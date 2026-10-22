@@ -34,7 +34,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
   size?: BadgeSize;
   icon?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -54,16 +54,16 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles: Record<BadgeVariant, string> = {
-    brand: "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900",
-    teal: "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-900",
-    warning: "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900",
-    destructive: "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900",
-    danger: "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900",
-    neutral: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700",
-    outline: "bg-transparent text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700",
-    verified: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900 font-semibold",
-    mastery: "bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900",
-    success: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900 font-semibold",
+    brand: "bg-[#EEF2F6] dark:bg-[#152035] text-[#1B2A4A] dark:text-[#A8B7D8] border border-[#D5DEE8] dark:border-[#263554]",
+    teal: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900",
+    warning: "bg-[#FEF9EE] dark:bg-amber-950/40 text-[#B8862B] dark:text-amber-300 border border-[#F5E5C4] dark:border-amber-900",
+    destructive: "bg-[#FDF2F2] dark:bg-red-950/40 text-[#991B1B] dark:text-red-300 border border-[#F8D2D2] dark:border-red-900",
+    danger: "bg-[#FDF2F2] dark:bg-red-950/40 text-[#991B1B] dark:text-red-300 border border-[#F8D2D2] dark:border-red-900",
+    neutral: "bg-[#F5F2EB] dark:bg-[#121B2D] text-[#5B5B5B] dark:text-slate-300 border border-[#E5E2DA] dark:border-[#262D3D]",
+    outline: "bg-transparent text-[#1B2A4A] dark:text-[#F5F2EB] border border-[#E5E2DA] dark:border-[#262D3D]",
+    verified: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900 font-semibold",
+    mastery: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900 font-semibold",
+    success: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900 font-semibold",
   };
 
   return (
@@ -121,7 +121,7 @@ export const DifficultyBadge: React.FC<DifficultyBadgeProps> = ({
   );
 };
 
-export interface VerifiedBadgeProps extends Omit<BadgeProps, 'variant' | 'icon'> {
+export interface VerifiedBadgeProps extends Omit<BadgeProps, 'variant' | 'icon' | 'children'> {
   label?: string;
   shield?: boolean;
 }

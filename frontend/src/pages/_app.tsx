@@ -171,7 +171,7 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
       </main>
 
       {/* Persistent Floating Socratic AI Tutor Help Button (Small, Flat, Calm & Mobile Docked) */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 print:hidden">
+      <div className="fixed bottom-6 right-6 z-40 print:hidden">
         <button
           id="global-socratic-trigger"
           type="button"
@@ -182,7 +182,7 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
               ? 'সক্রেটিক এআই টিউটর সহায়তা'
               : 'Open Socratic AI Study Assistant'
           }
-          className="group relative flex items-center gap-2 p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-[#1B2A4A] dark:bg-[#181E2B] hover:bg-[#253961] dark:hover:bg-[#252E42] text-[#FAF8F3] dark:text-[#F5F2EB] font-sans text-xs shadow-xs border border-[#2D426B] dark:border-[#37445E] focus:outline-none focus:ring-2 focus:ring-[#B8862B] transition-all duration-150 active:translate-y-0.5"
+          className="group relative flex items-center gap-2 min-h-[48px] p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-[#1B2A4A] dark:bg-[#181E2B] hover:bg-[#253961] dark:hover:bg-[#252E42] text-[#FAF8F3] dark:text-[#F5F2EB] font-sans text-xs shadow-xs border border-[#2D426B] dark:border-[#37445E] focus:outline-none focus:ring-2 focus:ring-[#B8862B] transition-all duration-150 active:translate-y-0.5"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#065F46] dark:bg-emerald-400 shrink-0"></span>
           <Sparkles className="w-3.5 h-3.5 text-[#B8862B] dark:text-amber-300 shrink-0" />

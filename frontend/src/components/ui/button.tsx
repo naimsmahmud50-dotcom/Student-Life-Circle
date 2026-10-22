@@ -27,7 +27,8 @@ export type ButtonVariant =
   | 'destructive'
   | 'danger'
   | 'outline'
-  | 'ghost';
+  | 'ghost'
+  | 'link';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -91,8 +92,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     destructive: "bg-[#991B1B] text-white hover:bg-[#7F1D1D] shadow-[0_4px_0_0_#5B1010] focus-visible:ring-[#991B1B]",
     danger: "bg-[#991B1B] text-white hover:bg-[#7F1D1D] shadow-[0_4px_0_0_#5B1010] focus-visible:ring-[#991B1B]",
 
-    // Scholarly Ghost Button
+    // Scholarly Ghost & Text Link Buttons
     ghost: "bg-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 active:translate-y-0.5 shadow-none focus-visible:ring-[#0A2540]",
+    link: "bg-transparent text-[#1B2A4A] dark:text-[#F5F2EB] hover:underline underline-offset-4 active:translate-y-0 shadow-none focus-visible:ring-[#1B2A4A] p-0 h-auto min-h-[44px]",
   };
 
   const widthStyle = fullWidth ? "w-full" : "";

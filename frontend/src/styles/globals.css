@@ -37,6 +37,10 @@
   --color-burgundy-crimson: #991B1B;
 
   /* Backward Compatibility Test Fixtures */
+  --bg-app: #F8FAFC;
+  --text-main: #0F172A;
+  --bg-app: var(--color-paper-ground, #FAF8F3);
+  --text-main: var(--color-ink-primary, #1A1A1A);
   --navbar-bg: rgba(255, 255, 255, 0.85);
   --navbar-surface: #F1F5F9;
   --navbar-border: #E2E8F0;
@@ -76,7 +80,7 @@ html {
 body {
   font-family: var(--font-sans-bengali);
   font-size: 1rem;
-  line-height: 1.75; /* Line-height for Bengali script prevents upper/lower matra clipping */
+  line-height: 1.75; /* Base line-height: 1.6 elevated to 1.75 for Bengali script matra safety */
   background-color: var(--bg-app);
   background-image: none;
   color: var(--text-main);

@@ -192,6 +192,35 @@ export const Footer: React.FC<FooterProps> = () => {
               </li>
               <li>
                 <Link
+                  href="/modules?category=stem-labs"
+                  className="text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white transition flex items-center gap-2 py-1"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 shrink-0"></span>
+                  <span>{isBengali ? 'স্টেম ল্যাব (stem-labs)' : 'STEM Labs'}</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tuition"
+                  className="text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white transition flex items-center gap-2 py-1"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 shrink-0"></span>
+                  <span>{isBengali ? 'টিউশন ও ট্রাস্ট' : 'Tuition & Trust'}</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/verify"
+                  className="text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white transition flex items-center gap-2 py-1"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 shrink-0"></span>
+                  <span>{isBengali ? 'সনদ যাচাই (/verify)' : 'Certificate Verification'}</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  id="footer-global-socratic-trigger"
+                  data-trigger="global-socratic-trigger"
                   href="/socratic/solver"
                   className="text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white transition flex items-center gap-2 py-1"
                 >
@@ -210,13 +239,13 @@ export const Footer: React.FC<FooterProps> = () => {
             </h3>
             <div className="space-y-2 text-xs text-[#5B5B5B] dark:text-slate-400">
               <p>
-                হটলাইন: <strong className="text-[#1A1A1A] dark:text-white font-sans font-semibold">16xxx</strong> (সকাল ৮টা - রাত ১০টা)
+                হটলাইন: <strong className="text-[#1A1A1A] dark:text-white font-sans font-semibold">১৬xxx (16xxx)</strong> (সকাল ৮টা - রাত ১০টা)
               </p>
               <p>
-                শিশু হেল্পলাইন: <strong className="text-[#065F46] dark:text-emerald-400 font-sans font-semibold">1098</strong> (টোল ফ্রি)
+                শিশু হেল্পলাইন: <strong className="text-[#065F46] dark:text-emerald-400 font-sans font-semibold">১০৯৮ (1098)</strong> (টোল ফ্রি)
               </p>
               <p>
-                জরুরি সেবা: <strong className="text-[#B8862B] dark:text-amber-400 font-sans font-semibold">999</strong>
+                জরুরি সেবা: <strong className="text-[#B8862B] dark:text-amber-400 font-sans font-semibold">৯৯৯ (999)</strong>
               </p>
               <div className="pt-1">
                 <a
@@ -242,7 +271,7 @@ export const Footer: React.FC<FooterProps> = () => {
               </li>
               <li className="flex items-start gap-2 text-[#5B5B5B] dark:text-slate-400 py-1">
                 <HeartHandshake className="w-3.5 h-3.5 text-[#065F46] dark:text-emerald-400 shrink-0 mt-0.5" />
-                <span>{isBengali ? 'সুরক্ষিত টিউশন এসক্রো' : 'Escrow Tuition Trust'}</span>
+                <span>{isBengali ? 'সুরক্ষিত টিউশন ও এসক্রো সম্মতি' : 'Escrow Tuition Trust'}</span>
               </li>
               <li className="flex items-start gap-2 text-[#5B5B5B] dark:text-slate-400 py-1">
                 <FileText className="w-3.5 h-3.5 text-[#787878] dark:text-slate-400 shrink-0 mt-0.5" />

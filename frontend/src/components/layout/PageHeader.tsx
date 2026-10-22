@@ -61,10 +61,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <section
       className={cn(
-        'relative pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-[#E5E2DA] dark:border-[#273145] bg-[#FAF8F3] dark:bg-[#12161F] transition-colors',
+        'relative pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-[#E5E2DA] dark:border-[#273145] bg-[#FAF8F3] dark:bg-[#12161F] transition-colors overflow-hidden',
         className
       )}
     >
+      {/* Subtle ambient depth for dark mode */}
+      <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl opacity-0 dark:opacity-20" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
         {/* Breadcrumb Navigation */}
         {breadcrumbs && breadcrumbs.length > 0 && (

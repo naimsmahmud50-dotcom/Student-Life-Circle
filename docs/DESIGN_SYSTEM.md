@@ -134,23 +134,83 @@ Base body size is `16px` (`1rem`). Headings follow a strict $1.250$ ratio:
 
 ---
 
-## 4. Component Patterns
+## 4. Component Architecture & Usage Rules
 
-### 4.1 Buttons
-- **Primary Action (Oxford Navy):**
-  `bg-[#1B2A4A] text-white hover:bg-[#121E36] rounded-[8px] px-4 py-2.5 font-medium border border-[#1B2A4A]`
-- **Secondary Action (Paper Outline):**
-  `bg-white text-[#1B2A4A] border border-[#E5E2DA] hover:bg-[#F5F2EB] rounded-[8px] px-4 py-2.5 font-medium`
-- **Ghost Action (Navigation):**
-  `text-[#5B5B5B] hover:text-[#1A1A1A] hover:bg-[#F5F2EB] rounded-[8px] px-3 py-2 font-medium`
-- **Mastery Action (Subdued Emerald):**
-  `bg-[#0B5D3B] text-white hover:bg-[#08492E] rounded-[8px] px-4 py-2.5 font-medium border border-[#0B5D3B]`
+All shared primitives reside in `frontend/src/components/ui/` and `frontend/src/components/quiz/`, exporting clean compound APIs with strict TypeScript types, 44px minimum touch targets, visible focus rings, and zero emoji dependencies.
 
-### 4.2 Cards
-- **Editorial Paper Card:**
-  `bg-white border border-[#E5E2DA] rounded-[10px] p-6 shadow-[var(--shadow-paper)] hover:border-[#D1CDC4] transition-all`
-- **Featured / Abstract Box:**
-  `bg-[#FAF8F3] border-l-4 border-[#1B2A4A] border-y border-r border-[#E5E2DA] rounded-r-[8px] p-5`
+### 4.1 Buttons (`<Button />`)
+- **Solid Primary:** `<Button variant="default">` or `<Button variant="oxford">` — Oxford navy (`#1B2A4A` / `#0A2540`), tactile feedback (`active:translate-y-1`), high contrast white label. Used for the single primary call-to-action per section.
+- **Secondary Outline:** `<Button variant="paper">` or `<Button variant="outline">` — Pure white fill, hairline border (`#E5E2DA`), calm hover (`#FAF8F3`). Used for complementary actions.
+- **Mastery Action:** `<Button variant="academic">` or `<Button variant="emerald">` — Academic forest emerald (`#065F46` / `#0B5D3B`). Used for verified achievements, syllabus completion, and solution viewing.
+- **Destructive Action:** `<Button variant="destructive">` — Burgundy crimson (`#991B1B`). Used for account deletion, quiz cancellation, or negative marking alerts.
+- **Text Link:** `<Button variant="link">` — Inline link button with underline on hover and 44px accessible touch boundary.
+- **Loading & Disabled:** Pass `isLoading` for spinning `Loader2` indicator; `disabled` renders at 50% opacity with `cursor-not-allowed`.
+- **Accessibility:** Minimum touch height $\ge 44$px (`min-h-[44px]`), visible focus ring (`focus-visible:ring-2 focus-visible:ring-offset-2`).
+
+### 4.2 Cards (`<Card />`)
+- **Structure:** Content-first compound architecture:
+  ```tsx
+  <Card hoverable>
+    <CardHeader>
+      <CardMeta><Badge variant="brand" size="sm">HSC ২০২৬</Badge> <span>অধ্যায় ৩</span></CardMeta>
+      <CardTitle>গতিবিদ্যা ও প্রক্ষেপকের গতি</CardTitle>
+      <CardDescription>বোর্ড পরীক্ষার বিগত ১০ বছরের সৃজনশীল প্রশ্ন ও সমাধান</CardDescription>
+    </CardHeader>
+    <CardContent>{/* Interactive metrics or math */}</CardContent>
+    <CardFooter>{/* Actions */}</CardFooter>
+  </Card>
+  ```
+- **Border & Hover:** Standard 1px hairline border (`#E5E2DA` light, `#262D3D` dark). When `hoverable={true}`, hover produces subtle border color change (`hover:border-[#D1CDC4]`) and background tint (`hover:bg-[#FAF8F3]/60`) — **zero lift (`translate-y`) and zero glowing drop shadows**.
+
+### 4.3 Badges & Status Chips (`<Badge />`)
+- **Variants:** `brand` (Oxford tint `#EEF2F6`), `success`/`verified`/`mastery` (Emerald tint `#F0F7F4`), `warning` (Gold tint `#FEF9EE`), `destructive` (Crimson tint `#FDF2F2`), `neutral` (Paper tint `#F5F2EB`), `outline` (Hairline).
+- **Specialized Chips:**
+  - `<DifficultyBadge difficulty="easy" | "medium" | "hard" />`: Bengali difficulty labels with bullet indicator.
+  - `<VerifiedBadge label="এনসিটিবি অনুমোদিত" shield />`: Verified accreditation badge with `ShieldCheck` or `Check`.
+  - `<RoleChip role="student" | "guardian" | "teacher" | "admin" />`: User persona chips with semantic Lucide icons.
+
+### 4.4 Form Controls (`Input`, `Select`, `Checkbox`, `Radio`, `Textarea`)
+- **Universal Standards:**
+  - Always provide a visible `<label>` or accessible `aria-label`.
+  - Inline error validation with `AlertCircle` icon and `aria-invalid="true"`.
+  - Explanatory `helperText` for disambiguating user requirements.
+  - 44px touch targets on mobile viewports.
+- **Primitives:**
+  - `<Input prefixIcon={<Search />} error={error} helperText={helper} />`
+  - `<Select options={items} label="শিক্ষাস্তর" />`
+  - `<Checkbox label="অফলাইন মেশ সিঙ্ক" indeterminate={isPartial} />`
+  - `<RadioGroup name="subject" value={sub} onChange={setSub}><Radio value="physics" label="পদার্থবিজ্ঞান" /></RadioGroup>`
+  - `<Textarea maxLength={200} showCount rows={4} label="নোট" />`
+
+### 4.5 Navigation & Disclosure (`Tabs`, `Accordion`, `Breadcrumb`, `Pagination`)
+- **Tabs:** Based on `@radix-ui/react-tabs`, with full keyboard arrow navigation and high-contrast active tab state.
+- **Accordion:** WAI-ARIA disclosure pattern with 150–200ms ease-out height animations (`animate-in fade-in-50`), single and multiple selection modes.
+- **Breadcrumb:** Semantic `<nav aria-label="Breadcrumb">` with `<ol>` and `<li>`, quiet chevron separators, and `aria-current="page"`.
+- **Pagination:** Mobile-first pagination with bilingual numeral support (Bangla/English), ellipsis range windowing, and 44px touch buttons.
+
+### 4.6 Overlays & Feedback (`Dialog`, `Modal`, `Drawer`, `Toast`, `Tooltip`)
+- **Calm Overlays:** Pure solid black 40% backdrop (`bg-black/40`), completely eliminating heavy `backdrop-blur(20px)` glassmorphism.
+- **Modal:** Radix-powered accessible modal with focus trap and Escape key dismissal.
+- **Drawer:** Slide-over sheet (`side="right" | "left" | "bottom"`) with 200ms ease-out translation.
+- **Tooltip:** Hover and keyboard focus tooltip with `role="tooltip"` and position auto-alignment.
+- **Toast:** React Context-based toast notifications (`useToast()`) with auto-dismiss timers and live regions.
+
+### 4.7 Data Display (`Table`, `Skeleton`, `EmptyState`)
+- **Textbook Table:** `<Table stickyHeader striped>` with hairline row borders (`#E5E2DA`), subtle hover highlight, and mobile-friendly responsive stacking.
+- **Skeleton Shimmer:** `<Skeleton variant="text" | "rectangular" | "circular" | "card">` with calm pulse animation to reserve space and prevent layout shifts (CLS $\le 0.0$).
+- **Empty State:** `<EmptyState icon={<FileQuestion />} title="তথ্য পাওয়া যায়নি" actionText="নতুন প্রশ্ন যুক্ত করুন" />` with dignified academic framing.
+
+### 4.8 Quiz & Question Engine (`QuestionCard`, `OptionCard`, `QuizProgress`, `ExplanationBlock`, `QuizResultSummary`)
+- **Mathematical Formula Rendering:** Native KaTeX engine via `<KaTeXRenderer content="$E = mc^2$" />` supporting inline (`$...$`) and display (`$$...$$`) math formulas with zero client flicker.
+- **Quiz Progress:** `<QuizProgress currentQuestion={5} totalQuestions={20} streak={3} score={18} />` with smooth progress indicator.
+- **Option Card:** Keyboard accessible (`1-4` / `A-D`), min-height 52px, active letter badge (`ক`, `খ`, `গ`, `ঘ` / `A`, `B`, `C`, `D`), clear correct/incorrect feedback states.
+- **Explanation Block:** Structured teacher explanation with key governing equation box, step-by-step mathematical derivation, and official board citation tags.
+- **Quiz Result Summary:** Scorecard displaying net marks, accuracy percentage, correct/wrong/skipped ledger, and action buttons.
+
+### 4.9 Motion & Animation Rules
+- **Duration Scale:** All transitions are restricted to `150ms` (micro-interactions) up to `250ms` (drawers/modals).
+- **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)` or standard `ease-out`.
+- **Reduced Motion:** All components honor `@media (prefers-reduced-motion: reduce)` by disabling translation animations.
 
 ---
 
@@ -165,3 +225,4 @@ Base body size is `16px` (`1rem`). Headings follow a strict $1.250$ ratio:
 | Monospace "telemetry" & "cyber" labels | Small letter-spaced sans eyebrow labels (`text-xs tracking-wider uppercase`) |
 | Over-sized 800/900 font weights | Balanced 400/500/600 typography with matra safety |
 | Random floating emoji decorations | Precise vector SVG icons from `lucide-react` |
+

@@ -24,8 +24,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "rounded-2xl border border-[#E2E8F0] dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm transition-all duration-200",
-        hoverable && "hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 hover:-translate-y-0.5",
+        // Standard subtle border border-[#E2E8F0] elevated to academic hairline #E5E2DA
+        "rounded-2xl border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1A1A1A] dark:text-[#F5F2EB] shadow-none transition-colors duration-150",
+        hoverable && "hover:border-[#D1CDC4] dark:hover:border-[#3D475C] hover:bg-[#FAF8F3]/60 dark:hover:bg-[#152035]/60",
         className
       )}
       {...props}
@@ -40,11 +41,23 @@ export const CardHeader = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6 pb-3", className)}
+    className={cn("flex flex-col space-y-1.5 p-6 pb-2", className)}
     {...props}
   />
 ));
 CardHeader.displayName = "CardHeader";
+
+export const CardMeta = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center gap-2 text-xs text-[#5B5B5B] dark:text-slate-400 font-sans pb-1", className)}
+    {...props}
+  />
+));
+CardMeta.displayName = "CardMeta";
 
 export const CardTitle = forwardRef<
   HTMLParagraphElement,
@@ -53,7 +66,7 @@ export const CardTitle = forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base sm:text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white",
+      "text-base sm:text-lg font-serif font-bold leading-snug tracking-normal text-[#1B2A4A] dark:text-[#F5F2EB]",
       className
     )}
     {...props}
@@ -67,7 +80,7 @@ export const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed", className)}
+    className={cn("text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-sans", className)}
     {...props}
   />
 ));
@@ -77,7 +90,7 @@ export const CardContent = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-3", className)} {...props} />
+  <div ref={ref} className={cn("p-6 pt-2", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -87,7 +100,7 @@ export const CardFooter = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0 border-t border-slate-100 dark:border-slate-800/80 mt-4", className)}
+    className={cn("flex items-center p-6 pt-0 border-t border-[#E5E2DA] dark:border-[#262D3D] mt-4", className)}
     {...props}
   />
 ));
