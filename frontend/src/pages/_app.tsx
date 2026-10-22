@@ -17,6 +17,7 @@ import { I18nProvider, useTranslation } from '@/lib/i18n';
 import { SocraticTutorDrawer } from '@/components/ai/SocraticTutorDrawer';
 import { PwaUpdateToast, PwaInstallBanner, OfflineIndicator } from '@/components/pwa';
 import '../styles/globals.css';
+import 'katex/dist/katex.min.css';
 
 interface OfflineToastState {
   show: boolean;

@@ -103,8 +103,9 @@ body {
 
 /* Primary Sans Body */
 .font-sans-bn,
-.font-sans-bengali {
-  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+.font-sans-bengali,
+.font-bengali {
+  font-family: 'Noto Sans Bengali', 'Hind Siliguri', system-ui, sans-serif;
 }
 
 .font-sans-en,

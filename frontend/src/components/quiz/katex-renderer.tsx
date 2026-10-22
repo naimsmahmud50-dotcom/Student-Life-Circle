@@ -19,6 +19,7 @@
  */
 
 import React, { useMemo } from 'react';
+import katex from 'katex';
 
 export interface KaTeXRendererProps {
   content?: string;
@@ -88,44 +89,36 @@ export const KaTeXRenderer: React.FC<KaTeXRendererProps> = ({
 
   // Render a math segment using KaTeX if available, or clean semantic fallback
   const renderMathBlock = (formula: string, isDisplay: boolean, key: number) => {
-    // Check if KaTeX is globally injected on window
-    const hasGlobalKaTeX =
-      typeof window !== 'undefined' &&
-      Boolean((window as unknown as { katex?: { renderToString: (f: string, opt: unknown) => string } }).katex);
+    try {
+      const html = katex.renderToString(formula, {
+        displayMode: isDisplay,
+        throwOnError: false,
+        output: 'htmlAndMathml'
+      });
 
-    if (hasGlobalKaTeX) {
-      try {
-        const katexObj = (window as unknown as { katex: { renderToString: (f: string, opt: unknown) => string } }).katex;
-        const html = katexObj.renderToString(formula, {
-          displayMode: isDisplay,
-          throwOnError: false,
-          output: 'htmlAndMathml'
-        });
-
-        if (isDisplay) {
-          return (
-            <div
-              key={key}
-              role="math"
-              aria-label={formula}
-              className="my-3 py-2 px-3 overflow-x-auto text-center rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-main)] select-all"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          );
-        }
-
+      if (isDisplay) {
         return (
-          <span
+          <div
             key={key}
             role="math"
             aria-label={formula}
-            className="inline-block px-1 mx-0.5 rounded text-[var(--color-brand)] font-medium select-all"
+            className="my-3 py-2 px-3 overflow-x-auto text-center rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-main)] select-all"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         );
-      } catch {
-        // Fall through to semantic fallback
       }
+
+      return (
+        <span
+          key={key}
+          role="math"
+          aria-label={formula}
+          className="inline-block px-1 mx-0.5 rounded text-[var(--color-brand)] font-medium select-all"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      );
+    } catch {
+      // Fall through to semantic fallback
     }
 
     // Semantic Accessible Fallback
