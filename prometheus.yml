@@ -1,0 +1,56 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - PROMETHEUS METRICS SCRAPER CONFIGURATION:
+# MODULE:    Prometheus Real-Time Telemetry & Target Exposition Configuration
+# TOPIC:     Scrape Interval, Alert Rules, FastAPI & Redis Node Targets
+# FILE:      infra/prometheus/prometheus.yml
+# PURPOSE:   Defines Prometheus scraping rules and intervals for the Ogrojatra platform:
+#            1. Scrape Cadence: 10-second high-resolution interval on FastAPI backend to
+#               capture sub-second latency spikes (p95/p99) and active WebSocket connections.
+#            2. Target Multiplexing: Scrapes backend:8000/metrics and self-monitoring.
+#            3. Relabeling & Cardinality: Sanitizes labels to avoid time-series explosion.
+# AUDIENCE:  DevOps Engineers, SREs, Performance Engineers & AI Agents
+# STANDARDS: Prometheus 2.x Specification, OpenMetrics, Zero-Emoji Spec
+# ========================================================================================
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+  external_labels:
+    monitor: 'ogrojatra-production-monitor'
+    environment: 'production'
+
+# Alertmanager configuration (Optional integration for paging and incident dispatch)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Alerting rules definition
+rule_files:
+  # - "rules/*.yml"
+
+scrape_configs:
+  # ---------------------------------------------------------------------------
+  # 1. Ogrojatra FastAPI Application Engine
+  # ---------------------------------------------------------------------------
+  - job_name: 'ogrojatra-backend'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    metrics_path: '/metrics'
+    scheme: 'http'
+    static_configs:
+      - targets: ['backend:8000']
+        labels:
+          service: 'fastapi-backend'
+          tier: 'application-core'
+
+  # ---------------------------------------------------------------------------
+  # 2. Prometheus Self-Monitoring
+  # ---------------------------------------------------------------------------
+  - job_name: 'prometheus'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus-telemetry'

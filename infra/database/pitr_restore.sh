@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - POINT-IN-TIME RECOVERY (PITR) RESTORATION SCRIPT:
+# MODULE:    Automated PostgreSQL Disaster Recovery & WAL Replay Engine
+# TOPIC:     Precision Rollback to Millisecond Target Timestamp or Named Restore Point
+# FILE:      infra/database/pitr_restore.sh
+# PURPOSE:   Executes automated Point-in-Time Recovery (PITR) for PostgreSQL 16:
+#            1. Validation: Ensures WAL archive directory and base backup archive exist.
+#            2. Clean Extraction: Stops running database and extracts base snapshot to clean PGDATA.
+#            3. Recovery Configuration: Writes recovery.signal and restores parameters into
+#               postgresql.auto.conf with precision recovery_target_time / recovery_target_name.
+#            4. Target Action: recovery_target_action='promote' transitions cluster to live
+#               read-write primary upon reaching recovery boundary.
+# AUDIENCE:  Database Administrators, SREs, Disaster Recovery Teams & AI Agents
+# STANDARDS: PostgreSQL 16 PITR Standard, ISO 22301 Business Continuity, Zero-Emoji Spec
+# ========================================================================================
+
+set -euo pipefail
+
+# Configuration Defaults (can be overridden via environment variables)
+PGDATA="${PGDATA:-/var/lib/postgresql/data}"
+WAL_ARCHIVE_DIR="${WAL_ARCHIVE_DIR:-/mnt/wal_archive}"
+BACKUP_ARCHIVE_DIR="${BACKUP_ARCHIVE_DIR:-/mnt/base_backups}"
+TARGET_TIMESTAMP="${1:-}"
+RESTORE_POINT="${RESTORE_POINT:-}"
+DRY_RUN="${DRY_RUN:-false}"
+
+log_info() {
+    echo "[INFO] $(date -u '+%Y-%m-%d %H:%M:%SZ') - $1"
+}
+
+log_error() {
+    echo "[ERROR] $(date -u '+%Y-%m-%d %H:%M:%SZ') - $1" >&2
+}
+
+log_warn() {
+    echo "[WARN] $(date -u '+%Y-%m-%d %H:%M:%SZ') - $1"
+}
+
+usage() {
+    cat << EOF
+Usage: $0 "<TARGET_TIMESTAMP_UTC>" or RESTORE_POINT="<point_name>" $0
+
+Examples:
+  $0 "2026-10-18 14:30:00 UTC"
+  RESTORE_POINT="ogrojatra_rp_20261018_143000_pre_migration" $0
+  DRY_RUN=true $0 "2026-10-18 14:30:00 UTC"
+
+Prerequisites:
+  - PGDATA: Target database directory (Default: /var/lib/postgresql/data)
+  - WAL_ARCHIVE_DIR: Shipped WAL segments directory (Default: /mnt/wal_archive)
+  - BACKUP_ARCHIVE_DIR: Base backup tarballs (Default: /mnt/base_backups)
+EOF
+    exit 1
+}
+
+# Parameter Validation
+if [[ -z "${TARGET_TIMESTAMP}" && -z "${RESTORE_POINT}" ]]; then
+    log_error "Missing required target timestamp or restore point."
+    usage
+fi
+
+log_info "Initializing Point-in-Time Recovery procedure for Ogrojatra Platform."
+log_info "Target Directory: ${PGDATA}"
+log_info "WAL Archive: ${WAL_ARCHIVE_DIR}"
+log_info "Base Backups: ${BACKUP_ARCHIVE_DIR}"
+
+if [[ -n "${TARGET_TIMESTAMP}" ]]; then
+    log_info "Recovery Target Time: ${TARGET_TIMESTAMP}"
+else
+    log_info "Recovery Target Restore Point: ${RESTORE_POINT}"
+fi
+
+# Dry Run Verification Check
+if [[ "${DRY_RUN}" == "true" ]]; then
+    log_info "DRY_RUN flag is set to true. Validating environment without modifying files..."
+    if [[ ! -d "${WAL_ARCHIVE_DIR}" ]]; then
+        log_warn "WAL archive directory does not exist yet: ${WAL_ARCHIVE_DIR} (Simulated)"
+    else
+        log_info "Verified WAL archive directory: ${WAL_ARCHIVE_DIR}"
+    fi
+    log_info "Dry run preflight checks completed successfully."
+    exit 0
+fi
+
+# Step 1: Verify Storage Directories
+if [[ ! -d "${WAL_ARCHIVE_DIR}" ]]; then
+    log_error "WAL archive directory not found: ${WAL_ARCHIVE_DIR}"
+    exit 1
+fi
+
+if [[ ! -d "${BACKUP_ARCHIVE_DIR}" ]]; then
+    log_error "Base backup directory not found: ${BACKUP_ARCHIVE_DIR}"
+    exit 1
+fi
+
+# Find Latest Base Backup
+LATEST_BACKUP=$(find "${BACKUP_ARCHIVE_DIR}" -maxdepth 1 -name "*.tar.gz" -o -name "*.tar" | sort -r | head -n 1 || true)
+if [[ -z "${LATEST_BACKUP}" ]]; then
+    log_error "No base backup archive found in ${BACKUP_ARCHIVE_DIR}."
+    exit 1
+fi
+log_info "Selected Base Backup: ${LATEST_BACKUP}"
+
+# Step 2: Ensure PostgreSQL is stopped before data directory manipulation
+log_info "Stopping active PostgreSQL service if running..."
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl stop postgresql || true
+fi
+
+# Step 3: Archive current PGDATA for safety
+SAFETY_BACKUP="/tmp/pgdata_corrupted_backup_$(date +%s)"
+if [[ -d "${PGDATA}" && "$(ls -A "${PGDATA}")" ]]; then
+    log_info "Backing up existing PGDATA to ${SAFETY_BACKUP}..."
+    mv "${PGDATA}" "${SAFETY_BACKUP}"
+fi
+mkdir -p "${PGDATA}"
+chmod 0700 "${PGDATA}"
+
+# Step 4: Extract Base Backup to PGDATA
+log_info "Extracting base backup into clean PGDATA..."
+tar -xf "${LATEST_BACKUP}" -C "${PGDATA}"
+
+# Step 5: Configure Point-in-Time Recovery
+log_info "Creating recovery.signal marker..."
+touch "${PGDATA}/recovery.signal"
+
+log_info "Configuring postgresql.auto.conf recovery parameters..."
+cat >> "${PGDATA}/postgresql.auto.conf" << EOF
+# Auto-generated by Ogrojatra PITR restoration script
+restore_command = 'cp ${WAL_ARCHIVE_DIR}/%f %p'
+recovery_target_action = 'promote'
+EOF
+
+if [[ -n "${TARGET_TIMESTAMP}" ]]; then
+    cat >> "${PGDATA}/postgresql.auto.conf" << EOF
+recovery_target_time = '${TARGET_TIMESTAMP}'
+EOF
+elif [[ -n "${RESTORE_POINT}" ]]; then
+    cat >> "${PGDATA}/postgresql.auto.conf" << EOF
+recovery_target_name = '${RESTORE_POINT}'
+EOF
+fi
+
+# Step 6: Ready for Restart
+log_info "Recovery configuration written successfully."
+log_info "Start PostgreSQL to initiate WAL replay up to the designated target."
+log_info "Run: pg_ctl -D ${PGDATA} start OR systemctl start postgresql"

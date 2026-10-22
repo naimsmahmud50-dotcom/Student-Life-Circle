@@ -1,0 +1,1122 @@
+[
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "মানবদেহের সবচেয়ে বড় গ্রন্থি কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "যকৃৎ (Liver)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "অগ্ন্যাশয়",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "থাইরয়েড",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "পিটুইটারি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "যকৃৎ মানবদেহের বৃহত্তম পরিপাক ও বিপাকীয় গ্রন্থি, যার গড় ওজন ১.৫ কেজি।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "বৃক্কের গাঠনিক ও কার্যকরী একক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "নেফ্রন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "নিউরণ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "অ্যালভিওলাস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অ্যাক্সন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রতিটি মানব বৃক্কে প্রায় ১০-১২ লক্ষ নেফ্রন থাকে যা মূত্র উৎপাদন ও রেচনের মূল একক।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "মানুষের করোটিক স্নায়ু কত জোড়া?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১২ জোড়া",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৩১ জোড়া",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১০ জোড়া",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "২৪ জোড়া",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মানুষের মস্তিষ্ক থেকে ১২ জোড়া করোটিক স্নায়ু এবং সুষুম্নাকাণ্ড থেকে ৩১ জোড়া সুষুম্না স্নায়ু উৎপন্ন হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "রক্ত জমাট বাঁধতে সাহায্য করে কোন রক্তকণিকা?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অণুচক্রিকা (Platelet)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "লোহিত রক্তকণিকা",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "শ্বেত রক্তকণিকা",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মনোসাইট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অণুচক্রিকা বা থ্রম্বোসাইট ক্ষতস্থানে থ্রম্বোপ্লাস্টিন ক্ষরণ করে রক্ত তঞ্চন প্রক্রিয়া ত্বরান্বিত করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "ম্যালেরিয়া পরজীবীর সুপ্তাবস্থা মানবদেহের কোন কোষে ঘটে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "যকৃৎ কোষে (হেপাটোসাইট)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "লোহিত রক্তকণিকায়",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ফুসফুসে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "হৃদপিণ্ডে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্লাজমোডিয়াম পরজীবী মানুষের শরীরে প্রবেশ করে প্রথমে যকৃৎ কোষে হেপাটিক সাইজোগনি সম্পন্ন করে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2019-20"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "মানবদেহের প্রধান রেচন অঙ্গ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বৃক্ক (Kidney)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "যকৃৎ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ফুসফুস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ত্বক",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বৃক্ক শতকরা ৮০ ভাগ নাইট্রোজেনঘটিত বর্জ্য (ইউরিয়া, ইউরিক এসিড) শরীর থেকে নিষ্কাশন করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2018-19"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "হাইড্রার দংশন অঙ্গাণুকে কী বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "নেমাটোসিস্ট",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "নিডোসাইট",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "সিলেন্টেরন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "টেন্টাকল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "নিডোসাইট কোষের ভেতরে কন্টকযুক্ত বিষাক্ত হিপনোটক্সিনবাহী ক্যাপসুলকে নেমাটোসিস্ট বলে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "রুই মাছের পটকা বা বায়ুথলির প্রধান কাজ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্লবতা রক্ষা করা",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "শব্দ তৈরি করা",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "রক্ত সংবহন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "খাদ্য সঞ্চয়",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বায়ুথলি বা সুইম ব্লাডার গ্যাসের পরিমাণ নিয়ন্ত্রণ করে মাছকে পানির বিভিন্ন গভীরতায় ভাসতে সহায়তা করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "চোখের আলোক সংবেদী কোষ রড কোষে কোন রঞ্জক পদার্থ থাকে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "রোডোপসিন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "আয়োডোপসিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "মেলানিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "হিমোগ্লোবিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "রড কোষে ভিটামিন এ সমৃদ্ধ রোডোপসিন থাকে যা মৃদু বা স্তিমিত আলোতে দর্শনে সাহায্য করে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "অগ্ন্যাশয়ের আইলেটস অব ল্যাঙ্গারহ্যান্সের আলফা কোষ থেকে কোন হরমোন নিঃসৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গ্লুকাগন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ইনসুলিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "সোমাটোস্ট্যাটিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "গ্যাস্ট্রিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আলফা কোষ গ্লুকাগন ক্ষরণ করে যা গ্লাইকোজেন ভেঙে রক্তের গ্লুকোজ বৃদ্ধি করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "কোষের ট্রাফিক পুলিশ কাকে বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গলগি বডি",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "মাইটোকনড্রিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "এন্ডোপ্লাজমিক রেটিকুলাম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "রাইবোজোম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "গলগি বডি বিভিন্ন এনজাইম ও প্রোটিন প্যাকেটজাত করে কোষের বিভিন্ন অংশে প্রেরণ নিয়ন্ত্রণ করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "মিয়োসিস কোষ বিভাজনের কোন উপপর্যায়ে ক্রসিং ওভার ঘটে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্যাকাইটিন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "লেপ্টোটিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "জাইগোটিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ডিপ্লোটিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রোফেজ-১ এর প্যাকাইটিন উপপর্যায়ে নন-সিস্টার ক্রোমাটিডের মধ্যে অংশের বিনিময় (Crossing Over) ঘটে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "ভাস্কুলার বান্ডল জাইলেম ও ফ্লোয়েম এর মাঝে ক্যাম্বিয়াম থাকলে তাকে কী বলে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "মুক্ত ভাস্কুলার বান্ডল",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "বদ্ধ ভাস্কুলার বান্ডল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "অরিও বান্ডল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কেন্দ্রিক বান্ডল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ক্যাম্বিয়াম বিদ্যমান থাকলে তাকে মুক্ত (Open) সংযুক্ত ভাস্কুলার বান্ডল বলে, যা দ্বিবীজপত্রী উদ্ভিদে দেখা যায়।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "গ্লাইকোলাইসিস প্রক্রিয়ায় ১ অণু গ্লুকোজ ভেঙে কয় অণু পাইরুভিক এসিড তৈরি হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২ অণু",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১ অণু",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪ অণু",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৩ অণু",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সাইটোপ্লাজমে সংঘটিত গ্লাইকোলাইসিসে এক অণু ৬-কার্বন গ্লুকোজ ভেঙে দুই অণু ৩-কার্বন পাইরুভিক এসিড উৎপন্ন হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "ম্যালেরিয়া রোগের জীবাণু কোন ধরণের জীব?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্রোটোজোয়া",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ব্যাকটেরিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ভাইরাস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ছত্রাক",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্লাজমোডিয়াম একটি এককোষী অন্তঃপরজীবী প্রোটোজোয়া (স্পোরোজোয়া)।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2019-20"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "কোন উদ্ভিদে হ্যাচ ও স্ল্যাক চক্র (C4 গতিপথ) দেখা যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভুট্টা ও আখ",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ধান ও গম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "আম ও জাম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "আলু ও টমেটো",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "উচ্চ তাপমাত্রা ও তীব্র আলোতে ভুট্টা, আখ, কাউন ইত্যাদি উদ্ভিদে ক্র্যাঞ্জ অ্যানাটমিযুক্ত $C_4$ চক্র ঘটে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2018-19"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "ভাইরাসের সুপ্তাবস্থায় বংশগতির উপাদানকে কী বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্রোভাইরাস",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ক্যাপসিড",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ভ্যারিয়ন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "প্রিয়ন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "পোষক ব্যাকটেরিয়ার ডিএনএ-এর সাথে যুক্ত সুপ্তাবস্থার ভাইরাল ডিএনএকে প্রোভাইরাস বা প্রোফায বলে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "উদ্ভিদের পাতায় পত্ররন্ধ্র খোলার জন্য কোন আয়নের প্রবেশ প্রয়োজন?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "K+ (পটাশিয়াম আয়ন)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "Na+",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "Ca2+",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "Cl-",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "লেভিটের প্রোটন-পটাশিয়াম মতবাদ মতে, রক্ষীকোষে $K^+$ আয়নের প্রবেশ অভিস্রবণিক চাপ বৃদ্ধি করে রন্ধ্র খোলে।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "ফুসফুসের আবরণের নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্লুরা (Pleura)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "পেরিকার্ডিয়াম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "পেরিটোনিউম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মেনিনজেস",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ফুসফুস দ্বিস্তরী প্লুরা পর্দা দিয়ে আবৃত থাকে। হৃদপিণ্ডের পর্দা পেরিকার্ডিয়াম।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "মানবদেহের রক্তে স্বাভাবিক হিমোগ্লোবিনের গড় পরিমাণ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১৪-১৬ গ্রাম/ডেসিলিটার",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১০-১২ গ্রাম/ডেসিলিটার",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১৮-২০ গ্রাম/ডেসিলিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৫-৮ গ্রাম/ডেসিলিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রাপ্তবয়স্ক পুরুষের রক্তে স্বাভাবিক হিমোগ্লোবিন ১৪-১৬ g/dL এবং নারীদের ক্ষেত্রে ১২-১৪ g/dL।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "দ্বিপদ নামকরণের প্রবর্তক কে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ক্যারোলাস লিনিয়াস",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "চার্লস ডারউইন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "থিওফ্রাস্টাস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বেন্থাম ও হুকার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৭৫৩ সালে সুয়েডীয় বিজ্ঞানী ক্যারোলাস লিনিয়াস তাঁর 'স্পেসিস প্ল্যান্টারাম' গ্রন্থে দ্বিপদ নামকরণ প্রবর্তন করেন।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2019-20"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "ডিএনএ অনুলিপন কোন পদ্ধতিতে সম্পন্ন হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অর্ধ-সংরক্ষণশীল পদ্ধতি",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "সম্পূর্ণ সংরক্ষণশীল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বিচ্ছুরণশীল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অনিয়মিত",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মেসেলসন ও স্টাহলের পরীক্ষার মাধ্যমে প্রমাণিত যে ডিএনএ রেপ্লিকেশন অর্ধ-সংরক্ষণশীল (Semi-conservative)।",
+    "difficulty": "MEDIUM",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2018-19"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "ঘাসফড়িংয়ের রেচন অঙ্গের নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ম্যালপিজিয়ান নালিকা",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "নেফ্রিডিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "শিখা কোষ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অ্যান্টেনাল গ্রন্থি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সন্ধিপদী প্রাণী ঘাসফড়িংয়ের পৌষ্টিকনালীর সংযোগস্থলে অবস্থিত ম্যালপিজিয়ান নালিকা প্রধান রেচন অঙ্গ।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "প্রাণিবিজ্ঞান",
+    "chapter": "প্রাণিবিজ্ঞান",
+    "stem_bn": "কোন ভিটামিনের অভাবে রিকেটস রোগ হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভিটামিন ডি (D)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ভিটামিন এ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ভিটামিন সি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ভিটামিন কে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ভিটামিন ডি ক্যালসিয়াম ও ফসফরাস শোষণে সহায়তা করে; এর অভাবে শিশুদের হাড় নরম হয়ে রিকেটস হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "উদ্ভিদবিজ্ঞান",
+    "chapter": "উদ্ভিদবিজ্ঞান",
+    "stem_bn": "ব্যাকটেরিয়া কোষে কোন ধরনের রাইবোজোম পাওয়া যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "70S",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "80S",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "60S",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "40S",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আদিকোষী জীব ব্যাকটেরিয়ায় $50S$ ও $30S$ সাবইউনিট সমন্বিত $70S$ রাইবোজোম থাকে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "ঐতিহাসিক ৭ই মার্চের ভাষণ কোন ময়দানে দেওয়া হয়েছিল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "রেসকোর্স ময়দান (সোহরাওয়ার্দী উদ্যান)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "পল্টন ময়দান",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ধানমন্ডি মাঠ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "লালদিঘী ময়দান",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৯৭১ সালের ৭ই মার্চ জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমান তৎকালীন রেসকোর্স ময়দানে ঐতিহাসিক ভাষণ দেন।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "বাংলাদেশের মুক্তিযুদ্ধের সময় সমগ্র দেশকে কয়টি সেক্টরে বিভক্ত করা হয়েছিল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১১টি",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৭টি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৬৪টি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৮টি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মুক্তিযুদ্ধের সফল পরিচালনার জন্য পুরো বাংলাদেশকে ১১টি সামরিক সেক্টরে এবং ৬৪টি সাব-সেক্টরে বিভক্ত করা হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "মুক্তিযুদ্ধে সর্বোচ্চ বীরত্বসূচক সামরিক খেতাব কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বীরশ্রেষ্ঠ",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "বীর উত্তম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বীর বিক্রম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বীর প্রতীক",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বাংলাদেশের মহান মুক্তিযুদ্ধে সর্বোচ্চ আত্মত্যাগের স্বীকৃতিস্বরূপ ৭ জন শহীদ বীর মুক্তিযোদ্ধাকে 'বীরশ্রেষ্ঠ' খেতাবে ভূষিত করা হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "বাংলাদেশের প্রথম অস্থায়ী সরকার (মুজিবনগর সরকার) কত তারিখে গঠিত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১০ই এপ্রিল ১৯৭১",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১৭ই এপ্রিল ১৯৭১",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২৬শে মার্চ ১৯৭১",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১৬ই ডিসেম্বর ১৯৭১",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৯৭১ সালের ১০ই এপ্রিল মেহেরপুরের বৈদ্যনাথতলায় প্রথম বাংলাদেশ সরকার গঠিত হয় এবং ১৭ই এপ্রিল শপথ গ্রহণ করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "বাংলাদেশের জাতীয় সংসদের স্থপতি কে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "লুই আই কান",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "মাজহারুল ইসলাম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "হামিদুর রহমান",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "সৈয়দ মাইনুল হোসেন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ঢাকার শের-ই-বাংলা নগরে অবস্থিত দৃষ্টিনন্দন জাতীয় সংসদ ভবনের মূল স্থপতি বিশ্বখ্যাত মার্কিন আর্কিটেক্ট লুই আই কান।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2019-20"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "বাংলাদেশের একমাত্র পাহাড়ি দ্বীপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "মহেশখালী",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "সেন্টমার্টিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "হাতিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ভোলা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "কক্সবাজার জেলায় অবস্থিত মহেশখালী দ্বীপ বাংলাদেশের একমাত্র পাহাড়ি দ্বীপ হিসেবে স্বীকৃত।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2018-19"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "জাতীয় স্মৃতিসৌধের স্থপতি কে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "সৈয়দ মাইনুল হোসেন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "হামিদুর রহমান",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "মৃদুল কান্তি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "শামীম শিকদার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সাভারে অবস্থিত জাতীয় স্মৃতিসৌধের স্থপতি সৈয়দ মাইনুল হোসেন, যার সাত জোড়া ত্রিভুজাকার দেয়াল জাতীয় ইতিহাসের ৭টি আন্দোলন নির্দেশ করে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2023-24"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "পদ্মা সেতুর মোট দৈর্ঘ্য কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৬.১৫ কিমি",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৪.৮ কিমি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৭.২ কিমি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৫.৫ কিমি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "পদ্মা সেতুর মূল কাঠামো দৈর্ঘ্য ৬.১৫ কিলোমিটার এবং এতে ৪১টি স্প্যান ও ৪২টি পিয়ার রয়েছে।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2022-23"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "ইউনেস্কো কত তারিখে ২১শে ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে স্বীকৃতি দেয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১৭ই নভেম্বর ১৯৯৯",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২১শে ফেব্রুয়ারি ২০০০",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২৬শে মার্চ ১৯৭১",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১৬ই ডিসেম্বর ১৯৯৯",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৯৯৯ সালের ১৭ই নভেম্বর প্যারিসে ইউনেস্কোর সাধারণ অধিবেশনে ২১শে ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে ঘোষণা করা হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2021-22"
+  },
+  {
+    "subject": "সাধারণ জ্ঞান",
+    "chapter": "সাধারণ জ্ঞান",
+    "stem_bn": "বঙ্গবন্ধুর ঐতিহাসিক অসমাপ্ত আত্মজীবনী প্রথম কত সালে প্রকাশিত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২০১২ সালে",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২০১০ সালে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২০১৪ সালে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "২০২০ সালে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের 'অসমাপ্ত আত্মজীবনী' দি ইউনিভার্সিটি প্রেস লিমিটেড (UPL) থেকে ২০১২ সালের জুনে প্রথম প্রকাশিত হয়।",
+    "difficulty": "EASY",
+    "syllabus_year": "2024",
+    "source": "Medical Admission 2020-21"
+  }
+]

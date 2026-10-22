@@ -1,0 +1,1122 @@
+[
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "একটি ভূ-স্থির উপগ্রহের আবর্তনকাল কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২৪ ঘণ্টা",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১২ ঘণ্টা",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৩৬৫ দিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৪৮ ঘণ্টা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ভূ-স্থির উপগ্রহের আবর্তনকাল পৃথিবীর আহ্নিক গতির আবর্তনকালের সমান অর্থাৎ ২৪ ঘণ্টা, ফলে এটি পৃথিবীর সাপেক্ষে স্থির থাকে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2023-24"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "সরল ছন্দিত স্পন্দনে গতিশীল কণার সাম্যাবস্থানে কোন রাশিটি সর্বোচ্চ হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গতিশক্তি",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "বিভব শক্তি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ত্বরণ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "সরণ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সাম্যাবস্থানে ($x=0$) কণার বেগ সর্বোচ্চ ($v = \\omega A$) হয়, ফলে গতিশক্তি সর্বোচ্চ এবং বিভব শক্তি ও ত্বরণ শূন্য হয়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2022-23"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "একটি প্রিজমের প্রিজম কোণ ৬০° এবং ন্যূনতম বিচ্যুতি কোণ ৩০° হলে প্রিজমের উপাদানের প্রতিসরাঙ্ক কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\sqrt{2}",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "1.5",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\sqrt{3}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "1.33",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\mu = \\frac{\\sin((A + D_m)/2)}{\\sin(A/2)} = \\frac{\\sin((60^\\circ+30^\\circ)/2)}{\\sin(60^\\circ/2)} = \\frac{\\sin 45^\\circ}{\\sin 30^\\circ} = \\frac{1/\\sqrt{2}}{1/2} = \\sqrt{2} \\approx 1.414$।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2021-22"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "কার্নো ইঞ্জিনের দক্ষতা ১০০% হতে হলে গ্রাহকের তাপমাত্রা কত হতে হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "0 K",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "273 K",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "100°C",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অসীম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "দক্ষতা $\\eta = 1 - \\frac{T_2}{T_1}$। $\\eta = 100\\% = 1$ হতে হলে গ্রাহকের পরম তাপমাত্রা $T_2 = 0\\ \\text{K}$ (পরম শূন্য তাপমাত্রা) হতে হবে।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2020-21"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "একটি তারের রোধ ১০ ওহম। এটিকে টেনে দৈর্ঘ্য দ্বিগুণ করা হলে নতুন রোধ কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৪০ ওহম",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২০ ওহম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৫ ওহম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৮০ ওহম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "টেনে দৈর্ঘ্য দ্বিগুণ করলে আয়তন স্থির থাকার কারণে প্রস্থচ্ছেদের ক্ষেত্রফল অর্ধেক হয়ে যায়। ফলে নতুন রোধ $R' = n^2 R = 2^2 \\times 10 = 40\\ \\Omega$।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2019-20"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "একটি স্প্রিং এর স্প্রিং ধ্রুবক k = ২০০ N/m। এটিকে ০.১ মিটার প্রসারিত করতে কত কাজ করতে হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১ জুল",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "০.৫ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০ জুল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "কাজ $W = \\frac{1}{2}kx^2 = \\frac{1}{2} \\times 200 \\times (0.1)^2 = 100 \\times 0.01 = 1\\ \\text{J}$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2018-19"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "কোন তাপমাত্রায় সেলসিয়াস ও কেলভিন স্কেলের পার্থক্য কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২৭৩.১৫",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "০",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১০০",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৩৭৩",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$T(\\text{K}) = \\theta(^\\circ\\text{C}) + 273.15$। ফলে যেকোনো তাপমাত্রায় সেলসিয়াস ও কেলভিনের সংখ্যামানের পার্থক্য সর্বদা ২৭৩.১৫।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2017-18"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "মহাকর্ষীয় প্রাবল্য E এবং বিভব V এর সম্পর্ক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "E = -dV/dr",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "E = dV/dr",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "E = V \\times r",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "V = -dE/dr",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বিভব দূরত্বের সাথে পরিবর্তনের ঋণাত্মক হার হলো প্রাবল্য: $E = -\\frac{dV}{dr}$।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2016-17"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "নিচের কোন দ্রবণটি ফেলিং দ্রবণকে বিজারিত করে লাল অধঃক্ষেপ উৎপন্ন করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অ্যালডিহাইড (CH3CHO)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "কিটোন (CH3COCH3)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ইথাইল এসিটেট",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বেনজিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অ্যালডিহাইড ক্ষারীয় কিউপ্রিক টারট্রেট (ফেলিং দ্রবণ) কে বিজারিত করে লাল বর্ণের কিউপ্রাস অক্সাইড ($Cu_2O$) অধঃক্ষেপ তৈরি করে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2023-24"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "পর্যায় সারণির কোন গ্রুপের মৌলগুলোকে চালকোজেন (Chalcogen) বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গ্রুপ ১৬",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "গ্রুপ ১৫",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "গ্রুপ ১৭",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "গ্রুপ ১৮",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "পর্যায় সারণির গ্রুপ ১৬ এর মৌলসমূহকে (অক্সিজেন, সালফার ইত্যাদি) আকরিক গঠনকারী বা চালকোজেন বলে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2022-23"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "বিশুদ্ধ পানির মোলারিটি কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৫৫.৫৫ M",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১ M",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১৮ M",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০ M",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১ লিটার (১০০০ গ্রাম) পানিতে মোল সংখ্যা $n = \\frac{1000}{18.015} \\approx 55.55\\ \\text{mol}$। সুতরাং মোলারিটি ৫৫.৫৫ M।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2021-22"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "KMnO4 যৌগে ম্যাঙ্গানিজের জারণ মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "+৭",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "+৬",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "+২",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "+৪",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$1(+1) + x + 4(-2) = 0 \\implies x - 7 = 0 \\implies x = +7$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2020-21"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "কোন যৌগে sp2 সংকরণ বিদ্যমান?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "C2H4 (ইথিলিন)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "CH4 (মিথেন)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "C2H2 (অ্যাসিটিলিন)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "NH3 (অ্যামোনিয়া)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ইথিনে দ্বিবন্ধনযুক্ত কার্বন পরমাণুগুলোতে তিনটি করে $\\sigma$ বন্ধন থাকায় $sp^2$ সংকরণ ঘটে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2019-20"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "রক্তের স্বাভাবিক pH কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৭.৪",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৬.৮",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৮.২",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৭.০",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মানুষের রক্তের স্বাভাবিক $pH$ সামান্য ক্ষারীয় এবং এর মান ৭.৩৫ থেকে ৭.৪৫ (গড়ে ৭.৪)।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2018-19"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "কোনটি অ্যান্টিঅক্সিডেন্ট হিসেবে খাদ্য সংরক্ষণে ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "BHT ও BHA",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ফরমালিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ইউরিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কপার সালফেট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "Butylated Hydroxytoluene (BHT) এবং BHA অনুমোদিত অ্যান্টিঅক্সিডেন্ট হিসেবে চর্বি ও তেলের জারণ রোধে ব্যবহৃত হয়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2017-18"
+  },
+  {
+    "subject": "রসায়ন",
+    "chapter": "রসায়ন",
+    "stem_bn": "কোন গ্যাসটি ব্যাপন সবচেয়ে দ্রুত ঘটবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "CH4 (আণবিক ভর ১৬)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "CO2 (আণবিক ভর ৪৪)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "O2 (আণবিক ভর ৩২)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "N2 (আণবিক ভর ২৮)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "গ্রাহামের ব্যাপন সূত্র মতে, ব্যাপন হার আণবিক ভরের বর্গমূলের ব্যস্তানুপাতিক ($r \\propto \\frac{1}{\\sqrt{M}}$)। মিথেনের আণবিক ভর সবচেয়ে কম হওয়ায় ব্যাপন সবচেয়ে দ্রুত ঘটে।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2016-17"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$\\lim_{x \\to 0} \\frac{e^x - 1}{x}$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "1",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "0",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "e",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\infty",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "লা হসপিটাল নীতি বা প্রমিত সীমা সূত্র অনুসারে $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2023-24"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$y = \\sin(2x)$ হলে $\\frac{d^2y}{dx^2}$ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "-4\\sin(2x)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "4\\cos(2x)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "-2\\sin(2x)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "4\\sin(2x)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\frac{dy}{dx} = 2\\cos(2x)$ এবং $\\frac{d^2y}{dx^2} = 2(-2\\sin(2x)) = -4\\sin(2x)$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2022-23"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$\\int_0^1 (2x + 1) dx$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "2",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "3",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "4",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$[x^2 + x]_0^1 = (1^2 + 1) - 0 = 2$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2021-22"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$(1, 2)$ ও $(4, 6)$ বিন্দুগামী সরলরেখার ঢাল কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "4/3",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "3/4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ঢাল $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{6 - 2}{4 - 1} = \\frac{4}{3}$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2020-21"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$\\cos^2\\theta + \\sin^2\\theta$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "1",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "0",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "-1",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "পিথাগোরাসের ত্রিকোণমিতিক অভেদ অনুসারে যেকোনো $\\theta$ এর জন্য $\\sin^2\\theta + \\cos^2\\theta = 1$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2019-20"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$x^2/9 + y^2/4 = 1$ উপবৃত্তের ক্ষেত্রফল কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "6\\pi",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "12\\pi",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "36\\pi",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "13\\pi",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "উপবৃত্তের ক্ষেত্রফল $= \\pi a b$। এখানে $a = 3, b = 2$। ক্ষেত্রফল $= \\pi (3)(2) = 6\\pi$ বর্গ একক।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2018-19"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "$\\vec{A} = 3\\hat{i} + 4\\hat{j}$ ভেক্টরের মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "5",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "7",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "25",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "1",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$|\\vec{A}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2017-18"
+  },
+  {
+    "subject": "উচ্চতর গণিত",
+    "chapter": "উচ্চতর গণিত",
+    "stem_bn": "একটি ছক্কা একবার নিক্ষেপ করলে মৌলিক সংখ্যা ওঠার সম্ভাবনা কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "1/2",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "1/3",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "1/6",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "2/3",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ছক্কার মোট ফল $\\{1, 2, 3, 4, 5, 6\\}$ (৬টি)। মৌলিক সংখ্যা $\\{2, 3, 5\\}$ (৩টি)। সম্ভাবনা $= 3/6 = 1/2$।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2016-17"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "মাইটোকনড্রিয়াকে কোষের কী বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "পাওয়ার হাউস (শক্তিঘর)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রোটিন ফ্যাক্টরি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ট্রাফিক পুলিশ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "সুইসাইডাল ব্যাগ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "কোষীয় শ্বসনের ক্রেবস চক্র এবং অক্সিডেটিভ ফসফোরাইলেশনের মাধ্যমে এটিপি তৈরি হওয়ায় মাইটোকনড্রিয়াকে কোষের শক্তিঘর বলা হয়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2023-24"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "ডিএনএ (DNA) এর ডাবল হেলিক্স কাঠামোর আবিষ্কারক কারা?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ওয়াটসন ও ক্রিক",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "রবার্ট হুক",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "গ্রেগর জোহান মেন্ডেল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "লুই পাস্তুর",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৯৫৩ সালে জেমস ওয়াটসন ও ফ্রান্সিস ক্রিক ডিএনএ ডাবল হেলিক্স মডেল প্রস্তাব করেন।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2022-23"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "সালোকসংশ্লেষণ প্রক্রিয়ায় উপজাত হিসেবে অক্সিজেন নির্গমনের মূল উৎস কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "পানি (H2O)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "কার্বন ডাই-অক্সাইড (CO2)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "গ্লুকোজ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ক্লোরোফিল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আলোক পর্যায়ে পানির ফটোলাইসিস বা ফটো-অক্সিডেশনের ফলে অক্সিজেন গ্যাস নির্গত হয়।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2021-22"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "মানবদেহে রক্তের সার্বজনীন গ্রহীতা (Universal Recipient) রক্তের গ্রুপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "AB+",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "O-",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "A+",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "B+",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "AB+ রক্তের লোহিত কণিকায় A ও B উভয় অ্যান্টিজেন থাকে এবং রক্তরসে কোনো অ্যান্টিবডি থাকে না, তাই এরা সবার রক্ত গ্রহণ করতে পারে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2020-21"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "কোন হরমোন মানবদেহে রক্তের গ্লুকোজের মাত্রা হ্রাস করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইনসুলিন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "গ্লুকাগন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "থাইরক্সিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অ্যাড্রেনালিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অগ্ন্যাশয়ের আইলেটস অব ল্যাঙ্গারহ্যান্সের বিটা কোষ থেকে ক্ষরিত ইনসুলিন অতিরিক্ত গ্লুকোজকে গ্লাইকোজেনে রূপান্তর করে রক্তের গ্লুকোজ কমায়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2019-20"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "পুষ্পক উদ্ভিদের দ্বিনিষেকের পর শস্য (Endosperm) কোন স্তরের হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ট্রিপ্লয়েড (3n)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "হ্যাপ্লয়েড (n)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ডিপ্লয়েড (2n)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "টেট্রাপ্লয়েড (4n)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "গুপ্তবীজী উদ্ভিদে গৌণ নিউক্লিয়াস ($2n$) এবং একটি পুংগ্যামেট ($n$) এর মিলনে ট্রিপ্লয়েড ($3n$) শস্য গঠিত হয়।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2018-19"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "মেন্ডেলের প্রথম সূত্রের ফিনোটাইপিক অনুপাত কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৩:১",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৯:৩:৩:১",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১:২:১",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "২:১",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "একসংকর জননে মেন্ডেলের প্রথম সূত্র (পৃথকীকরণ সূত্র) অনুসারে $F_2$ জনুতে ফিনোটাইপিক অনুপাত ৩:১ হয়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2017-18"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "কোন অঙ্গাণুকে কোষের 'প্রোটিন কারখানা' বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "রাইবোজোম",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "গলগি বডি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "লাইসোজোম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "সেন্ট্রোসোম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "রাইবোজোমে এমআরএনএ নির্দেশিত প্রোটিন সংশ্লেষণ ঘটে বলে একে প্রোটিন ফ্যাক্টরি বলা হয়।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2016-17"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "মানুষের হৃদপিণ্ডের পেসমেকার (Pacemaker) কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "এসএ নোড (SA Node)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "এভি নোড (AV Node)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "হিজের বান্ডিল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "পারকিঞ্জি তন্তু",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ডান অলিন্দের প্রাচীরে অবস্থিত সাইনো-অ্যাট্রিয়াল নোড স্বয়ংক্রিয় স্পন্দন শুরু করে বলে একে প্রাকৃতিক পেসমেকার বলে।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2015-16"
+  },
+  {
+    "subject": "জীববিজ্ঞান",
+    "chapter": "জীববিজ্ঞান",
+    "stem_bn": "নিচের কোন মৌলটি ক্লোরোফিল অণুর কেন্দ্রস্থলে অবস্থান করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ম্যাগনেসিয়াম (Mg)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "আয়রন (Fe)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ক্যালসিয়াম (Ca)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "জিংক (Zn)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ক্লোরোফিলের পোরফাইরিন বলয়ের কেন্দ্রীয় পরমাণু হলো ম্যাগনেসিয়াম ($Mg^{2+}$)।",
+    "difficulty": "EASY",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2014-15"
+  },
+  {
+    "subject": "পদার্থবিজ্ঞান",
+    "chapter": "পদার্থবিজ্ঞান",
+    "stem_bn": "আলোর সমবর্তন (Polarization) আলোর কোন প্রকৃতি প্রমাণ করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "তির্যক তরঙ্গ (অনুপ্রস্থ)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "অনুদৈর্ঘ্য তরঙ্গ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "কণা প্রকৃতি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "স্থির তরঙ্গ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "কেবলমাত্র অনুপ্রস্থ বা তির্যক তরঙ্গেই সমবর্তন সম্ভব, যা প্রমাণ করে আলো অনুপ্রস্থ তড়িৎচৌম্বকীয় তরঙ্গ।",
+    "difficulty": "MEDIUM",
+    "negative_marking": 0.25,
+    "source": "DU Ka Admission 2013-14"
+  }
+]

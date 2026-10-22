@@ -1,0 +1,76 @@
+{
+  "_comment": "DEVELOPER ARCHITECTURE NOTE: Phase 126 - Grand Final Public Production Rollout & National Attestation (Successor to Phase 100 Grand Public Launch) - Cloudflare Edge, DNSSEC, Full (Strict) SSL & DDoS Defense Configuration",
+  "zone_name": "ogrojatra.edu.bd",
+  "security_level": "medium",
+  "dnssec": {
+    "status": "active",
+    "algorithm": "13",
+    "digest_type": "2"
+  },
+  "ssl_tls": {
+    "mode": "strict",
+    "min_tls_version": "1.2",
+    "tls_1_3": "on",
+    "automatic_https_rewrites": "on",
+    "always_use_https": "on",
+    "universal_ssl": "enabled",
+    "origin_server_name_indication": "on"
+  },
+  "edge_caching_and_performance": {
+    "brotli": "on",
+    "early_hints": "on",
+    "http2": "on",
+    "http3_quic": "on",
+    "0_rtt": "on",
+    "browser_cache_ttl": 14400,
+    "ip_geolocation": "on",
+    "development_mode": "off",
+    "websockets": "on"
+  },
+  "dns_records": [
+    {
+      "type": "A",
+      "name": "ogrojatra.edu.bd",
+      "content": "203.0.113.195",
+      "proxied": true,
+      "ttl": 1,
+      "comment": "Production edge ingress load balancer IP"
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "ogrojatra.edu.bd",
+      "proxied": true,
+      "ttl": 1,
+      "comment": "WWW canonical alias"
+    },
+    {
+      "type": "CNAME",
+      "name": "api",
+      "content": "ogrojatra.edu.bd",
+      "proxied": true,
+      "ttl": 1,
+      "comment": "API direct route"
+    }
+  ],
+  "waf_rate_limiting_rules": [
+    {
+      "description": "Block brute-force OTP and login flooding on authentication endpoints",
+      "expression": "(http.request.uri.path contains \"/api/v1/auth\") and not (cf.client.bot)",
+      "action": "block",
+      "rate_limit": {
+        "requests": 10,
+        "period": 60
+      }
+    },
+    {
+      "description": "Rate limit unauthenticated quiz scraping attacks",
+      "expression": "(http.request.uri.path contains \"/api/v1/practice\") and (http.request.method eq \"GET\")",
+      "action": "managed_challenge",
+      "rate_limit": {
+        "requests": 150,
+        "period": 60
+      }
+    }
+  ]
+}

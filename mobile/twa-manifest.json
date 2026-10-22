@@ -1,0 +1,71 @@
+{
+  "packageId": "bd.edu.ogrojatra.app",
+  "host": "ogrojatra.edu.bd",
+  "name": "অগ্রযাত্রা - Student Growth Platform",
+  "launcherName": "অগ্রযাত্রা",
+  "display": "standalone",
+  "themeColor": "#0F172A",
+  "themeColorDark": "#0A0F1D",
+  "navigationColor": "#0F172A",
+  "navigationColorDark": "#0A0F1D",
+  "navigationDividerColor": "#1E293B",
+  "navigationDividerColorDark": "#1E293B",
+  "backgroundColor": "#F8FAFC",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://ogrojatra.edu.bd/icons/icon-512x512.png",
+  "maskableIconUrl": "https://ogrojatra.edu.bd/icons/icon-maskable-512x512.png",
+  "monochromeIconUrl": "https://ogrojatra.edu.bd/icons/icon-monochrome.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./keystore/ogrojatra-release.keystore",
+    "alias": "ogrojatra-release-key"
+  },
+  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "minSdkVersion": 24,
+  "targetSdkVersion": 34,
+  "orientation": "portrait",
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://ogrojatra.edu.bd/manifest.json",
+  "fallbackType": "customtabs",
+  "fullScopeUrl": "https://ogrojatra.edu.bd/",
+  "shortcuts": [
+    {
+      "name": "Practice Sets | অনুশীলন",
+      "shortName": "Practice",
+      "url": "https://ogrojatra.edu.bd/practice",
+      "chosenIconUrl": "https://ogrojatra.edu.bd/icons/icon-192x192.png"
+    },
+    {
+      "name": "Live Challenge | লাইভ কুইজ",
+      "shortName": "Challenge",
+      "url": "https://ogrojatra.edu.bd/live-challenge",
+      "chosenIconUrl": "https://ogrojatra.edu.bd/icons/icon-192x192.png"
+    },
+    {
+      "name": "Admission Hub | ভর্তি প্রস্তুতি",
+      "shortName": "Admission",
+      "url": "https://ogrojatra.edu.bd/admission",
+      "chosenIconUrl": "https://ogrojatra.edu.bd/icons/icon-192x192.png"
+    }
+  ],
+  "adaptiveIcons": {
+    "roundIconUrl": "https://ogrojatra.edu.bd/icons/icon-round-512x512.png",
+    "squircleIconUrl": "https://ogrojatra.edu.bd/icons/icon-squircle-512x512.png"
+  }
+}

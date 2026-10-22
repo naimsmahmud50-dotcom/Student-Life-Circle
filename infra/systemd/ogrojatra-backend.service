@@ -1,0 +1,62 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - SYSTEMD SERVICE SPECIFICATION:
+# MODULE:    Systemd Unit File for FastAPI Application Engine
+# TOPIC:     Host Process Lifecycle, Sandboxing, Auto-Restart, Production Hardening
+# FILE:      infra/systemd/ogrojatra-backend.service
+# PURPOSE:   Runs and manages the Python FastAPI application directly on Ubuntu VPS hosts:
+#            1. Process Lifecycle: Auto-restarts on unexpected failure after 5s delay.
+#            2. Process Sandboxing: Enforces strict OS isolation via ProtectSystem=strict,
+#               ProtectHome=true, PrivateTmp=true, and NoNewPrivileges=true.
+#            3. Non-Root Execution: Runs under dedicated system service account 'ogrojatra'.
+#            4. Limits: Sets resource descriptor limits (LimitNOFILE=65536) for high-concurrency
+#               WebSocket and HTTP traffic handling.
+# AUDIENCE:  DevOps Engineers, Linux Sysadmins, SREs & AI Agents
+# STANDARDS: Systemd Unit File Standard, CIS Linux Benchmark, Zero-Emoji Spec
+# ========================================================================================
+
+[Unit]
+Description=Ogrojatra Platform FastAPI Backend Service
+After=network.target postgresql.service redis-server.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=ogrojatra
+Group=ogrojatra
+WorkingDirectory=/opt/ogrojatra/backend
+EnvironmentFile=/etc/ogrojatra/backend.env
+ExecStart=/opt/ogrojatra/backend/venv/bin/uvicorn backend.app.main:app \
+    --host 0.0.0.0 \
+    --port 8000 \
+    --workers 4 \
+    --log-level info \
+    --access-log \
+    --timeout-keep-alive 65 \
+    --limit-concurrency 1000
+
+# Process Restart Policy
+Restart=always
+RestartSec=5s
+KillMode=mixed
+TimeoutStopSec=30
+
+# Hardened Linux Security Sandboxing
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+# File System Isolation and Temporary Dirs
+ReadWritePaths=/opt/ogrojatra/backend/logs /tmp
+
+# Resource Limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target

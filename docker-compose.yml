@@ -1,0 +1,118 @@
+# ========================================================================================
+# MODULE:    Docker Compose Production & Development Orchestration
+# TOPIC:     FastAPI Backend, Next.js PWA, PostgreSQL 16, Redis 7 & Celery Workers
+# FILE:      docker-compose.yml
+# PURPOSE:   Coordinates all platform microservices in isolated networks. Enforces
+#            healthcheck readiness ordering, persistent volume data safety, and zero
+#            hardcoded secret configuration via environment variables.
+# AUDIENCE:  DevOps Engineers, Local Full-Stack Developers & CI/CD Pipelines
+# STANDARDS: Docker Compose v2.20+, Microservices Best Practices, 12-Factor App
+# ========================================================================================
+
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------------------------
+  # 1. PostgreSQL 16 Database with Persistent Storage
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: ogrojatra-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ogrojatra_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_dev_password_change_in_prod}
+      POSTGRES_DB: ${POSTGRES_DB:-ogrojatra_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ogrojatra-internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ogrojatra_admin} -d ${POSTGRES_DB:-ogrojatra_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # 2. Redis 7 In-Memory Cache & Exam Submission Buffer
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: ogrojatra-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-redis_secure_pass}"]
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - ogrojatra-internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_secure_pass}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # 3. Python FastAPI Core & Live Exam Engine
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: ogrojatra-backend
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=production
+      - PROJECT_NAME=Student Growth Platform
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-ogrojatra_admin}:${POSTGRES_PASSWORD:-secure_dev_password_change_in_prod}@postgres:5432/${POSTGRES_DB:-ogrojatra_db}
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-redis_secure_pass}@redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-long_random_64_char_secret_key_required_by_asvs_standards_here}
+      - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://127.0.0.1:3000"]
+    ports:
+      - "8000:8000"
+    networks:
+      - ogrojatra-internal
+      - ogrojatra-public
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # 4. Next.js 15+ PWA Web Client
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: ogrojatra-frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    ports:
+      - "3000:3000"
+    networks:
+      - ogrojatra-public
+    depends_on:
+      - backend
+
+# -----------------------------------------------------------------------------
+# Networks & Persistent Volumes
+# -----------------------------------------------------------------------------
+networks:
+  ogrojatra-internal:
+    driver: bridge
+    internal: true
+  ogrojatra-public:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

@@ -1,0 +1,3572 @@
+[
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "স্কেলার রাশি কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বেগ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ত্বরণ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কাজ",
+        "is_correct": true
+      }
+    ],
+    "correct_option_key": "D",
+    "explanation_bn": "কাজের মান আছে কিন্তু দিক নেই, তাই কাজ একটি স্কেলার রাশি।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "ভার্নিয়ার ধ্রুবক (VC) নির্ণয়ের সূত্র কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "VC = s \\times n",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "VC = s/n",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "VC = n/s",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "VC = s - n",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "প্রধান স্কেলের ক্ষুদ্রতম এক ভাগের মান $s$ এবং ভার্নিয়ার স্কেলের মোট ভাগ সংখ্যা $n$ হলে, ভার্নিয়ার ধ্রুবক $VC = \\frac{s}{n}$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২০"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "১ মাইক্রোমিটার সমান কত মিটার?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১০^-৩ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১০^-৬ মি.",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "১০^-৯ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০^-১২ মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "$1\\ \\mu\\text{m} = 10^{-6}\\ \\text{m}$।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২১"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "স্ক্রু-গেজের বৃত্তাকার স্কেলের ভাগ সংখ্যা ১০০ এবং পিচ ১ মি.মি. হলে লঘিষ্ঠ গণন (LC) কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০.১ মি.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "০.০১ মি.মি.",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "০.০০১ মি.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১ মি.মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "লঘিষ্ঠ গণন $LC = \\frac{\\text{Pitch}}{\\text{Total Divisions}} = \\frac{1\\ \\text{mm}}{100} = 0.01\\ \\text{mm}$।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০২২"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "কোনটির মাত্রা সমীকরণ $[ML^2T^{-3}]$?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কাজ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ক্ষমতা",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "শক্তি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "চাপ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ক্ষমতা $P = \\frac{W}{t} = \\frac{[ML^2T^{-2}]}{[T]} = [ML^2T^{-3}]$।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "একটি দণ্ড পরিমাপ করতে গিয়ে প্রধান স্কেল পাঠ ৪ সে.মি., ভার্নিয়ার পাঠ ৬ এবং ভার্নিয়ার ধ্রুবক ০.০০৫ সে.মি. পাওয়া গেল। দণ্ডটির দৈর্ঘ্য কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৪.০৩ সে.মি.",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৪.০৬ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪.৩ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৪.৬ সে.মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "দৈর্ঘ্য $L = M + (V \\times VC) = 4 + (6 \\times 0.005) = 4 + 0.03 = 4.03\\ \\text{cm}$।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "এসআই (SI) পদ্ধতিতে পদার্থের পরিমাণের একক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ক্যান্ডেলা",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "মোল",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "অ্যাম্পিয়ার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কেলভিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "আন্তর্জাতিক পদ্ধতিতে পদার্থের পরিমাণের একক হলো মোল (mole)।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "ভৌত রাশি ও পরিমাপ",
+    "stem_bn": "কোন পরিমাপ যন্ত্রের সাহায্যে কোনো গোলকের বক্রতার ব্যাসার্ধ নির্ণয় করা যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভার্নিয়ার স্কেল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "স্ক্রু গজ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "স্ফেরোমিটার",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "স্লাইড ক্যালিপার্স",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "স্ফেরোমিটারের সাহায্যে গোলীয় তলের বক্রতার ব্যাসার্ধ $R = \\frac{d^2}{6h} + \\frac{h}{2}$ সমীকরণ দিয়ে নির্ণয় করা হয়।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২০"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "মুক্তভাবে পড়ন্ত কোনো বস্তু প্রথম সেকেন্ডে ৪.৯ মিটার দূরত্ব অতিক্রম করলে, তৃতীয় সেকেন্ডে অতিক্রান্ত দূরত্ব কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১৪.৭ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১৯.৬ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২৪.৫ মি.",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৪৪.১ মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "$t$-তম সেকেন্ডে অতিক্রান্ত দূরত্ব $s_t = u + \\frac{1}{2}g(2t-1)$। এখানে $u=0, g=9.8\\ \\text{m/s}^2, t=3$। সুতরাং $s_3 = 0 + \\frac{1}{2} \\times 9.8 \\times (2 \\times 3 - 1) = 4.9 \\times 5 = 24.5\\ \\text{m}$।",
+    "difficulty": "HARD",
+    "source": "ঢাকা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "নিচের কোনটি ভেক্টর রাশি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "দ্রুতি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "দূরত্ব",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ত্বরণ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "ভর",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "ত্বরণের মান ও নির্দিষ্ট দিক উভয়ই রয়েছে, তাই এটি ভেক্টর রাশি।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "একটি গাড়ি স্থির অবস্থা থেকে ২ মি/সে^২ সুষম ত্বরণে চলা শুরু করলে ১০ সেকেন্ড পর এর বেগ কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১০ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২০ মি/সে",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৫০ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০০ মি/সে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "আমরা জানি, $v = u + at = 0 + (2 \\times 10) = 20\\ \\text{m/s}$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২১"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "দূরত্ব-সময় লেখচিত্রের ঢাল কী নির্দেশ করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ত্বরণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বেগ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "দ্রুতি",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "মন্দন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "দূরত্ব-সময় ($s-t$) লেখচিত্রের যেকোনো বিন্দুর ঢাল হলো $\\frac{ds}{dt}$, যা তাৎক্ষণিক দ্রুতি নির্দেশ করে।",
+    "difficulty": "MEDIUM",
+    "source": "ময়মনসিংহ বোর্ড ২০২০"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "একটি বুলেট কোনো দেয়ালে ৩ সে.মি. প্রবেশ করে অর্ধেক বেগ হারায়। বুলেটটি দেয়ালে আর কতটুকু প্রবেশ করতে পারবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১ সে.মি.",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১.৫ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "০.৭৫ সে.মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বেগ অর্ধেক হলে অবশিষ্ট গতিশক্তি হয় আদি গতিশক্তির $\\frac{1}{4}$ অংশ। সুতরাং অতিরিক্ত দূরত্ব $s' = \\frac{s}{n^2 - 1} = \\frac{3}{2^2 - 1} = \\frac{3}{3} = 1\\ \\text{cm}$।",
+    "difficulty": "HARD",
+    "source": "ঢাকা বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "একটি পাথরকে ৪৯ মি/সে বেগে খাড়া উপরের দিকে নিক্ষেপ করা হলে এটি সর্বোচ্চ কত উচ্চতায় উঠবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৪৯ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৯৮ মি.",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১২২.৫ মি.",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "২৪৫ মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "সর্বোচ্চ উচ্চতা $H = \\frac{u^2}{2g} = \\frac{49^2}{2 \\times 9.8} = \\frac{2401}{19.6} = 122.5\\ \\text{m}$।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "বেগ-সময় লেখচিত্রের নিচের ক্ষেত্রফল কী নির্দেশ করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ত্বরণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অতিক্রান্ত দূরত্ব",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "বল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ক্ষমতা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বেগ-সময় ($v-t$) লেখচিত্র এবং সময় অক্ষ দ্বারা বেষ্টিত ক্ষেত্রফল মোট দূরত্ব ($s = \\int v dt$) নির্দেশ করে।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "একটি গাড়ির চাকার গতি কোন ধরণের গতি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "রৈখিক গতি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ঘূর্ণন গতি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "পর্যাবৃত্ত গতি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ঘূর্ণন-চলন গতি",
+        "is_correct": true
+      }
+    ],
+    "correct_option_key": "D",
+    "explanation_bn": "গাড়ির চাকা একই সাথে নিজের অক্ষের চারদিকে ঘোরে এবং সামনের দিকে অগ্রসর হয়, তাই এটি জটিল বা চলন-ঘূর্ণন গতি।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "গতি",
+    "stem_bn": "সমবৃত্তীয় গতিতে চলমান বস্তুর ক্ষেত্রে কোনটি সঠিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বেগ ধ্রুব",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ত্বরণ শূন্য",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "দ্রুতি ধ্রুব কিন্তু ত্বরণ বিদ্যমান",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "ভরবেগ ধ্রুব",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "বৃত্তীয় পথে দ্রুতি ধ্রুব থাকলেও গতির দিক অনবরত পরিবর্তিত হয়, ফলে কেন্দ্রমুখী ত্বরণ $a_c = \\frac{v^2}{r}$ সক্রিয় থাকে।",
+    "difficulty": "HARD",
+    "source": "সিলেট বোর্ড ২০২১"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "১০ কেজি ভরের একটি বস্তুর ওপর কত বল প্রয়োগ করলে এর ত্বরণ ৪ মি/সে^২ হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২.৫ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১৪ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪০ নিউটন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৪০০ নিউটন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "নিউটনের গতির দ্বিতীয় সূত্র মতে, $F = ma = 10 \\times 4 = 40\\ \\text{N}$।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "বলের ঘাতের একক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "N/s",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "N s",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "N m",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "J s",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বলের ঘাত $J = F \\times \\Delta t$। এর এসআই একক নিউটন-সেকেন্ড ($\\text{N}\\cdot\\text{s}$) বা $\\text{kg}\\cdot\\text{m/s}$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "প্রকৃতির মৌলিক বলগুলোর মধ্যে সবচেয়ে দুর্বল বল কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "তড়িৎচৌম্বক বল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "সবল নিউক্লীয় বল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "দুর্বল নিউক্লীয় বল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মহাকর্ষ বল",
+        "is_correct": true
+      }
+    ],
+    "correct_option_key": "D",
+    "explanation_bn": "মহাকর্ষ বল প্রকৃতির চারটি মৌলিক বলের মধ্যে সবচেয়ে দুর্বল (আপেক্ষিক তীব্রতা $10^{-39}$)।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "৫ কেজি ভরের একটি বন্দুক থেকে ১০ গ্রাম ভরের একটি গুলি ৪০০ মি/সে বেগে নির্গত হলে বন্দুকের পশ্চাৎ বেগ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "-০.৮ মি/সে",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "-৮ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "০.৮ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৮ মি/সে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ভরবেগের সংরক্ষণ সূত্র মতে, $MV + mv = 0 \\implies V = -\\frac{mv}{M} = -\\frac{0.01 \\times 400}{5} = -0.8\\ \\text{m/s}$।",
+    "difficulty": "HARD",
+    "source": "যশোর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "কোনটি স্পর্শহীন বল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ঘর্ষণ বল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "টান বল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "সংঘর্ষ বল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অভিকর্ষ বল",
+        "is_correct": true
+      }
+    ],
+    "correct_option_key": "D",
+    "explanation_bn": "দুটি বস্তুর প্রত্যক্ষ স্পর্শ ছাড়াই ক্রিয়াশীল বলকে অস্পর্শ বল বলে; যেমন অভিকর্ষ ও মহাকর্ষ বল।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "একটি টেবিলের উপর রাখা বস্তুর স্থিতি ঘর্ষণ গুণাঙ্ক ০.৫ এবং বস্তুর ওজন ১০০ নিউটন হলে সীমাস্ত ঘর্ষণ বল কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২০ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৫০ নিউটন",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "১০০ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "২০০ নিউটন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "সীমান্তিক ঘর্ষণ বল $f_s = \\mu_s R = \\mu_s W = 0.5 \\times 100 = 50\\ \\text{N}$।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০২২"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "নিউটনের তৃতীয় সূত্রানুসারে ক্রিয়া ও প্রতিক্রিয়া বলের মধ্যবর্তী কোণ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০°",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৯০°",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১৮০°",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৩৬০°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "ক্রিয়া ও প্রতিক্রিয়া বলের মান সমান কিন্তু এরা একে অপরের বিপরীত অভিমুখে কাজ করে, ফলে তাদের মধ্যবর্তী কোণ ১৮০ ডিগ্রি।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২১"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "ঘর্ষণ বল কমানোর জন্য ব্যবহৃত তরল পদার্থকে কী বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "সলভেন্ট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "লুব্রিকেন্ট",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "কুল্যান্ট",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "পলিমার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ঘূর্ণায়মান বা চলমান যন্ত্রাংশের ঘর্ষণ রোধে লুব্রিকেন্ট (যেমন মবিল বা গ্রিজ) ব্যবহার করা হয়।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "১ অশ্বক্ষমতা (1 HP) সমান কত ওয়াট?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৫৫৩ ওয়াট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৭৪৬ ওয়াট",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "১০০০ ওয়াট",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৭৬০ ওয়াট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "$1\\ \\text{HP} = 746\\ \\text{W}$।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "কোনো বস্তুর বেগ ৩ গুণ বৃদ্ধি করলে এর গতিশক্তি কত গুণ বৃদ্ধি পাবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৩ গুণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৬ গুণ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৯ গুণ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "২৭ গুণ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "গতিশক্তি $E_k = \\frac{1}{2}mv^2$। বেগ $v' = 3v$ হলে গতিশক্তি $E_k' = \\frac{1}{2}m(3v)^2 = 9 E_k$ হয়।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "৫০ কেজি ভরের এক ব্যক্তি ২০ সে.মি. উঁচু ৩০টি সিঁড়ি ১০ সেকেন্ডে উঠলে তার ক্ষমতা কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১৪৭ ওয়াট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২৯৪ ওয়াট",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৫৮৮ ওয়াট",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৮৮২ ওয়াট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "মোট উচ্চতা $h = 30 \\times 0.2\\ \\text{m} = 6\\ \\text{m}$। ক্ষমতা $P = \\frac{mgh}{t} = \\frac{50 \\times 9.8 \\times 6}{10} = 294\\ \\text{W}$।",
+    "difficulty": "HARD",
+    "source": "রাজশাহী বোর্ড ২০২২"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "ধনাত্মক কাজের ক্ষেত্রে বল ও সরণের মধ্যবর্তী কোণ কত হতে পারে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "θ = ৯০°",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "০° <= θ < ৯০°",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৯০° < θ <= ১৮০°",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "θ = ১৮০°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কাজ $W = F s \\cos\\theta$। যখন $0^\\circ \\le \\theta < 90^\\circ$, তখন $\\cos\\theta > 0$ হয়, যা ধনাত্মক কাজ নির্দেশ করে।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০২১"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "একটি স্প্রিংকে সংকুচিত করলে এতে কোন শক্তি সঞ্চিত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গতি শক্তি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বিভব শক্তি",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "রাসায়নিক শক্তি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "তাপ শক্তি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "স্প্রিং সংকুচিত বা প্রসারিত করলে স্থিতিস্থাপক বিভব শক্তি $U = \\frac{1}{2}kx^2$ জমা হয়।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "কর্মদক্ষতা (η)-র সঠিক সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "η = (মোট শক্তি / কার্যকর শক্তি) × ১০০%",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "η = (লভ্য কার্যকর শক্তি / মোট প্রদত্ত শক্তি) × ১০০%",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "η = অপচয়কৃত শক্তি / মোট শক্তি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "η = বল × সরণ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কর্মদক্ষতা $\\eta = \\frac{\\text{Useful Work Output}}{\\text{Total Energy Input}} \\times 100\\%$।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "১০ কেজি ভরের একটি বস্তুকে মুক্তভাবে উপর থেকে নিচে ফেলে দেওয়া হলে ভূমিতে আঘাত করার ঠিক পূর্ব মুহূর্তে এর মোট শক্তি কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "শূন্য",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রাথমিক মোট বিভব শক্তির সমান",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "প্রাথমিক গতিশক্তির অর্ধেক",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অসীম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "শক্তির সংরক্ষণশীলতা নীতি অনুযায়ী, মুক্তভাবে পড়ন্ত বস্তুর সর্বোচ্চ বিন্দুতে মোট বিভব শক্তি ভূমিতে পতনের মুহূর্তে সম্পূর্ণ গতিশক্তিতে রূপান্তরিত হয়।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২২"
+  },
+  {
+    "chapter": "কাজ, ক্ষমতা ও শক্তি",
+    "stem_bn": "১ কিলোওয়াট-ঘণ্টা (1 kWh) সমান কত জুল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৩.৬ × ১০^৩ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৩.৬ × ১০^৫ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৩.৬ × ১০^৬ জুল",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৭৪৬ জুল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "$1\\ \\text{kWh} = 1000\\ \\text{W} \\times 3600\\ \\text{s} = 3.6 \\times 10^6\\ \\text{J}$।",
+    "difficulty": "EASY",
+    "source": "ময়মনসিংহ বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "প্যাসকেলের সূত্র কোন ক্ষেত্রে প্রযোজ্য?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কঠিন পদার্থ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রবাহিত তরল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "আবদ্ধ তরল ও বায়বীয় পদার্থ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "সকল পদার্থ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "প্যাসকেলের নীতি কেবলমাত্র আবদ্ধ পাত্রে রক্ষিত তরল বা বায়বীয় পদার্থের ওপর বাহ্যিক চাপ প্রয়োগের ক্ষেত্রে প্রযোজ্য।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২১"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "পানির নিচে ১০ মিটার গভীরে পানির চাপ কত? (পানির ঘনত্ব ১০০০ কেজি/মি^৩)",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৯,৮০০ প্যাস্কেল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৯৮,০০০ প্যাস্কেল",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "১০০,০০০ প্যাস্কেল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৯৮০ প্যাস্কেল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "তরলের অভ্যন্তরে চাপ $p = h \\rho g = 10 \\times 1000 \\times 9.8 = 98,000\\ \\text{Pa}$।",
+    "difficulty": "MEDIUM",
+    "source": "চট্টগ্রাম বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "একটি হাইড্রোলিক প্রেসের ছোট পিস্টনের ক্ষেত্রফল ৫ বর্গসে.মি. এবং বড় পিস্টনের ক্ষেত্রফল ১০০ বর্গসে.মি.। ছোট পিস্টনে ২০ নিউটন বল প্রয়োগ করলে বড় পিস্টনে কত বল অনুভূত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২০ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১০০ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪০০ নিউটন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "২০০০ নিউটন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "বল বৃদ্ধিকরণ নীতি: $\\frac{F_2}{F_1} = \\frac{A_2}{A_1} \\implies F_2 = 20 \\times \\frac{100}{5} = 400\\ \\text{N}$।",
+    "difficulty": "HARD",
+    "source": "রাজশাহী বোর্ড ২০২০"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "প্লবতার মান কোনটির সমান?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বস্তুর মোট ওজন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বস্তুর ভর",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বস্তু কর্তৃক অপসারিত তরলের ওজন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "পাত্রের তলদেশের চাপ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "আর্কিমিডিসের নীতি অনুসারে, কোনো বস্তুকে তরলে নিমজ্জিত করলে তা যে পরিমাণ ঊর্ধ্বমুখী বল (প্লবতা) লাভ করে, তা বস্তু কর্তৃক অপসারিত তরলের ওজনের সমান।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "বায়ুমণ্ডলীয় চাপ পরিমাপক যন্ত্রের নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ম্যানোমিটার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ব্যারোমিটার",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "হাইড্রোমিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ল্যাকটোমিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বায়ুমণ্ডলের চাপ মাপতে টরিসেলির উদ্ভাবিত পারদ ব্যারোমিটার ব্যবহৃত হয়।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "হুকের সূত্রানুসারে কোনটি সঠিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "পীড়ন × বিকৃতি = ধ্রুবক",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "পীড়ন / বিকৃতি = ধ্রুবক",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "পীড়ন = বিকৃতি^২",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বিকৃতি / পীড়ন = ক্ষেত্রফল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "স্থিতিস্থাপক সীমার মধ্যে পীড়ন বিকৃতির সমানুপাতিক: $\\frac{\\text{পীড়ন}}{\\text{বিকৃতি}} = E$ (ধ্রুবক)।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "কোন পদার্থের নির্দিষ্ট আয়তন আছে কিন্তু নির্দিষ্ট আকার নেই?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কঠিন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "তরল",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "বায়বীয়",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "প্লাজমা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "তরল পদার্থের অণুগুলোর মধ্যে আন্তঃআণবিক আকর্ষণ বল কঠিনের চেয়ে কম থাকায় এদের নির্দিষ্ট আকার থাকে না কিন্তু আয়তন নির্দিষ্ট থাকে।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "পদার্থের অবস্থা ও চাপ",
+    "stem_bn": "বস্তুর ভাসন ও নিমজ্জনের ক্ষেত্রে কোনটি ঘটলে বস্তুটি তরলে সম্পূর্ণ নিমজ্জিত অবস্থায় ভাসবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বস্তুর ঘনত্ব বেশি হলে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বস্তুর ঘনত্ব কম হলে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বস্তুর ঘনত্ব তরলের ঘনত্বের সমান হলে (ρ = ρ_w)",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "বস্তুর ওজন শূন্য হলে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "যখন বস্তুর ঘনত্ব তরলের ঘনত্বের সমান হয় ($\\rho_s = \\rho_l$), তখন বস্তুর ওজন অপসারিত তরলের ওজনের সমান হয় এবং বস্তুটি নিমজ্জিত অবস্থায় ভাসে।",
+    "difficulty": "MEDIUM",
+    "source": "সিলেট বোর্ড ২০২২"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "পানির ত্রৈধ বিন্দুর তাপমাত্রা কেলভিন স্কেলে কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০ K",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২৭৩.১৫ K",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২৭৩.১৬ K",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৩৭৩.১৫ K",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "যে তাপমাত্রায় ও চাপে পানি একই সাথে কঠিন, তরল ও বায়বীয় তিনটি অবস্থাতেই সাম্যাবস্থায় থাকে তাকে পানির ত্রৈধ বিন্দু বলে (২৭৩.১৬ K বা ০.০১ °C)।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "ফারেনহাইট ও সেলসিয়াস স্কেলের মধ্যে সম্পর্ক নির্দেশকারী সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "C/9 = (F - 32)/5",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "C/5 = (F - 32)/9",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "C/5 = (F + 32)/9",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "C/100 = F/212",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "স্কেলদ্বয়ের সম্পর্ক সমীকরণ হলো $\\frac{C}{5} = \\frac{F-32}{9}$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "কোন তাপমাত্রায় সেলসিয়াস ও ফারেনহাইট স্কেলে একই পাঠ পাওয়া যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০°",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৪০°",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "-৪০°",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "১০০°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "ধরি পাঠ $x$। $\\frac{x}{5} = \\frac{x-32}{9} \\implies 9x = 5x - 160 \\implies 4x = -160 \\implies x = -40^\\circ$।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "পানির আপেক্ষিক তাপ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২০০০ জুল/কেজি-কেলভিন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২১০০ জুল/কেজি-কেলভিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪২00 জুল/কেজি-কেলভিন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৩৩৬০০০ জুল/কেজি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "পানির আপেক্ষিক তাপ $s = 4200\\ \\text{J}/(\\text{kg}\\cdot\\text{K})$।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২০"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "বরফ গলনের সুপ্ততাপ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২.২৬ × ১০^৬ জুল/কেজি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৩.৩৬ × ১০^৫ জুল/কেজি",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৪.২ × ১০^৩ জুল/কেজি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১.২৬ × ১০^৫ জুল/কেজি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বরফ গলনের আপেক্ষিক সুপ্ততাপ $L_f = 3.36 \\times 10^5\\ \\text{J/kg}$।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "কঠিন পদার্থের ক্ষেত্র প্রসারণ সহগ (β) এবং দৈর্ঘ্য প্রসারণ সহগের (α) সম্পর্ক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "β = α",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "β = ২α",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "β = ৩α",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "β = α/২",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কঠিন বস্তুর ক্ষেত্রে ক্ষেত্র প্রসারণ সহগ দৈর্ঘ্য প্রসারণ সহগের দ্বিগুণ ($\\beta = 2\\alpha$) এবং আয়তন প্রসারণ সহগ তিনগুণ ($\\gamma = 3\\alpha$)।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "পানির অস্বাভাবিক প্রসারণ দেখা যায় কোন তাপমাত্রা পরিসরে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০°C থেকে ৪°C",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৪°C থেকে ১০০°C",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "-৪°C থেকে ০°C",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "০°C থেকে ১০°C",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "০°C থেকে ৪°C পর্যন্ত উত্তপ্ত করলে পানি প্রসারিত না হয়ে সংকুচিত হয়, যাকে পানির ব্যতিক্রমী প্রসারণ বলা হয়।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০২১"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "শব্দ তরঙ্গের বেগ, কম্পাঙ্ক ও তরঙ্গদৈর্ঘ্যের মধ্যকার সম্পর্ক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "v = f/λ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "v = fλ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "v = λ/f",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "v = f^2 λ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "তরঙ্গ বেগ $v$, কম্পাঙ্ক $f$ এবং তরঙ্গদৈর্ঘ্য $\\lambda$ হলে $v = f\\lambda$।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "শ্রাব্যতার স্বাভাবিক কম্পাঙ্কের সীমা কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০ Hz থেকে ২০ Hz",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২০ Hz থেকে ২০,০০০ Hz",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "২০,০০০ Hz এর বেশি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০০ Hz থেকে ১,০০০ Hz",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "মানুষের কানের শ্রাব্যতার পাল্লা ২০ হার্টজ থেকে ২০,০০০ হার্টজ পর্যন্ত।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২২"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "বাতাসে শব্দের বেগ ৩৪০ মি/সে হলে প্রতিধ্বনি শোনার জন্য প্রতিফলক ও উৎসের ন্যূনতম দূরত্ব কত হতে পারে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১৭ মিটার",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৩৪ মিটার",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৮.৫ মিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১০ মিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মস্তিষ্কে শব্দের অনুভূতি স্থায়ী হয় ০.১ সেকেন্ড। সুতরাং ন্যূনতম দূরত্ব $d = \\frac{v \\times t}{2} = \\frac{340 \\times 0.1}{2} = 17\\ \\text{m}$।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "শব্দ তরঙ্গ কোন ধরণের তরঙ্গ?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অনুদৈর্ঘ্য তরঙ্গ",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "অনুপ্রস্থ তরঙ্গ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "তড়িৎচৌম্বকীয় তরঙ্গ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "স্থির তরঙ্গ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "শব্দ তরঙ্গ মাধ্যমের কণাগুলোর স্পন্দনের সমান্তরালে সঞ্চালিত হয়, তাই এটি অনুদৈর্ঘ্য বা লম্বিক তরঙ্গ।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "কোন মাধ্যমে শব্দের বেগ সবচেয়ে বেশি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বায়বীয় মাধ্যমে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "তরল মাধ্যমে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "কঠিন মাধ্যমে",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "শূন্য মাধ্যমে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "শব্দের বেগ কঠিন মাধ্যমে সবচেয়ে বেশি ($v_s > v_l > v_g$), এবং শূন্য মাধ্যমে শব্দ চলাচল করতে পারে না।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২১"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "একটি শব্দের কম্পাঙ্ক ৫০০ Hz এবং তরঙ্গদৈর্ঘ্য ০.৬৮ মিটার হলে শব্দের বেগ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৩৪০ মি/সে",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৬৮০ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১৭০ মি/সে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৭৩৫ মি/সে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$v = f \\lambda = 500 \\times 0.68 = 340\\ \\text{m/s}$।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "শব্দোত্তর বা আল্ট্রাসনিক তরঙ্গের কম্পাঙ্ক কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "< ২০ Hz",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২০ - ২০,০০০ Hz",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "> ২০,০০০ Hz",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "> ১,০০,০০০ Hz",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "২০,০০০ হার্টজের বেশি কম্পাঙ্কের শব্দকে আল্ট্রাসাউন্ড বা শব্দোত্তর তরঙ্গ বলে।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২০"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "বাদুড় চলাচলের সময় কোন তরঙ্গ ব্যবহার করে দিক নির্ণয় করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "শব্দেতর তরঙ্গ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "শব্দোত্তর তরঙ্গ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "বেতার তরঙ্গ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ইনফ্রারেড তরঙ্গ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বাদুড় মুখ দিয়ে উচ্চ কম্পাঙ্কের শব্দোত্তর তরঙ্গ (Ultrasound) তৈরি করে প্রতিধ্বনি শুনে শিকার ও বাধা শনাক্ত করে।",
+    "difficulty": "EASY",
+    "source": "ময়মনসিংহ বোর্ড ২০২১"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "সমতল দর্পণে গঠিত প্রতিবিম্বের বৈশিষ্ট্য কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বাস্তব ও সোজা",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অবাস্তব ও সোজা",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "বাস্তব ও উল্টো",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অবাস্তব ও উল্টো",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "সমতল দর্পণ সর্বদা লক্ষবস্তুর সমান আকারের অবাস্তব ও সোজা প্রতিবিম্ব গঠন করে।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "অবতল দর্পণের বক্রতার কেন্দ্রে কোনো বস্তু রাখলে প্রতিবিম্ব কোথায় গঠিত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ফোকাসে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অসীমে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "বক্রতার কেন্দ্রে",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "মেরুতে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "অবতল দর্পণের বক্রতার কেন্দ্র $C$-তে অবস্থিত বস্তুর প্রতিবিম্ব বক্রতার কেন্দ্রেই গঠিত হয় এবং তা বাস্তব, উল্টো ও বস্তুর সমান আকারের হয়।",
+    "difficulty": "MEDIUM",
+    "source": "চট্টগ্রাম বোর্ড ২০২০"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "গোলীয় দর্পণের ফোকাস দূরত্ব (f) ও বক্রতার ব্যাসার্ধের (r) মধ্যে সম্পর্ক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "f = 2r",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "f = r/2",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "f = r^2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "f = 1/r",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ক্ষুদ্র উন্মেষযুক্ত গোলীয় দর্পণের ক্ষেত্রে ফোকাস দূরত্ব বক্রতার ব্যাসার্ধের অর্ধেক ($f = \\frac{r}{2}$)।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২১"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "গাড়ির পেছনের যানবাহন দেখার জন্য চালকের পাশে কোন দর্পণ ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "সমতল দর্পণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অবতল দর্পণ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "উত্তল দর্পণ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "অধিবৃত্তীয় দর্পণ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "উত্তল দর্পণ সর্বদা সোজা ও খর্বিত প্রতিবিম্ব গঠন করে এবং এর দৃষ্টি ক্ষেত্র (Field of View) অনেক বড়, তাই এটি রিয়ার ভিউ মিরর হিসেবে ব্যবহৃত হয়।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "কোনো দর্পণের রৈখিক বিবর্ধন m = -1 হলে এর অর্থ কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্রতিবিম্ব অবাস্তব ও সোজা",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রতিবিম্ব বাস্তব ও বস্তুর সমান আকারের",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "প্রতিবিম্ব বস্তুর চেয়ে বড়",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "প্রতিবিম্ব মেরুতে অবস্থিত",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বিবর্ধনের ঋণাত্মক মান নির্দেশ করে প্রতিবিম্বটি বাস্তব ও উল্টো, এবং মান ১ হওয়ার অর্থ এটি বস্তুর সমান আকারের।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "দন্ত চিকিৎসকরা দাঁত পরীক্ষার জন্য কোন ধরনের দর্পণ ব্যবহার করেন?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "উত্তল দর্পণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অবতল দর্পণ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "সমতল দর্পণ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "উত্তলাবতল দর্পণ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "দাঁতের কাছে অবতল দর্পণ ধরলে ফোকাস দূরত্বের ভেতরে থাকার কারণে বড়, সোজা ও অবাস্তব প্রতিবিম্ব দেখা যায়।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২০"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "একটি অবতল দর্পণের ফোকাস দূরত্ব ২০ সে.মি.। দর্পণ থেকে ৩০ সে.মি. দূরে বস্তু রাখলে প্রতিবিম্বের দূরত্ব কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২০ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৩০ সে.মি.",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৬০ সে.মি.",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "১২০ সে.মি.",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "দর্পণের সমীকরণ: $\\frac{1}{u} + \\frac{1}{v} = \\frac{1}{f} \\implies \\frac{1}{30} + \\frac{1}{v} = \\frac{1}{20} \\implies \\frac{1}{v} = \\frac{1}{20} - \\frac{1}{30} = \\frac{1}{60} \\implies v = 60\\ \\text{cm}$।",
+    "difficulty": "HARD",
+    "source": "বরিশাল বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "প্রতিফলনের দ্বিতীয় সূত্রানুসারে আপতন কোণ ৬০° হলে প্রতিফলন কোণ কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৩০°",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৪৫°",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৬০°",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "১২০°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "প্রতিফলনের সূত্রানুসারে আপতন কোণ ও প্রতিফলন কোণ সর্বদা সমান ($i = r = 60^\\circ$)।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "স্নেলের প্রতিসরণ সূত্রের গাণিতিক রূপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "sin i × sin r = η",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "sin i / sin r = η",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "cos i / cos r = η",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "tan i = η",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "নির্দিষ্ট মাধ্যমের জন্য আপতন কোণের সাইন ও প্রতিসরণ কোণের সাইনের অনুপাত একটি ধ্রুব সংখ্যা ($n = \\frac{\\sin i}{\\sin r}$)।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "পানিতে আলোর বেগ ২.২৫ × ১০^৮ মি/সে এবং শূন্য মাধ্যমে আলোর বেগ ৩ × ১০^৮ মি/সে হলে পানির প্রতিসরাঙ্ক কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১.৩৩",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "১.৫",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১.২৫",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "০.৭৫",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রতিসরাঙ্ক $\\eta = \\frac{c}{v} = \\frac{3 \\times 10^8}{2.25 \\times 10^8} = 1.33$।",
+    "difficulty": "MEDIUM",
+    "source": "চট্টগ্রাম বোর্ড ২০২১"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "পূর্ণ অভ্যন্তরীণ প্রতিফলনের জন্য কোন শর্তটি আবশ্যক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "হালকা মাধ্যম থেকে ঘন মাধ্যমে যেতে হবে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "আলোক রশ্মি ঘন মাধ্যম থেকে হালকা মাধ্যমে প্রবেশ করতে হবে",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "আপতন কোণ সংকট কোণের চেয়ে ছোট হতে হবে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "আপতন কোণ ৯০ ডিগ্রি হতে হবে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "পূর্ণ অভ্যন্তরীণ প্রতিফলনের প্রধান শর্ত দুটি: আলো ঘন থেকে হালকা মাধ্যমে যেতে হবে এবং আপতন কোণ সংকট কোণের চেয়ে বড় ($i > \\theta_c$) হতে হবে।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "লেন্সের ক্ষমতার একক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ওয়াট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "জুল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ডাইঅপ্টার",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "মিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "লেন্সের ফোকাস দূরত্বের বিপরীত রাশিকে ক্ষমতা বলে এবং এর প্রচলিত একক ডাইঅপ্টার ($\\text{D} = \\text{m}^{-1}$)।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২২"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "একটি উত্তল লেন্সের ফোকাস দূরত্ব ৫০ সে.মি. হলে লেন্সটির ক্ষমতা কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "+০.০২ D",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "+০.৫ D",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "+২ D",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "-২ D",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "ক্ষমতা $P = \\frac{1}{f(\\text{m})} = \\frac{1}{0.5} = +2\\ \\text{D}$।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "মরুভূমির মরীচিকা সৃষ্টির কারণ কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "আলোর বিচ্ছুরণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "আলোর বিচ্ছুরণ ও প্রতিফলন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "পূর্ণ অভ্যন্তরীণ প্রতিফলন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "আলোর অপবর্তন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "উত্তপ্ত বালুর উপরের বাতাসের ঘনত্বের তারতম্যের কারণে আলোক রশ্মির পূর্ণ অভ্যন্তরীণ প্রতিফলনের ফলে মরীচিকা সৃষ্টি হয়।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "অপটিক্যাল ফাইবারে আলোর কোন ঘটনাটি ঘটে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "নিয়মিত প্রতিফলন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "আলোর প্রতিসরণ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "পূর্ণ অভ্যন্তরীণ প্রতিফলন",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "আলোর অপবর্তন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "অপটিক্যাল ফাইবারের কোরের মধ্য দিয়ে সিগন্যাল পুনঃপুনঃ পূর্ণ অভ্যন্তরীণ প্রতিফলনের মাধ্যমে আলোক গতিতে সঞ্চালিত হয়।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০২০"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "কোন রঙের আলোর প্রতিসরাঙ্ক সবচেয়ে বেশি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "লাল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "হলুদ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "সবুজ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বেগুনি",
+        "is_correct": true
+      }
+    ],
+    "correct_option_key": "D",
+    "explanation_bn": "বেগুনি আলোর তরঙ্গদৈর্ঘ্য সবচেয়ে কম হওয়ায় কাচ বা পানির মতো মাধ্যমে এর প্রতিসরাঙ্ক সবচেয়ে বেশি এবং বিচ্যুতিও সবচেয়ে বেশি।",
+    "difficulty": "MEDIUM",
+    "source": "সিলেট বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "কুলম্বের সূত্রানুসারে দুটি আধানের মধ্যকার বল কোনটির ব্যস্তানুপাতিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "দূরত্বের",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "দূরত্বের বর্গের",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "আধানদ্বয়ের গুণফলের",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মাধ্যমের ঘনত্বের",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কুলম্বের সূত্র মতে, $F = k \\frac{|q_1 q_2|}{r^2}$। অর্থাৎ বল দূরত্বের বর্গের ব্যস্তানুপাতিক।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "চার্জের এসআই (SI) একক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অ্যাম্পিয়ার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ভোল্ট",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "কুলম্ব",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "ফ্যারাড",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "বৈদ্যুতিক আধান বা চার্জের একক কুলম্ব (C)।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "একটি পরমাণু ঋণাত্মক আধানে আহিত হয় যখন এটি-",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্রোটন ত্যাগ করে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ইলেকট্রন ত্যাগ করে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ইলেকট্রন গ্রহণ করে",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "নিউট্রন গ্রহণ করে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "পরমাণুতে ইলেকট্রনের সংখ্যা প্রোটনের চেয়ে বেশি হলে পরমাণুটি ঋণাত্মক আধানে আহিত হয়।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "তড়িৎ তীব্রতার একক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "N m",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "N/C",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "J/C",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "V m",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "তড়িৎ তীব্রতা $E = \\frac{F}{q}$, যার একক নিউটন প্রতি কুলম্ব ($\\text{N/C}$) বা ভোল্ট প্রতি মিটার ($\\text{V/m}$)।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "বায়ু মাধ্যমে দুটি ১ কুলম্ব আধানের মধ্যবর্তী দূরত্ব ১ মিটার হলে তাদের মধ্যকার বিকর্ষণ বল কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৯ × ১০^৯ নিউটন",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৮.৮৫ × ১০^-১২ নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৯ × ১০^৬ নিউটন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "$F = \\frac{1}{4\\pi\\epsilon_0} \\frac{q_1 q_2}{r^2} = 9 \\times 10^9 \\times \\frac{1 \\times 1}{1^2} = 9 \\times 10^9\\ \\text{N}$।",
+    "difficulty": "HARD",
+    "source": "কুমিল্লা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "তড়িৎ আবেশ প্রক্রিয়ায় কোন আধান তৈরি হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "স্থায়ী আধান",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "মুক্ত ইলেকট্রন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "আবিষ্ট আধান",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "কোনোটিই নয়",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "স্পর্শ ছাড়া কেবল আহিত বস্তুর সান্নিধ্যে অন্য বস্তুতে ক্ষণস্থায়ী আধান সঞ্চার করার প্রক্রিয়াকে তড়িৎ আবেশ বলে।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২১"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "বজ্রপাত থেকে সুরক্ষার জন্য ভবনের উপরে কী স্থাপন করা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইনভার্টার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বজ্রনিরোধক দণ্ড (Lightning Conductor)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ট্রান্সফরমার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ফিউজ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "তামার সূচ্যগ্র প্রান্তবিশিষ্ট বজ্রনিরোধক দণ্ড মাটির সাথে যুক্ত থেকে নিরাপদে মেঘের চার্জ মাটিতে প্রবাহিত করে।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "ওহমের সূত্রের সঠিক রূপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "V = I/R",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "V = IR",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "I = VR",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "R = VI",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "নির্দিষ্ট তাপমাত্রায় পরিবাহীর প্রবাহমাত্রা দুই প্রান্তের বিভব পার্থক্যের সমানুপাতিক: $V = IR$।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "রোধের এসআই একক কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভোল্ট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অ্যাম্পিয়ার",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ওহম",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "সিমেন্স",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "তড়িৎ রোধের আন্তর্জাতিক একক ওহম ($\\Omega$)।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "১০ ওহম ও ১৫ ওহমের দুটি রোধ সমান্তরাল সমবায়ে যুক্ত থাকলে তুল্যরোধ কত হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২৫ ওহম",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১২.৫ ওহম",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৬ ওহম",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৫ ওহম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "সমান্তরাল তুল্যরোধ $\\frac{1}{R_p} = \\frac{1}{10} + \\frac{1}{15} = \\frac{3+2}{30} = \\frac{5}{30} = \\frac{1}{6} \\implies R_p = 6\\ \\Omega$।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "একটি ৬০ ওয়াটের বাল্ব দৈনিক ৫ ঘণ্টা করে ৩০ দিন জ্বললে কত ইউনিট (kWh) বিদ্যুৎ শক্তি ব্যয় হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৬ ইউনিট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৯ ইউনিট",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "১৫ ইউনিট",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১৮ ইউনিট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বিদ্যুৎ শক্তি $W = \\frac{P \\times t \\times \\text{days}}{1000} = \\frac{60 \\times 5 \\times 30}{1000} = 9\\ \\text{kWh}$ (ইউনিট)।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০২১"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "কোনো পরিবাহীর দৈর্ঘ্য দ্বিগুণ এবং প্রস্থচ্ছেদের ক্ষেত্রফল অর্ধেক করা হলে রোধ কত গুণ হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২ গুণ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৪ গুণ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৮ গুণ",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অপরিবর্তিত থাকবে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "রোধ $R = \\rho \\frac{L}{A}$। নতুন রোধ $R' = \\rho \\frac{2L}{A/2} = 4 \\rho \\frac{L}{A} = 4R$।",
+    "difficulty": "HARD",
+    "source": "কুমিল্লা বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "ফিউজ তার সাধারণত কোন ধাতুদ্বয়ের সংকর দ্বারা তৈরি হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "তামা ও দস্তা",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "টিন ও সিসা",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "লোহা ও নিকেল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "অ্যালুমিনিয়াম ও তামা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ফিউজ তার নিম্ন গলনাঙ্কের সংকর ধাতু (প্রায় ২৫% টিন ও ৭৫% সিসা) দিয়ে তৈরি করা হয়।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২২"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "বিদ্যুৎ প্রবাহ পরিমাপক যন্ত্রের নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভোল্টমিটার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অ্যামিটার",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "গ্যালভানোমিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ওহমমিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বর্তনীর তড়িৎ প্রবাহমাত্রা সরাসরি পরিমাপের জন্য অ্যামিটার ব্যবহার করা হয়।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "বাসাবাড়িতে বৈদ্যুতিক যন্ত্রপাতি কোন সমবায়ে সংযোগ দেওয়া হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "শ্রেণী সমবায়ে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "সমান্তরাল সমবায়ে",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "মিশ্র সমবায়ে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "যেকোনো সমবায়ে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বাসাবাড়ির সমস্ত লোড সমান্তরাল সমবায়ে যুক্ত থাকে যাতে প্রতিটি যন্ত্র পূর্ণ ২২০ ভোল্ট পায় এবং স্বতন্ত্রভাবে চালানো যায়।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২১"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "বৈদ্যুতিক মোটর কোন শক্তিকে কোন শক্তিতে রূপান্তরিত করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "যান্ত্রিক শক্তিকে তড়িৎ শক্তিতে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "তড়িৎ শক্তিকে যান্ত্রিক শক্তিতে",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "চৌম্বক শক্তিকে তাপ শক্তিতে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "রাসায়নিক শক্তিকে তড়িৎ শক্তিতে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "মোটর তড়িৎ শক্তি গ্রহণ করে এবং চৌম্বক ক্রিয়ার মাধ্যমে ঘূর্ণন বা যান্ত্রিক শক্তি উৎপন্ন করে।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২১"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "স্টেপ-আপ ট্রান্সফরমারের ক্ষেত্রে কোনটি সঠিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "Ep > Es",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "Ep < Es এবং Ip > Is",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "Np < Ns এবং Ip < Is",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "Vs < Vp",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "স্টেপ-আপ ট্রান্সফরমার ভোল্টেজ বৃদ্ধি করে ($E_s > E_p$) কিন্তু শক্তির নিত্যতা বজায় রাখতে গৌণ কুণ্ডলীর প্রবাহ কমে যায় ($I_s < I_p$)।",
+    "difficulty": "MEDIUM",
+    "source": "চট্টগ্রাম বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "তড়িৎচৌম্বকীয় আবেশের নীতি কে আবিষ্কার করেন?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "হ্যান্স ওরস্টেড",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "মাইকেল ফ্যারাডে",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "জেমস ম্যাক্সওয়েল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "আইজ্যাক নিউটন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "১৮৩১ সালে বিজ্ঞানী মাইকেল ফ্যারাডে পরিবর্তনশীল চৌম্বক ক্ষেত্রের দ্বারা বিদ্যুৎ উৎপাদনের ঘটনা আবিষ্কার করেন।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২০"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "সোলেনয়েডের ভেতরে চৌম্বক বলরেখার প্রকৃতি কেমন?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বৃত্তাকার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "পরস্পর সমান্তরাল ও সুষম",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "অগোছালো",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "শূন্য",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "সোলেনয়েডের অক্ষ বরাবর চৌম্বক ক্ষেত্র অতি শক্তিশালী, সুষম এবং বলরেখাগুলো পরস্পরের সমান্তরাল থাকে।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "একটি ট্রান্সফরমারের মুখ্য কুণ্ডলীর পাকসংখ্যা ১০০ এবং গৌণ কুণ্ডলীর পাকসংখ্যা ৫০০। মুখ্য কুণ্ডলীতে ১২ ভোল্ট দিলে গৌণ কুণ্ডলীতে কত ভোল্ট পাওয়া যাবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১২ ভোল্ট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২৪ ভোল্ট",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৬০ ভোল্ট",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "১২০ ভোল্ট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "$\\frac{E_s}{E_p} = \\frac{N_s}{N_p} \\implies E_s = 12 \\times \\frac{500}{100} = 60\\ \\text{V}$।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "তড়িৎ প্রবাহের দিক এবং উৎপন্ন চৌম্বক ক্ষেত্রের দিক কোন নিয়মে জানা যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বাম হাত নিয়ম",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ডান হাত বৃদ্ধাঙ্গুলি নিয়ম",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "লেনজের নিয়ম",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কুলম্বের নিয়ম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ডান হাতের বৃদ্ধাঙ্গুলি তড়িৎ প্রবাহের অভিমুখে রাখলে অন্য আঙ্গুলগুলোর বাঁকানো দিক চৌম্বক ক্ষেত্রের দিক নির্দেশ করে।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "বিদ্যুতের চৌম্বক ক্রিয়া",
+    "stem_bn": "লেনজের সূত্রটি কোন সংরক্ষণশীলতা নীতির রূপ?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ভরবেগের নীতি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "আধানের সংরক্ষণশীলতা",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "শক্তির সংরক্ষণশীলতা নীতি",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "ভরের সংরক্ষণশীলতা",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "তড়িৎচৌম্বকীয় আবেশে লেনজের সূত্রটি শক্তির সংরক্ষণশীলতার সরাসরি প্রত্যক্ষ রূপ।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০২০"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "তেজস্ক্রিয় রশ্মির মধ্যে কোনটির ভেদন ক্ষমতা সবচেয়ে বেশি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "আলফা রশ্মি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বিটা রশ্মি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "গামা রশ্মি",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "এক্স-রে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "গামা রশ্মি চার্জহীন উচ্চ কম্পাঙ্কের তড়িৎচৌম্বকীয় তরঙ্গ হওয়ায় এর ভেদন ক্ষমতা সর্বাধিক।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "অর্ধপরিবাহীতে পঞ্চযোজী অপদ্রব্য (যেমন ফসফরাস) ডোপায়ন করলে কোন ধরণের সেমিকন্ডাক্টর তৈরি হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "p-টাইপ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "n-টাইপ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ইনট্রিনসিক",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ডায়োড",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "পঞ্চযোজী মৌল মেশালে অতিরিক্ত মুক্ত ইলেকট্রন সৃষ্টি হয়, ফলে n-টাইপ অর্ধপরিবাহী উৎপন্ন হয়।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "আইনস্টাইনের ভর-শক্তি সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "E = mgh",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "E = mc^2",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "E = hf",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "E = 1/2 mv^2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "আইনস্টাইনের বিশেষ আপেক্ষিকতা তত্ত্ব অনুসারে শক্তি ও ভরের সমতুল্যতা হলো $E = mc^2$।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "আলফা কণা মূলত কোনটির নিউক্লিয়াস?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "হাইড্রোজেন নিউক্লিয়াস",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "হিলিয়াম নিউক্লিয়াস",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "লিথিয়াম নিউক্লিয়াস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ডিউটেরিয়াম",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "আলফা কণা হলো দুটি প্রোটন ও দুটি নিউট্রন সমন্বিত দ্বি-ধনাত্মক হিলিয়াম নিউক্লিয়াস ($^4_2\\text{He}^{2+}$)।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২১"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "একটি তেজস্ক্রিয় পদার্থের অর্ধায়ু ৪ দিন হলে ১৬ দিন পর এর কত অংশ অবশিষ্ট থাকবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১/৪ অংশ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১/৮ অংশ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১/১৬ অংশ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "১/৩২ অংশ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "অর্ধায়ুর সংখ্যা $n = \\frac{16}{4} = 4$। অবশিষ্ট পরিমাণ $N = N_0 \\left(\\frac{1}{2}\\right)^4 = \\frac{N_0}{16}$।",
+    "difficulty": "MEDIUM",
+    "source": "কুমিল্লা বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "পি-এন জাংশন ডায়োড কোন বর্তনীতে বিদ্যুৎ প্রবাহের অনুমতি দেয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "রিভার্স বায়াস",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ফরওয়ার্ড বায়াস",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "উভয় বায়াস",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কোনোটিই নয়",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ডায়োডের p-প্রান্ত ধনাত্মক ও n-প্রান্ত ঋণাত্মকে যুক্ত থাকলে (সম্মুখী ঝোঁক বা ফরওয়ার্ড বায়াস) নিঃশেষিত স্তর হ্রাস পায় এবং বিদ্যুৎ প্রবাহিত হয়।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২২"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "সিআরটি (CRT) মনিটরে ইলেকট্রন নির্গমনের জন্য কোন ঘটনাটি ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "আলোকতড়িৎ ক্রিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "তাপীয় নিঃসরণ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "তেজস্ক্রিয় ক্ষয়",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "রাসায়নিক বিক্রিয়া",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ক্যাথোডকে উত্তপ্ত করে ইলেকট্রন মুক্ত করার প্রক্রিয়াকে তাপীয় নিঃসরণ (Thermionic Emission) বলা হয়।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০২১"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "লজিক গেটের ক্ষেত্রে কোন গেটের সকল ইনপুট ১ হলে আউটপুট ০ হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "AND গেট",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "OR গেট",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "NAND গেট",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "XOR গেট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "NAND গেটের আউটপুট সমীকরণ $Y = \\overline{A \\cdot B}$। যখন $A=1, B=1$, তখন $Y = \\overline{1 \\cdot 1} = 0$।",
+    "difficulty": "MEDIUM",
+    "source": "সিলেট বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "দেহের অভ্যন্তরীণ অঙ্গের ত্রিমাত্রিক চিত্র পাওয়ার জন্য কোন পরীক্ষাটি করা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "এক্স-রে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "সিটি স্ক্যান (CT Scan)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ইসিজি (ECG)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "এন্ডোস্কোপি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কম্পিউটার টমোগ্রাফি (CT Scan) এক্স-রে রশ্মি ও কম্পিউটারের সমন্বয়ে মানবদেহের অভ্যন্তরীণ অঙ্গের ত্রিমাত্রিক নিখুঁত চিত্র তৈরি করে।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "এমআরআই (MRI) পরীক্ষায় কোন চৌম্বক ক্ষেত্র ও তরঙ্গ ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "এক্স-রে ও গামা রশ্মি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "শক্তিশালী চৌম্বক ক্ষেত্র ও রেডিও তরঙ্গ",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "আল্ট্রাসাউন্ড ও অবলোহিত রশ্মি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মাইক্রোওয়েভ ও লেজার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "Magnetic Resonance Imaging (MRI) অত্যন্ত শক্তিশালী চৌম্বক ক্ষেত্র এবং রেডিও ফ্রিকোয়েন্সি তরঙ্গ ব্যবহার করে শরীরের নরম টিস্যুর চিত্র ধারণ করে।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২০"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "হৃদপিণ্ডের বৈদ্যুতিক কার্যকলাপ পরিমাপ ও রেকর্ড করার যন্ত্রের নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইইজি (EEG)",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ইসিজি (ECG)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "এন্ডোস্কোপি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "এনজিওগ্রাফি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "Electrocardiogram (ECG) হৃদস্পন্দনের সময় সৃষ্ট সূক্ষ্ম বৈদ্যুতিক সংকেত গ্রাফ পেপারে লিপিবদ্ধ করে।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২১"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "গর্ভস্থ শিশুর বৃদ্ধি ও বিকাশ নিরীক্ষণের জন্য সবচেয়ে নিরাপদ পরীক্ষা কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "এক্স-রে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "সিটি স্ক্যান",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "আল্ট্রাসনোগ্রাফি",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "তেজস্ক্রিয় আইসোটোপ স্ক্যান",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "আল্ট্রাসনোগ্রাফিতে ক্ষতিকর আয়োনাইজিং বিকিরণের পরিবর্তে অতিউচ্চ কম্পাঙ্কের নিরীহ শব্দ তরঙ্গ ব্যবহৃত হয়।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "ক্যান্সার চিকিৎসায় আক্রান্ত কোষ ধ্বংস করতে কোনটি ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কেমোথেরাপি ইনসুলিন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "রেডিওথেরাপি (কোবাল্ট-৬০)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "আল্ট্রাসনোগ্রাফি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "এমআরআই",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "কোবাল্ট-৬০ আইসোটোপ থেকে নির্গত উচ্চ শক্তির গামা রশ্মি দিয়ে টিউমার ও ক্যান্সার কোষ ধ্বংস করা হয়।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "রক্তনালীর ব্লকেজ বা সংকীর্ণতা নির্ণয় করার বিশেষ এক্স-রে পরীক্ষাকে কী বলা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ম্যামোগ্রাফি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "এনজিওগ্রাফি",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "এন্ডোস্কোপি",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বায়োপসি",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "রক্তনালীতে বিশেষ রঞ্জক বা ডাই প্রবেশ করিয়ে এক্স-রে চিত্রের মাধ্যমে ব্লকেজ শনাক্তকরণকে এনজিওগ্রাফি বলে।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "জীবন বাঁচাতে পদার্থবিজ্ঞান",
+    "stem_bn": "পাকস্থলী বা খাদ্যনালীর অভ্যন্তরীণ ক্ষত পর্যবেক্ষণের জন্য ব্যবহৃত অপটিক্যাল ফাইবারযুক্ত যন্ত্র কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "পেরিস্কোপ",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "মাইক্রোস্কোপ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "এন্ডোস্কোপ",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "টেলিস্কোপ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "এন্ডোস্কোপ নমনীয় অপটিক্যাল ফাইবার কেবলের মাধ্যমে শরীরের অভ্যন্তরীণ আলো প্রেরণ ও চিত্র প্রদর্শনে সহায়তা করে।",
+    "difficulty": "EASY",
+    "source": "ময়মনসিংহ বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "কোন সূত্রটি শক্তির নিত্যতা এবং ভরবেগের নিত্যতা সমর্থন করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "নিউটনের ১ম সূত্র",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "নিউটনের ২য় সূত্র",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "নিউটনের ৩য় সূত্র",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "হুকের সূত্র",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "নিউটনের ৩য় সূত্র ভরবেগ ও শক্তির সংরক্ষণশীলতার সাথে ওতপ্রোতভাবে জড়িত।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "বল",
+    "stem_bn": "মহাকর্ষীয় ধ্রুবক G এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৯.৮ N m^2/kg^2",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "৬.৬৭৩ × ১০^-১১ N m^2/kg^2",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৬.৬৭৩ × ১০^-৯ N m^2/kg^2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৩ × ১০^৮ N m^2/kg^2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "$G = 6.673 \\times 10^{-11}\\ \\text{N}\\cdot\\text{m}^2/\\text{kg}^2$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "তরঙ্গ ও শব্দ",
+    "stem_bn": "শব্দের তীব্রতার একক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "W/m",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "W/m^2",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "J/s",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "N/m^2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "প্রতি একক ক্ষেত্রফলের মধ্য দিয়ে প্রবাহিত শব্দের শক্তিকে তীব্রতা বলে, একক ওয়াট প্রতি বর্গমিটার ($W/m^2$)।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "কোন লেন্স চোখের দূরদৃষ্টি (Hypermetropia) প্রতিকারে ব্যবহৃত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অবতল লেন্স",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "উত্তল লেন্স",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "দ্বি-অবতল লেন্স",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বেলনাকার লেন্স",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "দূরদৃষ্টি ত্রুটিযুক্ত চোখ কাছের বস্তু দেখতে পায় না; উত্তল লেন্স অভিসারী ক্ষমতা বাড়িয়ে রেটিনায় প্রতিবিম্ব ফেলে।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "আলোর প্রতিসরণ",
+    "stem_bn": "চোখের যে অংশে বস্তুর বাস্তব প্রতিবিম্ব গঠিত হয় তার নাম কী?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কর্নিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "আইরিশ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "রেটিনা",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "অপটিক স্নায়ু",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "চোখের অক্ষিগোলকের ভেতরের আলোকসংবেদী স্তর রেটিনায় বাস্তব ও উল্টো প্রতিবিম্ব তৈরি হয়।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "বস্তুর উপর তাপের প্রভাব",
+    "stem_bn": "১ ক্যালরি তাপ সমান কত জুল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "০.২৪ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১ জুল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৪.২ জুল",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৪২০ জুল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "$1\\ \\text{cal} = 4.184\\ \\text{J} \\approx 4.2\\ \\text{J}$।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "আলোর প্রতিফলন",
+    "stem_bn": "কোন বিজ্ঞানী সর্বপ্রথম প্রমাণের মাধ্যমে দেখান যে আলো এক ধরনের তড়িৎচৌম্বকীয় তরঙ্গ?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "আইজ্যাক নিউটন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "জেমস ক্লার্ক ম্যাক্সওয়েল",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "আলবার্ট আইনস্টাইন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "থমাস ইয়ং",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "১৮৬৫ সালে জেমস ক্লার্ক ম্যাক্সওয়েল তাঁর তড়িৎচৌম্বক সমীকরণের সাহায্যে আলোর তড়িৎচৌম্বকীয় স্বরূপ প্রতিষ্ঠা করেন।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "স্থির বিদ্যুৎ",
+    "stem_bn": "ইলেকট্রনের আধানের পরিমাণ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "+১.৬ × ১০^-১৯ কুলম্ব",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "-১.৬ × ১০^-১৯ কুলম্ব",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "-৯.১ × ১০^-৩১ কুলম্ব",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "-১.৬ × ১০^-১৬ কুলম্ব",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ইলেকট্রনের আধান $e = -1.602 \\times 10^{-19}\\ \\text{C}$।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "চল বিদ্যুৎ",
+    "stem_bn": "কোন যন্ত্রের সাহায্যে কোনো বর্তনীতে ভোল্টেজ পরিমাপ করা হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অ্যামিটার",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ভোল্টমিটার",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ওহমমিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "পোটেনশিওমিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "বর্তনীতে দুই বিন্দুর বিভব পার্থক্য পরিমাপের জন্য ভোল্টমিটার সমান্তরাল সমবায়ে যুক্ত করা হয়।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৬"
+  },
+  {
+    "chapter": "আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিক্স",
+    "stem_bn": "বায়ুমণ্ডলের ওজোন স্তর সূর্যের কোন ক্ষতিকর রশ্মি শোষণ করে জীবজগৎকে রক্ষা করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অবলোহিত রশ্মি",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অতিবেগুনী রশ্মি (UV)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "এক্স-রে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "মাইক্রোওয়েভ",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ওজোন ($O_3$) স্তর সূর্যের উচ্চ-শক্তির ক্ষতিকর অতিবেগুনী বিকিরণ শোষণ করে।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০১৬"
+  }
+]

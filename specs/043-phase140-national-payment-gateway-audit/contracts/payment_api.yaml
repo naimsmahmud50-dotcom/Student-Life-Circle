@@ -1,0 +1,124 @@
+# DEVELOPER ARCHITECTURE NOTE:
+# MODULE:    National Payment Gateway & Security Lockdown
+# TOPIC:     Phase 140 bKash, Nagad, SSLCommerz Escrow, IPN Webhooks & OWASP ASVS L2 Audit
+# FILE:      specs/043-phase140-national-payment-gateway-audit/contracts/payment_api.yaml
+# PHASE:     Phase 140 - National Payment Gateway & Live Security Audit
+# PURPOSE:   OpenAPI 3.1 contract specification for Phase 140 payment endpoints
+# STANDARDS: Zero-Emoji, Zero-IDOR, OWASP ASVS L2, Atomic DB Transactions, Server Authority
+
+openapi: 3.1.0
+info:
+  title: Student Life Circle - National Payment Gateway & Escrow API
+  version: "140.0.0"
+  description: Server-authoritative payment execution, SSLCommerz/bKash/Nagad gateways, 24h escrow, and automated reconciliation.
+
+paths:
+  /api/v1/payments/checkout/initiate:
+    post:
+      summary: Initiate server-authoritative checkout
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [gateway, reference_id, purpose]
+              properties:
+                gateway:
+                  type: string
+                  enum: [BKASH, NAGAD, SSLCOMMERZ]
+                reference_id:
+                  type: string
+                purpose:
+                  type: string
+                  enum: [TUITION_ESCROW, EXAM_PACKAGE, MENTORSHIP]
+                user_id:
+                  type: string
+      responses:
+        "200":
+          description: Checkout session created
+        "400":
+          description: Invalid request or missing idempotency key
+
+  /api/v1/payments/sslcommerz/initiate:
+    post:
+      summary: Initialize SSLCommerz V4 Hosted Session
+      parameters:
+        - in: header
+          name: X-Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tran_id, amount]
+              properties:
+                tran_id:
+                  type: string
+                amount:
+                  type: number
+                cus_name:
+                  type: string
+                cus_email:
+                  type: string
+                cus_phone:
+                  type: string
+      responses:
+        "200":
+          description: SSLCommerz session URL and session key
+
+  /api/v1/payments/ipn/sslcommerz:
+    post:
+      summary: SSLCommerz IPN webhook listener
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tran_id:
+                  type: string
+                val_id:
+                  type: string
+                amount:
+                  type: string
+                verify_sign:
+                  type: string
+                verify_key:
+                  type: string
+                status:
+                  type: string
+      responses:
+        "200":
+          description: IPN processed successfully
+
+  /api/v1/payments/escrow/{contract_id}/auto-release:
+    post:
+      summary: Check and trigger 24h auto-release for an escrow contract
+      parameters:
+        - in: path
+          name: contract_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Auto-release evaluated and processed
+
+  /api/v1/payments/reconciliation/run:
+    post:
+      summary: Execute automated hourly payment reconciliation
+      responses:
+        "200":
+          description: Reconciliation report generated

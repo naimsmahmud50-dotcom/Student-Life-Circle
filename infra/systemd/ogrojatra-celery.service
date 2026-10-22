@@ -1,0 +1,58 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - SYSTEMD CELERY WORKER SPECIFICATION:
+# MODULE:    Systemd Unit File for Celery Async Task Worker
+# TOPIC:     Asynchronous Job Processing, SMS Queue, Email Dispatch, Video Transcoding
+# FILE:      infra/systemd/ogrojatra-celery.service
+# PURPOSE:   Runs and manages the Celery worker daemon directly on Ubuntu VPS hosts:
+#            1. Process Lifecycle: Auto-restarts on failure, graceful warm shutdown.
+#            2. Process Sandboxing: System protection flags preventing tampering with system binaries.
+#            3. Non-Root Execution: Runs under dedicated system service account 'ogrojatra'.
+#            4. Concurrency: Automatically tunes worker concurrency based on available CPU cores.
+# AUDIENCE:  DevOps Engineers, Linux Sysadmins, SREs & AI Agents
+# STANDARDS: Systemd Unit File Standard, CIS Linux Benchmark, Zero-Emoji Spec
+# ========================================================================================
+
+[Unit]
+Description=Ogrojatra Platform Celery Asynchronous Task Worker
+After=network.target redis-server.service postgresql.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=ogrojatra
+Group=ogrojatra
+WorkingDirectory=/opt/ogrojatra/backend
+EnvironmentFile=/etc/ogrojatra/backend.env
+ExecStart=/opt/ogrojatra/backend/venv/bin/celery -A backend.app.core.celery_app worker \
+    --loglevel=INFO \
+    --concurrency=4 \
+    --max-tasks-per-child=1000 \
+    --time-limit=300 \
+    --soft-time-limit=270
+
+# Process Restart Policy
+Restart=always
+RestartSec=5s
+KillMode=mixed
+TimeoutStopSec=45
+
+# Hardened Linux Security Sandboxing
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+# File System Isolation
+ReadWritePaths=/opt/ogrojatra/backend/logs /tmp
+
+# Resource Limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target

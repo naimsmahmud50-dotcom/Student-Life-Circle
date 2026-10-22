@@ -1,0 +1,305 @@
+/**
+ * DEVELOPER ARCHITECTURE NOTE:
+ * MODULE:    Global Design System Tokens, Editorial Typography & Reset
+ * TOPIC:     Master Academic UI & Pro Tactile Button Elevation
+ * FILE:      frontend/src/styles/globals.css
+ * PHASE:     Phase 110 - Pure Academic Visual Design Elevation & Phase 123 - Master Academic UI & Pro Tactile Button Elevation & Phase 144 - Foundation Tokens & Modern Academic Editorial
+ * PURPOSE:   Elevates every button, card, background, and header to Cambridge/Oxford-grade
+ *            editorial typography, warm paper ground (#FAF8F3), Deep Academic Ink (#1B2A4A),
+ *            and strict Zero-AI Vibe standards.
+ * STANDARDS: UI/UX Pro Max, Pure Academic Palette, Tactile 3D Physics, Zero-Emoji, WCAG 2.2 AAA
+ */
+
+@import './tokens.css';
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Serif+Bengali:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --------------------------------------------------------------------------
+   * PURE ACADEMIC DESIGN TOKENS (Oxford & Cambridge Standards)
+   * Single Source of Truth bridged from tokens.css
+   * -------------------------------------------------------------------------- */
+  --color-oxford-navy: #0A2540;
+  --color-oxford-navy-hover: #0E3357;
+  --color-oxford-depth: #051329;
+  --color-academic-emerald: #065F46;
+  --color-academic-emerald-hover: #087858;
+  --color-academic-emerald-depth: #044332;
+  --color-academic-forest-depth: #033829;
+  --color-scholar-gold: #B45309;
+  --color-scholar-gold-subtle: #FFFBEB;
+  --color-paper-ivory: #FAFAF8;
+  --color-paper-white: #FFFFFF;
+  --color-ink-slate: #0B132B;
+  --color-burgundy-crimson: #991B1B;
+
+  /* Backward Compatibility Test Fixtures */
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --navbar-surface: #F1F5F9;
+  --navbar-border: #E2E8F0;
+  --navbar-text: #0F172A;
+  --navbar-text-muted: #64748B;
+  --navbar-primary-gradient: linear-gradient(135deg, #0891B2 0%, #2563EB 100%);
+
+  /* Clean Paper Canvas - Strict Zero AI Glow */
+  --bg-radial-ambient: none;
+}
+
+.dark {
+  --navbar-bg: rgba(10, 15, 30, 0.80);
+  --navbar-surface: #111A2E;
+  --navbar-text: #E6EAF2;
+  --navbar-text-muted: #8FA0BD;
+  --navbar-primary-gradient: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
+  --navbar-primary-text: #06121F;
+}
+
+/* ----------------------------------------------------------------------------
+ * BASE TYPOGRAPHY, RESET & EDITORIAL MEASURE
+ * ---------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--color-paper-ground, #FAF8F3);
+  color: var(--color-ink-primary, #1A1A1A);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans-bengali);
+  font-size: 1rem;
+  line-height: 1.75; /* Line-height for Bengali script prevents upper/lower matra clipping */
+  background-color: var(--bg-app);
+  background-image: none;
+  color: var(--text-main);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----------------------------------------------------------------------------
+ * EDITORIAL TYPOGRAPHY CLASSES
+ * ---------------------------------------------------------------------------- */
+
+/* Bengali Serif Headings (Authentic Editorial Book-Print) */
+.font-serif-bn,
+.font-serif-bengali {
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', serif;
+}
+
+/* English Serif Headings (Cambridge/Oxford Monograph Style) */
+.font-serif-en,
+.font-serif-english {
+  font-family: 'Source Serif 4', 'Lora', Georgia, serif;
+}
+
+/* Primary Sans Body */
+.font-sans-bn,
+.font-sans-bengali {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+}
+
+.font-sans-en,
+.font-sans-english {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Landmark Editorial Heading (Balanced, Unbloated) */
+.editorial-title {
+  font-family: 'Noto Serif Bengali', 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-brand-primary, #1B2A4A);
+}
+
+/* Eyebrow Label (Small Letter-Spaced Sans, NOT Monospace) */
+.eyebrow-label {
+  font-family: 'Inter', 'Hind Siliguri', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-muted, #5B5B5B);
+}
+
+/* Tabular figures for countdown timers, roll numbers and scores */
+.tabular-numbers,
+.tabular-nums {
+  font-family: 'Inter', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Line balancing & optimal reading measures */
+.balance-text {
+  text-wrap: balance;
+}
+
+.editorial-measure {
+  max-width: 68ch;
+}
+
+/* ----------------------------------------------------------------------------
+ * SURFACES, CARDS & PAPER ELEVATION
+ * ---------------------------------------------------------------------------- */
+
+/* Paper Surface Card: Crisp 1px hairline border, subtle paper shadow */
+.card-paper {
+  background-color: var(--color-paper-surface, #FFFFFF);
+  border: 1px solid var(--color-border-hairline, #E5E2DA);
+  border-radius: var(--radius-lg, 10px);
+  box-shadow: var(--shadow-paper);
+}
+
+.card-paper-elevated {
+  background-color: var(--color-paper-surface, #FFFFFF);
+  border: 1px solid var(--color-border-hairline, #E5E2DA);
+  border-radius: var(--radius-lg, 10px);
+  box-shadow: var(--shadow-paper-elevated);
+}
+
+.card-paper-muted {
+  background-color: var(--color-paper-surface-muted, #F5F2EB);
+  border: 1px solid var(--color-border-hairline, #E5E2DA);
+  border-radius: var(--radius-lg, 10px);
+}
+
+/* Hairline border utility */
+.border-hairline {
+  border-color: var(--color-border-hairline, #E5E2DA);
+}
+
+/* ----------------------------------------------------------------------------
+ * TACTILE ACADEMIC BUTTON PHYSICS
+ * ---------------------------------------------------------------------------- */
+
+/* Primary Oxford / Academic Navy Button */
+.btn-3d-oxford,
+.btn-academic-primary {
+  background-color: #0A2540;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: var(--radius-md, 8px);
+  box-shadow: 0 4px 0 0 #051329;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.btn-3d-oxford:hover,
+.btn-academic-primary:hover {
+  background-color: #0E3357;
+}
+
+.btn-3d-oxford:active,
+.btn-academic-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 #051329;
+}
+
+/* Secondary Subdued Academic Emerald Button */
+.btn-3d-emerald,
+.btn-academic-emerald {
+  background-color: #065F46;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: var(--radius-md, 8px);
+  box-shadow: 0 4px 0 0 #033829;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.btn-3d-emerald:hover,
+.btn-academic-emerald:hover {
+  background-color: #087858;
+}
+
+.btn-3d-emerald:active,
+.btn-academic-emerald:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 #044332;
+}
+
+/* Pure Paper Secondary Outline Button */
+.btn-paper-outline {
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+  border: 1px solid var(--color-border-hairline, #E5E2DA);
+  font-weight: 600;
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--shadow-paper);
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-paper-outline:hover {
+  background-color: var(--color-paper-surface-muted, #F5F2EB);
+  border-color: var(--color-border-strong, #D1CDC4);
+}
+
+.btn-paper-outline:active {
+  transform: translateY(1px);
+}
+
+/* Backward-compatible push button depths */
+.btn-push-brand {
+  box-shadow: 0 4px 0 0 #051329;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-push-brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 0 #051329;
+}
+.btn-push-brand:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 #051329;
+}
+
+.btn-push-teal {
+  box-shadow: 0 4px 0 0 #044332;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-push-teal:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 0 #044332;
+}
+.btn-push-teal:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 #044332;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--focus-ring, #1B2A4A);
+  outline-offset: var(--focus-ring-offset, 2px);
+}
+
+/* Nav utilities */
+.nav-hover-lift {
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+.nav-hover-lift:hover {
+  transform: translateY(-1px);
+}
+.nav-hover-lift:active {
+  transform: translateY(0);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .nav-hover-lift:hover {
+    transform: none !important;
+  }
+}

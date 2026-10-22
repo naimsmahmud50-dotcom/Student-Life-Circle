@@ -1,0 +1,14 @@
+{
+  "title": "OWASP ASVS L2 Whitebox Security Audit Report",
+  "target_directory": "/home/mahmud-hasan/Naims Project/Student Life Circle/backend/app",
+  "scanned_files_count": 304,
+  "findings_count": 0,
+  "findings_by_severity": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0
+  },
+  "passed": true,
+  "findings": []
+}

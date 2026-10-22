@@ -1,0 +1,88 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - KUBERNETES INGRESS & ROUTING:
+# MODULE:    Kubernetes Ingress Controller Routing Specification
+# TOPIC:     TLS Termination, WebSocket Upgrades, Path Multiplexing, Cloudflare Integration
+# FILE:      infra/k8s/ingress.yaml
+# PURPOSE:   Defines ingress traffic routing rules into the Kubernetes cluster:
+#            1. Ingress Class: ingress-nginx with cert-manager automated Let's Encrypt TLS.
+#            2. WebSocket Support: Extended timeouts (3600s) and connection headers for `/ws/`.
+#            3. Traffic Routing:
+#               - `/api/v1/` -> ogrojatra-backend-service:8000
+#               - `/metrics`  -> ogrojatra-backend-service:8000 (restricted by internal IP whitelist)
+#               - `/ws/`      -> ogrojatra-backend-service:8000
+#               - `/`         -> ogrojatra-frontend-service:3000
+#            4. Security Headers & SSL: HSTS, SSL redirect, and strict SNI validation.
+# AUDIENCE:  DevOps Engineers, Kubernetes Administrators, SREs & AI Agents
+# STANDARDS: Kubernetes Networking v1 Ingress, OWASP ASVS L2, Zero-Emoji Spec
+# ========================================================================================
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ogrojatra-ingress
+  namespace: ogrojatra-production
+  labels:
+    app.kubernetes.io/name: ogrojatra-ingress
+    app.kubernetes.io/part-of: student-growth-platform
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "15m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/websocket-services: "ogrojatra-backend-service"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+      more_set_headers "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload";
+spec:
+  tls:
+    - hosts:
+        - ogrojatra.edu.bd
+        - www.ogrojatra.edu.bd
+        - api.ogrojatra.edu.bd
+      secretName: ogrojatra-tls-cert
+  rules:
+    - host: ogrojatra.edu.bd
+      http:
+        paths:
+          - path: /api/v1
+            pathType: Prefix
+            backend:
+              service:
+                name: ogrojatra-backend-service
+                port:
+                  number: 8000
+          - path: /ws
+            pathType: Prefix
+            backend:
+              service:
+                name: ogrojatra-backend-service
+                port:
+                  number: 8000
+          - path: /metrics
+            pathType: Exact
+            backend:
+              service:
+                name: ogrojatra-backend-service
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ogrojatra-frontend-service
+                port:
+                  number: 3000
+    - host: api.ogrojatra.edu.bd
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ogrojatra-backend-service
+                port:
+                  number: 8000

@@ -1,0 +1,40 @@
+{
+  "default_locale": "bn-BD",
+  "category": "EDUCATION",
+  "content_rating": "EVERYONE",
+  "privacy_policy_url": "https://ogrojatra.edu.bd/privacy",
+  "support_email": "support@ogrojatra.edu.bd",
+  "support_website": "https://ogrojatra.edu.bd",
+  "contains_ads": false,
+  "target_sdk": 34,
+  "package_name": "bd.edu.ogrojatra.app",
+  "locales": {
+    "bn-BD": {
+      "title": "অগ্রযাত্রা - স্টুডেন্ট অ্যাপ",
+      "short_description": "এইচএসসি, এসএসসি ও ভর্তি পরীক্ষার প্রস্তুতি ও সহায়িকা প্ল্যাটফর্ম।",
+      "full_description": "অগ্রযাত্রা (Student Life Circle) বাংলাদেশের প্রথম সমন্বিত ও সর্বাধুনিক শিক্ষার্থী সহায়তা ও শিক্ষাক্রম প্ল্যাটফর্ম। এটি মাধ্যমিক (SSC), উচ্চ মাধ্যমিক (HSC), এবং বিশ্ববিদ্যালয় ও মেডিকেল ভর্তি পরীক্ষার্থীদের জন্য জাতীয় শিক্ষাক্রম পাঠ্যপুস্তক বোর্ড (NCTB) অনুমোদিত নির্ভুল পাঠ্যক্রম, অধ্যায়ভিত্তিক প্র্যাকটিস ও লাইভ চ্যালেঞ্জ সুবিধা প্রদান করে।\n\nপ্রধান বৈশিষ্ট্যসমূহ:\n১. এনসিটিবি প্রশ্নব্যাংক ও সমাধান: ঢাকা, চট্টগ্রাম, রাজশাহীসহ সকল শিক্ষা বোর্ডের বিগত বছরের প্রশ্ন এবং পূর্ণাঙ্গ সমাধান।\n২. সক্রেটিক এআই টিউটর: কৃত্রিম বুদ্ধিমত্তার মাধ্যমে সরাসরি উত্তর না দিয়ে ধাপে ধাপে গাণিতিক যুক্তি ও সূত্রের মাধ্যমে সঠিক সমাধানে পৌঁছাতে সহায়তা করে।\n৩. ইন্টারেক্টিভ ৩ডি স্টেম ল্যাব: পদার্থবিজ্ঞান, রসায়ন ও জীববিজ্ঞানের জটিল ধারণাগুলো ভার্চুয়াল থ্রি-ডি ল্যাবরেটরির মাধ্যমে হাতে-কলমে শেখার সুযোগ।\n৪. লাইভ চ্যালেঞ্জ ও ন্যাশনাল লিডারবোর্ড: দেশসেরা শিক্ষার্থীদের সাথে রিয়েল-টাইম কুইজ প্রতিযোগিতায় অংশগ্রহণ ও পারসেন্টাইল র‍্যাঙ্কিং।\n৫. নিরাপদ টিউশন ও পেমেন্ট: বিকাশ এবং নগদের অফিসিয়াল গেটওয়ের মাধ্যমে সুরক্ষিত টিউশন পেমেন্ট ও ভেরিফাইড ক্রিপ্টোগ্রাফিক সনদপত্র।\n\nঅগ্রযাত্রার সাথে আপনার শিক্ষা ও ক্যারিয়ার অগ্রযাত্রাকে করুন আরও গতিশীল ও সমৃদ্ধ।",
+      "keywords": [
+        "hsc",
+        "ssc",
+        "buet admission",
+        "medical admission",
+        "physics lab",
+        "bangladesh education",
+        "nctb question bank"
+      ]
+    },
+    "en-US": {
+      "title": "Ogrojatra - Student Platform",
+      "short_description": "Complete academic, exam preparation & mentoring platform for students in BD.",
+      "full_description": "Ogrojatra (Student Life Circle) is Bangladesh's premier comprehensive academic and career advancement ecosystem for secondary, higher secondary, and competitive university admission students.\n\nKey Highlights:\n1. NCTB Question Bank: Past board examination questions from Dhaka, Chittagong, Rajshahi, and other boards with comprehensive step-by-step KaTeX solutions.\n2. Socratic AI Tutor: Intelligent pedagogical assistant guiding students with structured hints, formulas, and conceptual understanding rather than direct rote answers.\n3. Interactive 3D STEM Laboratories: Interactive Newtonian mechanics, 3D molecular geometry, and plant/animal cell cytology virtual laboratories.\n4. Real-Time Live Challenges & Percentile Ranks: Nationwide synchronized live academic competitions with sub-second WebSocket leaderboards.\n5. Verified Proof-of-Skill Credentials: Cryptographically signed W3C Verifiable Credentials with instant QR code validation.\n6. Secure Escrow & Payment: Direct integration with bKash and Nagad payment channels with automated digital PDF invoicing.\n\nEmpower your academic journey with Ogrojatra.",
+      "keywords": [
+        "education",
+        "hsc preparation",
+        "bangladesh admission",
+        "stem labs",
+        "socratic tutor",
+        "verifiable credentials"
+      ]
+    }
+  }
+}

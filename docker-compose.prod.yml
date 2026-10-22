@@ -1,0 +1,300 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - PRODUCTION DOCKER COMPOSE ORCHESTRATION:
+# MODULE:    Production Multi-Service Container Orchestration Stack
+# TOPIC:     FastAPI, Next.js Standalone, PostgreSQL 16 Alpine, Redis 7, Nginx HTTP/3, Prometheus & Grafana
+# FILE:      docker-compose.prod.yml
+# PURPOSE:   Coordinates the end-to-end production architecture in isolated virtual networks:
+#            1. Security Isolation: Database and Cache run in internal non-routable network
+#               (ogrojatra-internal), invisible to the external internet.
+#            2. Reverse Proxy & HTTP/3: Nginx edge handles TLS termination, HTTP/3 (QUIC),
+#               and WebSocket protocol multiplexing.
+#            3. Observability Stack: Prometheus continuously scrapes `/metrics` and Grafana
+#               visualizes real-time p95/p99 latency, WebSocket rooms, and error trends.
+#            4. Dependency Chains: Backend waits for PostgreSQL and Redis healthy status
+#               before spawning; Frontend and Nginx wait for Backend healthy status.
+#            5. Resource Governance: Enforces hard CPU and Memory quotas across all containers
+#               to prevent resource starvation and Denial of Service (DoS).
+#            6. Log Rotation: Caps container JSON logs to 50MB with 3 rotations to prevent
+#               host disk space exhaustion.
+# AUDIENCE:  DevOps Engineers, Site Reliability Engineers, Production Sysadmins & AI Agents
+# STANDARDS: Docker Compose v2 Specification, 12-Factor App, CIS Benchmark, Zero-Emoji Spec
+# ========================================================================================
+
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------------------------
+  # 1. PostgreSQL 16 Database (Alpine Minimal Base & Isolated Storage)
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: ogrojatra-postgres-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ogrojatra_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Database password must be provided}
+      POSTGRES_DB: ${POSTGRES_DB:-ogrojatra_prod_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ogrojatra-internal
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ogrojatra_admin} -d ${POSTGRES_DB:-ogrojatra_prod_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 2. Redis 7 In-Memory Cache & Distributed Throttling Buffer
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: ogrojatra-redis-prod
+    restart: always
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?Redis password must be provided}"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - ogrojatra-internal
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 3. Python FastAPI Core & Live Exam Engine
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: ogrojatra-backend-prod
+    restart: always
+    environment:
+      - ENVIRONMENT=production
+      - PROJECT_NAME=Student Growth Platform
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-ogrojatra_admin}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-ogrojatra_prod_db}
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:?Application secret key must be provided}
+      - BACKEND_CORS_ORIGINS=["https://ogrojatra.edu.bd","http://localhost:3000"]
+      - SENTRY_DSN=${SENTRY_DSN:-}
+    ports:
+      - "8000:8000"
+    networks:
+      - ogrojatra-internal
+      - ogrojatra-public
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/v1/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 4. Next.js 15+ Standalone Frontend PWA (< 120MB Image)
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: ogrojatra-frontend-prod
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000/api/v1}
+      - NEXT_PUBLIC_SENTRY_DSN=${NEXT_PUBLIC_SENTRY_DSN:-}
+    ports:
+      - "3000:3000"
+    networks:
+      - ogrojatra-public
+    depends_on:
+      backend:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1536M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 5. Nginx Reverse Proxy with HTTP/3 (QUIC) & WebSocket Upgrades
+  # ---------------------------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: ogrojatra-nginx-prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - certbot_certs:/etc/letsencrypt:ro
+    networks:
+      - ogrojatra-public
+      - ogrojatra-internal
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 6. Prometheus Telemetry & Performance Scraper
+  # ---------------------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: ogrojatra-prometheus-prod
+    restart: always
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=30d"
+      - "--web.enable-lifecycle"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - ogrojatra-internal
+      - ogrojatra-public
+    depends_on:
+      backend:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # 7. Grafana Observability & Real-Time SLO Dashboard
+  # ---------------------------------------------------------------------------
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: ogrojatra-grafana-prod
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-ChangeMeProdGrafana2026}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    networks:
+      - ogrojatra-internal
+      - ogrojatra-public
+    depends_on:
+      - prometheus
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+# -----------------------------------------------------------------------------
+# Networks & Persistent Volumes Topology
+# -----------------------------------------------------------------------------
+networks:
+  ogrojatra-internal:
+    driver: bridge
+    internal: true
+  ogrojatra-public:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  certbot_certs:
+    driver: local

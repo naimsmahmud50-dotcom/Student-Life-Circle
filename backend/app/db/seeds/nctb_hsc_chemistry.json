@@ -1,0 +1,1052 @@
+[
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "নিচের কোন যৌগটি লুকাস বিকারকের সাথে তাৎক্ষণিকভাবে সাদা অধঃক্ষেপ সৃষ্টি করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১-বিউটানল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২-বিউটানল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২-মিথাইল-২-প্রোপানল",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "ইথানল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "৩° অ্যালকোহল (যেমন ২-মিথাইল-২-প্রোপানল বা $(CH_3)_3C-OH$) লুকাস বিকারক (অনুকূল $ZnCl_2 + \\text{গাঢ় } HCl$) এর সাথে তৎক্ষণাৎ অ্যালকাইল হ্যালাইডের ঘোলাটে অধঃক্ষেপ দেয়।",
+    "difficulty": "MEDIUM",
+    "source": "ঢাকা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "মারকভনিকভের নিয়ম কোন ধরণের বিক্রিয়ার ক্ষেত্রে প্রযোজ্য?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "প্রতিস্থাপন বিক্রিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "অপ্রতিসম অ্যালকিনে যোজন বিক্রিয়া",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "পলিমারকরণ বিক্রিয়া",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "জারণ বিক্রিয়া",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "অপ্রতিসম অ্যালকিনে (যেমন $CH_3-CH=CH_2$) অপ্রতিসম বিকারক (যেমন $HBr$) যুক্ত হওয়ার সময় ঋণাত্মক অংশটি কম হাইড্রোজেনযুক্ত কার্বনে যুক্ত হয়।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২১"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "ইথাইন ($C_2H_2$) অণুতে কার্বন পরমাণুর সংকরণ অবস্থা কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "sp3",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "sp2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "sp",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "dsp2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "ইথাইনে কার্বন-কার্বন ত্রিবন্ধন ($HC \\equiv CH$) বিদ্যমান, যাতে একটি $\\sigma$ ও দুটি $\\pi$ বন্ধন রয়েছে। তাই এখানে $sp$ সংকরণ ঘটে।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "ক্যানিজারো বিক্রিয়া প্রদর্শন করে নিচের কোন অ্যালডিহাইডটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইথান্যাল",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রোপান্যাল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ফরমালডিহাইড (মিথান্যাল)",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "বিউটান্যাল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "যেসব অ্যালডিহাইডে আলফা-হাইড্রোজেন ($\\alpha-H$) অনুপস্থিত থাকে (যেমন $HCHO$ বা $C_6H_5CHO$), তারা গাঢ় ক্ষারের উপস্থিতিতে ক্যানিজারো বিক্রিয়ায় অংশ নেয়।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "গ্রিগনার্ড বিকারকের সাধারণ সংকেত কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "R-Mg-X",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "R-X",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "R-OH",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "R-CO-R",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অ্যালকাইল ম্যাগনেসিয়াম হ্যালাইডকে ($R-Mg-X$) গ্রিগনার্ড বিকারক বলা হয়, যা জৈব সংশ্লেষণে অতি গুরুত্বপূর্ণ।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "টলুইনকে ক্ষারীয় KMnO4 দ্বারা তীব্র জারণ করলে কী উৎপন্ন হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বেনজালডিহাইড",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "বেনজোয়িক এসিড",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "বেনজিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ফেনল",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "টলুইনের পার্শ্ব শিকল জারিত হয়ে বেনজোয়িক এসিডে রূপান্তরিত হয়: $C_6H_5-CH_3 + 3[O] \\xrightarrow{KMnO_4/KOH} C_6H_5-COOH + H_2O$।",
+    "difficulty": "HARD",
+    "source": "দিনাজপুর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "কার্বিলঅ্যামিন পরীক্ষার সাহায্যে কোন ধরনের অ্যামিন শনাক্ত করা যায়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১° অ্যালিফ্যাটিক ও অ্যারোমেটিক অ্যামিন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২° অ্যামিন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "৩° অ্যামিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "কোয়াটারনারি অ্যামিন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ক্লোরোফর্ম ও অ্যালকোহলীয় $KOH$ সহ উত্তপ্ত করলে ১° অ্যামিন তীব্র দুর্গন্ধযুক্ত আইসোসায়ানাইড ($R-NC$) উৎপন্ন করে।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০২২"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "বেনজিন বলয়ে অর্থো-প্যারা নির্দেশক মূলক কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "-NO2",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "-CHO",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "-OH",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "-COOH",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "$-OH$ মূলক বেনজিন বলয়ে ইলেকট্রন ঘনত্ব বৃদ্ধি করে (সক্রিয়কারী মূলক), ফলে এটি অর্থো ও প্যারা অবস্থানে ইলেকট্রোফাইল প্রতিস্থাপন সহজতর করে।",
+    "difficulty": "MEDIUM",
+    "source": "সিলেট বোর্ড ২০২১"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "ইথানলকে ১৭০°C তাপমাত্রায় অতিরিক্ত গাঢ় H2SO4 সহ উত্তপ্ত করলে প্রধান উৎপাদ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইথেন",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ইথিন",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ডাইইথাইল ইথার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ইথাইল হাইড্রোজেন সালফেট",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "অতিরিক্ত গাঢ় সালফিউরিক এসিড অ্যালকোহলকে নিরুদিত করে অ্যালকিন উৎপন্ন করে: $CH_3CH_2OH \\xrightarrow{H_2SO_4, 170^\\circ\\text{C}} CH_2=CH_2 + H_2O$।",
+    "difficulty": "MEDIUM",
+    "source": "ময়মনসিংহ বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "ফেনল ও জিংক গুঁড়া পাতন করলে কোন যৌগ উৎপন্ন হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বেনজিন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "টলুইন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "অ্যানিলিন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বেনজয়িক এসিড",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$C_6H_5OH + Zn \\xrightarrow{\\Delta} C_6H_6 + ZnO$। ফেনল জিংক দ্বারা বিজারিত হয়ে বেনজিনে পরিণত হয়।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "রাসায়নিক বন্ধন",
+    "stem_bn": "পানির অণুর ($H_2O$) আকৃতি ও বন্ধন কোণ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "সরলরৈখিক, ১৮০°",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "কৌণিক, ১০৪.৫°",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "চতুস্তলকীয়, ১০৯.৫°",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ত্রিকোণাকার, ১২০°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "অক্সিজেনের $sp^3$ সংকরণ হলেও দুটি নিঃসঙ্গ ইলেকট্রন জোড়ের (Lone Pair) বিকর্ষণের কারণে পানির অণুর আকৃতি কৌণিক এবং বন্ধন কোণ $104.5^\\circ$ হয়।",
+    "difficulty": "MEDIUM",
+    "source": "ঢাকা বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "রাসায়নিক পরিবর্তন",
+    "stem_bn": "হেন্ডারসন-হ্যাসেলবালখ সমীকরণ অনুসারে অম্লীয় বাফার দ্রবণের pH নির্ণয়ের সূত্র কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "pH = pKa + log([Salt]/[Acid])",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "pH = pKa - log([Salt]/[Acid])",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "pH = pKb + log([Base]/[Salt])",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "pH = -log[H+]",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অম্লীয় বাফারের ক্ষেত্রে সমীকরণটি হলো $pH = pK_a + \\log\\frac{[\\text{Salt}]}{[\\text{Acid}]}$।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২০"
+  },
+  {
+    "chapter": "রাসায়নিক পরিবর্তন",
+    "stem_bn": "নিচের কোন বিক্রিয়াটিতে Kp = Kc হবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "N2 + 3H2 <=> 2NH3",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "PCl5 <=> PCl3 + Cl2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "H2 + I2 <=> 2HI",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "2SO2 + O2 <=> 2SO3",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "যে বিক্রিয়ায় গ্যাসীয় উৎপাদ ও বিক্রিয়কের মোল সংখ্যার পরিবর্তন $\\Delta n = 0$ হয়, সেখানে $K_p = K_c(RT)^{\\Delta n} = K_c$। এখানে $\\Delta n = 2 - (1+1) = 0$।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০২১"
+  },
+  {
+    "chapter": "জারণ-বিজারণ",
+    "stem_bn": "অম্লীয় পটাশিয়াম ডাইক্রোমেট (K2Cr2O7) দ্রবণে ক্রোমিয়ামের জারণ সংখ্যা কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "+৩",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "+৬",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "+২",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "+৭",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "$K_2Cr_2O_7$ এ $2(+1) + 2x + 7(-2) = 0 \\implies 2 + 2x - 14 = 0 \\implies 2x = 12 \\implies x = +6$।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "মৌলের পর্যাবৃত্ত ধর্ম",
+    "stem_bn": "প্রমাণ তাপমাত্রা ও চাপে (STP) ১ মোল যেকোনো গ্যাসের আয়তন কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "২২.৪ লিটার",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "২৪.৭৮৯ লিটার",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২২.৭১ লিটার",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "১ লিটার",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "STP-তে (০ °C এবং ১ atm) এক মোল আদর্শ গ্যাসের মোলার আয়তন ২২.৪১৪ লিটার।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২২"
+  },
+  {
+    "chapter": "মৌলের পর্যাবৃত্ত ধর্ম",
+    "stem_bn": "নিচের কোন মৌলটির ইলেকট্রন আসক্তি সর্বাধিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ফ্লোরিন (F)",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "ক্লোরিন (Cl)",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "ব্রোমিন (Br)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "আয়োডিন (I)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "ফ্লোরিনের আকার ক্ষুদ্র হওয়ায় ২য় শক্তিস্তরে ইলেকট্রন মেঘের ঘনত্বের বিকর্ষণের কারণে ক্লোরিনের ইলেকট্রন আসক্তি ($-349\\ \\text{kJ/mol}$) ফ্লোরিনের চেয়ে বেশি হয়।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২৪"
+  },
+  {
+    "chapter": "গুণগত রসায়ন",
+    "stem_bn": "ক্যাথোড রশ্মি কোন কণার প্রবাহ?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "ইলেকট্রন",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "প্রোটন",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "নিউট্রন",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "পজিট্রন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "১৮৯৭ সালে জে. জে. থমসন প্রমাণ করেন যে ক্যাথোড রশ্মি হলো ঋণাত্মক চার্জযুক্ত ইলেকট্রন কণার অবিচ্ছিন্ন প্রবাহ।",
+    "difficulty": "EASY",
+    "source": "বরিশাল বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "গুণগত রসায়ন",
+    "stem_bn": "হাইড্রোজেন পরমাণুর বামার সিরিজের জন্য প্রধান কোয়ান্টাম সংখ্যা n1 এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "২",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "৩",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৪",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "লাইম্যান সিরিজের জন্য $n_1=1$, বামার সিরিজের জন্য $n_1=2$ (দৃশ্যমান অঞ্চল), প্যাসচেন সিরিজের জন্য $n_1=3$।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২২"
+  },
+  {
+    "chapter": "তড়িৎ রসায়ন",
+    "stem_bn": "লেড-এসিড সঞ্চয়ী ব্যাটারির ডিসচার্জিংয়ের সময় ক্যাথোড ও অ্যানোডে কোন যৌগ গঠিত হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "PbSO4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "PbO2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "PbO",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "Pb(OH)2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ডিসচার্জিংকালে অ্যানোড ($Pb$) ও ক্যাথোড ($PbO_2$) উভয়ই সালফিউরিক এসিডের সাথে বিক্রিয়া করে $PbSO_4$ এর সাদা অধঃক্ষেপে পরিণত হয়।",
+    "difficulty": "HARD",
+    "source": "ময়মনসিংহ বোর্ড ২০২১"
+  },
+  {
+    "chapter": "গুণগত রসায়ন",
+    "stem_bn": "প্লাঙ্কের ধ্রুবক (h) এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "৬.৬২৬ × ১০^-৩৪ জুল-সে.",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "৯.১ × ১০^-৩১ কেজি",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "১.৬ × ১০^-১৯ কুলম্ব",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "৩ × ১০^৮ মি/সে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$h = 6.626 \\times 10^{-34}\\ \\text{J}\\cdot\\text{s}$।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০২০"
+  },
+  {
+    "chapter": "গুণগত রসায়ন",
+    "stem_bn": "কোন আয়নটির দ্রবণ শিখা পরীক্ষায় উজ্জ্বল সোনালী হলুদ বর্ণ প্রদর্শন করে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "Na+",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "K+",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "Ca2+",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "Cu2+",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সোডিয়াম ($Na^+$) লবণ বুনসেন দীপের শিখায় তীব্র সোনালী হলুদ বর্ণ দেখায়। পটাশিয়াম দেয় হালকা বেগুনি।",
+    "difficulty": "EASY",
+    "source": "চট্টগ্রাম বোর্ড ২০২২"
+  },
+  {
+    "chapter": "রাসায়নিক বন্ধন",
+    "stem_bn": "অক্সিজেন অণুর বন্ধন ক্রম (Bond Order) কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "১",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "১.৫",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "২",
+        "is_correct": true
+      },
+      {
+        "key": "D",
+        "text_bn": "৩",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "C",
+    "explanation_bn": "আণবিক অরবিটাল তত্ত্ব (MOT) মতে, $O_2$ অণুতে বন্ধন ক্রম $= \\frac{N_b - N_a}{2} = \\frac{10 - 6}{2} = 2$।",
+    "difficulty": "MEDIUM",
+    "source": "রাজশাহী বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "তড়িৎ রসায়ন",
+    "stem_bn": "ফ্যারাডের ১ম সূত্রানুসারে ক্যাথোডে সঞ্চিত পদার্থের ভরের সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "W = ZIt",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "W = Z/It",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "W = I/Zt",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "W = EIt",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "তড়িৎ বিশ্লেষণের প্রথম সূত্র: $W = Z Q = Z I t$।",
+    "difficulty": "EASY",
+    "source": "যশোর বোর্ড ২০২৩"
+  },
+  {
+    "chapter": "পরিমাণগত রসায়ন",
+    "stem_bn": "কোন ক্ষারীয় দ্রবণে ফেনলফথ্যালিনের বর্ণ কেমন হয়?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গোলাপী",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "হলুদ",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "লাল",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "বর্ণহীন",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ফেনলফথ্যালিন নির্দেশক অম্লীয় মাধ্যমে বর্ণহীন থাকে কিন্তু ক্ষারীয় মাধ্যমে উজ্জ্বল গোলাপী বর্ণ ধারণ করে।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০২১"
+  },
+  {
+    "chapter": "পরিমাণগত রসায়ন",
+    "stem_bn": "১ মোলার দ্রবণের ঘনমাত্রা তাপমাত্রা পরিবর্তনের সাথে-",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অপরিবর্তিত থাকে",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "পরিবর্তিত হয়",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "দ্বিগুণ হয়",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "শূন্য হয়",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "মোলারিটি ($M = \\frac{n}{V}$) দ্রবণের আয়তনের ওপর নির্ভরশীল। তাপমাত্রা বাড়লে আয়তন বাড়ে ফলে মোলার ঘনমাত্রা হ্রাস পায়।",
+    "difficulty": "MEDIUM",
+    "source": "দিনাজপুর বোর্ড ২০২০"
+  },
+  {
+    "chapter": "রাসায়নিক পরিবর্তন",
+    "stem_bn": "লা-শাতেলিয়ারের নীতি অনুযায়ী তাপোৎপাদী বিক্রিয়ায় তাপমাত্রা বৃদ্ধি করলে সাম্যাবস্থা কোন দিকে সরে যাবে?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বাম দিকে (পশ্চাৎমুখী)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ডান দিকে (সম্মুখী)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "অপরিবর্তিত থাকবে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "সাম্যাবস্থা বিনষ্ট হবে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "তাপোৎপাদী বিক্রিয়ায় তাপমাত্রা বৃদ্ধি করলে অতিরিক্ত তাপ প্রশমিত করতে সাম্যাবস্থা পশ্চাৎমুখী বিক্রিয়ার দিকে সরে যায়।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০১৯"
+  },
+  {
+    "chapter": "রাসায়নিক বন্ধন",
+    "stem_bn": "হাইড্রোজেন বন্ধন কোন যৌগে বিদ্যমান?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "HF",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "HCl",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "HBr",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "HI",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "তীব্র তড়িৎঋণাত্মক মৌল ফ্লোরিনের সাথে যুক্ত থাকায় হাইড্রোজেন ফ্লোরাইডে ($H-F$) শক্তিশালী আন্তঃআণবিক হাইড্রোজেন বন্ধন থাকে।",
+    "difficulty": "EASY",
+    "source": "সিলেট বোর্ড ২০২০"
+  },
+  {
+    "chapter": "পরিবেশ রসায়ন",
+    "stem_bn": "আদর্শ গ্যাস সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "PV = nRT",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "P/V = nRT",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "PT = nVR",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "V/T = nPR",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$PV = nRT$ হলো আদর্শ গ্যাস সমীকরণ।",
+    "difficulty": "EASY",
+    "source": "ময়মনসিংহ বোর্ড ২০২০"
+  },
+  {
+    "chapter": "পরিবেশ রসায়ন",
+    "stem_bn": "গ্রীনহাউস গ্যাসের মধ্যে বৈশ্বিক উষ্ণায়নে সবচেয়ে বেশি অবদান রাখে কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "CO2",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "CH4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "N2O",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "CFC",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বায়ুমণ্ডলে কার্বন ডাই-অক্সাইডের ($CO_2$) সামগ্রিক পরিমাণ বেশি হওয়ায় এটি বৈশ্বিক উষ্ণায়নে প্রায় ৬০% অবদান রাখে।",
+    "difficulty": "EASY",
+    "source": "ঢাকা বোর্ড ২০১৮"
+  },
+  {
+    "chapter": "গুণগত রসায়ন",
+    "stem_bn": "বোর পরমাণু মডেলের প্রধান সীমাবদ্ধতা কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "বহু ইলেকট্রন বিশিষ্ট পরমাণুর বর্ণালী ব্যাখ্যা করতে পারে না",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "হাইড্রোজেনের বর্ণালী ব্যাখ্যা করতে পারে",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "কৌণিক ভরবেগ ব্যাখ্যা করতে পারে",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "শক্তির কোয়ান্টায়ন নীতি সমর্থন করে",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বোর মডেল কেবল এক-ইলেকট্রন বিশিষ্ট পরমাণু বা আয়নের ($H, He^+, Li^{2+}$) বর্ণালী ব্যাখ্যা করতে পারে, একাধিক ইলেকট্রনের ক্ষেত্রে ব্যর্থ হয়।",
+    "difficulty": "MEDIUM",
+    "source": "চট্টগ্রাম বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "মৌলের পর্যাবৃত্ত ধর্ম",
+    "stem_bn": "ক্ষার ধাতুসমূহ পর্যায় সারণির কোন গ্রুপে অবস্থিত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "গ্রুপ ১",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "গ্রুপ ২",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "গ্রুপ ১৭",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "গ্রুপ ১৮",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "লিথিয়াম, সোডিয়াম, পটাশিয়াম ইত্যাদি সক্রিয় ক্ষার ধাতুসমূহ পর্যায় সারণির গ্রুপ ১-এ অবস্থিত।",
+    "difficulty": "EASY",
+    "source": "রাজশাহী বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "মৌলের পর্যাবৃত্ত ধর্ম",
+    "stem_bn": "হ্যালোজেনসমূহের সক্রিয়তার সঠিক ক্রম কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "F2 > Cl2 > Br2 > I2",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "I2 > Br2 > Cl2 > F2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "Cl2 > F2 > Br2 > I2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "Br2 > Cl2 > F2 > I2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "হ্যালোজেন গ্রুপে আকার বৃদ্ধির সাথে সাথে ইলেকট্রন গ্রহণের প্রবণতা কমে, ফলে সক্রিয়তার ক্রম $F_2 > Cl_2 > Br_2 > I_2$।",
+    "difficulty": "MEDIUM",
+    "source": "যশোর বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "পরিবেশ রসায়ন",
+    "stem_bn": "অম্লীয় বৃষ্টি (Acid Rain) সৃষ্টির প্রধান কারণ বায়ুমণ্ডলে কোন গ্যাসগুলোর আধিক্য?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "SO2 ও NO2",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "CO ও CO2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "O2 ও N2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "CH4 ও CFC",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "শিল্পকারখানা ও যানবাহনের ধোঁয়া থেকে নির্গত সালফার ডাই-অক্সাইড ($SO_2$) ও নাইট্রোজেন ডাই-অক্সাইড ($NO_2$) বৃষ্টির পানির সাথে এসিড তৈরি করে।",
+    "difficulty": "EASY",
+    "source": "কুমিল্লা বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "জৈব রসায়ন",
+    "stem_bn": "প্রোপানোন যৌগে কোন কার্যকরী মূলকটি উপস্থিত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "কিটোন মূলক (>C=O)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "অ্যালডিহাইড মূলক (-CHO)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "অ্যালকোহল মূলক (-OH)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "ইথার মূলক (-O-)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রোপানোন ($CH_3-CO-CH_3$) একটি কিটোন যৌগ এবং এর কার্যকরী মূলক হলো কার্বনিল কিটোন মূলক ($>C=O$)।",
+    "difficulty": "EASY",
+    "source": "দিনাজপুর বোর্ড ২০১৭"
+  },
+  {
+    "chapter": "মৌলের পর্যাবৃত্ত ধর্ম",
+    "stem_bn": "সালফার অণুর সাধারণ আণবিক রূপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "S8",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "S2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "S4",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "S6",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "স্বাভাবিক তাপমাত্রায় সালফার রম্বিক ও মনোক্লিনিক উভয় রূপভেদে ৮টি পরমাণুর বলয়াকার মুকুটাকৃতি ($S_8$) অণু হিসেবে অবস্থান করে।",
+    "difficulty": "MEDIUM",
+    "source": "বরিশাল বোর্ড ২০১৭"
+  }
+]

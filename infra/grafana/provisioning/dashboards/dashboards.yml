@@ -1,0 +1,25 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - GRAFANA DASHBOARD PROVIDER PROVISIONING:
+# MODULE:    Grafana Dashboard Automatic Provider
+# TOPIC:     Filesystem Dashboard Discovery and Auto-Mount
+# FILE:      infra/grafana/provisioning/dashboards/dashboards.yml
+# PURPOSE:   Discovers and loads Ogrojatra JSON dashboards into Grafana UI:
+#            1. Folder: Ogrojatra Production Telemetry.
+#            2. Path: /var/lib/grafana/dashboards.
+#            3. Update Interval: 30s automatic file sync.
+# AUDIENCE:  DevOps Engineers, SREs & AI Agents
+# STANDARDS: Grafana Dashboard Provisioning v1, Zero-Emoji Spec
+# ========================================================================================
+
+apiVersion: 1
+
+providers:
+  - name: 'ogrojatra-dashboards'
+    orgId: 1
+    folder: 'Ogrojatra Production'
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 30
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards

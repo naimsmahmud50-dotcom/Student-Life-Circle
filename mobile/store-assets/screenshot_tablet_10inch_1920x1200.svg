@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+  <defs>
+    <linearGradient id="tab10Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1920" height="1200" fill="url(#tab10Bg)" />
+
+  <!-- Status Bar -->
+  <rect width="1920" height="48" fill="#0f172a" />
+  <text x="64" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="600">10:00</text>
+  <text x="1800" y="32" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="18" font-weight="600">Wi-Fi | 100%</text>
+
+  <!-- Header -->
+  <rect y="48" width="1920" height="96" fill="#0f172a" stroke="#1e293b" stroke-width="1.5" />
+  <g transform="translate(64, 68)">
+    <rect x="0" y="0" width="56" height="56" rx="14" fill="#2563eb" />
+    <path d="M 28 16 L 44 26 L 28 36 L 12 26 Z" fill="#ffffff" />
+    <text x="76" y="32" fill="#ffffff" font-family="system-ui, sans-serif" font-size="26" font-weight="800">অগ্রযাত্রা | Ogrojatra 10-inch Dashboard</text>
+    <text x="76" y="52" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="15" font-weight="600">National Curriculum Comprehensive Analytics &amp; Live Olympiad Arena</text>
+  </g>
+
+  <!-- 3-Column Tablet Layout -->
+  <!-- Column 1: Curriculum & Stage Progress (Left) -->
+  <g transform="translate(64, 170)">
+    <rect width="560" height="930" rx="24" fill="#0f172a" stroke="#1e293b" stroke-width="1.5" />
+    <text x="36" y="50" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="700">CURRICULUM MASTERY</text>
+    <text x="36" y="90" fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="800">এইচএসসি বিজ্ঞান পাঠ্যক্রম ট্র্যাকার</text>
+
+    <!-- Subject Progress Bars -->
+    <g transform="translate(36, 130)">
+      <text x="0" y="0" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">পদার্থবিজ্ঞান ১ম ও ২য় পত্র</text>
+      <text x="488" y="0" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" text-anchor="end">88%</text>
+      <rect y="12" width="488" height="12" rx="6" fill="#1e293b" />
+      <rect y="12" width="429" height="12" rx="6" fill="#38bdf8" />
+
+      <text x="0" y="60" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">রসায়ন বিজ্ঞান</text>
+      <text x="488" y="60" fill="#22c55e" font-family="system-ui, sans-serif" font-size="16" text-anchor="end">94%</text>
+      <rect y="72" width="488" height="12" rx="6" fill="#1e293b" />
+      <rect y="72" width="458" height="12" rx="6" fill="#22c55e" />
+
+      <text x="0" y="120" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">উচ্চতর গণিত ও ক্যালকুলাস</text>
+      <text x="488" y="120" fill="#a855f7" font-family="system-ui, sans-serif" font-size="16" text-anchor="end">91%</text>
+      <rect y="132" width="488" height="12" rx="6" fill="#1e293b" />
+      <rect y="132" width="444" height="12" rx="6" fill="#a855f7" />
+    </g>
+  </g>
+
+  <!-- Column 2: Live Challenge / Olympiad Stage (Center) -->
+  <g transform="translate(660, 170)">
+    <rect width="600" height="930" rx="24" fill="#0f172a" stroke="#1e293b" stroke-width="1.5" />
+    <text x="36" y="50" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="16" font-weight="700">LIVE CHALLENGE ARENA</text>
+    <text x="36" y="90" fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="800">জাতীয় এইচএসসি মেগা চ্যালেঞ্জ ২০২৬</text>
+
+    <!-- Live Timer & Question Preview -->
+    <rect x="36" y="120" width="528" height="200" rx="20" fill="#1e1b4b" stroke="#4338ca" stroke-width="1.5" />
+    <text x="60" y="160" fill="#a5b4fc" font-family="system-ui, sans-serif" font-size="14" font-weight="700">TIME REMAINING: 04:32</text>
+    <text x="60" y="200" fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="600">
+      প্রশ্ন ৫: কোনো তারের দৈর্ঘ্য দ্বিগুণ এবং ব্যাসার্ধ অর্ধেক করা হলে রোধ কত গুণ বৃদ্ধি পাবে?
+    </text>
+    <rect x="60" y="235" width="240" height="40" rx="10" fill="#22c55e" />
+    <text x="180" y="260" fill="#ffffff" font-family="system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle">সঠিক উত্তর: ৮ গুণ</text>
+  </g>
+
+  <!-- Column 3: Guardian Oversight & Verified Credentials (Right) -->
+  <g transform="translate(1296, 170)">
+    <rect width="560" height="930" rx="24" fill="#0f172a" stroke="#1e293b" stroke-width="1.5" />
+    <text x="36" y="50" fill="#22c55e" font-family="system-ui, sans-serif" font-size="16" font-weight="700">GUARDIAN &amp; CREDENTIALS</text>
+    <text x="36" y="90" fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="800">অ্যাকাডেমিক সনদ ও রিপোর্ট</text>
+
+    <rect x="36" y="120" width="488" height="240" rx="20" fill="#1e293b" />
+    <text x="60" y="160" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="14" font-weight="700">WEEKLY GUARDIAN DIGEST</text>
+    <text x="60" y="195" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">Study Hours: 14.5 hrs</text>
+    <text x="60" y="230" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">Questions Solved: 185</text>
+    <text x="60" y="265" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="16">Accuracy Rate: 92.4%</text>
+    <text x="60" y="300" fill="#4ade80" font-family="system-ui, sans-serif" font-size="14" font-weight="600">Verified by WhatsApp &amp; Telegram Bot</text>
+  </g>
+
+  <!-- Android Navigation Bar (#0F172A) -->
+  <rect y="1150" width="1920" height="50" fill="#0f172a" />
+  <g transform="translate(900, 1172)">
+    <rect x="-60" y="0" width="120" height="6" rx="3" fill="#64748b" />
+  </g>
+</svg>

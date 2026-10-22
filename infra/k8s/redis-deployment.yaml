@@ -1,0 +1,113 @@
+# ========================================================================================
+# DEVELOPER ARCHITECTURE NOTE - KUBERNETES REDIS CACHE WORKLOAD:
+# MODULE:    Kubernetes Redis Workload & Storage Specification
+# TOPIC:     In-Memory Distributed Cache, Throttling Buffer, WebSocket Pub/Sub
+# FILE:      infra/k8s/redis-deployment.yaml
+# PURPOSE:   Deploys an in-cluster Redis instance with persistent volume storage:
+#            1. Persistence: AOF (Append-Only File) enabled on PVC mount `/data`.
+#            2. Clustering / Service: Exposes ClusterIP service on port 6379 for backend pods.
+#            3. Health Probes: Probes execute `redis-cli ping` with password auth.
+# AUDIENCE:  DevOps Engineers, Kubernetes Administrators, SREs & AI Agents
+# STANDARDS: Kubernetes v1.28+, Redis 7 Alpine, Zero-Emoji Spec
+# ========================================================================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ogrojatra-redis
+  namespace: ogrojatra-production
+  labels:
+    app.kubernetes.io/name: ogrojatra-redis
+    app.kubernetes.io/component: cache
+    app.kubernetes.io/part-of: student-growth-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ogrojatra-redis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ogrojatra-redis
+        app.kubernetes.io/component: cache
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          command:
+            - "redis-server"
+            - "--appendonly"
+            - "yes"
+            - "--requirepass"
+            - "$(REDIS_PASSWORD)"
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ogrojatra-secrets
+                  key: REDIS_URL
+          ports:
+            - name: redis
+              containerPort: 6379
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: ogrojatra-redis-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ogrojatra-redis-pvc
+  namespace: ogrojatra-production
+  labels:
+    app.kubernetes.io/name: ogrojatra-redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: ogrojatra-production
+  labels:
+    app.kubernetes.io/name: ogrojatra-redis
+    app.kubernetes.io/component: cache
+spec:
+  type: ClusterIP
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: ogrojatra-redis

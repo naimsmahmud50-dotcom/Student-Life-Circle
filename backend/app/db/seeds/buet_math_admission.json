@@ -1,0 +1,902 @@
+[
+  {
+    "chapter": "ক্যালকুলাস (সীমা)",
+    "stem_bn": "$\\lim_{x \\to 0} \\frac{\\tan x - \\sin x}{x^3}$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "0",
+        "is_correct": false
+      },
+      {
+        "key": "B",
+        "text_bn": "1/2",
+        "is_correct": true
+      },
+      {
+        "key": "C",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "B",
+    "explanation_bn": "গাণিতিক সমাধান:\n$\\lim_{x \\to 0} \\frac{\\tan x - \\sin x}{x^3} = \\lim_{x \\to 0} \\frac{\\sin x (\\frac{1}{\\cos x} - 1)}{x^3} = \\lim_{x \\to 0} \\frac{\\sin x (1 - \\cos x)}{x^3 \\cos x}$\n$= \\lim_{x \\to 0} \\left(\\frac{\\sin x}{x}\\right) \\left(\\frac{2\\sin^2(x/2)}{x^2}\\right) \\frac{1}{\\cos x} = 1 \\times 2 \\left(\\frac{1}{2}\\right)^2 \\times 1 = \\frac{1}{2}$।",
+    "difficulty": "HARD",
+    "source": "BUET Admission 2020-21"
+  },
+  {
+    "chapter": "ক্যালকুলাস (যোগজীকরণ)",
+    "stem_bn": "$\\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}} dx$ নির্দিষ্ট যৌগজের মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\pi/4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\pi/2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "0",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "যৌগজ ধর্মাবলী প্রয়োগ করে:\nধরি, $I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}} dx$\nধর্ম $\\int_0^a f(x)dx = \\int_0^a f(a-x)dx$ অনুসারে,\n$I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\cos x}}{\\sqrt{\\cos x} + \\sqrt{\\sin x}} dx$\nউভয় সমীকরণ যোগ করে পাই: $2I = \\int_0^{\\pi/2} 1 \\cdot dx = \\frac{\\pi}{2} \\implies I = \\frac{\\pi}{4}$।",
+    "difficulty": "HARD",
+    "source": "BUET Admission 2019-20"
+  },
+  {
+    "chapter": "ভেক্টর",
+    "stem_bn": "$\\vec{A} = 2\\hat{i} + 3\\hat{j} - \\hat{k}$ এবং $\\vec{B} = \\hat{i} - 2\\hat{j} + \\lambda\\hat{k}$ ভেক্টরদ্বয় পরস্পর লম্ব হলে $\\lambda$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "-4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "-2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ভেক্টরদ্বয় পরস্পর লম্ব হওয়ার শর্ত হলো তাদের ডট গুণফল শূন্য হবে: $\\vec{A} \\cdot \\vec{B} = 0$\n$\\implies (2)(1) + (3)(-2) + (-1)(\\lambda) = 0$\n$\\implies 2 - 6 - \\lambda = 0 \\implies -4 - \\lambda = 0 \\implies \\lambda = -4$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2018-19"
+  },
+  {
+    "chapter": "স্থানাঙ্ক জ্যামিতি (বৃত্ত)",
+    "stem_bn": "$x^2 + y^2 - 4x + 6y - 12 = 0$ বৃত্তের কেন্দ্র ও ব্যাসার্ধ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "(2, -3) এবং 5",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "(-2, 3) এবং 5",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "(2, -3) এবং 25",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "(-4, 6) এবং 12",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বৃত্তের সাধারণ সমীকরণ $x^2 + y^2 + 2gx + 2fy + c = 0$ এর সাথে তুলনা করে:\n$2g = -4 \\implies g = -2$\n$2f = 6 \\implies f = 3$\n$c = -12$\nঅতএব কেন্দ্র $(-g, -f) = (2, -3)$।\nব্যাসার্ধ $r = \\sqrt{g^2 + f^2 - c} = \\sqrt{(-2)^2 + 3^2 - (-12)} = \\sqrt{4 + 9 + 12} = \\sqrt{25} = 5$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2017-18"
+  },
+  {
+    "chapter": "কনিক্স",
+    "stem_bn": "$y^2 = 8x$ পরাবৃত্তের উপকেন্দ্রিক লম্বের দৈর্ঘ্য কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "8",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "16",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "পরাবৃত্তের আদর্শ সমীকরণ $y^2 = 4ax$ এর সাথে তুলনা করে:\n$4a = 8 \\implies a = 2$।\nউপকেন্দ্রিক লম্বের দৈর্ঘ্য $= |4a| = 8$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2021-22"
+  },
+  {
+    "chapter": "জটিল সংখ্যা",
+    "stem_bn": "$z = 1 + i\\sqrt{3}$ জটিল সংখ্যার পরম মান (মডুলাস) এবং আর্গুমেন্ট কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "2 এবং \\pi/3",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "2 এবং \\pi/6",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "4 এবং \\pi/3",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "1 এবং \\pi/3",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "মডুলাস $r = |z| = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{1 + 3} = 2$।\nআর্গুমেন্ট $\\theta = \\tan^{-1}\\left(\\frac{\\sqrt{3}}{1}\\right) = 60^\\circ = \\frac{\\pi}{3}$ রেডিয়ান।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2022-23"
+  },
+  {
+    "chapter": "ক্যালকুলাস (অন্তরীকরণ)",
+    "stem_bn": "$\\frac{d}{dx}(\\sin^{-1} x)$ এর অন্তরজ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\frac{1}{\\sqrt{1-x^2}}",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "-\\frac{1}{\\sqrt{1-x^2}}",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\frac{1}{1+x^2}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\frac{1}{|x|\\sqrt{x^2-1}}",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আমরা জানি বিপরীত ত্রিকোণমিতিক ফাংশনের অন্তরজ সূত্র: $\\frac{d}{dx}(\\sin^{-1} x) = \\frac{1}{\\sqrt{1-x^2}}$ যেখানে $-1 < x < 1$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2016-17"
+  },
+  {
+    "chapter": "স্থানাঙ্ক জ্যামিতি",
+    "stem_bn": "$2x - 3y + 6 = 0$ এবং $4x - 6y + 15 = 0$ সমান্তরাল সরলরেখাদ্বয়ের মধ্যবর্তী লম্ব দূরত্ব কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "3 / (2\\sqrt{13})",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "9 / (2\\sqrt{13})",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "3 / \\sqrt{13}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "21 / \\sqrt{13}",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সমীকরণ দুটিকে একই সহগে প্রকাশ করি:\n১ম রেখা: $4x - 6y + 12 = 0$\n২য় রেখা: $4x - 6y + 15 = 0$\nসমান্তরাল রেখাদ্বয়ের মধ্যবর্তী দূরত্ব $d = \\frac{|c_1 - c_2|}{\\sqrt{a^2 + b^2}} = \\frac{|12 - 15|}{\\sqrt{4^2 + (-6)^2}} = \\frac{3}{\\sqrt{16+36}} = \\frac{3}{\\sqrt{52}} = \\frac{3}{2\\sqrt{13}}$।",
+    "difficulty": "HARD",
+    "source": "BUET Admission 2023-24"
+  },
+  {
+    "chapter": "জটিল সংখ্যা",
+    "stem_bn": "এককের একটি কাল্পনিক ঘনমূল $\\omega$ হলে, $(1 - \\omega + \\omega^2)(1 + \\omega - \\omega^2)$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "-4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "0",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আমরা জানি $1 + \\omega + \\omega^2 = 0 \\implies 1 + \\omega^2 = -\\omega$ এবং $1 + \\omega = -\\omega^2$।\nঅতএব, $(1 - \\omega + \\omega^2)(1 + \\omega - \\omega^2) = (-\\omega - \\omega)(-\\omega^2 - \\omega^2) = (-2\\omega)(-2\\omega^2) = 4\\omega^3 = 4(1) = 4$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2019-20"
+  },
+  {
+    "chapter": "ক্যালকুলাস (যোগজীকরণ)",
+    "stem_bn": "$\\int e^x (\\sin x + \\cos x) dx$ এর অনির্দিষ্ট যোগজ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "e^x \\sin x + C",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "e^x \\cos x + C",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "-e^x \\cos x + C",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "e^x (\\sin x - \\cos x) + C",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রমিত সূত্র $\\int e^x [f(x) + f'(x)] dx = e^x f(x) + C$। এখানে $f(x) = \\sin x$, যার অন্তরজ $f'(x) = \\cos x$। সুতরাং উত্তর $e^x \\sin x + C$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2020-21"
+  },
+  {
+    "chapter": "ক্যালকুলাস (অন্তরীকরণ)",
+    "stem_bn": "$y = x^3 - 3x^2 + 5$ বক্ররেখার কোন বিন্দুতে স্পর্শক x-অক্ষের সমান্তরাল?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "(0, 5) এবং (2, 1)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "(1, 3) এবং (2, 5)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "(0, 0)",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "(3, 5)",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "স্পর্শক $x$-অক্ষের সমান্তরাল হলে $\\frac{dy}{dx} = 0$।\n$\\frac{dy}{dx} = 3x^2 - 6x = 0 \\implies 3x(x - 2) = 0 \\implies x = 0$ অথবা $x = 2$।\n$x=0$ হলে $y=5$ এবং $x=2$ হলে $y=8-12+5=1$। সুতরাং বিন্দুদ্বয় $(0, 5)$ ও $(2, 1)$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2018-19"
+  },
+  {
+    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক",
+    "stem_bn": "$\\det\\begin{pmatrix} 1 & a & a^2 \\\\ 1 & b & b^2 \\\\ 1 & c & c^2 \\end{pmatrix}$ নির্ণায়কটির মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "(a-b)(b-c)(c-a)",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "(a+b)(b+c)(c+a)",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "a^2+b^2+c^2",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "0",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "এটি ভ্যান্ডারমন্ড নির্ণায়ক (Vandermonde Determinant), যার মান $(a-b)(b-c)(c-a)$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2017-18"
+  },
+  {
+    "chapter": "ত্রিকোণমিতি",
+    "stem_bn": "$\\sin 75^\\circ$ এর সঠিক ত্রিকোণমিতিক মান কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\frac{\\sqrt{6} + \\sqrt{2}}{4}",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\frac{\\sqrt{6} - \\sqrt{2}}{4}",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\frac{\\sqrt{3} + 1}{2}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\frac{\\sqrt{2} + 1}{2}",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\sin 75^\\circ = \\sin(45^\\circ + 30^\\circ) = \\sin 45^\\circ \\cos 30^\\circ + \\cos 45^\\circ \\sin 30^\\circ = \\frac{1}{\\sqrt{2}} \\frac{\\sqrt{3}}{2} + \\frac{1}{\\sqrt{2}} \\frac{1}{2} = \\frac{\\sqrt{6}+\\sqrt{2}}{4}$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2016-17"
+  },
+  {
+    "chapter": "কনিক্স",
+    "stem_bn": "$\\frac{x^2}{16} + \\frac{y^2}{9} = 1$ উপবৃত্তের উৎকেন্দ্রিকতা (e) কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\sqrt{7}/4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "3/4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "7/16",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\sqrt{7}/3",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "এখানে $a^2 = 16, b^2 = 9$ ($a > b$)। উৎকেন্দ্রিকতা $e = \\sqrt{1 - \\frac{b^2}{a^2}} = \\sqrt{1 - \\frac{9}{16}} = \\sqrt{\\frac{7}{16}} = \\frac{\\sqrt{7}}{4}$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2022-23"
+  },
+  {
+    "chapter": "ম্যাট্রিক্স",
+    "stem_bn": "$A = \\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$ হলে $A^{-1}$ ম্যাট্রিক্সটি কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\frac{1}{5}\\begin{pmatrix} 4 & -3 \\\\ -1 & 2 \\end{pmatrix}",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\begin{pmatrix} 4 & -3 \\\\ -1 & 2 \\end{pmatrix}",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\frac{1}{5}\\begin{pmatrix} 2 & -3 \\\\ -1 & 4 \\end{pmatrix}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\frac{1}{11}\\begin{pmatrix} 4 & -3 \\\\ -1 & 2 \\end{pmatrix}",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\det(A) = (2)(4) - (3)(1) = 8 - 3 = 5$। বিপরীত ম্যাট্রিক্স $A^{-1} = \\frac{1}{\\det(A)} \\text{adj}(A) = \\frac{1}{5} \\begin{pmatrix} 4 & -3 \\\\ -1 & 2 \\end{pmatrix}$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2021-22"
+  },
+  {
+    "chapter": "ক্যালকুলাস (যোগজীকরণ)",
+    "stem_bn": "$\\int_0^1 x e^x dx$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "1",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "e - 1",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "e",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "আংশিক যৌগজীকরণ ($u=x, dv=e^x dx$):\n$\\int_0^1 x e^x dx = [x e^x]_0^1 - \\int_0^1 e^x dx = (1 \\cdot e - 0) - [e^x]_0^1 = e - (e - 1) = 1$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2020-21"
+  },
+  {
+    "chapter": "ভেক্টর",
+    "stem_bn": "$\\vec{A} \\times \\vec{B} = \\vec{0}$ এবং $\\vec{A} \\cdot \\vec{B} = 0$ হলে কোনটি সঠিক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "অন্তত একটি ভেক্টর শূন্য",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "ভেক্টরদ্বয় সমান্তরাল",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "ভেক্টরদ্বয় লম্ব",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "উভয় ভেক্টর একক ভেক্টর",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ক্রস গুণফল শূন্য হলে ভেক্টরদ্বয় সমান্তরাল এবং ডট গুণফল শূন্য হলে লম্ব হয়। একই সাথে দুটি অশূন্য ভেক্টর সমান্তরাল ও লম্ব হওয়া অসম্ভব, সুতরাং অন্তত একটি ভেক্টর অবশ্যই শূন্য ভেক্টর।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2019-20"
+  },
+  {
+    "chapter": "দ্বিপদী বিস্তৃতি",
+    "stem_bn": "$(1 + x)^n$ এর বিস্তৃতিতে ৩য় পদের সহগ ৩৬ হলে n এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "9",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "8",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "10",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "12",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "৩য় পদ হলো $\\binom{n}{2} x^2$। শর্তমতে $\\binom{n}{2} = 36 \\implies \\frac{n(n-1)}{2} = 36 \\implies n^2 - n - 72 = 0 \\implies (n-9)(n+8) = 0 \\implies n = 9$ ($n > 0$)।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2018-19"
+  },
+  {
+    "chapter": "বিপরীত ত্রিকোণমিতি",
+    "stem_bn": "$\\cos(2\\tan^{-1} x)$ এর সমতুল্য বীজগণিতীয় রূপ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\frac{1-x^2}{1+x^2}",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\frac{2x}{1+x^2}",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\frac{2x}{1-x^2}",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\frac{1+x^2}{1-x^2}",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "ধরি $\\theta = \\tan^{-1} x \\implies \\tan\\theta = x$। আমরা জানি $\\cos 2\\theta = \\frac{1-\\tan^2\\theta}{1+\\tan^2\\theta} = \\frac{1-x^2}{1+x^2}$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2017-18"
+  },
+  {
+    "chapter": "বহুপদী",
+    "stem_bn": "$x^2 - 5x + 6 = 0$ সমীকরণের মূলদ্বয় $\\alpha, \\beta$ হলে $\\alpha^2 + \\beta^2$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "13",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "25",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "19",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "31",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\alpha + \\beta = 5$ এবং $\\alpha\\beta = 6$।\n$\\alpha^2 + \\beta^2 = (\\alpha+\\beta)^2 - 2\\alpha\\beta = 5^2 - 2(6) = 25 - 12 = 13$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2016-17"
+  },
+  {
+    "chapter": "ক্যালকুলাস",
+    "stem_bn": "$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "e",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "0",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\infty",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "এটি অয়লার সংখ্যা $e$ এর সংজ্ঞামূলক প্রমিত সীমা: $\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e \\approx 2.71828$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2023-24"
+  },
+  {
+    "chapter": "সরলরেখা",
+    "stem_bn": "$(2, 3)$ বিন্দু থেকে $3x + 4y - 8 = 0$ সরলরেখার লম্ব দূরত্ব কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "2 একক",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "1 একক",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "10 একক",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "5 একক",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "বিন্দু থেকে রেখার লম্ব দূরত্ব $d = \\frac{|a x_1 + b y_1 + c|}{\\sqrt{a^2 + b^2}} = \\frac{|3(2) + 4(3) - 8|}{\\sqrt{3^2 + 4^2}} = \\frac{|6 + 12 - 8|}{5} = \\frac{10}{5} = 2$ একক।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2022-23"
+  },
+  {
+    "chapter": "ক্যালকুলাস",
+    "stem_bn": "$\\int \\frac{dx}{x^2 + 9}$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\frac{1}{3}\\tan^{-1}\\left(\\frac{x}{3}\\right) + C",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\tan^{-1}\\left(\\frac{x}{3}\\right) + C",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\frac{1}{9}\\tan^{-1}\\left(\\frac{x}{3}\\right) + C",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\frac{1}{3}\\sin^{-1}\\left(\\frac{x}{3}\\right) + C",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "প্রমিত সমাকলন সূত্র $\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + C$। এখানে $a = 3$, তাই উত্তর $\\frac{1}{3}\\tan^{-1}\\left(\\frac{x}{3}\\right) + C$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2021-22"
+  },
+  {
+    "chapter": "ভেক্টর",
+    "stem_bn": "$|\\vec{A} + \\vec{B}| = |\\vec{A} - \\vec{B}|$ হলে ভেক্টরদ্বয়ের মধ্যবর্তী কোণ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "90°",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "0°",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "180°",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "45°",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "উভয়পক্ষ বর্গ করে: $A^2 + B^2 + 2\\vec{A}\\cdot\\vec{B} = A^2 + B^2 - 2\\vec{A}\\cdot\\vec{B} \\implies 4\\vec{A}\\cdot\\vec{B} = 0 \\implies \\vec{A}\\cdot\\vec{B} = 0 \\implies \\theta = 90^\\circ$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2020-21"
+  },
+  {
+    "chapter": "ক্যালকুলাস",
+    "stem_bn": "$y = \\ln(\\sec x + \\tan x)$ হলে $\\frac{dy}{dx}$ কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\sec x",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\tan x",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\sec^2 x",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\sec x \\tan x",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\frac{dy}{dx} = \\frac{1}{\\sec x + \\tan x} \\cdot (\\sec x \\tan x + \\sec^2 x) = \\frac{\\sec x (\\tan x + \\sec x)}{\\sec x + \\tan x} = \\sec x$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2019-20"
+  },
+  {
+    "chapter": "কনিক্স",
+    "stem_bn": "$\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$ অধিবৃত্তের অসীমমুখী রেখাদ্বয়ের (Asymptotes) সমীকরণ কোনটি?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "y = \\pm \\frac{b}{a} x",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "y = \\pm \\frac{a}{b} x",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "y = \\pm x",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "x = \\pm \\frac{a}{b} y^2",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "অধিবৃত্তের অসীমতটের সমীকরণ হলো $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 0 \\implies y = \\pm \\frac{b}{a} x$।",
+    "difficulty": "MEDIUM",
+    "source": "BUET Admission 2018-19"
+  },
+  {
+    "chapter": "ত্রিকোণমিতি",
+    "stem_bn": "$\\tan^{-1}(1/2) + \\tan^{-1}(1/3)$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\pi/4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\pi/2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "\\pi/3",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "\\pi/6",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$\\tan^{-1}\\left(\\frac{1/2 + 1/3}{1 - (1/2)(1/3)}\\right) = \\tan^{-1}\\left(\\frac{5/6}{5/6}\\right) = \\tan^{-1}(1) = \\frac{\\pi}{4}$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2017-18"
+  },
+  {
+    "chapter": "বিন্যাস ও সমাবেশ",
+    "stem_bn": "$^n P_r = 720$ এবং $^n C_r = 120$ হলে r এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "3",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "4",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "5",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "6",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$r! = \\frac{^n P_r}{^n C_r} = \\frac{720}{120} = 6 \\implies r! = 3! \\implies r = 3$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2016-17"
+  },
+  {
+    "chapter": "ক্যালকুলাস",
+    "stem_bn": "$\\int_0^1 \\frac{1}{1 + x^2} dx$ এর মান কত?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "\\pi/4",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "\\pi/2",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "1",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "0",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "$[\\tan^{-1} x]_0^1 = \\tan^{-1}(1) - \\tan^{-1}(0) = \\frac{\\pi}{4} - 0 = \\frac{\\pi}{4}$।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2023-24"
+  },
+  {
+    "chapter": "স্থানাঙ্ক জ্যামিতি",
+    "stem_bn": "একটি ত্রিভুজের শীর্ষবিন্দুগুলো $(0, 0), (4, 0), (0, 3)$ হলে ত্রিভুজটির ক্ষেত্রফল কত বর্গ একক?",
+    "options": [
+      {
+        "key": "A",
+        "text_bn": "6",
+        "is_correct": true
+      },
+      {
+        "key": "B",
+        "text_bn": "12",
+        "is_correct": false
+      },
+      {
+        "key": "C",
+        "text_bn": "7",
+        "is_correct": false
+      },
+      {
+        "key": "D",
+        "text_bn": "5",
+        "is_correct": false
+      }
+    ],
+    "correct_option_key": "A",
+    "explanation_bn": "সমকোণী ত্রিভুজের ক্ষেত্রফল $= \\frac{1}{2} \\times \\text{ভূমি} \\times \\text{উচ্চতা} = \\frac{1}{2} \\times 4 \\times 3 = 6$ বর্গ একক।",
+    "difficulty": "EASY",
+    "source": "BUET Admission 2022-23"
+  }
+]
