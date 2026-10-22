@@ -10,7 +10,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Smartphone, Download, X, CheckCircle2 } from 'lucide-react';
+import { Smartphone, Download, X } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -23,9 +23,10 @@ export function PwaInstallBanner() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isInstalling, setIsInstalling] = useState(false);
+  const [isEngaged, setIsEngaged] = useState(false);
 
   useEffect(() => {
-    // Check if dismissed recently (e.g. within 3 days)
+    // Check if dismissed recently (7 days dismissal memory)
     if (typeof window !== 'undefined') {
       const dismissedUntil = localStorage.getItem(STORAGE_KEY_DISMISSED);
       if (dismissedUntil && Date.now() < parseInt(dismissedUntil, 10)) {
@@ -36,15 +37,35 @@ export function PwaInstallBanner() {
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setIsVisible(true);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
+    // Show only after meaningful engagement: scroll down or 15s session
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setIsEngaged(true);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      setIsEngaged(true);
+    }, 15000);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    if (deferredPrompt && isEngaged) {
+      setIsVisible(true);
+    }
+  }, [deferredPrompt, isEngaged]);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
@@ -66,9 +87,9 @@ export function PwaInstallBanner() {
 
   const handleDismiss = () => {
     setIsVisible(false);
-    // Dismiss for 3 days
+    // Dismiss for 7 days
     if (typeof window !== 'undefined') {
-      const cooldown = Date.now() + 3 * 24 * 60 * 60 * 1000;
+      const cooldown = Date.now() + 7 * 24 * 60 * 60 * 1000;
       localStorage.setItem(STORAGE_KEY_DISMISSED, cooldown.toString());
     }
   };
@@ -80,58 +101,43 @@ export function PwaInstallBanner() {
   return (
     <aside
       aria-label="অফলাইন অ্যাপ ইনস্টলেশন ব্যানার"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 p-4 rounded-2xl bg-[#090D16] border border-blue-500/30 shadow-[0_8px_30px_rgb(0,0,0,0.6)] text-slate-100 backdrop-blur-md animate-in fade-in slide-in-from-bottom-3 duration-200"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] shadow-[0_4px_16px_rgba(0,0,0,0.08)] text-[#1A1A1A] dark:text-[#F5F2EB] animate-in fade-in slide-in-from-bottom-2 duration-200"
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 shrink-0">
-            <Smartphone className="w-5 h-5" strokeWidth={1.75} />
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="p-2 rounded-lg bg-[#FAF8F3] dark:bg-[#202838] border border-[#E5E2DA] dark:border-[#273145] text-[#1B2A4A] dark:text-sky-400 shrink-0">
+            <Smartphone className="w-4 h-4" strokeWidth={1.75} />
           </div>
-          <div>
-            <h4 className="text-sm font-bold font-bengali text-white flex items-center gap-1.5">
-              <span>অগ্রযাত্রা অ্যাপ ইনস্টল করুন</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <div className="min-w-0">
+            <h4 className="text-xs font-bold font-bengali text-[#1A1A1A] dark:text-[#F5F2EB] truncate flex items-center gap-1.5">
+              <span>অগ্রযাত্রা অ্যাপ ইনস্টল</span>
+              <span className="text-[10px] font-sans px-1 py-0.2 rounded bg-[#F5F2EB] dark:bg-slate-800 text-[#5B5B5B] dark:text-slate-300 border border-[#E5E2DA] dark:border-slate-700">
                 PWA
               </span>
             </h4>
-            <p className="text-xs text-slate-400 font-bengali leading-relaxed mt-0.5">
-              নেটওয়ার্ক ছাড়াই সংরক্ষিত বোর্ড প্রশ্ন ও অনুশীলন সেটে দ্রুততম প্রবেশাধিকার পান।
+            <p className="text-[11px] text-[#5B5B5B] dark:text-slate-400 font-bengali truncate mt-0.5">
+              অফলাইনে বোর্ড প্রশ্ন ও দ্রুত অ্যাক্সেস
             </p>
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleDismiss}
-          className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
-          aria-label="ব্যানার বন্ধ করুন"
-        >
-          <X className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="flex items-center justify-between pt-3 mt-2 border-t border-slate-800">
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-bengali">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          <span>অফলাইন ব্যাকআপ সক্রিয়</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleDismiss}
-            className="px-2.5 py-1 text-xs font-bengali text-slate-400 hover:text-slate-200 transition-colors"
-          >
-            পরে
-          </button>
+        <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
             onClick={handleInstallClick}
             disabled={isInstalling}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold font-bengali text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-[0_2px_0_0_#1D4ED8] active:translate-y-0.5 active:shadow-none transition-all disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold font-bengali text-white bg-[#1B2A4A] hover:bg-[#253961] dark:bg-[#0A2540] rounded-lg shadow-xs active:translate-y-0.5 transition-all disabled:opacity-50"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>{isInstalling ? 'যুক্ত হচ্ছে...' : 'হোমস্ক্রিনে যুক্ত করুন'}</span>
+            <span>{isInstalling ? 'যুক্ত হচ্ছে...' : 'ইনস্টল'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className="text-[#787878] hover:text-[#1A1A1A] dark:hover:text-white p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            aria-label="ব্যানার বন্ধ করুন"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
       </div>

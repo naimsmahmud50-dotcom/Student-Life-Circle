@@ -123,6 +123,14 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg-app)] text-[var(--text-main)] font-sans selection:bg-[var(--primary)] selection:text-white">
+      {/* Skip to Main Content Link for Keyboard Accessibility (WCAG 2.2 AAA) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#1B2A4A] focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#B8862B] text-xs font-semibold"
+      >
+        {isBengali ? 'মূল কন্টেন্টে সরাসরি যান' : 'Skip to main content'}
+      </a>
+
       {/* Real-time PWA Offline & Status Indicators */}
       <OfflineIndicator />
       <PwaUpdateToast registration={swRegistration} />
@@ -156,13 +164,13 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
         </div>
       )}
 
-      {/* Main Page Component View */}
-      <main className="flex-1 w-full flex flex-col">
+      {/* Semantic Main Landmark with Skip Destination */}
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full flex flex-col focus:outline-none">
         <Component {...pageProps} />
       </main>
 
-      {/* Persistent Floating Socratic AI Tutor Trigger Button (Pure Academic Style) */}
-      <div className="fixed bottom-6 right-6 z-40 print:hidden">
+      {/* Persistent Floating Socratic AI Tutor Help Button (Small, Flat, Calm & Mobile Docked) */}
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 print:hidden">
         <button
           id="global-socratic-trigger"
           type="button"
@@ -170,15 +178,15 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
           aria-expanded={isTutorOpen}
           aria-label={
             isBengali
-              ? 'সক্রেটিক এআই টিউটর সহায়তা চালু করুন'
-              : 'Open Socratic AI Learning Assistant'
+              ? 'সক্রেটিক এআই টিউটর সহায়তা'
+              : 'Open Socratic AI Study Assistant'
           }
-          className="group relative flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#0A2540] hover:bg-[#0E3357] text-white font-medium text-xs sm:text-sm shadow-md hover:shadow-lg transition-all duration-150 border border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#0A2540] min-h-[44px]"
+          className="group relative flex items-center gap-2 p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-[#1B2A4A] dark:bg-[#181E2B] hover:bg-[#253961] dark:hover:bg-[#252E42] text-[#FAF8F3] dark:text-[#F5F2EB] font-sans text-xs shadow-xs border border-[#2D426B] dark:border-[#37445E] focus:outline-none focus:ring-2 focus:ring-[#B8862B] transition-all duration-150 active:translate-y-0.5"
         >
-          <span className="relative flex h-2 w-2 shrink-0 rounded-full bg-emerald-400"></span>
-          <Sparkles className="w-4 h-4 text-amber-300 shrink-0" />
-          <span className="font-semibold tracking-wide">
-            {isBengali ? 'সক্রেটিক এআই টিউটর' : 'Socratic AI Tutor'}
+          <span className="w-1.5 h-1.5 rounded-full bg-[#065F46] dark:bg-emerald-400 shrink-0"></span>
+          <Sparkles className="w-3.5 h-3.5 text-[#B8862B] dark:text-amber-300 shrink-0" />
+          <span className="hidden sm:inline font-medium tracking-wide">
+            {isBengali ? 'এআই সহায়িকা' : 'Study Help'}
           </span>
         </button>
       </div>

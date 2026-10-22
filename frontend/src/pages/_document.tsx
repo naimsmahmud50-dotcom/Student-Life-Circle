@@ -33,7 +33,8 @@ export default function Document() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="theme-color" content="#FAF8F3" />
+        <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#090D16" media="(prefers-color-scheme: dark)" />
       </Head>
       <body className="antialiased min-h-screen bg-[var(--bg-app)] text-[var(--text-main)] font-sans">
         <Main />
