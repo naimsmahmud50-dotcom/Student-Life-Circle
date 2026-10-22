@@ -195,7 +195,7 @@ export const OtpVerificationModal: React.FC<OtpVerificationModalProps> = ({
   const timeFormatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
       <div 
         className="w-full max-w-md rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden transition-all duration-200 animate-in fade-in zoom-in-95"
         role="dialog"

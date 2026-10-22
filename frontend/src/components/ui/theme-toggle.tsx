@@ -35,10 +35,12 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }
     if (isDark) {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      localStorage.setItem('slc_theme', 'light');
       setIsDark(false);
     } else {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      localStorage.setItem('slc_theme', 'dark');
       setIsDark(true);
     }
   };

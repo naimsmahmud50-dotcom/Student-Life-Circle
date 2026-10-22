@@ -242,7 +242,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Guidance Top Card */}
-      <div className="rounded-3xl bg-slate-900/90 border border-slate-800 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+      <div className="rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 sm:p-8 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800/80">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono font-medium">
@@ -355,7 +355,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
             return (
               <div
                 key={program.program_id}
-                className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-700/80 shadow-md transition-all backdrop-blur-md"
+                className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] hover:border-[#1B2A4A]/40 dark:hover:border-slate-600 shadow-xs transition-all"
               >
                 {/* Priority Rank & Details */}
                 <div className="flex items-start sm:items-center gap-4">

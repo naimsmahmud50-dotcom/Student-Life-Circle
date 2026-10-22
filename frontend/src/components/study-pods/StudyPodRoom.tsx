@@ -172,7 +172,7 @@ export const StudyPodRoom: React.FC<StudyPodRoomProps> = ({
       className={`relative flex flex-col w-full h-full min-h-[700px] bg-slate-900 text-slate-100 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl font-bengali ${className}`}
     >
       {/* Top Header Bar */}
-      <header className="flex items-center justify-between px-6 py-3.5 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 z-20">
+      <header className="flex items-center justify-between px-6 py-3.5 bg-slate-900 border-b border-slate-800 z-20">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
             <Users className="w-5 h-5" strokeWidth={1.75} />
@@ -255,18 +255,18 @@ export const StudyPodRoom: React.FC<StudyPodRoomProps> = ({
                 return (
                   <div
                     key={peer.user_id}
-                    className={`relative flex items-center md:flex-row gap-3 p-2.5 rounded-2xl bg-slate-900/90 border transition-all duration-300 ${
+                    className={`relative flex items-center md:flex-row gap-3 p-2.5 rounded-2xl bg-slate-900 border transition-all duration-200 ${
                       isSpeaking
-                        ? 'border-emerald-500/60 shadow-[0_0_16px_rgba(16,185,129,0.25)]'
+                        ? 'border-emerald-500 ring-2 ring-emerald-500/20'
                         : 'border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    {/* Peer Avatar with Ambient Emerald Pulse Ring when speaking */}
+                    {/* Peer Avatar with Emerald Ring when speaking */}
                     <div className="relative">
                       <div
-                        className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm transition-all duration-300 ${
+                        className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm transition-all duration-200 ${
                           isSpeaking
-                            ? 'bg-emerald-600 text-white ring-4 ring-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.35)] animate-pulse'
+                            ? 'bg-emerald-600 text-white ring-2 ring-emerald-400'
                             : 'bg-slate-800 text-slate-300 border border-slate-700'
                         }`}
                       >
@@ -326,18 +326,18 @@ export const StudyPodRoom: React.FC<StudyPodRoomProps> = ({
                 return (
                   <div
                     key={peer.user_id}
-                    className={`relative flex flex-col items-center justify-center p-6 rounded-3xl bg-slate-800/80 border transition-all duration-300 min-h-[180px] ${
+                    className={`relative flex flex-col items-center justify-center p-6 rounded-3xl bg-slate-800/80 border transition-all duration-200 min-h-[180px] ${
                       isSpeaking
-                        ? 'border-emerald-500/70 shadow-[0_0_24px_rgba(16,185,129,0.3)] ring-2 ring-emerald-500/30'
+                        ? 'border-emerald-500 ring-2 ring-emerald-500/30'
                         : 'border-slate-700/80 hover:border-slate-600'
                     }`}
                   >
                     {/* Active Speaker Ring Around Avatar */}
                     <div className="relative mb-3">
                       <div
-                        className={`w-20 h-20 rounded-3xl flex items-center justify-center font-bold text-2xl transition-all duration-300 ${
+                        className={`w-20 h-20 rounded-3xl flex items-center justify-center font-bold text-2xl transition-all duration-200 ${
                           isSpeaking
-                            ? 'bg-emerald-600 text-white ring-4 ring-emerald-500/50 shadow-[0_0_24px_rgba(16,185,129,0.4)] animate-pulse'
+                            ? 'bg-emerald-600 text-white ring-4 ring-emerald-500/30'
                             : 'bg-slate-700 text-slate-200 border border-slate-600'
                         }`}
                       >
@@ -385,8 +385,8 @@ export const StudyPodRoom: React.FC<StudyPodRoomProps> = ({
         )}
       </div>
 
-      {/* Floating Frosted Glass Bottom Control Bar (Apple / Linear caliber) */}
-      <footer className="relative flex items-center justify-center py-4 bg-slate-950/80 backdrop-blur-xl border-t border-slate-800/80 z-30">
+      {/* Bottom Control Bar */}
+      <footer className="relative flex items-center justify-center py-4 bg-slate-950 border-t border-slate-800 z-30">
         <div className="flex items-center gap-3 px-6 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-2xl">
           {/* Mic Toggle */}
           <button

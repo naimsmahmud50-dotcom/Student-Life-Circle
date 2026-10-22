@@ -308,3 +308,74 @@ body {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   ACADEMIC PRINT STYLESHEET
+   Clean physical examination paper and reading notes layout.
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Hide digital chrome, navigation, interactive controls, and modals */
+  header,
+  footer,
+  nav,
+  aside,
+  button,
+  .print\:hidden,
+  [role="dialog"],
+  [role="status"],
+  [aria-label="Navigation Menu"],
+  [aria-label="অফলাইন অ্যাপ ইনস্টলেশন ব্যানার"] {
+    display: none !important;
+  }
+
+  /* Full paper width and clean borders */
+  main,
+  article,
+  .max-w-7xl,
+  .max-w-5xl,
+  .max-w-4xl,
+  .max-w-3xl {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Page break rules for questions, notes, and diagrams */
+  .break-inside-avoid,
+  .card,
+  article,
+  section,
+  .katex-display {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  h1, h2, h3, h4 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    color: #000000 !important;
+  }
+
+  /* Ink contrast enforcement */
+  a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  .katex {
+    color: #000000 !important;
+  }
+}

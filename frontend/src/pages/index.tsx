@@ -1367,7 +1367,7 @@ export default function FlagshipLandingPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 animate-in fade-in"
         >
           <div className="relative w-full max-w-5xl bg-white dark:bg-[#121B2D] rounded-2xl border border-[#E5E2DA] dark:border-[#262D3D] shadow-xl overflow-hidden max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E2DA] dark:border-[#262D3D] bg-[#FAF8F3] dark:bg-[#0E1526]">

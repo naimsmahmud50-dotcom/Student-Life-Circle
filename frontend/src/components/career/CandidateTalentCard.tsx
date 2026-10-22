@@ -74,10 +74,10 @@ export const CandidateTalentCard: React.FC<CandidateTalentCardProps> = ({
   const matchScore = candidate.match_score_percent ?? 92.4;
   const matchColor =
     matchScore >= 85
-      ? 'from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-emerald-300'
+      ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300'
       : matchScore >= 70
-      ? 'from-blue-500/20 to-teal-500/20 border-blue-500/40 text-blue-300'
-      : 'from-amber-500/20 to-orange-500/20 border-amber-500/40 text-amber-300';
+      ? 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300'
+      : 'bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300';
 
   const handleVerify = async () => {
     setIsVerifying(true);
@@ -123,7 +123,7 @@ export const CandidateTalentCard: React.FC<CandidateTalentCardProps> = ({
   };
 
   return (
-    <div className={`relative rounded-3xl bg-slate-900/90 border border-slate-800 p-6 shadow-xl hover:border-slate-700/80 transition-all backdrop-blur-xl flex flex-col justify-between space-y-5 ${className}`}>
+    <div className={`relative rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 shadow-xs hover:border-[#1B2A4A]/40 dark:hover:border-slate-600 transition-all flex flex-col justify-between space-y-5 ${className}`}>
       {/* Top Header & Match Pill */}
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-4">
@@ -145,7 +145,7 @@ export const CandidateTalentCard: React.FC<CandidateTalentCardProps> = ({
           </div>
 
           {/* Cosine Match Score Pill */}
-          <div className={`px-3 py-1.5 rounded-2xl border text-xs font-mono font-bold flex items-center gap-1.5 shrink-0 bg-gradient-to-r ${matchColor}`}>
+          <div className={`px-3 py-1.5 rounded-2xl border text-xs font-mono font-bold flex items-center gap-1.5 shrink-0 ${matchColor}`}>
             <Sparkles className="w-3.5 h-3.5" />
             <span>{matchScore}% উপযুক্ত</span>
           </div>
@@ -230,7 +230,7 @@ export const CandidateTalentCard: React.FC<CandidateTalentCardProps> = ({
 
       {/* Interview Offer Modal */}
       {isOfferModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div className="w-full max-w-lg rounded-3xl bg-slate-900 border border-blue-500/40 p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950 border border-blue-500/40 text-blue-300 text-xs font-mono font-medium">

@@ -532,10 +532,10 @@ export const ChemistryMolecularViewer: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsAutoRotating(!isAutoRotating)}
-            className={`p-2 rounded-lg text-xs flex items-center space-x-1.5 border backdrop-blur-md transition-colors ${
+            className={`p-2 rounded-lg text-xs flex items-center space-x-1.5 border transition-colors ${
               isAutoRotating
-                ? 'bg-[var(--color-brand)]/80 text-white border-[var(--color-brand)]'
-                : 'bg-black/40 text-slate-300 border-white/20 hover:text-white'
+                ? 'bg-[var(--color-brand)] text-white border-[var(--color-brand)]'
+                : 'bg-slate-900 text-slate-300 border-white/20 hover:text-white'
             }`}
             title="স্বয়ংক্রিয় ঘূর্ণন টগল"
           >
@@ -546,10 +546,10 @@ export const ChemistryMolecularViewer: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowOrbitalLobes(!showOrbitalLobes)}
-            className={`p-2 rounded-lg text-xs flex items-center space-x-1.5 border backdrop-blur-md transition-colors ${
+            className={`p-2 rounded-lg text-xs flex items-center space-x-1.5 border transition-colors ${
               showOrbitalLobes
-                ? 'bg-sky-500/80 text-white border-sky-400'
-                : 'bg-black/40 text-slate-300 border-white/20 hover:text-white'
+                ? 'bg-sky-600 text-white border-sky-400'
+                : 'bg-slate-900 text-slate-300 border-white/20 hover:text-white'
             }`}
             title="অরবিটাল ক্লাউড টগল"
           >
@@ -560,7 +560,7 @@ export const ChemistryMolecularViewer: React.FC = () => {
 
         {/* Atom Distance Measurement Box */}
         {selectedAtomIds.length > 0 && (
-          <div className="absolute bottom-3 left-3 bg-slate-900/90 backdrop-blur-md border border-slate-700 rounded-xl p-3 text-xs text-white max-w-xs space-y-1 z-10 shadow-lg">
+          <div className="absolute bottom-3 left-3 bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white max-w-xs space-y-1 z-10 shadow-lg">
             <div className="font-semibold text-sky-400 flex items-center space-x-1">
               <span>পরিমাপক (Measurement Tool)</span>
             </div>

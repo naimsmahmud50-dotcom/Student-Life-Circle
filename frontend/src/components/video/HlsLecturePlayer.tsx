@@ -352,7 +352,7 @@ export const HlsLecturePlayer: React.FC<HlsLecturePlayerProps> = ({
       {!isPlaying && !activeCheckpoint && (
         <div
           onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center cursor-pointer z-10 bg-black/30 backdrop-blur-[2px]"
+          className="absolute inset-0 flex items-center justify-center cursor-pointer z-10 bg-black/40"
         >
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[var(--color-brand)]/90 text-white flex items-center justify-center shadow-lg transform transition hover:scale-105 active:scale-95">
             <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1 fill-white" />
@@ -362,7 +362,7 @@ export const HlsLecturePlayer: React.FC<HlsLecturePlayerProps> = ({
 
       {/* Interactive Checkpoint Modal Overlay */}
       {activeCheckpoint && (
-        <div className="absolute inset-0 z-40 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div className="absolute inset-0 z-40 bg-black/85 flex items-center justify-center p-4">
           <div className="w-full max-w-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-2xl text-[var(--text-main)]">
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">

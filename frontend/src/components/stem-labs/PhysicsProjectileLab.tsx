@@ -338,7 +338,7 @@ export const PhysicsProjectileLab: React.FC = () => {
         />
 
         {/* Legend Overlay */}
-        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm border border-slate-700/60 rounded-lg px-3 py-1.5 text-[11px] text-slate-300 space-y-1">
+        <div className="absolute top-3 left-3 bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-1.5 text-[11px] text-slate-300 space-y-1">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-0.5 bg-[#38BDF8] border-dashed border-t border-[#38BDF8]" />
             <span>তাত্ত্বিক গতিপথ (শূন্যস্থান)</span>

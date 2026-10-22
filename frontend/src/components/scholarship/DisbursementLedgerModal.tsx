@@ -145,7 +145,7 @@ export const DisbursementLedgerModal: React.FC<DisbursementLedgerModalProps> = (
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 animate-fade-in"
     >
       <div className="bg-[#FAFAF8] dark:bg-[#0B132B] border-2 border-slate-300 dark:border-slate-700 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         

@@ -243,7 +243,7 @@ export default function AdminQuarantineConsole() {
 
         {/* Quarantine Reason Confirmation Modal */}
         {quarantineTarget && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
             <div className="max-w-lg w-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 shadow-2xl space-y-5">
               <div className="space-y-1">
                 <Badge variant="danger">কোয়ারেন্টিন সতর্কতা</Badge>

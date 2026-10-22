@@ -68,7 +68,7 @@ export const StreakShieldModal: React.FC<StreakShieldModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in select-none font-bengali">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 animate-in fade-in select-none font-bengali">
       <div
         className={`relative w-full max-w-lg p-6 sm:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl space-y-6 ${className}`}
       >
@@ -85,10 +85,8 @@ export const StreakShieldModal: React.FC<StreakShieldModalProps> = ({
         {/* Ambient Amber Radiance Flame Header */}
         <div className="flex flex-col items-center text-center space-y-3 pt-2">
           <div className="relative">
-            {/* Ambient Radial Amber Glow */}
-            <div className="absolute inset-0 bg-amber-500/25 rounded-full blur-xl animate-pulse" />
-            <div className="relative w-20 h-20 rounded-3xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-500 shadow-[0_0_24px_-4px_rgba(217,119,6,0.3)]">
-              <Flame className="w-10 h-10 text-amber-500 fill-amber-500/20" strokeWidth={1.75} />
+            <div className="relative w-20 h-20 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-xs">
+              <Flame className="w-10 h-10 text-amber-600 dark:text-amber-400 fill-amber-500/20" strokeWidth={1.75} />
             </div>
             {/* Active Shield Floating Pill */}
             <div className="absolute -bottom-2 -right-2 px-2 py-0.5 rounded-full bg-blue-600 text-white text-[11px] font-bold font-numeric flex items-center gap-1 shadow-md">

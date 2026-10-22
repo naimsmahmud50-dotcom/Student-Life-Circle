@@ -78,7 +78,7 @@ export function PwaUpdateToast({ registration }: PwaUpdateToastProps) {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-5 right-5 z-50 max-w-sm w-full p-4 rounded-2xl bg-[#0F172A] border border-slate-700/80 shadow-2xl text-slate-100 flex flex-col gap-3 backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-200"
+      className="fixed bottom-5 right-5 z-50 max-w-sm w-full p-4 rounded-2xl bg-[#0F172A] border border-slate-700/80 shadow-2xl text-slate-100 flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-4 duration-200"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5">

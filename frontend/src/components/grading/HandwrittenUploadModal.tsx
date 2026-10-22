@@ -113,7 +113,7 @@ export const HandwrittenUploadModal: React.FC<HandwrittenUploadModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in select-none font-bengali">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 animate-in fade-in select-none font-bengali">
       <div
         className={`relative w-full max-w-xl p-6 sm:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl space-y-6 ${className}`}
       >

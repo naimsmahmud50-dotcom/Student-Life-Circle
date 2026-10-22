@@ -156,7 +156,7 @@ export const ScientificDiagram: React.FC<ScientificDiagramProps> = ({
         />
 
         {/* Overlay Controls */}
-        <div className="absolute top-2 right-2 flex items-center space-x-1.5 bg-[var(--bg-surface-elevated)]/90 backdrop-blur-sm border border-[var(--border-subtle)] rounded-lg p-1 shadow-sm">
+        <div className="absolute top-2 right-2 flex items-center space-x-1.5 bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] rounded-lg p-1 shadow-sm">
           <button
             type="button"
             onClick={handleZoomIn}

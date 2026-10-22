@@ -154,7 +154,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-2 border-b border-white/[0.07]">
             <div className="space-y-1">
               <div className="inline-flex items-center gap-2 text-[11px] sm:text-[12px] font-semibold text-emerald-400 tracking-wider uppercase font-mono">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 লাইভ লার্নিং টেলিমেট্রি
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-bengali text-white tracking-tight">
@@ -170,7 +170,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
 
             {/* CARD 1: 7-DAY STREAK (Amber Accent) */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-amber-400/40 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-amber-400/40 transition-all duration-200 flex flex-col justify-between space-y-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -206,8 +206,8 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
                         className={`w-full h-2.5 rounded-full transition-all duration-300 ${
                           item.active
                             ? item.isToday
-                              ? 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.7)]'
-                              : 'bg-amber-400/80 shadow-[0_0_4px_rgba(251,191,36,0.3)]'
+                              ? 'bg-amber-400'
+                              : 'bg-amber-400/80'
                             : 'bg-white/10'
                         }`}
                         title={`${item.day}: ${item.active ? 'অর্জিত' : 'বাকি'}`}
@@ -222,7 +222,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 2: SOLVED QUESTIONS (Emerald Accent) */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-emerald-400/40 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-emerald-400/40 transition-all duration-200 flex flex-col justify-between space-y-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -268,8 +268,8 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
                           style={{ height: `${heightPercent}%` }}
                           className={`w-full rounded-t-[3px] transition-all duration-300 ${
                             isLatest
-                              ? 'bg-gradient-to-t from-emerald-500 to-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]'
-                              : 'bg-emerald-500/35 group-hover/bar:bg-emerald-400/60'
+                              ? 'bg-[#0B5D3B] dark:bg-emerald-500'
+                              : 'bg-[#0B5D3B]/35 dark:bg-emerald-500/35 group-hover/bar:bg-[#0B5D3B]/60 dark:group-hover/bar:bg-emerald-400/60'
                           }`}
                           title={`দিন ${toBengaliNumeral(idx + 1)}: ${toBengaliNumeral(val)}টি`}
                         />
@@ -285,7 +285,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 3: ACCURACY RATE (Emerald Accent) */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-emerald-400/40 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-emerald-400/40 transition-all duration-200 flex flex-col justify-between space-y-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -350,7 +350,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 4: NATIONAL PERCENTILE (Emerald Accent) */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-emerald-400/40 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-emerald-400/40 transition-all duration-200 flex flex-col justify-between space-y-5">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -382,7 +382,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
                 <div className="relative w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
                   <div
                     style={{ width: `${personalData.percentileScore ?? 95.2}%` }}
-                    className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.5)]"
+                    className="h-full bg-[#0B5D3B] dark:bg-emerald-500 rounded-full"
                   />
                 </div>
                 <div className="flex items-center justify-between text-[11px] text-slate-400 font-bengali">
@@ -422,7 +422,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
 
             {/* CARD 5: 10-YEAR ARCHIVE (Clean Single Line Metric) */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-white/20 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-white/20 transition-all duration-200 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -468,7 +468,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 6: 100% NCTB COMPLIANT */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-emerald-400/40 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-emerald-400/40 transition-all duration-200 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -497,7 +497,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
 
               {/* Data Visual: 100% Solid Emerald Progress Bar */}
               <div className="pt-3 border-t border-white/[0.07]">
-                <div className="w-full h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
+                <div className="w-full h-2 rounded-full bg-emerald-400" />
                 <div className="flex justify-between items-center text-[10px] text-slate-400 font-bengali mt-1.5">
                   <span>এনসিটিবি অনুমোদিত</span>
                   <span className="text-emerald-300 font-medium">৬৯ / ৬৯ অধ্যায়</span>
@@ -506,7 +506,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 7: 64 DISTRICTS P2P OFFLINE */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-white/20 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-white/20 transition-all duration-200 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -537,11 +537,11 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
               <div className="pt-3 border-t border-white/[0.07]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                     <span className="w-8 h-[2px] bg-white/20" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                     <span className="w-8 h-[2px] bg-white/20" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                   </div>
                   <span className="text-[11px] font-mono text-slate-300 font-bengali">
                     {platformData.subDistrictCount || '৪৯৫ উপজেলা'}
@@ -554,7 +554,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
             </div>
 
             {/* CARD 8: 0% INTRUSIVE SURVEILLANCE */}
-            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_4px_20px_rgba(0,0,0,0.3)] hover:border-white/20 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_rgba(0,0,0,0.5)] transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div className="group p-6 rounded-2xl bg-[#0A1E34]/85 border border-white/[0.09] shadow-xs hover:border-white/20 transition-all duration-200 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -584,7 +584,7 @@ export const AcademicTelemetrySection: React.FC<AcademicTelemetryProps> = ({
               {/* Data Visual: End-to-End Cryptographic Security Status */}
               <div className="pt-3 border-t border-white/[0.07]">
                 <div className="flex items-center gap-2 text-[11px] font-medium text-emerald-400 font-bengali">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] inline-block" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
                   <span>এন্ড-টু-এন্ড এনক্রিপ্টেড ও সুরক্ষিত</span>
                 </div>
                 <div className="text-[10px] text-slate-400 font-bengali mt-1.5">

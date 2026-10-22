@@ -477,7 +477,7 @@ export const CollaborativeWhiteboard: React.FC<CollaborativeWhiteboardProps> = (
             left: `${formula.position_x}px`,
             top: `${formula.position_y}px`
           }}
-          className={`absolute z-20 group p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border ${
+          className={`absolute z-20 group p-3 rounded-2xl bg-white dark:bg-slate-900 border ${
             formula.is_pinned
               ? 'border-amber-400/80 shadow-md ring-2 ring-amber-400/20'
               : 'border-slate-200/80 dark:border-slate-700/80 shadow-lg'
@@ -521,8 +521,8 @@ export const CollaborativeWhiteboard: React.FC<CollaborativeWhiteboardProps> = (
         </div>
       ))}
 
-      {/* Floating Frosted Glass Pill Toolbar (Apple Freeform / Figma caliber) */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xl">
+      {/* Academic Floating Pill Toolbar */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
         {/* Tool Selector Buttons */}
         <div className="flex items-center gap-1 pr-2 border-r border-slate-200 dark:border-slate-700">
           <button
@@ -698,7 +698,7 @@ export const CollaborativeWhiteboard: React.FC<CollaborativeWhiteboardProps> = (
 
       {/* LaTeX Formula Stamp Modal */}
       {isLatexModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 animate-in fade-in">
           <div className="w-full max-w-lg p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">

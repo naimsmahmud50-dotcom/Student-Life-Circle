@@ -135,7 +135,7 @@ export const GradingFeedbackCard: React.FC<GradingFeedbackCardProps> = ({
       </div>
 
       {/* Affectionate Teacher Handwritten Summary Note (Ruled Notepad Margin Aesthetic) */}
-      <div className="relative p-5 rounded-2xl bg-gradient-to-r from-blue-50/60 to-indigo-50/40 dark:from-slate-800/60 dark:to-slate-800/30 border border-blue-100 dark:border-slate-700/80 space-y-2">
+      <div className="relative p-5 rounded-2xl bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] space-y-2">
         <div className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-300">
           <Heart className="w-4 h-4 text-rose-500 fill-rose-500/20" strokeWidth={1.75} />
           <span>শিক্ষকের স্নেহাশিস ও মূল মন্তব্য:</span>

@@ -8,6 +8,7 @@
  *            all sub-pages featuring breadcrumbs, NCTB accreditation chips, flat paper backgrounds,
  *            editorial serif headings, clean stats bento metrics, and responsive action button slots.
  * STANDARDS: Zero-Emoji, WCAG 2.2 AAA, Zero-AI Glow, Modern Academic Editorial
+ * ARCHITECTURE NOTE: Replaced legacy AI glow ambient orbs (blur-3xl) with crisp academic editorial surface borders.
  */
 
 import React from 'react';
@@ -65,8 +66,6 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         className
       )}
     >
-      {/* Subtle ambient depth for dark mode */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl opacity-0 dark:opacity-20" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
         {/* Breadcrumb Navigation */}

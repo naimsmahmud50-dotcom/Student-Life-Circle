@@ -101,7 +101,7 @@ export function PwaInstallBanner() {
   return (
     <aside
       aria-label="অফলাইন অ্যাপ ইনস্টলেশন ব্যানার"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] shadow-[0_4px_16px_rgba(0,0,0,0.08)] text-[#1A1A1A] dark:text-[#F5F2EB] animate-in fade-in slide-in-from-bottom-2 duration-200"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] shadow-lg text-[#1A1A1A] dark:text-[#F5F2EB] animate-in fade-in slide-in-from-bottom-2 duration-200"
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">

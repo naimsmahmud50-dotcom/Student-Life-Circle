@@ -74,7 +74,7 @@ export const OfflineToast: React.FC<OfflineToastProps> = ({
     >
       {/* State 1: Offline Mode Indicator */}
       {!status.isOnline && (
-        <div className="flex items-center space-x-3 px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs shadow-xl backdrop-blur-md">
+        <div className="flex items-center space-x-3 px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs shadow-xl">
           <div className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 shrink-0">
             <WifiOff className="w-3.5 h-3.5" aria-hidden="true" />
           </div>

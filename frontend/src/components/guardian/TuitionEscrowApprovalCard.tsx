@@ -124,7 +124,7 @@ export const TuitionEscrowApprovalCard: React.FC<TuitionEscrowApprovalCardProps>
 
   return (
     <div className={`space-y-4 ${className}`}>
-      <div className="rounded-3xl bg-slate-900/90 border border-teal-500/30 p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6">
+      <div className="rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 sm:p-8 shadow-xs space-y-6">
         {/* Milestone Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
           <div className="space-y-1.5">
@@ -237,7 +237,7 @@ export const TuitionEscrowApprovalCard: React.FC<TuitionEscrowApprovalCardProps>
 
       {/* OTP Confirmation Modal */}
       {isOtpModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div className="w-full max-w-md rounded-3xl bg-slate-900 border border-teal-500/40 p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="space-y-2 text-center">
               <div className="w-12 h-12 rounded-2xl bg-teal-950 border border-teal-500/40 text-teal-300 mx-auto flex items-center justify-center">

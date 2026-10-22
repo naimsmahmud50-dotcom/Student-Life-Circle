@@ -124,7 +124,7 @@ export const RemedialPathDrawer: React.FC<RemedialPathDrawerProps> = ({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-[#0A2540]/30 backdrop-blur-xs transition-opacity"
+        className="absolute inset-0 bg-[#0A2540]/30 transition-opacity"
       />
 
       {/* Slide-over panel */}

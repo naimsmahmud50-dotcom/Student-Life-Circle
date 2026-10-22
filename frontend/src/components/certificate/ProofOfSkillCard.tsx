@@ -61,9 +61,6 @@ export const ProofOfSkillCard: React.FC<ProofOfSkillCardProps> = ({
     <div 
       className={`relative w-full max-w-4xl mx-auto rounded-3xl p-6 sm:p-10 bg-slate-900 text-slate-100 border-2 border-slate-800 shadow-2xl overflow-hidden ${className}`}
     >
-      {/* Background Decorative Gradient Orbs */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
 
       {/* Decorative Gold Corner Accents */}
       <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-amber-400/80 rounded-tl-sm pointer-events-none" />

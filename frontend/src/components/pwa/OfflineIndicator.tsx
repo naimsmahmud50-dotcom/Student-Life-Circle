@@ -51,7 +51,7 @@ export function OfflineIndicator() {
       <div
         role="status"
         aria-live="assertive"
-        className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-[#0F172A]/95 border border-amber-500/40 shadow-xl backdrop-blur-md text-amber-300 text-xs sm:text-sm font-bengali flex items-center gap-2.5 animate-in fade-in slide-in-from-top-2 duration-200"
+        className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-[#0F172A] border border-amber-500/40 shadow-xl text-amber-300 text-xs sm:text-sm font-bengali flex items-center gap-2.5 animate-in fade-in slide-in-from-top-2 duration-200"
       >
         <WifiOff className="w-4 h-4 text-amber-400 animate-pulse shrink-0" />
         <span>অফলাইন মোড সক্রিয় • সংরক্ষিত বোর্ড প্রশ্ন উপলব্ধ</span>
@@ -72,7 +72,7 @@ export function OfflineIndicator() {
       <div
         role="status"
         aria-live="polite"
-        className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-[#0F172A]/95 border border-emerald-500/40 shadow-xl backdrop-blur-md text-emerald-300 text-xs sm:text-sm font-bengali flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200"
+        className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-[#0F172A] border border-emerald-500/40 shadow-xl text-emerald-300 text-xs sm:text-sm font-bengali flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200"
       >
         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
         <span>ইন্টারনেট সংযোগ পুনঃস্থাপিত হয়েছে • ডেটা সিঙ্ক সম্পন্ন</span>

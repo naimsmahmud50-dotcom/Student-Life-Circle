@@ -72,7 +72,7 @@ export const MasteryBadgeCard: React.FC<MasteryBadgeProps> = ({
 
   return (
     <div
-      className={`relative group flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4),0_8px_24px_rgba(15,23,42,0.08)] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_16px_32px_rgba(15,23,42,0.12)] transition-all duration-300 font-bengali ${className}`}
+      className={`relative group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-xs hover:border-[#1B2A4A]/40 dark:hover:border-slate-600 transition-all duration-200 font-bengali ${className}`}
     >
       {/* Top Header: Badge Icon & Authority Tag */}
       <div>
@@ -97,7 +97,7 @@ export const MasteryBadgeCard: React.FC<MasteryBadgeProps> = ({
         </p>
 
         {/* Percentile Rank Callout */}
-        <div className="my-5 p-3.5 rounded-2xl bg-gradient-to-r from-blue-50/70 to-emerald-50/70 dark:from-slate-800/60 dark:to-slate-800/40 border border-blue-100 dark:border-slate-700/80 flex items-center justify-between">
+        <div className="my-5 p-3.5 rounded-2xl bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] flex items-center justify-between">
           <div>
             <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               জাতীয় পার্সেন্টাইল
@@ -175,7 +175,7 @@ export const MasteryBadgeCard: React.FC<MasteryBadgeProps> = ({
 
       {/* QR Code Verification Modal */}
       {showQrModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 animate-in fade-in">
           <div className="relative w-full max-w-sm p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl text-center space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">

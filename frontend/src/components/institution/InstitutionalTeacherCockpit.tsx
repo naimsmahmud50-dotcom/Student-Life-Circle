@@ -288,7 +288,7 @@ export const InstitutionalTeacherCockpit: React.FC<InstitutionalTeacherCockpitPr
       <div className="bg-[#0A2540] text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-6 relative z-10">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-2xl bg-[#133254] border border-white/20 flex items-center justify-center">
               <School className="w-8 h-8 text-amber-300" />
             </div>
             <div>

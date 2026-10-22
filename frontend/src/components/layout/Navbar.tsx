@@ -315,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header 
       ref={navContainerRef}
       className={`sticky top-0 z-50 w-full transition-colors duration-200 bg-white dark:bg-[#12161F] border-b border-[#E5E2DA] dark:border-[#273145] ${
-        scrolled ? 'shadow-[0_1px_3px_rgba(0,0,0,0.03)]' : ''
+        scrolled ? 'shadow-xs' : ''
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -729,9 +729,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           ===================================================================== */}
       {mounted && mobileMenuOpen && createPortal(
         <div className="fixed inset-0 z-[100] lg:hidden flex justify-end">
-          {/* Backdrop Blur Overlay */}
+          {/* Backdrop Scrim Overlay */}
           <div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-200"
+            className="fixed inset-0 bg-black/60 transition-opacity duration-200"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />

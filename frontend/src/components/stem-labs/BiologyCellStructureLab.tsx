@@ -450,7 +450,7 @@ export const BiologyCellStructureLab: React.FC = () => {
           />
 
           {/* Quick Instruction Banner */}
-          <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm border border-slate-700/60 rounded-lg px-3 py-1.5 text-[11px] text-slate-300">
+          <div className="absolute top-3 left-3 bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-1.5 text-[11px] text-slate-300">
             যেকোনো অঙ্গাণুর ওপর ক্লিক করে বিস্তারিত তথ্য দেখুন (ড্র্যাগ করে ঘুরান)
           </div>
         </div>

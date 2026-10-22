@@ -128,7 +128,7 @@ function Swatch({
       >
         <button
           onClick={handleCopy}
-          className="p-1.5 rounded bg-black/40 hover:bg-black/60 text-white backdrop-blur-sm transition text-xs flex items-center gap-1"
+          className="p-1.5 rounded bg-black/60 hover:bg-black/80 text-white transition text-xs flex items-center gap-1"
           title="কপি করুন"
           aria-label={`${name} হেক্স কোড কপি করুন`}
         >

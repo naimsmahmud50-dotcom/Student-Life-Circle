@@ -117,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       {/* Spaced-Repetition Review CTA */}
-      <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/60 border border-blue-100 dark:border-slate-700">
+      <div className="p-4 rounded-xl bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A]">
         <div className="flex items-center gap-2 text-blue-700 dark:text-blue-400 font-semibold text-xs mb-1">
           <BookMarked className="w-4 h-4" />
           <span>ভুল উত্তর রিভিশন কিউ</span>

@@ -35,6 +35,25 @@ export default function Document() {
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#090D16" media="(prefers-color-scheme: dark)" />
+
+        {/* Immediate Theme Bootstrap to prevent Flash of Incorrect Theme (FOIT) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('slc_theme') || localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </Head>
       <body className="antialiased min-h-screen bg-[var(--bg-app)] text-[var(--text-main)] font-sans">
         <Main />

@@ -199,7 +199,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] font-sans pb-16">
       {/* Top Academic Proctor Bar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-8 py-4 shadow-xs">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 px-4 sm:px-8 py-4 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
@@ -389,7 +389,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
 
       {/* Examinee Telemetry Audit Modal */}
       {selectedExaminee && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2540]/40 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2540]/40 p-4">
           <div className="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
             <button
               onClick={() => setSelectedExaminee(null)}

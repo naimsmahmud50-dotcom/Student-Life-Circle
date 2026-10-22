@@ -174,7 +174,7 @@ export const ToastCard: React.FC<ToastCardProps> = ({ toast, onDismiss }) => {
     <div
       role={toast.type === 'error' ? 'alert' : 'status'}
       className={cn(
-        "pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-md transition-all duration-200 animate-in slide-in-from-bottom-2 fade-in",
+        "pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-lg transition-all duration-200 animate-in slide-in-from-bottom-2 fade-in",
         config.bgColor,
         config.borderColor
       )}

@@ -171,7 +171,7 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Visualizer Top Shell */}
-      <div className="rounded-3xl bg-slate-900/90 border border-slate-800 p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6">
+      <div className="rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
           <div className="space-y-1.5">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono font-medium">

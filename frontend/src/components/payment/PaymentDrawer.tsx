@@ -110,7 +110,7 @@ export const PaymentDrawer: React.FC<PaymentDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4">
       <div className="relative w-full max-w-lg rounded-2xl border border-slate-800 bg-[#0B132B] p-6 text-slate-100 shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">

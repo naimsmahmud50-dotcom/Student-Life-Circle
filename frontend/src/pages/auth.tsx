@@ -230,7 +230,7 @@ export default function AuthPage() {
                     <span className="font-bold font-bengali text-slate-800 dark:text-slate-200">
                       এসএমএস ওটিপি ভেরিফিকেশন:
                     </span>
-                    <span className="text-[10px] text-slate-500 font-mono">কোড পাঠানো হয়েছে</span>
+                    <span className="text-[10px] text-slate-500 font-bengali">কোড পাঠানো হয়েছে</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <input

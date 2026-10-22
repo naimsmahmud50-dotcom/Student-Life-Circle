@@ -125,7 +125,7 @@ export const ScholarshipEndowmentCard: React.FC<ScholarshipEndowmentCardProps> =
         {/* Progress Track */}
         <div className="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-300/50 dark:border-slate-700">
           <div
-            className="h-full bg-gradient-to-r from-[#0A2540] to-amber-600 rounded-full transition-all duration-500 ease-out"
+            className="h-full bg-[#0A2540] dark:bg-amber-500 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${percentFunded}%` }}
           />
         </div>

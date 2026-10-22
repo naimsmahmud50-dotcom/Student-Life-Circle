@@ -161,7 +161,7 @@ export const OfflineClassroomStation: React.FC<OfflineClassroomStationProps> = (
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] font-sans pb-16">
       {/* Top Utilitarian Field Bar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-8 py-4 shadow-xs">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 px-4 sm:px-8 py-4 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-[#0A2540] text-white flex items-center justify-center shadow-xs">

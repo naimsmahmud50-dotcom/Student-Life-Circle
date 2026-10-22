@@ -398,7 +398,7 @@ export const DigitalExamDesk: React.FC<DigitalExamDeskProps> = ({
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] flex flex-col font-sans select-none">
       {/* Top Academic Hall Header Bar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-4">
           <div className="w-9 h-9 rounded-xl bg-[#0A2540] text-white flex items-center justify-center shadow-xs">
             <BookOpen className="w-5 h-5 stroke-[1.75]" />
@@ -617,7 +617,7 @@ export const DigitalExamDesk: React.FC<DigitalExamDeskProps> = ({
 
       {/* Confirmation Modal Before Final Submission */}
       {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2540]/40 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2540]/40 p-4">
           <div className="bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-xl text-center">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto mb-4">
               <AlertCircle className="w-6 h-6 stroke-[1.75]" />

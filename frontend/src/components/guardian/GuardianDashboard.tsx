@@ -116,7 +116,7 @@ export const GuardianDashboard: React.FC<GuardianDashboardProps> = ({
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Top Empathetic Parental Banner */}
-      <div className="rounded-3xl bg-slate-900/90 border border-emerald-500/30 p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6">
+      <div className="rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-mono font-medium">
@@ -214,7 +214,7 @@ export const GuardianDashboard: React.FC<GuardianDashboardProps> = ({
       {/* Subject Mastery Progress & Upcoming Exams Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Subject Mastery Stack */}
-        <div className="lg:col-span-2 rounded-3xl bg-slate-900/80 border border-slate-800 p-6 space-y-5 shadow-lg backdrop-blur-md">
+        <div className="lg:col-span-2 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 space-y-5 shadow-xs">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">
@@ -252,7 +252,7 @@ export const GuardianDashboard: React.FC<GuardianDashboardProps> = ({
         </div>
 
         {/* Upcoming Exam Calendar */}
-        <div className="rounded-3xl bg-slate-900/80 border border-slate-800 p-6 space-y-5 shadow-lg backdrop-blur-md flex flex-col justify-between">
+        <div className="rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] p-6 space-y-5 shadow-xs flex flex-col justify-between">
           <div className="space-y-4">
             <div className="space-y-1">
               <h3 className="text-base font-bold text-white font-sans flex items-center gap-2">

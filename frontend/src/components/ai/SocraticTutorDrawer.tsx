@@ -351,7 +351,7 @@ export const SocraticTutorDrawer: React.FC<SocraticTutorDrawerProps> = ({
     >
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/50 transition-opacity"
         onClick={onClose}
       />
 
