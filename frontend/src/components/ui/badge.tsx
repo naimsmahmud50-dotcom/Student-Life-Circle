@@ -26,7 +26,8 @@ export type BadgeVariant =
   | 'outline'
   | 'verified'
   | 'mastery'
-  | 'success';
+  | 'success'
+  | 'default';
 
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
@@ -60,6 +61,7 @@ export const Badge: React.FC<BadgeProps> = ({
     destructive: "bg-[#FDF2F2] dark:bg-red-950/40 text-[#991B1B] dark:text-red-300 border border-[#F8D2D2] dark:border-red-900",
     danger: "bg-[#FDF2F2] dark:bg-red-950/40 text-[#991B1B] dark:text-red-300 border border-[#F8D2D2] dark:border-red-900",
     neutral: "bg-[#F5F2EB] dark:bg-[#121B2D] text-[#5B5B5B] dark:text-slate-300 border border-[#E5E2DA] dark:border-[#262D3D]",
+    default: "bg-[#F5F2EB] dark:bg-[#121B2D] text-[#5B5B5B] dark:text-slate-300 border border-[#E5E2DA] dark:border-[#262D3D]",
     outline: "bg-transparent text-[#1B2A4A] dark:text-[#F5F2EB] border border-[#E5E2DA] dark:border-[#262D3D]",
     verified: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900 font-semibold",
     mastery: "bg-[#F0F7F4] dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-[#C8E3D7] dark:border-emerald-900 font-semibold",
