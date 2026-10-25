@@ -70,10 +70,18 @@ class QuizEngineService:
         attempt_id = f"att_{hashlib.sha256(f'{user_id}:{now.timestamp()}'.encode()).hexdigest()[:16]}"
         seed = self._generate_deterministic_seed(user_id, blueprint_id, attempt_id)
 
+        # Exclude quarantined questions AND unapproved draft questions to ensure student exam trust
+        eligible_questions = [
+            q for q in raw_questions
+            if q.get("id") not in self._quarantined_questions
+            and q.get("status", "PUBLISHED") in ("PUBLISHED", "APPROVED")
+        ]
+
         # Shuffle questions deterministically using attempt seed
         rng = random.Random(seed)
-        shuffled_questions = list(raw_questions)
+        shuffled_questions = list(eligible_questions)
         rng.shuffle(shuffled_questions)
+
 
         active_questions: List[ActiveQuizQuestion] = []
         for idx, q in enumerate(shuffled_questions, start=1):
@@ -114,7 +122,7 @@ class QuizEngineService:
             "expires_at": expires_at,
             "status": AttemptStatus.IN_PROGRESS,
             "negative_marking": negative_marking,
-            "raw_questions": {q["id"]: q for q in raw_questions},
+            "raw_questions": {q["id"]: q for q in shuffled_questions},
             "saved_answers": {},  # question_id -> {option_id, saved_at}
         }
 

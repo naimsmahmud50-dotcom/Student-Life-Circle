@@ -84,8 +84,9 @@ class SystemDiagnosticsService:
         disputes_count = len(dispute_service._disputes)
 
         # Content pipeline stats
-        ai_drafts = content_pipeline_service.list_drafts()
-        approved_drafts = sum(1 for d in ai_drafts if d.get("status") == "APPROVED")
+        res = content_pipeline_service.list_drafts(limit=1000)
+        ai_drafts = res[0] if isinstance(res, tuple) else res
+        approved_drafts = sum(1 for d in ai_drafts if d.get("status") in ("APPROVED", "PUBLISHED"))
         needs_review_drafts = sum(1 for d in ai_drafts if d.get("status") == "NEEDS_REVIEW")
 
         return {

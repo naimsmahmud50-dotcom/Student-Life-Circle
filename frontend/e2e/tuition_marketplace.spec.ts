@@ -13,9 +13,13 @@
  * ========================================================================================
  */
 
-import { test, expect, assertZeroEmojis, setupConsoleTrap } from './helpers/e2e-fixtures';
+import { test, expect, assertZeroEmojis, setupConsoleTrap, setupMockApiRoutes } from './helpers/e2e-fixtures';
 
 test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await setupMockApiRoutes(page);
+  });
 
   test('TC-TUI-01: Guardian visits tuition hub, verifies masked contact information, and filters by district', async ({ page }) => {
     const consoleTrap = setupConsoleTrap(page);
@@ -28,12 +32,15 @@ test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
     assertZeroEmojis(initialContent, 'Tuition Marketplace Initial Render');
 
     // 1. Assert Trust & Privacy Badges
-    await expect(page.locator('text=গোপনীয়তা ও নিরাপত্তা নিশ্চিত')).toBeVisible();
-    await expect(page.locator('text=জিরো স্ক্যাম পলিসি')).toBeVisible();
+    await expect(page.locator('text=জিরো স্ক্যাম ও গোপনীয়তা নিশ্চিত')).toBeVisible();
+    await expect(page.locator('text=দ্বিপাক্ষিক সম্মতি ও ভেরিফায়েড ম্যাচিং')).toBeVisible();
 
-    // 2. Assert Phone Numbers are strictly masked on public cards
+    // 2. Assert Phone Numbers are strictly masked on public cards with bilateral lock
     const maskedPhone = page.locator('text=০১৭*** (দ্বিপাক্ষিক লক)').first();
     await expect(maskedPhone).toBeVisible();
+
+    const applyBtn = page.locator('button', { hasText: 'দ্বিপাক্ষিক সম্মতির আবেদন করুন' }).first();
+    await expect(applyBtn).toBeVisible();
 
     // 3. Test District Filter: Filter by Dhaka
     const districtSelect = page.locator('select').first();
@@ -50,15 +57,16 @@ test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
 
     await page.goto('/tuition');
 
-    // 1. Click "আবেদন ও যোগাযোগ সম্মতি" on the first verified listing
-    const applyButton = page.locator('button', { hasText: 'আবেদন ও যোগাযোগ সম্মতি' }).first();
+    // 1. Click "দ্বিপাক্ষিক সম্মতির আবেদন করুন" (আবেদন ও যোগাযোগ সম্মতি) on the first verified listing
+    const applyButton = page.locator('button', { hasText: 'দ্বিপাক্ষিক সম্মতির আবেদন করুন' }).first();
     await expect(applyButton).toBeVisible();
     await applyButton.click();
 
     // 2. Verify Bilateral Consent Modal opened
-    const modalTitle = page.locator('text=টিউশন আবেদন ও যোগাযোগ সম্মতি');
+    const modalTitle = page.getByRole('heading', { name: 'দ্বিপাক্ষিক যোগাযোগ সম্মতি', exact: true });
     await expect(modalTitle).toBeVisible();
 
+    // Assert bilateral approval policy notice
     const consentNotice = page.locator('text=দ্বিপাক্ষিক অনুমোদন নীতি');
     await expect(consentNotice).toBeVisible();
 
@@ -67,12 +75,12 @@ test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
     assertZeroEmojis(modalText, 'Bilateral Consent Modal Text');
 
     // 3. Confirm Application Submission
-    const confirmButton = page.locator('button', { hasText: 'আবেদন নিশ্চিত করুন' });
+    const confirmButton = page.locator('button', { hasText: 'সম্মতি নিশ্চিত করুন' });
     await expect(confirmButton).toBeVisible();
     await confirmButton.click();
 
     // 4. Assert Success Confirmation
-    const successMsg = page.locator('text=আবেদন জমা হয়েছে!');
+    const successMsg = page.locator('text=দ্বিপাক্ষিক সম্মতির অনুরোধ সফলভাবে পাঠানো হয়েছে');
     await expect(successMsg).toBeVisible();
 
     consoleTrap.assertZeroErrors();
@@ -104,7 +112,7 @@ test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
     await page.goto('/tuition');
 
     // Check button touch target size >= 40px
-    const applyBtn = page.locator('button', { hasText: 'আবেদন ও যোগাযোগ সম্মতি' }).first();
+    const applyBtn = page.locator('button', { hasText: 'দ্বিপাক্ষিক সম্মতির আবেদন করুন' }).first();
     const box = await applyBtn.boundingBox();
     expect(box).not.toBeNull();
     if (box) {

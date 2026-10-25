@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
 import { EmptyState } from '@/components/ui/empty-state';
+import { BoardYearSwiper } from './BoardYearSwiper';
 
 export interface CQSubQuestion {
   label: string;
@@ -230,6 +231,16 @@ export const BoardQuestionArchiveViewer: React.FC<BoardQuestionArchiveViewerProp
             </button>
           </div>
         </div>
+
+        {/* Touch-Friendly Swiper Horizontal Year & Board Selector */}
+        <BoardYearSwiper
+          years={years}
+          selectedYear={selectedYear}
+          onSelectYear={setSelectedYear}
+          boards={boards}
+          selectedBoard={selectedBoard}
+          onSelectBoard={setSelectedBoard}
+        />
 
         {/* Search & Multi-Criteria Selectors */}
         <div className="bg-white dark:bg-[#0F172A] p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-4">

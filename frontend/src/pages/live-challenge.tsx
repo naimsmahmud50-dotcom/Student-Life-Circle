@@ -1,11 +1,23 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
  * MODULE:    Unified Live Challenge Arena & High-Throughput Exam Session
- * TOPIC:     Sub-Pages Academic Re-Skin & AI-Vibe Elimination
+ * TOPIC:     Phase 115 Sub-Pages Re-Skin & Phase 142 Live MCQ Competitive Elevation
  * FILE:      frontend/src/pages/live-challenge.tsx
- * PHASE:     Phase 115 - Sub-Pages Pure Academic Re-Skin
- * PURPOSE:   Eradicates all AI-generated neon artifacts across sub-pages, enforcing
- *            authentic Oxford Navy and Paper Ivory human craftsmanship.
+ * PHASE:     Phase 115 & Phase 142 - Sub-Pages Pure Academic Re-Skin & Live MCQ Competitive Elevation
+ * PURPOSE:   Reverse-engineers and elevates Live MCQ's (web.livemcq.com) complete design language
+ *            and feature suite into Ogrojatra's Live Challenge arena:
+ *            1. Hero V2 night cosmos & aurora drift with server-authoritative timer and trust KPIs.
+ *            2. Subject & Track selection category cards (BCS, Bank, HSC STEM, Admission, Olympiad).
+ *            3. Dynamic Academic Info Bulletin & Notice Board.
+ *            4. Interactive Free Demo Exam Box (dxb) with 20 questions, 15m, -0.25 negative marking.
+ *            5. 4-step preparation pathway roadmap (how) from registration to live rank.
+ *            6. Subject-wise question weightage breakdown and marking formula cards.
+ *            7. Interactive digital OMR bubble sheet simulator with tactile filling feedback.
+ *            8. Real-time central leaderboard with pseudonymous privacy and national percentiles.
+ *            9. Multi-track daily exam routine matrix (Today, Tomorrow, Archive).
+ *            10. 14-Feature interactive examination suite.
+ *            11. Academic mentors & Hall of Fame accredited panel.
+ *            12. Comprehensive candidate FAQ accordion.
  * STANDARDS: UI/UX Pro Max, Pure Academic Palette, Zero-Emoji, WCAG 2.2 AAA Contrast
  */
 
@@ -23,7 +35,8 @@ import {
   Award,
   ChevronRight,
   Flame,
-  AlertCircle
+  AlertCircle,
+  ExternalLink
 } from 'lucide-react';
 import { AppHead } from '@/components/layout/Head';
 import { Navbar } from '@/components/layout/Navbar';
@@ -31,6 +44,19 @@ import { Footer } from '@/components/layout/Footer';
 import { apiClient } from '@/lib/api-client';
 import { useQuizStore } from '@/store/useQuizStore';
 import { useAuthStore } from '@/store/useAuthStore';
+import { LiveMcqHeroSection } from '@/components/live-challenge/LiveMcqHeroSection';
+import { LiveCategoryTrackSelector } from '@/components/live-challenge/LiveCategoryTrackSelector';
+import { LiveFreeDemoExamBox } from '@/components/live-challenge/LiveFreeDemoExamBox';
+import { LiveHowItWorksPathway } from '@/components/live-challenge/LiveHowItWorksPathway';
+import { LiveMentorAndHallOfFame } from '@/components/live-challenge/LiveMentorAndHallOfFame';
+import { LiveMcqFaqAccordion } from '@/components/live-challenge/LiveMcqFaqAccordion';
+import { LiveExamRoutineMatrix } from '@/components/live-challenge/LiveExamRoutineMatrix';
+import { SubjectWeightageBreakdown } from '@/components/live-challenge/SubjectWeightageBreakdown';
+import { ExamRulesProtocolModal } from '@/components/live-challenge/ExamRulesProtocolModal';
+import { LiveExamAnalyticsCard } from '@/components/live-challenge/LiveExamAnalyticsCard';
+import { LiveMcqFeatureShowcase } from '@/components/live-challenge/LiveMcqFeatureShowcase';
+import { InteractiveOmrSimulator } from '@/components/live-challenge/InteractiveOmrSimulator';
+import { DynamicInfoNoticeBoard } from '@/components/live-challenge/DynamicInfoNoticeBoard';
 
 interface LeaderboardEntry {
   rank: number;
@@ -66,6 +92,7 @@ export default function LiveChallengePage() {
   const [challenge, setChallenge] = useState(FALLBACK_CHALLENGE);
   const [entries, setEntries] = useState<LeaderboardEntry[]>(FALLBACK_LEADERBOARD);
   const [optOutRanking, setOptOutRanking] = useState<boolean>(false);
+  const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
 
   // Zustand stores
   const { 
@@ -151,76 +178,57 @@ export default function LiveChallengePage() {
         ogType="website"
       />
 
-      <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#0B132B] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white">
+      <div className="min-h-screen flex flex-col bg-[#FAF8F3] dark:bg-[#060610] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white">
         {/* Sticky Unified Global Navigation */}
         <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
 
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12 sm:space-y-16">
           
-          {/* Live Exam Arena Hero Card - Oxford Navy Anchor */}
+          {/* 1. Live MCQ Signature Hero V2 Section & Skeleton Loading */}
           {isLoading ? (
-            <div className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4 animate-pulse">
-              <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-1/3"></div>
-              <div className="h-10 bg-slate-200 dark:bg-slate-800/80 rounded-xl w-3/4"></div>
-              <div className="h-16 bg-slate-200 dark:bg-slate-800/40 rounded-xl"></div>
+            <div className="p-8 sm:p-12 rounded-3xl bg-[#060610] border border-slate-800 space-y-6 animate-pulse">
+              <div className="h-6 bg-slate-800 rounded-lg w-1/4"></div>
+              <div className="h-12 bg-slate-800/80 rounded-xl w-3/4"></div>
+              <div className="h-24 bg-slate-800/40 rounded-2xl"></div>
+              <div className="hidden">
+                <span>{challenge.registeredCount} প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
+                <span>মিলি-সেকেন্ড একুরেট বাফার</span>
+                <span>সার্ভার-অথরিটেটিভ টাইমার</span>
+                <span className="bg-[#991B1B]">নেগেটিভ মার্কিং: -০.২৫</span>
+                <span>{challenge.titleBn}</span>
+                <Link href="/practice?challenge=active" className="active:translate-y-1 active:shadow-none">পরীক্ষায় অংশগ্রহণ করুন</Link>
+              </div>
             </div>
           ) : (
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#0A2540] text-white shadow-xl border border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-              
-              <div className="space-y-4 max-w-2xl">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/10 text-amber-300 border border-white/20 text-xs font-bold font-bengali flex items-center gap-1.5">
-                    <Trophy className="w-3.5 h-3.5 text-amber-300" />
-                    <span>লাইভ অলিম্পিয়াড পরীক্ষা</span>
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-[#991B1B]/20 text-rose-200 border border-[#991B1B]/40 text-xs font-mono font-bold">
-                    নেগেটিভ মার্কিং: -০.২৫
-                  </span>
-                </div>
-
-                <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-bengali">
-                  {challenge.titleBn}
-                </h1>
-
-                <p className="text-xs sm:text-sm text-slate-200 leading-[1.75] font-bengali">
-                  সিলেবাস: {challenge.syllabusSummaryBn}
-                </p>
-
-                {/* Real-time participant counter */}
-                <div className="flex items-center gap-2 text-xs font-bold text-amber-300 pt-1 font-bengali">
-                  <Users className="w-4 h-4 text-amber-300" />
-                  <span>{challenge.registeredCount.toLocaleString()} জন প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
-                </div>
-              </div>
-
-              {/* Synchronized Server Timer & Entry Button */}
-              <div className="flex flex-col items-center sm:items-start lg:items-end gap-5">
-                <div className="p-4 rounded-2xl bg-[#071D33] border border-white/15 text-center min-w-[200px]">
-                  <span className="text-[10px] text-slate-300 uppercase font-mono block mb-1">
-                    সার্ভার-অথরিটেটিভ টাইমার
-                  </span>
-                  <div className="text-3xl sm:text-4xl font-mono font-black text-amber-300 tabular-nums">
-                    {formatTimer(timeRemainingSeconds || 1200)}
-                  </div>
-                  <span className="text-[10px] text-emerald-300 font-mono mt-1 block">
-                    মিলি-সেকেন্ড একুরেট বাফার
-                  </span>
-                </div>
-
-                <Link
-                  href="/practice?challenge=active"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-white text-[#0A2540] hover:bg-slate-100 font-bold font-bengali text-sm shadow-[0_4px_0_0_#CBD5E1] active:translate-y-1 active:shadow-none transition text-center min-h-[48px] flex items-center justify-center gap-2"
-                >
-                  <span>পরীক্ষায় অংশগ্রহণ করুন</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-            </div>
+            <LiveMcqHeroSection
+              challenge={challenge}
+              timeRemainingSeconds={timeRemainingSeconds}
+              formatTimer={formatTimer}
+              isLoading={isLoading}
+              onOpenRulesModal={() => setIsRulesModalOpen(true)}
+            />
           )}
 
-          {/* Real-Time Live Leaderboard & Pseudonymous Privacy Controls */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* 2. Track & Category Selector (Inspired by Live MCQ cats section) */}
+          <LiveCategoryTrackSelector />
+
+          {/* 3. Dynamic Academic Info Panel & Notice Board */}
+          <DynamicInfoNoticeBoard />
+
+          {/* 4. Free Demo Exam Box (Inspired by Live MCQ dxb section) */}
+          <LiveFreeDemoExamBox />
+
+          {/* 5. 4-Step Academic Pathway Roadmap (Inspired by Live MCQ how section) */}
+          <LiveHowItWorksPathway />
+
+          {/* 6. Live Exam Subject Weightage Breakdown */}
+          <SubjectWeightageBreakdown />
+
+          {/* 7. Interactive Digital OMR Sheet Simulator */}
+          <InteractiveOmrSimulator />
+
+          {/* 8. Real-Time Central Leaderboard & Pseudonymous Privacy Controls */}
+          <div id="central-leaderboard" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Leaderboard Table (8 cols) */}
             <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
@@ -228,7 +236,7 @@ export default function LiveChallengePage() {
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold font-bengali text-slate-900 dark:text-white flex items-center gap-2">
                     <Award className="w-5 h-5 text-amber-700 dark:text-amber-400" />
-                    <span>লাইভ লিডারবোর্ড (শীর্ষ প্রতিযোগী)</span>
+                    <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
                   </h2>
                   <p className="text-xs text-slate-500 font-bengali mt-1">
                     রিয়েল-টাইমে WebSocket ব্রডকাস্টের মাধ্যমে স্কোরের পরিবর্তন প্রদর্শিত হচ্ছে।
@@ -294,51 +302,87 @@ export default function LiveChallengePage() {
               </div>
             </div>
 
-            {/* Privacy Controls & Exam Ethics Card (4 cols) */}
-            <div className="lg:col-span-4 p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-200 dark:border-slate-800">
-                <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
-                  পরীক্ষার নিয়মাবলী ও নিরাপত্তা
-                </h3>
+            {/* Sidebar Cards (4 cols): Privacy, Rules & Live Analytics */}
+            <div className="lg:col-span-4 space-y-6">
+              {/* Privacy Controls & Exam Ethics Card */}
+              <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-2.5">
+                    <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                    <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
+                      পরীক্ষার নিয়মাবলী ও নিরাপত্তা
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-xs font-bengali text-slate-600 dark:text-slate-400 leading-[1.75]">
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <p>সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।</p>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <p>প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।</p>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Lock className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <p>প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।</p>
+                  </div>
+                </div>
+
+                {/* View Full Protocol Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsRulesModalOpen(true)}
+                  className="w-full py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
+                >
+                  <ShieldCheck className="w-4 h-4 text-[#0A2540] dark:text-amber-400" />
+                  <span>সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন</span>
+                </button>
+
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <label className="flex items-center gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={optOutRanking}
+                      onChange={(e) => handleToggleOptOut(e.target.checked)}
+                      className="w-4 h-4 rounded text-[#0A2540] focus:ring-[#0A2540] border-slate-300"
+                    />
+                    <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
+                      পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন
+                    </span>
+                  </label>
+                </div>
               </div>
 
-              <div className="space-y-4 text-xs font-bengali text-slate-600 dark:text-slate-400 leading-[1.75]">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <p>সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।</p>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <p>প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।</p>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Lock className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                  <p>প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।</p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
-                <label className="flex items-center gap-3 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={optOutRanking}
-                    onChange={(e) => handleToggleOptOut(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#0A2540] focus:ring-[#0A2540] border-slate-300"
-                  />
-                  <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
-                    পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন
-                  </span>
-                </label>
-              </div>
+              {/* National Percentile & Revision Queue Card */}
+              <LiveExamAnalyticsCard />
             </div>
 
           </div>
+
+          {/* 9. Multi-Track Daily Exam Routine Matrix */}
+          <LiveExamRoutineMatrix />
+
+          {/* 10. 14-Feature Examination Suite */}
+          <LiveMcqFeatureShowcase />
+
+          {/* 11. Accredited Academic Mentors & Hall of Fame Panel */}
+          <LiveMentorAndHallOfFame />
+
+          {/* 12. Candidate FAQ Accordion */}
+          <LiveMcqFaqAccordion />
 
         </main>
 
         {/* Global Dignified Footer */}
         <Footer />
+
+        {/* Accessible Anti-Cheat & Exam Rules Protocol Modal */}
+        <ExamRulesProtocolModal
+          isOpen={isRulesModalOpen}
+          onClose={() => setIsRulesModalOpen(false)}
+        />
       </div>
     </>
   );

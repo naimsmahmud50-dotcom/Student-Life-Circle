@@ -133,3 +133,100 @@ class QuestionQuarantineRequest(BaseDTO):
     action: str = "QUARANTINE"
     reason: str = ""
     recalculate_active_sessions: bool = True
+
+
+class QuestionRestoreRequest(BaseDTO):
+    action: str = "RESTORE"
+    reason: str = ""
+
+
+class QuestionQuarantineItem(BaseDTO):
+    id: str = ""
+    version: int = 1
+    stem_bn: str = ""
+    stem_en: Optional[str] = None
+    subject: str = ""
+    reports_count: int = 0
+    primary_issue: str = ""
+    status: str = "PUBLISHED"  # 'PUBLISHED', 'UNDER_REVIEW', 'QUARANTINED', 'ARCHIVED'
+    quarantine_reason: Optional[str] = None
+    quarantined_by: Optional[str] = None
+    quarantined_at: Optional[str] = None
+    restored_by: Optional[str] = None
+    restored_at: Optional[str] = None
+    restore_reason: Optional[str] = None
+    affected_attempts_count: int = 0
+    options: List[Dict[str, Any]] = []
+
+
+class QuestionQuarantineListResponse(BaseDTO):
+    total: int = 0
+    page: int = 1
+    limit: int = 20
+    items: List[Dict[str, Any]] = []
+
+
+# -----------------------------------------------------------------------------
+# Draft Review Queue Schemas
+# -----------------------------------------------------------------------------
+class DraftReviewDecisionRequest(BaseDTO):
+    action: str = "APPROVE"  # 'APPROVE', 'REJECT', 'NEEDS_CHANGES'
+    rejection_reason: Optional[str] = None
+    comments: Optional[str] = None
+
+
+class DraftEditAndApproveRequest(BaseDTO):
+    stem_bn: str = ""
+    stem_en: Optional[str] = None
+    options: List[Dict[str, Any]] = []
+    explanation_bn: str = ""
+    explanation_en: Optional[str] = None
+    difficulty: Optional[str] = None
+    cognitive_skill: Optional[str] = None
+    topic: Optional[str] = None
+    concept: Optional[str] = None
+    comments: Optional[str] = None
+
+
+class DraftBulkActionRequest(BaseDTO):
+    question_ids: List[str] = []
+    action: str = "APPROVE"  # 'APPROVE', 'REJECT'
+    reason: Optional[str] = None
+
+
+class DraftQuestionItem(BaseDTO):
+    id: str = ""
+    version: int = 1
+    status: str = "NEEDS_REVIEW"
+    subject: str = ""
+    topic: str = ""
+    concept: str = ""
+    stem_bn: str = ""
+    stem_en: Optional[str] = None
+    options: List[Dict[str, Any]] = []
+    explanation_bn: str = ""
+    explanation_en: Optional[str] = None
+    difficulty: str = "MEDIUM"
+    cognitive_skill: str = "APPLICATION"
+    curriculum: str = "NCTB_2024"
+    class_grade: int = 10
+    is_ai_generated: bool = True
+    ai_confidence_score: float = 0.94
+    ai_model: str = "Claude-3.5-Sonnet-NCTB"
+    deduplication_similarity: float = 0.05
+    is_duplicate_flag: bool = False
+    source_attribution: Optional[str] = None
+    creator_user_id: str = "ai_agent_generator"
+    reviewed_by: Optional[str] = None
+    reviewed_at: Optional[str] = None
+    rejection_feedback: Optional[str] = None
+    created_at: str = ""
+
+
+class DraftQuestionListResponse(BaseDTO):
+    total: int = 0
+    page: int = 1
+    limit: int = 20
+    counts: Dict[str, int] = {}
+    items: List[Dict[str, Any]] = []
+

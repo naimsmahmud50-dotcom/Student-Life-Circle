@@ -31,6 +31,54 @@ class AuthService:
         self._profiles: Dict[str, StudentProfile] = {}
         self._sessions: Dict[str, Dict[str, Any]] = {}
         self._user_roles: Dict[str, List[UserRoleEnum]] = {}
+        self._seed_default_administrative_actors()
+
+    def _seed_default_administrative_actors(self) -> None:
+        """Seeds initial administrative, reviewer, and student actors for testing and development."""
+        default_actors = [
+            {
+                "id": "usr_admin_01",
+                "email": "admin@ogrojatra.edu.bd",
+                "full_name": "Chief Platform Administrator",
+                "roles": [UserRoleEnum.ADMIN],
+                "token": "test_admin_token_01",
+                "is_active": True
+            },
+            {
+                "id": "usr_reviewer_01",
+                "email": "reviewer@ogrojatra.edu.bd",
+                "full_name": "Senior Physics Subject Reviewer",
+                "roles": [UserRoleEnum.SUBJECT_REVIEWER],
+                "token": "test_reviewer_token_01",
+                "is_active": True
+            },
+            {
+                "id": "usr_student_01",
+                "email": "student@ogrojatra.edu.bd",
+                "full_name": "Naim Hasan (HSC Science)",
+                "roles": [UserRoleEnum.STUDENT],
+                "token": "test_student_token_01",
+                "is_active": True
+            }
+        ]
+
+        now = datetime.now(timezone.utc).isoformat()
+        for actor in default_actors:
+            user = User(
+                id=actor["id"],
+                email=actor["email"],
+                full_name=actor["full_name"],
+                password_hash=SecurityService.hash_password("admin123" if "admin" in actor["email"] else "password123"),
+                is_email_verified=True,
+                is_active=actor["is_active"]
+            )
+            self._users[user.id] = user
+            self._user_roles[user.id] = actor["roles"]
+            self._sessions[actor["token"]] = {
+                "user_id": user.id,
+                "roles": [r.value for r in actor["roles"]],
+                "created_at": now
+            }
 
     def register_user(
         self,
@@ -151,22 +199,35 @@ class AuthService:
         if not session:
             return None
 
-        user = self._users.get(session["user_id"])
-        profile = self._profiles.get(session["user_id"])
-
-        if not user:
+        # Check session expiry if set
+        expires_at = session.get("expires_at")
+        if expires_at and datetime.now(timezone.utc).isoformat() > expires_at:
+            del self._sessions[token]
             return None
+
+        user = self._users.get(session["user_id"])
+        if not user or not user.is_active:
+            return None
+
+        profile = self._profiles.get(session["user_id"])
 
         return {
             "user": user.to_dict(),
             "profile": profile.to_dict() if profile else None,
-            "roles": session["roles"]
+            "roles": session.get("roles", [UserRoleEnum.STUDENT.value])
         }
 
     def logout_session(self, token: str) -> bool:
         """Revokes an active session token."""
         if token in self._sessions:
             del self._sessions[token]
+            return True
+        return False
+
+    def expire_session(self, token: str) -> bool:
+        """Explicitly sets a session as expired for testing and security revocation."""
+        if token in self._sessions:
+            self._sessions[token]["expires_at"] = "2020-01-01T00:00:00+00:00"
             return True
         return False
 

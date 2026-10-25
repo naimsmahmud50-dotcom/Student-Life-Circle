@@ -14,10 +14,13 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { ThemeToggle } from '../components/ui/theme-toggle';
-import { CheckCircle2, ShieldCheck, Smartphone } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Smartphone, Info } from 'lucide-react';
+import { useAuth } from '@/lib/auth-context';
+import { UserRole } from '@/lib/auth-types';
 
 export default function AuthPage() {
   const [authMode, setAuthMode] = useState<'LOGIN' | 'REGISTER'>('REGISTER');
@@ -36,11 +39,22 @@ export default function AuthPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
 
+  const router = useRouter();
+  const { login } = useAuth();
+  const redirectTo = router.query.redirectTo as string | undefined;
+
   const isMinor = typeof age === 'number' && age < 16;
 
   React.useEffect(() => {
     document.title = `${authMode === 'LOGIN' ? 'লগইন' : 'অ্যাকাউন্ট তৈরি'} | অগ্রযাত্রা`;
   }, [authMode]);
+
+  // If user arrived via protected admin redirect, default to LOGIN tab
+  React.useEffect(() => {
+    if (redirectTo) {
+      setAuthMode('LOGIN');
+    }
+  }, [redirectTo]);
 
   const handleSendOtp = () => {
     setShowOtpSection(true);
@@ -55,10 +69,46 @@ export default function AuthPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (authMode === 'REGISTER') {
-      alert(`রেজিস্ট্রেশন সফল! ${isMinor ? "(অপ্রাপ্তবয়স্ক হওয়ায় প্রোফাইল প্রাইভেট মোডে সুরক্ষিত করা হয়েছে)" : ""}`);
+
+    // Determine user role based on credentials/identifier
+    let roles: UserRole[] = [UserRole.STUDENT];
+    const lowerId = identifier.toLowerCase().trim();
+    if (lowerId.includes('admin')) {
+      roles = [UserRole.ADMIN];
+    } else if (lowerId.includes('reviewer')) {
+      roles = [UserRole.SUBJECT_REVIEWER];
+    }
+
+    const resolvedUser = {
+      id: `usr_${Date.now().toString(36)}`,
+      email: identifier.includes('@') ? identifier : undefined,
+      phone: !identifier.includes('@') ? identifier : undefined,
+      fullName:
+        fullName ||
+        (roles.includes(UserRole.ADMIN)
+          ? 'ড. রফিকুল ইসলাম (সুপার অ্যাডমিন)'
+          : roles.includes(UserRole.SUBJECT_REVIEWER)
+          ? 'অধ্যাপক শামসুল আলম (বিষয় পর্যালোচক)'
+          : 'তানভীর আহমেদ'),
+      roles,
+    };
+
+    const mockToken = `ogrojatra_jwt_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 9)}`;
+
+    login({
+      user: resolvedUser,
+      token: mockToken,
+      expiresInSeconds: 86400 * 7,
+    });
+
+    if (redirectTo && typeof redirectTo === 'string' && redirectTo.startsWith('/')) {
+      router.push(decodeURIComponent(redirectTo));
     } else {
-      alert("লগইন সফল হয়েছে। ড্যাশবোর্ডে রিডাইরেক্ট করা হচ্ছে...");
+      router.push(
+        roles.includes(UserRole.ADMIN) || roles.includes(UserRole.SUBJECT_REVIEWER)
+          ? '/admin'
+          : '/dashboard'
+      );
     }
   };
 
@@ -115,6 +165,19 @@ export default function AuthPage() {
                 লগইন করুন
               </button>
             </div>
+
+            {/* Redirect Notice if coming from protected route */}
+            {redirectTo && (
+              <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5 animate-in fade-in">
+                <Info className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" strokeWidth={1.75} />
+                <div className="space-y-0.5">
+                  <span className="font-bold font-bengali block">প্রশাসনিক অঞ্চলে প্রবেশের অনুরোধ</span>
+                  <p className="font-normal font-sans leading-relaxed text-[11px] text-amber-800 dark:text-amber-300">
+                    সংরক্ষিত প্রশাসনিক অঞ্চলে প্রবেশের জন্য অনুমোদিত অ্যাডমিন বা বিষয় পর্যালোচক অ্যাকাউন্টে লগইন করুন।
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -280,6 +343,48 @@ export default function AuthPage() {
               </div>
 
             </form>
+
+            {/* Quick Demo Credentials */}
+            <div className="pt-3 border-t border-[var(--border-subtle)] space-y-2">
+              <span className="text-[11px] text-[#787878] dark:text-slate-400 font-sans block">
+                টেস্টিং বা ডেমো রোল লগইন:
+              </span>
+              <div className="flex flex-wrap gap-2 text-xs">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('LOGIN');
+                    setIdentifier('admin@ogrojatra.edu.bd');
+                    setPassword('AdminPass1234');
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#1B2A4A] dark:text-[#5A7EBA] hover:border-[#1B2A4A] transition-colors font-sans text-[11px] font-medium"
+                >
+                  অ্যাডমিন (Admin)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('LOGIN');
+                    setIdentifier('reviewer@ogrojatra.edu.bd');
+                    setPassword('ReviewerPass1234');
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#065F46] dark:text-emerald-400 hover:border-[#065F46] transition-colors font-sans text-[11px] font-medium"
+                >
+                  পর্যালোচক (Reviewer)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('LOGIN');
+                    setIdentifier('student@ogrojatra.edu.bd');
+                    setPassword('StudentPass1234');
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#5B5B5B] dark:text-slate-300 hover:border-[#5B5B5B] transition-colors font-sans text-[11px] font-medium"
+                >
+                  শিক্ষার্থী (Student)
+                </button>
+              </div>
+            </div>
 
             <div className="text-center pt-2 border-t border-[var(--border-subtle)]">
               <p className="text-xs text-[var(--text-muted)]">

@@ -37,12 +37,16 @@ import {
   BadgeAlert,
   CheckCircle2,
   AlertTriangle,
-  FileText
+  FileText,
+  LogOut
 } from 'lucide-react';
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { toBengaliDigits } from '../../lib/i18n';
+import { useAuth } from '@/lib/auth-context';
+import { UserRole, ADMIN_PANEL_ROLES, isFullAdmin, isSubjectReviewer } from '@/lib/auth-types';
+import { withAdminAuth } from '@/components/auth/AdminAuthGuard';
 
 interface SystemMetric {
   title: string;
@@ -66,7 +70,11 @@ interface AuditLogEntry {
   severity: 'INFO' | 'WARNING' | 'CRITICAL';
 }
 
-export default function MasterAdminDashboard() {
+function MasterAdminDashboard() {
+  const { user, roles, logout } = useAuth();
+  const isAdmin = isFullAdmin(roles);
+  const isReviewer = isSubjectReviewer(roles);
+
   const [activeTab, setActiveTab] = useState<'overview' | 'audit' | 'telemetry'>('overview');
   const [auditFilter, setAuditFilter] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -137,7 +145,8 @@ export default function MasterAdminDashboard() {
       badge: '৩টি পেন্ডিং রিপোর্ট',
       badgeType: 'warning',
       icon: ShieldAlert,
-      iconBg: 'bg-rose-500/10 text-rose-500 dark:bg-rose-500/20 dark:text-rose-400'
+      iconBg: 'bg-rose-500/10 text-rose-500 dark:bg-rose-500/20 dark:text-rose-400',
+      adminOnly: false
     },
     {
       id: 'disputes',
@@ -148,7 +157,8 @@ export default function MasterAdminDashboard() {
       badge: '১টি উন্মুক্ত কেস',
       badgeType: 'info',
       icon: Scale,
-      iconBg: 'bg-indigo-500/10 text-indigo-500 dark:bg-indigo-500/20 dark:text-indigo-400'
+      iconBg: 'bg-indigo-500/10 text-indigo-500 dark:bg-indigo-500/20 dark:text-indigo-400',
+      adminOnly: true
     },
     {
       id: 'board-gateway',
@@ -159,18 +169,20 @@ export default function MasterAdminDashboard() {
       badge: '১২/১২ নোড সক্রিয়',
       badgeType: 'success',
       icon: Building2,
-      iconBg: 'bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400'
+      iconBg: 'bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400',
+      adminOnly: true
     },
     {
       id: 'ai-pipeline',
       title: 'এআই প্রশ্ন ব্যাংক ও ড্রাফট পাইপলাইন',
       desc: 'NCTB কারিকুলাম সমন্বিত এআই প্রশ্ন ড্রাফট জেনারেশন, ব্লুমস ট্যাক্সোনমি স্কোরিং ও সেন্ট্রাল রিভিউ কিউ অনুমোদন নিয়ন্ত্রণ।',
-      link: '/admin/quarantine',
+      link: '/admin/review-queue',
       actionLabel: 'ড্রাফট কিউ ও মডারেশন দেখুন',
       badge: '২০টি প্রস্তুত ড্রাফট',
       badgeType: 'neutral',
       icon: Sparkles,
-      iconBg: 'bg-purple-500/10 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400'
+      iconBg: 'bg-purple-500/10 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400',
+      adminOnly: false
     }
   ];
 
@@ -285,7 +297,16 @@ export default function MasterAdminDashboard() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 shrink-0">
+              <div className="text-left sm:text-right">
+                <span className="block text-xs font-semibold text-slate-900 dark:text-white">
+                  {user?.fullName || (isAdmin ? 'ড. রফিকুল ইসলাম' : 'অধ্যাপক শামসুল আলম')}
+                </span>
+                <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                  {isAdmin ? 'সুপার অ্যাডমিন (Full Admin)' : 'বিষয় পর্যালোচক (Reviewer)'}
+                </span>
+              </div>
+
               <button
                 type="button"
                 onClick={handleRefresh}
@@ -302,8 +323,39 @@ export default function MasterAdminDashboard() {
                 <ShieldAlert className="w-4 h-4" strokeWidth={1.75} />
                 <span>জরুরি কোয়ারেন্টিন</span>
               </Link>
+
+              <button
+                type="button"
+                onClick={() => {
+                  logout();
+                  window.location.href = '/auth';
+                }}
+                className="inline-flex items-center gap-1.5 h-10 px-3.5 rounded-xl text-sm font-semibold border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 shadow-xs transition-all active:scale-95 cursor-pointer"
+                title="অ্যাডমিন সেশন সমাপ্ত করুন"
+              >
+                <LogOut className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+                <span>লগআউট</span>
+              </button>
             </div>
           </div>
+
+          {/* Role Scope Notice for Subject Reviewers */}
+          {!isAdmin && (
+            <div className="mt-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <BadgeAlert className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0" strokeWidth={1.75} />
+                <div>
+                  <strong className="font-bold font-bengali block">সীমিত প্রবেশাধিকার স্তর: বিষয় পর্যালোচক (Subject Reviewer)</strong>
+                  <span className="text-[11px] font-sans text-amber-800 dark:text-amber-300">
+                    আপনার অ্যাকাউন্টের মাধ্যমে প্রশ্ন কোয়ারেন্টিন এবং এআই ড্রাফট কিউ অনুমোদিত। আর্থিক আরবিট্রেশন ও বোর্ড নোড কি-রোটেশন শুধুমাত্র সুপার অ্যাডমিনদের জন্য সংরক্ষিত।
+                  </span>
+                </div>
+              </div>
+              <span className="shrink-0 px-2.5 py-0.5 rounded-full bg-amber-200/60 dark:bg-amber-900/40 text-[10px] font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200">
+                Scoped Mode
+              </span>
+            </div>
+          )}
 
           {/* =================================================================
               KPI METRICS STRIP: 5 Core Health Indicators
@@ -390,13 +442,23 @@ export default function MasterAdminDashboard() {
                     </div>
 
                     <div className="pt-6 mt-4 border-t border-slate-100 dark:border-slate-800/60">
-                      <Link
-                        href={hub.link}
-                        className="inline-flex items-center justify-between w-full h-10 px-3.5 rounded-xl text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 hover:bg-cyan-500/20 transition-colors"
-                      >
-                        <span>{hub.actionLabel}</span>
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={2} />
-                      </Link>
+                      {hub.adminOnly && !isAdmin ? (
+                        <div className="inline-flex items-center justify-between w-full h-10 px-3.5 rounded-xl text-xs font-semibold text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800/50 cursor-not-allowed select-none">
+                          <span className="flex items-center gap-1.5">
+                            <Lock className="w-3.5 h-3.5" strokeWidth={1.75} />
+                            <span>শুধুমাত্র সুপার অ্যাডমিন</span>
+                          </span>
+                          <span className="text-[10px] uppercase tracking-wider font-mono">Locked</span>
+                        </div>
+                      ) : (
+                        <Link
+                          href={hub.link}
+                          className="inline-flex items-center justify-between w-full h-10 px-3.5 rounded-xl text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 hover:bg-cyan-500/20 transition-colors"
+                        >
+                          <span>{hub.actionLabel}</span>
+                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={2} />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 );
@@ -638,3 +700,5 @@ export default function MasterAdminDashboard() {
     </>
   );
 }
+
+export default withAdminAuth(MasterAdminDashboard, ADMIN_PANEL_ROLES);

@@ -78,7 +78,7 @@ test.describe('End-to-End Dual-Perspective 69 Modules Directory Journey', () => 
     await stemCategoryBtn.click();
 
     // Verify STEM modules are visible
-    await expect(page.locator('text=Quantum Circuit Simulator & Bloch Sphere')).toBeVisible();
+    await expect(page.locator('text=Quantum Well & Semiconductor')).toBeVisible();
 
     // 2. Use Search Bar to search for "LoRaWAN"
     const searchInput = page.locator('input[placeholder*="মডিউল নাম বা ট্যাগ খুঁজুন"]');
@@ -86,7 +86,7 @@ test.describe('End-to-End Dual-Perspective 69 Modules Directory Journey', () => 
 
     // Reset category to ALL or click Resilience to see LoRaWAN
     await page.locator('button', { hasText: 'রেজিলিয়েন্স (Resilience)' }).click();
-    await expect(page.locator('text=Satellite USSD & LoRaWAN Studio')).toBeVisible();
+    await expect(page.locator('text=Autonomous Satellite USSD')).toBeVisible();
 
     consoleTrap.assertZeroErrors();
   });

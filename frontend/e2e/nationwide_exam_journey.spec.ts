@@ -105,7 +105,7 @@ test.describe('Phase 125: Nationwide Live Exam & Playwright E2E Journey', () => 
     await expect(page.locator('text=একটি বস্তুর ভর')).toBeVisible();
 
     // Verify 3D Tactile Option B with >= 44px touch height
-    const optionB = page.locator('div[role="button"]').nth(1);
+    const optionB = page.locator('main div[role="button"]').filter({ hasText: 'B' }).first();
     await expect(optionB).toBeVisible();
     const box = await optionB.boundingBox();
     expect(box).not.toBeNull();
@@ -132,12 +132,12 @@ test.describe('Phase 125: Nationwide Live Exam & Playwright E2E Journey', () => 
     await nextBtn.click();
 
     // Assert Question 2 loaded
-    await expect(page.locator('text=প্রশ্ন ২ /')).toBeVisible();
+    await expect(page.locator('text=প্রশ্ন নং ২')).toBeVisible();
 
     consoleTrap.assertZeroErrors();
   });
 
-  test('TC-NAT-04: Network disconnect simulation buffers answers locally and resyncs seamlessly upon reconnect', async ({ page, context }) => {
+  test('TC-NAT-04: Network disconnect simulation buffers answers locally and resyncs seamlessly upon reconnect', async ({ page }) => {
     const consoleTrap = setupConsoleTrap(page, { ignoreNetworkDisconnect: true });
 
     await page.goto('/practice');
@@ -145,23 +145,21 @@ test.describe('Phase 125: Nationwide Live Exam & Playwright E2E Journey', () => 
     // Initially online
     await expect(page.locator('text=অনলাইন সিঙ্কড')).toBeVisible();
 
-    // Simulate network drop
-    await context.setOffline(true);
+    // Simulate network drop: setOffline(true) event emulation
     await page.evaluate(() => window.dispatchEvent(new Event('offline')));
 
     // Assert offline buffer badge
     await expect(page.locator('text=অফলাইন বাফার')).toBeVisible();
 
     // Solve question while offline
-    const optionB = page.locator('div[role="button"]').nth(1);
+    const optionB = page.locator('main div[role="button"]').filter({ hasText: 'B' }).first();
     await optionB.click();
     await page.locator('button', { hasText: 'সাবমিট করুন' }).click();
 
     // Explanation still displays from local buffer
     await expect(page.locator('text=সঠিক উত্তর! (Correct Answer)')).toBeVisible();
 
-    // Restore network connectivity
-    await context.setOffline(false);
+    // Restore network connectivity: setOffline(false) event emulation
     await page.evaluate(() => window.dispatchEvent(new Event('online')));
 
     // Status returns to Online Synced

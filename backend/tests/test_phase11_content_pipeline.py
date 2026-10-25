@@ -175,23 +175,35 @@ class TestPhase11ContentPipeline(unittest.TestCase):
 
     def test_05_api_router_ai_content_pipeline_endpoints(self):
         """Verifies end-to-end REST router endpoints for AI drafting, review, and publishing."""
+        admin_auth = "Bearer test_admin_token_01"
+
         # 1. Generate AI Draft via API
         draft_payload = AIDraftGenerateRequest(
             subject="পদার্থবিজ্ঞান ১ম পত্র",
             topic="গতিবিদ্যা",
             concept="নিউটনের বলবিদ্যার সূত্রাবলী"
         )
-        draft_res = asyncio.run(generate_ai_question_draft(payload=draft_payload, admin_id="usr_admin_01"))
+        draft_res = asyncio.run(generate_ai_question_draft(
+            payload=draft_payload,
+            admin_id="usr_admin_01",
+            authorization=admin_auth
+        ))
         self.assertEqual(draft_res["status"], "SUCCESS")
         q_id = draft_res["question_id"]
         self.assertEqual(draft_res["lifecycle_state"], "DRAFT")
 
         # 2. Submit for review via API
-        submit_res = asyncio.run(submit_question_for_review(question_id=q_id))
+        submit_res = asyncio.run(submit_question_for_review(
+            question_id=q_id,
+            authorization=admin_auth
+        ))
         self.assertEqual(submit_res["status"], "QUEUED")
 
         # 3. View review queue via API
-        queue_res = asyncio.run(get_sme_review_queue(status_filter="NEEDS_REVIEW"))
+        queue_res = asyncio.run(get_sme_review_queue(
+            status_filter="NEEDS_REVIEW",
+            authorization=admin_auth
+        ))
         self.assertGreaterEqual(queue_res["total_pending"], 1)
 
         # 4. SME approves via API
@@ -199,13 +211,18 @@ class TestPhase11ContentPipeline(unittest.TestCase):
         decision_res = asyncio.run(review_and_decide_question(
             question_id=q_id,
             payload=decision_payload,
-            sme_id="usr_sme_expert_01"
+            sme_id="usr_sme_expert_01",
+            authorization=admin_auth
         ))
         self.assertEqual(decision_res["status"], "SUCCESS")
         self.assertEqual(decision_res["new_state"], "APPROVED")
 
         # 5. Publish via API
-        publish_res = asyncio.run(publish_approved_question(question_id=q_id, publisher_id="usr_admin_01"))
+        publish_res = asyncio.run(publish_approved_question(
+            question_id=q_id,
+            publisher_id="usr_admin_01",
+            authorization=admin_auth
+        ))
         self.assertEqual(publish_res["status"], "SUCCESS")
 
 

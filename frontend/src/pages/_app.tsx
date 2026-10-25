@@ -14,10 +14,15 @@ import React, { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { Sparkles, WifiOff, Wifi, X } from 'lucide-react';
 import { I18nProvider, useTranslation } from '@/lib/i18n';
+import { AuthProvider } from '@/lib/auth-context';
 import { SocraticTutorDrawer } from '@/components/ai/SocraticTutorDrawer';
 import { PwaUpdateToast, PwaInstallBanner, OfflineIndicator } from '@/components/pwa';
+import { LazyMotion, domAnimation } from '@/lib/motion';
 import '../styles/globals.css';
 import 'katex/dist/katex.min.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface OfflineToastState {
   show: boolean;
@@ -208,7 +213,11 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
 export default function App(props: AppProps) {
   return (
     <I18nProvider>
-      <GlobalAppShell {...props} />
+      <AuthProvider>
+        <LazyMotion features={domAnimation} strict={false}>
+          <GlobalAppShell {...props} />
+        </LazyMotion>
+      </AuthProvider>
     </I18nProvider>
   );
 }

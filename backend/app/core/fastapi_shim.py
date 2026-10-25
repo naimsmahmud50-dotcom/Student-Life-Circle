@@ -23,7 +23,8 @@ try:
         status,
         Request,
         WebSocket,
-        WebSocketDisconnect
+        WebSocketDisconnect,
+        Depends
     )
     from fastapi.middleware.cors import CORSMiddleware
     from starlette.middleware.base import BaseHTTPMiddleware
@@ -124,6 +125,10 @@ except ImportError:
 
     def Query(default=..., **kwargs):
         return default
+
+
+    def Depends(dependency=None):
+        return dependency
 
 
     class HTTPException(Exception):

@@ -383,6 +383,186 @@ export class ApiClient {
   }
 
   // ---------------------------------------------------------------------------
+  // Question Quarantine & Content Integrity Endpoints (Admin Operations)
+  // ---------------------------------------------------------------------------
+  public async getFlaggedQuestions(params?: {
+    status?: string;
+    subject?: string;
+    search?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    total: number;
+    page: number;
+    limit: number;
+    items: Array<{
+      id: string;
+      version: number;
+      stem_bn: string;
+      stem_en?: string;
+      subject: string;
+      reports_count: number;
+      primary_issue: string;
+      status: 'PUBLISHED' | 'QUARANTINED' | 'UNDER_REVIEW' | 'ACTIVE';
+      quarantine_reason?: string;
+      quarantined_by?: string;
+      quarantined_at?: string;
+      restored_by?: string;
+      restored_at?: string;
+      restore_reason?: string;
+      affected_attempts_count?: number;
+    }>;
+  }> {
+    const qp = new URLSearchParams();
+    if (params?.status) qp.set('status', params.status);
+    if (params?.subject) qp.set('subject', params.subject);
+    if (params?.search) qp.set('search', params.search);
+    if (params?.page) qp.set('page', String(params.page));
+    if (params?.limit) qp.set('limit', String(params.limit));
+    const qs = qp.toString() ? `?${qp.toString()}` : '';
+    return this.get(`/admin/questions/flagged${qs}`);
+  }
+
+  public async quarantineQuestion(
+    questionId: string,
+    payload: { reason: string; recalculate_active_sessions?: boolean }
+  ): Promise<any> {
+    return this.post(`/admin/questions/${questionId}/quarantine`, {
+      action: 'QUARANTINE',
+      reason: payload.reason,
+      recalculate_active_sessions: payload.recalculate_active_sessions ?? true,
+    });
+  }
+
+  public async restoreQuestion(
+    questionId: string,
+    payload: { reason: string }
+  ): Promise<any> {
+    return this.post(`/admin/questions/${questionId}/restore`, {
+      action: 'RESTORE',
+      reason: payload.reason,
+    });
+  }
+
+  public async getAdminAuditLogs(limit: number = 50, offset: number = 0): Promise<{
+    total_records: number;
+    records: Array<{
+      audit_id: string;
+      action: string;
+      entity_id: string;
+      actor_id: string;
+      actor_role: string;
+      actor?: string;
+      reason: string;
+      affected_attempts_count?: number;
+      timestamp: string;
+    }>;
+  }> {
+    return this.get(`/admin/audit-logs?limit=${limit}&offset=${offset}`);
+  }
+
+  // ---------------------------------------------------------------------------
+  // AI Question Bank & Draft Review Queue Methods
+  // ---------------------------------------------------------------------------
+  public async getDraftQuestions(params?: {
+    status?: string;
+    subject?: string;
+    chapter?: string;
+    difficulty?: string;
+    source?: string;
+    search?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    total: number;
+    page: number;
+    limit: number;
+    counts: {
+      all: number;
+      needs_review: number;
+      draft: number;
+      approved: number;
+      rejected: number;
+      needs_changes: number;
+    };
+    items: Array<any>;
+  }> {
+    const searchParams = new URLSearchParams();
+    if (params?.status) searchParams.set('status', params.status);
+    if (params?.subject) searchParams.set('subject', params.subject);
+    if (params?.chapter) searchParams.set('chapter', params.chapter);
+    if (params?.difficulty) searchParams.set('difficulty', params.difficulty);
+    if (params?.source) searchParams.set('source', params.source);
+    if (params?.search) searchParams.set('search', params.search);
+    if (params?.page) searchParams.set('page', params.page.toString());
+    if (params?.limit) searchParams.set('limit', params.limit.toString());
+
+    return this.get(`/admin/drafts?${searchParams.toString()}`);
+  }
+
+  public async getDraftQuestion(questionId: string): Promise<any> {
+    return this.get(`/admin/drafts/${questionId}`);
+  }
+
+  public async approveDraftQuestion(questionId: string, comments?: string): Promise<any> {
+    return this.post(`/admin/drafts/${questionId}/approve`, {
+      action: 'APPROVE',
+      comments: comments || undefined,
+    });
+  }
+
+  public async rejectDraftQuestion(
+    questionId: string,
+    reason: string,
+    action: 'REJECT' | 'NEEDS_CHANGES' = 'REJECT'
+  ): Promise<any> {
+    return this.post(`/admin/drafts/${questionId}/reject`, {
+      action,
+      rejection_reason: reason,
+    });
+  }
+
+  public async editAndApproveDraftQuestion(questionId: string, payload: {
+    stem_bn: string;
+    stem_en?: string;
+    options: Array<{
+      id?: string;
+      option_key: string;
+      option_text_bn: string;
+      is_correct: boolean;
+      distractor_rationale?: string;
+    }>;
+    explanation_bn: string;
+    explanation_en?: string;
+    difficulty?: string;
+    cognitive_skill?: string;
+    topic?: string;
+    concept?: string;
+    comments?: string;
+  }): Promise<any> {
+    return this.post(`/admin/drafts/${questionId}/edit-and-approve`, payload);
+  }
+
+  public async bulkActionDraftQuestions(
+    questionIds: string[],
+    action: 'APPROVE' | 'REJECT',
+    reason?: string
+  ): Promise<any> {
+    return this.post('/admin/drafts/bulk-action', {
+      question_ids: questionIds,
+      action,
+      reason: reason || undefined,
+    });
+  }
+
+  public async getDraftAuditLogs(limit: number = 50): Promise<{
+    total: number;
+    audit_logs: Array<any>;
+  }> {
+    return this.get(`/admin/drafts/audit-logs?limit=${limit}`);
+  }
+
+  // ---------------------------------------------------------------------------
   // Resilient Offline Replay Engine
   // ---------------------------------------------------------------------------
   public async replayPendingAnswers(): Promise<number> {

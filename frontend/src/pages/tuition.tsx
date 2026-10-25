@@ -369,9 +369,9 @@ export default function TuitionPage() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-500 font-bengali">সাপ্তাহিক ক্লাস:</span>
+                        <span className="text-slate-500 font-bengali">যোগাযোগ:</span>
                         <span className="font-mono text-slate-700 dark:text-slate-300">
-                          {item.daysPerWeek} দিন
+                          ০১৭*** (দ্বিপাক্ষিক লক)
                         </span>
                       </div>
                     </div>
@@ -381,6 +381,7 @@ export default function TuitionPage() {
                   <div className="pt-2">
                     <button
                       onClick={() => setSelectedTuition(item)}
+                      aria-label="আবেদন ও যোগাযোগ সম্মতি"
                       className="w-full py-3 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <Lock className="w-3.5 h-3.5 text-amber-300" />
@@ -421,6 +422,7 @@ export default function TuitionPage() {
               <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 flex items-start gap-2.5">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" />
                 <p>
+                  <span className="font-semibold block mb-0.5">দ্বিপাক্ষিক অনুমোদন নীতি:</span>
                   গোপনীয়তা নীতিমালার আওতায় উভয় পক্ষ সম্মতি প্রদান না করা পর্যন্ত সরাসরি ফোন নম্বর বা ফেসবুক লিংক আদান-প্রদান করা সম্পূর্ণ নিষিদ্ধ।
                 </p>
               </div>

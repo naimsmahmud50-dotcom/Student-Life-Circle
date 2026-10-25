@@ -21,7 +21,17 @@ from backend.app.schemas.quiz_schema import (
     AnswerSaveResponse,
     QuizResultResponse
 )
-from backend.app.schemas.question_schema import QuestionQuarantineRequest
+from backend.app.schemas.question_schema import (
+    QuestionQuarantineRequest,
+    QuestionRestoreRequest,
+    QuestionQuarantineItem,
+    QuestionQuarantineListResponse,
+    DraftReviewDecisionRequest,
+    DraftEditAndApproveRequest,
+    DraftBulkActionRequest,
+    DraftQuestionItem,
+    DraftQuestionListResponse
+)
 from backend.app.schemas.opportunity_schema import (
     TuitionListingCreateRequest,
     TuitionApplyRequest,
@@ -70,6 +80,13 @@ from backend.app.schemas.study_circle_and_arbitration_schema import (
 
 from backend.app.services.quiz_engine import quiz_engine
 from backend.app.services.quarantine_service import quarantine_service
+from backend.app.core.auth_guards import (
+    require_admin_or_reviewer,
+    require_full_admin,
+    require_roles,
+    get_current_user_context
+)
+from backend.app.models.user import UserRoleEnum
 from backend.app.services.live_challenge_service import live_challenge_service
 from backend.app.services.diagnostic_service import diagnostic_service
 from backend.app.services.tuition_service import tuition_service
@@ -1185,11 +1202,12 @@ async def start_practice_set(
     Randomizes questions and options deterministically, creates an active attempt,
     and returns sanitized questions with server-authoritative countdown timer.
     """
+    raw_pool = list(SAMPLE_MATH_QUESTIONS) + content_pipeline_service.get_published_questions()
     attempt = quiz_engine.start_practice_attempt(
         user_id=user_id,
         blueprint_id=blueprint_id,
         mode=mode,
-        raw_questions=SAMPLE_MATH_QUESTIONS,
+        raw_questions=raw_pool,
         duration_minutes=10,
         negative_marking=0.0
     )
@@ -1721,6 +1739,36 @@ async def update_application_stage(
 # -----------------------------------------------------------------------------
 # 8. Admin Single-Click Quarantine & Audit Log Endpoints
 # -----------------------------------------------------------------------------
+@api_router.get(
+    "/admin/questions/flagged",
+    tags=["Admin & Safety Operations"]
+)
+@api_router.get(
+    "/admin/questions/quarantined",
+    tags=["Admin & Safety Operations"]
+)
+async def list_flagged_and_quarantined_questions(
+    status_filter: Optional[str] = Query(None, alias="status", description="Filter by status: ALL, FLAGGED, QUARANTINED, PUBLISHED"),
+    subject: Optional[str] = Query(None, description="Filter by subject"),
+    search: Optional[str] = Query(None, description="Search query in stem, subject or ID"),
+    page: int = Query(1, ge=1, description="Page number"),
+    limit: int = Query(20, ge=1, le=100, description="Items per page"),
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Retrieves paginated queue of reported and quarantined questions with filters.
+    Enforces RBAC: Only ADMIN or SUBJECT_REVIEWER may view administrative questions queue.
+    """
+    require_admin_or_reviewer(authorization)
+    return quarantine_service.list_questions(
+        status=status_filter,
+        subject=subject,
+        search=search,
+        page=page,
+        limit=limit
+    )
+
+
 @api_router.post(
     "/admin/questions/{question_id}/quarantine",
     tags=["Admin & Safety Operations"]
@@ -1728,21 +1776,63 @@ async def update_application_stage(
 async def quarantine_question_endpoint(
     question_id: str,
     payload: QuestionQuarantineRequest,
-    admin_id: str = Query("usr_admin_01", description="Authenticated Admin User ID"),
-    admin_role: str = Query("ADMIN", description="User Role")
+    authorization: Optional[str] = Header(None, description="Bearer authorization token"),
+    admin_id: Optional[str] = Query(None, description="Authenticated Admin User ID"),
+    admin_role: Optional[str] = Query(None, description="User Role")
 ):
     """
     Single-click question quarantine.
     Immediately isolates flawed question from future pools, finds all affected attempts,
     reconciles scores, and writes to immutable audit log.
+    Enforces RBAC: Only ADMIN or SUBJECT_REVIEWER may quarantine questions.
     """
+    user_context = require_admin_or_reviewer(authorization)
+    actor_id = (user_context.get("user") or {}).get("id") or admin_id or "usr_admin_01"
+    roles = user_context.get("roles", [])
+    actor_role = roles[0] if roles else (admin_role or "ADMIN")
+
     result = quarantine_service.quarantine_question(
         question_id=question_id,
-        actor_id=admin_id,
-        actor_role=admin_role,
+        actor_id=actor_id,
+        actor_role=actor_role,
         reason=payload.reason,
         recalculate_active=payload.recalculate_active_sessions
     )
+    return result
+
+
+@api_router.post(
+    "/admin/questions/{question_id}/restore",
+    tags=["Admin & Safety Operations"]
+)
+async def restore_question_endpoint(
+    question_id: str,
+    payload: QuestionRestoreRequest,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token"),
+    admin_id: Optional[str] = Query(None, description="Authenticated Admin User ID"),
+    admin_role: Optional[str] = Query(None, description="User Role")
+):
+    """
+    Reverses quarantine on a question, returning it to active examination pools.
+    Enforces RBAC: Only ADMIN or SUBJECT_REVIEWER may restore questions.
+    Records operation in immutable audit log.
+    """
+    user_context = require_admin_or_reviewer(authorization)
+    actor_id = (user_context.get("user") or {}).get("id") or admin_id or "usr_admin_01"
+    roles = user_context.get("roles", [])
+    actor_role = roles[0] if roles else (admin_role or "ADMIN")
+
+    result = quarantine_service.restore_question(
+        question_id=question_id,
+        actor_id=actor_id,
+        actor_role=actor_role,
+        reason=payload.reason
+    )
+    if result.get("status") == "ERROR":
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=result.get("message", "QUESTION_NOT_FOUND")
+        )
     return result
 
 
@@ -1750,12 +1840,23 @@ async def quarantine_question_endpoint(
     "/admin/audit-logs",
     tags=["Admin & Safety Operations"]
 )
-async def view_audit_logs():
-    """Retrieves immutable administrative audit history."""
+async def view_audit_logs(
+    limit: int = Query(50, ge=1, le=500, description="Max audit entries to retrieve"),
+    offset: int = Query(0, ge=0, description="Offset for pagination"),
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Retrieves immutable administrative audit history.
+    Enforces RBAC: Only ADMIN or SUBJECT_REVIEWER may view audit logs.
+    """
+    require_admin_or_reviewer(authorization)
+    total_logs = quarantine_service.get_audit_trail(limit=10000, offset=0)
+    page_logs = quarantine_service.get_audit_trail(limit=limit, offset=offset)
     return {
-        "total_records": len(quarantine_service.get_audit_trail()),
-        "records": quarantine_service.get_audit_trail()
+        "total_records": len(total_logs),
+        "records": page_logs
     }
+
 
 
 # -----------------------------------------------------------------------------
@@ -1767,12 +1868,17 @@ async def view_audit_logs():
 )
 async def generate_ai_question_draft(
     payload: AIDraftGenerateRequest,
-    admin_id: str = Query("usr_admin_01", description="Admin or Editor User ID")
+    authorization: Optional[str] = Header(None, description="Bearer authorization token"),
+    admin_id: Optional[str] = Query(None, description="Admin or Editor User ID")
 ):
     """
     Generates an initial MCQ draft with intelligent distractors and explanations.
     Status is strictly initialized to DRAFT. Prohibited from production without SME approval.
+    Enforces RBAC: ADMIN, SUBJECT_REVIEWER or CONTENT_EDITOR.
     """
+    user_context = require_roles([UserRoleEnum.ADMIN, UserRoleEnum.SUBJECT_REVIEWER, UserRoleEnum.CONTENT_EDITOR])(authorization)
+    creator_id = (user_context.get("user") or {}).get("id") or admin_id or "usr_admin_01"
+
     draft = content_pipeline_service.generate_ai_draft(
         subject=payload.subject,
         topic=payload.topic,
@@ -1780,7 +1886,7 @@ async def generate_ai_question_draft(
         cognitive_level=payload.cognitive_level,
         curriculum=payload.curriculum,
         class_grade=payload.class_grade,
-        creator_user_id=admin_id
+        creator_user_id=creator_id
     )
     return {
         "status": "SUCCESS",
@@ -1794,8 +1900,15 @@ async def generate_ai_question_draft(
     "/admin/content/{question_id}/submit-review",
     tags=["AI Content Pipeline & SME Review"]
 )
-async def submit_question_for_review(question_id: str):
-    """Transitions a draft question into the human SME review queue."""
+async def submit_question_for_review(
+    question_id: str,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Transitions a draft question into the human SME review queue.
+    Enforces RBAC: ADMIN, SUBJECT_REVIEWER or CONTENT_EDITOR.
+    """
+    require_roles([UserRoleEnum.ADMIN, UserRoleEnum.SUBJECT_REVIEWER, UserRoleEnum.CONTENT_EDITOR])(authorization)
     success, reason = content_pipeline_service.submit_for_sme_review(question_id)
     if not success:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=reason)
@@ -1811,14 +1924,266 @@ async def submit_question_for_review(question_id: str):
     tags=["AI Content Pipeline & SME Review"]
 )
 async def get_sme_review_queue(
-    status_filter: str = Query("NEEDS_REVIEW", description="Filter by lifecycle status")
+    status_filter: str = Query("NEEDS_REVIEW", description="Filter by lifecycle status"),
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
 ):
-    """Lists draft questions awaiting Subject Matter Expert (SME) validation."""
+    """
+    Lists draft questions awaiting Subject Matter Expert (SME) validation.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    require_admin_or_reviewer(authorization)
     queue = content_pipeline_service.get_review_queue(status_filter=status_filter)
     return {
         "status_filter": status_filter,
         "total_pending": len(queue),
         "items": queue
+    }
+
+
+# -----------------------------------------------------------------------------
+# Dedicated AI Draft Review Queue & SME Moderation Endpoints
+# -----------------------------------------------------------------------------
+@api_router.get(
+    "/admin/drafts",
+    response_model=DraftQuestionListResponse,
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def list_draft_questions(
+    status: Optional[str] = Query("NEEDS_REVIEW", description="Status filter: ALL, NEEDS_REVIEW, DRAFT, APPROVED, REJECTED, NEEDS_CHANGES"),
+    subject: Optional[str] = Query(None, description="Subject filter"),
+    chapter: Optional[str] = Query(None, description="Chapter/topic filter"),
+    difficulty: Optional[str] = Query(None, description="Difficulty: EASY, MEDIUM, HARD"),
+    source: Optional[str] = Query(None, description="Source: AI_GENERATED, TEACHER_SUBMISSION"),
+    search: Optional[str] = Query(None, description="Text search term"),
+    page: int = Query(1, ge=1, description="Page number"),
+    limit: int = Query(20, ge=1, le=100, description="Items per page"),
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Lists draft questions with multi-faceted filtering, status counts, and pagination.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    require_admin_or_reviewer(authorization)
+    items, total, p, l, counts = content_pipeline_service.list_drafts(
+        status=status,
+        subject=subject,
+        chapter=chapter,
+        difficulty=difficulty,
+        source=source,
+        search=search,
+        page=page,
+        limit=limit
+    )
+    return {
+        "total": total,
+        "page": p,
+        "limit": l,
+        "counts": counts,
+        "items": items
+    }
+
+
+@api_router.get(
+    "/admin/drafts/audit-logs",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def get_draft_review_audit_logs(
+    limit: int = Query(50, ge=1, le=200, description="Max logs to return"),
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Retrieves immutable audit trail of draft review decisions.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    require_admin_or_reviewer(authorization)
+    logs = content_pipeline_service.get_audit_trail(limit)
+    return {
+        "total": len(logs),
+        "audit_logs": logs
+    }
+
+
+@api_router.get(
+    "/admin/drafts/{question_id}",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def get_draft_question(
+    question_id: str,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Retrieves full details of a single draft question.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    require_admin_or_reviewer(authorization)
+    item = content_pipeline_service.get_draft(question_id)
+    if not item:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Draft question not found.")
+    return item
+
+
+@api_router.post(
+    "/admin/drafts/{question_id}/approve",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def approve_draft_question(
+    question_id: str,
+    payload: Optional[DraftReviewDecisionRequest] = None,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Approves a draft question, releasing it into active examination pools.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    user_context = require_admin_or_reviewer(authorization)
+    reviewer_id = (user_context.get("user") or {}).get("id") or "usr_sme_01"
+    roles = (user_context.get("user") or {}).get("roles") or ["SUBJECT_REVIEWER"]
+    role = "ADMIN" if "ADMIN" in roles else "SUBJECT_REVIEWER"
+    comments = payload.comments if payload else None
+
+    success, reason, item = content_pipeline_service.approve_draft(
+        question_id=question_id,
+        reviewer_id=reviewer_id,
+        reviewer_role=role,
+        comments=comments
+    )
+    if not success:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=reason)
+    return {
+        "status": "SUCCESS",
+        "action": reason,
+        "question_id": question_id,
+        "message": "Question approved and released into active examination pool.",
+        "item": item
+    }
+
+
+@api_router.post(
+    "/admin/drafts/{question_id}/reject",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def reject_draft_question(
+    question_id: str,
+    payload: DraftReviewDecisionRequest,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Rejects a draft with mandatory feedback reason.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    user_context = require_admin_or_reviewer(authorization)
+    reviewer_id = (user_context.get("user") or {}).get("id") or "usr_sme_01"
+    roles = (user_context.get("user") or {}).get("roles") or ["SUBJECT_REVIEWER"]
+    role = "ADMIN" if "ADMIN" in roles else "SUBJECT_REVIEWER"
+
+    if not payload or not payload.rejection_reason or not payload.rejection_reason.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Rejection reason is mandatory."
+        )
+
+    target_status = "NEEDS_CHANGES" if payload.action == "NEEDS_CHANGES" else "REJECTED"
+    success, reason, item = content_pipeline_service.reject_draft(
+        question_id=question_id,
+        reviewer_id=reviewer_id,
+        reviewer_role=role,
+        reason=payload.rejection_reason,
+        status=target_status
+    )
+    if not success:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=reason)
+    return {
+        "status": "SUCCESS",
+        "action": reason,
+        "question_id": question_id,
+        "message": "Draft rejected with feedback.",
+        "item": item
+    }
+
+
+@api_router.post(
+    "/admin/drafts/{question_id}/edit-and-approve",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def edit_and_approve_draft_question(
+    question_id: str,
+    payload: DraftEditAndApproveRequest,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Applies SME inline modifications and approves question in a single atomic transaction.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    user_context = require_admin_or_reviewer(authorization)
+    reviewer_id = (user_context.get("user") or {}).get("id") or "usr_sme_01"
+    roles = (user_context.get("user") or {}).get("roles") or ["SUBJECT_REVIEWER"]
+    role = "ADMIN" if "ADMIN" in roles else "SUBJECT_REVIEWER"
+
+    updates = {
+        "stem_bn": payload.stem_bn,
+        "stem_en": payload.stem_en,
+        "options": payload.options,
+        "explanation_bn": payload.explanation_bn,
+        "explanation_en": payload.explanation_en,
+        "difficulty": payload.difficulty,
+        "cognitive_skill": payload.cognitive_skill,
+        "topic": payload.topic,
+        "concept": payload.concept,
+        "comments": payload.comments
+    }
+
+    success, reason, item = content_pipeline_service.edit_and_approve_draft(
+        question_id=question_id,
+        reviewer_id=reviewer_id,
+        reviewer_role=role,
+        updates=updates
+    )
+    if not success:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=reason)
+    return {
+        "status": "SUCCESS",
+        "action": reason,
+        "question_id": question_id,
+        "message": "Draft updated and released into active examination pool.",
+        "item": item
+    }
+
+
+@api_router.post(
+    "/admin/drafts/bulk-action",
+    tags=["AI Content Pipeline & SME Review"]
+)
+async def bulk_action_draft_questions(
+    payload: DraftBulkActionRequest,
+    authorization: Optional[str] = Header(None, description="Bearer authorization token")
+):
+    """
+    Batch approves or rejects multiple draft questions.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
+    """
+    user_context = require_admin_or_reviewer(authorization)
+    actor_id = (user_context.get("user") or {}).get("id") or "usr_admin_01"
+    roles = (user_context.get("user") or {}).get("roles") or ["ADMIN"]
+    role = "ADMIN" if "ADMIN" in roles else "SUBJECT_REVIEWER"
+
+    if not payload.question_ids:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="question_ids list cannot be empty."
+        )
+
+    count, updated_items = content_pipeline_service.bulk_action(
+        question_ids=payload.question_ids,
+        action=payload.action,
+        actor_id=actor_id,
+        actor_role=role,
+        reason=payload.reason
+    )
+    return {
+        "status": "SUCCESS",
+        "action": payload.action,
+        "affected_count": count,
+        "items": updated_items
     }
 
 
@@ -1829,16 +2194,21 @@ async def get_sme_review_queue(
 async def review_and_decide_question(
     question_id: str,
     payload: SMEReviewDecisionRequest,
-    sme_id: str = Query("usr_sme_physics_01", description="Subject Matter Expert User ID")
+    authorization: Optional[str] = Header(None, description="Bearer authorization token"),
+    sme_id: Optional[str] = Query(None, description="Subject Matter Expert User ID")
 ):
     """
     Human Subject Matter Expert Gate:
     Validates question accuracy, pedagogy, and distractors.
     Moves to APPROVED or rejects back to DRAFT with feedback.
+    Enforces RBAC: ADMIN or SUBJECT_REVIEWER.
     """
+    user_context = require_admin_or_reviewer(authorization)
+    reviewer_id = (user_context.get("user") or {}).get("id") or sme_id or "usr_sme_physics_01"
+
     success, reason, item = content_pipeline_service.review_and_approve_draft(
         question_id=question_id,
-        sme_user_id=sme_id,
+        sme_user_id=reviewer_id,
         approve=payload.approve,
         rejection_reason=payload.rejection_reason
     )
@@ -1858,12 +2228,19 @@ async def review_and_decide_question(
 )
 async def publish_approved_question(
     question_id: str,
-    publisher_id: str = Query("usr_admin_01", description="Publishing Authority ID")
+    authorization: Optional[str] = Header(None, description="Bearer authorization token"),
+    publisher_id: Optional[str] = Query(None, description="Publishing Authority ID")
 ):
-    """Releases an SME-approved question into the active live question bank."""
+    """
+    Releases an SME-approved question into the active live question bank.
+    Enforces RBAC: Only full ADMIN role may execute final publication into live pools.
+    """
+    user_context = require_full_admin(authorization)
+    pub_id = (user_context.get("user") or {}).get("id") or publisher_id or "usr_admin_01"
+
     success, reason = content_pipeline_service.publish_approved_question(
         question_id=question_id,
-        publisher_id=publisher_id
+        publisher_id=pub_id
     )
     if not success:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=reason)

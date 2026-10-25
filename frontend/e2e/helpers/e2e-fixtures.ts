@@ -276,13 +276,19 @@ export async function setupMockApiRoutes(page: Page) {
   });
 
   // Mock Tuition Marketplace Listing Endpoint
-  await page.route('**/api/v1/tuitions*', async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({
-        total: 2,
-        items: [
+  await page.route(/\/api\/v1\/tuitions/, async (route) => {
+    if (route.request().method() === 'POST') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'REGISTERED',
+          message_bn: 'দ্বিপাক্ষিক সম্মতি অনুরোধ নিবন্ধিত হয়েছে।',
+        }),
+      });
+      return;
+    }
+    const tuitionItems = [
           {
             id: 'tui_101',
             classGrade: 11,
@@ -311,7 +317,14 @@ export async function setupMockApiRoutes(page: Page) {
             tutorInstitution: 'ঢাকা বিশ্ববিদ্যালয় (ফলিত গণিত)',
             isVerifiedTutor: true,
           },
-        ],
+    ];
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        total: tuitionItems.length,
+        data: tuitionItems,
+        items: tuitionItems,
       }),
     });
   });

@@ -1,0 +1,474 @@
+{
+  "questions": {
+    "q_draft_phys_301": {
+      "id": "q_draft_phys_301",
+      "version": 1,
+      "status": "APPROVED",
+      "subject": "পদার্থবিজ্ঞান",
+      "topic": "বলবিদ্যা ও গতিবিজ্ঞান",
+      "concept": "নিউটনের দ্বিতীয় গতিসূত্র ও ঘর্ষণ বল",
+      "stem_bn": "একটি ১০ কেজি ভরের ব্লকের ওপর অনুভূমিকভাবে ৫০ নিউটন বল প্রয়োগ করা হলো। যদি মেঝের ঘর্ষণ গুণাঙ্ক \\mu_k = 0.2 হয় (এবং g = 9.8 \\text{ m/s}^2), তবে ব্লকটির কার্যকরী ত্বরণ কত হবে?",
+      "stem_en": "A horizontal force of 50 N is applied to a 10 kg block. If the coefficient of kinetic friction is 0.2 (g = 9.8 m/s^2), what is the effective acceleration?",
+      "options": [
+        {
+          "id": "opt_301_a",
+          "option_key": "A",
+          "option_text_bn": "৩.০৪ m/s²",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: নীট বল F = ৫০ - (০.২ × ১০ × ৯.৮) = ৩০.৪ নিউটন; a = ৩০.৪ / ১০ = ৩.০৪ m/s²।"
+        },
+        {
+          "id": "opt_301_b",
+          "option_key": "B",
+          "option_text_bn": "৫.০০ m/s²",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ঘর্ষণ বল বিবেচনা না করে সরাসরি ৫০/১০ গণনা করা হয়েছে।"
+        },
+        {
+          "id": "opt_301_c",
+          "option_key": "C",
+          "option_text_bn": "১.৯৬ m/s²",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এটি কেবল ঘর্ষণজনিত মন্দনের মান, কার্যকরী ত্বরণ নয়।"
+        },
+        {
+          "id": "opt_301_d",
+          "option_key": "D",
+          "option_text_bn": "২.৫০ m/s²",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ভুল সমীকরণ প্রয়োগ।"
+        }
+      ],
+      "explanation_bn": "ঘর্ষণ বল f_k = \\mu_k \\cdot mg = 0.2 \\times 10 \\times 9.8 = 19.6 \\text{ N}। নীট বল F_{net} = 50 - 19.6 = 30.4 \\text{ N}। সুতরাং ত্বরণ a = 30.4 / 10 = 3.04 \\text{ m/s}^2।",
+      "explanation_en": "Frictional force f_k = 19.6 N. Net force = 30.4 N. Acceleration = 3.04 m/s^2.",
+      "difficulty": "MEDIUM",
+      "cognitive_skill": "APPLICATION",
+      "curriculum": "NCTB_2024",
+      "class_grade": 10,
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.96,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.04,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "ai_agent_generator",
+      "reviewed_by": "usr_admin_01",
+      "reviewed_at": "2026-10-25T12:39:55.958912+00:00",
+      "rejection_feedback": null,
+      "created_at": "2026-10-24T08:30:00Z",
+      "reviewed_by_sme_id": "usr_admin_01",
+      "approval_comments": "প্যানেল মিটিংয়ে একযোগে অনুমোদন।"
+    },
+    "q_draft_chem_402": {
+      "id": "q_draft_chem_402",
+      "version": 1,
+      "status": "APPROVED",
+      "subject": "রসায়ন",
+      "topic": "জৈব রসায়ন ও কার্যকরী মূলক",
+      "concept": "লুকাস বিকারক ও অ্যালকোহল শনাক্তকরণ",
+      "stem_bn": "লুকাস বিকারক (ZnCl₂ + গাঢ় HCl) যোগ করার সাথে সাথে কোন শ্রেণির অ্যালকোহল তাৎক্ষণিক সাদা অধঃক্ষেপ তৈরি করে?",
+      "stem_en": "Which class of alcohol immediately forms a white precipitate upon adding Lucas reagent (ZnCl2 + conc. HCl)?",
+      "options": [
+        {
+          "id": "opt_402_a",
+          "option_key": "A",
+          "option_text_bn": "১° অ্যালকোহল (Primary)",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ১° অ্যালকোহল সাধারণ তাপমাত্রায় কোনো অধঃক্ষেপ দেয় না, উত্তপ্ত করলে দেয়।"
+        },
+        {
+          "id": "opt_402_b",
+          "option_key": "B",
+          "option_text_bn": "২° অ্যালকোহল (Secondary)",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ২° অ্যালকোহল ৫ থেকে ১০ মিনিট পর সাদা অধঃক্ষেপ বা তৈলাক্ত স্তর ফেলে।"
+        },
+        {
+          "id": "opt_402_c",
+          "option_key": "C",
+          "option_text_bn": "৩° অ্যালকোহল (Tertiary)",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: ৩° কার্বোক্যাটায়নের উচ্চ স্থায়িত্বের কারণে তৎক্ষণাৎ টারশিয়ারি অ্যালকাইল হ্যালাইডের অধঃক্ষেপ পড়ে।"
+        },
+        {
+          "id": "opt_402_d",
+          "option_key": "D",
+          "option_text_bn": "ফেনল (Phenol)",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ফেনল লুকাস বিকারকের সাথে অ্যালকাইল হ্যালাইড অধঃক্ষেপ দেয় না।"
+        }
+      ],
+      "explanation_bn": "৩° কার্বোক্যাটায়ন অধিক সুস্থিত হওয়ায় টারশিয়ারি অ্যালকোহল লুকাস বিকারকের সাথে অত্যন্ত দ্রুত বিক্রিয়া করে কয়েক সেকেন্ডের মধ্যে সাদা অ্যালকাইল ক্লোরাইড অধঃক্ষেপ সৃষ্টি করে।",
+      "explanation_en": "Tertiary alcohol reacts instantaneously due to the high stability of the 3-degree carbocation.",
+      "difficulty": "HARD",
+      "cognitive_skill": "REASONING",
+      "curriculum": "NCTB_2024",
+      "class_grade": 12,
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.95,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.03,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "ai_agent_generator",
+      "reviewed_by": "usr_admin_01",
+      "reviewed_at": "2026-10-25T12:39:55.962820+00:00",
+      "rejection_feedback": null,
+      "created_at": "2026-10-24T09:15:00Z",
+      "reviewed_by_sme_id": "usr_admin_01",
+      "approval_comments": "প্যানেল মিটিংয়ে একযোগে অনুমোদন।"
+    },
+    "q_draft_math_503": {
+      "id": "q_draft_math_503",
+      "version": 1,
+      "status": "REJECTED",
+      "subject": "উচ্চতর গণিত",
+      "topic": "ত্রিকোণমিতি ও বৃত্তীয় পরিমাপ",
+      "concept": "বৃত্তচাপ ও কেন্দ্রস্থ কোণ",
+      "stem_bn": "কোনো বৃত্তের ব্যাসার্ধ ৭ সেমি এবং একটি বৃত্তচাপ কেন্দ্রে \\frac{\\pi}{3} রেডিয়ান কোণ উৎপন্ন করলে চাপটির দৈর্ঘ্য কত সেমি?",
+      "stem_en": "If a circle has radius 7 cm and an arc subtends an angle of pi/3 radians at the center, what is the arc length?",
+      "options": [
+        {
+          "id": "opt_503_a",
+          "option_key": "A",
+          "option_text_bn": "৭.৩৩ সেমি",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: s = r\\theta = 7 × (3.1416 / 3) ≈ 7.33 সেমি।"
+        },
+        {
+          "id": "opt_503_b",
+          "option_key": "B",
+          "option_text_bn": "২১.০০ সেমি",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ব্যাসার্ধ ও পাই-এর ভুল গুণফল।"
+        },
+        {
+          "id": "opt_503_c",
+          "option_key": "C",
+          "option_text_bn": "৩.৫০ সেমি",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ব্যাসার্ধকে কোণ দ্বারা ভাগ করা হয়েছে।"
+        },
+        {
+          "id": "opt_503_d",
+          "option_key": "D",
+          "option_text_bn": "১৪.৬৭ সেমি",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: ব্যাসার্ধের বদলে ব্যাস দিয়ে হিসেব করা হয়েছে।"
+        }
+      ],
+      "explanation_bn": "বৃত্তচাপের দৈর্ঘ্য s = r\\theta। এখানে r = ৭ সেমি এবং \\theta = \\pi/3 রেডিয়ান। সুতরাং s = ৭ × (৩.১৪১৬/৩) = ৭.৩৩ সেমি।",
+      "explanation_en": "Arc length s = r*theta = 7 * (pi/3) = 7.33 cm.",
+      "difficulty": "EASY",
+      "cognitive_skill": "APPLICATION",
+      "curriculum": "NCTB_2024",
+      "class_grade": 9,
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.98,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.02,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "ai_agent_generator",
+      "reviewed_by": "usr_reviewer_01",
+      "reviewed_at": "2026-10-25T12:39:55.987959+00:00",
+      "rejection_feedback": "বৃত্তচাপের গণনায় পাই-এর আসন্ন মান দশমিকের পর কত ঘর নিতে হবে তা উল্লেখ করা প্রয়োজন।",
+      "created_at": "2026-10-24T10:00:00Z",
+      "reviewed_by_sme_id": "usr_reviewer_01"
+    },
+    "q_draft_bio_604": {
+      "id": "q_draft_bio_604",
+      "version": 2,
+      "status": "APPROVED",
+      "subject": "জীববিজ্ঞান",
+      "topic": "কোষ ও বংশগতিবিদ্যা",
+      "concept": "ডিএনএ রেপ্লিকেশন ও ওকাজাকি খণ্ড",
+      "stem_bn": "ডিএনএ রেপ্লিকেশনের সময় ল্যাগিং সূত্রে ওকাজাকি খণ্ডগুলোকে ফসফোডাইএস্টার বন্ধনে আবদ্ধকারী এনজাইম কোনটি?",
+      "stem_en": null,
+      "options": [
+        {
+          "id": "opt_604_a",
+          "option_key": "A",
+          "option_text_bn": "ডিএনএ পলিমারেজ I",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এটি প্রাইমার অপসারণ করে ডিএনএ অংশ প্রতিস্থাপন করে।"
+        },
+        {
+          "id": "opt_604_b",
+          "option_key": "B",
+          "option_text_bn": "ডিএনএ লাইগেজ",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: ওকাজাকি খণ্ডগুলোকে ফসফোডাইএস্টার বন্ধনের মাধ্যমে সংযুক্ত করে।"
+        },
+        {
+          "id": "opt_604_c",
+          "option_key": "C",
+          "option_text_bn": "ডিএনএ হেলিকেজ",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: হেলিকেজ ডিএনএর প্যাঁচ ও হাইড্রোজেন বন্ধন খুলে দেয়।"
+        },
+        {
+          "id": "opt_604_d",
+          "option_key": "D",
+          "option_text_bn": "টপোআইসোমারেজ",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এটি ডিএনএর অতিরিক্ত ঘূর্ণন চাপ হ্রাস করে।"
+        }
+      ],
+      "explanation_bn": "লাইগেজ এনজাইম সংযোগকারী আঠা হিসেবে কাজ করে।",
+      "explanation_en": "DNA ligase joins Okazaki fragments by creating phosphodiester bonds.",
+      "difficulty": "HARD",
+      "cognitive_skill": "REASONING",
+      "curriculum": "NCTB_2024",
+      "class_grade": 11,
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.92,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.05,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "ai_agent_generator",
+      "reviewed_by": "usr_reviewer_01",
+      "reviewed_at": "2026-10-25T12:39:55.970879+00:00",
+      "rejection_feedback": null,
+      "created_at": "2026-10-24T11:20:00Z",
+      "edited_by": "usr_reviewer_01",
+      "edited_at": "2026-10-25T12:39:55.970885+00:00"
+    },
+    "q_draft_ict_705": {
+      "id": "q_draft_ict_705",
+      "version": 1,
+      "status": "APPROVED",
+      "subject": "তথ্য ও যোগাযোগ প্রযুক্তি",
+      "topic": "ডিজিটাল ডিভাইস ও লজিক গেট",
+      "concept": "ইউনিভার্সাল গেট ও বুলিয়ান সরলীকরণ",
+      "stem_bn": "নিচের কোন লজিক গেট জোড়াকে সার্বজনীন বা ইউনিভার্সাল গেট বলা হয়?",
+      "stem_en": "Which pair of logic gates are known as universal gates?",
+      "options": [
+        {
+          "id": "opt_705_a",
+          "option_key": "A",
+          "option_text_bn": "AND ও OR",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এরা মৌলিক লজিক গেট।"
+        },
+        {
+          "id": "opt_705_b",
+          "option_key": "B",
+          "option_text_bn": "NAND ও NOR",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: NAND এবং NOR গেট দ্বারা যেকোনো মৌলিক লজিক গেট তৈরি করা সম্ভব।"
+        },
+        {
+          "id": "opt_705_c",
+          "option_key": "C",
+          "option_text_bn": "XOR ও XNOR",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এরা বিশেষ (Exclusive) লজিক গেট।"
+        },
+        {
+          "id": "opt_705_d",
+          "option_key": "D",
+          "option_text_bn": "NOT ও AND",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: মৌলিক গেটের সংমিশ্রণ।"
+        }
+      ],
+      "explanation_bn": "NAND এবং NOR গেট দিয়ে যেকোনো জটিল লজিক বর্তনী পূর্ণাঙ্গরূপে তৈরি করা যায় বলে এদের সার্বজনীন গেট বলা হয়।",
+      "explanation_en": "NAND and NOR can construct any Boolean function, making them universal gates.",
+      "difficulty": "EASY",
+      "cognitive_skill": "RECALL",
+      "curriculum": "NCTB_2024",
+      "class_grade": 11,
+      "is_ai_generated": false,
+      "ai_confidence_score": 0.99,
+      "ai_model": "Human-SME-Teacher",
+      "deduplication_similarity": 0.01,
+      "is_duplicate_flag": false,
+      "source_attribution": "TEACHER_SUBMISSION",
+      "creator_user_id": "usr_teacher_ict",
+      "reviewed_by": "usr_sme_ict_01",
+      "reviewed_at": "2026-10-24T12:00:00Z",
+      "rejection_feedback": null,
+      "created_at": "2026-10-23T14:00:00Z"
+    },
+    "q_draft_phys_806": {
+      "id": "q_draft_phys_806",
+      "version": 1,
+      "status": "REJECTED",
+      "subject": "পদার্থবিজ্ঞান",
+      "topic": "কাজ, শক্তি ও ক্ষমতা",
+      "concept": "স্প্রিং-এর সঞ্চিত স্থিতিশক্তি",
+      "stem_bn": "একটি স্প্রিংকে x দূরত্ব সংকুচিত করতে কৃতকাজের সমীকরণ কোনটি? (k = স্প্রিং ধ্রুবক)",
+      "stem_en": "What is the equation for work done to compress a spring by distance x (k = spring constant)?",
+      "options": [
+        {
+          "id": "opt_806_a",
+          "option_key": "A",
+          "option_text_bn": "W = kx",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এটি হুকের সূত্রের বল, কাজ নয়।"
+        },
+        {
+          "id": "opt_806_b",
+          "option_key": "B",
+          "option_text_bn": "W = ½kx²",
+          "is_correct": true,
+          "distractor_rationale": "সঠিক উত্তর: স্প্রিং স্থিতিশক্তি = ½kx²।"
+        },
+        {
+          "id": "opt_806_c",
+          "option_key": "C",
+          "option_text_bn": "W = ½mv²",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: এটি গতিশক্তি।"
+        },
+        {
+          "id": "opt_806_d",
+          "option_key": "D",
+          "option_text_bn": "W = 2kx²",
+          "is_correct": false,
+          "distractor_rationale": "ভুল: গুণাঙ্ক ভুল।"
+        }
+      ],
+      "explanation_bn": "পরিবর্তনশীল বলের ক্ষেত্রে স্প্রিং সংকোচনে কৃতকাজ সমাকলনের মাধ্যমে পাওয়া যায় W = ½kx²।",
+      "explanation_en": "Work done on spring W = 1/2 k x^2.",
+      "difficulty": "EASY",
+      "cognitive_skill": "RECALL",
+      "curriculum": "NCTB_2024",
+      "class_grade": 9,
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.88,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.08,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "ai_agent_generator",
+      "reviewed_by": "usr_sme_physics_01",
+      "reviewed_at": "2026-10-24T14:30:00Z",
+      "rejection_feedback": "প্রশ্নে স্থিতিস্থাপক সীমার শর্ত এবং স্প্রিং-এর প্রাথমিক সাম্যাবস্থার শর্ত উল্লেখ করা আবশ্যক।",
+      "created_at": "2026-10-24T13:00:00Z"
+    },
+    "q_draft_b285a858": {
+      "id": "q_draft_b285a858",
+      "version": 1,
+      "status": "PUBLISHED",
+      "subject": "পদার্থবিজ্ঞান ১ম পত্র",
+      "topic": "গতিবিদ্যা",
+      "concept": "নিউটনের বলবিদ্যার সূত্রাবলী",
+      "cognitive_skill": "APPLICATION",
+      "curriculum": "NCTB_2024",
+      "class_grade": 10,
+      "stem_bn": "যদি কোনো গতিশীল বস্তুর ত্বরণ ধ্রুব থাকে, তবে নির্দিষ্ট সময় t পরে অতিক্রান্ত দূরত্ব s নির্ণয়ের সূত্র কোনটি?",
+      "stem_en": "Which of the following is the formula for distance s under constant acceleration?",
+      "options": [
+        {
+          "id": "opt_6c17b7",
+          "option_key": "A",
+          "option_text_bn": "s = vt",
+          "is_correct": false,
+          "distractor_rationale": "এটি সমবেগের ক্ষেত্রে প্রযোজ্য; সুষম ত্বরণের জন্য নয়।"
+        },
+        {
+          "id": "opt_3fd977",
+          "option_key": "B",
+          "option_text_bn": "s = ut + ½at²",
+          "is_correct": true,
+          "distractor_rationale": "সুষম ত্বরণে অতিক্রান্ত দূরত্বের আদর্শ সমীকরণ।"
+        },
+        {
+          "id": "opt_9113a3",
+          "option_key": "C",
+          "option_text_bn": "v = u + at",
+          "is_correct": false,
+          "distractor_rationale": "এটি শেষ বেগ নির্ণয়ের সূত্র, দূরত্ব নয়।"
+        },
+        {
+          "id": "opt_324c50",
+          "option_key": "D",
+          "option_text_bn": "v² = u² + 2as",
+          "is_correct": false,
+          "distractor_rationale": "এখানে সময় t অনুপস্থিত।"
+        }
+      ],
+      "explanation_bn": "গড় বেগ = (u + v)/2। আবার v = u + at।\nসুতরাং s = ((u + u + at)/2) × t = ut + ½at²। এটি এনসিটিবি পদার্থবিজ্ঞান ৩য় অধ্যায়ের অন্তর্ভুক্ত।",
+      "explanation_en": "Under uniform acceleration, s = ut + 0.5 a t^2.",
+      "difficulty": "MEDIUM",
+      "is_ai_generated": true,
+      "ai_confidence_score": 0.94,
+      "ai_model": "Claude-3.5-Sonnet-NCTB",
+      "deduplication_similarity": 0.0,
+      "is_duplicate_flag": false,
+      "source_attribution": "AI_GENERATED",
+      "creator_user_id": "usr_admin_01",
+      "reviewed_by": "usr_admin_01",
+      "reviewed_at": "2026-10-25T12:39:59.469978+00:00",
+      "rejection_feedback": null,
+      "created_at": "2026-10-25T12:39:59.463309+00:00",
+      "reviewed_by_sme_id": "usr_admin_01",
+      "published_by_id": "usr_admin_01",
+      "published_at": "2026-10-25T12:39:59.472800+00:00"
+    }
+  },
+  "audit_logs": [
+    {
+      "audit_id": "AUD-REV-A8EA682C",
+      "question_id": "q_draft_b285a858",
+      "action": "PUBLISH_TO_POOLS",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "previous_status": "APPROVED",
+      "new_status": "PUBLISHED",
+      "reason_or_feedback": "Released to active examination pool",
+      "diff_summary": {},
+      "timestamp": "2026-10-25T12:39:59.472811+00:00"
+    },
+    {
+      "audit_id": "AUD-REV-082FB897",
+      "question_id": "q_draft_b285a858",
+      "action": "APPROVE_DRAFT",
+      "actor_id": "usr_admin_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "previous_status": "NEEDS_REVIEW",
+      "new_status": "APPROVED",
+      "reason_or_feedback": "বিষয়বস্তুর মান এনসিটিবি আদর্শ অনুযায়ী অনুমোদিত।",
+      "diff_summary": {},
+      "timestamp": "2026-10-25T12:39:59.469990+00:00"
+    },
+    {
+      "audit_id": "AUD-REV-B7F9F44F",
+      "question_id": "q_draft_b285a858",
+      "action": "SUBMIT_FOR_REVIEW",
+      "actor_id": "usr_admin_01",
+      "actor_role": "AUTHOR",
+      "previous_status": "DRAFT",
+      "new_status": "NEEDS_REVIEW",
+      "reason_or_feedback": "Submitted for Subject Matter Expert evaluation",
+      "diff_summary": {},
+      "timestamp": "2026-10-25T12:39:59.466859+00:00"
+    },
+    {
+      "audit_id": "AUD-REV-2026-101",
+      "question_id": "q_draft_ict_705",
+      "action": "APPROVE_DRAFT",
+      "actor_id": "usr_sme_ict_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "previous_status": "NEEDS_REVIEW",
+      "new_status": "APPROVED",
+      "reason_or_feedback": "মানসম্মত প্রশ্ন এবং এনসিটিবি কারিকুলামের সাথে সঙ্গতিপূর্ণ।",
+      "timestamp": "2026-10-24T12:00:00Z"
+    },
+    {
+      "audit_id": "AUD-REV-2026-102",
+      "question_id": "q_draft_phys_806",
+      "action": "REJECT_DRAFT",
+      "actor_id": "usr_sme_physics_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "previous_status": "NEEDS_REVIEW",
+      "new_status": "REJECTED",
+      "reason_or_feedback": "প্রশ্নে স্থিতিস্থাপক সীমার শর্ত এবং স্প্রিং-এর প্রাথমিক সাম্যাবস্থার শর্ত উল্লেখ করা আবশ্যক।",
+      "timestamp": "2026-10-24T14:30:00Z"
+    }
+  ],
+  "last_updated": "2026-10-25T12:39:59.472869+00:00"
+}

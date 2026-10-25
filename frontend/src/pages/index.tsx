@@ -52,6 +52,11 @@ import { ProofOfSkillCard, SocialShareButtons, CertificateData } from '@/compone
 import { PhysicsProjectileLab, ChemistryMolecularViewer } from '@/components/stem-labs';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
 import { useTranslation } from '@/lib/i18n';
+import { SubjectExplorerCarousel } from '@/components/home/SubjectExplorerCarousel';
+import { StudentStoriesCarousel } from '@/components/home/StudentStoriesCarousel';
+import { LiveHeroInteractiveWidget } from '@/components/home/LiveHeroInteractiveWidget';
+import { CompetitorComparisonPillars } from '@/components/home/CompetitorComparisonPillars';
+import { m, fadeIn, slideUp, staggerContainer, useReducedMotion } from '@/lib/motion';
 
 // Sample verified certificate data for W3C showcase
 const SAMPLE_CERTIFICATE: CertificateData = {
@@ -138,15 +143,49 @@ export default function FlagshipLandingPage() {
 
                   {/* Headline & Welcoming Tone */}
                   <div className="space-y-3.5">
-                    <div className="text-sm font-semibold text-[#0B5D3B] dark:text-emerald-400 tracking-wide font-bengali">
-                      স্বাগতম, ভবিষ্যৎ গড়ার অগ্রযাত্রায়
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#0B5D3B] dark:text-emerald-300 text-xs font-bold font-bengali border border-emerald-200 dark:border-emerald-800">
+                        <Sparkles className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
+                        <span>৪টি প্রথাগত অ্যাপের একক বিকল্প • জাতীয় ডিজিটাল ক্যাম্পাস</span>
+                      </div>
+                      <span className="text-xs font-semibold text-[#1B2A4A]/80 dark:text-slate-300 font-bengali">
+                        স্বাগতম, ভবিষ্যৎ গড়ার অগ্রযাত্রায়
+                      </span>
                     </div>
-                    <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight leading-[1.22] font-bengali">
-                      বাংলাদেশের প্রতিটি শিক্ষার্থীর জন্য একটি সার্বিক <span className="underline decoration-[#B8862B]/40 underline-offset-8">ডিজিটাল শিক্ষাজীবন</span>
+                    <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight leading-[1.22] font-bengali">
+                      বাংলাদেশের প্রতিটি শিক্ষার্থীর জন্য একটি সার্বিক <span className="text-gradient-emerald underline decoration-[#0B5D3B]/40 underline-offset-8">ডিজিটাল ক্যাম্পাস</span>
                     </h1>
                     <p className="text-base sm:text-lg text-[#5B5B5B] dark:text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bengali">
-                      মাধ্যমিক ও উচ্চ মাধ্যমিক থেকে বিশ্ববিদ্যালয় ভর্তি এবং পেশাগত ক্যারিয়ার—সব বিষয়ের অধ্যায়ভিত্তিক প্রাতিষ্ঠানিক পাঠ্যক্রম, বিগত ১০ বছরের নির্ভুল বোর্ড প্রশ্ন এবং ৩ডি ভার্চুয়াল বিজ্ঞান ল্যাবরেটরি।
+                      ১০ মিনিট স্কুলের ভিডিওর চেয়ে বেশি সক্রিয় ৩ডি ল্যাব, লাইভ এমসিকইউর চেয়ে নির্ভুল জাতীয় অলিম্পিয়াড, কেয়ারটিউটর্সের মতো ৫০% কমিশনহীন টিউশন এবং বিডিজবসের কাগুজে সিভির বিকল্পে W3C ক্রিপ্টোগ্রাফিক সনদ।
                     </p>
+
+                    {/* Interactive Stage Selector Chips */}
+                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 font-bengali">
+                      <Link
+                        href="/learn?stage=SSC"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                      >
+                        মাধ্যমিক (SSC ৯-১০)
+                      </Link>
+                      <Link
+                        href="/learn?stage=HSC"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                      >
+                        উচ্চ মাধ্যমিক (HSC ১১-১২)
+                      </Link>
+                      <Link
+                        href="/admission"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                      >
+                        বিশ্ববিদ্যালয় ভর্তি (Admission)
+                      </Link>
+                      <Link
+                        href="/tuition"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                      >
+                        টিউশন ও ক্যারিয়ার (Career)
+                      </Link>
+                    </div>
                   </div>
 
                   {/* High-Contrast Dual Call to Action */}
@@ -195,189 +234,19 @@ export default function FlagshipLandingPage() {
 
                 </div>
 
-                {/* Right Column: Clean Editorial Level Selector Card */}
+                {/* Right Column: Live Interactive Science Playground & Real-Time Campus Energy */}
                 <div className="lg:col-span-5">
-                  <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm space-y-5">
-                    
-                    <div className="flex items-center justify-between border-b border-[#E5E2DA] dark:border-[#262D3D] pb-3.5">
-                      <div className="space-y-0.5">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
-                          শিক্ষার ধাপসমূহ
-                        </span>
-                        <h2 className="text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
-                          আপনার শিক্ষাস্তর নির্বাচন করুন
-                        </h2>
-                      </div>
-                      <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-300 text-xs font-semibold border border-[#E5E2DA] dark:border-[#262D3D]">
-                        এনসিটিবি ২০২৬ সমন্বিত
-                      </span>
-                    </div>
-
-                    {/* Stage Selector Chips */}
-                    <div className="grid grid-cols-2 gap-2.5 text-xs font-bengali">
-                      <button
-                        type="button"
-                        onClick={() => setActiveStage('ssc')}
-                        className={`p-3 rounded-xl border text-left transition-all ${
-                          activeStage === 'ssc'
-                            ? 'bg-[#1B2A4A] text-white border-[#1B2A4A] shadow-sm'
-                            : 'bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1A1A1A] dark:text-slate-300 border-[#E5E2DA] dark:border-[#262D3D] hover:border-[#1B2A4A]/40'
-                        }`}
-                      >
-                        <BookOpen className="w-4 h-4 mb-1.5 text-amber-400" />
-                        <div className="font-semibold">মাধ্যমিক (SSC ৯-১০)</div>
-                        <div className="text-[11px] opacity-80 font-normal">শ্রেণি ৯–১০ বোর্ড প্রস্তুতি</div>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveStage('hsc')}
-                        className={`p-3 rounded-xl border text-left transition-all ${
-                          activeStage === 'hsc'
-                            ? 'bg-[#1B2A4A] text-white border-[#1B2A4A] shadow-sm'
-                            : 'bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1A1A1A] dark:text-slate-300 border-[#E5E2DA] dark:border-[#262D3D] hover:border-[#1B2A4A]/40'
-                        }`}
-                      >
-                        <Layers className="w-4 h-4 mb-1.5 text-emerald-400" />
-                        <div className="font-semibold">উচ্চ মাধ্যমিক (HSC ১১-১২)</div>
-                        <div className="text-[11px] opacity-80 font-normal">বিজ্ঞান, মানবিক, বাণিজ্য</div>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveStage('admission')}
-                        className={`p-3 rounded-xl border text-left transition-all ${
-                          activeStage === 'admission'
-                            ? 'bg-[#1B2A4A] text-white border-[#1B2A4A] shadow-sm'
-                            : 'bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1A1A1A] dark:text-slate-300 border-[#E5E2DA] dark:border-[#262D3D] hover:border-[#1B2A4A]/40'
-                        }`}
-                      >
-                        <Target className="w-4 h-4 mb-1.5 text-sky-400" />
-                        <div className="font-semibold">বিশ্ববিদ্যালয় ভর্তি (Admission)</div>
-                        <div className="text-[11px] opacity-80 font-normal">বুয়েট, ঢাবি, মেডিকেল</div>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveStage('career')}
-                        className={`p-3 rounded-xl border text-left transition-all ${
-                          activeStage === 'career'
-                            ? 'bg-[#1B2A4A] text-white border-[#1B2A4A] shadow-sm'
-                            : 'bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1A1A1A] dark:text-slate-300 border-[#E5E2DA] dark:border-[#262D3D] hover:border-[#1B2A4A]/40'
-                        }`}
-                      >
-                        <Users className="w-4 h-4 mb-1.5 text-amber-400" />
-                        <div className="font-semibold">টিউশন ও ক্যারিয়ার (Career)</div>
-                        <div className="text-[11px] opacity-80 font-normal">এসক্রো চুক্তি ও চাকরি</div>
-                      </button>
-                    </div>
-
-                    {/* Active Stage Details Card */}
-                    <div className="p-4 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] space-y-3">
-                      {activeStage === 'ssc' && (
-                        <>
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="font-semibold text-[#1B2A4A] dark:text-[#F5F2EB]">মাধ্যমিক প্রস্তুতি হাব</span>
-                            <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">১০ বছরের বোর্ড প্রশ্ন</span>
-                          </div>
-                          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
-                            সাধারণ গণিত, উচ্চতর গণিত, পদার্থ ও রসায়নের অধ্যায়ভিত্তিক প্রশ্ন, এমসিকিউ কুইজ এবং মডেল টেস্ট।
-                          </p>
-                          <div className="flex items-center gap-2 pt-1">
-                            <Link
-                              href="/learn?stage=SSC"
-                              className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-bengali"
-                            >
-                              <span>মাধ্যমিক সিলেবাস এক্সপ্লোর করুন</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        </>
-                      )}
-
-                      {activeStage === 'hsc' && (
-                        <>
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="font-semibold text-[#1B2A4A] dark:text-[#F5F2EB]">উচ্চ মাধ্যমিক বিজ্ঞান হাব</span>
-                            <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">KaTeX সমীকরণ ভিউয়ার</span>
-                          </div>
-                          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
-                            পদার্থবিজ্ঞান ১ম ও ২য় পত্র, জৈব রসায়ন, ম্যাট্রিক্স এবং ক্যালকুলাসের বিশদ গাণিতিক বিশ্লেষণ।
-                          </p>
-                          <div className="p-2 rounded bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] text-[11px]">
-                            <KaTeXRenderer content="$H = \frac{v_0^2 \sin^2\theta}{2g} \quad R = \frac{v_0^2 \sin 2\theta}{g}$" className="text-[#1B2A4A] dark:text-[#F5F2EB]" />
-                          </div>
-                          <div className="flex items-center gap-2 pt-1">
-                            <Link
-                              href="/learn?stage=HSC"
-                              className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-bengali"
-                            >
-                              <span>উচ্চ মাধ্যমিক কোর্স দেখুন</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        </>
-                      )}
-
-                      {activeStage === 'admission' && (
-                        <>
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="font-semibold text-[#1B2A4A] dark:text-[#F5F2EB]">ভর্তি ব্লুপ্রিন্ট ও কাট-অফ ম্যাট্রিক্স</span>
-                            <span className="text-[#B8862B] font-semibold">নেগেটিভ মার্কিং এলার্ট</span>
-                          </div>
-                          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
-                            বুয়েট প্রিলিমিনারি, ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট এবং সরকারি মেডিকেলের বিগত বছরের কাট-অফ বিশ্লেষণ।
-                          </p>
-                          <div className="flex items-center gap-2 pt-1">
-                            <Link
-                              href="/admission"
-                              className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-bengali"
-                            >
-                              <span>ভর্তি প্রস্তুতি হাব খুলুন</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        </>
-                      )}
-
-                      {activeStage === 'career' && (
-                        <>
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="font-semibold text-[#1B2A4A] dark:text-[#F5F2EB]">টিউশন এসক্রো ও স্কিল সনদ</span>
-                            <span className="text-[#1B2A4A] dark:text-sky-300 font-semibold">W3C ক্রিপ্টোগ্রাফিক ভেরিফাইড</span>
-                          </div>
-                          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
-                            অভিভাবকদের সঙ্গে দ্বিপাক্ষিক ডিজিটাল চুক্তি এবং বিশ্ববিদ্যালয় শিক্ষার্থীদের জন্য নিরাপদ টিউশন প্ল্যাটফর্ম।
-                          </p>
-                          <div className="flex items-center gap-2 pt-1">
-                            <Link
-                              href="/tuition"
-                              className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-bengali"
-                            >
-                              <span>টিউশন মার্কেটপ্লেস দেখুন</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    <div className="pt-1">
-                      <Link
-                        href="/dashboard"
-                        className="w-full py-2.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] hover:bg-[#F5F2EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] font-semibold text-xs flex items-center justify-center gap-2 border border-[#E5E2DA] dark:border-[#262D3D] transition"
-                      >
-                        <span>শিক্ষার্থী পোর্টাল ও ড্যাশবোর্ডে প্রবেশ</span>
-                        <ChevronRight className="w-4 h-4" />
-                      </Link>
-                    </div>
-
-                  </div>
+                  <LiveHeroInteractiveWidget />
                 </div>
 
               </div>
             </div>
           </section>
+
+          {/* ===================================================================
+              SECTION 1.5: 4-IN-1 COMPETITOR COMPARISON (10MS, Live MCQ, CareTutors, Bdjobs)
+              =================================================================== */}
+          <CompetitorComparisonPillars />
 
           {/* ===================================================================
               SECTION 2: ACADEMIC PROGRESS ("আপনার শেখার অগ্রগতি") & PEDAGOGICAL PILLARS
@@ -843,13 +712,18 @@ export default function FlagshipLandingPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 {/* 1. SSC */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#1B2A4A]/40 dark:hover:border-sky-500/40 transition-all duration-200">
                   <div className="space-y-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1B2A4A] dark:text-sky-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <BookOpen className="w-5 h-5 text-[#B8862B]" />
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1B2A4A] dark:text-sky-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                        <BookOpen className="w-5 h-5 text-[#B8862B]" />
+                      </div>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bengali">
+                        ১০MS অল্টারনেটিভ • ৩ডি ল্যাব
+                      </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 9–10</span>
+                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 9–10 • মাধ্যমিক (SSC ৯-১০)</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         মাধ্যমিক (SSC) বোর্ড প্রস্তুতি
                       </h3>
@@ -878,13 +752,18 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 2. HSC */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#065F46]/40 dark:hover:border-emerald-500/40 transition-all duration-200">
                   <div className="space-y-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Layers className="w-5 h-5 text-[#0B5D3B] dark:text-emerald-400" />
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                        <Layers className="w-5 h-5 text-[#0B5D3B] dark:text-emerald-400" />
+                      </div>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bengali">
+                        এনসিটিবি ১০ বছর আর্কাইভ
+                      </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 11–12</span>
+                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 11–12 • উচ্চ মাধ্যমিক (HSC ১১-১২)</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         উচ্চ মাধ্যমিক (HSC) বিজ্ঞান
                       </h3>
@@ -913,10 +792,15 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 3. Admission */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#B8862B]/40 dark:hover:border-amber-500/40 transition-all duration-200">
                   <div className="space-y-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] dark:text-amber-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Target className="w-5 h-5 text-[#B8862B]" />
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] dark:text-amber-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                        <Target className="w-5 h-5 text-[#B8862B]" />
+                      </div>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bengali">
+                        Live MCQ বিকল্প • জিরো ল্যাগ
+                      </span>
                     </div>
                     <div>
                       <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">University Entrance</span>
@@ -948,10 +832,15 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 4. Tuition & Career */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-all duration-200">
                   <div className="space-y-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-slate-700 dark:text-slate-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Users className="w-5 h-5 text-[#1B2A4A] dark:text-slate-300" />
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-slate-700 dark:text-slate-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                        <Users className="w-5 h-5 text-[#1B2A4A] dark:text-slate-300" />
+                      </div>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-50 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bengali">
+                        CareTutors মুক্ত • ০% ফি
+                      </span>
                     </div>
                     <div>
                       <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Marketplace & Career</span>
@@ -982,6 +871,11 @@ export default function FlagshipLandingPage() {
                   </Link>
                 </div>
 
+              </div>
+
+              {/* Subject Explorer Carousel (Swiper & KaTeX Formulas) */}
+              <div className="pt-10 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                <SubjectExplorerCarousel />
               </div>
 
             </div>
@@ -1241,6 +1135,16 @@ export default function FlagshipLandingPage() {
                 </div>
               </div>
 
+            </div>
+          </section>
+
+          {/* ===================================================================
+              SECTION 6.5: STUDENT TESTIMONIALS & SUCCESS STORIES (Swiper)
+              Warm Paper Background
+              =================================================================== */}
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FAF8F3] dark:bg-[#090D16] border-b border-[#E5E2DA] dark:border-[#262D3D]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <StudentStoriesCarousel />
             </div>
           </section>
 
