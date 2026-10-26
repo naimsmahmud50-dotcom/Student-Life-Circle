@@ -1,12 +1,11 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
- * MODULE:    Unified Design System & Premium Sub-Page Architecture
- * TOPIC:     Phase 138 Linear/Vercel-Style Premium Design System & Sub-Page Elevation
+ * MODULE:    Unified Design System & Accessible Loading Skeleton
+ * TOPIC:     Bengal Academic Editorial & Warm Paper Shimmer
  * FILE:      frontend/src/components/ui/skeleton.tsx
- * PHASE:     Phase 138 - Unified Premium Design for Sub-pages
- * PURPOSE:   Provides subtle, polished loading skeleton shimmer components that respect
- *            prefers-reduced-motion and harmonize across both Light and Dark themes.
- * STANDARDS: Zero-Emoji, WCAG 2.2 AAA, Linear/Vercel Dark Theme, 3D Tactile Buttons
+ * PURPOSE:   Provides subtle, warm paper loading skeleton shimmer components that respect
+ *            prefers-reduced-motion, avoid harsh neon white/slate flashes, and harmonize across both Light and Dark themes.
+ * STANDARDS: Zero-Emoji, WCAG 2.2 AAA, Academic Editorial, Warm Paper Shimmer
  */
 
 import React from 'react';
@@ -28,15 +27,15 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
   const variantStyles: Record<string, string> = {
     text: 'h-4 w-full rounded-md',
-    rectangular: 'rounded-xl',
+    rectangular: 'rounded-lg',
     circular: 'rounded-full',
-    card: 'h-48 w-full rounded-2xl',
+    card: 'h-48 w-full rounded-lg border border-[#E5E2DA] dark:border-[#263147]',
   };
 
   return (
     <div
       className={cn(
-        'animate-pulse bg-slate-200/80 dark:bg-slate-800/60',
+        'animate-pulse bg-[#EFECE3] dark:bg-[#1E2738]',
         variantStyles[variant],
         className
       )}
@@ -60,17 +59,17 @@ export const CardSkeleton: React.FC<{ count?: number; className?: string }> = ({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4"
+          className="p-6 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] shadow-sm space-y-4"
         >
           <div className="flex items-center justify-between">
             <Skeleton variant="text" className="w-1/3 h-5" />
-            <Skeleton variant="rectangular" className="w-16 h-6 rounded-full" />
+            <Skeleton variant="rectangular" className="w-16 h-6" />
           </div>
           <Skeleton variant="text" className="w-full h-4" />
           <Skeleton variant="text" className="w-4/5 h-4" />
-          <div className="pt-2 flex items-center gap-3">
-            <Skeleton variant="rectangular" className="w-24 h-9 rounded-xl" />
-            <Skeleton variant="rectangular" className="w-24 h-9 rounded-xl" />
+          <div className="flex items-center justify-between pt-2">
+            <Skeleton variant="rectangular" className="w-24 h-4" />
+            <Skeleton variant="rectangular" className="w-28 h-9" />
           </div>
         </div>
       ))}

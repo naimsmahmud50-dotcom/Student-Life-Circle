@@ -1,19 +1,20 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
- * MODULE:    Design System Internal Style Guide & Component Gallery
- * TOPIC:     Modern Academic Editorial Component Gallery & Specification
+ * MODULE:    Design System Internal Style Guide & Living Component Gallery
+ * TOPIC:     Master Academic UI, Bengal Academic Editorial & Tactile 3D Physics
  * FILE:      frontend/src/pages/styleguide.tsx
  * PURPOSE:   Visual verification and living specification for:
- *            - Color tokens (Paper grounds, ink levels, primary ink-blue, accent gold, flat semantics)
- *            - Modular typography scale (~1.250) in Bengali & English
- *            - Bengali conjunct ligature rendering (যুক্তাক্ষর) across font sizes with matra safety
- *            - Comprehensive Component Gallery: Button, Card, Badge, Input, Select, Checkbox,
- *              Radio, Textarea, Tabs, Accordion, Breadcrumb, Pagination, Drawer, Modal, Tooltip,
- *              Table, Skeleton, EmptyState, QuizProgress, OptionCard, ExplanationBlock, ResultSummary.
- * STANDARDS: Zero-Emoji, Zero-Neon, WCAG 2.2 AAA Contrast, Academic Monograph Style
+ *            1. Color Tokens Palette (Paper ground, surface, ink levels, Oxford navy, emerald, scholar gold, crimson)
+ *            2. Typography System & Bengali Conjunct Ligature Integrity (যুক্তাক্ষর clearance & zero matra collision)
+ *            3. Reusable Background Language Library (Paper grain, Ruled paper, Graph paper, Layered depth)
+ *            4. Comprehensive Tactile 3D Button System across all states (Default, Hover, Active, Focus, Loading, Disabled)
+ *            5. Form Controls (Input with inner bevel, Select, Checkbox, Radio, Textarea)
+ *            6. Feedback & Navigation (Tactile Tabs, Card variants, Badges, Modals, Tooltips, Skeletons)
+ *            7. Full Dark & Light Theme Live Switcher with WCAG 2.2 AAA Contrast verification
+ * STANDARDS: Zero-Emoji, Zero-Neon, WCAG 2.2 AAA Contrast, Tactile 3D Physics
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
@@ -39,6 +40,14 @@ import {
   Send,
   Eye,
   Info,
+  Sun,
+  Moon,
+  Clock,
+  Compass,
+  FileText,
+  Volume2,
+  Activity,
+  Bookmark
 } from 'lucide-react';
 
 import {
@@ -96,7 +105,6 @@ interface SwatchProps {
   name: string;
   variable: string;
   hex: string;
-  bgClass?: string;
   textDark?: boolean;
   contrastRatio?: string;
   wcag?: string;
@@ -121,33 +129,33 @@ function Swatch({
   };
 
   return (
-    <div className="flex flex-col border border-[var(--color-border-hairline)] rounded-[8px] overflow-hidden bg-white shadow-[var(--shadow-paper)]">
+    <div className="flex flex-col border border-[#E5E2DA] dark:border-[#263147] rounded-lg overflow-hidden bg-[#FDFCF9] dark:bg-[#171E2C] shadow-sm">
       <div
         className="h-20 w-full flex items-end justify-end p-2 relative transition-all"
         style={{ backgroundColor: hex }}
       >
         <button
           onClick={handleCopy}
-          className="p-1.5 rounded bg-black/60 hover:bg-black/80 text-white transition text-xs flex items-center gap-1"
+          className="p-1.5 rounded bg-black/60 hover:bg-black/80 text-white transition text-xs flex items-center gap-1 cursor-pointer"
           title="কপি করুন"
           aria-label={`${name} হেক্স কোড কপি করুন`}
         >
           {copied ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Copy className="w-3.5 h-3.5" />}
         </button>
       </div>
-      <div className="p-3 bg-white flex flex-col gap-1 text-xs">
-        <div className="flex items-center justify-between font-semibold text-[var(--color-ink-primary)]">
+      <div className="p-3 bg-[#FDFCF9] dark:bg-[#171E2C] flex flex-col gap-1 text-xs">
+        <div className="flex items-center justify-between font-semibold text-[#1A1A1A] dark:text-[#F5F2EB]">
           <span>{name}</span>
-          <span className="font-mono text-[11px] text-[var(--color-ink-muted)]">{hex}</span>
+          <span className="font-mono text-[11px] text-[#525252] dark:text-[#A3A8B5]">{hex}</span>
         </div>
-        <div className="font-mono text-[10px] text-[var(--color-ink-faint)] truncate" title={variable}>
+        <div className="font-mono text-[10px] text-[#737373] dark:text-[#7D8494] truncate" title={variable}>
           {variable}
         </div>
-        <div className="text-[11px] text-[var(--color-ink-muted)] mt-1">{roleDescription}</div>
+        <div className="text-[11px] text-[#525252] dark:text-[#A3A8B5] mt-1">{roleDescription}</div>
         {contrastRatio && (
-          <div className="mt-2 pt-2 border-t border-[var(--color-border-subtle)] flex items-center justify-between text-[11px]">
-            <span className="text-[var(--color-ink-faint)]">Contrast:</span>
-            <span className="font-semibold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded">
+          <div className="mt-2 pt-2 border-t border-[#E5E2DA] dark:border-[#263147] flex items-center justify-between text-[11px]">
+            <span className="text-[#737373] dark:text-[#7D8494]">Contrast:</span>
+            <span className="font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
               {contrastRatio} ({wcag})
             </span>
           </div>
@@ -158,8 +166,9 @@ function Swatch({
 }
 
 export default function StyleGuidePage() {
-  const [activeTab, setActiveTab] = useState<'all' | 'colors' | 'typography' | 'components' | 'quiz'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'buttons' | 'backgrounds' | 'components' | 'colors' | 'typography' | 'quiz'>('all');
   const [isBengali, setIsBengali] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [showFormErrors, setShowFormErrors] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -168,6 +177,28 @@ export default function StyleGuidePage() {
   const [checkboxChecked, setCheckboxChecked] = useState(true);
   const [currentPage, setCurrentPage] = useState(3);
   const [selectedOption, setSelectedOption] = useState<string | null>('B');
+
+  // Sync theme with document class
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isDark = document.documentElement.classList.contains('dark');
+      setIsDarkMode(isDark);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (typeof document !== 'undefined') {
+      const newDark = !isDarkMode;
+      setIsDarkMode(newDark);
+      if (newDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('slc_theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('slc_theme', 'light');
+      }
+    }
+  };
 
   const conjuncts = [
     { glyph: 'ক্ষ', name: 'ক + ষ', example: 'শিক্ষা, পরীক্ষা, ক্ষমার্হ' },
@@ -191,43 +222,65 @@ export default function StyleGuidePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-paper-ground)] text-[var(--color-ink-primary)] selection:bg-[#1B2A4A] selection:text-white">
+    <div className="min-h-screen bg-[var(--color-paper-ground)] text-[var(--color-ink-primary)] selection:bg-[#0A2540] selection:text-white transition-colors duration-150">
       <Head>
-        <title>অগ্রযাত্রা কম্পোনেন্ট গ্যালারি ও ডিজাইন সিস্টেম (Style Guide) | Modern Academic Editorial</title>
-        <meta name="description" content="অগ্রযাত্রা প্ল্যাটফর্মের প্রাতিষ্ঠানিক ডিজাইন সিস্টেম, কম্পোনেন্ট গ্যালারি ও টাইপোগ্রাফি নির্দেশিকা" />
+        <title>অগ্রযাত্রা মাস্টার ডিজাইন সিস্টেম ও কম্পোনেন্ট গ্যালারি | Bengal Academic Editorial</title>
+        <meta name="description" content="অগ্রযাত্রা প্ল্যাটফর্মের প্রাতিষ্ঠানিক ডিজাইন সিস্টেম, ট্যাকটাইল বাটন ফিজিক্স এবং এডিটোরিয়াল কম্পোনেন্ট গ্যালারি" />
       </Head>
 
-      {/* Top Academic Bar */}
-      <header className="border-b border-[var(--color-border-hairline)] bg-white sticky top-0 z-30 shadow-[var(--shadow-paper)]">
+      {/* Top Academic Sticky Command Header */}
+      <header className="border-b border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] sticky top-0 z-30 shadow-sm transition-colors duration-150">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-[8px] bg-[#1B2A4A] text-white flex items-center justify-center font-serif text-lg font-semibold shadow-sm">
+            <div className="w-9 h-9 rounded-lg bg-[#0A2540] text-white flex items-center justify-center font-serif text-lg font-bold shadow-[0_2px_0_0_#051329]">
               অ
             </div>
             <div>
-              <div className="font-serif text-base sm:text-lg font-semibold tracking-tight text-[#1B2A4A]">
+              <div className="font-serif text-base sm:text-lg font-bold tracking-tight text-[#0A2540] dark:text-[#F5F2EB]">
                 অগ্রযাত্রা ডিজাইন সিস্টেম ও কম্পোনেন্ট গ্যালারি
               </div>
-              <div className="text-[11px] text-[var(--color-ink-muted)] uppercase tracking-wider font-sans">
-                Modern Academic Editorial Standard
+              <div className="text-[11px] text-[#525252] dark:text-[#A3A8B5] tracking-wider font-sans font-medium">
+                Bengal Academic Editorial & Tactile 3D Standard (2026)
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Live Theme Toggle */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] hover:bg-[#F5F2EB] text-[#1A1A1A] dark:text-[#F5F2EB] transition-colors cursor-pointer shadow-sm"
+              title="থিম পরিবর্তন করুন"
+              aria-label="Toggle dark/light theme"
+            >
+              {isDarkMode ? (
+                <>
+                  <Sun className="w-4 h-4 text-amber-400" />
+                  <span>লাইট মোড</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 text-[#0A2540]" />
+                  <span>ডার্ক মোড</span>
+                </>
+              )}
+            </button>
+
+            {/* Language Toggle */}
             <button
               type="button"
               onClick={() => setIsBengali(!isBengali)}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--color-border-hairline)] bg-[#FAF8F3] hover:bg-[#F5F2EB] text-[#1B2A4A] transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] hover:bg-[#F5F2EB] text-[#0A2540] dark:text-[#F5F2EB] transition-colors cursor-pointer"
             >
               <span>{isBengali ? "English View" : "বাংলা ভিউ"}</span>
             </button>
 
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-ink-muted)] hover:text-[#1B2A4A] px-3 py-1.5 rounded-[6px] border border-[var(--color-border-hairline)] hover:bg-[var(--color-paper-surface-muted)] transition"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] hover:text-[#0A2540] dark:hover:text-[#F5F2EB] px-3 py-1.5 rounded-lg border border-[#E5E2DA] dark:border-[#263147] hover:bg-[#F5F2EB] dark:hover:bg-[#1E2738] transition"
             >
-              <span>{isBengali ? "ওয়েবসাইটে ফিরুন" : "Back to Site"}</span>
+              <span>{isBengali ? "মূল সাইটে ফিরুন" : "Live App"}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -237,22 +290,24 @@ export default function StyleGuidePage() {
       {/* Main Container */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
         {/* Navigation Tabs */}
-        <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[var(--color-border-hairline)] pb-4">
+        <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#E5E2DA] dark:border-[#263147] pb-4">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
             {[
               { id: 'all', label: isBengali ? 'সম্পূর্ণ গ্যালারি' : 'All Sections' },
+              { id: 'buttons', label: isBengali ? 'ট্যাকটাইল বাটন' : 'Tactile Buttons' },
+              { id: 'backgrounds', label: isBengali ? 'ব্যাকগ্রাউন্ড লাইব্রেরি' : 'Backgrounds' },
               { id: 'components', label: isBengali ? 'শেয়ার্ড কম্পোনেন্ট' : 'UI Components' },
-              { id: 'quiz', label: isBengali ? 'কুইজ ও প্রশ্ন ইঞ্জিন' : 'Quiz & Math' },
+              { id: 'quiz', label: isBengali ? 'কুইজ ও ফর্মুলা' : 'Quiz & Math' },
               { id: 'colors', label: isBengali ? 'কালার টোকেন' : 'Color Tokens' },
               { id: 'typography', label: isBengali ? 'টাইপোগ্রাফি' : 'Typography' },
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors duration-150 whitespace-nowrap min-h-[40px] ${
+                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-120 whitespace-nowrap min-h-[40px] cursor-pointer ${
                   activeTab === tab.id
-                    ? 'bg-[#1B2A4A] text-white shadow-sm'
-                    : 'bg-white border border-[var(--color-border-hairline)] text-[var(--color-ink-muted)] hover:text-[#1B2A4A] hover:bg-[#FAF8F3]'
+                    ? 'bg-[#0A2540] text-white shadow-[0_2px_0_0_#051329]'
+                    : 'bg-[#FDFCF9] dark:bg-[#171E2C] border border-[#E5E2DA] dark:border-[#263147] text-[#525252] dark:text-[#A3A8B5] hover:text-[#0A2540] dark:hover:text-[#F5F2EB] hover:bg-[#FAF8F3]'
                 }`}
               >
                 {tab.label}
@@ -261,19 +316,23 @@ export default function StyleGuidePage() {
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-[#5B5B5B]">ইন্টারেকশন টেস্ট:</span>
+            <span className="text-[#525252] dark:text-[#A3A8B5] font-medium">ইন্টারেকশন কন্ট্রোল:</span>
             <button
               onClick={() => setButtonLoading(!buttonLoading)}
-              className={`px-2.5 py-1 rounded text-xs border ${
-                buttonLoading ? 'bg-amber-100 border-amber-300 text-amber-900 font-semibold' : 'bg-white border-slate-200 text-slate-700'
+              className={`px-2.5 py-1 rounded text-xs border cursor-pointer ${
+                buttonLoading
+                  ? 'bg-amber-100 dark:bg-amber-950/80 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 font-semibold'
+                  : 'bg-[#FDFCF9] dark:bg-[#171E2C] border-[#E5E2DA] dark:border-[#263147] text-[#1A1A1A] dark:text-[#F5F2EB]'
               }`}
             >
               Loading State {buttonLoading ? 'ON' : 'OFF'}
             </button>
             <button
               onClick={() => setShowFormErrors(!showFormErrors)}
-              className={`px-2.5 py-1 rounded text-xs border ${
-                showFormErrors ? 'bg-rose-100 border-rose-300 text-rose-900 font-semibold' : 'bg-white border-slate-200 text-slate-700'
+              className={`px-2.5 py-1 rounded text-xs border cursor-pointer ${
+                showFormErrors
+                  ? 'bg-rose-100 dark:bg-rose-950/80 border-rose-300 dark:border-rose-700 text-rose-900 dark:text-rose-200 font-semibold'
+                  : 'bg-[#FDFCF9] dark:bg-[#171E2C] border-[#E5E2DA] dark:border-[#263147] text-[#1A1A1A] dark:text-[#F5F2EB]'
               }`}
             >
               Form Errors {showFormErrors ? 'ON' : 'OFF'}
@@ -281,150 +340,261 @@ export default function StyleGuidePage() {
           </div>
         </div>
 
-        {/* SECTION: SHARED UI COMPONENTS GALLERY */}
-        {(activeTab === 'all' || activeTab === 'components') && (
-          <div className="space-y-12">
-            {/* 1. BUTTONS */}
-            <section className="space-y-5">
-              <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-                <Layers className="w-5 h-5 text-[#1B2A4A]" />
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                  ১. বাটন সিস্টেম (Buttons)
-                </h2>
+        {/* ===================================================================
+            SECTION 1: TACTILE 3D BUTTON SYSTEM (Pure CSS Physics)
+            =================================================================== */}
+        {(activeTab === 'all' || activeTab === 'buttons') && (
+          <section className="space-y-6">
+            <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+              <Layers className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                ১. ট্যাকটাইল ৩ডি বাটন সিস্টেম (Tactile 3D Buttons & Physical Depth)
+              </h2>
+            </div>
+
+            <Card variant="elevated">
+              <CardHeader>
+                <CardTitle>Physical Press Physics & Layered Shadows</CardTitle>
+                <CardDescription>
+                  বাস্তব ট্যাকটাইল কিবোর্ড ও স্ট্যাম্পের মতো ফিজিক্যাল প্রেস ফিজিক্স: ক্লিকে ৪ পিক্সেল নিচে ডেবে যায়, ইনার হাইলাইট এবং সলিড বেভেল শ্যাডো। কোনো সস্তা এআই জেলি অ্যানিমেশন নেই।
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-8">
+                {/* Core Variants in Default State */}
+                <div className="space-y-3">
+                  <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] uppercase tracking-wider block">
+                    কোর ভেরিয়েন্টসমূহ (Primary, Secondary, Outline, Danger, Ghost, Icon)
+                  </span>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button variant="default" size="md" isLoading={buttonLoading}>
+                      প্রাইমারি অক্সফোর্ড নেভি (Solid)
+                    </Button>
+                    <Button variant="secondary" size="md" isLoading={buttonLoading} icon={<CheckCircle className="w-4 h-4" />}>
+                      সেকেন্ডারি এমারেল্ড (Mastery)
+                    </Button>
+                    <Button variant="outline" size="md" isLoading={buttonLoading}>
+                      পেপার আউটলাইন (Hairline)
+                    </Button>
+                    <Button variant="danger" size="md" isLoading={buttonLoading} icon={<AlertTriangle className="w-4 h-4" />}>
+                      বার্গান্ডি ক্রিমসন (Negative Mark)
+                    </Button>
+                    <Button variant="ghost" size="md">
+                      ঘোস্ট বাটন (Flat)
+                    </Button>
+                    <Button variant="icon" size="icon" aria-label="বুকমার্ক করুন" title="বুকমার্ক করুন">
+                      <Bookmark className="w-4 h-4" />
+                    </Button>
+                    <Button variant="link" size="md">
+                      একাডেমিক টেক্সট লিঙ্ক →
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Button States Matrix: Default, Hover, Active, Focus, Loading, Disabled */}
+                <div className="space-y-3 pt-4 border-t border-[#E5E2DA] dark:border-[#263147]">
+                  <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] uppercase tracking-wider block">
+                    স্টেট ম্যাট্রিক্স (Default, Simulated Pressed, Loading, Disabled)
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="p-4 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] space-y-2">
+                      <span className="text-xs font-medium text-[#737373] dark:text-[#7D8494] block">১. রেস্টিং স্টেট (Resting / Hoverable):</span>
+                      <Button variant="default" size="md" fullWidth>
+                        ক্লিক করুন (Click to Press)
+                      </Button>
+                    </div>
+
+                    <div className="p-4 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] space-y-2">
+                      <span className="text-xs font-medium text-[#737373] dark:text-[#7D8494] block">২. সক্রিয় প্রেসড স্টেট (4px Drop):</span>
+                      <button className="btn-tactile-primary w-full h-11 text-sm font-semibold translate-y-1 shadow-none">
+                        প্রেসড স্টেট (Simulated)
+                      </button>
+                    </div>
+
+                    <div className="p-4 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] space-y-2">
+                      <span className="text-xs font-medium text-[#737373] dark:text-[#7D8494] block">৩. লোডিং স্টেট (Accessible Busy):</span>
+                      <Button variant="default" size="md" isLoading={true} fullWidth>
+                        সংরক্ষণ হচ্ছে...
+                      </Button>
+                    </div>
+
+                    <div className="p-4 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] space-y-2">
+                      <span className="text-xs font-medium text-[#737373] dark:text-[#7D8494] block">৪. নিষ্ক্রিয় স্টেট (Flat Disabled):</span>
+                      <Button variant="default" size="md" disabled fullWidth>
+                        নিষ্ক্রিয় বাটন (Disabled)
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Touch Target Sizes */}
+                <div className="space-y-3 pt-4 border-t border-[#E5E2DA] dark:border-[#263147]">
+                  <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] uppercase tracking-wider block">
+                    মোবাইল স্পর্শ মানদণ্ড (Touch Targets: 36px, 44px standard, 48px large, 44x44 icon)
+                  </span>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button variant="default" size="sm">Small (36px)</Button>
+                    <Button variant="default" size="md">Standard (44px Touch)</Button>
+                    <Button variant="default" size="lg">Large (48px Touch)</Button>
+                    <Button variant="outline" size="icon" aria-label="সার্চ করুন">
+                      <Search className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" size="icon-sm" aria-label="তথ্য দেখুন">
+                      <Info className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+
+        {/* ===================================================================
+            SECTION 2: REUSABLE BACKGROUND LANGUAGE LIBRARY
+            =================================================================== */}
+        {(activeTab === 'all' || activeTab === 'backgrounds') && (
+          <section className="space-y-6">
+            <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+              <Compass className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                ২. ব্যাকগ্রাউন্ড ল্যাঙ্গুয়েজ লাইব্রেরি (CSS & SVG Micro-Textures)
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Pattern 1: Paper Grain */}
+              <div className="rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-academic-paper-grain p-6 space-y-3 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <Badge variant="brand">.bg-academic-paper-grain</Badge>
+                  <span className="text-xs font-mono text-[#525252] dark:text-[#A3A8B5]">SVG Fractal Noise</span>
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  সূক্ষ্ম প্রাকৃতিক পেপার গ্রেইন (Paper Texture)
+                </h3>
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-[#A3A8B5] leading-relaxed">
+                  হালকা হস্তনির্মিত কাগজের বুনট যা ডিজিটাল স্ক্রিনে একটি মননশীল প্রিন্ট জার্নাল ফিল দান করে। কোনো ভারী ইমেজ রিকোয়েস্ট নেই, ০.০২৫ অপাসিটিতে পারফেক্ট।
+                </p>
               </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Academic Button Variants & Interactive States</CardTitle>
-                  <CardDescription>
-                    Solid primary, outline secondary, text link, destructive, loading, and disabled states. Zero gradients, zero neon, guaranteed &gt;= 44px min-height.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Row 1: Main Variants */}
-                  <div className="space-y-2">
-                    <span className="text-xs font-semibold text-[#5B5B5B] uppercase tracking-wider block">
-                      কোর ভেরিয়েন্টসমূহ (Core Variants)
-                    </span>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <Button variant="default" size="md" isLoading={buttonLoading}>
-                        {isBengali ? "প্রাইমারি অ্যাকশন (Solid)" : "Primary Action"}
-                      </Button>
-                      <Button variant="paper" size="md" isLoading={buttonLoading}>
-                        {isBengali ? "সেকেন্ডারি আউটলাইন (Outline)" : "Secondary Outline"}
-                      </Button>
-                      <Button variant="academic" size="md" isLoading={buttonLoading} icon={<CheckCircle className="w-4 h-4" />}>
-                        {isBengali ? "একাডেমিক এমারেল্ড (Mastery)" : "Academic Mastery"}
-                      </Button>
-                      <Button variant="destructive" size="md" isLoading={buttonLoading} icon={<AlertTriangle className="w-4 h-4" />}>
-                        {isBengali ? "নেগেটিভ মার্ক / ডিলিট" : "Destructive Action"}
-                      </Button>
-                      <Button variant="ghost" size="md">
-                        {isBengali ? "ঘোস্ট বাটন" : "Ghost Button"}
-                      </Button>
-                      <Button variant="link" size="md">
-                        {isBengali ? "টেক্সট লিঙ্ক বাটন →" : "Text Link Button →"}
-                      </Button>
-                    </div>
-                  </div>
+              {/* Pattern 2: Ruled Lines */}
+              <div className="rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-academic-ruled p-6 space-y-3 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <Badge variant="teal">.bg-academic-ruled</Badge>
+                  <span className="text-xs font-mono text-[#525252] dark:text-[#A3A8B5]">CSS 32px Repeating</span>
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  পরীক্ষার উত্তরপত্র রুলড লাইন (Notebook Lines)
+                </h3>
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-[#A3A8B5] leading-relaxed">
+                  প্রথাগত পরীক্ষার খাতার মতো অনুভূমিক রেখা যা হ্যান্ডনোট, এসাইনমেন্ট ও বর্ণনামূলক উত্তরের ক্ষেত্রে শিক্ষার্থীদের লেখার অভ্যাস জাগিয়ে তোলে।
+                </p>
+              </div>
 
-                  {/* Row 2: Sizes & States */}
-                  <div className="space-y-2 pt-2 border-t border-[var(--color-border-subtle)]">
-                    <span className="text-xs font-semibold text-[#5B5B5B] uppercase tracking-wider block">
-                      সাইজ ও বিশেষ স্টেট (Sizes & Disabled State)
-                    </span>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <Button variant="default" size="sm">
-                        Small (36px)
-                      </Button>
-                      <Button variant="default" size="md">
-                        Standard (44px)
-                      </Button>
-                      <Button variant="default" size="lg">
-                        Large (48px)
-                      </Button>
-                      <Button variant="default" size="md" disabled>
-                        {isBengali ? "নিষ্ক্রিয় বাটন (Disabled)" : "Disabled State"}
-                      </Button>
-                      <Button variant="paper" size="md" disabled>
-                        {isBengali ? "নিষ্ক্রিয় আউটলাইন" : "Disabled Outline"}
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
+              {/* Pattern 3: STEM Graph Paper */}
+              <div className="rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-academic-graph p-6 space-y-3 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <Badge variant="warning">.bg-academic-graph</Badge>
+                  <span className="text-xs font-mono text-[#525252] dark:text-[#A3A8B5]">CSS 24px Grid</span>
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  বিজ্ঞান ও গণিত ল্যাব গ্রাফ পেপার (Lab Graph)
+                </h3>
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-[#A3A8B5] leading-relaxed">
+                  পদার্থবিজ্ঞান, ক্যালকুলাস ও থ্রিডি ল্যাবের জন্য তৈরি সূক্ষ্ম জ্যামিতিক গ্রিড। লেখার কনট্রাস্টে বিন্দুমাত্র ব্যাঘাত ঘটায় না।
+                </p>
+              </div>
 
-            {/* 2. CARDS */}
+              {/* Pattern 4: Examination Margin Accent */}
+              <div className="rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] notebook-margin-accent p-6 space-y-3 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <Badge variant="destructive">.notebook-margin-accent</Badge>
+                  <span className="text-xs font-mono text-[#525252] dark:text-[#A3A8B5]">Double Margin Rule</span>
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  খাতার বাম মার্জিন রুলার (Khata Margin Rule)
+                </h3>
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-[#A3A8B5] leading-relaxed">
+                  ঐতিহ্যবাহী পরীক্ষার খাতায় লাল বা ওকার কালিতে টানা মার্জিনের আদলে নির্মিত ডাবল-বর্ডার লেফট অ্যাকসেন্ট।
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ===================================================================
+            SECTION 3: SHARED UI COMPONENTS & FORMS
+            =================================================================== */}
+        {(activeTab === 'all' || activeTab === 'components') && (
+          <div className="space-y-12">
+            {/* CARDS */}
             <section className="space-y-5">
-              <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-                <Layers className="w-5 h-5 text-[#1B2A4A]" />
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                  ২. পেপার কার্ড সিস্টেম (Cards)
+              <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+                <Layers className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  ৩. পেপার কার্ড সিস্টেম (Cards: Default, Elevated, Interactive, Muted)
                 </h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card>
+                <Card variant="default">
                   <CardHeader>
                     <CardMeta>
-                      <Badge variant="brand" size="sm">HSC ২০২৬</Badge>
-                      <span>অধ্যায়ভিত্তিক পাঠ্যক্রম</span>
+                      <Badge variant="brand" size="sm">ডিফল্ট পেপার</Badge>
+                      <span>HSC ২০২৬</span>
                     </CardMeta>
                     <CardTitle>পদার্থবিজ্ঞান ১ম পত্র: গতিবিদ্যা</CardTitle>
                     <CardDescription>
-                      প্রক্ষেপকের পাল্লা, সর্বোচ্চ উচ্চতা এবং প্রাস সংক্রান্ত বোর্ড পরীক্ষার বিগত ১০ বছরের সৃজনশীল প্রশ্ন ও সমাধান।
+                      বিগত ১০ বছরের বোর্ড পরীক্ষার সৃজনশীল প্রশ্ন ও অধ্যায়ভিত্তিক নির্ভুল সমাধান।
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="p-3 rounded-lg bg-[#FAF8F3] border border-[#E5E2DA] text-xs">
-                      <span className="font-semibold text-[#1B2A4A]">গড় নির্ভুলতা: </span>
-                      <span className="text-[#0B5D3B] font-bold">৮৪.২%</span>
+                    <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#1E2738] border border-[#E5E2DA] dark:border-[#263147] text-xs">
+                      <span className="font-semibold text-[#0A2540] dark:text-[#F5F2EB]">গড় নির্ভুলতা: </span>
+                      <span className="text-[#065F46] dark:text-emerald-400 font-bold">৮৪.২%</span>
                     </div>
                   </CardContent>
                   <CardFooter className="justify-between">
-                    <span className="text-xs text-[#5B5B5B]">১০টি সৃজনশীল অনুশীলন</span>
+                    <span className="text-xs text-[#525252] dark:text-[#A3A8B5]">১০টি সৃজনশীল অনুশীলন</span>
                     <Button variant="link" size="sm">শুরু করুন &gt;</Button>
                   </CardFooter>
                 </Card>
 
-                <Card hoverable>
+                <Card variant="interactive">
                   <CardHeader>
                     <CardMeta>
-                      <Badge variant="verified" size="sm">ভর্তি প্রস্তুতি</Badge>
+                      <Badge variant="verified" size="sm">ইন্টারেক্টিভ ৩ডি লিফট</Badge>
                       <span>বুয়েট ও ঢাবি ক</span>
                     </CardMeta>
-                    <CardTitle>হোভারযোগ্য এডিটোরিয়াল কার্ড (Hoverable)</CardTitle>
+                    <CardTitle>হোভারযোগ্য ট্যাকটাইল কার্ড (Interactive)</CardTitle>
                     <CardDescription>
-                      মাউস কার্সার রাখলে কেবল সূক্ষ্ম বর্ডার ও ব্যাকগ্রাউন্ড টোন পরিবর্তন হবে; কোনো ডিসট্রেস্টিং ৩ডি জাম্প বা গ্লো নেই।
+                      মাউস নিলে বাস্তবসম্মত ৩ডি লিফট ও বেভেল শ্যাডো দৃশ্যমান হবে, ক্লিকে ডেবে যাবে।
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="p-3 rounded-lg bg-[#FAF8F3] border border-[#E5E2DA] text-xs">
-                      <span className="font-semibold text-[#1B2A4A]">স্ট্যাটাস: </span>
-                      <span className="text-[#B8862B] font-bold">লাইভ পরীক্ষা চালু আছে</span>
+                    <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#1E2738] border border-[#E5E2DA] dark:border-[#263147] text-xs">
+                      <span className="font-semibold text-[#0A2540] dark:text-[#F5F2EB]">স্ট্যাটাস: </span>
+                      <span className="text-[#B45309] dark:text-amber-400 font-bold">লাইভ পরীক্ষা চালু আছে</span>
                     </div>
                   </CardContent>
                   <CardFooter className="justify-between">
-                    <span className="text-xs text-[#5B5B5B]">কাট-অফ ৬০.৫ মার্ক</span>
-                    <Button variant="paper" size="sm">মক টেস্ট দিন</Button>
+                    <span className="text-xs text-[#525252] dark:text-[#A3A8B5]">কাট-অফ ৬০.৫ মার্ক</span>
+                    <Button variant="outline" size="sm">মক টেস্ট দিন</Button>
                   </CardFooter>
                 </Card>
 
-                <Card className="bg-[#FAF8F3] border-l-4 border-l-[#1B2A4A]">
+                <Card variant="muted" className="border-l-4 border-l-[#0A2540] dark:border-l-[#6088C6]">
                   <CardHeader>
                     <CardMeta>
-                      <Badge variant="warning" size="sm">নোটিশ বোর্ড</Badge>
-                      <span>আজকের আপডেট</span>
+                      <Badge variant="warning" size="sm">মিউটেড পেপার</Badge>
+                      <span>আজকের নোটিশ</span>
                     </CardMeta>
-                    <CardTitle>প্রাতিষ্ঠানিক ঘোষণা ও নির্দেশিকা</CardTitle>
+                    <CardTitle>প্রাতিষ্ঠানিক বুলেটিন ও নির্দেশিকা</CardTitle>
                     <CardDescription>
-                      নতুন পাঠ্যক্রম অনুযায়ী সকল বিষয়ে কুইজ ও হ্যান্ডনোট হালনাগাদ করা হয়েছে। অফলাইন অ্যাপে নতুন অধ্যায় সিঙ্ক করে নিন।
+                      নতুন পাঠ্যক্রম অনুযায়ী সকল বিষয়ে কুইজ ও হ্যান্ডনোট হালনাগাদ করা হয়েছে।
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-xs text-[#5B5B5B] leading-relaxed">
-                      সিঙ্ক সংক্রান্ত যে কোনো সমস্যায় হেল্প সেন্টারে যোগাযোগ করুন।
+                    <div className="text-xs text-[#525252] dark:text-[#A3A8B5] leading-relaxed">
+                      অফলাইন অ্যাপে নতুন অধ্যায় সিঙ্ক করে সংরক্ষণ করুন।
                     </div>
                   </CardContent>
                   <CardFooter>
@@ -436,398 +606,77 @@ export default function StyleGuidePage() {
               </div>
             </section>
 
-            {/* 3. BADGES & CHIPS */}
+            {/* FORM CONTROLS */}
             <section className="space-y-5">
-              <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-                <Palette className="w-5 h-5 text-[#1B2A4A]" />
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                  ৩. ব্যাজ ও স্ট্যাটাস ট্যাগ (Badges & Chips)
+              <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+                <Sliders className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                  ৪. ফর্ম ও ইন্টারঅ্যাকশন কন্ট্রোল (Input with Inner Bevel, Tabs, Checkbox)
                 </h2>
               </div>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Subdued Flat Academic Tints (Zero Neon & Zero Purple)</CardTitle>
+                  <CardTitle>Accessible Form Inputs with Subtle Inner Shadows</CardTitle>
                   <CardDescription>
-                    Low-contrast semantic tints for subject domains, difficulty levels, and user roles.
+                    ইনপুট ফিল্ডগুলোতে হালকা ইনার বেভেল শ্যাডো, হাই-কনট্রাস্ট ফোকাস রিং এবং সঠিক বাংলা লেবেলিং।
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="space-y-2">
-                    <span className="text-xs font-semibold text-[#5B5B5B] uppercase tracking-wider block">
-                      সিম্যান্টিক ব্যাজ টিন্ট (Semantic Badges)
-                    </span>
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <Badge variant="brand">Oxford Navy Tint</Badge>
-                      <Badge variant="success">Emerald Mastery</Badge>
-                      <Badge variant="warning">Scholar Gold</Badge>
-                      <Badge variant="destructive">Burgundy Alert</Badge>
-                      <Badge variant="neutral">Neutral Paper</Badge>
-                      <Badge variant="outline">Hairline Outline</Badge>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 pt-2 border-t border-[var(--color-border-subtle)]">
-                    <span className="text-xs font-semibold text-[#5B5B5B] uppercase tracking-wider block">
-                      কঠিনতা ও রোল চিপ (Domain Specific Chips)
-                    </span>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <DifficultyBadge difficulty="easy" label="সহজ প্রশ্ন (Easy)" />
-                      <DifficultyBadge difficulty="medium" label="মধ্যম প্রশ্ন (Medium)" />
-                      <DifficultyBadge difficulty="hard" label="কঠিন প্রশ্ন (Hard)" />
-                      <VerifiedBadge label="এনসিটিবি অনুমোদিত (Verified)" shield />
-                      <RoleChip role="student" label="শিক্ষার্থী (Student)" />
-                      <RoleChip role="guardian" label="অভিভাবক (Guardian)" />
-                      <RoleChip role="teacher" label="শিক্ষক (Teacher)" />
-                      <RoleChip role="admin" label="অ্যাডমিন (Admin)" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            {/* 4. FORM PRIMITIVES */}
-            <section className="space-y-5">
-              <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-                <Sliders className="w-5 h-5 text-[#1B2A4A]" />
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                  ৪. ফর্ম উপাদানসমূহ (Form Inputs, Select, Checkbox, Radio, Textarea)
-                </h2>
-              </div>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Accessible Academic Form Controls</CardTitle>
-                  <CardDescription>
-                    Labeled, helper text, prefix/suffix icons, inline error validation, and accessible focus outlines.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
-                      label={isBengali ? "শিক্ষার্থীর নাম (Student Full Name)" : "Full Name"}
-                      placeholder={isBengali ? "যেমন: নাঈম মাহমুদ" : "e.g. John Doe"}
-                      helperText={isBengali ? "আপনার প্রাতিষ্ঠানিক সার্টিফিকেটের নাম দিন" : "Enter name as on certificate"}
-                      error={showFormErrors ? (isBengali ? "নাম দেওয়া আবশ্যক" : "Name is required") : undefined}
+                      label="শিক্ষার্থীর পুরো নাম (বাংলায়)"
+                      placeholder="যেমন: তানজিম হাসান"
+                      leftIcon={<Type className="w-4 h-4" />}
+                      defaultValue="তানজিম হাসান"
                     />
 
                     <Input
-                      label={isBengali ? "অনুসন্ধান করুন (Search Library)" : "Search"}
-                      placeholder={isBengali ? "অধ্যায় বা বোর্ড প্রশ্ন খুঁজুন..." : "Search topics..."}
-                      prefixIcon={<Search className="w-4 h-4" />}
+                      label="বোর্ড রোল অথবা রেজিস্ট্রেশন নম্বর"
+                      placeholder="৬ সংখ্যার রোল দিন"
+                      leftIcon={<FileQuestion className="w-4 h-4" />}
+                      error={showFormErrors ? "সঠিক ৬ সংখ্যার রোল নম্বর প্রদান করুন" : undefined}
+                      defaultValue={showFormErrors ? "123" : "772184"}
                     />
-
-                    <Select
-                      label={isBengali ? "শিক্ষাস্তর নির্বাচন করুন (Educational Level)" : "Select Level"}
-                      helperText={isBengali ? "আপনার বর্তমান শ্রেণি বা প্রস্তুতি ক্ষেত্র নির্বাচন করুন" : "Choose target syllabus"}
-                      error={showFormErrors ? (isBengali ? "শিক্ষাস্তর নির্বাচন করুন" : "Please select a level") : undefined}
-                      options={[
-                        { value: 'ssc', label: isBengali ? 'মাধ্যমিক (SSC ৯-১০)' : 'Secondary (SSC 9-10)' },
-                        { value: 'hsc', label: isBengali ? 'উচ্চ মাধ্যমিক (HSC ১১-১২)' : 'Higher Secondary (HSC 11-12)' },
-                        { value: 'admission', label: isBengali ? 'বিশ্ববিদ্যালয় ভর্তি (Admission)' : 'University Admission' },
-                        { value: 'career', label: isBengali ? 'টিউশন ও পেশাগত ক্যারিয়ার (Career)' : 'Career & Tuition' },
-                      ]}
-                    />
-
-                    <div className="space-y-3">
-                      <span className="text-xs font-semibold text-[#1B2A4A] dark:text-[#F5F2EB] block">
-                        {isBengali ? "চেকবক্স অপশন (Checkboxes)" : "Checkboxes"}
-                      </span>
-                      <Checkbox
-                        label={isBengali ? "অফলাইন মেশ সিঙ্ক চালু রাখুন" : "Keep offline mesh sync active"}
-                        helperText={isBengali ? "ইন্টারনেট না থাকলেও স্থানীয় ডিভাইসে ডেটা সংরক্ষিত হবে" : "Saves data locally without internet"}
-                        checked={checkboxChecked}
-                        onChange={(e) => setCheckboxChecked(e.target.checked)}
-                      />
-                      <Checkbox
-                        label={isBengali ? "দৈনিক অনুশীলন রিমাইন্ডার গ্রহণ করুন" : "Receive daily study reminders"}
-                        error={showFormErrors ? (isBengali ? "শর্তাবলি মানা আবশ্যক" : "Consent required") : undefined}
-                      />
-                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[var(--color-border-subtle)]">
-                    <RadioGroup
-                      label={isBengali ? "প্রধান বিষয় নির্বাচন করুন (Radio Group)" : "Select Primary Subject"}
-                      name="subject"
-                      value={selectedRadio}
-                      onChange={setSelectedRadio}
-                      helperText={isBengali ? "আপনার নির্বাচিত বিষয়ে দৈনিক প্রশ্ন আসবে" : "Sets priority subject"}
-                    >
-                      <Radio value="physics" label={isBengali ? "পদার্থবিজ্ঞান (Physics)" : "Physics"} />
-                      <Radio value="chemistry" label={isBengali ? "রসায়ন (Chemistry)" : "Chemistry"} />
-                      <Radio value="math" label={isBengali ? "উচ্চতর গণিত (Higher Mathematics)" : "Higher Math"} />
-                    </RadioGroup>
-
-                    <Textarea
-                      label={isBengali ? "প্রশ্নের সমাধান নোট বা পর্যবেক্ষণ (Study Notes)" : "Study Notes"}
-                      placeholder={isBengali ? "এখানে আপনার ব্যক্তিগত সমাধান নোট লিখুন..." : "Write personal notes here..."}
-                      maxLength={200}
-                      showCount
-                      helperText={isBengali ? "সর্বোচ্চ ২০০ অক্ষরে নোট সংরক্ষণ করুন" : "Max 200 characters"}
-                      error={showFormErrors ? (isBengali ? "নোট খালি রাখা যাবে না" : "Notes cannot be empty") : undefined}
-                    />
+                  {/* Tabs Segmented Control */}
+                  <div className="space-y-2 pt-2 border-t border-[#E5E2DA] dark:border-[#263147]">
+                    <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] uppercase tracking-wider block">
+                      ট্যাকটাইল সেগমেন্টেড ট্যাব (Tactile 3D Active Segmented Control)
+                    </span>
+                    <Tabs defaultValue="physics" className="w-full">
+                      <TabsList>
+                        <TabsTrigger value="physics">পদার্থবিজ্ঞান (Physics)</TabsTrigger>
+                        <TabsTrigger value="chemistry">রসায়ন (Chemistry)</TabsTrigger>
+                        <TabsTrigger value="math">উচ্চতর গণিত (Higher Math)</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="physics" className="p-4 rounded-lg bg-[#FAF8F3] dark:bg-[#1E2738] border border-[#E5E2DA] dark:border-[#263147] text-xs leading-relaxed">
+                        পদার্থবিজ্ঞান ১ম ও ২য় পত্রের জন্য ১০টি অধ্যায় ও বিগত ১০ বছরের বোর্ড প্রশ্নের নির্ভুল ব্যাংক।
+                      </TabsContent>
+                      <TabsContent value="chemistry" className="p-4 rounded-lg bg-[#FAF8F3] dark:bg-[#1E2738] border border-[#E5E2DA] dark:border-[#263147] text-xs leading-relaxed">
+                        গুণগত ও পরিমাণগত রসায়ন সহ আধুনিক ল্যাবরেটরি রিঅ্যাকশন নোট।
+                      </TabsContent>
+                      <TabsContent value="math" className="p-4 rounded-lg bg-[#FAF8F3] dark:bg-[#1E2738] border border-[#E5E2DA] dark:border-[#263147] text-xs leading-relaxed">
+                        ক্যালকুলাস ও ভেক্টর জ্যামিতির স্টেপ-বাই-স্টেপ গাণিতিক সমাধান।
+                      </TabsContent>
+                    </Tabs>
                   </div>
                 </CardContent>
               </Card>
-            </section>
-
-            {/* 5. NAVIGATION, DISCLOSURE & FEEDBACK */}
-            <section className="space-y-5">
-              <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-                <BookOpen className="w-5 h-5 text-[#1B2A4A]" />
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                  ৫. নেভিগেশন ও ডিসক্লোজার (Breadcrumbs, Accordion, Pagination, Modal, Drawer)
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Accordion */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>অ্যাকর্ডিয়ন ডিসক্লোজার (Accordion)</CardTitle>
-                    <CardDescription>
-                      ১৫০–২০০ms গতিতে মসৃণভাবে বিস্তারিত উন্মুক্ত বা বন্ধ হয়। WAI-ARIA ডিসক্লোজার নির্দেশিকা অনুযায়ী তৈরি।
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Accordion type="single" defaultValue="item-1">
-                      <AccordionItem value="item-1">
-                        <AccordionTrigger>
-                          ১. অফলাইন মেশ প্রযুক্তি কীভাবে কাজ করে?
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          ইন্টারনেট সংযোগ না থাকলেও ব্রাউজারের IndexedDB এবং স্থানীয় পিয়ার-টু-পিয়ার ওয়াইফাই মেশের মাধ্যমে পরীক্ষা এবং নোট সিঙ্ক হয়।
-                        </AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem value="item-2">
-                        <AccordionTrigger>
-                          ২. নেগেটিভ মার্কিং কীভাবে হিসাব করা হয়?
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          বিশ্ববিদ্যালয় ভর্তি পরীক্ষায় প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কর্তন করা হয়, যা স্বয়ংক্রিয়ভাবে নেট স্কোরে প্রতিফলিত হয়।
-                        </AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem value="item-3">
-                        <AccordionTrigger>
-                          ৩. বোর্ড পরীক্ষার বিগত বছরের প্রশ্নগুলো কি যাচাইকৃত?
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          হ্যাঁ, ২০১৫ থেকে ২০২৫ পর্যন্ত সকল শিক্ষা বোর্ডের সাধারণ ও নৈর্ব্যক্তিক প্রশ্নসমূহ এনসিটিবি ও অভিজ্ঞ পরীক্ষক দ্বারা শতভাগ যাচাইকৃত।
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </CardContent>
-                </Card>
-
-                {/* Overlays & Modals */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>মডাল ও ড্রয়ার কন্ট্রোল (Modal & Drawer)</CardTitle>
-                    <CardDescription>
-                      কোনো ভারী ব্যাকড্রপ-ব্লার ছাড়াই হালকা স্বচ্ছ শেডে ফোকাস ট্র্যাপ সহ প্যানেল প্রদর্শন।
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <Breadcrumb
-                      items={[
-                        { label: 'হোম', href: '/' },
-                        { label: 'এইচএসসি বিজ্ঞান', href: '/learn' },
-                        { label: 'পদার্থবিজ্ঞান ১ম পত্র', href: '/practice' },
-                        { label: 'গতিবিদ্যা', isCurrent: true },
-                      ]}
-                    />
-
-                    <div className="flex flex-wrap items-center gap-3 pt-3">
-                      <Button variant="default" size="md" onClick={() => setIsModalOpen(true)}>
-                        মডাল ওপেন করুন (Modal)
-                      </Button>
-                      <Button variant="paper" size="md" onClick={() => setIsDrawerOpen(true)}>
-                        স্লাইড ড্রয়ার খুলুন (Drawer)
-                      </Button>
-                      <Tooltip content="এটি একটি টুলটিপ নির্দেশিকা">
-                        <Button variant="ghost" size="md" icon={<Info className="w-4 h-4" />}>
-                          টুলটিপ টেস্ট
-                        </Button>
-                      </Tooltip>
-                    </div>
-
-                    <div className="pt-4 border-t border-[var(--color-border-subtle)]">
-                      <span className="text-xs font-semibold text-[#5B5B5B] block mb-2">
-                        পৃষ্ঠা পরিবর্তন নেভিগেশন (Pagination):
-                      </span>
-                      <Pagination
-                        currentPage={currentPage}
-                        totalPages={8}
-                        onPageChange={setCurrentPage}
-                        isBengali={isBengali}
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Table Primitive */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>টেক্সটবুক টেবিল (Textbook-like Table)</CardTitle>
-                  <CardDescription>
-                    হেয়ারলাইন রো বর্ডার (#E5E2DA), স্টিকি হেডার, এবং হালকা পেপার হোভার স্টেট।
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Table stickyHeader striped>
-                    <TableHeader sticky>
-                      <TableRow>
-                        <TableHead>বোর্ড ও সন</TableHead>
-                        <TableHead>অধ্যায় ও বিষয়</TableHead>
-                        <TableHead>প্রশ্ন সংখ্যা</TableHead>
-                        <TableHead>গড় নির্ভুলতা</TableHead>
-                        <TableHead>পদক্ষেপ</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {[
-                        { board: 'ঢাকা বোর্ড ২০২৩', subject: 'পদার্থবিজ্ঞান ১ম পত্র • গতিবিদ্যা', count: '২৫টি MCQ', accuracy: '৮৬.৪%', status: 'সম্পূর্ণ' },
-                        { board: 'চট্টগ্রাম বোর্ড ২০২৩', subject: 'রসায়ন ১ম পত্র • গুণগত রসায়ন', count: '২৫টি MCQ', accuracy: '৭৯.১%', status: 'চলমান' },
-                        { board: 'রাজশাহী বোর্ড ২০২২', subject: 'উচ্চতর গণিত ১ম পত্র • ম্যাট্রিক্স', count: '২৫টি MCQ', accuracy: '৯১.০%', status: 'সম্পূর্ণ' },
-                        { board: 'যশোর বোর্ড ২০২২', subject: 'জীববিজ্ঞান ১ম পত্র • কোষ ও এর গঠন', count: '২৫টি MCQ', accuracy: '৮৩.৫%', status: 'সম্পূর্ণ' },
-                      ].map((row, idx) => (
-                        <TableRow key={idx}>
-                          <TableCell className="font-semibold text-[#1B2A4A]">{row.board}</TableCell>
-                          <TableCell>{row.subject}</TableCell>
-                          <TableCell className="font-mono text-xs">{row.count}</TableCell>
-                          <TableCell className="font-bold text-[#0B5D3B]">{row.accuracy}</TableCell>
-                          <TableCell>
-                            <Button variant="link" size="sm">অনুশীলন &gt;</Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-
-              {/* Skeleton & Empty State */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>স্কেলিটন লোডার (Skeleton Loaders)</CardTitle>
-                    <CardDescription>
-                      শান্ত ও মৃদু পালস অ্যানিমেশন যা পেজের লেআউট শিফট (CLS) প্রতিরোধ করে।
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Skeleton variant="circular" width={48} height={48} />
-                      <div className="space-y-2 flex-1">
-                        <Skeleton variant="text" width="60%" height={16} />
-                        <Skeleton variant="text" width="40%" height={12} />
-                      </div>
-                    </div>
-                    <Skeleton variant="rectangular" height={80} className="w-full rounded-xl" />
-                  </CardContent>
-                </Card>
-
-                <EmptyState
-                  title="কোনো অনিষ্পন্ন পরীক্ষা পাওয়া যায়নি"
-                  description="আপনার সকল নির্ধারিত অধ্যায়ের পরীক্ষা সফলভাবে সম্পন্ন হয়েছে। নতুন কোনো মডেল টেস্ট চালু করতে সিলেবাস ব্রাউজ করুন।"
-                  actionText="নতুন অধ্যায় দেখুন"
-                  onAction={() => alert('Browse curriculum clicked')}
-                />
-              </div>
             </section>
           </div>
         )}
 
-        {/* SECTION: QUIZ & QUESTION ENGINE */}
-        {(activeTab === 'all' || activeTab === 'quiz') && (
-          <section className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-              <Sparkles className="w-5 h-5 text-[#1B2A4A]" />
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                ৬. কুইজ ও প্রশ্ন ইঞ্জিন উপাদান (Quiz UI & Mathematical KaTeX)
-              </h2>
-            </div>
-
-            <div className="space-y-6">
-              {/* Progress */}
-              <QuizProgress
-                currentQuestion={7}
-                totalQuestions={25}
-                timeRemaining="18:42"
-                score={28}
-                streak={5}
-                isBengali={isBengali}
-              />
-
-              {/* Interactive Question Demonstration */}
-              <Card>
-                <CardHeader>
-                  <CardMeta>
-                    <Badge variant="brand" size="sm">ঢাকা বোর্ড ২০২৩</Badge>
-                    <Badge variant="warning" size="sm">নেগেটিভ মার্কিং: ০.২৫</Badge>
-                    <span>পদার্থবিজ্ঞান ১ম পত্র • ৩য় অধ্যায়</span>
-                  </CardMeta>
-                  <CardTitle className="text-xl sm:text-2xl pt-1">
-                    <KaTeXRenderer text={String.raw`একটি ক্রিকেট বলকে ভূমির সাথে $30^\circ$ কোণে $40 \text{ m/s}$ বেগে নিক্ষেপ করা হলে এর সর্বোচ্চ উচ্চতা ($H$) কত হবে? ($g = 9.8 \text{ m/s}^2$)`} />
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="space-y-2">
-                    {[
-                      { key: 'A', text: String.raw`$H = 15.42 \text{ m}$` },
-                      { key: 'B', text: String.raw`$H = 20.41 \text{ m}$` },
-                      { key: 'C', text: String.raw`$H = 25.68 \text{ m}$` },
-                      { key: 'D', text: String.raw`$H = 32.14 \text{ m}$` },
-                    ].map(opt => (
-                      <OptionCard
-                        key={opt.key}
-                        id={opt.key}
-                        optionKey={opt.key as 'A' | 'B' | 'C' | 'D'}
-                        textBn={opt.text}
-                        isSelected={selectedOption === opt.key}
-                        onSelect={(k) => setSelectedOption(k)}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="pt-4">
-                    <ExplanationBlock
-                      correctOptionKey="B"
-                      correctOptionText={String.raw`$H = \frac{v_0^2 \sin^2\theta}{2g} = \frac{40^2 \times \sin^2(30^\circ)}{2 \times 9.8} = \frac{1600 \times 0.25}{19.6} \approx 20.41 \text{ m}$`}
-                      keyFormula={String.raw`$H = \frac{v_0^2 \sin^2\theta}{2g} \quad \text{এবং} \quad R = \frac{v_0^2 \sin 2\theta}{g}$`}
-                      sourceAttribution="এনসিটিবি অনুমোদিত পাঠ্যবই, অধ্যায় ৩ (গতিবিদ্যা)"
-                      explanationBn={String.raw`আমরা জানি, প্রক্ষেপকের ক্ষেত্রে সর্বোচ্চ উচ্চতার সমীকরণ $H = \frac{v_0^2 \sin^2\theta}{2g}$। এখানে আদিবেগ $v_0 = 40 \text{ m/s}$, নিক্ষেপণ কোণ $\theta = 30^\circ$, এবং অভিকর্ষজ ত্বরণ $g = 9.8 \text{ m/s}^2$। মানগুলো বসালে প্রাপ্ত মান দাঁড়ায় প্রায় $20.41 \text{ m}$।`}
-                      isBengali={isBengali}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Scorecard */}
-              <QuizResultSummary
-                totalQuestions={25}
-                correctCount={21}
-                incorrectCount={3}
-                unattemptedCount={1}
-                negativeMarks={0.75}
-                timeTaken="22 মিনিট 15 সেকেন্ড"
-                isBengali={isBengali}
-                onReview={() => alert('Review answers')}
-                onRetry={() => alert('Retry')}
-              />
-            </div>
-          </section>
-        )}
-
-        {/* SECTION: COLOR TOKENS */}
+        {/* ===================================================================
+            SECTION 4: COLOR TOKENS ARCHITECTURE
+            =================================================================== */}
         {(activeTab === 'all' || activeTab === 'colors') && (
           <section id="colors" className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-              <Palette className="w-5 h-5 text-[#1B2A4A]" />
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                ৭. কালার টোকেন আর্কিটেকচার (Color Tokens)
+            <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+              <Palette className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                ৫. কালার টোকেন আর্কিটেকচার (Color Tokens & WCAG Contrast)
               </h2>
             </div>
 
@@ -835,7 +684,7 @@ export default function StyleGuidePage() {
               <Swatch
                 name="Paper Ground"
                 variable="--color-paper-ground"
-                hex="#FAF8F3"
+                hex={isDarkMode ? "#0F141E" : "#FAF8F3"}
                 roleDescription="মেইন অ্যাপ ক্যানভাস ব্যাকগ্রাউন্ড (Warm Paper)"
                 contrastRatio="15.8:1"
                 wcag="AAA"
@@ -843,7 +692,7 @@ export default function StyleGuidePage() {
               <Swatch
                 name="Paper Surface"
                 variable="--color-paper-surface"
-                hex="#FFFFFF"
+                hex={isDarkMode ? "#171E2C" : "#FDFCF9"}
                 roleDescription="কার্ড ও কন্টেইনার সারফেস"
                 contrastRatio="16.5:1"
                 wcag="AAA"
@@ -851,7 +700,7 @@ export default function StyleGuidePage() {
               <Swatch
                 name="Academic Navy"
                 variable="--color-brand-primary"
-                hex="#1B2A4A"
+                hex={isDarkMode ? "#527EBD" : "#0A2540"}
                 textDark
                 roleDescription="প্রধান প্রাতিষ্ঠানিক অ্যাকশন ও হেডিং কালার"
                 contrastRatio="12.4:1"
@@ -860,23 +709,59 @@ export default function StyleGuidePage() {
               <Swatch
                 name="Academic Emerald"
                 variable="--color-semantic-success"
-                hex="#0B5D3B"
+                hex={isDarkMode ? "#268C5E" : "#065F46"}
                 textDark
                 roleDescription="মেধাতালিকা, সঠিক উত্তর ও ভেরিফাইড ব্যাজ"
                 contrastRatio="7.9:1"
+                wcag="AAA"
+              />
+              <Swatch
+                name="Scholar Gold"
+                variable="--color-accent-gold"
+                hex={isDarkMode ? "#D4A34B" : "#B45309"}
+                textDark
+                roleDescription="ঐতিহ্য ও মেধা স্বীকৃতি, সংযমী গোল্ড অ্যাকসেন্ট"
+                contrastRatio="5.2:1"
+                wcag="AA"
+              />
+              <Swatch
+                name="Burgundy Crimson"
+                variable="--color-semantic-danger"
+                hex={isDarkMode ? "#D94545" : "#991B1B"}
+                textDark
+                roleDescription="নেগেটিভ মার্কিং, এরর ও কোয়ারেন্টাইন অ্যালার্ট"
+                contrastRatio="6.8:1"
+                wcag="AAA"
+              />
+              <Swatch
+                name="Hairline Border"
+                variable="--color-border-hairline"
+                hex={isDarkMode ? "#263147" : "#E5E2DA"}
+                roleDescription="১ পিক্সেল এডিটোরিয়াল সূক্ষ্ম ফ্রেম বর্ডার"
+                contrastRatio="3.1:1"
+                wcag="AA"
+              />
+              <Swatch
+                name="Carbon Ink"
+                variable="--color-ink-primary"
+                hex={isDarkMode ? "#F5F2EB" : "#1A1A1A"}
+                roleDescription="উচ্চ বৈসাদৃশ্যের কালির মতো পাঠযোগ্য হরফ"
+                contrastRatio="15.8:1"
                 wcag="AAA"
               />
             </div>
           </section>
         )}
 
-        {/* SECTION: TYPOGRAPHY */}
+        {/* ===================================================================
+            SECTION 5: TYPOGRAPHY & LIGATURE SHOWCASE
+            =================================================================== */}
         {(activeTab === 'all' || activeTab === 'typography') && (
           <section id="typography" className="space-y-6">
-            <div className="flex items-center gap-2 border-b border-[var(--color-border-hairline)] pb-3">
-              <Type className="w-5 h-5 text-[#1B2A4A]" />
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#1B2A4A]">
-                ৮. টাইপোগ্রাফি ও যুক্তাক্ষর নির্দেশিকা (Typography & Ligatures)
+            <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+              <Type className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                ৬. টাইপোগ্রাফি ও যুক্তাক্ষর নির্দেশিকা (Typography & Ligature Integrity)
               </h2>
             </div>
 
@@ -884,26 +769,26 @@ export default function StyleGuidePage() {
               <CardHeader>
                 <CardTitle>বাংলা ও ইংরেজি টাইপ স্কেল (~১.২৫০ মেজর থার্ড)</CardTitle>
                 <CardDescription>
-                  মাত্ৰা সুরক্ষা সহ ১.৭৮ লাইন-হাইট এবং Noto Serif Bengali + Hind Siliguri ফন্ট সমন্বয়।
+                  মাত্রা সুরক্ষা সহ ১.৭৮ লাইন-হাইট এবং Noto Serif Bengali + Hind Siliguri ফন্ট সমন্বয়। যুক্তাক্ষরে কোনো কাটাকুটি বা ক্লিপিং নেই।
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-3xl sm:text-4xl font-serif font-bold text-[#1B2A4A]">
+                <div className="text-3xl sm:text-4xl font-serif font-bold text-[#0A2540] dark:text-[#F5F2EB] leading-[1.35]">
                   বাংলাদেশের প্রতিটি শিক্ষার্থীর জন্য একটি সার্বিক ডিজিটাল শিক্ষাজীবন
                 </div>
-                <p className="text-base sm:text-lg text-[#5B5B5B] leading-[1.8] max-w-2xl font-sans">
+                <p className="text-base sm:text-lg text-[#525252] dark:text-[#A3A8B5] leading-[1.78] max-w-2xl font-sans">
                   মাধ্যমিক ও উচ্চ মাধ্যমিক থেকে বিশ্ববিদ্যালয় ভর্তি এবং পেশাগত ক্যারিয়ার—সব বিষয়ের অধ্যায়ভিত্তিক প্রাতিষ্ঠানিক পাঠ্যক্রম, বিগত ১০ বছরের নির্ভুল বোর্ড প্রশ্ন এবং ৩ডি ভার্চুয়াল বিজ্ঞান ল্যাবরেটরি।
                 </p>
 
-                <div className="pt-4 border-t border-[var(--color-border-subtle)] space-y-2">
-                  <span className="text-xs font-semibold text-[#5B5B5B] uppercase tracking-wider block">
-                    জটিল বাংলা যুক্তাক্ষর রেন্ডারিং (Conjunct Glyphs):
+                <div className="pt-4 border-t border-[#E5E2DA] dark:border-[#263147] space-y-3">
+                  <span className="text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] uppercase tracking-wider block">
+                    জটিল বাংলা যুক্তাক্ষর রেন্ডারিং (Conjunct Glyphs Clearance Check):
                   </span>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-                    {conjuncts.slice(0, 12).map((item, idx) => (
-                      <div key={idx} className="p-2.5 rounded-lg border border-[#E5E2DA] bg-[#FAF8F3] text-center">
-                        <span className="text-xl font-serif font-bold text-[#1B2A4A] block mb-1">{item.glyph}</span>
-                        <span className="text-[10px] text-[#5B5B5B] block truncate">{item.example}</span>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
+                    {conjuncts.map((item, idx) => (
+                      <div key={idx} className="p-3 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] text-center">
+                        <span className="text-2xl font-serif font-bold text-[#0A2540] dark:text-[#F5F2EB] block mb-1">{item.glyph}</span>
+                        <span className="text-[10px] text-[#525252] dark:text-[#A3A8B5] block truncate font-medium">{item.example}</span>
                       </div>
                     ))}
                   </div>
@@ -912,65 +797,69 @@ export default function StyleGuidePage() {
             </Card>
           </section>
         )}
+
+        {/* ===================================================================
+            SECTION 6: QUIZ & FORMULA RENDERING
+            =================================================================== */}
+        {(activeTab === 'all' || activeTab === 'quiz') && (
+          <section className="space-y-6">
+            <div className="flex items-center gap-2 border-b border-[#E5E2DA] dark:border-[#263147] pb-3">
+              <Sparkles className="w-5 h-5 text-[#0A2540] dark:text-[#6088C6]" />
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A2540] dark:text-[#F5F2EB]">
+                ৭. কুইজ ও প্রশ্ন ইঞ্জিন উপাদান (Mathematical KaTeX & Option Bubbles)
+              </h2>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardMeta>
+                  <Badge variant="brand" size="sm">ঢাকা বোর্ড ২০২৩</Badge>
+                  <Badge variant="warning" size="sm">নেগেটিভ মার্কিং: ০.২৫</Badge>
+                  <span>পদার্থবিজ্ঞান ১ম পত্র • ৩য় অধ্যায়</span>
+                </CardMeta>
+                <CardTitle className="text-xl sm:text-2xl pt-1">
+                  <KaTeXRenderer text={String.raw`একটি ক্রিকেট বলকে ভূমির সাথে $30^\circ$ কোণে $40 \text{ m/s}$ বেগে নিক্ষেপ করা হলে এর সর্বোচ্চ উচ্চতা ($H$) কত হবে? ($g = 9.8 \text{ m/s}^2$)`} />
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  {[
+                    { key: 'A', text: String.raw`$H = 15.42 \text{ m}$` },
+                    { key: 'B', text: String.raw`$H = 20.41 \text{ m}$` },
+                    { key: 'C', text: String.raw`$H = 25.68 \text{ m}$` },
+                    { key: 'D', text: String.raw`$H = 32.14 \text{ m}$` },
+                  ].map(opt => (
+                    <OptionCard
+                      key={opt.key}
+                      id={opt.key}
+                      optionKey={opt.key as 'A' | 'B' | 'C' | 'D'}
+                      textBn={opt.text}
+                      isSelected={selectedOption === opt.key}
+                      onSelect={(k) => setSelectedOption(k)}
+                    />
+                  ))}
+                </div>
+
+                <div className="pt-4">
+                  <ExplanationBlock
+                    correctOptionKey="B"
+                    correctOptionText={String.raw`$H = \frac{v_0^2 \sin^2\theta}{2g} = \frac{40^2 \times \sin^2(30^\circ)}{2 \times 9.8} = \frac{1600 \times 0.25}{19.6} \approx 20.41 \text{ m}$`}
+                    keyFormula={String.raw`$H = \frac{v_0^2 \sin^2\theta}{2g} \quad \text{এবং} \quad R = \frac{v_0^2 \sin 2\theta}{g}$`}
+                    sourceAttribution="এনসিটিবি অনুমোদিত পাঠ্যবই, অধ্যায় ৩ (গতিবিদ্যা)"
+                    explanationBn={String.raw`আমরা জানি, প্রক্ষেপকের ক্ষেত্রে সর্বোচ্চ উচ্চতার সমীকরণ $H = \frac{v_0^2 \sin^2\theta}{2g}$। এখানে আদিবেগ $v_0 = 40 \text{ m/s}$, নিক্ষেপণ কোণ $\theta = 30^\circ$, এবং অভিকর্ষজ ত্বরণ $g = 9.8 \text{ m/s}^2$। মানগুলো বসালে প্রাপ্ত মান দাঁড়ায় প্রায় $20.41 \text{ m}$।`}
+                    isBengali={isBengali}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
       </main>
 
-      {/* Interactive Modal Instance */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="প্রাতিষ্ঠানিক কুইজ ডায়ালগ"
-        description="পরীক্ষা শুরু করার পূর্বে নির্দেশিকাগুলো মনোযোগ সহকারে পড়ুন।"
-        footer={
-          <div className="flex items-center justify-end gap-2 w-full">
-            <Button variant="paper" size="sm" onClick={() => setIsModalOpen(false)}>
-              বাতিল করুন
-            </Button>
-            <Button variant="default" size="sm" onClick={() => setIsModalOpen(false)}>
-              বুঝেছি, পরীক্ষা শুরু করুন
-            </Button>
-          </div>
-        }
-      >
-        <div className="space-y-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-slate-300">
-          <p>১. প্রতি প্রশ্নের জন্য ৬০ সেকেন্ড সময় বরাদ্দ থাকবে।</p>
-          <p>২. প্রতিটি ভুল উত্তরের জন্য ০.২৫ নেগেটিভ মার্কিং প্রযোজ্য।</p>
-          <p>৩. পরীক্ষা চলাকালীন কিবোর্ডের 1-4 অথবা A-D চেপে দ্রুত উত্তর নির্বাচন করা যাবে।</p>
-        </div>
-      </Modal>
-
-      {/* Interactive Drawer Instance */}
-      <Drawer
-        isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        title="শেখার অগ্রগতি ও সিলেবাস ওভারভিউ"
-        description="আপনার বর্তমান সম্পন্নকৃত অধ্যায়সমূহ ও পরীক্ষার ফলাফল"
-        footer={
-          <Button variant="default" size="md" fullWidth onClick={() => setIsDrawerOpen(false)}>
-            ড্রয়ার বন্ধ করুন
-          </Button>
-        }
-      >
-        <div className="space-y-4">
-          <div className="p-3.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
-            <span className="text-xs font-semibold text-[#1B2A4A] dark:text-[#F5F2EB] block mb-1">
-              পদার্থবিজ্ঞান ১ম পত্র
-            </span>
-            <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
-              <div className="h-full bg-[#0B5D3B] rounded-full" style={{ width: '68%' }} />
-            </div>
-            <span className="text-[11px] text-[#5B5B5B] mt-1 block">৬৮% সিলেবাস সম্পন্ন</span>
-          </div>
-
-          <p className="text-xs text-[#5B5B5B] leading-relaxed">
-            এখানে শিক্ষার্থীর বিস্তারিত অগ্রগতি, প্রতিটি অধ্যায়ের সমাধানকৃত প্রশ্ন সংখ্যা এবং রিভিশন তালিকা দেখা যাবে।
-          </p>
-        </div>
-      </Drawer>
-
       {/* Footer */}
-      <footer className="mt-16 border-t border-[var(--color-border-hairline)] bg-white py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center text-xs text-[var(--color-ink-muted)]">
-          অগ্রযাত্রা এডুকেশন প্ল্যাটফর্ম · অ্যাকাডেমিক এডিটোরিয়াল ডিজাইন সিস্টেম ও কম্পোনেন্ট গ্যালারি · ২০২৬
+      <footer className="mt-16 border-t border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] py-8 transition-colors duration-150">
+        <div className="max-w-6xl mx-auto px-4 text-center text-xs text-[#525252] dark:text-[#A3A8B5]">
+          অগ্রযাত্রা ডিজিটাল ক্যাম্পাস · অ্যাকাডেমিক এডিটোরিয়াল ডিজাইন সিস্টেম ও ট্যাকটাইল ৩ডি বাটন গ্যালারি · ২০২৬
         </div>
       </footer>
     </div>

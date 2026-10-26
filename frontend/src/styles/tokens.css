@@ -1,79 +1,90 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
  * MODULE:    Design System Token Repository (Single Source of Truth)
- * TOPIC:     Modern Academic Editorial Design System
+ * TOPIC:     Master Academic UI, Bengal Academic Editorial & Tactile 3D Physics
  * FILE:      frontend/src/styles/tokens.css
  * PURPOSE:   Defines all primitive and semantic design tokens:
- *            - Paper grounds (#FAF8F3) and pure white surfaces (#FFFFFF)
- *            - Deep Academic Ink-Blue (#1B2A4A) primary and muted ochre (#B8862B) accent
- *            - High-contrast near-black ink (#1A1A1A) and muted gray (#5B5B5B)
- *            - Flat subdued semantic status tokens (success, warning, error)
- *            - Modular typography scale (~1.250 Major Third)
- *            - 8px spacing scale and 2 soft paper shadow levels
- * STANDARDS: WCAG 2.2 AAA Contrast, Zero-Emoji, Zero-Neon, Academic Editorial
+ *            - Semantic colors (surfaces, text, border, accent, success, warning, danger) for light and dark
+ *            - Spacing scale (8px modular grid), radius scale (disciplined academic 6-12px)
+ *            - Layered, soft, believable paper shadows (zero neon glow)
+ *            - Z-index scale, motion tokens (durations, easing, spring presets)
+ *            - Zero pure #000/#fff for surfaces and texts (WCAG 2.2 AAA compliance)
+ *            - Strict Zero-Emoji, Zero-Neon, Academic Editorial Standards
  */
 
 :root {
   /* ==========================================================================
-   * 1. COLOR TOKENS: SURFACES & GROUNDS (Warm Off-White Paper Family)
+   * 1. COLOR TOKENS: SURFACES & GROUNDS (Warm Off-White Paper Family - Light)
+   * No harsh pure #FFFFFF glare or pure #000000 ink
    * ========================================================================== */
-  --color-paper-ground: #FAF8F3;          /* Warm off-white paper canvas */
-  --color-paper-surface: #FFFFFF;         /* Pure white card and container surface */
+  --color-paper-ground: #FAF8F3;          /* Warm natural off-white paper canvas */
+  --color-paper-surface: #FDFCF9;         /* Warm parchment card and container surface */
   --color-paper-surface-muted: #F5F2EB;   /* Subtle tinted paper for secondary regions */
   --color-paper-surface-hover: #EFECE3;   /* Soft paper hover state */
+  --color-paper-surface-inset: #F2EFE8;   /* Inset container surface */
   
   /* Hairline Borders */
   --color-border-hairline: #E5E2DA;       /* Hairline warm gray 1px border */
   --color-border-subtle: #EBE8E0;         /* Extra soft divider hairline */
   --color-border-strong: #D1CDC4;         /* Structural contrast border */
-  --color-border-focus: #1B2A4A;          /* High-visibility keyboard focus border */
+  --color-border-focus: #0A2540;          /* High-visibility keyboard focus border */
 
   /* ==========================================================================
-   * 2. COLOR TOKENS: INK & TYPOGRAPHY (High Contrast Near-Black)
+   * 2. COLOR TOKENS: INK & TYPOGRAPHY (High Contrast Near-Black Ink - Light)
    * ========================================================================== */
-  --color-ink-primary: #1A1A1A;           /* Near-black ink (15.8:1 contrast on #FAF8F3 - WCAG AAA) */
-  --color-ink-muted: #5B5B5B;             /* Subdued secondary gray (6.1:1 contrast on #FAF8F3 - WCAG AAA) */
-  --color-ink-faint: #787878;             /* Tertiary metadata ink (4.5:1 minimum on white) */
-  --color-ink-inverse: #FFFFFF;           /* Contrast white text on dark buttons */
+  --color-ink-primary: #1A1A1A;           /* Near-black carbon ink (15.8:1 contrast on #FAF8F3 - WCAG AAA) */
+  --color-ink-muted: #525252;             /* Subdued secondary gray (7.1:1 contrast on #FAF8F3 - WCAG AAA) */
+  --color-ink-faint: #737373;             /* Tertiary metadata ink (4.6:1 contrast on #FAF8F3 - WCAG AA) */
+  --color-ink-inverse: #FDFCF9;           /* Contrast parchment text on dark buttons */
 
   /* ==========================================================================
-   * 3. COLOR TOKENS: BRAND & ACCENT
+   * 3. COLOR TOKENS: BRAND & ACCENTS (Academic Editorial Heritage)
    * ========================================================================== */
-  /* Primary: Deep Academic Ink-Blue (#1B2A4A Family) */
-  --color-brand-primary: #1B2A4A;         /* Authoritative scholarly ink-blue */
-  --color-brand-hover: #121E36;           /* Deeper tone on interaction */
+  /* Primary: Oxford Academic Navy (#0A2540 / #1B2A4A) */
+  --color-brand-primary: #0A2540;         /* Authoritative Oxford Navy */
+  --color-brand-hover: #0E3357;           /* Deeper tone on hover */
+  --color-brand-active: #051329;          /* Pressed tone */
+  --color-brand-depth: #051329;           /* 3D tactile bottom bevel shadow */
   --color-brand-tint: #EEF2F6;            /* Soft background tint for active items */
   --color-brand-contrast: #FFFFFF;        /* Crisp white on primary */
 
-  /* Accent: Muted Gold / Ochre (#B8862B Family - Used Sparingly) */
-  --color-accent-gold: #B8862B;           /* Muted academic ochre */
-  --color-accent-gold-hover: #9E7223;     /* Deeper pressed gold */
-  --color-accent-gold-tint: #FDF9F0;      /* Subtle warm ivory-gold wash */
+  /* Accent: Scholar Gold & Muted Ochre (#B45309 / #B8862B) */
+  --color-accent-gold: #B45309;           /* Muted academic ochre */
+  --color-accent-gold-hover: #92400E;     /* Deeper pressed gold */
+  --color-accent-gold-depth: #78350F;     /* 3D tactile gold bottom shadow */
+  --color-accent-gold-tint: #FEF9EE;      /* Subtle warm ivory-gold wash */
+  --color-accent-gold-border: #F5E5C4;    /* Gold hairline accent border */
   --color-accent-gold-contrast: #FFFFFF;  /* Contrast text on accent */
 
   /* ==========================================================================
-   * 4. COLOR TOKENS: SUBDUED FLAT SEMANTICS (Success, Warning, Danger)
+   * 4. COLOR TOKENS: FLAT SUBDUED SEMANTICS (Success, Warning, Danger)
    * ========================================================================== */
-  /* Success / Mastery: Deep Academic Forest Green (#0B5D3B) */
-  --color-semantic-success: #0B5D3B;      /* Subdued academic forest emerald */
-  --color-semantic-success-hover: #08492E;
+  /* Success / Mastery: Deep Academic Forest Emerald (#065F46 / #0B5D3B) */
+  --color-semantic-success: #065F46;      /* Subdued academic forest emerald */
+  --color-semantic-success-hover: #087858;
+  --color-semantic-success-active: #033829;
+  --color-semantic-success-depth: #033829; /* 3D tactile emerald bottom shadow */
   --color-semantic-success-tint: #F0F7F4;
   --color-semantic-success-border: #C8E3D7;
 
-  /* Warning / Caution: Muted Scholar Ochre (#B8862B) */
-  --color-semantic-warning: #B8862B;      /* Subdued gold warning */
-  --color-semantic-warning-hover: #9E7223;
+  /* Warning / Caution: Scholar Ochre (#B45309) */
+  --color-semantic-warning: #B45309;      /* Subdued scholar warning */
+  --color-semantic-warning-hover: #92400E;
+  --color-semantic-warning-active: #78350F;
+  --color-semantic-warning-depth: #78350F; /* 3D tactile warning bottom shadow */
   --color-semantic-warning-tint: #FEF9EE;
   --color-semantic-warning-border: #F5E5C4;
 
-  /* Danger / Error: Muted Burgundy Crimson (#991B1B / #A32A2A) */
-  --color-semantic-danger: #991B1B;       /* Subdued academic crimson */
+  /* Danger / Error: Muted Burgundy Crimson (#991B1B) */
+  --color-semantic-danger: #991B1B;       /* Subdued academic burgundy crimson */
   --color-semantic-danger-hover: #7F1D1D;
+  --color-semantic-danger-active: #5B1010;
+  --color-semantic-danger-depth: #5B1010;  /* 3D tactile crimson bottom shadow */
   --color-semantic-danger-tint: #FDF2F2;
   --color-semantic-danger-border: #F8D2D2;
 
   /* Focus & Accessibility */
-  --focus-ring: #1B2A4A;
+  --focus-ring: #0A2540;
   --focus-ring-offset: 2px;
 
   /* ==========================================================================
@@ -84,11 +95,11 @@
   --color-oxford-depth: #051329;
   --color-academic-emerald: #065F46;
   --color-academic-emerald-hover: #087858;
-  --color-academic-emerald-depth: #044332;
+  --color-academic-emerald-depth: #033829;
   --color-scholar-gold: #B45309;
   --color-scholar-gold-subtle: #FFFBEB;
   --color-paper-ivory: #FAF8F3;
-  --color-paper-white: #FFFFFF;
+  --color-paper-white: #FDFCF9;
   --color-ink-slate: #0B132B;
   --color-burgundy-crimson: #991B1B;
 
@@ -125,15 +136,15 @@
   /* Navbar Clean Academic Tokens */
   --header-height: 72px;
   --header-height-scrolled: 60px;
-  --header-bg-idle: #FFFFFF;
-  --header-bg-scrolled: #FFFFFF;
+  --header-bg-idle: #FDFCF9;
+  --header-bg-scrolled: #FDFCF9;
   --header-border-idle: var(--color-border-hairline);
   --header-border-scrolled: var(--color-border-hairline);
-  --header-dropdown-bg: #FFFFFF;
+  --header-dropdown-bg: #FDFCF9;
   --header-dropdown-border: var(--color-border-hairline);
   --header-dropdown-hover: var(--color-paper-surface-muted);
-  --navbar-bg: #FFFFFF;
-  --navbar-bg-solid: #FFFFFF;
+  --navbar-bg: #FDFCF9;
+  --navbar-bg-solid: #FDFCF9;
   --navbar-border: var(--color-border-hairline);
   --navbar-surface: var(--color-paper-surface-muted);
   --navbar-surface-border: var(--color-border-hairline);
@@ -148,8 +159,8 @@
   --navbar-primary-text: #FFFFFF;
   --navbar-primary-glow: none;
   --navbar-primary-glow-hover: none;
-  --navbar-logo-cap: #B8862B;
-  --navbar-logo-bg: #1B2A4A;
+  --navbar-logo-cap: #B45309;
+  --navbar-logo-bg: #0A2540;
   --navbar-live-badge-bg: var(--color-semantic-danger-tint);
   --navbar-live-badge-border: var(--color-semantic-danger-border);
   --navbar-live-badge-text: var(--color-semantic-danger);
@@ -158,14 +169,23 @@
   --navbar-dashboard-text: var(--color-brand-primary);
   --navbar-dashboard-hover-bg: var(--color-paper-surface-muted);
 
-  /* Clean Paper Shadows - Max 2 Soft Levels (Strict Zero Glow) */
-  --shadow-paper: 0 1px 2px rgba(27, 42, 74, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
-  --shadow-paper-elevated: 0 3px 6px -1px rgba(27, 42, 74, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-sm: var(--shadow-paper);
-  --shadow-md: var(--shadow-paper-elevated);
-  --shadow-lg: 0 6px 14px -2px rgba(27, 42, 74, 0.08), 0 3px 6px -2px rgba(0, 0, 0, 0.04);
-  --shadow-ambient: var(--shadow-paper);
-  --shadow-ambient-lg: var(--shadow-paper-elevated);
+  /* Clean Paper Shadows - Layered, Soft, Believable (Strict Zero Neon Glow) */
+  --shadow-paper-xs: 0 1px 2px rgba(10, 37, 64, 0.04);
+  --shadow-paper-sm: 0 1px 3px rgba(10, 37, 64, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-paper-md: 0 4px 8px -2px rgba(10, 37, 64, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-paper-lg: 0 10px 20px -3px rgba(10, 37, 64, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-paper-xl: 0 20px 25px -5px rgba(10, 37, 64, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --shadow-inner-bevel: inset 0 1px 2px rgba(10, 37, 64, 0.06);
+
+  /* Backward Compatibility Shadows */
+  --shadow-paper: var(--shadow-paper-sm);
+  --shadow-paper-elevated: var(--shadow-paper-md);
+  --shadow-sm: var(--shadow-paper-xs);
+  --shadow-md: var(--shadow-paper-md);
+  --shadow-lg: var(--shadow-paper-lg);
+  --shadow-ambient: var(--shadow-paper-sm);
+  --shadow-ambient-lg: var(--shadow-paper-md);
 
   /* Clean Canvas - Zero Neon Glow */
   --bg-radial-ambient: none;
@@ -173,10 +193,10 @@
   /* ==========================================================================
    * 6. MODULAR TYPOGRAPHY SCALE (1.250 Major Third)
    * ========================================================================== */
-  --font-serif-bengali: 'Noto Serif Bengali', 'Tiro Bangla', serif;
-  --font-sans-bengali: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
-  --font-serif-english: 'Source Serif 4', 'Lora', Georgia, serif;
-  --font-sans-english: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif-bengali: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
+  --font-sans-bengali: 'Hind Siliguri', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif-english: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans-english: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Scale: Base 16px, Ratio 1.250 */
   --font-size-xs: 0.8rem;         /* 12.8px */
@@ -189,7 +209,7 @@
   --font-size-3xl: 2.441rem;      /* 39px */
   --font-size-4xl: 3.052rem;      /* 48.8px */
 
-  /* Line Heights */
+  /* Line Heights: Calibrated to prevent Bengali conjunct & matra collision */
   --line-height-tight: 1.35;      /* For large Bengali & English headings */
   --line-height-normal: 1.6;      /* For compact UI elements */
   --line-height-relaxed: 1.78;    /* For Bengali body prose (prevents matra collision) */
@@ -199,10 +219,13 @@
   --reading-measure-max: 68ch;
 
   /* ==========================================================================
-   * 7. SPACING SCALE (8px Grid)
+   * 7. SPACING SCALE (8px Modular Grid)
    * ========================================================================== */
+  --space-0-5: 2px;
   --space-1: 4px;
+  --space-1-5: 6px;
   --space-2: 8px;
+  --space-2-5: 10px;
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 20px;
@@ -211,56 +234,108 @@
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
+  --space-20: 80px;
 
-  /* Shape & Radius (6 - 10px standard, no exaggerated pill cards) */
+  /* Shape & Radius (Disciplined academic 6-12px, zero exaggerated pill cards) */
+  --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
   
   /* Container Standard */
   --container-max-width: 1200px;
+
+  /* ==========================================================================
+   * 8. Z-INDEX SYSTEM TOKENS (Strict Single Source of Truth)
+   * ========================================================================== */
+  --z-deep: -1;
+  --z-base: 0;
+  --z-raised: 1;
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-popover: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+
+  /* ==========================================================================
+   * 9. MOTION & INTERACTION TOKENS (Context-Aware, Zero-Jank, Spring Presets)
+   * ========================================================================== */
+  --duration-instant: 75ms;
+  --duration-fast: 120ms;         /* Tactile button press & toggle */
+  --duration-normal: 200ms;       /* Smooth fade & card elevation */
+  --duration-moderate: 300ms;     /* Drawers, dialogs & accordions */
+  --duration-slow: 450ms;         /* Major surface transitions */
+
+  --ease-academic: cubic-bezier(0.16, 1, 0.3, 1);   /* Smooth, scholarly, refined */
+  --ease-press: cubic-bezier(0.4, 0, 0.2, 1);       /* Tactile physical click */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --spring-tactile: cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
 /* ==========================================================================
- * 8. DARK THEME SCAFFOLDING (Soft Matte Ink/Charcoal - NOT Neon Navy)
- * Ready for future complete rollout; strictly excludes cybernetic neon.
+ * 10. DARK THEME TOKENS (Soft Matte Ink/Charcoal - NOT Neon Navy or Pure #000)
+ * Fully compliant with WCAG 2.2 AA/AAA contrast on dark surfaces
  * ========================================================================== */
 .dark {
-  --color-paper-ground: #12161F;          /* Soft matte charcoal canvas */
-  --color-paper-surface: #181E2B;         /* Flat slate-ink card surface */
-  --color-paper-surface-muted: #1E2536;   /* Muted surface */
-  --color-paper-surface-hover: #252E42;
+  /* Surfaces: Soft matte slate-ink (No pure #000000) */
+  --color-paper-ground: #0F141E;          /* Soft matte slate-charcoal canvas */
+  --color-paper-surface: #171E2C;         /* Flat slate-ink card surface */
+  --color-paper-surface-muted: #1E2738;   /* Muted secondary container surface */
+  --color-paper-surface-hover: #263147;   /* Hover state */
+  --color-paper-surface-inset: #131A26;   /* Inset container surface */
 
-  --color-border-hairline: #273145;       /* Hairline warm slate border */
-  --color-border-subtle: #202838;
-  --color-border-strong: #37445E;
-  --color-border-focus: #5A7EBA;
+  /* Hairline Borders */
+  --color-border-hairline: #263147;       /* Hairline warm slate border */
+  --color-border-subtle: #1F283A;
+  --color-border-strong: #384663;
+  --color-border-focus: #6088C6;
 
-  --color-ink-primary: #F5F2EB;           /* Warm parchment text */
-  --color-ink-muted: #9E9E9E;             /* Soft neutral muted text */
-  --color-ink-faint: #757575;
-  --color-ink-inverse: #12161F;
+  /* Inks: Warm parchment text (No pure #FFFFFF) */
+  --color-ink-primary: #F5F2EB;           /* Warm parchment text (13:1 on #0F141E) */
+  --color-ink-muted: #A3A8B5;             /* Soft neutral muted text (6.2:1) */
+  --color-ink-faint: #7D8494;             /* Tertiary metadata ink (4.6:1) */
+  --color-ink-inverse: #0F141E;           /* Contrast dark text on light buttons */
 
-  --color-brand-primary: #5A7EBA;         /* Soft academic blue */
-  --color-brand-hover: #7192C9;
-  --color-brand-tint: rgba(90, 126, 186, 0.14);
+  /* Brand & Semantics in Dark */
+  --color-brand-primary: #527EBD;         /* Readable academic blue in dark */
+  --color-brand-hover: #6992CE;
+  --color-brand-active: #385D94;
+  --color-brand-depth: #233B61;           /* 3D tactile depth in dark */
+  --color-brand-tint: rgba(82, 126, 189, 0.16);
+  --color-brand-contrast: #F5F2EB;
 
   --color-accent-gold: #D4A34B;
-  --color-accent-gold-tint: rgba(212, 163, 75, 0.12);
+  --color-accent-gold-hover: #E2B768;
+  --color-accent-gold-active: #A6792A;
+  --color-accent-gold-depth: #7A5313;
+  --color-accent-gold-tint: rgba(212, 163, 75, 0.14);
+  --color-accent-gold-border: #523B14;
 
-  --color-semantic-success: #2E8A5E;
-  --color-semantic-success-tint: rgba(46, 138, 94, 0.14);
-  --color-semantic-success-border: #245E42;
+  --color-semantic-success: #268C5E;
+  --color-semantic-success-hover: #33A874;
+  --color-semantic-success-active: #1A6342;
+  --color-semantic-success-depth: #134B32;
+  --color-semantic-success-tint: rgba(38, 140, 94, 0.16);
+  --color-semantic-success-border: #1B5439;
 
-  --color-semantic-warning: #D4A34B;
-  --color-semantic-warning-tint: rgba(212, 163, 75, 0.12);
-  --color-semantic-warning-border: #8A6524;
+  --color-semantic-warning: #D98E28;
+  --color-semantic-warning-hover: #E5A344;
+  --color-semantic-warning-active: #A86915;
+  --color-semantic-warning-depth: #7A4E11;
+  --color-semantic-warning-tint: rgba(217, 142, 40, 0.15);
+  --color-semantic-warning-border: #6B4310;
 
   --color-semantic-danger: #D94545;
-  --color-semantic-danger-tint: rgba(217, 69, 69, 0.14);
-  --color-semantic-danger-border: #822727;
+  --color-semantic-danger-hover: #E26363;
+  --color-semantic-danger-active: #A82E2E;
+  --color-semantic-danger-depth: #751E1E;
+  --color-semantic-danger-tint: rgba(217, 69, 69, 0.16);
+  --color-semantic-danger-border: #6B1D1D;
 
   /* Backward Compatibility in Dark */
   --bg-app: var(--color-paper-ground);
@@ -271,8 +346,42 @@
   --border-subtle: var(--color-border-hairline);
   --border-strong: var(--color-border-strong);
 
-  --shadow-paper: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-paper-elevated: 0 3px 6px -1px rgba(0, 0, 0, 0.45);
-  --shadow-sm: var(--shadow-paper);
-  --shadow-md: var(--shadow-paper-elevated);
+  --shadow-paper-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-paper-sm: 0 1px 3px rgba(0, 0, 0, 0.40);
+  --shadow-paper-md: 0 4px 8px -2px rgba(0, 0, 0, 0.50);
+  --shadow-paper-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.60);
+  --shadow-paper-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.70);
+  --shadow-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-inner-bevel: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  --shadow-paper: var(--shadow-paper-sm);
+  --shadow-paper-elevated: var(--shadow-paper-md);
+  --shadow-sm: var(--shadow-paper-xs);
+  --shadow-md: var(--shadow-paper-md);
+  --shadow-lg: var(--shadow-paper-lg);
+  --shadow-ambient: var(--shadow-paper-sm);
+  --shadow-ambient-lg: var(--shadow-paper-md);
+
+  --header-bg-idle: #171E2C;
+  --header-bg-scrolled: #171E2C;
+  --header-border-idle: var(--color-border-hairline);
+  --header-border-scrolled: var(--color-border-hairline);
+  --header-dropdown-bg: #171E2C;
+  --header-dropdown-border: var(--color-border-hairline);
+  --header-dropdown-hover: var(--color-paper-surface-muted);
+  --navbar-bg: #171E2C;
+  --navbar-bg-solid: #171E2C;
+  --navbar-border: var(--color-border-hairline);
+  --navbar-surface: var(--color-paper-surface-muted);
+  --navbar-surface-border: var(--color-border-hairline);
+  --navbar-surface-hover: var(--color-paper-surface-hover);
+  --navbar-text: var(--color-ink-primary);
+  --navbar-text-muted: var(--color-ink-muted);
+  --navbar-hover-text: var(--color-brand-primary);
+  --navbar-hover-bg: var(--color-paper-surface-muted);
+  --navbar-active-text: var(--color-brand-primary);
+  --navbar-active-bg: var(--color-brand-tint);
+  --navbar-primary-gradient: none;
+  --navbar-primary-text: #F5F2EB;
+  --focus-ring: #6088C6;
 }

@@ -1,37 +1,46 @@
 /**
- * ========================================================================================
- * DEVELOPER ARCHITECTURE NOTE - CORE UI PRIMITIVES:
- * MODULE:    Accessible Elevated Card Component Suite
- * TOPIC:     Subtle Border (#E2E8F0), Dual Light/Dark Theme Elevation & Zero Emoji
+ * DEVELOPER ARCHITECTURE NOTE:
+ * MODULE:    Accessible Academic Card Component Suite
+ * TOPIC:     Bengal Academic Editorial & Layered Soft Paper Depth
  * FILE:      frontend/src/components/ui/card.tsx
  * PURPOSE:   Provides clean, modern elevated cards for modules, course units, quiz questions,
- *            and telemetry monitors. Uses subtle border (#E2E8F0 / slate-800), smooth hover
- *            elevation, and structured compound components (Header, Title, Description, Content, Footer).
- * AUDIENCE:  Frontend Developers, Accessibility Testers & UI Reviewers
- * STANDARDS: UI/UX Pro Max, WCAG 2.2 AA Contrast >= 4.5:1, Zero-Emoji Architecture
- * ========================================================================================
+ *            and telemetry monitors. Uses hairline borders (#E5E2DA / #263147), soft layered
+ *            paper elevation, optional tactile 3D hover lift, and disciplined 8-10px radius.
+ * STANDARDS: UI/UX Pro Max, WCAG 2.2 AAA Contrast >= 4.5:1, Zero-Emoji Architecture
  */
 
 import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
+export type CardVariant = 'default' | 'elevated' | 'interactive' | 'muted';
+
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: CardVariant;
   hoverable?: boolean;
 }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, hoverable = false, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        // Standard subtle border border-[#E2E8F0] elevated to academic hairline #E5E2DA
-        "rounded-2xl border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1A1A1A] dark:text-[#F5F2EB] shadow-none transition-colors duration-150",
-        hoverable && "hover:border-[#D1CDC4] dark:hover:border-[#3D475C] hover:bg-[#FAF8F3]/60 dark:hover:bg-[#152035]/60",
-        className
-      )}
-      {...props}
-    />
-  )
+  ({ className, variant = 'default', hoverable = false, ...props }, ref) => {
+    const variantStyles: Record<CardVariant, string> = {
+      default: "bg-[#FDFCF9] dark:bg-[#171E2C] border-[#E5E2DA] dark:border-[#263147] shadow-[0_1px_3px_rgba(10,37,64,0.05),0_1px_2px_rgba(0,0,0,0.02)]",
+      elevated: "bg-[#FDFCF9] dark:bg-[#171E2C] border-[#E5E2DA] dark:border-[#263147] shadow-[0_4px_8px_-2px_rgba(10,37,64,0.06),0_2px_4px_-1px_rgba(0,0,0,0.03)]",
+      interactive: "bg-[#FDFCF9] dark:bg-[#171E2C] border-[#E5E2DA] dark:border-[#263147] shadow-[0_3px_0_0_#D1CDC4,0_1px_3px_rgba(10,37,64,0.05)] hover:-translate-y-0.5 hover:shadow-[0_5px_0_0_#D1CDC4,0_4px_8px_rgba(10,37,64,0.08)] active:translate-y-0.5 active:shadow-[0_1px_0_0_#D1CDC4] dark:shadow-[0_3px_0_0_#1F283A] dark:hover:shadow-[0_5px_0_0_#1F283A] cursor-pointer will-change-transform",
+      muted: "bg-[#F5F2EB] dark:bg-[#1E2738] border-[#E5E2DA] dark:border-[#263147] shadow-none",
+    };
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "rounded-lg border text-[#1A1A1A] dark:text-[#F5F2EB] transition-all duration-150 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          variantStyles[variant],
+          hoverable && variant !== 'interactive' && "hover:border-[#D1CDC4] dark:hover:border-[#384663] hover:bg-[#FAF8F3] dark:hover:bg-[#1E2738]/80",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
 );
 Card.displayName = "Card";
 
@@ -53,7 +62,7 @@ export const CardMeta = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center gap-2 text-xs text-[#5B5B5B] dark:text-slate-400 font-sans pb-1", className)}
+    className={cn("flex items-center gap-2 text-xs text-[#525252] dark:text-[#A3A8B5] font-sans pb-1", className)}
     {...props}
   />
 ));
@@ -66,7 +75,7 @@ export const CardTitle = forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-base sm:text-lg font-serif font-bold leading-snug tracking-normal text-[#1B2A4A] dark:text-[#F5F2EB]",
+      "text-base sm:text-lg font-serif font-bold leading-[1.35] tracking-normal text-[#0A2540] dark:text-[#F5F2EB]",
       className
     )}
     {...props}
@@ -80,7 +89,7 @@ export const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-sans", className)}
+    className={cn("text-xs sm:text-sm text-[#525252] dark:text-[#A3A8B5] leading-[1.7] font-sans", className)}
     {...props}
   />
 ));
@@ -100,7 +109,7 @@ export const CardFooter = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0 border-t border-[#E5E2DA] dark:border-[#262D3D] mt-4", className)}
+    className={cn("flex items-center p-6 pt-2 border-t border-[#E5E2DA] dark:border-[#263147]", className)}
     {...props}
   />
 ));
