@@ -12,6 +12,17 @@
  * STANDARDS: Strict Zero-Emoji, WCAG 2.2 AAA, Pedagogical Hint Guard, OWASP LLM01.
  */
 
+import type { PlatformFeature } from './platformKnowledge.ts';
+import {
+  findPlatformKnowledge,
+  formatPlatformFeatureResponse
+} from './platformKnowledge.ts';
+
+export interface AcademicInvitation {
+  domain: 'math' | 'physics' | 'chemistry' | 'ict' | 'general';
+  responseBn: string;
+}
+
 export interface MisconceptionRule {
   id: string;
   domain: 'math' | 'physics' | 'chemistry' | 'ict';
@@ -232,11 +243,15 @@ export const ZERO_ANSWER_LEAKING_REFUSAL_BN =
 // 2.1 Capability & General Orientation Inquiry Detector
 // =============================================================================
 export const CAPABILITY_INQUIRY_PATTERNS = [
-  /tmi\s*amk\s*ki\s*ki\s*kaje\s*(help|sahajjo)\s*korba/i,
-  /tumi\s*amake\s*ki\s*ki\s*kaje\s*sahajjo/i,
+  /tmi\s*amk\s*ki\s*ki\s*(kaje|topic|bishoy)\s*(help|sahajjo)\s*korba/i,
+  /tumi\s*amake\s*ki\s*ki\s*(kaje|topic|bishoy)\s*sahajjo/i,
+  /ki\s*ki\s*topic\s*(a|e)?\s*(tmi|tumi)?\s*(amk\s*)?(help|sahajjo)/i,
+  /ki\s*ki\s*topic/i,
+  /what\s*topics?\s*(can\s*you|do\s*you)/i,
   /tmi\s*ki\s*(korte\s*paro|help\s*korba)/i,
-  /তুমি\s*আমাকে\s*কী\s*কী\s*(কাজে|বিষয়ে)\s*(সাহায্য|হেল্প)\s*করবে/i,
-  /কী\s*কী\s*কাজে\s*(সাহায্য|হেল্প)/i,
+  /তুমি\s*আমাকে\s*কী\s*কী\s*(কাজে|বিষয়ে|টপিকে)\s*(সাহায্য|হেল্প)\s*করবে/i,
+  /কী\s*কী\s*(কাজে|বিষয়ে|টপিকে)\s*(সাহায্য|হেল্প)/i,
+  /কোন\s*কোন\s*(বিষয়ে|টপিকে|অধ্যায়ে)\s*(সাহায্য|হেল্প)/i,
   /তুমি\s*(কী|কি)\s*করতে\s*পারো/i,
   /কিভাবে\s*(সাহায্য|হেল্প)\s*করবে/i,
   /what\s*can\s*you\s*(do|help\s*with)/i,
@@ -244,6 +259,8 @@ export const CAPABILITY_INQUIRY_PATTERNS = [
   /tumi\s*ke/i,
   /তুমি\s*কে/i,
   /তোমার\s*কাজ\s*(কী|কি)/i,
+  /তোমার\s*দক্ষতা\s*(কী|কি)/i,
+  /তোমার\s*স্কিল/i,
   /হেল্প\s*করবে/i,
 ];
 
@@ -260,8 +277,121 @@ export const TUTOR_CAPABILITIES_RESPONSE_BN =
   '৪. তথ্য ও যোগাযোগ প্রযুক্তি (আইসিটি): বুলিয়ান বীজগণিত, ডি মরগ্যান উপপাদ্য এবং সংখ্যা পদ্ধতি রূপান্তর।\n' +
   '৫. খাতার ছবির ওটিআর স্ক্যানিং: খাতার পাতার ছবি আপলোড করলে স্বয়ংক্রিয়ভাবে সমীকরণ সনাক্ত করে শিক্ষণ সংকেত প্রদান।\n' +
   '৬. বাংলা ভয়েস ইনপুট: কিবোর্ডে না লিখে সরাসরি বাংলায় মুখে প্রশ্ন বলে অনুসন্ধান।\n' +
-  '৭. ৩ডি সিমুলেশন ল্যাব: সূত্রের পাশাপাশি ৩ডি প্রজেক্টাইল ও মলিকিউলার ল্যাবে পরীক্ষা নিরীক্ষণ।\n\n' +
+  '৭. ৩ডি সিমুলেশন ল্যাব: সূত্রের পাশাপাশি ৩ডি প্রজেক্টাইল ও মলিকিউলার ল্যাবে পরীক্ষা নিরীক্ষণ।\n' +
+  '৮. সাইট নেভিগেশন ও গাইডেন্স: প্ল্যাটফর্মের লাইভ চ্যালেঞ্জ, টিউশন হাব, এডমিশন প্রেডিক্টর, বোর্ড প্রশ্ন ব্যাংক কোথায় কী সুবিধা আছে তার সার্বিক নির্দেশনা।\n\n' +
   'আপনার পড়ার টেবিলের যেকোনো সমস্যা, সমীকরণ বা খাতার ছবি দিয়ে শুরু করতে পারেন!';
+
+// =============================================================================
+// 2.2 Academic Problem Invitation & Conversational Opening Detector
+// =============================================================================
+export const MATH_INVITATION_PATTERNS = [
+  /amr\s*(akta\s*)?math(\s*a|\s*e|\s*er)?\s*(problem|help|somadhan)/i,
+  /math(\s*a|\s*e|\s*er)?\s*(problem|help|somadhan|solve)/i,
+  /math\s*solve\s*kore\s*dite\s*parbe/i,
+  /গণিত(ে)?\s*(একটা\s*)?(সমস্যা|সাহায্য|সমাধান|হেল্প)/i,
+  /অংক(ে)?\s*(একটা\s*)?(সমস্যা|সাহায্য|সমাধান|হেল্প)/i,
+  /অংক\s*সমাধান\s*করতে\s*পারবে/i,
+  /অংক\s*করে\s*দিতে\s*পারবে/i,
+  /গণিতে\s*সাহায্য\s*করবে/i,
+  /উচ্চতর\s*গণিত(ে)?\s*সাহায্য/i,
+];
+
+export const PHYSICS_INVITATION_PATTERNS = [
+  /physics(\s*a|\s*e|\s*er)?\s*(problem|help|somadhan|solve)/i,
+  /পদার্থ(বিজ্ঞান)?(ে)?\s*(একটা\s*)?(সমস্যা|সাহায্য|সমাধান|হেল্প)/i,
+  /পদার্থবিজ্ঞানে\s*সাহায্য/i,
+  /physics\s*problem/i,
+];
+
+export const CHEMISTRY_INVITATION_PATTERNS = [
+  /chem(istry)?(\s*a|\s*e|\s*er)?\s*(problem|help|somadhan|solve)/i,
+  /রসায়ন(ে)?\s*(একটা\s*)?(সমস্যা|সাহায্য|সমাধান|হেল্প)/i,
+  /রসায়নে\s*সাহায্য/i,
+  /chemistry\s*problem/i,
+];
+
+export const ICT_INVITATION_PATTERNS = [
+  /ict(\s*a|\s*e|\s*er|te)?\s*(problem|help|somadhan|solve)/i,
+  /আইসিটি(তে)?\s*(একটা\s*)?(সমস্যা|সাহায্য|সমাধান|হেল্প)/i,
+  /তথ্য\s*ও\s*যোগাযোগ\s*প্রযুক্তি(তে)?\s*সাহায্য/i,
+  /লজিক\s*গেট|বুলিয়ান|বাইনারি\s*রূপান্তর/i,
+  /ict\s*help/i,
+];
+
+export const GENERAL_ACADEMIC_INVITATION_PATTERNS = [
+  /amr\s*akta\s*(problem|somadhan|prosno)\s*(ache|somadhan|korte|parbe)/i,
+  /akta\s*(problem|prosno|অংক|সমস্যা)\s*(ache|somadhan|solve|সমাধান|সাহায্য)/i,
+  /আমার\s*একটা\s*(সমস্যা|প্রশ্ন|অংক)\s*(আছে|সমাধান)/i,
+  /একটা\s*(সমস্যা|প্রশ্ন|অংক)\s*(আছে|সমাধান\s*করতে\s*পারবে)/i,
+  /academic\s*problem/i,
+  /পড়াশোনা(য়)?\s*(সাহায্য|সমস্যা)/i,
+  /can\s*you\s*(help\s*with\s*my\s*math|solve\s*my\s*problem)/i,
+];
+
+export function findAcademicInvitation(query: string): AcademicInvitation | null {
+  const text = query.trim();
+  if (!text) return null;
+
+  // 1. Math Invitation
+  if (MATH_INVITATION_PATTERNS.some((p) => p.test(text))) {
+    return {
+      domain: 'math',
+      responseBn:
+        'অবশ্যই! আমি আপনাকে উচ্চতর গণিত এবং সাধারণ গণিতের যেকোনো সমস্যা ধাপে ধাপে নিজে বুঝে সমাধান করতে সাহায্য করতে প্রস্তুত।\n\n' +
+        'আমরা জাতীয় শিক্ষাক্রম (NCTB) অনুযায়ী বীজগণিত, দ্বিঘাত সমীকরণ, ক্যালকুলাস (অন্তরীকরণ ও যোগজীকরণ), ত্রিকোণমিতি, স্থানাঙ্ক জ্যামিতি বা বিন্যাস-সমাবেশ—যেকোনো অধ্যায়ের গাণিতিক যুক্তি বিশ্লেষণ করতে পারি।\n\n' +
+        'আপনার সমস্যাটি নিয়ে আসার ৩টি সহজ উপায় রয়েছে:\n' +
+        '১. সমস্যা বা সমীকরণটি সরাসরি এখানে লিখে জানান।\n' +
+        '২. আপনার খাতার পাতার ছবি ক্যামেরা দিয়ে তুলে বা গ্যালারি থেকে সিলেক্ট করে আপলোড করুন (আমাদের OCR স্বয়ংক্রিয়ভাবে সমীকরণটি শনাক্ত করবে)।\n' +
+        '৩. অথবা নিচে মাইক্রোফোন আইকনে ট্যাপ করে মুখে বাংলায় প্রশ্নটি বলুন।\n\n' +
+        'আপনার গণিত সমস্যাটি কী? প্রশ্নটি লিখে বা খাতার ছবি পাঠিয়ে শুরু করুন!'
+    };
+  }
+
+  // 2. Physics Invitation
+  if (PHYSICS_INVITATION_PATTERNS.some((p) => p.test(text))) {
+    return {
+      domain: 'physics',
+      responseBn:
+        'অবশ্যই! পদার্থবিজ্ঞানের বলবিদ্যা, গতিবিদ্যা, প্রাসের গতিপথ, কাজ-ক্ষমতা-শক্তি, মহাকর্ষ, তড়িৎবিদ্যা বা আলোর প্রতিফলনের যেকোনো জটিল বিষয় ধাপে ধাপে উন্মোচন করতে আমি প্রস্তুত।\n\n' +
+        'প্রয়োজনে আমাদের ৩ডি প্রজেক্টাইল ও গতিপথ সিমুলেটরে মান বসিয়েও আপনি গতিপথের বাস্তব রূপটি পরীক্ষা করতে পারবেন।\n\n' +
+        'আপনার সমস্যাটি সরাসরি লিখুন, খাতার ছবি আপলোড করুন কিংবা মুখে বলুন। সমস্যাটি পদার্থবিজ্ঞানের কোন অধ্যায়ের এবং প্রশ্নে কী কী উপাত্ত দেওয়া আছে?'
+    };
+  }
+
+  // 3. Chemistry Invitation
+  if (CHEMISTRY_INVITATION_PATTERNS.some((p) => p.test(text))) {
+    return {
+      domain: 'chemistry',
+      responseBn:
+        'অবশ্যই! রসায়নের রাসায়নিক গণনা, স্টয়কিওমেট্রি, সমতাকরণ, মোলারিটি ও দ্রবণ, জারণ-বিজারণ কিংবা জৈব যৌগের গঠন ও বন্ধন কোণ নিয়ে যেকোনো সমস্যা ধাপে ধাপে সমাধান করতে আমি প্রস্তুত।\n\n' +
+        'আমাদের ৩ডি আণবিক ল্যাবে আপনি যৌগের ত্রিমাত্রিক গঠন ও সংকরায়নও দেখে নিতে পারবেন।\n\n' +
+        'আপনার রাসায়নিক সমীকরণ বা প্রশ্নটি এখানে লিখে দিন অথবা খাতার ছবি আপলোড করুন। বিক্রিয়ক ও বিক্রিয়ার শর্তাবলী কী দেওয়া আছে?'
+    };
+  }
+
+  // 4. ICT Invitation
+  if (ICT_INVITATION_PATTERNS.some((p) => p.test(text))) {
+    return {
+      domain: 'ict',
+      responseBn:
+        'অবশ্যই! আইসিটির বুলিয়ান বীজগণিত, ডি মরগ্যান উপপাদ্য, লজিক গেট সরলীকরণ, সংখ্যা পদ্ধতি রূপান্তর (বাইনারি, অক্টাল, ডেসিমেল, হেক্সাডেসিমেল) কিংবা সি প্রোগ্রামিংয়ের অ্যালগরিদমে সাহায্য করতে আমি প্রস্তুত।\n\n' +
+        'আপনার বুলিয়ান সমীকরণ বা সংখ্যা পদ্ধতির প্রশ্নটি এখানে লিখুন। আমরা প্রতিটি ধাপ যুক্তি সহকারে সম্পন্ন করব!'
+    };
+  }
+
+  // 5. General Academic Invitation
+  if (GENERAL_ACADEMIC_INVITATION_PATTERNS.some((p) => p.test(text))) {
+    return {
+      domain: 'general',
+      responseBn:
+        'অবশ্যই! আমি জাতীয় শিক্ষাক্রম (NCTB) অনুযায়ী উচ্চতর গণিত, পদার্থবিজ্ঞান, রসায়ন ও আইসিটির যেকোনো সমস্যা সমাধানে আপনাকে ধাপে ধাপে দিকনির্দেশনা দিতে প্রস্তুত।\n\n' +
+        'আপনার প্রশ্ন বা সমস্যাটি বিস্তারিত লিখুন, খাতার পাতার ছবি আপলোড করুন কিংবা ক্যানভাসে এঁকে দেখান।\n\n' +
+        'আমরা কোন বিষয়ের কোন অধ্যায় নিয়ে শুরু করব?'
+    };
+  }
+
+  return null;
+}
 
 // =============================================================================
 // 3. Dynamic Problem Domain & Topic Classifier
@@ -269,7 +399,67 @@ export const TUTOR_CAPABILITIES_RESPONSE_BN =
 export function analyzeProblemDomain(input: string): SocraticProblemAnalysis {
   const text = input.toLowerCase();
 
-  // 1. Math / Higher Math
+  // 1. ICT / Boolean Algebra / Logic Gates (Evaluated before Math to properly catch Boolean equations)
+  if (
+    text.includes('আইসিটি') ||
+    text.includes('ict') ||
+    text.includes('বুলিয়ান') ||
+    text.includes('boolean') ||
+    text.includes('ডি মরগ্যান') ||
+    text.includes('de morgan') ||
+    text.includes('লজিক গেট') ||
+    text.includes('logic gate') ||
+    text.includes('বাইনারি') ||
+    text.includes('binary') ||
+    text.includes('হেক্সাডেসিমেল') ||
+    text.includes('hexadecimal') ||
+    text.includes('অক্টাল') ||
+    text.includes('octal') ||
+    text.includes('সত্যক সারণী') ||
+    text.includes('truth table')
+  ) {
+    return {
+      detectedDomain: 'ict',
+      identifiedTopicBn: 'তথ্য ও যোগাযোগ প্রযুক্তি: বুলিয়ান বীজগণিত ও ডিজিটাল লজিক',
+      relevantBoardExamBn: 'ঢাকা ও কুমিল্লা বোর্ড ২০২৩ (এইচএসসি আইসিটি ৩য় অধ্যায়)',
+      simulators: [],
+      scaffolding: [
+        {
+          tier: 1,
+          tierNameBn: 'টিয়ার ১: মৌলিক বুলিয়ান স্বতঃসিদ্ধ ও চলক নির্ধারণ',
+          hintTextBn: 'বুলিয়ান বীজগণিতে কেবল ০ এবং ১ নিয়ে কাজ করা হয়। লজিক্যাল অ্যান্ড (গুণ) ও অর (যোগ) এর নিয়ম প্রয়োগ করুন।',
+          guidingQuestionBn: 'প্রদত্ত রাশিতে কয়টি স্বতন্ত্র চলক উপস্থিত রয়েছে এবং তাদের কোন কোন মৌলিক অপারেশন সম্পন্ন হচ্ছে?',
+          formulaLatex: 'A + 0 = A, \\quad A \\cdot 1 = A, \\quad A + \\overline{A} = 1',
+          isTerminal: false,
+        },
+        {
+          tier: 2,
+          tierNameBn: 'টিয়ার ২: ডি মরগ্যান উপপাদ্য ও সরলীকরণ কৌশল',
+          hintTextBn: 'জটিল বার (NOT) অপসারণ করতে ডি মরগ্যানের সূত্রাবলি স্মরণ করুন: যোগের বার ভাঙলে গুণ হয় এবং গুণের বার ভাঙলে যোগ হয়।',
+          guidingQuestionBn: '\\overline{A + B} = \\overline{A} \\cdot \\overline{B} সূত্র প্রয়োগ করে পুরো বারটিকে চলক অনুযায়ী পৃথক করেছেন কি?',
+          formulaLatex: '\\overline{A + B} = \\overline{A} \\cdot \\overline{B}, \\quad \\overline{A \\cdot B} = \\overline{A} + \\overline{B}',
+          isTerminal: false,
+        },
+        {
+          tier: 3,
+          tierNameBn: 'টিয়ার ৩: ধাপে ধাপে লজিক সরলীকরণ',
+          hintTextBn: 'বন্টন উপপাদ্য ও শোষণ উপপাদ্য (A + AB = A) প্রয়োগ করে অপ্রয়োজনীয় পদ বাদ দিন।',
+          guidingQuestionBn: 'কমন পদ বের করার পর সমীকরণের ক্ষুদ্রতম রূপটি কী এসে দাঁড়িয়েছে?',
+          formulaLatex: 'A + AB = A(1 + B) = A',
+          isTerminal: false,
+        },
+        {
+          tier: 4,
+          tierNameBn: 'টিয়ার ৪: সত্যক সারণী ও সার্বজনীন গেট বাস্তবায়ন',
+          hintTextBn: 'প্রাপ্ত সরলীকৃত রূপটি সত্যক সারণী (Truth Table) তৈরি করে মূল রাশির সাথে মানগুলো মিলিয়ে দেখুন।',
+          guidingQuestionBn: 'এই সরলীকৃত সার্কিটটিকে কেবল ন্যান্ড (NAND) গেট দিয়ে বাস্তবায়ন করতে কয়টি গেট লাগবে হিসাব করেছেন কি?',
+          isTerminal: true,
+        },
+      ],
+    };
+  }
+
+  // 2. Math / Higher Math
   if (
     text.includes('সমীকরণ') ||
     text.includes('ক্যালকুলাস') ||
@@ -281,8 +471,17 @@ export function analyzeProblemDomain(input: string): SocraticProblemAnalysis {
     text.includes('ত্রিকোণমিতি') ||
     text.includes('sin') ||
     text.includes('cos') ||
+    text.includes('tan') ||
     text.includes('matrix') ||
-    text.includes('ম্যাট্রিক্স')
+    text.includes('ম্যাট্রিক্স') ||
+    text.includes('গণিত') ||
+    text.includes('math') ||
+    text.includes('x^2') ||
+    text.includes('dy/dx') ||
+    text.includes('dx') ||
+    text.includes('lim') ||
+    text.includes('জ্যামিতি') ||
+    text.includes('ফাংশন')
   ) {
     return {
       detectedDomain: 'math',
@@ -338,7 +537,13 @@ export function analyzeProblemDomain(input: string): SocraticProblemAnalysis {
     text.includes('গতিবিদ্যা') ||
     text.includes('তড়িৎ') ||
     text.includes('আলো') ||
-    text.includes('প্রতিসরণ')
+    text.includes('প্রতিসরণ') ||
+    text.includes('physics') ||
+    text.includes('পদার্থবিজ্ঞান') ||
+    text.includes('কাজ') ||
+    text.includes('শক্তি') ||
+    text.includes('রোধ') ||
+    text.includes('সার্কিট')
   ) {
     const isProjectile = text.includes('প্রক্ষেপক') || text.includes('প্রাস') || text.includes('projectile') || text.includes('নিক্ষেপ');
     const isCelestial = text.includes('মহাকর্ষ') || text.includes('গ্রহ') || text.includes('উপগ্রহ') || text.includes('আহ্নিক');
@@ -397,7 +602,15 @@ export function analyzeProblemDomain(input: string): SocraticProblemAnalysis {
     text.includes('organic') ||
     text.includes('জৈব') ||
     text.includes('যোজ্যতা') ||
-    text.includes('বন্ধন')
+    text.includes('বন্ধন') ||
+    text.includes('chemistry') ||
+    text.includes('রসায়ন') ||
+    text.includes('দ্রবণ') ||
+    text.includes('সংকরায়ন') ||
+    text.includes('naoh') ||
+    text.includes('hcl') ||
+    text.includes('h2so4') ||
+    text.includes('ph')
   ) {
     return {
       detectedDomain: 'chemistry',
@@ -491,4 +704,107 @@ export function scanForMisconception(studentAnswer: string): MisconceptionRule |
     }
   }
   return null;
+}
+
+// =============================================================================
+// 5. Unified Socratic Response Resolution Orchestrator
+// =============================================================================
+export interface SocraticResolvedReply {
+  text: string;
+  type: 'capability' | 'academic_invitation' | 'platform_knowledge' | 'zero_leak_refusal' | 'misconception' | 'scaffold';
+  topicBn?: string;
+  route?: string;
+  formulaLatex?: string;
+  simulators?: ('projectile' | 'celestial_globe' | 'chemistry_molecule')[];
+}
+
+export function resolveSocraticResponse(query: string, imageBase64?: string | null): SocraticResolvedReply {
+  const trimmed = (query || '').trim();
+
+  // Multimodal OCR extraction prefix if image is provided
+  let ocrPrefix = '';
+  if (imageBase64) {
+    if (imageBase64.includes('projectile') || trimmed.includes('প্রাস')) {
+      ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $H = \\frac{v_0^2 \\sin^2\\theta}{2g}$\n\n';
+    } else if (imageBase64.includes('chem') || trimmed.includes('মোল')) {
+      ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $2\\text{NaOH} + \\text{H}_2\\text{SO}_4 \\longrightarrow \\text{Na}_2\\text{SO}_4 + 2\\text{H}_2\\text{O}$\n\n';
+    } else {
+      ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $2x^2 + 7x - 4 = 0$\n\n';
+    }
+  }
+
+  const effectiveText = (trimmed + ' ' + (ocrPrefix ? 'সমীকরণ' : '')).trim();
+
+  // 1. ASVS L2: Zero-Answer-Leaking Guardrail
+  if (isDirectAnswerDemanded(effectiveText)) {
+    return {
+      text: ocrPrefix + ZERO_ANSWER_LEAKING_REFUSAL_BN,
+      type: 'zero_leak_refusal'
+    };
+  }
+
+  // 2. Capability & General Orientation Inquiry ("ki ki topic a tmi amk help korte parbe")
+  if (isCapabilityInquiry(effectiveText) || (!effectiveText && !imageBase64)) {
+    return {
+      text: ocrPrefix + TUTOR_CAPABILITIES_RESPONSE_BN,
+      type: 'capability'
+    };
+  }
+
+  // 3. Academic Problem Invitation (e.g., "amr akta math a problem somadhan dite parbe")
+  const academicInvitation = findAcademicInvitation(effectiveText);
+  if (academicInvitation) {
+    return {
+      text: ocrPrefix + academicInvitation.responseBn,
+      type: 'academic_invitation',
+      topicBn: academicInvitation.domain
+    };
+  }
+
+  // 4. Platform Omniscience Knowledge Lookup (e.g., "হোম টিউটর কোথায় পাব?", "লাইভ চ্যালেঞ্জ কী?")
+  const platformFeature = findPlatformKnowledge(effectiveText);
+  if (platformFeature) {
+    return {
+      text: ocrPrefix + formatPlatformFeatureResponse(platformFeature),
+      type: 'platform_knowledge',
+      topicBn: platformFeature.titleBn,
+      route: platformFeature.route
+    };
+  }
+
+  // 5. Misconception Scanner (Cognitive Error Taxonomy)
+  const misconception = scanForMisconception(effectiveText);
+  if (misconception) {
+    const text =
+      ocrPrefix +
+      `সতর্কতা ও পর্যবেক্ষণ: ${misconception.titleBn}\n` +
+      `${misconception.explanationBn}\n\n` +
+      (misconception.remedialFormulaLatex
+        ? `সঠিক রূপ: $${misconception.remedialFormulaLatex}$\n\n`
+        : '') +
+      `সক্রেটিক প্রশ্ন: ${misconception.guidingQuestionBn}`;
+    return {
+      text,
+      type: 'misconception',
+      formulaLatex: misconception.remedialFormulaLatex
+    };
+  }
+
+  // 6. Socratic Problem Scaffolding (Domain & Bloom's Taxonomy)
+  const analysis = analyzeProblemDomain(effectiveText);
+  const scaffold = analysis.scaffolding[0];
+  const scaffoldText =
+    ocrPrefix +
+    `[${analysis.identifiedTopicBn}]\n` +
+    `${scaffold.hintTextBn}\n\n` +
+    (scaffold.formulaLatex ? `প্রাসঙ্গিক সূত্র: $${scaffold.formulaLatex}$\n\n` : '') +
+    `সক্রেটিক অনুসন্ধান: ${scaffold.guidingQuestionBn}`;
+
+  return {
+    text: scaffoldText,
+    type: 'scaffold',
+    topicBn: analysis.identifiedTopicBn,
+    formulaLatex: scaffold.formulaLatex,
+    simulators: analysis.simulators
+  };
 }

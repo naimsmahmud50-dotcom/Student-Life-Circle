@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { KaTeXRenderer } from '../quiz/katex-renderer';
 import {
+  resolveSocraticResponse,
   isCapabilityInquiry,
   TUTOR_CAPABILITIES_RESPONSE_BN,
   isDirectAnswerDemanded,
@@ -293,27 +294,10 @@ export const SocraticTutorDrawer: React.FC<SocraticTutorDrawerProps> = ({
       setIsStreaming(false);
     };
 
-    // 1. Instant Client-Side Handling: Capability & Orientation Inquiry
-    if (isCapabilityInquiry(textToSend) || (!textToSend && !currentImg)) {
-      await streamTokensLocally(TUTOR_CAPABILITIES_RESPONSE_BN);
-      return;
-    }
-
-    // 2. Instant Client-Side Handling: Zero-Answer-Leaking Guardrail
-    if (isDirectAnswerDemanded(textToSend)) {
-      await streamTokensLocally(ZERO_ANSWER_LEAKING_REFUSAL_BN);
-      return;
-    }
-
-    // 3. Instant Client-Side Handling: Classic Misconception Diagnosis
-    const instantMis = scanForMisconception(textToSend);
-    if (instantMis) {
-      const misText =
-        `সতর্কতা ও পর্যবেক্ষণ: ${instantMis.titleBn}\n` +
-        `${instantMis.explanationBn}\n\n` +
-        (instantMis.remedialFormulaLatex ? `সঠিক রূপ: $${instantMis.remedialFormulaLatex}$\n\n` : '') +
-        `সক্রেটিক প্রশ্ন: ${instantMis.guidingQuestionBn}`;
-      await streamTokensLocally(misText);
+    // 1. Instant Client-Side Handling: Capability, Refusal, Academic Invitation, Platform Knowledge, Misconceptions
+    const instantResult = resolveSocraticResponse(textToSend, currentImg);
+    if (instantResult.type !== 'scaffold') {
+      await streamTokensLocally(instantResult.text);
       return;
     }
 
@@ -384,29 +368,8 @@ export const SocraticTutorDrawer: React.FC<SocraticTutorDrawerProps> = ({
       );
     } catch (err) {
       // High-availability graceful fallback using client Socratic engine
-      let fallbackText = '';
-      if (isCapabilityInquiry(textToSend)) {
-        fallbackText = TUTOR_CAPABILITIES_RESPONSE_BN;
-      } else if (isDirectAnswerDemanded(textToSend)) {
-        fallbackText = ZERO_ANSWER_LEAKING_REFUSAL_BN;
-      } else {
-        const misconception = scanForMisconception(textToSend);
-        if (misconception) {
-          fallbackText =
-            `সতর্কতা ও পর্যবেক্ষণ: ${misconception.titleBn}\n` +
-            `${misconception.explanationBn}\n\n` +
-            (misconception.remedialFormulaLatex ? `সঠিক রূপ: $${misconception.remedialFormulaLatex}$\n\n` : '') +
-            `সক্রেটিক প্রশ্ন: ${misconception.guidingQuestionBn}`;
-        } else {
-          const analysis = analyzeProblemDomain(textToSend);
-          const scaffold = analysis.scaffolding[0];
-          fallbackText =
-            `[${analysis.identifiedTopicBn}]\n` +
-            `${scaffold.hintTextBn}\n\n` +
-            (scaffold.formulaLatex ? `প্রাসঙ্গিক সূত্র: $${scaffold.formulaLatex}$\n\n` : '') +
-            `সক্রেটিক অনুসন্ধান: ${scaffold.guidingQuestionBn}`;
-        }
-      }
+      const fallbackResult = resolveSocraticResponse(textToSend, currentImg);
+      const fallbackText = fallbackResult.text;
 
       setMessages((prev) =>
         prev.map((msg) =>

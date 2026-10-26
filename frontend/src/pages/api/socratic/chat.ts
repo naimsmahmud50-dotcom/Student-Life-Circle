@@ -8,6 +8,7 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
+  resolveSocraticResponse,
   isDirectAnswerDemanded,
   ZERO_ANSWER_LEAKING_REFUSAL_BN,
   analyzeProblemDomain,
@@ -99,31 +100,14 @@ export default async function handler(
 
     const effectiveText = (trimmedQuery + ' ' + ocrResultText).trim();
 
-    // 3. Zero-Answer-Leaking Guardrail
-    if (isDirectAnswerDemanded(effectiveText)) {
+    // 3. Unified Socratic Reasoning (Capability, Invitations, Platform Knowledge, Refusals, Misconceptions)
+    const resolved = resolveSocraticResponse(trimmedQuery, imageBase64);
+    if (resolved.type !== 'scaffold') {
       return res.status(200).json({
         success: true,
-        refusedDirectAnswer: true,
-        tutorReplyBn: ZERO_ANSWER_LEAKING_REFUSAL_BN,
-        activeTier: currentTier,
-        extractedOcrText: ocrResultText || undefined,
-        ocrConfidence: ocrResultText ? ocrConfidenceScore : undefined
-      });
-    }
-
-    // 4. Misconception Scanner on Student Query or Deduction
-    const detectedMisconception = scanForMisconception(effectiveText);
-    if (detectedMisconception) {
-      const guidance =
-        `সতর্কতা ও পর্যবেক্ষণ: ${detectedMisconception.titleBn}\n` +
-        `${detectedMisconception.explanationBn}\n\n` +
-        `সক্রেটিক প্রশ্ন: ${detectedMisconception.guidingQuestionBn}`;
-
-      return res.status(200).json({
-        success: true,
-        misconceptionDetected: detectedMisconception,
-        tutorReplyBn: guidance,
-        suggestedFormulaLatex: detectedMisconception.remedialFormulaLatex,
+        refusedDirectAnswer: resolved.type === 'zero_leak_refusal',
+        tutorReplyBn: resolved.text,
+        suggestedFormulaLatex: resolved.formulaLatex,
         activeTier: currentTier,
         extractedOcrText: ocrResultText || undefined,
         ocrConfidence: ocrResultText ? ocrConfidenceScore : undefined

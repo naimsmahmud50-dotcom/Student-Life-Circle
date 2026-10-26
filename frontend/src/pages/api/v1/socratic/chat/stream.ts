@@ -5,22 +5,17 @@
  * FILE:      frontend/src/pages/api/v1/socratic/chat/stream.ts
  * PURPOSE:   Provides real-time token-by-token SSE streaming for the global SocraticTutorDrawer:
  *            1. Responds to general / capability questions ("tmi amk ki ki kaje help korba?").
- *            2. Enforces Zero-Answer-Leaking guardrail (intercepts direct answer demands).
- *            3. Scans 25+ Bangladeshi STEM misconceptions in real-time.
- *            4. Generates 4-tier Bloom's taxonomy scaffolding with KaTeX formula strings.
- *            5. ASVS L2 secure headers and OWASP LLM01 prompt injection sanitization.
+ *            2. Academic problem invitations ("amr akta math a problem somadhan dite parbe").
+ *            3. Platform omniscience lookup ("হোম টিউটর কোথায় পাব?", "লাইভ চ্যালেঞ্জ কী?").
+ *            4. Enforces Zero-Answer-Leaking guardrail (intercepts direct answer demands).
+ *            5. Scans 25+ Bangladeshi STEM misconceptions in real-time.
+ *            6. Generates 4-tier Bloom's taxonomy scaffolding with KaTeX formula strings.
+ *            7. ASVS L2 secure headers and OWASP LLM01 prompt injection sanitization.
  * STANDARDS: Strict Zero-Emoji, ASVS L2, Core Web Vitals, Sub-second streaming
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  isCapabilityInquiry,
-  TUTOR_CAPABILITIES_RESPONSE_BN,
-  isDirectAnswerDemanded,
-  ZERO_ANSWER_LEAKING_REFUSAL_BN,
-  scanForMisconception,
-  analyzeProblemDomain
-} from '../../../../../lib/socratic/socraticEngine';
+import { resolveSocraticResponse } from '../../../../../lib/socratic/socraticEngine';
 
 interface StreamRequestBody {
   session_id?: string;
@@ -80,62 +75,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   };
 
   try {
-    let fullResponse = '';
-
-    // A. Multimodal OCR detection if image is provided
-    let ocrPrefix = '';
-    if (image_base64) {
-      if (image_base64.includes('projectile') || trimmed.includes('প্রাস')) {
-        ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $H = \\frac{v_0^2 \\sin^2\\theta}{2g}$\n\n';
-      } else if (image_base64.includes('chem') || trimmed.includes('মোল')) {
-        ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $2\\text{NaOH} + \\text{H}_2\\text{SO}_4 \\longrightarrow \\text{Na}_2\\text{SO}_4 + 2\\text{H}_2\\text{O}$\n\n';
-      } else {
-        ocrPrefix = 'খাতার ছবি থেকে সনাক্তকৃত সমীকরণ: $2x^2 + 7x - 4 = 0$\n\n';
-      }
-    }
-
-    const effectiveText = (trimmed + ' ' + (ocrPrefix ? 'সমীকরণ' : '')).trim();
-
-    // B. Capability / Identity / Help Inquiries ("tmi amk ki ki kaje help korba?")
-    if (isCapabilityInquiry(effectiveText) || (!effectiveText && !image_base64)) {
-      fullResponse = ocrPrefix + TUTOR_CAPABILITIES_RESPONSE_BN;
-    }
-    // C. Zero-Answer-Leaking Guardrail
-    else if (isDirectAnswerDemanded(effectiveText)) {
-      fullResponse = ocrPrefix + ZERO_ANSWER_LEAKING_REFUSAL_BN;
-    }
-    // D. Misconception Scanner
-    else {
-      const misconception = scanForMisconception(effectiveText);
-      if (misconception) {
-        fullResponse =
-          ocrPrefix +
-          `সতর্কতা ও পর্যবেক্ষণ: ${misconception.titleBn}\n` +
-          `${misconception.explanationBn}\n\n` +
-          (misconception.remedialFormulaLatex
-            ? `সঠিক রূপ: $${misconception.remedialFormulaLatex}$\n\n`
-            : '') +
-          `সক্রেটিক প্রশ্ন: ${misconception.guidingQuestionBn}`;
-      } else {
-        // E. Socratic Domain Scaffolding
-        const analysis = analyzeProblemDomain(effectiveText);
-        const scaffold = analysis.scaffolding[0];
-
-        fullResponse =
-          ocrPrefix +
-          `[${analysis.identifiedTopicBn}]\n` +
-          `${scaffold.hintTextBn}\n\n` +
-          (scaffold.formulaLatex ? `প্রাসঙ্গিক সূত্র: $${scaffold.formulaLatex}$\n\n` : '') +
-          `সক্রেটিক অনুসন্ধান: ${scaffold.guidingQuestionBn}`;
-      }
-    }
+    const resolved = resolveSocraticResponse(trimmed, image_base64);
+    const fullResponse = resolved.text;
 
     // Stream tokens in words/phrases for a smooth academic reading experience
     const words = fullResponse.split(/(?<=\s|[\n।])/);
     for (const chunk of words) {
       if (chunk) {
         sendToken(chunk);
-        await delay(18); // smooth 18ms cadence
+        await delay(16); // smooth 16ms cadence
       }
     }
 
