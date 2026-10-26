@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Zero-IDOR, Workbox-Grade SW, idb Offline Vault, WCAG 2.2 AAA
  */
 
-const CACHE_VERSION = 'slc-v5';
+const CACHE_VERSION = 'slc-v6-socratic-live';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGES_CACHE = `${CACHE_VERSION}-pages`;
 const FONTS_CACHE = `${CACHE_VERSION}-fonts`;

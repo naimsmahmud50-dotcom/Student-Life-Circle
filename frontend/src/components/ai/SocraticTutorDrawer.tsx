@@ -60,6 +60,7 @@ export interface SocraticTutorDrawerProps {
 }
 
 const QUICK_SOCRATIC_PROMPTS = [
+  'আপনি আমাকে কী কী বিষয়ে সাহায্য করতে পারেন?',
   'এই সমস্যাটির প্রথম যৌক্তিক ধাপ কী হতে পারে?',
   'আমাকে একটি সহজ ক্লু বা সংকেত দিয়ে সাহায্য করুন',
   'আমার চিন্তা বা সমীকরণে কোনো ভুল আছে কি?',
@@ -265,6 +266,56 @@ export const SocraticTutorDrawer: React.FC<SocraticTutorDrawerProps> = ({
     const currentImg = selectedImage;
     setSelectedImage(null);
     setIsStreaming(true);
+
+    // High-performance token streamer helper
+    const streamTokensLocally = async (fullText: string) => {
+      const words = fullText.split(/(?<=\s|[\n।])/);
+      let acc = '';
+      for (const w of words) {
+        if (!w) continue;
+        acc += w;
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === assistantMessageId
+              ? { ...msg, text: acc, isStreaming: true }
+              : msg
+          )
+        );
+        await new Promise((resolve) => setTimeout(resolve, 14));
+      }
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === assistantMessageId
+            ? { ...msg, text: acc, isStreaming: false }
+            : msg
+        )
+      );
+      setIsStreaming(false);
+    };
+
+    // 1. Instant Client-Side Handling: Capability & Orientation Inquiry
+    if (isCapabilityInquiry(textToSend) || (!textToSend && !currentImg)) {
+      await streamTokensLocally(TUTOR_CAPABILITIES_RESPONSE_BN);
+      return;
+    }
+
+    // 2. Instant Client-Side Handling: Zero-Answer-Leaking Guardrail
+    if (isDirectAnswerDemanded(textToSend)) {
+      await streamTokensLocally(ZERO_ANSWER_LEAKING_REFUSAL_BN);
+      return;
+    }
+
+    // 3. Instant Client-Side Handling: Classic Misconception Diagnosis
+    const instantMis = scanForMisconception(textToSend);
+    if (instantMis) {
+      const misText =
+        `সতর্কতা ও পর্যবেক্ষণ: ${instantMis.titleBn}\n` +
+        `${instantMis.explanationBn}\n\n` +
+        (instantMis.remedialFormulaLatex ? `সঠিক রূপ: $${instantMis.remedialFormulaLatex}$\n\n` : '') +
+        `সক্রেটিক প্রশ্ন: ${instantMis.guidingQuestionBn}`;
+      await streamTokensLocally(misText);
+      return;
+    }
 
     try {
       // POST endpoint to handle large base64 image streams cleanly
