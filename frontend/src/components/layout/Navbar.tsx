@@ -34,10 +34,12 @@ import {
   ChevronDown,
   Sparkles,
   Globe,
-  LogOut
+  LogOut,
+  Calendar
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 import { useAuthStore } from '@/store/useAuthStore';
+import { isFeatureEnabled } from '@/config/featureFlags';
 
 export interface NavbarProps {
   currentStage?: string;
@@ -277,7 +279,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       href: '/olympiad/arena',
       icon: Trophy,
       iconBg: 'bg-indigo-500/10 text-indigo-500 dark:bg-indigo-500/20 dark:text-indigo-400'
-    }
+    },
+    ...(isFeatureEnabled('examRoutine') ? [{
+      title: isBengali ? 'পরীক্ষার রুটিন ও মেগা টেস্ট' : 'Exam Routine & Mega Tests',
+      desc: isBengali ? '২০০ দিনের বিসিএস ও ভর্তি রুটিন শিডিউল' : '200-day BCS & admission calendar',
+      href: '/routines',
+      icon: Calendar,
+      iconBg: 'bg-emerald-500/10 text-emerald-500 dark:bg-emerald-500/20 dark:text-emerald-400'
+    }] : [])
   ];
 
   const moreItems = [

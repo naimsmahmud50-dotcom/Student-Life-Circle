@@ -295,6 +295,17 @@ export const MODULES_REGISTRY: ModuleMetadata[] = [
     tags: ['did', 'airgap', 'merkle', 'ed25519', 'attendance'],
     status: 'active',
   },
+  {
+    id: 'exam-routine-hub',
+    tabNumber: 70,
+    title: 'Live MCQ Routine & Mega Model Test Calendar Hub',
+    category: 'academic',
+    tier: 'enterprise',
+    description: '200-day BCS and Admission daily routine calendar, Friday mega model tests, and negative marking simulator.',
+    tags: ['routine', 'bcs-200-day', 'mega-model-test', 'countdown', 'negative-marking'],
+    status: 'active',
+    badgeLabel: 'Batch 1 Hub',
+  },
 ];
 
 export function getModulesByCategory(category: ModuleCategory): ModuleMetadata[] {

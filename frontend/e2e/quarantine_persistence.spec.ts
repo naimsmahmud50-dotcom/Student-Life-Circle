@@ -21,6 +21,7 @@ const SESSION_KEY = 'ogrojatra_auth_session';
 const TOKEN_KEY = 'auth_token';
 
 test.describe('Admin Quarantine Persistence & Lifecycle Verification', () => {
+  test.describe.configure({ mode: 'serial' });
 
   const adminSession = {
     user: {
@@ -82,6 +83,10 @@ test.describe('Admin Quarantine Persistence & Lifecycle Verification', () => {
 
     // 7. Verify new audit record is visible
     await expect(page.locator('text=' + testReason).first()).toBeVisible();
+
+    // Wait for the backend persistence toast notification before reloading
+    await expect(page.getByText(/কোয়ারেন্টিন করা হয়েছে/)).toBeVisible({ timeout: 5000 });
+    await page.waitForTimeout(600);
 
     // 8. RELOAD THE PAGE: This directly tests persistence vs in-memory fake timer!
     await page.reload();

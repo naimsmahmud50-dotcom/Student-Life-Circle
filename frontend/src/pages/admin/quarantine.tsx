@@ -168,20 +168,31 @@ function AdminQuarantineConsole() {
 
   // Fetch initial questions and audit logs with local persistence fallback
   const loadData = useCallback(async () => {
-    setIsLoading(true);
-    setErrorMsg(null);
-
-    // Initial check from localStorage for fast offline rendering
+    let hasLocal = false;
     let localQuestions = DEFAULT_QUESTIONS;
     let localAudit = DEFAULT_AUDIT_LOGS;
     if (typeof window !== 'undefined') {
       try {
         const storedQ = localStorage.getItem(STORAGE_KEY_QUESTIONS);
-        if (storedQ) localQuestions = JSON.parse(storedQ);
+        if (storedQ) {
+          localQuestions = JSON.parse(storedQ);
+          setQuestions(localQuestions);
+          hasLocal = true;
+        }
         const storedLogs = localStorage.getItem(STORAGE_KEY_AUDIT);
-        if (storedLogs) localAudit = JSON.parse(storedLogs);
+        if (storedLogs) {
+          localAudit = JSON.parse(storedLogs);
+          setAuditLogs(localAudit);
+        }
       } catch {}
     }
+
+    if (!hasLocal) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+    setErrorMsg(null);
 
     try {
       const [qData, logData] = await Promise.allSettled([

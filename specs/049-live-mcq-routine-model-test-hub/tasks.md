@@ -1,0 +1,23 @@
+# Tasks: 049 - Live MCQ Routine & Mega Model Test Calendar Hub
+
+- [x] Task 1: Create Database Migration `backend/migrations/017_exam_routine_and_model_test_rls.sql` with RLS & Rollback
+- [x] Task 2: Implement Feature Flags Config (`backend/app/core/config.py` & `frontend/src/config/featureFlags.ts`)
+- [x] Task 3: Implement Backend Schemas (`backend/app/schemas/exam_routine_schema.py`)
+- [x] Task 4: Implement Backend Service (`backend/app/services/exam_routine_service.py`)
+- [x] Task 5: Implement Backend Router (`backend/app/api/v1/endpoints/exam_routine_router.py`) & Mount in `backend/app/api/v1/router.py`
+- [x] Task 6: Implement Frontend Module (`frontend/src/modules/exam-routine/`)
+  - [x] 6.1: Types & Zod Schemas (`types/examRoutine.types.ts`)
+  - [x] 6.2: Mock / Seed Data (`data/examRoutineData.ts`)
+  - [x] 6.3: API Client & Hooks (`services/routineApiClient.ts`, `hooks/useExamRoutine.ts`)
+  - [x] 6.4: UI Components (`RoutineCalendarView.tsx`, `MegaModelTestCountdown.tsx`, `NegativeMarkingSimulator.tsx`, `RoutineSubscriptionModal.tsx`)
+  - [x] 6.5: Main Module Container (`ExamRoutineHub.tsx`)
+- [x] Task 7: Create Isolated Page Route (`frontend/src/pages/routines/index.tsx`) with Feature Gate
+- [x] Task 8: Minimal Integration Points
+  - [x] 8.1: Conditionally render link in `frontend/src/components/layout/Navbar.tsx`
+  - [x] 8.2: Register Module in `frontend/src/modules/registry.ts`
+- [x] Task 9: Comprehensive Testing & Verification
+  - [x] 9.1: Write backend unit tests in `backend/tests/test_phase164_exam_routine_and_model_test.py` (11/11 passed)
+  - [x] 9.2: Write frontend unit tests in `frontend/src/modules/exam-routine/__tests__/examRoutine.test.mjs` (4/4 passed)
+  - [x] 9.3: Run full backend regression suite (1,613/1,613 passed, 100% green)
+  - [x] 9.4: Build frontend (`npm run build`) & verify zero errors (42 static pages generated)
+- [x] Task 10: Final Verification & Evidence Report

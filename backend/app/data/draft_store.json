@@ -53,7 +53,7 @@
       "source_attribution": "AI_GENERATED",
       "creator_user_id": "ai_agent_generator",
       "reviewed_by": "usr_admin_01",
-      "reviewed_at": "2026-10-26T04:31:48.696280+00:00",
+      "reviewed_at": "2026-10-26T07:04:49.148884+00:00",
       "rejection_feedback": null,
       "created_at": "2026-10-24T08:30:00Z",
       "reviewed_by_sme_id": "usr_admin_01",
@@ -112,7 +112,7 @@
       "source_attribution": "AI_GENERATED",
       "creator_user_id": "ai_agent_generator",
       "reviewed_by": "usr_admin_01",
-      "reviewed_at": "2026-10-26T04:31:48.700191+00:00",
+      "reviewed_at": "2026-10-26T07:04:49.152766+00:00",
       "rejection_feedback": null,
       "created_at": "2026-10-24T09:15:00Z",
       "reviewed_by_sme_id": "usr_admin_01",
@@ -171,7 +171,7 @@
       "source_attribution": "AI_GENERATED",
       "creator_user_id": "ai_agent_generator",
       "reviewed_by": "usr_reviewer_01",
-      "reviewed_at": "2026-10-26T04:31:48.724400+00:00",
+      "reviewed_at": "2026-10-26T07:04:49.177084+00:00",
       "rejection_feedback": "বৃত্তচাপের গণনায় পাই-এর আসন্ন মান দশমিকের পর কত ঘর নিতে হবে তা উল্লেখ করা প্রয়োজন।",
       "created_at": "2026-10-24T10:00:00Z",
       "reviewed_by_sme_id": "usr_reviewer_01"
@@ -229,11 +229,11 @@
       "source_attribution": "AI_GENERATED",
       "creator_user_id": "ai_agent_generator",
       "reviewed_by": "usr_reviewer_01",
-      "reviewed_at": "2026-10-26T04:31:48.708217+00:00",
+      "reviewed_at": "2026-10-26T07:04:49.160854+00:00",
       "rejection_feedback": null,
       "created_at": "2026-10-24T11:20:00Z",
       "edited_by": "usr_reviewer_01",
-      "edited_at": "2026-10-26T04:31:48.708223+00:00"
+      "edited_at": "2026-10-26T07:04:49.160860+00:00"
     },
     "q_draft_ict_705": {
       "id": "q_draft_ict_705",
@@ -349,8 +349,8 @@
       "rejection_feedback": "প্রশ্নে স্থিতিস্থাপক সীমার শর্ত এবং স্প্রিং-এর প্রাথমিক সাম্যাবস্থার শর্ত উল্লেখ করা আবশ্যক।",
       "created_at": "2026-10-24T13:00:00Z"
     },
-    "q_draft_490e2f68": {
-      "id": "q_draft_490e2f68",
+    "q_draft_61236df3": {
+      "id": "q_draft_61236df3",
       "version": 1,
       "status": "PUBLISHED",
       "subject": "পদার্থবিজ্ঞান ১ম পত্র",
@@ -363,28 +363,28 @@
       "stem_en": "Which of the following is the formula for distance s under constant acceleration?",
       "options": [
         {
-          "id": "opt_36d3b3",
+          "id": "opt_467656",
           "option_key": "A",
           "option_text_bn": "s = vt",
           "is_correct": false,
           "distractor_rationale": "এটি সমবেগের ক্ষেত্রে প্রযোজ্য; সুষম ত্বরণের জন্য নয়।"
         },
         {
-          "id": "opt_abf636",
+          "id": "opt_a86ae1",
           "option_key": "B",
           "option_text_bn": "s = ut + ½at²",
           "is_correct": true,
           "distractor_rationale": "সুষম ত্বরণে অতিক্রান্ত দূরত্বের আদর্শ সমীকরণ।"
         },
         {
-          "id": "opt_0a49dc",
+          "id": "opt_9c9a88",
           "option_key": "C",
           "option_text_bn": "v = u + at",
           "is_correct": false,
           "distractor_rationale": "এটি শেষ বেগ নির্ণয়ের সূত্র, দূরত্ব নয়।"
         },
         {
-          "id": "opt_851165",
+          "id": "opt_cd60c5",
           "option_key": "D",
           "option_text_bn": "v² = u² + 2as",
           "is_correct": false,
@@ -402,18 +402,18 @@
       "source_attribution": "AI_GENERATED",
       "creator_user_id": "usr_admin_01",
       "reviewed_by": "usr_admin_01",
-      "reviewed_at": "2026-10-26T04:31:52.339279+00:00",
+      "reviewed_at": "2026-10-26T07:04:52.661460+00:00",
       "rejection_feedback": null,
-      "created_at": "2026-10-26T04:31:52.327366+00:00",
+      "created_at": "2026-10-26T07:04:52.653419+00:00",
       "reviewed_by_sme_id": "usr_admin_01",
       "published_by_id": "usr_admin_01",
-      "published_at": "2026-10-26T04:31:52.345187+00:00"
+      "published_at": "2026-10-26T07:04:52.665343+00:00"
     }
   },
   "audit_logs": [
     {
-      "audit_id": "AUD-REV-503DCD13",
-      "question_id": "q_draft_490e2f68",
+      "audit_id": "AUD-REV-EC3476FA",
+      "question_id": "q_draft_61236df3",
       "action": "PUBLISH_TO_POOLS",
       "actor_id": "usr_admin_01",
       "actor_role": "ADMIN",
@@ -421,11 +421,11 @@
       "new_status": "PUBLISHED",
       "reason_or_feedback": "Released to active examination pool",
       "diff_summary": {},
-      "timestamp": "2026-10-26T04:31:52.345200+00:00"
+      "timestamp": "2026-10-26T07:04:52.665356+00:00"
     },
     {
-      "audit_id": "AUD-REV-8F05550B",
-      "question_id": "q_draft_490e2f68",
+      "audit_id": "AUD-REV-B8F5F39D",
+      "question_id": "q_draft_61236df3",
       "action": "APPROVE_DRAFT",
       "actor_id": "usr_admin_01",
       "actor_role": "SUBJECT_REVIEWER",
@@ -433,11 +433,11 @@
       "new_status": "APPROVED",
       "reason_or_feedback": "বিষয়বস্তুর মান এনসিটিবি আদর্শ অনুযায়ী অনুমোদিত।",
       "diff_summary": {},
-      "timestamp": "2026-10-26T04:31:52.339291+00:00"
+      "timestamp": "2026-10-26T07:04:52.661472+00:00"
     },
     {
-      "audit_id": "AUD-REV-EF8A2944",
-      "question_id": "q_draft_490e2f68",
+      "audit_id": "AUD-REV-FFF49165",
+      "question_id": "q_draft_61236df3",
       "action": "SUBMIT_FOR_REVIEW",
       "actor_id": "usr_admin_01",
       "actor_role": "AUTHOR",
@@ -445,7 +445,7 @@
       "new_status": "NEEDS_REVIEW",
       "reason_or_feedback": "Submitted for Subject Matter Expert evaluation",
       "diff_summary": {},
-      "timestamp": "2026-10-26T04:31:52.332242+00:00"
+      "timestamp": "2026-10-26T07:04:52.657285+00:00"
     },
     {
       "audit_id": "AUD-REV-2026-101",
@@ -470,5 +470,5 @@
       "timestamp": "2026-10-24T14:30:00Z"
     }
   ],
-  "last_updated": "2026-10-26T04:31:52.345266+00:00"
+  "last_updated": "2026-10-26T07:04:52.665427+00:00"
 }

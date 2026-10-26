@@ -2,7 +2,7 @@
   "benchmark_metadata": {
     "platform_name": "Ogrojatra National Challenge Engine",
     "test_suite": "k6 / Locust Distributed Hyper-Scale Suite",
-    "timestamp_utc": "2026-10-26T04:31:59Z",
+    "timestamp_utc": "2026-10-26T07:04:59Z",
     "concurrency_target_vus": 50000,
     "test_duration_seconds": 720,
     "traffic_profile": "0 to 10k in 2m -> spike to 50k at 8:00 PM -> 5m peak -> 2m cooldown",

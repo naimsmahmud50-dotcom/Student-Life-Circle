@@ -42,6 +42,9 @@ try:
             "https://studentlifecircle.com",
             "https://ogrojatra.edu.bd"
         ]
+        FEATURE_EXAM_ROUTINE: bool = False
+        FEATURE_STUDY_ARCHIVE: bool = False
+        FEATURE_CIRCULAR_ALERT: bool = False
 
     settings = Settings()
 
@@ -64,5 +67,8 @@ except ImportError:
             "https://studentlifecircle.com",
             "https://ogrojatra.edu.bd"
         ]
+        FEATURE_EXAM_ROUTINE: bool = os.getenv("FEATURE_EXAM_ROUTINE", "False").lower() == "true"
+        FEATURE_STUDY_ARCHIVE: bool = os.getenv("FEATURE_STUDY_ARCHIVE", "False").lower() == "true"
+        FEATURE_CIRCULAR_ALERT: bool = os.getenv("FEATURE_CIRCULAR_ALERT", "False").lower() == "true"
 
     settings = Settings()

@@ -1007,6 +1007,7 @@ from backend.app.api.v1.endpoints.exam_hall import router as exam_hall_router
 from backend.app.api.v1.endpoints.moderation import router as moderation_router
 from backend.app.api.v1.endpoints.knowledge_graph import router as knowledge_graph_router
 from backend.app.api.v1.endpoints.offline_sync import router as offline_sync_router
+from backend.app.api.v1.endpoints.exam_routine_router import router as exam_routine_router
 from backend.app.db.seed_data import (
     CURRICULUM_SEEDS,
     SUBJECT_SEEDS,
@@ -1081,6 +1082,9 @@ api_router.include_router(knowledge_graph_router)
 
 # Mount Offline P2P Classroom Mesh & Local CRDT Sync sub-router (Phase 119)
 api_router.include_router(offline_sync_router)
+
+# Mount Exam Routine & Mega Model Test Calendar sub-router (Batch 1)
+api_router.include_router(exam_routine_router)
 
 
 

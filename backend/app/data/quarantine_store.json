@@ -189,7 +189,7 @@
       "options": [],
       "quarantine_reason": "Typo in stem statement",
       "quarantined_by": "usr_reviewer_01",
-      "quarantined_at": "2026-10-26T04:31:48.661542+00:00",
+      "quarantined_at": "2026-10-26T07:04:49.111937+00:00",
       "affected_attempts_count": 0
     },
     {
@@ -205,7 +205,7 @@
       "options": [],
       "quarantine_reason": "Incorrect formula in option B",
       "quarantined_by": "usr_reviewer_01",
-      "quarantined_at": "2026-10-26T04:31:48.682839+00:00",
+      "quarantined_at": "2026-10-26T07:04:49.134466+00:00",
       "affected_attempts_count": 0
     },
     {
@@ -221,10 +221,10 @@
       "options": [],
       "quarantine_reason": "Second review reason",
       "quarantined_by": "reviewer_2",
-      "quarantined_at": "2026-10-26T04:31:59.755417+00:00",
+      "quarantined_at": "2026-10-26T07:04:59.864155+00:00",
       "affected_attempts_count": 0,
       "restored_by": "reviewer_2",
-      "restored_at": "2026-10-26T04:31:59.759611+00:00",
+      "restored_at": "2026-10-26T07:04:59.868843+00:00",
       "restore_reason": "Board fixed question duplicate click"
     },
     {
@@ -240,10 +240,10 @@
       "options": [],
       "quarantine_reason": "Answer key ambiguity reported by 20 students",
       "quarantined_by": "usr_admin_01",
-      "quarantined_at": "2026-10-26T04:31:59.764467+00:00",
+      "quarantined_at": "2026-10-26T07:04:59.873090+00:00",
       "affected_attempts_count": 1,
       "restored_by": "usr_admin_01",
-      "restored_at": "2026-10-26T04:31:59.766721+00:00",
+      "restored_at": "2026-10-26T07:04:59.875387+00:00",
       "restore_reason": "Corrected and verified"
     },
     {
@@ -3096,7 +3096,199 @@
       "affected_attempts_count": 0,
       "recalculated": false,
       "timestamp": "2026-10-26T04:31:59.766721+00:00"
+    },
+    {
+      "audit_id": "aud_0237",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_chem_505",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Typo in stem statement",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T04:50:38.059977+00:00"
+    },
+    {
+      "audit_id": "aud_0238",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_phys_404",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Incorrect formula in option B",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T04:50:38.080212+00:00"
+    },
+    {
+      "audit_id": "aud_0239",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "First review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T04:50:48.778362+00:00"
+    },
+    {
+      "audit_id": "aud_0240",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Second review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T04:50:48.780736+00:00"
+    },
+    {
+      "audit_id": "aud_0241",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T04:50:48.783108+00:00"
+    },
+    {
+      "audit_id": "aud_0242",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question duplicate click",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T04:50:48.785398+00:00"
+    },
+    {
+      "audit_id": "aud_0243",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Answer key ambiguity reported by 20 students",
+      "affected_attempts_count": 1,
+      "recalculated": true,
+      "timestamp": "2026-10-26T04:50:48.789500+00:00"
+    },
+    {
+      "audit_id": "aud_0244",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Corrected and verified",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T04:50:48.791690+00:00"
+    },
+    {
+      "audit_id": "aud_0245",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_chem_505",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Typo in stem statement",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T07:04:49.111937+00:00"
+    },
+    {
+      "audit_id": "aud_0246",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_phys_404",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Incorrect formula in option B",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T07:04:49.134466+00:00"
+    },
+    {
+      "audit_id": "aud_0247",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "First review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T07:04:59.861375+00:00"
+    },
+    {
+      "audit_id": "aud_0248",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Second review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-10-26T07:04:59.864155+00:00"
+    },
+    {
+      "audit_id": "aud_0249",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T07:04:59.866594+00:00"
+    },
+    {
+      "audit_id": "aud_0250",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question duplicate click",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T07:04:59.868843+00:00"
+    },
+    {
+      "audit_id": "aud_0251",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Answer key ambiguity reported by 20 students",
+      "affected_attempts_count": 1,
+      "recalculated": true,
+      "timestamp": "2026-10-26T07:04:59.873090+00:00"
+    },
+    {
+      "audit_id": "aud_0252",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Corrected and verified",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-10-26T07:04:59.875387+00:00"
     }
   ],
-  "updated_at": "2026-10-26T04:31:59.766729+00:00"
+  "updated_at": "2026-10-26T07:04:59.875395+00:00"
 }
