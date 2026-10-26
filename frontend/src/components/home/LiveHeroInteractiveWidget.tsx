@@ -90,9 +90,11 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
       </div>
 
       {/* 2. Dual-Perspective Mode Switcher */}
-      <div className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
+      <div role="tablist" aria-label="হিরো ইন্টারেক্টিভ ল্যাব নির্বাচক" className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
         <button
           type="button"
+          role="tab"
+          aria-selected={activeHeroTab === 'globe'}
           onClick={() => setActiveHeroTab('globe')}
           className={`py-2 text-xs font-bold rounded-lg transition-all select-none flex items-center justify-center gap-1.5 cursor-pointer ${
             activeHeroTab === 'globe'
@@ -105,6 +107,8 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
         </button>
         <button
           type="button"
+          role="tab"
+          aria-selected={activeHeroTab === 'physics'}
           onClick={() => setActiveHeroTab('physics')}
           className={`py-2 text-xs font-bold rounded-lg transition-all select-none flex items-center justify-center gap-1.5 cursor-pointer ${
             activeHeroTab === 'physics'

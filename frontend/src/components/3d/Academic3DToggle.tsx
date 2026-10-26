@@ -56,6 +56,7 @@ export const Academic3DToggle: React.FC<Academic3DToggleProps> = ({
         type="button"
         role="switch"
         aria-checked={is3DAllowed}
+        aria-label="ত্রিমাত্রিক ৩ডি ভিজুয়ালাইজেশন নিয়ন্ত্রণ"
         onClick={toggle3D}
         title={`দৃশ্যপট মোড পরিবর্তন: ${reason} (ক্লিক করুন)`}
         className={`btn-tactile-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold select-none transition-all cursor-pointer ${
