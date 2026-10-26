@@ -1,0 +1,179 @@
+/**
+ * DEVELOPER ARCHITECTURE NOTE:
+ * MODULE:    Live Challenge Arena & Academic Editorial Design System
+ * TOPIC:     Phase 142 Live MCQ 2D Elevation & Editorial Typography
+ * FILE:      frontend/src/components/live-challenge/LiveChallengeEditorial.module.css
+ * PHASE:     Phase 142 - Live MCQ Competitive Elevation
+ * PURPOSE:   Scoped tokens and typography system for Live Challenge arena.
+ *            Strict isolation: zero bleeding to dashboard, global navigation, or other routes.
+ *            Defines Cambridge/Oxford-grade Bengali editorial serif scale, tabular timer figures,
+ *            warm paper ground (#FAF8F3), deep academic ink (#0B132B), and restrained scholar ochre.
+ * STANDARDS: Zero-AI Vibe, WCAG 2.2 AAA Contrast, Pure Academic Palette, Zero Emoji
+ */
+
+.liveChallengeRoot {
+  /* --------------------------------------------------------------------------
+   * 1. SCOPED COLOR TOKENS (LIGHT PARCHMENT CANVAS)
+   * -------------------------------------------------------------------------- */
+  --lc-bg-paper: #FAF8F3;
+  --lc-bg-card: #FFFFFF;
+  --lc-bg-card-subtle: #F6F3EB;
+  --lc-bg-hero: #07192F;
+  --lc-bg-hero-card: #0A2540;
+  --lc-bg-hero-inner: #06172A;
+
+  --lc-ink-primary: #0B132B;
+  --lc-ink-secondary: #334155;
+  --lc-ink-muted: #64748B;
+  --lc-ink-on-dark: #F8FAFC;
+  --lc-ink-muted-on-dark: #94A3B8;
+
+  --lc-border-subtle: #E8E2D8;
+  --lc-border-card: #DFD7CA;
+  --lc-border-strong: #CBD5E1;
+  --lc-border-on-dark: rgba(255, 255, 255, 0.12);
+
+  --lc-oxford-navy: #0A2540;
+  --lc-oxford-navy-hover: #0E3559;
+  --lc-academic-emerald: #065F46;
+  --lc-scholar-ochre: #B45309;
+  --lc-scholar-amber: #D97706;
+  --lc-burgundy-crimson: #991B1B;
+
+  /* Typography Fallbacks & Feature Settings */
+  --lc-font-serif: 'Noto Serif Bengali', 'Source Serif 4', Georgia, serif;
+  --lc-font-sans: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+  --lc-font-mono: 'JetBrains Mono', 'Hind Siliguri', monospace;
+
+  background-color: var(--lc-bg-paper);
+  color: var(--lc-ink-primary);
+  font-family: var(--lc-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+ * 2. SCOPED COLOR TOKENS (DARK ACADEMIC INK CANVAS)
+ * -------------------------------------------------------------------------- */
+:global(.dark) .liveChallengeRoot {
+  --lc-bg-paper: #060B14;
+  --lc-bg-card: #0B1324;
+  --lc-bg-card-subtle: #0E1A33;
+  --lc-bg-hero: #050E1C;
+  --lc-bg-hero-card: #08172E;
+  --lc-bg-hero-inner: #050E1B;
+
+  --lc-ink-primary: #F8FAFC;
+  --lc-ink-secondary: #CBD5E1;
+  --lc-ink-muted: #94A3B8;
+  --lc-ink-on-dark: #F8FAFC;
+  --lc-ink-muted-on-dark: #94A3B8;
+
+  --lc-border-subtle: #16243E;
+  --lc-border-card: #1E3050;
+  --lc-border-strong: #2D466F;
+  --lc-border-on-dark: rgba(255, 255, 255, 0.14);
+
+  --lc-oxford-navy: #0F3559;
+  --lc-oxford-navy-hover: #174E82;
+  --lc-academic-emerald: #059669;
+  --lc-scholar-ochre: #D97706;
+  --lc-scholar-amber: #F59E0B;
+  --lc-burgundy-crimson: #DC2626;
+
+  background-color: var(--lc-bg-paper);
+  color: var(--lc-ink-primary);
+}
+
+/* --------------------------------------------------------------------------
+ * 3. EDITORIAL TYPOGRAPHY SCALE (BENGALI MATRA-SAFE)
+ * Line heights tuned for vowel signs (কার) and conjuncts (যুক্তাক্ষর).
+ * -------------------------------------------------------------------------- */
+.editorialSerif {
+  font-family: var(--lc-font-serif);
+  font-feature-settings: "kern" 1, "liga" 1;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  text-rendering: optimizeLegibility;
+}
+
+.editorialBody {
+  font-family: var(--lc-font-sans);
+  line-height: 1.8;
+  letter-spacing: 0.005em;
+  text-rendering: optimizeLegibility;
+}
+
+.tabularTimer {
+  font-family: var(--lc-font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+/* Prevent Bengali Matra clipping on top and bottom */
+.matraSafe {
+  padding-top: 0.08em;
+  padding-bottom: 0.12em;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+ * 4. TACTILE ACADEMIC BUTTONS & LABELS
+ * Strict Zero-AI glow: physical depth, crisp hairlines, authentic ink contrast.
+ * -------------------------------------------------------------------------- */
+.tactilePrimaryBtn {
+  background-color: #FFFFFF;
+  color: #0A2540;
+  border: 1px solid #CBD5E1;
+  box-shadow: 0 4px 0 0 #CBD5E1;
+  font-weight: 700;
+  transition: all 0.15s ease-in-out;
+}
+
+.tactilePrimaryBtn:hover {
+  background-color: #F8FAFC;
+  box-shadow: 0 5px 0 0 #94A3B8;
+  transform: translateY(-1px);
+}
+
+.tactilePrimaryBtn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 #CBD5E1;
+}
+
+.tactileSecondaryBtn {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: all 0.15s ease-in-out;
+}
+
+.tactileSecondaryBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.tactileSecondaryBtn:active {
+  transform: translateY(2px);
+}
+
+/* --------------------------------------------------------------------------
+ * 5. ARCHITECTURAL ACADEMIC GRID & ENGRAVED MOTIF CONTAINERS
+ * -------------------------------------------------------------------------- */
+.academicGridPattern {
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px, 64px 64px, 64px 64px;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .liveChallengeRoot * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

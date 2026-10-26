@@ -47,6 +47,13 @@ class TestPhase142LiveMcqElevation(unittest.TestCase):
             cls.components_dir / "InteractiveOmrSimulator.tsx",
             cls.components_dir / "DynamicInfoNoticeBoard.tsx",
             cls.pages_dir / "live-challenge.tsx",
+            cls.components_dir / "AcademicHeroMotif2D.tsx",
+            cls.components_dir / "LiveChallengeEditorial.module.css",
+            cls.components_dir / "detect3DCapability.ts",
+            cls.components_dir / "Scene3DSlot.tsx",
+            cls.components_dir / "TestHarnessScene3D.tsx",
+            cls.components_dir / "AcademicArmillaryScene3D.tsx",
+            cls.components_dir / "AcademicLeaderboardReveal.tsx",
             cls.specs_dir / "spec.md",
             cls.specs_dir / "plan.md",
             cls.specs_dir / "tasks.md",
@@ -304,6 +311,120 @@ class TestPhase142LiveMcqElevation(unittest.TestCase):
         faq_content = faq_file.read_text(encoding="utf-8")
         self.assertIn("সচরাচর জিজ্ঞাসা • FAQ", faq_content)
         self.assertIn("নেগেটিভ মার্কিং পদ্ধতি", faq_content)
+
+    def test_13_3d_capability_detection_and_runtime_guards(self):
+        """Verifies detect3DCapability module structure, constants, and defensive fallbacks."""
+        cap_file = self.components_dir / "detect3DCapability.ts"
+        self.assertTrue(cap_file.exists())
+        cap_content = cap_file.read_text(encoding="utf-8")
+
+        # Required storage keys and events
+        self.assertIn("STORAGE_KEY_3D_DISABLED", cap_content)
+        self.assertIn("ogrojatra_live_challenge_3d_disabled", cap_content)
+
+        # 8 core capability guard reasons
+        self.assertIn("LOW_DEVICE_MEMORY", cap_content)
+        self.assertIn("LOW_CPU_CONCURRENCY", cap_content)
+        self.assertIn("SAVE_DATA_ACTIVE", cap_content)
+        self.assertIn("SLOW_NETWORK_TIER", cap_content)
+        self.assertIn("PREFERS_REDUCED_MOTION", cap_content)
+        self.assertIn("TAB_HIDDEN", cap_content)
+        self.assertIn("USER_OPTED_OUT", cap_content)
+        self.assertIn("WEBGL_UNAVAILABLE", cap_content)
+        self.assertIn("BENCHMARK_STUTTER", cap_content)
+
+        # Functions
+        self.assertIn("checkStatic3DCapability", cap_content)
+        self.assertIn("runFrameTimeBenchmark", cap_content)
+        self.assertIn("evaluate3DCapability", cap_content)
+        self.assertIn("getUser3DPreference", cap_content)
+        self.assertIn("setUser3DPreference", cap_content)
+
+    def test_14_scene_3d_slot_architecture_and_zero_cls_guarantee(self):
+        """Verifies Scene3DSlot zero-CLS wrapper, dynamic chunk loading, and runtime protection."""
+        slot_file = self.components_dir / "Scene3DSlot.tsx"
+        self.assertTrue(slot_file.exists())
+        slot_content = slot_file.read_text(encoding="utf-8")
+
+        # Zero-CLS fallback motif
+        self.assertIn("AcademicHeroMotif2D", slot_content)
+
+        # Dynamic import / client-only SSR guard
+        self.assertIn("dynamic(", slot_content)
+        self.assertIn("ssr: false", slot_content)
+
+        # Runtime protections: context lost, FPS downgrade, tab visibility, manual toggle
+        self.assertIn("webglcontextlost", slot_content)
+        self.assertIn("LOW_FPS_DOWNGRADE", slot_content)
+        self.assertIn("visibilitychange", slot_content)
+        self.assertIn("handleTogglePreference", slot_content)
+        self.assertIn("Scene3DErrorBoundary", slot_content)
+
+        # Hero section integration
+        hero_file = self.components_dir / "LiveMcqHeroSection.tsx"
+        hero_content = hero_file.read_text(encoding="utf-8")
+        self.assertIn("Scene3DSlot", hero_content)
+
+    def test_15_academic_armillary_scene_3d_procedural_integrity(self):
+        """Verifies Three.js procedural Armillary Scene, lighting, props, and zero-leak disposal."""
+        scene_file = self.components_dir / "AcademicArmillaryScene3D.tsx"
+        self.assertTrue(scene_file.exists())
+        scene_content = scene_file.read_text(encoding="utf-8")
+
+        # Three.js import and procedural geometry
+        self.assertIn("import * as THREE from 'three';", scene_content)
+        self.assertIn("THREE.TorusGeometry", scene_content)
+        self.assertIn("THREE.CylinderGeometry", scene_content)
+        self.assertIn("THREE.SphereGeometry", scene_content)
+        self.assertIn("THREE.BoxGeometry", scene_content)
+
+        # Studio lighting rig
+        self.assertIn("THREE.DirectionalLight", scene_content)
+        self.assertIn("THREE.PointLight", scene_content)
+        self.assertIn("THREE.AmbientLight", scene_content)
+        self.assertIn("THREE.PCFSoftShadowMap", scene_content)
+
+        # Props: treatises, brass stylus pen, Bangladesh marker
+        self.assertIn("book1Group", scene_content)
+        self.assertIn("stylusGroup", scene_content)
+        self.assertIn("bangladeshMarker", scene_content)
+        self.assertIn("plinthMesh", scene_content)
+
+        # Performance & leak-free lifecycle
+        self.assertIn("Math.min(window.devicePixelRatio || 1, 1.5)", scene_content)
+        self.assertIn("IntersectionObserver", scene_content)
+        self.assertIn("webglcontextlost", scene_content)
+        self.assertIn("geometry.dispose()", scene_content)
+        self.assertIn("material.dispose()", scene_content)
+        self.assertIn("renderer.dispose()", scene_content)
+        self.assertIn("renderer.forceContextLoss()", scene_content)
+
+    def test_16_moments_countdown_reactivity_and_dignified_leaderboard_reveal(self):
+        """Verifies real-timer 3D reactivity, waiting room beacon, and dignified Motion leaderboard reveal."""
+        # 1. 3D Timer reactivity
+        scene_file = self.components_dir / "AcademicArmillaryScene3D.tsx"
+        scene_content = scene_file.read_text(encoding="utf-8")
+        self.assertIn("timeRemainingSeconds", scene_content)
+        self.assertIn("isLastMinute", scene_content)
+        self.assertIn("isExamStarted", scene_content)
+        self.assertIn("armillaryCenter.scale", scene_content)
+
+        # 2. Hero waiting room beacon
+        hero_file = self.components_dir / "LiveMcqHeroSection.tsx"
+        hero_content = hero_file.read_text(encoding="utf-8")
+        self.assertIn("লাইভ অপেক্ষা কক্ষ • Waiting Room", hero_content)
+        self.assertIn("animate-pulse", hero_content)
+
+        # 3. Motion Leaderboard reveal
+        reveal_file = self.components_dir / "AcademicLeaderboardReveal.tsx"
+        self.assertTrue(reveal_file.exists())
+        reveal_content = reveal_file.read_text(encoding="utf-8")
+        self.assertIn("LazyMotion", reveal_content)
+        self.assertIn("useReducedMotion", reveal_content)
+        self.assertIn("জাতীয় মেধা মূল্যায়ন ও শীর্ষ ফলাফল", reveal_content)
+        self.assertIn("সর্বোচ্চ নম্বর", reveal_content)
+        self.assertIn("গড় নির্ভুলতা", reveal_content)
+        self.assertIn("শীর্ষ স্ট্রিক", reveal_content)
 
 
 if __name__ == "__main__":

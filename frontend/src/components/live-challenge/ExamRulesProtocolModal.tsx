@@ -48,7 +48,7 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="exam-rules-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 animate-fade-in"
     >
       <div 
         className="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl border-2 border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"

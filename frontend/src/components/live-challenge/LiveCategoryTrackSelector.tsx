@@ -125,9 +125,9 @@ export function LiveCategoryTrackSelector() {
           <span>বিষয় ও পরীক্ষা ক্যাটাগরি</span>
         </div>
 
-        <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-bengali tracking-tight">
+        <h2 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif tracking-tight">
           অগ্রযাত্রায় কোন কোন{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-rose-600">
+          <span className="text-[#B45309] dark:text-amber-400 font-serif">
             পরীক্ষার প্রস্তুতি
           </span>{' '}
           নিতে পারবেন?

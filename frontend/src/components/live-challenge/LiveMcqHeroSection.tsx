@@ -1,33 +1,29 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
  * MODULE:    Live Examination & Nationwide Competitive Elevation
- * TOPIC:     Phase 142 Live MCQ Reverse Engineering & Competitive Superiority
+ * TOPIC:     Phase 142 Live MCQ 2D Elevation & Academic Typography
  * FILE:      frontend/src/components/live-challenge/LiveMcqHeroSection.tsx
  * PHASE:     Phase 142 - Live MCQ Competitive Elevation
- * PURPOSE:   Reverse-engineers and elevates Live MCQ's signature heroV2 section:
- *            night cosmos aurora background, floating track pills, dual action CTAs,
- *            server-authoritative countdown timer, platform ecosystem indicators,
- *            and 4 authoritative national trust KPI badges with zero emojis.
- * STANDARDS: Zero-Emoji, Zero-IDOR, Production Grade, WCAG 2.2 AAA, Human Craftsmanship
+ * PURPOSE:   Reverse-engineers and elevates Live MCQ's signature hero section:
+ *            authentic Oxford academic canvas, engraved 2D Armillary Sphere motif,
+ *            editorial serif typography, server-authoritative countdown timer,
+ *            platform ecosystem row, and 4 national trust KPI cards with zero emojis.
+ * STANDARDS: Zero-Emoji, Zero-AI Vibe, WCAG 2.2 AAA Contrast, Human Craftsmanship
  */
 
 import React from 'react';
 import Link from 'next/link';
 import {
   Trophy,
-  Clock,
   Users,
   ShieldCheck,
-  CheckCircle2,
   ArrowRight,
-  Sparkles,
-  Award,
   BookOpen,
   Smartphone,
   Monitor,
-  Flame,
   Check
 } from 'lucide-react';
+import { Scene3DSlot } from './Scene3DSlot';
 
 interface LiveMcqHeroSectionProps {
   challenge: {
@@ -55,95 +51,106 @@ export function LiveMcqHeroSection({
   onOpenRulesModal
 }: LiveMcqHeroSectionProps) {
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-[#060610] text-white border border-slate-800 shadow-2xl">
-      {/* Background Night Cosmos & Aurora Glow Mesh */}
+    <section className="relative overflow-hidden rounded-3xl bg-[#07192F] text-white border border-[#1E3A5F] shadow-2xl">
+      {/* Refined Academic Hairline Grid Canvas (Strict Zero AI Glow Blobs) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-blue-600/20 blur-[90px] animate-pulse" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-amber-500/15 blur-[90px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full bg-[#3333FF]/10 blur-[110px]" />
-        {/* Subtle grid mesh */}
-        <div 
-          className="absolute inset-0 opacity-[0.04]"
+        <div
+          className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
-            backgroundSize: '32px 32px'
+            backgroundImage:
+              'radial-gradient(circle, #ffffff 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)',
+            backgroundSize: '32px 32px, 64px 64px, 64px 64px'
           }}
         />
+        {/* Subtle architectural hairline border inside the hero */}
+        <div className="absolute inset-3 border border-white/5 rounded-2xl pointer-events-none" />
       </div>
 
       <div className="relative z-10 px-6 sm:px-10 lg:px-12 py-10 sm:py-14 space-y-10">
         
-        {/* Top Header Badge & Floating Track Indicators */}
+        {/* Top Header Badge & Categorical Track Indicators */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping inline-block" />
-            <span className="text-xs font-bold text-amber-300 font-bengali">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A2540] border border-[#1E3A5F]">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+            <span className="text-xs font-bold text-amber-300 font-bengali tracking-wide">
               সঠিক প্রস্তুতি, সহজ প্রিলি • জাতীয় লাইভ প্ল্যাটফর্ম
             </span>
           </div>
 
-          {/* Floating Category Badges inspired by Live MCQ */}
+          {/* Restrained Academic Category Pills */}
           <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold font-bengali text-slate-300">
-            <span className="px-2.5 py-1 rounded-lg bg-orange-500/15 text-orange-300 border border-orange-500/30">
+            <span className="px-2.5 py-1 rounded-lg bg-[#0F2D4A] text-amber-200 border border-[#1E3E66]">
               বিসিএস ও ব্যাংক
             </span>
-            <span className="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+            <span className="px-2.5 py-1 rounded-lg bg-[#0F2D4A] text-emerald-200 border border-[#1E3E66]">
               এইচএসসি সায়েন্স
             </span>
-            <span className="px-2.5 py-1 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-500/30">
+            <span className="px-2.5 py-1 rounded-lg bg-[#0F2D4A] text-sky-200 border border-[#1E3E66]">
               মেডিকেল ও ভর্তি
             </span>
-            <span className="px-2.5 py-1 rounded-lg bg-sky-500/15 text-sky-300 border border-sky-500/30">
+            <span className="px-2.5 py-1 rounded-lg bg-[#0F2D4A] text-amber-300 border border-[#B45309]/50">
               জাতীয় অলিম্পিয়াড
             </span>
           </div>
         </div>
 
-        {/* Main Title & Subtitle */}
-        <div className="max-w-3xl space-y-4">
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-bengali leading-[1.25]">
-            ঘরে বসেই সকল প্রতিযোগিতামূলক{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">
-              পরীক্ষার পূর্ণাঙ্গ ও শীর্ষ প্রস্তুতি
-            </span>
-          </h1>
+        {/* Hero Composition: Editorial Headline + 2D Academic Motif */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Dignified Editorial Typography */}
+          <div className="lg:col-span-8 space-y-4">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-serif leading-[1.3] text-balance">
+              ঘরে বসেই সকল প্রতিযোগিতামূলক{' '}
+              <span className="text-amber-400 font-serif">
+                পরীক্ষার শীর্ষ প্রস্তুতি
+              </span>
+            </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 font-bengali leading-[1.8] max-w-2xl">
-            বিসিএস, ব্যাংক, প্রাইমারি, এইচএসসি এবং জাতীয় অলিম্পিয়াডসহ সকল প্রতিযোগিতামূলক পরীক্ষার প্রস্তুতিতে 
-            দেশের প্রথম ও সর্ববৃহৎ ডিজিটাল একাডেমি প্ল্যাটফর্ম — <strong className="text-amber-300 font-semibold">২৩ লাখ+</strong> শিক্ষার্থীর আস্থার নাম।
-          </p>
+            <p className="text-sm sm:text-base text-slate-300 font-bengali leading-[1.8] max-w-2xl">
+              বিসিএস, ব্যাংক, প্রাইমারি, এইচএসসি এবং জাতীয় অলিম্পিয়াডসহ সকল প্রতিযোগিতামূলক পরীক্ষার প্রস্তুতিতে 
+              দেশের প্রথম ও সর্ববৃহৎ ডিজিটাল একাডেমি প্ল্যাটফর্ম — <strong className="text-amber-300 font-semibold">২৩ লাখ+</strong> শিক্ষার্থীর আস্থার নাম।
+            </p>
+          </div>
+
+          {/* Right Column: Progressive 2D/3D Adaptive Hero Composition */}
+          <div className="hidden lg:flex lg:col-span-4 items-center justify-center">
+            <div className="p-2 rounded-3xl bg-[#0A2540]/60 border border-white/10 shadow-lg">
+              <Scene3DSlot size={280} timeRemainingSeconds={timeRemainingSeconds} />
+            </div>
+          </div>
+
         </div>
 
         {/* Active Examination Arena Card (Server-Authoritative) */}
         {isLoading ? (
-          <div className="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4 animate-pulse">
+          <div className="p-8 rounded-2xl bg-[#0A2540] border border-[#1E3A5F] space-y-4 animate-pulse">
             <div className="h-6 bg-slate-800 rounded-lg w-1/3"></div>
             <div className="h-10 bg-slate-800/80 rounded-xl w-3/4"></div>
             <div className="h-16 bg-slate-800/40 rounded-xl"></div>
           </div>
         ) : (
-          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0A2540] to-[#071D33] border-2 border-white/15 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#0A2540] border-2 border-white/15 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             
             <div className="space-y-4 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-white/10 text-amber-300 border border-white/20 text-xs font-bold font-bengali flex items-center gap-1.5">
+                <span className="px-3 py-1 rounded-full bg-[#07192F] text-amber-300 border border-white/20 text-xs font-bold font-bengali flex items-center gap-1.5">
                   <Trophy className="w-3.5 h-3.5 text-amber-300" />
                   <span>লাইভ অলিম্পিয়াড পরীক্ষা</span>
                 </span>
-                <span className="px-3 py-1 rounded-full bg-[#991B1B]/30 text-rose-200 border border-[#991B1B]/50 text-xs font-mono font-bold">
+                <span className="px-3 py-1 rounded-full bg-[#991B1B]/40 text-rose-200 border border-[#991B1B] text-xs font-mono font-bold">
                   নেগেটিভ মার্কিং: -০.২৫
                 </span>
                 <button
                   type="button"
                   onClick={onOpenRulesModal}
-                  className="px-3 py-1 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-bold font-bengali flex items-center gap-1 transition"
+                  className="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-bold font-bengali flex items-center gap-1 transition"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                   <span>নিয়মাবলী</span>
                 </button>
               </div>
 
-              <div className="text-xl sm:text-3xl font-extrabold text-white tracking-tight font-bengali">
+              <div className="text-xl sm:text-3xl font-extrabold text-white tracking-tight font-serif">
                 {challenge.titleBn}
               </div>
 
@@ -151,10 +158,16 @@ export function LiveMcqHeroSection({
                 সিলেবাস: {challenge.syllabusSummaryBn}
               </p>
 
-              {/* Real-time participant counter */}
-              <div className="flex items-center gap-2 text-xs font-bold text-amber-300 pt-1 font-bengali">
-                <Users className="w-4 h-4 text-amber-300" />
-                <span>{challenge.registeredCount.toLocaleString()} জন প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
+              {/* Waiting Room & Live Participant Count (Calm, dignified academic beacon) */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#07192F] border border-[#1E3A5F] text-xs font-bold text-amber-300 font-bengali">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                  <Users className="w-3.5 h-3.5 text-amber-300" />
+                  <span>{challenge.registeredCount.toLocaleString()} জন প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
+                </div>
+                <span className="text-[11px] font-mono text-slate-300 px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                  লাইভ অপেক্ষা কক্ষ • Waiting Room
+                </span>
               </div>
             </div>
 
@@ -200,17 +213,17 @@ export function LiveMcqHeroSection({
               যে কোনো ডিভাইসে সহজে এক্সেস করুন:
             </span>
             <div className="flex items-center gap-2 text-slate-300">
-              <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono flex items-center gap-1.5">
+              <span className="px-2.5 py-1 rounded-md bg-[#0A2540] border border-[#1E3A5F] text-[11px] font-mono flex items-center gap-1.5">
                 <Smartphone className="w-3.5 h-3.5 text-emerald-400" /> Android
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono flex items-center gap-1.5">
+              <span className="px-2.5 py-1 rounded-md bg-[#0A2540] border border-[#1E3A5F] text-[11px] font-mono flex items-center gap-1.5">
                 <Smartphone className="w-3.5 h-3.5 text-sky-400" /> iOS
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono flex items-center gap-1.5">
+              <span className="px-2.5 py-1 rounded-md bg-[#0A2540] border border-[#1E3A5F] text-[11px] font-mono flex items-center gap-1.5">
                 <Monitor className="w-3.5 h-3.5 text-blue-400" /> Windows
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono flex items-center gap-1.5">
-                <Monitor className="w-3.5 h-3.5 text-purple-400" /> macOS
+              <span className="px-2.5 py-1 rounded-md bg-[#0A2540] border border-[#1E3A5F] text-[11px] font-mono flex items-center gap-1.5">
+                <Monitor className="w-3.5 h-3.5 text-amber-400" /> macOS
               </span>
             </div>
           </div>
@@ -220,9 +233,9 @@ export function LiveMcqHeroSection({
           </span>
         </div>
 
-        {/* 4 Grand Trust KPIs (Inspired by Live MCQ's iconic stats) */}
+        {/* 4 Grand Trust KPIs (Strict Editorial Solid Borders) */}
         <ul aria-label="বিশ্বাসের পরিসংখ্যান" className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-          <li className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-amber-400/40 transition">
+          <li className="p-4 rounded-2xl bg-[#0A2540]/80 border border-[#1E3A5F] text-center hover:border-amber-400/60 transition">
             <div className="text-2xl sm:text-3xl font-black font-mono text-amber-300">
               ২৩ লাখ+
             </div>
@@ -230,7 +243,7 @@ export function LiveMcqHeroSection({
               নিবন্ধিত শিক্ষার্থী
             </div>
           </li>
-          <li className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-blue-400/40 transition">
+          <li className="p-4 rounded-2xl bg-[#0A2540]/80 border border-[#1E3A5F] text-center hover:border-sky-400/60 transition">
             <div className="text-2xl sm:text-3xl font-black font-mono text-sky-300">
               ৭.৫ লাখ+
             </div>
@@ -238,7 +251,7 @@ export function LiveMcqHeroSection({
               আর্কাইভ প্রশ্ন ও ব্যাখ্যা
             </div>
           </li>
-          <li className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-emerald-400/40 transition">
+          <li className="p-4 rounded-2xl bg-[#0A2540]/80 border border-[#1E3A5F] text-center hover:border-emerald-400/60 transition">
             <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-300">
               ৩০ হাজার+
             </div>
@@ -246,7 +259,7 @@ export function LiveMcqHeroSection({
               প্রতিদিন লাইভ অংশগ্রহণকারী
             </div>
           </li>
-          <li className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-rose-400/40 transition">
+          <li className="p-4 rounded-2xl bg-[#0A2540]/80 border border-[#1E3A5F] text-center hover:border-rose-400/60 transition">
             <div className="text-2xl sm:text-3xl font-black font-mono text-rose-300">
               ১০+ বছর
             </div>

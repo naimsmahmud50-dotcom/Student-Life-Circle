@@ -57,6 +57,9 @@ import { LiveExamAnalyticsCard } from '@/components/live-challenge/LiveExamAnaly
 import { LiveMcqFeatureShowcase } from '@/components/live-challenge/LiveMcqFeatureShowcase';
 import { InteractiveOmrSimulator } from '@/components/live-challenge/InteractiveOmrSimulator';
 import { DynamicInfoNoticeBoard } from '@/components/live-challenge/DynamicInfoNoticeBoard';
+import { AcademicLeaderboardReveal } from '@/components/live-challenge/AcademicLeaderboardReveal';
+import Head from 'next/head';
+import styles from '@/components/live-challenge/LiveChallengeEditorial.module.css';
 
 interface LeaderboardEntry {
   rank: number;
@@ -171,6 +174,11 @@ export default function LiveChallengePage() {
 
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </Head>
+
       <AppHead
         title="দেশব্যাপী লাইভ চ্যালেঞ্জ | অগ্রযাত্রা"
         description="৫০,০০০ কনকারেন্ট শিক্ষার্থীর সঙ্গে রিয়েল-টাইম অলিম্পিয়াড পরীক্ষা, লাইভ লিডারবোর্ড ও মিলি-সেকেন্ড নির্ভুল সাবমিশন বাফার।"
@@ -178,7 +186,7 @@ export default function LiveChallengePage() {
         ogType="website"
       />
 
-      <div className="min-h-screen flex flex-col bg-[#FAF8F3] dark:bg-[#060610] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white">
+      <div className={`${styles.liveChallengeRoot} min-h-screen flex flex-col bg-[#FAF8F3] dark:bg-[#060610] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white`}>
         {/* Sticky Unified Global Navigation */}
         <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
 
@@ -234,7 +242,7 @@ export default function LiveChallengePage() {
             <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold font-bengali text-slate-900 dark:text-white flex items-center gap-2">
+                  <h2 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
                     <Award className="w-5 h-5 text-amber-700 dark:text-amber-400" />
                     <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
                   </h2>
@@ -248,58 +256,11 @@ export default function LiveChallengePage() {
                 </span>
               </div>
 
-              {/* Leaderboard Entries List */}
-              <div className="space-y-3">
-                {visibleEntries.map((entry) => (
-                  <div
-                    key={entry.rank}
-                    className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-4 ${
-                      entry.isCurrentUser
-                        ? 'bg-slate-50 dark:bg-slate-800/80 border-[#0A2540] dark:border-amber-400 ring-2 ring-[#0A2540]/20'
-                        : 'bg-[#FAFAF8] dark:bg-slate-950/60 border-slate-200 dark:border-slate-800'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3.5">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-mono font-bold text-xs ${
-                        entry.rank === 1
-                          ? 'bg-[#0A2540] text-amber-300'
-                          : entry.rank === 2
-                          ? 'bg-slate-700 text-slate-100'
-                          : entry.rank === 3
-                          ? 'bg-amber-800 text-amber-100'
-                          : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                      }`}>
-                        {entry.rank}
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs sm:text-sm font-bold font-bengali text-slate-900 dark:text-white">
-                            {entry.handle}
-                          </span>
-                          {entry.isCurrentUser && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-bengali bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200">
-                              আপনি
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-[11px] text-slate-500 font-mono block">
-                          সঠিকতা: {entry.accuracyPercent}% • স্ট্রিক: {entry.streakCount}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <div className="text-base sm:text-lg font-mono font-bold text-[#0A2540] dark:text-amber-300 tabular-nums">
-                        {entry.score.toFixed(1)}
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-bengali block">
-                        নম্বর
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Dignified Academic Leaderboard Reveal with Motion transitions & KPI count-up */}
+              <AcademicLeaderboardReveal
+                entries={visibleEntries}
+                registeredCount={challenge.registeredCount}
+              />
             </div>
 
             {/* Sidebar Cards (4 cols): Privacy, Rules & Live Analytics */}

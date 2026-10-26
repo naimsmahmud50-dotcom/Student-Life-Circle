@@ -95,7 +95,7 @@ test.describe('End-to-End Tuition Marketplace & Escrow Vault Journey', () => {
     const buetBadge = page.locator('text=বুয়েট (ECE)');
     await expect(buetBadge).toBeVisible();
 
-    const duBadge = page.locator('text=ঢাকা বিশ্ববিদ্যালয়');
+    const duBadge = page.locator('text=ঢাকা বিশ্ববিদ্যালয়').first();
     await expect(duBadge).toBeVisible();
 
     // Ensure no emojis in credentials display
