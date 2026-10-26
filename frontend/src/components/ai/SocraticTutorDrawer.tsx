@@ -34,6 +34,14 @@ import {
   FileText
 } from 'lucide-react';
 import { KaTeXRenderer } from '../quiz/katex-renderer';
+import {
+  isCapabilityInquiry,
+  TUTOR_CAPABILITIES_RESPONSE_BN,
+  isDirectAnswerDemanded,
+  ZERO_ANSWER_LEAKING_REFUSAL_BN,
+  scanForMisconception,
+  analyzeProblemDomain
+} from '../../lib/socratic/socraticEngine';
 
 export interface ChatMessage {
   id: string;
@@ -324,12 +332,37 @@ export const SocraticTutorDrawer: React.FC<SocraticTutorDrawerProps> = ({
         )
       );
     } catch (err) {
+      // High-availability graceful fallback using client Socratic engine
+      let fallbackText = '';
+      if (isCapabilityInquiry(textToSend)) {
+        fallbackText = TUTOR_CAPABILITIES_RESPONSE_BN;
+      } else if (isDirectAnswerDemanded(textToSend)) {
+        fallbackText = ZERO_ANSWER_LEAKING_REFUSAL_BN;
+      } else {
+        const misconception = scanForMisconception(textToSend);
+        if (misconception) {
+          fallbackText =
+            `সতর্কতা ও পর্যবেক্ষণ: ${misconception.titleBn}\n` +
+            `${misconception.explanationBn}\n\n` +
+            (misconception.remedialFormulaLatex ? `সঠিক রূপ: $${misconception.remedialFormulaLatex}$\n\n` : '') +
+            `সক্রেটিক প্রশ্ন: ${misconception.guidingQuestionBn}`;
+        } else {
+          const analysis = analyzeProblemDomain(textToSend);
+          const scaffold = analysis.scaffolding[0];
+          fallbackText =
+            `[${analysis.identifiedTopicBn}]\n` +
+            `${scaffold.hintTextBn}\n\n` +
+            (scaffold.formulaLatex ? `প্রাসঙ্গিক সূত্র: $${scaffold.formulaLatex}$\n\n` : '') +
+            `সক্রেটিক অনুসন্ধান: ${scaffold.guidingQuestionBn}`;
+        }
+      }
+
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessageId
             ? {
                 ...msg,
-                text: 'অনলাইন সংযোগে সমস্যা দেখা দিয়েছে। আপনার প্রশ্নটি সংক্ষেপে পুনরায় জিজ্ঞাসা করুন।',
+                text: fallbackText,
                 isStreaming: false
               }
             : msg

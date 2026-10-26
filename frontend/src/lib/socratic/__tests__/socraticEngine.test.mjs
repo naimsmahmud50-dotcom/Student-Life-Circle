@@ -10,11 +10,30 @@ import assert from 'node:assert/strict';
 
 import {
   isDirectAnswerDemanded,
+  isCapabilityInquiry,
+  TUTOR_CAPABILITIES_RESPONSE_BN,
   scanForMisconception,
   analyzeProblemDomain,
   MISCONCEPTION_TAXONOMY,
   ZERO_ANSWER_LEAKING_REFUSAL_BN
 } from '../socraticEngine.ts';
+
+test('Socratic AI Engine - Capability Inquiry Detection', async (t) => {
+  await t.test('detects Bengali and Banglish capability questions', () => {
+    assert.equal(isCapabilityInquiry('tmi amk ki ki kaje help korba?'), true);
+    assert.equal(isCapabilityInquiry('তুমি আমাকে কী কী কাজে সাহায্য করবে?'), true);
+    assert.equal(isCapabilityInquiry('তুমি কী করতে পারো?'), true);
+    assert.equal(isCapabilityInquiry('who are you'), true);
+  });
+
+  await t.test('capabilities response outlines all STEM subjects', () => {
+    assert.match(TUTOR_CAPABILITIES_RESPONSE_BN, /উচ্চতর গণিত/);
+    assert.match(TUTOR_CAPABILITIES_RESPONSE_BN, /পদার্থবিজ্ঞান/);
+    assert.match(TUTOR_CAPABILITIES_RESPONSE_BN, /রসায়ন/);
+    assert.match(TUTOR_CAPABILITIES_RESPONSE_BN, /তথ্য ও যোগাযোগ প্রযুক্তি/);
+    assert.match(TUTOR_CAPABILITIES_RESPONSE_BN, /খাতার ছবির ওটিআর/);
+  });
+});
 
 test('Socratic AI Engine - Zero-Answer Leaking Guardrail', async (t) => {
   await t.test('detects direct answer demands in Bengali', () => {
