@@ -37,7 +37,7 @@ export default function TermsPage() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${
+      className={`min-h-screen flex flex-col font-sans transition-colors duration-200 bg-academic-paper-grain ${
         theme === 'dark' ? 'dark bg-[#070D18]' : 'bg-[#FAFAF8]'
       }`}
     >
@@ -52,48 +52,52 @@ export default function TermsPage() {
         onToggleTheme={toggleTheme}
       />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 relative z-10">
         {/* Header Bar */}
         <div className="space-y-4">
           <Link
             href="/about"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#0A2540] transition-colors"
+            className="btn-tactile-outline inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1B2A4A] dark:text-[#A8B7D8] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>আমাদের সম্পর্কে ফিরে যান</span>
           </Link>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-xs font-bold text-[#0A2540] shadow-xs">
-            <Scale className="w-3.5 h-3.5 text-slate-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F5F2EB] dark:bg-[#162032] border border-[#E2DDD3] dark:border-[#263147] text-xs font-bold text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs">
+            <Scale className="w-3.5 h-3.5 text-emerald-800 dark:text-emerald-400" />
             <span>আইনগত ও প্রাতিষ্ঠানিক সনদ • সংস্করণ ২০২৬.১</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0A2540] tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0A2540] dark:text-[#E8EFF8] tracking-tight font-serif-bn">
             অগ্রযাত্রা প্রাতিষ্ঠানিক ব্যবহারের নীতিমালা ও শিক্ষার্থী অধিকার সনদ
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-[#5A687D] dark:text-[#94A3B8]">
             সর্বশেষ পরিমার্জন: অক্টোবর ২০২৬ • কার্যকর এলাকা: গণপ্রজাতন্ত্রী বাংলাদেশ
           </p>
         </div>
 
         {/* Content Clauses Card */}
-        <article className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs space-y-8 text-sm leading-relaxed text-slate-700">
+        <article className="bg-[#FDFCF9] dark:bg-[#111827] border border-[#E5E2DA] dark:border-[#263147] rounded-2xl p-6 sm:p-10 shadow-paper-md space-y-8 text-sm leading-relaxed text-[#2D3748] dark:text-[#CBD5E1] relative overflow-hidden notebook-margin-accent">
           {/* Preamble */}
-          <div className="pb-6 border-b border-slate-100">
-            <h2 className="text-base font-bold text-[#0A2540] uppercase tracking-wider mb-2">
+          <div className="p-5 rounded-xl bg-[#F6F5F0] dark:bg-[#151D2A] border-l-4 border-emerald-700 dark:border-emerald-500 space-y-2">
+            <h2 className="text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
               প্রস্তাবনা (Preamble)
             </h2>
-            <p>
+            <p className="text-sm font-medium text-[#1B2A4A] dark:text-[#E2E8F0] leading-relaxed">
               অগ্রযাত্রা প্ল্যাটফর্ম বাংলাদেশের প্রতিটি শিক্ষার্থী, শিক্ষক এবং অভিভাবকের সাংবিধানিক শিক্ষার অধিকার ও
               ডিজিটাল মর্যাদার প্রতি দায়বদ্ধ। এই নীতিমালা প্ল্যাটফর্মের প্রতিটি প্রযুক্তিগত ও আইনি মিথস্ক্রিয়া পরিচালনা করে।
             </p>
           </div>
 
           {/* Clause 1 */}
-          <section className="space-y-2">
-            <h3 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
-              <Lock className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-              <span>ধারা ১: শিক্ষার্থী ডেটা সার্বভৌমত্ব ও ব্যক্তিগত সুরক্ষা</span>
+          <section className="space-y-3 pt-2 border-t border-[#E5E2DA] dark:border-[#263147]/60">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
+              <span>ধারা ০১</span>
+              <span className="w-8 h-px bg-emerald-700/30 dark:bg-emerald-400/30"></span>
+            </div>
+            <h3 className="text-base font-bold text-[#0A2540] dark:text-[#E8EFF8] font-serif-bn flex items-center gap-2">
+              <Lock className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+              <span>শিক্ষার্থী ডেটা সার্বভৌমত্ব ও ব্যক্তিগত সুরক্ষা</span>
             </h3>
             <p>
               ১.১. শিক্ষার্থীর নাম, রোল, পরীক্ষা ফলাফল এবং প্রাতিষ্ঠানিক পরিচয় জাতীয় সার্বভৌম ডেটা হিসাবে গণ্য।
@@ -106,10 +110,14 @@ export default function TermsPage() {
           </section>
 
           {/* Clause 2 */}
-          <section className="space-y-2">
-            <h3 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-              <span>ধারা ২: নজরদারি-মুক্ত পরীক্ষা অখণ্ডতা ও প্রক্টরিং নিশ্চয়তা</span>
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DA] dark:border-[#263147]/60">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
+              <span>ধারা ০২</span>
+              <span className="w-8 h-px bg-emerald-700/30 dark:bg-emerald-400/30"></span>
+            </div>
+            <h3 className="text-base font-bold text-[#0A2540] dark:text-[#E8EFF8] font-serif-bn flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+              <span>নজরদারি-মুক্ত পরীক্ষা অখণ্ডতা ও প্রক্টরিং নিশ্চয়তা</span>
             </h3>
             <p>
               ২.১. অগ্রযাত্রা কখনোই শিক্ষার্থীর মুখমণ্ডলের ভিডিও রেকর্ডিং, চোখের পলক পর্যবেক্ষণ (Eye-tracking) বা ব্যক্তিগত কক্ষের
@@ -122,10 +130,14 @@ export default function TermsPage() {
           </section>
 
           {/* Clause 3 */}
-          <section className="space-y-2">
-            <h3 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-              <span>ধারা ৩: টিউশন ফি এসক্রো সুরক্ষা ও অভিভাবক ট্রাস্ট</span>
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DA] dark:border-[#263147]/60">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
+              <span>ধারা ০৩</span>
+              <span className="w-8 h-px bg-emerald-700/30 dark:bg-emerald-400/30"></span>
+            </div>
+            <h3 className="text-base font-bold text-[#0A2540] dark:text-[#E8EFF8] font-serif-bn flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+              <span>টিউশন ফি এসক্রো সুরক্ষা ও অভিভাবক ট্রাস্ট</span>
             </h3>
             <p>
               ৩.১. টিউশন ব্যবস্থার ক্ষেত্রে সমস্ত আর্থিক লেনদেন অগ্রযাত্রা সিকিউর এসক্রো ভল্টে সংরক্ষিত থাকে। শিক্ষক কর্তৃক
@@ -137,10 +149,14 @@ export default function TermsPage() {
           </section>
 
           {/* Clause 4 */}
-          <section className="space-y-2">
-            <h3 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
-              <Award className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-              <span>ধারা ৪: মেধা বৃত্তি ও নিরপেক্ষ ট্রাইব্যুনাল সালিশি</span>
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DA] dark:border-[#263147]/60">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
+              <span>ধারা ০৪</span>
+              <span className="w-8 h-px bg-emerald-700/30 dark:bg-emerald-400/30"></span>
+            </div>
+            <h3 className="text-base font-bold text-[#0A2540] dark:text-[#E8EFF8] font-serif-bn flex items-center gap-2">
+              <Award className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+              <span>মেধা বৃত্তি ও নিরপেক্ষ ট্রাইব্যুনাল সালিশি</span>
             </h3>
             <p>
               ৪.১. জাতীয় মেধা বৃত্তি বণ্টন ১০০% গাণিতিক যোগ্যতা এবং যাচাইকৃত প্রাতিষ্ঠানিক স্কোরের ভিত্তিতে স্বয়ংক্রিয়ভাবে পরিচালিত হয়।
@@ -153,10 +169,14 @@ export default function TermsPage() {
           </section>
 
           {/* Clause 5 */}
-          <section className="space-y-2">
-            <h3 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-              <span>ধারা ৫: অফলাইন পিয়ার-টু-পিয়ার শিক্ষাক্রম সমতা</span>
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DA] dark:border-[#263147]/60">
+            <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-emerald-800 dark:text-emerald-400 uppercase font-mono">
+              <span>ধারা ০৫</span>
+              <span className="w-8 h-px bg-emerald-700/30 dark:bg-emerald-400/30"></span>
+            </div>
+            <h3 className="text-base font-bold text-[#0A2540] dark:text-[#E8EFF8] font-serif-bn flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+              <span>অফলাইন পিয়ার-টু-পিয়ার শিক্ষাক্রম সমতা</span>
             </h3>
             <p>
               ৫.১. বাংলাদেশের প্রত্যন্ত চরাঞ্চল, হাওর ও পাহাড়ি অঞ্চলের যেসকল শিক্ষার্থীর নিয়মিত ইন্টারনেট সুবিধা নেই,

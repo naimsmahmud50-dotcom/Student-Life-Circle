@@ -128,60 +128,60 @@ export default function FlagshipLandingPage() {
           {/* ===================================================================
               SECTION 1: EDITORIAL HERO (Calm, Prestigious, Scholarly)
               =================================================================== */}
-          <section className="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 lg:pt-16 lg:pb-24 border-b border-[#E5E2DA] dark:border-[#262D3D] bg-[#FAF8F3] dark:bg-[#090D16]">
+          <section className="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 lg:pt-16 lg:pb-24 border-b border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#0F141E] bg-academic-paper-grain">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 
                 {/* Left Column: Authoritative Editorial Copy */}
-                <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div className="lg:col-span-7 space-y-6 text-left">
                   
                   {/* National Accreditation Chip */}
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] text-xs font-semibold text-[#5B5B5B] dark:text-slate-300 shadow-sm">
-                    <ShieldCheck className="w-4 h-4 text-[#0B5D3B] dark:text-emerald-400 shrink-0" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#FDFCF9] dark:bg-[#171E2C] border border-[#E5E2DA] dark:border-[#263147] text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] shadow-xs">
+                    <ShieldCheck className="w-4 h-4 text-[#065F46] dark:text-emerald-400 shrink-0" />
                     <span>জাতীয় শিক্ষাক্রম (NCTB) মানদণ্ডে পরিচালিত • ৬৪ জেলায় সমন্বিত</span>
                   </div>
 
                   {/* Headline & Welcoming Tone */}
                   <div className="space-y-3.5">
                     <div className="flex flex-wrap items-center gap-2.5">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#0B5D3B] dark:text-emerald-300 text-xs font-bold font-bengali border border-emerald-200 dark:border-emerald-800">
-                        <Sparkles className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#F0F7F4] dark:bg-emerald-950/50 text-[#065F46] dark:text-emerald-300 text-xs font-bold font-bengali border border-[#C8E3D7] dark:border-emerald-800">
+                        <Sparkles className="w-3.5 h-3.5 text-[#065F46] dark:text-emerald-400" />
                         <span>৪টি প্রথাগত অ্যাপের একক বিকল্প • জাতীয় ডিজিটাল ক্যাম্পাস</span>
                       </div>
-                      <span className="text-xs font-semibold text-[#1B2A4A]/80 dark:text-slate-300 font-bengali">
+                      <span className="text-xs font-semibold text-[#0A2540] dark:text-[#F5F2EB] font-bengali">
                         স্বাগতম, ভবিষ্যৎ গড়ার অগ্রযাত্রায়
                       </span>
                     </div>
-                    <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight leading-[1.22] font-bengali">
-                      বাংলাদেশের প্রতিটি শিক্ষার্থীর জন্য একটি সার্বিক <span className="text-gradient-emerald underline decoration-[#0B5D3B]/40 underline-offset-8">ডিজিটাল ক্যাম্পাস</span>
+                    <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-bold text-[#0A2540] dark:text-[#F5F2EB] tracking-tight leading-[1.22] font-serif-bn">
+                      বাংলাদেশের প্রতিটি শিক্ষার্থীর জন্য একটি সার্বিক <span className="text-[#065F46] dark:text-emerald-400 underline decoration-[#065F46]/40 underline-offset-8">ডিজিটাল ক্যাম্পাস</span>
                     </h1>
-                    <p className="text-base sm:text-lg text-[#5B5B5B] dark:text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bengali">
+                    <p className="text-base sm:text-lg text-[#525252] dark:text-[#A3A8B5] leading-[1.78] max-w-2xl font-sans font-bengali">
                       ১০ মিনিট স্কুলের ভিডিওর চেয়ে বেশি সক্রিয় ৩ডি ল্যাব, লাইভ এমসিকইউর চেয়ে নির্ভুল জাতীয় অলিম্পিয়াড, কেয়ারটিউটর্সের মতো ৫০% কমিশনহীন টিউশন এবং বিডিজবসের কাগুজে সিভির বিকল্পে W3C ক্রিপ্টোগ্রাফিক সনদ।
                     </p>
 
                     {/* Interactive Stage Selector Chips */}
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 font-bengali">
+                    <div className="flex flex-wrap items-center justify-start gap-2 pt-1 font-bengali">
                       <Link
                         href="/learn?stage=SSC"
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] text-[#0A2540] dark:text-[#F5F2EB] hover:border-[#065F46] hover:text-[#065F46] dark:hover:text-emerald-400 transition-colors shadow-xs"
                       >
                         মাধ্যমিক (SSC ৯-১০)
                       </Link>
                       <Link
                         href="/learn?stage=HSC"
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] text-[#0A2540] dark:text-[#F5F2EB] hover:border-[#065F46] hover:text-[#065F46] dark:hover:text-emerald-400 transition-colors shadow-xs"
                       >
                         উচ্চ মাধ্যমিক (HSC ১১-১২)
                       </Link>
                       <Link
                         href="/admission"
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] text-[#0A2540] dark:text-[#F5F2EB] hover:border-[#065F46] hover:text-[#065F46] dark:hover:text-emerald-400 transition-colors shadow-xs"
                       >
                         বিশ্ববিদ্যালয় ভর্তি (Admission)
                       </Link>
                       <Link
                         href="/tuition"
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#E5E2DA] dark:border-[#262D3D] bg-white dark:bg-[#121B2D] text-[#1B2A4A] dark:text-slate-300 hover:border-[#0B5D3B] hover:text-[#0B5D3B] dark:hover:text-emerald-400 transition-colors shadow-sm"
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#171E2C] text-[#0A2540] dark:text-[#F5F2EB] hover:border-[#065F46] hover:text-[#065F46] dark:hover:text-emerald-400 transition-colors shadow-xs"
                       >
                         টিউশন ও ক্যারিয়ার (Career)
                       </Link>
@@ -189,10 +189,10 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* High-Contrast Dual Call to Action */}
-                  <div className="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-start gap-4">
                     <Link
                       href="/practice"
-                      className="btn-3d-oxford w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white font-semibold font-bengali text-base shadow-[0_3px_0_0_#051329] active:translate-y-0.5 transition-all min-h-[48px]"
+                      className="btn-tactile-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-lg text-white font-semibold font-bengali text-base min-h-[48px]"
                     >
                       <GraduationCap className="w-5 h-5 text-amber-300" />
                       <span>পড়াশোনা শুরু করুন (Quick Resume)</span>
@@ -201,9 +201,9 @@ export default function FlagshipLandingPage() {
 
                     <Link
                       href="/board-archives"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white dark:bg-[#121B2D] hover:bg-[#F5F2EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] font-semibold font-bengali text-base border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm active:translate-y-0.5 transition-all min-h-[48px]"
+                      className="btn-tactile-outline w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg text-[#0A2540] dark:text-[#F5F2EB] font-semibold font-bengali text-base min-h-[48px]"
                     >
-                      <Award className="w-5 h-5 text-[#B8862B]" />
+                      <Award className="w-5 h-5 text-[#B45309]" />
                       <span>বোর্ড প্রশ্ন ব্যাংক (২০১৫–২০২৫)</span>
                     </Link>
                   </div>

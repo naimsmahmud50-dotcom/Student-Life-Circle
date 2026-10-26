@@ -14,6 +14,7 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
@@ -118,37 +119,37 @@ export default function AuthPage() {
         <title>{authMode === 'LOGIN' ? 'লগইন' : 'অ্যাকাউন্ট তৈরি'} | অগ্রযাত্রা</title>
       </Head>
 
-      <div className="min-h-screen bg-[var(--bg-app)] text-[var(--text-main)] flex flex-col justify-between transition-colors duration-200">
+      <div className="min-h-screen bg-[#FAFAF8] dark:bg-[#070D18] bg-academic-paper-grain text-[var(--text-main)] flex flex-col justify-between transition-colors duration-200">
         
         {/* Navigation Bar */}
-        <header className="border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] py-4">
+        <header className="border-b border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9]/95 dark:bg-[#111827]/95 backdrop-blur-md py-3.5 sticky top-0 z-40">
           <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-            <a href="/" className="flex items-center space-x-3 text-inherit no-underline">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center">
+            <Link href="/" className="flex items-center space-x-3 text-inherit no-underline">
+              <div className="w-9 h-9 rounded-lg bg-[#0A2540] dark:bg-[#1B2A4A] text-white font-serif-bn font-bold text-lg flex items-center justify-center shadow-paper-xs border border-[#E5E2DA]/20">
                 অ
               </div>
               <div>
-                <h1 className="text-base font-bold leading-none">অগ্রযাত্রা</h1>
-                <p className="text-xs text-[var(--text-muted)] mt-0.5">নিরাপদ ও দীর্ঘমেয়াদি শিক্ষার্থী প্রোফাইল</p>
+                <h1 className="text-base font-bold leading-none font-serif-bn text-[#0A2540] dark:text-[#E8EFF8]">অগ্রযাত্রা</h1>
+                <p className="text-xs text-[#5A687D] dark:text-[#94A3B8] mt-0.5">নিরাপদ ও দীর্ঘমেয়াদি শিক্ষার্থী প্রোফাইল</p>
               </div>
-            </a>
+            </Link>
             <ThemeToggle />
           </div>
         </header>
 
         {/* Auth Container */}
-        <main className="max-w-md mx-auto w-full px-4 py-8">
-          <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 sm:p-8 shadow-sm space-y-6">
+        <main className="max-w-md mx-auto w-full px-4 py-8 relative z-10">
+          <div className="rounded-2xl border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#111827] p-6 sm:p-8 shadow-paper-md space-y-6 notebook-margin-accent relative overflow-hidden">
             
-            {/* Header Tabs: Login vs Register */}
-            <div className="flex border-b border-[var(--border-subtle)] pb-2 gap-4">
+            {/* Header Tabs: Login vs Register (Tactile Segmented Switcher) */}
+            <div className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
               <button
                 type="button"
                 onClick={() => setAuthMode('REGISTER')}
-                className={`pb-2 text-base font-bold transition-all relative select-none ${
+                className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none ${
                   authMode === 'REGISTER'
-                    ? "text-[var(--color-brand)] border-b-2 border-[var(--color-brand)]"
-                    : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
+                    ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
+                    : "text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]"
                 }`}
               >
                 নতুন অ্যাকাউন্ট
@@ -156,10 +157,10 @@ export default function AuthPage() {
               <button
                 type="button"
                 onClick={() => setAuthMode('LOGIN')}
-                className={`pb-2 text-base font-bold transition-all relative select-none ${
+                className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none ${
                   authMode === 'LOGIN'
-                    ? "text-[var(--color-brand)] border-b-2 border-[var(--color-brand)]"
-                    : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
+                    ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
+                    : "text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]"
                 }`}
               >
                 লগইন করুন
@@ -168,7 +169,7 @@ export default function AuthPage() {
 
             {/* Redirect Notice if coming from protected route */}
             {redirectTo && (
-              <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5 animate-in fade-in">
+              <div className="p-3.5 rounded-xl bg-[#FFFBEB] dark:bg-[#1E1B13] border border-amber-300 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5 animate-in fade-in">
                 <Info className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" strokeWidth={1.75} />
                 <div className="space-y-0.5">
                   <span className="font-bold font-bengali block">প্রশাসনিক অঞ্চলে প্রবেশের অনুরোধ</span>
@@ -184,8 +185,8 @@ export default function AuthPage() {
               
               {authMode === 'REGISTER' && (
                 <>
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-[var(--text-main)]">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                       পূর্ণ নাম (Full Name):
                     </label>
                     <input
@@ -194,13 +195,13 @@ export default function AuthPage() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="যেমন: তানভীর আহমেদ"
-                      className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                      className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label className="text-xs font-semibold text-[var(--text-main)]">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                         বয়স (Age):
                       </label>
                       <input
@@ -210,18 +211,18 @@ export default function AuthPage() {
                         value={age}
                         onChange={(e) => setAge(e.target.value ? parseInt(e.target.value) : '')}
                         placeholder="যেমন: ১৬"
-                        className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                        className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                       />
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="text-xs font-semibold text-[var(--text-main)]">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                         মাধ্যম (Medium):
                       </label>
                       <select
                         value={medium}
                         onChange={(e) => setMedium(e.target.value)}
-                        className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                        className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                       >
                         <option value="BANGLA">বাংলা মাধ্যম</option>
                         <option value="ENGLISH_VERSION">ইংরেজি ভার্সন</option>
@@ -231,7 +232,7 @@ export default function AuthPage() {
 
                   {/* Minor Safety Alert */}
                   {isMinor && (
-                    <div className="p-3 rounded-xl bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 text-xs text-teal-800 dark:text-teal-200 space-y-1">
+                    <div className="p-3.5 rounded-xl bg-[#F0FDF4] dark:bg-[#0B251D] border border-emerald-300 dark:border-emerald-800 text-xs text-emerald-950 dark:text-emerald-200 space-y-1.5 animate-in fade-in">
                       <div className="font-bold flex items-center space-x-1.5">
                         <Badge variant="mastery">শিশু ও অপ্রাপ্তবয়স্ক সুরক্ষা</Badge>
                       </div>
@@ -242,14 +243,14 @@ export default function AuthPage() {
                     </div>
                   )}
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-[var(--text-main)]">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                       বর্তমান শিক্ষাস্তর (Education Stage):
                     </label>
                     <select
                       value={stage}
                       onChange={(e) => setStage(e.target.value)}
-                      className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                      className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                     >
                       <option value="PRIMARY">প্রাথমিক (Class 1-5)</option>
                       <option value="MIDDLE">মাধ্যমিক (Class 6-8)</option>
@@ -263,15 +264,15 @@ export default function AuthPage() {
                 </>
               )}
 
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-[var(--text-main)]">
+                  <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                     ইমেইল অথবা ফোন নম্বর:
                   </label>
                   <button
                     type="button"
                     onClick={handleSendOtp}
-                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-bengali font-bold cursor-pointer"
+                    className="text-xs text-emerald-800 dark:text-emerald-400 hover:underline font-bengali font-bold cursor-pointer"
                   >
                     ওটিপি পাঠান
                   </button>
@@ -282,18 +283,18 @@ export default function AuthPage() {
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder="student@example.com অথবা 017XXXXXXXX"
-                  className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                 />
               </div>
 
               {/* SMS OTP Verification Modal / Block */}
               {showOtpSection && (
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2.5 animate-in fade-in">
+                <div className="p-3.5 rounded-xl bg-[#F5F2EB] dark:bg-[#162032] border border-[#E2DDD3] dark:border-[#263147] space-y-2.5 animate-in fade-in">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold font-bengali text-slate-800 dark:text-slate-200">
+                    <span className="font-bold font-bengali text-[#0A2540] dark:text-[#E8EFF8]">
                       এসএমএস ওটিপি ভেরিফিকেশন:
                     </span>
-                    <span className="text-[10px] text-slate-500 font-bengali">কোড পাঠানো হয়েছে</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bengali font-medium">কোড পাঠানো হয়েছে</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <input
@@ -302,27 +303,27 @@ export default function AuthPage() {
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
                       placeholder="৬ ডিজিট ওটিপি"
-                      className="flex-1 text-sm font-mono tracking-widest p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white"
+                      className="flex-1 text-sm font-mono tracking-widest p-2.5 rounded-lg border border-[#D5DEE8] dark:border-[#263554] bg-[#FDFCF9] dark:bg-[#0C1422] text-[#0A2540] dark:text-white shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540]"
                     />
                     <button
                       type="button"
                       onClick={handleVerifyOtp}
-                      className="px-4 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs font-bengali shadow-sm cursor-pointer"
+                      className="btn-tactile-primary px-4 py-2.5 rounded-lg text-white font-bold text-xs font-bengali shadow-paper-xs cursor-pointer"
                     >
                       যাচাই করুন
                     </button>
                   </div>
                   {otpVerified && (
                     <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 font-bengali pt-1">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>ওটিপি যাচাই সম্পন্ন হয়েছে</span>
                     </div>
                   )}
                 </div>
               )}
 
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-[var(--text-main)]">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0]">
                   পাসওয়ার্ড (Password):
                 </label>
                 <input
@@ -332,21 +333,24 @@ export default function AuthPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড"
-                  className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
+                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all"
                 />
               </div>
 
               <div className="pt-2">
-                <Button variant="primary" size="md" fullWidth type="submit">
+                <button
+                  type="submit"
+                  className="btn-tactile-primary w-full py-3 px-4 rounded-xl text-white font-bold text-sm tracking-wide font-bengali shadow-paper-sm transition-all flex items-center justify-center cursor-pointer"
+                >
                   {authMode === 'REGISTER' ? "নিরাপদ প্রোফাইল তৈরি করুন" : "লগইন করুন"}
-                </Button>
+                </button>
               </div>
 
             </form>
 
             {/* Quick Demo Credentials */}
-            <div className="pt-3 border-t border-[var(--border-subtle)] space-y-2">
-              <span className="text-[11px] text-[#787878] dark:text-slate-400 font-sans block">
+            <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#263147] space-y-2">
+              <span className="text-[11px] text-[#5A687D] dark:text-[#94A3B8] font-sans block font-medium">
                 টেস্টিং বা ডেমো রোল লগইন:
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
@@ -357,7 +361,7 @@ export default function AuthPage() {
                     setIdentifier('admin@ogrojatra.edu.bd');
                     setPassword('AdminPass1234');
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#1B2A4A] dark:text-[#5A7EBA] hover:border-[#1B2A4A] transition-colors font-sans text-[11px] font-medium"
+                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#1B2A4A] dark:text-[#A8B7D8] font-sans text-[11px] font-semibold"
                 >
                   অ্যাডমিন (Admin)
                 </button>
@@ -368,7 +372,7 @@ export default function AuthPage() {
                     setIdentifier('reviewer@ogrojatra.edu.bd');
                     setPassword('ReviewerPass1234');
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#065F46] dark:text-emerald-400 hover:border-[#065F46] transition-colors font-sans text-[11px] font-medium"
+                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#065F46] dark:text-emerald-400 font-sans text-[11px] font-semibold"
                 >
                   পর্যালোচক (Reviewer)
                 </button>
@@ -379,16 +383,20 @@ export default function AuthPage() {
                     setIdentifier('student@ogrojatra.edu.bd');
                     setPassword('StudentPass1234');
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F3] dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-[#5B5B5B] dark:text-slate-300 hover:border-[#5B5B5B] transition-colors font-sans text-[11px] font-medium"
+                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#5A687D] dark:text-slate-300 font-sans text-[11px] font-semibold"
                 >
                   শিক্ষার্থী (Student)
                 </button>
               </div>
             </div>
 
-            <div className="text-center pt-2 border-t border-[var(--border-subtle)]">
-              <p className="text-xs text-[var(--text-muted)]">
-                অগ্রযাত্রায় যুক্ত হওয়ার মাধ্যমে আপনি আমাদের <span className="text-[var(--color-brand)] underline cursor-pointer">শিশু সুরক্ষা</span> ও <span className="text-[var(--color-brand)] underline cursor-pointer">গোপনীয়তা নীতি</span> মেনে নিচ্ছেন।
+            <div className="text-center pt-2 border-t border-[#E5E2DA] dark:border-[#263147]">
+              <p className="text-xs text-[#5A687D] dark:text-[#94A3B8]">
+                অগ্রযাত্রায় যুক্ত হওয়ার মাধ্যমে আপনি আমাদের{' '}
+                <Link href="/terms" className="text-emerald-800 dark:text-emerald-400 font-semibold underline underline-offset-2 hover:text-[#0A2540] dark:hover:text-[#E8EFF8]">
+                  শিশু সুরক্ষা ও প্রাতিষ্ঠানিক সনদ
+                </Link>{' '}
+                মেনে নিচ্ছেন।
               </p>
             </div>
 
@@ -396,7 +404,7 @@ export default function AuthPage() {
         </main>
 
         {/* Footer */}
-        <footer className="py-4 text-center text-xs text-[var(--text-muted)] border-t border-[var(--border-subtle)]">
+        <footer className="py-4 text-center text-xs text-[#5A687D] dark:text-[#94A3B8] border-t border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9]/60 dark:bg-[#111827]/60">
           © ২০২৬ অগ্রযাত্রা (Student Growth Platform)। একটি প্রোফাইল। একটি দীর্ঘযাত্রা।
         </footer>
 

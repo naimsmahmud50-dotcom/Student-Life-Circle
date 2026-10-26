@@ -33,39 +33,39 @@ export default function Custom500() {
         ogType="website"
       />
 
-      <div className="min-h-screen flex flex-col bg-[#FAF8F3] dark:bg-[#0B132B] text-[#1A1A1A] dark:text-[#F8FAFC] font-sans selection:bg-[#1B2A4A] selection:text-white transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#070D18] bg-academic-paper-grain text-[#1A1A1A] dark:text-[#F8FAFC] font-sans selection:bg-[#0A2540] selection:text-white transition-colors duration-200">
         <Navbar currentStage="এইচএসসি বিজ্ঞান (HSC Science)" />
 
         <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative overflow-hidden">
           <div className="max-w-2xl w-full text-center relative z-10 space-y-6">
             
             {/* Visual Decorative Vector Badge (Zero Emoji, 1.75px Stroke) */}
-            <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-[#EEF2F6] dark:bg-[#152035] border border-[#D5DEE8] dark:border-[#263554] text-[#1B2A4A] dark:text-[#A8B7D8] mx-auto">
+            <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147] text-[#0A2540] dark:text-[#A8B7D8] mx-auto shadow-paper-xs">
               <AlertCircle className="w-10 h-10" strokeWidth={1.75} />
             </div>
 
-            {/* Display Numeral in Plus Jakarta Sans */}
+            {/* Display Numeral */}
             <div className="space-y-3">
-              <span className="font-display font-bold text-7xl sm:text-8xl tracking-tight text-[#1B2A4A] dark:text-[#A8B7D8] block select-none">
+              <span className="font-mono font-bold text-7xl sm:text-8xl tracking-tight text-[#0A2540] dark:text-[#A8B7D8] block select-none">
                 500
               </span>
               
-              {/* Heartwarming Human Bengali Microcopy in Hind Siliguri */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold font-bengali text-[#1B2A4A] dark:text-white leading-tight balance-text">
+              {/* Heartwarming Human Bengali Microcopy */}
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif-bn font-bold text-[#0A2540] dark:text-[#E8EFF8] leading-tight balance-text">
                 সার্ভারে সামান্য যান্ত্রিক গোলযোগ দেখা দিয়েছে, আমাদের কারিগরি দল বিষয়টি দেখছে
               </h1>
 
-              <p className="text-sm sm:text-base text-[#5B5B5B] dark:text-slate-300 font-bengali leading-relaxed max-w-lg mx-auto editorial-measure">
+              <p className="text-sm sm:text-base text-[#5A687D] dark:text-[#94A3B8] font-bengali leading-relaxed max-w-lg mx-auto editorial-measure">
                 আমরা স্বয়ংক্রিয়ভাবে ত্রুটির বিবরণ পেয়েছি এবং অতি দ্রুত তা স্বাভাবিক করার কাজ চলছে। তোমার যেকোনো সংরক্ষিত তথ্য বা পরীক্ষার খাতা সম্পূর্ণ নিরাপদ রয়েছে।
               </p>
             </div>
 
-            {/* 3D Tactile Action Buttons (Brilliant / Linear Physics) */}
+            {/* Tactile Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
               <button
                 type="button"
                 onClick={handleReload}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#1B2A4A] hover:bg-[#132038] text-white font-semibold font-bengali text-sm sm:text-base rounded-2xl shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none transition-all duration-150 min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2A4A] focus-visible:ring-offset-2"
+                className="btn-tactile-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-white font-semibold font-bengali text-sm sm:text-base rounded-xl shadow-paper-sm min-h-[48px] cursor-pointer"
               >
                 <RefreshCw className="w-5 h-5" strokeWidth={1.75} />
                 <span>পুনরায় চেষ্টা করুন</span>
@@ -73,7 +73,7 @@ export default function Custom500() {
 
               <Link
                 href="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-white dark:bg-[#121B2D] text-[#1A1A1A] dark:text-slate-300 hover:text-[#1B2A4A] dark:hover:text-white border border-[#E5E2DA] dark:border-[#263145] font-semibold font-bengali text-sm sm:text-base rounded-2xl shadow-xs active:translate-y-0.5 transition-all duration-150 min-h-[48px]"
+                className="btn-tactile-outline w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-[#0A2540] dark:text-[#E8EFF8] font-semibold font-bengali text-sm sm:text-base rounded-xl min-h-[48px]"
               >
                 <Home className="w-5 h-5" strokeWidth={1.75} />
                 <span>হোমপেজে ফিরে যাও</span>
@@ -81,8 +81,8 @@ export default function Custom500() {
             </div>
 
             {/* Platform Security Assurance */}
-            <div className="pt-6 border-t border-[#E5E2DA] dark:border-slate-800 text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali inline-flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+            <div className="pt-6 border-t border-[#E5E2DA] dark:border-[#263147] text-xs text-[#5A687D] dark:text-[#94A3B8] font-bengali inline-flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-700 dark:text-emerald-400" strokeWidth={1.75} />
               <span>আইএসও ২৭০০১ ও পোস্টগ্রিস এসকিউএল পিআইটিআর সুরক্ষিত ডাটাবেস</span>
             </div>
 

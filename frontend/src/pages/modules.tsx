@@ -19,7 +19,7 @@ import { Layers } from 'lucide-react';
 
 export default function ModulesPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#090D16] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#070D18] bg-academic-graph text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
       <AppHead
         title="৬৯টি এন্টারপ্রাইজ মডিউল ডিরেক্টরি | অগ্রযাত্রা"
         description="৬৯টি স্বয়ংক্রিয় এন্টারপ্রাইজ রিসার্চ, স্টেম ল্যাব, অফলাইন রেজিলিয়েন্স ও একাডেমি মডিউল হাব।"

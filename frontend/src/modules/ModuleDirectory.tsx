@@ -69,17 +69,17 @@ export const ModuleDirectory: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Perspective Controller Card */}
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+      <div className="rounded-2xl border border-[#E5E2DA] dark:border-[#263147] bg-[#FDFCF9] dark:bg-[#111827] p-6 shadow-paper-md space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E2DA] dark:border-[#263147] pb-4">
           <div>
             <div className="flex items-center gap-2">
               <Badge variant="brand">ওয়ার্কস্পেস পারস্পেক্টিভ</Badge>
               <Badge variant="teal">৬৯ এন্টারপ্রাইজ মডিউল আর্কিটেকচার</Badge>
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+            <h2 className="text-2xl font-bold font-serif-bn text-[#0A2540] dark:text-[#E8EFF8] mt-1">
               {perspective === 'core' ? "শিক্ষার্থী কোর হাব (Student Core Hub)" : "অল ৬৯ এন্টারপ্রাইজ মডিউল ডিরেক্টরি"}
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-[#5A687D] dark:text-[#94A3B8] mt-0.5">
               {perspective === 'core'
                 ? "দৈনন্দিন পড়াশোনা ও পরীক্ষার জন্য শান্ত ও সরলীকৃত ৫টি কোর মডিউল ভিউ"
                 : "৬৯টি স্বয়ংক্রিয় এন্টারপ্রাইজ রিসার্চ, স্টেম ল্যাব ও রেজিলিয়েন্স মডিউল ভিউ"}
@@ -87,7 +87,7 @@ export const ModuleDirectory: React.FC = () => {
           </div>
 
           {/* Dual-Perspective Switcher Buttons */}
-          <div className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <div className="flex items-center p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
             <button
               onClick={() => {
                 setPerspective('core');
@@ -95,8 +95,8 @@ export const ModuleDirectory: React.FC = () => {
               }}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                 perspective === 'core'
-                  ? "bg-white dark:bg-slate-900 text-blue-600 shadow-sm"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                  ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
+                  : "text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]"
               }`}
             >
               কোর হাব (Tabs 1-5)
@@ -105,8 +105,8 @@ export const ModuleDirectory: React.FC = () => {
               onClick={() => setPerspective('enterprise')}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                 perspective === 'enterprise'
-                  ? "bg-white dark:bg-slate-900 text-blue-600 shadow-sm"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                  ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
+                  : "text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]"
               }`}
             >
               সমস্ত মডিউল (Tabs 1-69)
@@ -131,8 +131,8 @@ export const ModuleDirectory: React.FC = () => {
                   onClick={() => setSelectedCategory(c.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                     selectedCategory === c.id
-                      ? "bg-blue-600 text-white font-bold"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200"
+                      ? "btn-tactile-primary text-white font-bold"
+                      : "btn-tactile-outline text-[#5A687D] dark:text-[#CBD5E1]"
                   }`}
                 >
                   {c.label}
@@ -140,20 +140,20 @@ export const ModuleDirectory: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="text-xs text-slate-500 font-medium">
+            <div className="text-xs text-[#5A687D] dark:text-[#94A3B8] font-medium">
               কোর হাব ফিল্টার: শুধুমাত্র দৈনন্দিন আবশ্যকীয় শিক্ষার্থী ফিচার প্রদর্শিত হচ্ছে
             </div>
           )}
 
           {/* Quick Search Input */}
           <div className="relative min-w-[260px]">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#5A687D] dark:text-[#94A3B8]" />
             <input
               type="text"
               placeholder="মডিউল নাম বা ট্যাগ খুঁজুন..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-[#FAF8F5] dark:bg-[#0C1422] border border-[#E2DDD3] dark:border-[#2D3A52] text-[#1B2A4A] dark:text-[#E2E8F0] placeholder-[#5A687D] dark:placeholder-[#94A3B8] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6]"
             />
           </div>
         </div>
@@ -184,15 +184,15 @@ export const ModuleDirectory: React.FC = () => {
         {filteredModules.map((mod) => (
           <div
             key={mod.id}
-            className={`p-5 rounded-2xl border bg-white dark:bg-slate-900 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition-all ${
+            className={`p-5 rounded-2xl border bg-[#FDFCF9] dark:bg-[#111827] flex flex-col justify-between space-y-4 shadow-paper-xs hover:shadow-paper-md transition-all ${
               activeModuleId === mod.id
-                ? "border-blue-500 ring-2 ring-blue-500/20"
-                : "border-slate-200 dark:border-slate-800"
+                ? "border-emerald-700 dark:border-emerald-500 ring-2 ring-emerald-600/20"
+                : "border-[#E5E2DA] dark:border-[#263147]"
             }`}
           >
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#F0EDE6] dark:bg-[#172030] text-[#0A2540] dark:text-[#CBD5E1]">
                   Tab #{mod.tabNumber}
                 </span>
                 <Badge variant={mod.tier === 'core' ? 'brand' : 'teal'}>
@@ -200,10 +200,10 @@ export const ModuleDirectory: React.FC = () => {
                 </Badge>
               </div>
 
-              <h4 className="text-base font-bold text-slate-900 dark:text-white leading-snug">
+              <h4 className="text-base font-bold font-serif-bn text-[#0A2540] dark:text-[#E8EFF8] leading-snug">
                 {mod.title}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-[#5A687D] dark:text-[#94A3B8] leading-relaxed">
                 {mod.description}
               </p>
 
@@ -212,7 +212,7 @@ export const ModuleDirectory: React.FC = () => {
                 {mod.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/80 text-slate-500 border border-slate-200 dark:border-slate-700"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FAF8F5] dark:bg-[#162032] text-[#5A687D] dark:text-[#94A3B8] border border-[#E2DDD3] dark:border-[#263147]"
                   >
                     #{tag}
                   </span>
@@ -221,18 +221,18 @@ export const ModuleDirectory: React.FC = () => {
             </div>
 
             {/* Launch Action */}
-            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div className="pt-2 border-t border-[#E5E2DA] dark:border-[#263147] flex items-center justify-between">
               {mod.tier === 'core' ? (
                 <a
                   href={`/${mod.id}`}
-                  className="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1 hover:underline"
+                  className="text-xs font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-1 hover:underline"
                 >
                   <span>পেজে যান</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               ) : DYNAMIC_MODULE_MAP[mod.id] ? (
                 <Button
-                  variant="brand"
+                  variant="primary"
                   size="sm"
                   fullWidth
                   icon={<ArrowRight className="w-4 h-4" />}
@@ -244,7 +244,7 @@ export const ModuleDirectory: React.FC = () => {
                   {activeModuleId === mod.id ? "বর্তমানে সক্রিয়" : "মডিউল চালু করুন"}
                 </Button>
               ) : (
-                <span className="text-[11px] text-slate-400 font-mono">
+                <span className="text-[11px] text-[#5A687D] dark:text-[#94A3B8] font-mono">
                   প্রিভিউ ইন্টিগ্রেশন সক্রিয়
                 </span>
               )}
