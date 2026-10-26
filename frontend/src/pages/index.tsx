@@ -57,6 +57,7 @@ import { StudentStoriesCarousel } from '@/components/home/StudentStoriesCarousel
 import { LiveHeroInteractiveWidget } from '@/components/home/LiveHeroInteractiveWidget';
 import { CompetitorComparisonPillars } from '@/components/home/CompetitorComparisonPillars';
 import { m, fadeIn, slideUp, staggerContainer, useReducedMotion } from '@/lib/motion';
+import { Academic3DToggle } from '@/components/3d';
 
 // Sample verified certificate data for W3C showcase
 const SAMPLE_CERTIFICATE: CertificateData = {
@@ -135,10 +136,13 @@ export default function FlagshipLandingPage() {
                 {/* Left Column: Authoritative Editorial Copy */}
                 <div className="lg:col-span-7 space-y-6 text-left">
                   
-                  {/* National Accreditation Chip */}
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#FDFCF9] dark:bg-[#171E2C] border border-[#E5E2DA] dark:border-[#263147] text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] shadow-xs">
-                    <ShieldCheck className="w-4 h-4 text-[#065F46] dark:text-emerald-400 shrink-0" />
-                    <span>জাতীয় শিক্ষাক্রম (NCTB) মানদণ্ডে পরিচালিত • ৬৪ জেলায় সমন্বিত</span>
+                  {/* National Accreditation Chip & 3D Depth Controller */}
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#FDFCF9] dark:bg-[#171E2C] border border-[#E5E2DA] dark:border-[#263147] text-xs font-semibold text-[#525252] dark:text-[#A3A8B5] shadow-xs">
+                      <ShieldCheck className="w-4 h-4 text-[#065F46] dark:text-emerald-400 shrink-0" />
+                      <span>জাতীয় শিক্ষাক্রম (NCTB) মানদণ্ডে পরিচালিত • ৬৪ জেলায় সমন্বিত</span>
+                    </div>
+                    <Academic3DToggle />
                   </div>
 
                   {/* Headline & Welcoming Tone */}

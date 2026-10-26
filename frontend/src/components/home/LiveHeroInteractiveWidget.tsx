@@ -22,6 +22,7 @@ import {
   Flame,
 } from 'lucide-react';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
+import { LazyAcademic3DScene } from '@/components/3d';
 
 const BENGALI_DIGITS = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
 function toBn(num: number | string): string {
@@ -29,6 +30,9 @@ function toBn(num: number | string): string {
 }
 
 export const LiveHeroInteractiveWidget: React.FC = () => {
+  // Dual-View Mode: 'globe' (3D Armillary Sphere) or 'physics' (Kinematic Trajectory)
+  const [activeHeroTab, setActiveHeroTab] = useState<'globe' | 'physics'>('globe');
+
   // Interactive Physics Simulator Controls (Projectile Motion)
   const [velocity, setVelocity] = useState<number>(32); // m/s (10 - 50)
   const [angle, setAngle] = useState<number>(45); // degrees (15 - 75)
@@ -85,31 +89,100 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
         </span>
       </div>
 
-      {/* 2. Main Interactive Physics & Math Problem Playground */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm space-y-4">
-        {/* Header with STEM Badge */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#E5E2DA] dark:border-[#262D3D]">
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
-              <Atom className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
-              <span>ইন্টারেক্টিভ সায়েন্স প্লেগ্রাউন্ড</span>
+      {/* 2. Dual-Perspective Mode Switcher */}
+      <div className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
+        <button
+          type="button"
+          onClick={() => setActiveHeroTab('globe')}
+          className={`py-2 text-xs font-bold rounded-lg transition-all select-none flex items-center justify-center gap-1.5 cursor-pointer ${
+            activeHeroTab === 'globe'
+              ? 'bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs'
+              : 'text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]'
+          }`}
+        >
+          <Compass className="w-3.5 h-3.5" />
+          <span>৩ডি স্কলার গ্লোব</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveHeroTab('physics')}
+          className={`py-2 text-xs font-bold rounded-lg transition-all select-none flex items-center justify-center gap-1.5 cursor-pointer ${
+            activeHeroTab === 'physics'
+              ? 'bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs'
+              : 'text-[#5A687D] dark:text-[#94A3B8] hover:text-[#0A2540] dark:hover:text-[#E8EFF8]'
+          }`}
+        >
+          <Atom className="w-3.5 h-3.5" />
+          <span>প্রক্ষেপক সিমুলেটর</span>
+        </button>
+      </div>
+
+      {/* 3A. Academic 3D Scholar Globe View */}
+      {activeHeroTab === 'globe' ? (
+        <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-paper-md space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E5E2DA] dark:border-[#263147]">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
+                <Compass className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
+                <span>একাডেমিক ৩ডি স্কলার গ্লোব ও অ্যাস্ট্রোনমি</span>
+              </div>
+              <h3 className="text-sm sm:text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
+                জাতীয় শিক্ষাক্রম মহাজাগতিক পরিমাপক ও আর্মিলারি গোলক
+              </h3>
             </div>
-            <h3 className="text-sm sm:text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
-              প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতা নির্ণয়
-            </h3>
+            <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 text-[11px] font-semibold border border-[#E5E2DA] dark:border-[#263147] font-bengali">
+              ২৩°৪১′ উত্তর • ৯০°২১′ পূর্ব
+            </span>
           </div>
 
-          {isBullseye ? (
-            <span className="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#0B5D3B] dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800 flex items-center gap-1 animate-pulse">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
-              <span>লক্ষ্যভেদ!</span>
-            </span>
-          ) : (
-            <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 text-[11px] font-semibold border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
-              এইচএসসি পদার্থ ১ম পত্র
-            </span>
-          )}
+          <div className="flex flex-col items-center justify-center py-1">
+            <LazyAcademic3DScene size={270} showToggle={true} enableParallax={true} />
+          </div>
+
+          <div className="p-3 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#263147] space-y-1 text-xs">
+            <div className="flex items-center justify-between text-[#5B5B5B] dark:text-slate-400 text-[11px] font-bengali">
+              <span>অ্যাকাডেমিক অবজেক্টস</span>
+              <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">প্রসিডিউরাল থ্রি.জেএস ইঞ্জিন</span>
+            </div>
+            <p className="text-[#1B2A4A] dark:text-[#E2E8F0] text-[11px] font-bengali leading-relaxed">
+              ব্রাস সেলেস্টিয়াল রিং, ২৩.৫° ট্রপিক্যাল সোলেস্টিস এক্সিস, টার্নড টিল্ট পেডেস্টাল এবং বাংলাদেশের অবস্থান সূচক সার্বভৌমিক আলোকশিখা।
+            </p>
+          </div>
+
+          <Link
+            href="/practice?subject=Physics"
+            className="w-full py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-bold font-bengali transition flex items-center justify-center gap-2 shadow-xs active:translate-y-0.5"
+          >
+            <span>পদার্থবিজ্ঞান ও জ্যোতির্বিদ্যা পাঠ অন্বেষণ করুন</span>
+            <ArrowRight className="w-4 h-4 text-amber-300" />
+          </Link>
         </div>
+      ) : (
+        /* 3B. Main Interactive Physics & Math Problem Playground */
+        <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#263147] shadow-sm space-y-4">
+          {/* Header with STEM Badge */}
+          <div className="flex items-center justify-between pb-3 border-b border-[#E5E2DA] dark:border-[#263147]">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
+                <Atom className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
+                <span>ইন্টারেক্টিভ সায়েন্স প্লেগ্রাউন্ড</span>
+              </div>
+              <h3 className="text-sm sm:text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
+                প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতা নির্ণয়
+              </h3>
+            </div>
+
+            {isBullseye ? (
+              <span className="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#0B5D3B] dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800 flex items-center gap-1 animate-pulse">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
+                <span>লক্ষ্যভেদ!</span>
+              </span>
+            ) : (
+              <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 text-[11px] font-semibold border border-[#E5E2DA] dark:border-[#263147] font-bengali">
+                এইচএসসি পদার্থ ১ম পত্র
+              </span>
+            )}
+          </div>
 
         {/* Real-time Trajectory Arc Canvas */}
         <div className="relative w-full h-28 bg-[#FAF8F3] dark:bg-[#090D16] rounded-xl border border-[#E5E2DA] dark:border-[#262D3D] p-2 flex flex-col justify-between overflow-hidden">
@@ -208,15 +281,15 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
           </div>
         </div>
 
-        {/* Direct Action Link */}
-        <Link
-          href="/practice?subject=Physics"
-          className="w-full py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-bold font-bengali transition flex items-center justify-center gap-2 shadow-xs active:translate-y-0.5"
-        >
-          <span>১০ বছরের বোর্ড প্রশ্ন ব্যাংকে এই অধ্যায় অনুশীলন করুন</span>
-          <ArrowRight className="w-4 h-4 text-amber-300" />
-        </Link>
-      </div>
+          <Link
+            href="/practice?subject=Physics"
+            className="w-full py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-bold font-bengali transition flex items-center justify-center gap-2 shadow-xs active:translate-y-0.5"
+          >
+            <span>১০ বছরের বোর্ড প্রশ্ন ব্যাংকে এই অধ্যায় অনুশীলন করুন</span>
+            <ArrowRight className="w-4 h-4 text-amber-300" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

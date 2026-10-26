@@ -34,6 +34,7 @@ import {
 import { Navbar } from '@/components/layout/Navbar';
 import { ProofOfSkillCard, CertificateData } from '@/components/certificate/ProofOfSkillCard';
 import { SocialShareButtons } from '@/components/certificate/SocialShareButtons';
+import { Academic3DToggle, ParallaxDepthContainer } from '@/components/3d';
 
 // Sample fallback seed data for immediate offline/preview resilience
 const SEED_FALLBACK_CERTIFICATES: Record<string, CertificateData> = {
@@ -206,7 +207,7 @@ export default function CertificateVerificationPage() {
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
         
         {/* Navigation Breadcrumb & Back Link */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition min-h-touch"
@@ -215,8 +216,11 @@ export default function CertificateVerificationPage() {
             <span>হোমে ফিরে যান (Back to Home)</span>
           </Link>
 
-          <div className="text-xs font-semibold text-slate-500">
-            Ledger ID: <span className="text-blue-400 font-mono">{rawCertId}</span>
+          <div className="flex items-center gap-3">
+            <Academic3DToggle />
+            <div className="text-xs font-semibold text-slate-500 hidden sm:block">
+              Ledger ID: <span className="text-blue-400 font-mono">{rawCertId}</span>
+            </div>
           </div>
         </div>
 
@@ -253,7 +257,9 @@ export default function CertificateVerificationPage() {
           </div>
         ) : (
           <div className="space-y-6">
-            <ProofOfSkillCard certificate={certificate} />
+            <ParallaxDepthContainer maxTiltDegrees={2.5} maxTranslatePx={6}>
+              <ProofOfSkillCard certificate={certificate} />
+            </ParallaxDepthContainer>
 
             {/* 1-Click Social Sharing Action Bar */}
             <div className="rounded-2xl p-6 bg-slate-900/80 border border-slate-800 text-center space-y-3">

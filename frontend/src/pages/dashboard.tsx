@@ -38,6 +38,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ProofOfSkillCard, SocialShareButtons, CertificateData } from '@/components/certificate';
 import { PhysicsProjectileLab, ChemistryMolecularViewer } from '@/components/stem-labs';
 import { useTranslation } from '@/lib/i18n';
+import { Academic3DToggle, LazyAcademic3DScene } from '@/components/3d';
 
 // Sample verified certificate data for W3C showcase
 const SAMPLE_CERTIFICATE: CertificateData = {
@@ -69,7 +70,7 @@ export default function StudentDashboardPage() {
   const [selectedStage, setSelectedStage] = useState<'ssc' | 'hsc' | 'admission' | 'career'>('hsc');
 
   // Interactive 3D STEM Lab modal state
-  const [activeLabModal, setActiveLabModal] = useState<'physics' | 'chemistry' | null>(null);
+  const [activeLabModal, setActiveLabModal] = useState<'physics' | 'chemistry' | 'astronomy' | null>(null);
 
   // Active lab tab preview state
   const [activeLabTab, setActiveLabTab] = useState<'physics' | 'chemistry'>('physics');
@@ -120,7 +121,8 @@ export default function StudentDashboardPage() {
                   স্বাগতম, তানজিম হাসান
                 </h1>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
+                <Academic3DToggle />
                 <Link
                   href="/learn"
                   className="btn-3d-oxford px-5 py-2.5 rounded-2xl bg-[#0A2540] text-white text-xs font-semibold hover:bg-[#0E3357] transition shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none"
@@ -447,14 +449,14 @@ export default function StudentDashboardPage() {
                   <span>৩ডি স্টেম ভার্চুয়াল বিজ্ঞান ল্যাবরেটরি</span>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  ইন্টারেক্টিভ পদার্থ ও রসায়ন সিমুলেশন
+                  ইন্টারেক্টিভ পদার্থ, রসায়ন ও জ্যোতির্বিদ্যা সিমুলেশন
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400">
-                  প্রক্ষেপক গতি ও ত্রিমাত্রিক আণবিক মডেল সরাসরি ব্রাউজারে এক্সপ্লোর করুন।
+                  প্রক্ষেপক গতি, ত্রিমাত্রিক আণবিক মডেল ও জ্যোতির্বৈজ্ঞানিক গ্লোব সরাসরি ব্রাউজারে এক্সপ্লোর করুন।
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setActiveLabModal('physics')}
@@ -468,6 +470,14 @@ export default function StudentDashboardPage() {
                   className="px-5 py-3 rounded-2xl bg-[#0A2540] hover:bg-[#0E3357] text-white font-bold text-xs shadow-[0_3px_0_0_#051329] active:translate-y-0.5 transition"
                 >
                   রসায়ন আণবিক ল্যাব
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveLabModal('astronomy')}
+                  className="px-5 py-3 rounded-2xl bg-[#1E293B] hover:bg-[#334155] text-white font-bold text-xs shadow-[0_3px_0_0_#0F172A] active:translate-y-0.5 transition flex items-center gap-2"
+                >
+                  <Compass className="w-4 h-4 text-sky-400" />
+                  <span>জ্যোতির্বিদ্যা ল্যাব (3D)</span>
                 </button>
               </div>
             </div>
@@ -492,7 +502,9 @@ export default function StudentDashboardPage() {
                 <span className="font-bold text-white text-sm sm:text-base">
                   {activeLabModal === 'physics'
                     ? 'প্রক্ষেপক গতিবিদ্যা সিমুলেটর (Physics Projectile Lab)'
-                    : '৩ডি আণবিক জ্যামিতি ল্যাবরেটরি (Chemistry Molecular Viewer)'}
+                    : activeLabModal === 'chemistry'
+                    ? '৩ডি আণবিক জ্যামিতি ল্যাবরেটরি (Chemistry Molecular Viewer)'
+                    : '৩ডি স্কলার গ্লোব ও জ্যোতির্বিদ্যা ল্যাব (Scholar Celestial Globe Lab)'}
                 </span>
               </div>
 
@@ -509,8 +521,23 @@ export default function StudentDashboardPage() {
             <div className="p-4 sm:p-6 overflow-y-auto flex-1">
               {activeLabModal === 'physics' ? (
                 <PhysicsProjectileLab />
-              ) : (
+              ) : activeLabModal === 'chemistry' ? (
                 <ChemistryMolecularViewer />
+              ) : (
+                <div className="flex flex-col items-center justify-center py-6 px-4 bg-slate-950/40 rounded-2xl border border-slate-800/80">
+                  <div className="max-w-xl text-center space-y-2 mb-6">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-teal-400 font-semibold">
+                      একাডেমিক ৩ডি অবজারভেটরি
+                    </span>
+                    <h4 className="text-lg font-bold text-white font-bengali">
+                      অগ্রযাত্রা স্কলার আর্সিলারি স্ফিয়ার ও ভৌগোলিক অক্ষ
+                    </h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      ২৩.৫° অক্ষীয় হেলে থাকা সৌরক্রান্তীয় গোলক এবং বাংলাদেশের স্থানাঙ্ক (২৩.৬৮° উত্তর, ৯০.৩৫° পূর্ব) পর্যবেক্ষণ করুন। মাউস বা স্পর্শ দ্বারা ৩ডি কোণ পরিবর্তন করা যায়।
+                    </p>
+                  </div>
+                  <LazyAcademic3DScene size={320} showToggle={true} enableParallax={true} />
+                </div>
               )}
             </div>
           </div>
