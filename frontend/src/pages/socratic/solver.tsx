@@ -709,70 +709,103 @@ export default function SocraticWhiteboardSolverPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-slate-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] flex flex-col font-sans selection:bg-[#ED8E22] selection:text-white transition-colors duration-200">
       <AppHead
         title="সক্রেটিক এআই টিউটর ও হোয়াইটবোর্ড সলভার | Socratic AI STEM Tutor"
         description="হাতে লেখা খাতার ওটিআর স্ক্যানিং, বাংলা ভয়েস ইনপুট ও ৪-টিয়ার সক্রেটিক শিক্ষাদানের মাধ্যমে ধাপে ধাপে বিজ্ঞান ও গণিত সমস্যা সমাধান।"
       />
-      <Navbar />
+      <Navbar currentStage="সক্রেটিক এআই ল্যাব" />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-8">
-        {/* Header Breadcrumbs & Dual Mode Switcher */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
-              <span>একাডেমিক ল্যাবরেটরি</span>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <span>সক্রেটিক পেডাগজি ইঞ্জিন</span>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#0A2540] flex items-center gap-3">
-              <Sparkles className="w-6 h-6 text-[#B45309]" />
-              সক্রেটিক এআই টিউটর ও সলভার
-            </h1>
-            <p className="text-sm text-slate-600 mt-1">
-              সরাসরি সমাধান না দিয়ে শিক্ষার্থীকে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করা হয়।
-            </p>
-          </div>
+      {/* Socratic Bespoke Atmospheric Hero with SOCRATIC Watermark */}
+      <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
+        {/* GoEdu Intelligence Sunburst Aura */}
+        <div
+          className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+          style={{
+            height: '100%',
+            minHeight: '260px',
+            background:
+              'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(13, 148, 136, 0.15) 50%, rgba(253, 215, 70, 0) 100%)'
+          }}
+          aria-hidden="true"
+        />
 
-          {/* Mode Switcher Tabs */}
-          <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200 self-start md:self-auto">
-            <button
-              type="button"
-              onClick={() => setActiveMode('tutor')}
-              className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-md transition-all ${
-                activeMode === 'tutor'
-                  ? 'bg-[#0A2540] text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
-              }`}
-            >
-              <Cpu className="w-4 h-4" />
-              <span>সক্রেটিক এআই টিউটর ও খাতা ওটিআর</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveMode('whiteboard')}
-              className={`flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-md transition-all ${
-                activeMode === 'whiteboard'
-                  ? 'bg-[#0A2540] text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
-              }`}
-            >
-              <Pencil className="w-4 h-4" />
-              <span>ইন্টারেক্টিভ ড্রয়িং হোয়াইটবোর্ড</span>
-            </button>
-          </div>
+        {/* Giant Typographic Watermark */}
+        <div
+          className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+          aria-hidden="true"
+        >
+          <p
+            className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
+            style={{
+              lineHeight: 0.95,
+              backgroundImage:
+                'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
+            }}
+          >
+            SOCRATIC
+          </p>
         </div>
 
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#ED8E22] dark:text-amber-400 mb-1">
+                <span>একাডেমিক ল্যাবরেটরি</span>
+                <ChevronRight className="w-3.5 h-3.5 text-amber-400/80" />
+                <span>সক্রেটিক পেডাগজি ইঞ্জিন</span>
+              </div>
+              <h1 className="text-2xl md:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center gap-3">
+                <Sparkles className="w-7 h-7 text-[#ED8E22]" />
+                <span>সক্রেটিক এআই টিউটর ও সলভার</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed">
+                সরাসরি সমাধান না দিয়ে শিক্ষার্থীকে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করা হয়।
+              </p>
+            </div>
+
+            {/* Mode Switcher Tabs */}
+            <div className="flex items-center gap-2 bg-white dark:bg-[#121B2D] p-1.5 rounded-2xl border border-amber-200/70 dark:border-[#262D3D] shadow-xs self-start md:self-auto">
+              <button
+                type="button"
+                onClick={() => setActiveMode('tutor')}
+                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all ${
+                  activeMode === 'tutor'
+                    ? 'bg-[#ED8E22] text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-amber-50 dark:hover:bg-slate-800'
+                }`}
+              >
+                <Cpu className="w-4 h-4" />
+                <span>সক্রেটিক এআই টিউটর ও খাতা ওটিআর</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveMode('whiteboard')}
+                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all ${
+                  activeMode === 'whiteboard'
+                    ? 'bg-[#ED8E22] text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-amber-50 dark:hover:bg-slate-800'
+                }`}
+              >
+                <Pencil className="w-4 h-4" />
+                <span>ইন্টারেক্টিভ ড্রয়িং হোয়াইটবোর্ড</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-8">
         {/* =========================================================================
             MODE 1: SOCRATIC AI MULTIMODAL TUTOR & KHATA NOTEBOOK OCR
             ========================================================================= */}
         {activeMode === 'tutor' && (
           <div className="space-y-6">
             {/* Quick Sample Problem Pills (Authentic NCTB Board Exams) */}
-            <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs">
+            <div className="bg-white dark:bg-[#121B2D] rounded-3xl border border-amber-200/70 dark:border-[#262D3D] p-5 sm:p-6 shadow-xs">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5 uppercase tracking-wider">
-                  <FileText className="w-3.5 h-3.5 text-[#B45309]" />
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 uppercase tracking-wider">
+                  <FileText className="w-3.5 h-3.5 text-[#ED8E22]" />
                   বিগত বোর্ড ও ভর্তি পরীক্ষার নমুনা খাতা প্রশ্ন:
                 </span>
                 <span className="text-[11px] text-slate-500 font-medium">
@@ -785,17 +818,17 @@ export default function SocraticWhiteboardSolverPage() {
                     key={sample.id}
                     type="button"
                     onClick={() => handleSelectSampleProblem(sample)}
-                    className="p-3 text-left rounded-md border border-slate-200 hover:border-[#0A2540] hover:bg-slate-50 transition-all group"
+                    className="p-3.5 text-left rounded-2xl border border-amber-200/60 dark:border-slate-800 bg-[#FFFDF9] dark:bg-slate-900/60 hover:border-[#ED8E22] hover:bg-amber-50/40 dark:hover:bg-slate-800 transition-all group shadow-xs"
                   >
                     <div className="flex items-center justify-between gap-1 mb-1">
-                      <span className="text-[10px] font-bold text-[#065F46] bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                      <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
                         {sample.discipline}
                       </span>
                       <span className="text-[10px] text-slate-500 font-mono">
                         {sample.boardBn.split(' ')[0]}
                       </span>
                     </div>
-                    <div className="text-xs font-bold text-[#0A2540] group-hover:text-[#B45309] transition-colors mb-1">
+                    <div className="text-xs font-bold text-[#1B2A4A] dark:text-white group-hover:text-[#ED8E22] transition-colors mb-1">
                       {sample.titleBn}
                     </div>
                     <div className="text-[11px] text-slate-600 line-clamp-1 font-mono">

@@ -204,7 +204,7 @@ export default function CareerPage() {
         ogType="website"
       />
 
-      <div className="min-h-screen bg-[#FAFAF8] dark:bg-[#0B132B] text-slate-900 dark:text-slate-100 transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#0A2540] selection:text-white">
+      <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
         <Navbar currentStage="দক্ষতা প্রমাণ ও ক্যারিয়ার হাব" />

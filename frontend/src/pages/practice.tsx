@@ -306,11 +306,12 @@ export default function PracticePage() {
         ogType="website"
       />
 
-      <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#090D16] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] font-sans selection:bg-[#ED8E22] selection:text-white transition-colors duration-200">
         <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
 
-        {/* Unified Editorial Page Header */}
+        {/* Unified Editorial Page Header with PRACTICE Watermark */}
         <PageHeader
+          watermarkText="PRACTICE"
           title="এনসিটিবি অ্যাডাপ্টিভ প্র্যাকটিস এরিনা"
           description="এইচএসসি পদার্থবিজ্ঞান ১ম পত্রের বিগত বোর্ড পরীক্ষা ও অলিম্পিয়াড স্ট্যান্ডার্ড KaTeX প্রশ্নমালা। তাৎক্ষণিক উত্তর যাচাই ও সক্রেটিক গাইডেন্স।"
           category="LIVE ADAPTIVE ARENA"
@@ -345,9 +346,9 @@ export default function PracticePage() {
         <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6" data-testid="practice-exam-arena">
           
           {/* Question Status Counter Bar */}
-          <div className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#0A2540] text-white flex items-center justify-center font-bold text-xs font-mono">
+              <div className="w-8 h-8 rounded-xl bg-[#ED8E22] text-white flex items-center justify-center font-bold text-xs font-mono shadow-xs">
                 {toBengaliDigits(activeQuestionIndex + 1)}
               </div>
               <span className="text-xs sm:text-sm font-bold font-bengali text-slate-800 dark:text-slate-200">
@@ -356,9 +357,9 @@ export default function PracticePage() {
             </div>
 
             {/* Progress Bar */}
-            <div className="w-32 sm:w-48 bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+            <div className="w-32 sm:w-48 bg-amber-100/60 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
               <div
-                className="bg-[#0A2540] dark:bg-sky-400 h-full transition-all duration-300"
+                className="bg-[#ED8E22] h-full transition-all duration-300"
                 style={{ width: `${((activeQuestionIndex + 1) / questions.length) * 100}%` }}
               />
             </div>
@@ -459,10 +460,10 @@ export default function PracticePage() {
                 <CardSkeleton count={1} className="w-full" />
               </div>
             ) : (
-              <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
                 
                 {/* Question Stem with KaTeX High-Contrast Rendering */}
-                <div className="space-y-2 pb-5 border-b border-slate-200 dark:border-slate-800">
+                <div className="space-y-2 pb-5 border-b border-amber-100 dark:border-[#262D3D]">
                   <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
                     প্রশ্ন নং {toBengaliDigits(activeQuestionIndex + 1)}
                   </span>

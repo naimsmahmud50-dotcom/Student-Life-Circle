@@ -95,16 +95,44 @@ export default function TuitionPage() {
         {/* Global Standard Navigation Bar */}
         <Navbar currentStage="সুরক্ষিত টিউশন মার্কেটপ্লেস" />
 
-        <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
-          
-          {/* Header & Value Proposition */}
-          <div className="space-y-4 border-b border-amber-200/60 dark:border-[#262D3D] pb-6">
+        {/* Tuition Bespoke Atmospheric Hero with TUITION Watermark */}
+        <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
+          {/* GoEdu Trusted Scholar Aura */}
+          <div
+            className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+            style={{
+              height: '100%',
+              minHeight: '260px',
+              background:
+                'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(27, 42, 74, 0.15) 50%, rgba(253, 215, 70, 0) 100%)'
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Giant Typographic Watermark */}
+          <div
+            className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+            aria-hidden="true"
+          >
+            <p
+              className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
+              style={{
+                lineHeight: 0.95,
+                backgroundImage:
+                  'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
+              }}
+            >
+              TUITION
+            </p>
+          </div>
+
+          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
                 <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
                 দ্বিপাক্ষিক সম্মতি ও ভেরিফায়েড ম্যাচিং
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-slate-700 dark:text-slate-300 border border-amber-200/70 dark:border-slate-700">
                 <Lock className="w-3.5 h-3.5 mr-1 text-slate-500" />
                 জিরো স্ক্যাম ও গোপনীয়তা নিশ্চিত
               </span>
@@ -119,12 +147,12 @@ export default function TuitionPage() {
               )}
             </div>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="space-y-2 max-w-3xl">
-                <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight font-serif text-[#0A2540] dark:text-white">
+                <h1 className="text-2xl sm:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight">
                   সুরক্ষিত টিউশন মার্কেটপ্লেস ও টিউটর ম্যাচিং
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
                   বুয়েট, ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের জাতীয় পরিচয়পত্র (NID) ও একাডেমিক ডিগ্রি যাচাইকৃত শিক্ষকবৃন্দের সাথে বিশ্বস্ত সংযোগ। উভয় পক্ষের সম্মতি ছাড়া কোনো ফোন নম্বর উন্মুক্ত নয়।
                 </p>
               </div>
@@ -132,13 +160,16 @@ export default function TuitionPage() {
               {/* Primary Action Button */}
               <button
                 onClick={() => setIsWizardOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition-all cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition-all cursor-pointer whitespace-nowrap self-start md:self-auto"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>টিউটর রিকোয়ারমেন্ট দিন</span>
               </button>
             </div>
           </div>
+        </section>
+
+        <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
 
           {/* Skeleton Loader during loading state */}
           {isLoading && (

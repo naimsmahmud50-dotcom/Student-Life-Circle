@@ -170,18 +170,46 @@ export default function AdmissionPage() {
         })}
       />
 
-      <div className="min-h-screen bg-[#FAFAF8] dark:bg-[#0B132B] text-slate-900 dark:text-slate-100 transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#0A2540] selection:text-white">
+      <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
         <Navbar currentStage="বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব" />
 
-        <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
-          
-          {/* Header Section */}
-          <div className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+        {/* Admission Bespoke Atmospheric Hero with ADMISSION Watermark */}
+        <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
+          {/* GoEdu University Prestige Sunburst Glow */}
+          <div
+            className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+            style={{
+              height: '100%',
+              minHeight: '260px',
+              background:
+                'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(153, 27, 27, 0.12) 50%, rgba(253, 215, 70, 0) 100%)'
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Giant Typographic Watermark */}
+          <div
+            className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+            aria-hidden="true"
+          >
+            <p
+              className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
+              style={{
+                lineHeight: 0.95,
+                backgroundImage:
+                  'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
+              }}
+            >
+              ADMISSION
+            </p>
+          </div>
+
+          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-[#0A2540] dark:text-slate-300 border border-slate-300 dark:border-slate-700">
-                <Target className="w-3.5 h-3.5 mr-1 text-[#0A2540] dark:text-amber-300" />
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#ED8E22] border border-amber-200/70 dark:border-slate-700 shadow-xs">
+                <Target className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
                 পরীক্ষা-নির্দিষ্ট প্রস্তুতি মোড
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
@@ -189,39 +217,43 @@ export default function AdmissionPage() {
                 অফিশিয়াল সার্কুলার ও ব্লুপ্রিন্ট সমন্বিত
               </span>
             </div>
-            <div className="space-y-2">
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight font-bengali text-[#0A2540] dark:text-white">
+
+            <div className="space-y-2 max-w-4xl">
+              <h1 className="text-2xl sm:text-4xl font-serif font-bold tracking-tight text-[#1B2A4A] dark:text-[#F5F2EB]">
                 বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব
               </h1>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-4xl font-bengali leading-[1.75]">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-bengali">
                 ঢাকা বিশ্ববিদ্যালয় (DU Ka), বুয়েট (BUET), মেডিকেল (MBBS/BDS) এবং জিএসটি গুচ্ছ ভর্তি পরীক্ষার অফিশিয়াল সিলেবাস,
                 নেগেটিভ মার্কিং (-০.২৫) অ্যালগরিদম এবং বিগত বছরের কাট-অফ নম্বর অনুযায়ী প্রস্তুতি ও রিয়েল-টাইম চান্স প্রবাবিলিটি যাচাই করুন।
               </p>
             </div>
 
-            {/* Phase 128 Cut-off Forecaster CTA Banner */}
-            <div className="bg-[#0A2540] text-white rounded-xl p-5 border-2 border-[#B45309] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            {/* Cut-off Forecaster CTA Banner */}
+            <div className="bg-white dark:bg-[#121B2D] text-slate-900 dark:text-white rounded-2xl p-5 border border-amber-200/80 dark:border-[#262D3D] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#B45309] text-white">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                  নতুন ফিচার • Phase 128
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-bold bg-[#FFF9EB] dark:bg-amber-950/60 text-[#ED8E22] border border-amber-200/80 dark:border-amber-800">
+                  <Sparkles className="w-3.5 h-3.5 text-[#ED8E22]" />
+                  <span>কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর</span>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-white">
-                  স্বায়ত্তশাসিত কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর
+                <h3 className="text-sm sm:text-base font-bold text-[#1B2A4A] dark:text-white">
+                  স্বায়ত্তশাসিত চান্স মিটার ও বিশ্ববিদ্যালয় ম্যাচিং
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-200">
+                <p className="text-xs text-slate-600 dark:text-slate-300">
                   আপনার এসএসসি/এইচএসসি জিপিএ ও টেস্ট স্কোর ইনপুট দিয়ে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছের ক্যালিব্রেটেড চান্স মিটার যাচাই করুন।
                 </p>
               </div>
               <Link
                 href="/admission/predictor"
-                className="shrink-0 px-5 py-2.5 bg-white text-[#0A2540] hover:bg-slate-100 font-bold text-xs sm:text-sm rounded-lg shadow-[0_3px_0_0_#94A3B8] active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2"
+                className="shrink-0 px-5 py-2.5 bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm rounded-xl shadow-[0_3px_0_0_#C57013] active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2"
               >
                 <span>ফোরকাস্টার ওপেন করুন</span>
-                <ArrowRight className="w-4 h-4 text-[#0A2540]" />
+                <ArrowRight className="w-4 h-4 text-white" />
               </Link>
             </div>
           </div>
+        </section>
+
+        <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
 
           {/* Search & Category Filter Controls */}
           <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">

@@ -31,52 +31,82 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
   activeTab
 }) => {
   return (
-    <div className="rounded-3xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm space-y-6">
-      
-      {/* Top Banner & Quick Trust Badges */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-200 dark:border-slate-800 pb-6">
-        <div className="space-y-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#0A2540] text-amber-300">
-              <Briefcase className="w-3.5 h-3.5 mr-1 text-amber-300" />
-              অগ্রযাত্রা ক্যারিয়ার হাব
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
-              <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-              শতভাগ ভেরিফায়েড নিয়োগকর্তা
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
-              <Award className="w-3.5 h-3.5 mr-1 text-amber-700 dark:text-amber-400" />
-              সরকারি ও করপোরেট সার্কুলার
-            </span>
+    <div className="relative overflow-hidden rounded-3xl border border-amber-200/70 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] p-6 sm:p-8 shadow-xs space-y-6">
+      {/* GoEdu Career Horizon Sunburst Glow */}
+      <div
+        className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+        style={{
+          height: '100%',
+          minHeight: '260px',
+          background:
+            'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(243, 172, 8, 0.20) 45%, rgba(253, 215, 70, 0) 100%)'
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Giant Typographic Watermark */}
+      <div
+        className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <p
+          className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
+          style={{
+            lineHeight: 0.95,
+            backgroundImage:
+              'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
+          }}
+        >
+          CAREER
+        </p>
+      </div>
+
+      <div className="relative z-10 space-y-6">
+        {/* Top Banner & Quick Trust Badges */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-amber-200/60 dark:border-[#262D3D] pb-6">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#ED8E22] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
+                <Briefcase className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
+                অগ্রযাত্রা ক্যারিয়ার হাব
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
+                শতভাগ ভেরিফায়েড নিয়োগকর্তা
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-slate-700 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700">
+                <Award className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
+                সরকারি ও করপোরেট সার্কুলার
+              </span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl font-serif font-bold tracking-tight font-bengali text-[#1B2A4A] dark:text-[#F5F2EB]">
+              অন্বেষণ ও কর্মসংস্থান পোর্টাল
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-3xl font-bengali leading-relaxed">
+              বাংলাদেশের শীর্ষস্থানীয় প্রযুক্তি, ব্যাংকিং, বহুজাতিক কোম্পানি এবং সরকারি চাকরির বিশ্বস্ত সংযোগ।
+              একাডেমিক অর্জনের সাথে সিলগালা ক্রিপ্টোগ্রাফিক সিভি যুক্ত করে সরাসরি আবেদন করুন।
+            </p>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight font-bengali text-[#0A2540] dark:text-white">
-            অন্বেষণ ও কর্মসংস্থান পোর্টাল
-          </h1>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl font-bengali leading-relaxed">
-            বাংলাদেশের শীর্ষস্থানীয় প্রযুক্তি, ব্যাংকিং, বহুজাতিক কোম্পানি এবং সরকারি চাকরির বিশ্বস্ত সংযোগ।
-            একাডেমিক অর্জনের সাথে সিলগালা ক্রিপ্টোগ্রাফিক সিভি যুক্ত করে সরাসরি আবেদন করুন।
-          </p>
-        </div>
+          {/* Action Buttons for Seeker & Recruiter */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3">
+            <button
+              onClick={onOpenCvBuilder}
+              className="w-full sm:w-auto px-4 py-2.5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-slate-700 hover:bg-amber-50/50 text-[#1B2A4A] dark:text-white font-bold font-bengali text-xs shadow-xs active:translate-y-0.5 transition flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <FileText className="w-4 h-4 text-emerald-600" />
+              <span>প্রফেশনাল সিভি তৈরি করুন</span>
+            </button>
 
-        {/* Action Buttons for Seeker & Recruiter */}
-        <div className="flex flex-wrap sm:flex-nowrap items-center gap-3">
-          <button
-            onClick={onOpenCvBuilder}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-[#0A2540] dark:text-white font-bold font-bengali text-xs shadow-sm active:translate-y-0.5 transition flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <FileText className="w-4 h-4 text-emerald-600" />
-            <span>প্রফেশনাল সিভি তৈরি করুন</span>
-          </button>
-
-          <button
-            onClick={onOpenJobPostWizard}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <PlusCircle className="w-4 h-4 text-amber-300" />
-            <span>পোস্ট এ জব (নিয়োগদাতা)</span>
-          </button>
+            <button
+              onClick={onOpenJobPostWizard}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <PlusCircle className="w-4 h-4 text-amber-100" />
+              <span>পোস্ট এ জব (নিয়োগদাতা)</span>
+            </button>
+          </div>
         </div>
       </div>
 

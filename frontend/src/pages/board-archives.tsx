@@ -54,37 +54,38 @@ export default function BoardArchivesPage() {
 
       <Navbar currentStage="বোর্ড পরীক্ষা প্রস্তুতি (SSC & HSC)" />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
-        {/* Unified Flagship Editorial PageHeader */}
-        <PageHeader
-          category="এনসিটিবি অনুমোদিত অফিসিয়াল প্রশ্ন ব্যাংক"
-          title="অফিসিয়াল বোর্ড প্রশ্ন ও গাণিতিক সমাধান আর্কাইভ"
-          subtitle="২০১৫ থেকে ২০২৫ সালের ঢাকা, চট্টগ্রাম, রাজশাহী সহ সকল শিক্ষাবোর্ডের পদার্থবিজ্ঞান, রসায়ন, উচ্চতর গণিত, জীববিজ্ঞান ও আইসিটি পরীক্ষার সৃজনশীল ও বহুনির্বাচনি প্রশ্নপত্রের নির্ভরযোগ্য KaTeX সমাধান।"
-          breadcrumbs={[
-            { label: 'নীড়পাতা', href: '/' },
-            { label: 'পাঠ্যক্রম', href: '/learn' },
-            { label: 'অফিসিয়াল বোর্ড আর্কাইভ' }
-          ]}
-          stats={[
-            { label: 'শিক্ষাবোর্ড কভারেজ', value: '১০টি বোর্ড' },
-            { label: 'সংরক্ষিত সময়কাল', value: '২০১৫ — ২০২৫' },
-            { label: 'গাণিতিক নির্ভুলতা', value: '১০০% KaTeX', highlight: true },
-            { label: 'সমাধান পদ্ধতি', value: '৪ স্তরীয় রুব্রিক্স' }
-          ]}
-          action={
-            <button
-              type="button"
-              onClick={() => {
-                if (typeof window !== 'undefined') window.print();
-              }}
-              className="print:hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#ED8E22] hover:bg-[#D47C1A] text-white font-bold text-xs font-bengali shadow-md active:scale-95 transition-all duration-150"
-            >
-              <Printer className="w-4 h-4 text-amber-200" />
-              <span>প্রশ্নপত্র প্রিন্ট ভিউ</span>
-            </button>
-          }
-        />
+      {/* Unified Flagship Editorial PageHeader with ARCHIVES Watermark */}
+      <PageHeader
+        watermarkText="ARCHIVES"
+        category="এনসিটিবি অনুমোদিত অফিসিয়াল প্রশ্ন ব্যাংক"
+        title="অফিসিয়াল বোর্ড প্রশ্ন ও গাণিতিক সমাধান আর্কাইভ"
+        subtitle="২০১৫ থেকে ২০২৫ সালের ঢাকা, চট্টগ্রাম, রাজশাহী সহ সকল শিক্ষাবোর্ডের পদার্থবিজ্ঞান, রসায়ন, উচ্চতর গণিত, জীববিজ্ঞান ও আইসিটি পরীক্ষার সৃজনশীল ও বহুনির্বাচনি প্রশ্নপত্রের নির্ভরযোগ্য KaTeX সমাধান।"
+        breadcrumbs={[
+          { label: 'নীড়পাতা', href: '/' },
+          { label: 'পাঠ্যক্রম', href: '/learn' },
+          { label: 'অফিসিয়াল বোর্ড আর্কাইভ' }
+        ]}
+        stats={[
+          { label: 'শিক্ষাবোর্ড কভারেজ', value: '১০টি বোর্ড' },
+          { label: 'সংরক্ষিত সময়কাল', value: '২০১৫ — ২০২৫' },
+          { label: 'গাণিতিক নির্ভুলতা', value: '১০০% KaTeX', highlight: true },
+          { label: 'সমাধান পদ্ধতি', value: '৪ স্তরীয় রুব্রিক্স' }
+        ]}
+        action={
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== 'undefined') window.print();
+            }}
+            className="print:hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#ED8E22] hover:bg-[#D47C1A] text-white font-bold text-xs font-bengali shadow-md active:scale-95 transition-all duration-150"
+          >
+            <Printer className="w-4 h-4 text-amber-200" />
+            <span>প্রশ্নপত্র প্রিন্ট ভিউ</span>
+          </button>
+        }
+      />
 
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
         {/* Question Archive Viewer Component */}
         <BoardQuestionArchiveViewer initialQuestions={questions} />
 

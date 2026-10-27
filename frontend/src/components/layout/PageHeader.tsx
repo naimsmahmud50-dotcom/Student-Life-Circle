@@ -40,6 +40,10 @@ export interface PageHeaderProps {
   actions?: React.ReactNode;
   className?: string;
   children?: React.ReactNode;
+  watermarkText?: string;
+  watermarkGradient?: string;
+  showGlow?: boolean;
+  glowGradient?: string;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -55,6 +59,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   actions,
   className,
   children,
+  watermarkText,
+  watermarkGradient,
+  showGlow = true,
+  glowGradient,
 }) => {
   const displayDesc = description || subtitle;
   const actionSlot = actions || action;
@@ -62,10 +70,44 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <section
       className={cn(
-        'relative pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-[#E5E2DA] dark:border-[#273145] bg-[#FAF8F3] dark:bg-[#12161F] transition-colors overflow-hidden',
+        'relative pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors overflow-hidden',
         className
       )}
     >
+      {/* Background Radial Sunburst Glow (GoEdu Warm Design Language) */}
+      {showGlow && (
+        <div
+          className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+          style={{
+            height: '100%',
+            minHeight: '260px',
+            background:
+              glowGradient ||
+              'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(243, 172, 8, 0.20) 45%, rgba(253, 215, 70, 0) 100%)'
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Giant Typographic Watermark (GoEdu Signature Background Motif) */}
+      {watermarkText && (
+        <div
+          className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+          aria-hidden="true"
+        >
+          <p
+            className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
+            style={{
+              lineHeight: 0.95,
+              backgroundImage:
+                watermarkGradient ||
+                'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
+            }}
+          >
+            {watermarkText}
+          </p>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
         {/* Breadcrumb Navigation */}
@@ -83,7 +125,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   ) : (
                     <Link
                       href={crumb.href}
-                      className="hover:text-[#1A1A1A] dark:hover:text-white transition-colors"
+                      className="hover:text-[#ED8E22] dark:hover:text-amber-300 transition-colors"
                     >
                       {crumb.label}
                     </Link>
@@ -98,13 +140,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         {(badgeText || category) && (
           <div className="flex flex-wrap items-center gap-2">
             {badgeText && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] text-xs font-semibold text-[#1A1A1A] dark:text-slate-300 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] text-xs font-semibold text-[#1A1A1A] dark:text-slate-300 shadow-xs">
                 {badgeIcon}
                 <span>{badgeText}</span>
               </div>
             )}
             {category && (
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#B8862B] dark:text-[#D4AF37] font-sans">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#ED8E22] dark:text-amber-400 font-sans">
                 {category}
               </span>
             )}
@@ -137,10 +179,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {stats.map((s, idx) => (
               <div
                 key={idx}
-                className="p-3.5 rounded-xl bg-white dark:bg-[#181E2B] border border-[#E5E2DA] dark:border-[#273145] shadow-xs"
+                className="p-3.5 rounded-xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs"
               >
                 <span className="text-[#787878] dark:text-slate-400 block text-[11px] mb-0.5 font-sans">{s.label}</span>
-                <strong className={cn("text-sm sm:text-base font-bold", s.highlight ? "text-[#065F46] dark:text-emerald-400" : "text-[#1A1A1A] dark:text-[#F5F2EB]")}>
+                <strong className={cn("text-sm sm:text-base font-bold", s.highlight ? "text-[#ED8E22] dark:text-amber-400" : "text-[#1B2A4A] dark:text-[#F5F2EB]")}>
                   {s.value}
                 </strong>
               </div>
