@@ -99,16 +99,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   const currentPath = router?.pathname || '/';
 
   // ---------------------------------------------------------------------------
-  // 1. Client Mount & Theme Synchronization
+  // 1. Client Mount & Theme Synchronization (Dark = Default)
   // ---------------------------------------------------------------------------
   useEffect(() => {
     setMounted(true);
     if (typeof window !== 'undefined') {
-      const isDark = document.documentElement.classList.contains('dark') ||
-        localStorage.getItem('slc_theme') === 'dark' ||
-        localStorage.getItem('theme') === 'dark' ||
-        (!localStorage.getItem('slc_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const saved = localStorage.getItem('slc_theme') || localStorage.getItem('theme');
+      const isDark = saved === 'light' ? false : true;
       setInternalTheme(isDark ? 'dark' : 'light');
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, []);
 

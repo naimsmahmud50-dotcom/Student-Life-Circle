@@ -111,16 +111,16 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
   }, [isBengali]);
 
   // ---------------------------------------------------------------------------
-  // 3. Global Dark / Light Theme Synchronization (Light = Default)
+  // 3. Global Dark / Light Theme Synchronization (Dark = Default)
   // ---------------------------------------------------------------------------
   useEffect(() => {
     try {
-      const savedTheme = localStorage.getItem('slc_theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        // Light paper theme is the default
+      const savedTheme = localStorage.getItem('slc_theme') || localStorage.getItem('theme');
+      if (savedTheme === 'light') {
         document.documentElement.classList.remove('dark');
+      } else {
+        // Dark mode is the primary default, matching _document.tsx bootstrap
+        document.documentElement.classList.add('dark');
       }
     } catch (e) {
       // LocalStorage access non-blocking catch

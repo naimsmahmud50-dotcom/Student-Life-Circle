@@ -13,7 +13,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="bn" className="scroll-smooth">
+    <Html lang="bn" className="scroll-smooth dark">
       <Head>
         {/* DNS Pre-fetch and Preconnect to font domains to reduce TCP handshake latency */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -43,11 +43,10 @@ export default function Document() {
               (function() {
                 try {
                   var saved = localStorage.getItem('slc_theme') || localStorage.getItem('theme');
-                  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (saved === 'dark' || (!saved && prefersDark)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
+                  if (saved === 'light') {
                     document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
                   }
                 } catch (e) {}
               })();

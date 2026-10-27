@@ -32,33 +32,33 @@ export const Layout: React.FC<LayoutProps> = ({
   showSidebar = true,
   activeStageId = 'hsc'
 }) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
-    // Check saved theme or system preference
-    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    if (saved) {
-      setTheme(saved);
-      if (saved === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
+    try {
+      const saved = (localStorage.getItem('slc_theme') || localStorage.getItem('theme')) as 'light' | 'dark' | null;
+      if (saved === 'light') {
+        setTheme('light');
         document.documentElement.classList.remove('dark');
+      } else {
+        setTheme('dark');
+        document.documentElement.classList.add('dark');
       }
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-      document.documentElement.classList.add('dark');
-    }
+    } catch (e) {}
   }, []);
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
-    localStorage.setItem('theme', next);
-    if (next === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    try {
+      localStorage.setItem('slc_theme', next);
+      localStorage.setItem('theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (e) {}
   };
 
   return (
