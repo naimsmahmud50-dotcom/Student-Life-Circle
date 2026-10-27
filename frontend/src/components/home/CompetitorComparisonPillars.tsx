@@ -133,12 +133,33 @@ export const CompetitorComparisonPillars: React.FC = () => {
   const current = COMPARISONS.find((c) => c.id === activeTab) || COMPARISONS[0];
 
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 overflow-hidden transition-colors duration-300">
-      {/* Warm Ambient Glow */}
+    <section className="relative py-14 sm:py-16 md:py-20 bg-[#FAF7F2] dark:bg-[#0A1324] border-b border-amber-200/60 dark:border-slate-800 overflow-hidden transition-colors duration-300">
+      {/* Royal Cobalt & Amber Radial Ambient Glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-amber-200/25 via-amber-100/20 to-orange-100/20 dark:from-amber-950/15 dark:to-orange-950/10 rounded-full blur-3xl pointer-events-none -z-0"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[420px] pointer-events-none select-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 65% at 50% 50%, rgba(37, 99, 235, 0.16) 0%, rgba(237, 142, 34, 0.08) 50%, transparent 80%)'
+        }}
         aria-hidden="true"
       />
+
+      {/* Contextual Typographic Watermark (CAMPUS) */}
+      <div
+        className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <p
+          className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[20vw] md:text-[clamp(4rem,22vw,18rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+          style={{
+            lineHeight: 0.95,
+            backgroundImage:
+              'linear-gradient(to bottom, rgba(37, 99, 235, 0.22) 15%, rgba(237, 142, 34, 0.02) 100%)'
+          }}
+        >
+          campus
+        </p>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         

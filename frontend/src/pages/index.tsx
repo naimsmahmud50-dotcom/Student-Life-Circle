@@ -283,14 +283,42 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 2: ACADEMIC PROGRESS ("আপনার শেখার অগ্রগতি") & PEDAGOGICAL PILLARS
-              Warm Linen & Sunshine Editorial Band
+              Midnight Navy & Sapphire Editorial Band
               =================================================================== */}
           <section
             aria-label="অ্যাকাডেমিক প্রোগ্রেস ও প্ল্যাটফর্ম পরিসংখ্যান"
             suppressHydrationWarning={true}
-            className="py-14 sm:py-16 md:py-20 bg-[#FFF9EB]/60 dark:bg-[#0E1526] text-[#213130] dark:text-[#F5F2EB] border-b border-amber-200/60 dark:border-[#262D3D] transition-colors duration-300"
+            className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#F4F7FC]/70 dark:bg-[#0C1527] text-[#213130] dark:text-[#F5F2EB] border-b border-sky-200/50 dark:border-slate-800 transition-colors duration-300"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+            {/* Midnight Sapphire & Cyan Radial Ambient Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '520px',
+                background:
+                  'radial-gradient(ellipse 65% 75% at 50% 100%, rgba(14, 165, 233, 0.16) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 85%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (PROGRESS) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[20vw] md:text-[clamp(4rem,22vw,18rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(14, 165, 233, 0.22) 15%, rgba(37, 99, 235, 0.02) 100%)'
+                }}
+              >
+                progress
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 relative z-10">
 
               {/* TIER 1: আপনার শেখার অগ্রগতি (Study Momentum & Practice) */}
               <div className="space-y-6">
@@ -725,10 +753,38 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 3: CURATED JOURNEY PATHWAYS (4 Cards with Progress Bars)
-              Warm Linen Background
+              Scholar Emerald & Sage Heritage Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+          <section className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#F2F9F5]/70 dark:bg-[#091714] border-b border-emerald-200/50 dark:border-emerald-950/60 transition-colors duration-300">
+            {/* Scholar Emerald & Sage Radial Ambient Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '520px',
+                background:
+                  'radial-gradient(ellipse 65% 80% at 50% 100%, rgba(16, 185, 129, 0.16) 0%, rgba(5, 150, 105, 0.08) 45%, transparent 85%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (PATHWAYS) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[19vw] md:text-[clamp(4rem,21vw,17rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(16, 185, 129, 0.22) 15%, rgba(5, 150, 105, 0.02) 100%)'
+                }}
+              >
+                pathways
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
@@ -916,10 +972,38 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 4: 3D STEM VIRTUAL LABS (Interactive Simulators + KaTeX Math)
-              Warm Sunshine Accent Band
+              Cosmic Ultraviolet & Electric Sky Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFF6DD]/60 dark:bg-gray-900/60 border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+          <section className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#F8F5FE]/70 dark:bg-[#110D24] border-b border-purple-200/50 dark:border-purple-950/60 transition-colors duration-300">
+            {/* Cosmic Violet Radial Ambient Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '520px',
+                background:
+                  'radial-gradient(ellipse 60% 85% at 50% 100%, rgba(168, 85, 247, 0.18) 0%, rgba(126, 34, 206, 0.09) 45%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (LABORATORY) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(168, 85, 247, 0.22) 15%, rgba(126, 34, 206, 0.02) 100%)'
+                }}
+              >
+                laboratory
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
@@ -1023,10 +1107,38 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 5: LIVE CHALLENGE & SOCRATIC AI INSTANT SOLVER
-              Warm Linen Surface
+              Fiery Crimson & Golden Arena Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+          <section className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#FEF7F4]/70 dark:bg-[#1D1016] border-b border-rose-200/50 dark:border-rose-950/60 transition-colors duration-300">
+            {/* Fiery Crimson & Gold Arena Ambient Glow */}
+            <div
+              className="absolute top-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '520px',
+                background:
+                  'radial-gradient(ellipse 65% 75% at 50% 0%, rgba(244, 63, 94, 0.16) 0%, rgba(245, 158, 11, 0.10) 50%, transparent 85%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (OLYMPIAD) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[19vw] md:text-[clamp(4rem,21vw,17rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(244, 63, 94, 0.20) 15%, rgba(245, 158, 11, 0.02) 100%)'
+                }}
+              >
+                olympiad
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
@@ -1120,10 +1232,38 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 6: W3C PROOF-OF-SKILL CERTIFICATE SHOWCASE
-              Warm Linen Background
+              Lapis Lazuli & Gold Crest Vault Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFDF9] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+          <section className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#F4F6FC]/70 dark:bg-[#0B142B] border-b border-indigo-200/50 dark:border-indigo-950/60 transition-colors duration-300">
+            {/* Lapis Lazuli & Gold Crest Ambient Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '500px',
+                background:
+                  'radial-gradient(ellipse 70% 70% at 50% 100%, rgba(99, 102, 241, 0.16) 0%, rgba(212, 163, 75, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (CREDENTIAL) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(99, 102, 241, 0.20) 15%, rgba(212, 163, 75, 0.02) 100%)'
+                }}
+              >
+                credential
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
@@ -1177,19 +1317,75 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 6.5: STUDENT TESTIMONIALS & SUCCESS STORIES (Swiper)
-              Warm Linen Background
+              Warm Terracotta & Sunset Glow Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="relative overflow-hidden py-14 sm:py-16 md:py-20 bg-[#FFF8F3]/70 dark:bg-[#161118] border-b border-orange-200/50 dark:border-orange-950/60 transition-colors duration-300">
+            {/* Warm Terracotta Ambient Glow */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[420px] pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 65% 65% at 50% 50%, rgba(251, 146, 60, 0.14) 0%, transparent 75%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (STORIES) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[20vw] md:text-[clamp(4rem,22vw,18rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(251, 146, 60, 0.18) 15%, rgba(245, 158, 11, 0.02) 100%)'
+                }}
+              >
+                stories
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <StudentStoriesCarousel />
             </div>
           </section>
 
           {/* ===================================================================
               SECTION 7: TRUST BADGES & 69 ENTERPRISE MODULES DIRECTORY
+              Deep Marine Teal & Oceanic Assurance Band
               =================================================================== */}
-          <section className="py-12 sm:py-14 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <section className="relative overflow-hidden py-12 sm:py-14 bg-[#F1F8F8]/70 dark:bg-[#0A171B] border-b border-teal-200/50 dark:border-teal-950/60 transition-colors duration-300">
+            {/* Deep Marine Teal Ambient Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '420px',
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 100%, rgba(20, 184, 166, 0.16) 0%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (MODULES) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[19vw] md:text-[clamp(4rem,21vw,17rem)] uppercase tracking-wider select-none opacity-40 dark:opacity-20"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(20, 184, 166, 0.20) 15%, rgba(13, 148, 136, 0.02) 100%)'
+                }}
+              >
+                modules
+              </p>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
               
               <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
                 
@@ -1257,14 +1453,42 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 8: CLOSING ACADEMIC CALL TO ACTION
-              GoEdu Deep Charcoal Slate Gradient Background with Warm Golden Glow
+              Deep Charcoal Slate & Golden Horizon Band
               =================================================================== */}
-          <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#213130] via-slate-900 to-[#121B2D] text-white border-t border-amber-900/40 overflow-hidden">
+          <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1C2625] via-slate-900 to-[#101726] text-white border-t border-amber-900/40 overflow-hidden">
             {/* Golden radial ambient top glow */}
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-36 bg-amber-400/10 blur-3xl pointer-events-none"
               aria-hidden="true"
             />
+
+            {/* Golden Sunburst Radial Ambient Bottom Glow */}
+            <div
+              className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
+              style={{
+                height: '380px',
+                background:
+                  'radial-gradient(ellipse 65% 85% at 50% 100%, rgba(255, 178, 0, 0.28) 0%, rgba(243, 172, 8, 0.12) 50%, transparent 100%)'
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Typographic Watermark (EXCELLENCE) */}
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-6 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-30 dark:opacity-15"
+                style={{
+                  lineHeight: 0.95,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(255, 178, 0, 0.25) 15%, transparent 100%)'
+                }}
+              >
+                excellence
+              </p>
+            </div>
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
               
