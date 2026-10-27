@@ -18,7 +18,7 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
     <section className={`w-full ${className}`} aria-label="টিউশন প্ল্যাটফর্ম পরিসংখ্যান">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Metric 1: Active Tutors */}
-        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
           <div className="w-11 h-11 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
             <Users className="w-5 h-5" />
           </div>
@@ -33,7 +33,7 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
         </div>
 
         {/* Metric 2: Live Tuition Jobs */}
-        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
           <div className="w-11 h-11 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
             <Briefcase className="w-5 h-5" />
           </div>
@@ -48,7 +48,7 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
         </div>
 
         {/* Metric 3: Average Rating */}
-        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
           <div className="w-11 h-11 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 flex items-center justify-center shrink-0 border border-amber-200 dark:border-amber-800">
             <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
           </div>
@@ -64,7 +64,7 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
         </div>
 
         {/* Metric 4: Zero Scam / Trial */}
-        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
           <div className="w-11 h-11 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
             <ShieldCheck className="w-5 h-5" />
           </div>

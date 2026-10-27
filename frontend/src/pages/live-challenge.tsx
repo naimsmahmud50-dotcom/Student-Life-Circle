@@ -186,7 +186,7 @@ export default function LiveChallengePage() {
         ogType="website"
       />
 
-      <div className={`${styles.liveChallengeRoot} min-h-screen flex flex-col bg-[#FAF8F3] dark:bg-[#060610] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white`}>
+      <div className={`${styles.liveChallengeRoot} min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] font-sans selection:bg-[#ED8E22] selection:text-white`}>
         {/* Sticky Unified Global Navigation */}
         <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
 
@@ -239,11 +239,11 @@ export default function LiveChallengePage() {
           <div id="central-leaderboard" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Leaderboard Table (8 cols) */}
-            <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+            <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-amber-100 dark:border-[#262D3D]">
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
-                    <Award className="w-5 h-5 text-amber-700 dark:text-amber-400" />
+                    <Award className="w-5 h-5 text-[#ED8E22]" />
                     <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
                   </h2>
                   <p className="text-xs text-slate-500 font-bengali mt-1">
@@ -266,8 +266,8 @@ export default function LiveChallengePage() {
             {/* Sidebar Cards (4 cols): Privacy, Rules & Live Analytics */}
             <div className="lg:col-span-4 space-y-6">
               {/* Privacy Controls & Exam Ethics Card */}
-              <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-amber-100 dark:border-[#262D3D]">
                   <div className="flex items-center gap-2.5">
                     <ShieldCheck className="w-5 h-5 text-emerald-600" />
                     <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
@@ -295,19 +295,19 @@ export default function LiveChallengePage() {
                 <button
                   type="button"
                   onClick={() => setIsRulesModalOpen(true)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#FFF9EB] hover:bg-[#FFF6DD] dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-amber-200/60 dark:border-slate-700 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
                 >
-                  <ShieldCheck className="w-4 h-4 text-[#0A2540] dark:text-amber-400" />
+                  <ShieldCheck className="w-4 h-4 text-[#ED8E22]" />
                   <span>সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন</span>
                 </button>
 
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="pt-4 border-t border-amber-100 dark:border-[#262D3D]">
                   <label className="flex items-center gap-3 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={optOutRanking}
                       onChange={(e) => handleToggleOptOut(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#0A2540] focus:ring-[#0A2540] border-slate-300"
+                      className="w-4 h-4 rounded text-[#ED8E22] focus:ring-[#ED8E22] border-slate-300"
                     />
                     <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
                       পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন

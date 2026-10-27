@@ -80,10 +80,10 @@ export const TuitionSalaryCalculator: React.FC<TuitionSalaryCalculatorProps> = (
 
   return (
     <div
-      className={`p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm font-bengali ${className}`}
+      className={`p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs font-bengali ${className}`}
       aria-labelledby="salary-calculator-heading"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-amber-100 dark:border-[#262D3D]">
         <div>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 uppercase tracking-wider mb-1">
             <Calculator className="w-3.5 h-3.5" />
@@ -174,7 +174,7 @@ export const TuitionSalaryCalculator: React.FC<TuitionSalaryCalculatorProps> = (
                     onClick={() => setDaysPerWeek(d)}
                     className={`flex-1 py-2 rounded-xl border text-xs font-bold transition-all ${
                       daysPerWeek === d
-                        ? 'bg-[#0A2540] text-white border-[#0A2540]'
+                        ? 'bg-[#ED8E22] text-white border-[#ED8E22]'
                         : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                     }`}
                   >
@@ -187,7 +187,7 @@ export const TuitionSalaryCalculator: React.FC<TuitionSalaryCalculatorProps> = (
         </div>
 
         {/* Estimation Display Column */}
-        <div className="lg:col-span-5 flex flex-col justify-between p-6 rounded-3xl bg-[#FAF8F3] dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-4">
+        <div className="lg:col-span-5 flex flex-col justify-between p-6 rounded-3xl bg-[#FFF9EB]/70 dark:bg-[#0B0F19] border border-amber-200/60 dark:border-[#262D3D] space-y-4">
           <div>
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
               প্রস্তাবিত মাসিক পারিশ্রমিক পরিসর:
@@ -200,14 +200,14 @@ export const TuitionSalaryCalculator: React.FC<TuitionSalaryCalculatorProps> = (
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <div className="p-3.5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/60 dark:border-[#262D3D] text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
             এই পারিশ্রমিক বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট), ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের শীর্ষ শিক্ষার্থীবান্ধব স্ট্যান্ডার্ড অনুযায়ী তৈরি।
           </div>
 
           {onRequestTutorWithSalary && (
             <button
               onClick={() => onRequestTutorWithSalary(formattedSalaryText)}
-              className="w-full py-2.5 px-4 rounded-xl bg-emerald-800 hover:bg-emerald-900 active:bg-emerald-950 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#ED8E22] hover:bg-[#D97D1A] active:bg-[#C57013] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
             >
               <span>এই বাজেটে টিউটর রিকোয়ারমেন্ট দিন</span>
               <ArrowRight className="w-4 h-4" />

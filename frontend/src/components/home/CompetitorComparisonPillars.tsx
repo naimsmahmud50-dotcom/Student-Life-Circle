@@ -133,21 +133,28 @@ export const CompetitorComparisonPillars: React.FC = () => {
   const current = COMPARISONS.find((c) => c.id === activeTab) || COMPARISONS[0];
 
   return (
-    <section className="py-14 sm:py-16 md:py-20 bg-white dark:bg-[#0E1526] border-b border-[#E5E2DA] dark:border-[#262D3D]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section className="relative py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 overflow-hidden transition-colors duration-300">
+      {/* Warm Ambient Glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-amber-200/25 via-amber-100/20 to-orange-100/20 dark:from-amber-950/15 dark:to-orange-950/10 rounded-full blur-3xl pointer-events-none -z-0"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] text-xs font-bold text-[#0B5D3B] dark:text-emerald-400">
-            <Zap className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] text-xs font-bold text-[#ED8E22] shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-[#ED8E22] shrink-0 animate-pulse" aria-hidden="true" />
+            <Zap className="w-3.5 h-3.5 text-[#ED8E22]" />
             <span>৪টি আলাদা প্ল্যাটফর্মের বদলে একটি পূর্ণাঙ্গ ডিজিটাল ক্যাম্পাস</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] font-bengali tracking-tight">
             কেন অগ্রযাত্রা প্রথাগত প্ল্যাটফর্মগুলোর চেয়ে বহুগুণ এগিয়ে?
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
             আমরা আলাদা আলাদা প্ল্যাটফর্মের পেছনে ছোটাছুটি বন্ধ করেছি। একাডেমিক পড়াশোনা, লাইভ কুইজ, টিউশন এবং প্রথম চাকরি—সবকিছু একটি মাত্র প্রোফাইলে সমন্বিত।
           </p>
         </div>
@@ -163,8 +170,8 @@ export const CompetitorComparisonPillars: React.FC = () => {
                 onClick={() => setActiveTab(comp.id)}
                 className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold font-bengali transition-all duration-150 border ${
                   isActive
-                    ? 'bg-[#1B2A4A] text-white border-[#1B2A4A] shadow-md scale-[1.02]'
-                    : 'bg-[#FAF8F3] dark:bg-[#121B2D] text-[#5B5B5B] dark:text-slate-300 border-[#E5E2DA] dark:border-[#262D3D] hover:border-[#1B2A4A]/40'
+                    ? 'bg-[#ED8E22] text-white border-[#ED8E22] shadow-[0_4px_14px_0_rgba(237,142,34,0.30)] scale-[1.02]'
+                    : 'bg-white/95 dark:bg-[#121B2D] text-[#5B5B5B] dark:text-slate-300 border-amber-200/70 dark:border-[#262D3D] hover:border-[#ED8E22]/60 hover:bg-[#FFF9EB]'
                 }`}
               >
                 <span>বনাম {comp.tabLabel}</span>
@@ -174,10 +181,10 @@ export const CompetitorComparisonPillars: React.FC = () => {
         </div>
 
         {/* Selected Comparison Showcase Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm space-y-8">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#FFF9EB]/80 dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] shadow-[0_4px_24px_-4px_rgba(237,142,34,0.08)] space-y-8">
           
           {/* Header Summary */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#E5E2DA] dark:border-[#262D3D]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-amber-200/70 dark:border-[#262D3D]">
             <div className="space-y-1.5 max-w-2xl">
               <span className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
                 {current.categoryTitle}
@@ -185,17 +192,17 @@ export const CompetitorComparisonPillars: React.FC = () => {
               <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                 {current.ourAdvantage}
               </h3>
-              <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                 {current.ourDescription}
               </p>
             </div>
 
             <Link
               href={current.ctaLink}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white font-bold text-xs sm:text-sm font-bengali shadow-xs active:translate-y-0.5 transition shrink-0 self-start lg:self-auto"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#ED8E22] hover:bg-[#D47C1A] text-white font-bold text-xs sm:text-sm font-bengali shadow-md active:scale-95 transition shrink-0 self-start lg:self-auto"
             >
               <span>{current.ctaText}</span>
-              <ArrowRight className="w-4 h-4 text-amber-300" />
+              <ArrowRight className="w-4 h-4 text-amber-200" />
             </Link>
           </div>
 
@@ -204,7 +211,7 @@ export const CompetitorComparisonPillars: React.FC = () => {
             {current.comparisonPoints.map((pt, idx) => (
               <div
                 key={idx}
-                className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] space-y-3"
+                className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 transition-all space-y-3"
               >
                 <div className="text-xs font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                   {pt.feature}

@@ -45,7 +45,7 @@ export default function BoardArchivesPage() {
   }, [questions]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#090D16] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] font-sans transition-colors duration-300">
       <AppHead
         title="অফিসিয়াল এনসিটিবি বোর্ড প্রশ্ন আর্কাইভ (২০১৫-২০২৫) | অগ্রযাত্রা"
         description="বাংলাদেশ জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (NCTB) অনুমোদিত এসএসসি ও এইচএসসি বিগত ১০ বছরের বোর্ড প্রশ্ন ও KaTeX গাণিতিক সমাধান ব্যাংক।"
@@ -77,9 +77,9 @@ export default function BoardArchivesPage() {
               onClick={() => {
                 if (typeof window !== 'undefined') window.print();
               }}
-              className="print:hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#0A2540] dark:bg-amber-400 text-white dark:text-slate-950 font-bold text-xs font-bengali shadow-[0_4px_0_0_#051329] dark:shadow-[0_4px_0_0_#D97706] active:translate-y-1 active:shadow-none transition-all duration-150"
+              className="print:hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#ED8E22] hover:bg-[#D47C1A] text-white font-bold text-xs font-bengali shadow-md active:scale-95 transition-all duration-150"
             >
-              <Printer className="w-4 h-4" />
+              <Printer className="w-4 h-4 text-amber-200" />
               <span>প্রশ্নপত্র প্রিন্ট ভিউ</span>
             </button>
           }
@@ -89,30 +89,30 @@ export default function BoardArchivesPage() {
         <BoardQuestionArchiveViewer initialQuestions={questions} />
 
         {/* Academic Integrity & Study Tips Section */}
-        <section className="print:hidden mt-12 bg-white dark:bg-[#0F172A] p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
-          <div className="flex items-center gap-2.5 text-slate-900 dark:text-white font-bold font-bengali text-base">
-            <ShieldCheck className="w-5 h-5 text-[#0A2540] dark:text-amber-400" />
+        <section className="print:hidden mt-12 bg-[#FFF9EB]/70 dark:bg-[#121B2D] p-6 sm:p-8 rounded-3xl border border-amber-200/80 dark:border-[#262D3D] shadow-xs space-y-5">
+          <div className="flex items-center gap-2.5 text-[#213130] dark:text-[#F5F2EB] font-bold font-bengali text-base">
+            <ShieldCheck className="w-5 h-5 text-[#ED8E22]" />
             <span>বোর্ড পরীক্ষার জন্য প্রস্তুতি নির্দেশিকা ও নির্ভুলতা নিশ্চয়তা</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bengali text-slate-600 dark:text-slate-400 leading-relaxed">
-            <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 space-y-2">
-              <strong className="text-slate-900 dark:text-white block font-semibold text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bengali text-[#525252] dark:text-slate-400 leading-relaxed">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-2">
+              <strong className="text-[#1B2A4A] dark:text-white block font-semibold text-sm">
                 ১. পরীক্ষা মোডে সময় মেনে অনুশীলন
               </strong>
               <p>
                 পরীক্ষা মোড চালু করে উত্তর না দেখে পূর্ণাঙ্গ উদ্দীপক সমাধান করুন। নির্দিষ্ট সময়ের মধ্যে সৃজনশীল প্রশ্নের (ক, খ, গ, ঘ) উত্তর লেখার অভ্যাস বোর্ড পরীক্ষায় সেরা ফলাফল নিশ্চিত করে।
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 space-y-2">
-              <strong className="text-slate-900 dark:text-white block font-semibold text-sm">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-2">
+              <strong className="text-[#1B2A4A] dark:text-white block font-semibold text-sm">
                 ২. KaTeX সূত্রের নির্ভুল প্রতিপাদন
               </strong>
               <p>
                 অগ্রযাত্রা প্ল্যাটফর্মের প্রতিটি গাণিতিক সমাধান উচ্চ রেজোলিউশনের সাব-পিক্সেল KaTeX ফরম্যাটে উপস্থাপিত, যা কোনো প্রতীক বা ভগ্নাংশ বিকৃত হতে দেয় না।
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 space-y-2">
-              <strong className="text-slate-900 dark:text-white block font-semibold text-sm">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-2">
+              <strong className="text-[#1B2A4A] dark:text-white block font-semibold text-sm">
                 ৩. অফিসিয়াল প্রিন্ট প্রিভিউ
               </strong>
               <p>

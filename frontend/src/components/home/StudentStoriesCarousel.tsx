@@ -118,17 +118,17 @@ export const StudentStoriesCarousel: React.FC = () => {
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
             aria-label="পূর্ববর্তী গল্প"
-            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] hover:bg-[#FAF8F3] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]"
+            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] hover:bg-[#FFF9EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 text-[#ED8E22]" />
           </button>
           <button
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
             aria-label="পরবর্তী গল্প"
-            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] hover:bg-[#FAF8F3] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]"
+            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] hover:bg-[#FFF9EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 text-[#ED8E22]" />
           </button>
         </div>
       </div>
@@ -161,33 +161,33 @@ export const StudentStoriesCarousel: React.FC = () => {
           pagination={{
             clickable: true,
             el: '.student-swiper-pagination',
-            bulletClass: 'inline-block w-2.5 h-2.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 mx-1 cursor-pointer transition-all',
-            bulletActiveClass: '!bg-[#1B2A4A] dark:!bg-amber-400 !w-6',
+            bulletClass: 'inline-block w-2.5 h-2.5 rounded-full bg-amber-200 dark:bg-slate-700 mx-1 cursor-pointer transition-all',
+            bulletActiveClass: '!bg-[#ED8E22] dark:!bg-amber-400 !w-6',
           }}
           className="pb-12"
         >
           {TESTIMONIALS_DATA.map((item) => (
             <SwiperSlide key={item.id} className="h-auto">
-              <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm hover:border-[#D1CDC4] dark:hover:border-[#3D475C] transition-all duration-200">
+              <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                 <div className="space-y-4">
                   {/* Quote Icon & Achievement Badge */}
                   <div className="flex items-center justify-between">
-                    <div className="w-9 h-9 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Quote className="w-4 h-4 text-[#B8862B]" />
+                    <div className="w-9 h-9 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#ED8E22] flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
+                      <Quote className="w-4 h-4 text-[#ED8E22]" />
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                       {item.highlightedMetric}
                     </span>
                   </div>
 
                   {/* Bengali Quote Body */}
-                  <p className="text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F5F2EB] font-serif italic leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#213130] dark:text-[#F5F2EB] font-serif italic leading-relaxed">
                     “{item.quote_bn}”
                   </p>
                 </div>
 
                 {/* Student Info Footer */}
-                <div className="pt-5 mt-5 border-t border-[#E5E2DA] dark:border-[#262D3D] space-y-1.5">
+                <div className="pt-5 mt-5 border-t border-amber-200/60 dark:border-[#262D3D] space-y-1.5">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                       {item.studentName}
@@ -204,11 +204,11 @@ export const StudentStoriesCarousel: React.FC = () => {
                     {item.achievement}
                   </div>
 
-                  <div className="flex items-center gap-2 text-[11px] text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                  <div className="flex items-center gap-2 text-[11px] text-[#525252] dark:text-slate-400 font-bengali">
                     <span>{item.institution}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-[#5B5B5B] dark:text-slate-400" />
+                      <MapPin className="w-3 h-3 text-[#525252] dark:text-slate-400" />
                       {item.district}
                     </span>
                   </div>

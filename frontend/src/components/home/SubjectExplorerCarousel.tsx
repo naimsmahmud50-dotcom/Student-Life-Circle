@@ -153,17 +153,17 @@ export const SubjectExplorerCarousel: React.FC = () => {
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
             aria-label="পূর্ববর্তী বিষয়সমূহ"
-            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] hover:bg-[#FAF8F3] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]"
+            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] hover:bg-[#FFF9EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 text-[#ED8E22]" />
           </button>
           <button
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
             aria-label="পরবর্তী বিষয়সমূহ"
-            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] hover:bg-[#FAF8F3] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#1B2A4A]"
+            className="w-10 h-10 rounded-xl bg-white dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] hover:bg-[#FFF9EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center justify-center transition shadow-xs active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 text-[#ED8E22]" />
           </button>
         </div>
       </div>
@@ -191,27 +191,27 @@ export const SubjectExplorerCarousel: React.FC = () => {
           pagination={{
             clickable: true,
             el: '.subject-swiper-pagination',
-            bulletClass: 'inline-block w-2.5 h-2.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 mx-1 cursor-pointer transition-all',
-            bulletActiveClass: '!bg-[#1B2A4A] dark:!bg-amber-400 !w-6',
+            bulletClass: 'inline-block w-2.5 h-2.5 rounded-full bg-amber-200 dark:bg-slate-700 mx-1 cursor-pointer transition-all',
+            bulletActiveClass: '!bg-[#ED8E22] dark:!bg-amber-400 !w-6',
           }}
           className="pb-12"
         >
           {SUBJECTS_DATA.map((subject) => (
             <SwiperSlide key={subject.id} className="h-auto">
-              <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm hover:border-[#D1CDC4] dark:hover:border-[#3D475C] transition-all duration-200">
+              <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                 <div className="space-y-4">
                   {/* Top Bar with Icon & Level */}
                   <div className="flex items-center justify-between">
                     <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]"
+                      className="w-10 h-10 rounded-xl flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]"
                       style={{
-                        backgroundColor: 'var(--color-paper-ground, #FAF8F3)',
+                        backgroundColor: '#FFF9EB',
                         color: subject.accentColor,
                       }}
                     >
                       {subject.icon}
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                       {subject.level}
                     </span>
                   </div>
@@ -221,19 +221,19 @@ export const SubjectExplorerCarousel: React.FC = () => {
                     <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
                       {subject.name_bn}
                     </h3>
-                    <div className="text-[11px] font-medium text-[#5B5B5B] dark:text-slate-400 font-sans">
+                    <div className="text-[11px] font-medium text-[#525252] dark:text-slate-400 font-sans">
                       {subject.name_en}
                     </div>
                   </div>
 
                   {/* Summary */}
-                  <p className="text-xs text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-bengali line-clamp-2">
+                  <p className="text-xs text-[#525252] dark:text-slate-300 leading-relaxed font-bengali line-clamp-2">
                     {subject.summary_bn}
                   </p>
 
                   {/* KaTeX Math Formula Preview Box */}
-                  <div className="p-3 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] text-[11px] overflow-x-auto">
-                    <div className="text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali pb-1 flex items-center justify-between">
+                  <div className="p-3 rounded-xl bg-[#FFFDF9] dark:bg-[#0E1526] border border-amber-200/60 dark:border-[#262D3D] text-[11px] overflow-x-auto">
+                    <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali pb-1 flex items-center justify-between">
                       <span>নমুনা সমীকরণ ও সূত্র</span>
                       <span className="font-semibold text-[#0B5D3B] dark:text-emerald-400">KaTeX</span>
                     </div>
@@ -243,9 +243,9 @@ export const SubjectExplorerCarousel: React.FC = () => {
                   </div>
 
                   {/* Subject Badges */}
-                  <div className="flex items-center gap-3 text-xs text-[#5B5B5B] dark:text-slate-400 pt-1">
+                  <div className="flex items-center gap-3 text-xs text-[#525252] dark:text-slate-400 pt-1">
                     <div className="flex items-center gap-1.5 font-bengali">
-                      <BookOpen className="w-3.5 h-3.5 text-[#1B2A4A] dark:text-slate-300 shrink-0" />
+                      <BookOpen className="w-3.5 h-3.5 text-[#ED8E22] shrink-0" />
                       <span>{toBnDigits(subject.chaptersCount)}টি অধ্যায়</span>
                     </div>
                     <div className="flex items-center gap-1.5 font-bengali">
@@ -256,13 +256,13 @@ export const SubjectExplorerCarousel: React.FC = () => {
                 </div>
 
                 {/* Bottom Action */}
-                <div className="pt-5 mt-5 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                <div className="pt-5 mt-5 border-t border-amber-200/60 dark:border-[#262D3D]">
                   <Link
                     href={subject.link}
-                    className="w-full inline-flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] hover:bg-[#F5F2EB] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] text-xs font-semibold border border-[#E5E2DA] dark:border-[#262D3D] transition group font-bengali"
+                    className="w-full inline-flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] hover:bg-[#FFF2D1] dark:hover:bg-[#1A263E] text-[#1B2A4A] dark:text-[#F5F2EB] text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D] transition group font-bengali"
                   >
                     <span>অনুশীলন শুরু করুন</span>
-                    <ArrowRight className="w-4 h-4 text-[#B8862B] group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 text-[#ED8E22] group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

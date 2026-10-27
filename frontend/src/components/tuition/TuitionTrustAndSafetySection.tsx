@@ -62,7 +62,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {/* Pillar 1 */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-700">
               <FileCheck2 className="w-5 h-5" />
             </div>
@@ -75,7 +75,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
           </div>
 
           {/* Pillar 2 */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-3">
             <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700">
               <CalendarCheck2 className="w-5 h-5" />
             </div>
@@ -88,7 +88,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
           </div>
 
           {/* Pillar 3 */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-700">
               <ShieldCheck className="w-5 h-5" />
             </div>
@@ -101,7 +101,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
           </div>
 
           {/* Pillar 4 */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-3">
             <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-700">
               <CreditCard className="w-5 h-5" />
             </div>
@@ -116,7 +116,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
       </div>
 
       {/* FAQ Accordion Section */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <HelpCircle className="w-5 h-5 text-emerald-700" />

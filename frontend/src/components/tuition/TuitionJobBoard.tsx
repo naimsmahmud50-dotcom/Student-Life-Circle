@@ -82,7 +82,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
   return (
     <div className={`space-y-6 ${className}`} aria-labelledby="job-board-heading">
       {/* Search & Filter Bar */}
-      <div className="p-4 sm:p-5 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-3 font-bengali">
+      <div className="p-4 sm:p-5 rounded-3xl border border-amber-200/70 dark:border-[#262D3D] bg-white dark:bg-[#121B2D] shadow-xs space-y-3 font-bengali">
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="relative w-full sm:w-80">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -141,7 +141,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             return (
               <article
                 key={job.id}
-                className="flex flex-col justify-between bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 space-y-4"
+                className="flex flex-col justify-between bg-white dark:bg-[#121B2D] rounded-3xl border border-amber-200/70 dark:border-[#262D3D] p-5 sm:p-6 shadow-xs hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200 space-y-4"
               >
                 <div className="space-y-3 font-bengali">
                   {/* Top Bar: Job ID, Status & Date */}

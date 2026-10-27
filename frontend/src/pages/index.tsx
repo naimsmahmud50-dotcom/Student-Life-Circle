@@ -283,18 +283,18 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 2: ACADEMIC PROGRESS ("আপনার শেখার অগ্রগতি") & PEDAGOGICAL PILLARS
-              Clean Paper-Tinted Editorial Band (Lightly Tinted Background)
+              Warm Linen & Sunshine Editorial Band
               =================================================================== */}
           <section
             aria-label="অ্যাকাডেমিক প্রোগ্রেস ও প্ল্যাটফর্ম পরিসংখ্যান"
             suppressHydrationWarning={true}
-            className="py-14 sm:py-16 md:py-20 bg-[#F5F2EB] dark:bg-[#0E1526] text-[#1A1A1A] dark:text-[#F5F2EB] border-b border-[#E5E2DA] dark:border-[#262D3D]"
+            className="py-14 sm:py-16 md:py-20 bg-[#FFF9EB]/60 dark:bg-[#0E1526] text-[#213130] dark:text-[#F5F2EB] border-b border-amber-200/60 dark:border-[#262D3D] transition-colors duration-300"
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
 
               {/* TIER 1: আপনার শেখার অগ্রগতি (Study Momentum & Practice) */}
               <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-[#E5E2DA] dark:border-[#262D3D]">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-amber-200/70 dark:border-[#262D3D]">
                   <div className="space-y-1">
                     <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 tracking-wider uppercase font-sans">
                       আপনার শেখার অগ্রগতি (লাইভ লার্নিং টেলিমেট্রি)
@@ -303,7 +303,7 @@ export default function FlagshipLandingPage() {
                       আমার অনুশীলন ও মেধা প্রবৃদ্ধি
                     </h2>
                   </div>
-                  <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed max-w-md sm:text-right">
+                  <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 font-bengali leading-relaxed max-w-md sm:text-right">
                     দৈনন্দিন অধ্যবসায়, প্রশ্ন সমাধান, নির্ভুলতা ও জাতীয় মেধাতালিকায় আপনার অবস্থান
                   </p>
                 </div>
@@ -312,16 +312,16 @@ export default function FlagshipLandingPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
                   {/* 1. Study Streak */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-5">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Flame className="w-[18px] h-[18px] text-[#B8862B]" aria-hidden="true" />
+                          <Flame className="w-[18px] h-[18px] text-[#ED8E22]" aria-hidden="true" />
                           <span className="text-sm font-semibold text-[#1B2A4A] dark:text-slate-200 font-bengali">
                             Study Streak (অধ্যয়ন স্ট্রিক)
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#B8862B] border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           ধারাবাহিক
                         </span>
                       </div>
@@ -330,14 +330,14 @@ export default function FlagshipLandingPage() {
                         <div className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                           ৭ দিনের স্ট্রিক
                         </div>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           টানা ৭ দিন সক্রিয় প্রশ্ন অনুশীলন অব্যাহত
                         </p>
                       </div>
                     </div>
 
                     {/* Data Visual: 7-Day Streak Dots */}
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="flex items-center justify-between gap-1.5 mb-1">
                         {[
                           { day: 'শনি', active: true },
@@ -352,12 +352,12 @@ export default function FlagshipLandingPage() {
                             <div
                               className={`w-full h-2 rounded-full transition-all ${
                                 item.active
-                                  ? 'bg-[#B8862B]'
-                                  : 'bg-[#E5E2DA] dark:bg-slate-700'
+                                  ? 'bg-[#ED8E22]'
+                                  : 'bg-amber-100 dark:bg-slate-700'
                               }`}
                               title={`${item.day}: অর্জিত`}
                             />
-                            <span className="text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                            <span className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali">
                               {item.day}
                             </span>
                           </div>
@@ -367,7 +367,7 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* 2. Solved Questions */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-5">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -376,7 +376,7 @@ export default function FlagshipLandingPage() {
                             প্রশ্ন সমাধান
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           বোর্ড ব্যাংক
                         </span>
                       </div>
@@ -385,16 +385,16 @@ export default function FlagshipLandingPage() {
                         <div className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                           ১২৮টি প্রশ্ন সমাধান
                         </div>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           এনসিটিবি বোর্ড প্রশ্ন ব্যাংক থেকে সম্পন্ন
                         </p>
                       </div>
                     </div>
 
                     {/* Data Visual: 7-Day Activity Bars */}
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div
-                        className="flex items-end justify-between gap-1.5 h-6 pb-1 border-b border-[#E5E2DA] dark:border-[#262D3D]"
+                        className="flex items-end justify-between gap-1.5 h-6 pb-1 border-b border-amber-200/60 dark:border-[#262D3D]"
                         aria-label="সাপ্তাহিক প্রশ্ন সমাধানের চার্ট"
                       >
                         {[12, 18, 14, 26, 20, 16, 22].map((val, idx) => {
@@ -415,7 +415,7 @@ export default function FlagshipLandingPage() {
                           );
                         })}
                       </div>
-                      <div className="flex justify-between items-center text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
                         <span>৭ দিন পূর্বে</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">আজকের পিক (২২টি)</span>
                       </div>
@@ -423,7 +423,7 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* 3. Accuracy Rate */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-5">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -432,7 +432,7 @@ export default function FlagshipLandingPage() {
                             নির্ভুলতা
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           ঋণাত্মক সতর্ক
                         </span>
                       </div>
@@ -441,19 +441,19 @@ export default function FlagshipLandingPage() {
                         <div className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                           ৮৬.৪% নির্ভুলতা
                         </div>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           নেগেটিভ মার্কিং এড়িয়ে নির্ভুল উত্তর নিরূপণ
                         </p>
                       </div>
                     </div>
 
                     {/* Data Visual: Compact Circular Progress */}
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D] flex items-center justify-between">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D] flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="relative w-7 h-7 flex items-center justify-center">
                           <svg className="w-7 h-7 transform -rotate-90" viewBox="0 0 36 36" aria-hidden="true">
                             <path
-                              className="text-[#E5E2DA] dark:text-slate-700"
+                              className="text-amber-100 dark:text-slate-700"
                               strokeWidth="3.5"
                               stroke="currentColor"
                               fill="none"
@@ -478,14 +478,14 @@ export default function FlagshipLandingPage() {
                           উচ্চ নির্ভুলতা ব্যান্ড
                         </div>
                       </div>
-                      <span className="text-[11px] text-[#0B5D3B] dark:text-emerald-400 bg-[#FAF8F3] dark:bg-[#0E1526] px-2 py-0.5 rounded border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                      <span className="text-[11px] text-[#0B5D3B] dark:text-emerald-400 bg-[#FFF9EB] dark:bg-[#0E1526] px-2 py-0.5 rounded border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                         +৪.২% প্রবৃদ্ধি
                       </span>
                     </div>
                   </div>
 
                   {/* 4. National Percentile Rank */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-5">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -494,7 +494,7 @@ export default function FlagshipLandingPage() {
                             National Percentile (জাতীয় পার্সেন্টাইল)
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           শীর্ষ মেধা
                         </span>
                       </div>
@@ -503,21 +503,21 @@ export default function FlagshipLandingPage() {
                         <div className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                           শীর্ষ ৫% শিক্ষার্থী
                         </div>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           দেশব্যাপী ৫০,০০০+ সক্রিয় পরীক্ষার্থীর মধ্যে
                         </p>
                       </div>
                     </div>
 
                     {/* Data Visual: Percentile Track Bar */}
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D] space-y-1.5">
-                      <div className="relative w-full h-2 bg-[#E5E2DA] dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D] space-y-1.5">
+                      <div className="relative w-full h-2 bg-amber-100 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div
                           style={{ width: '95.2%' }}
                           className="h-full bg-[#0B5D3B] dark:bg-emerald-400 rounded-full"
                         />
                       </div>
-                      <div className="flex items-center justify-between text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                      <div className="flex items-center justify-between text-[10px] text-[#525252] dark:text-slate-400 font-bengali">
                         <span>০%</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">
                           ৯৫.২তম পার্সেন্টাইল
@@ -532,7 +532,7 @@ export default function FlagshipLandingPage() {
 
               {/* TIER 2: প্রাতিষ্ঠানিক ভিত্তি ও প্ল্যাটফর্ম ট্রাস্ট */}
               <div className="space-y-6 pt-4">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-[#E5E2DA] dark:border-[#262D3D]">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-amber-200/70 dark:border-[#262D3D]">
                   <div className="space-y-1">
                     <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 tracking-wider uppercase font-sans">
                       প্রাতিষ্ঠানিক ভিত্তি
@@ -541,7 +541,7 @@ export default function FlagshipLandingPage() {
                       প্ল্যাটফর্ম ট্রাস্ট ও জাতীয় শিক্ষাক্রম মানদণ্ড
                     </h2>
                   </div>
-                  <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed max-w-md sm:text-right">
+                  <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 font-bengali leading-relaxed max-w-md sm:text-right">
                     সার্বভৌম শিক্ষাক্রম, অফলাইন প্রযুক্তি ও শিক্ষার্থী গোপনীয়তার প্রাতিষ্ঠানিক সুরক্ষা
                   </p>
                 </div>
@@ -550,7 +550,7 @@ export default function FlagshipLandingPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
                   {/* 1. 10-Year Archive */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-4">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4">
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -559,7 +559,7 @@ export default function FlagshipLandingPage() {
                             বোর্ড প্রশ্ন আর্কাইভ
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           ২০১৫ — ২০২৫
                         </span>
                       </div>
@@ -571,13 +571,13 @@ export default function FlagshipLandingPage() {
                         <h3 className="text-sm font-semibold text-[#1B2A4A] dark:text-slate-200 font-bengali">
                           আসল বোর্ড প্রশ্ন আর্কাইভ
                         </h3>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           সকল সাধারণ ও কারিগরি শিক্ষা বোর্ডের আসল প্রশ্ন এবং নির্ভুল KaTeX সমীকরণ
                         </p>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="flex items-center gap-1">
                         {Array.from({ length: 10 }).map((_, i) => (
                           <div
@@ -586,7 +586,7 @@ export default function FlagshipLandingPage() {
                           />
                         ))}
                       </div>
-                      <div className="flex justify-between items-center text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
                         <span>২০১৫</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">১০/১০ বছর সম্পূর্ণ</span>
                         <span>২০২৫</span>
@@ -595,7 +595,7 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* 2. 100% NCTB Compliant */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-4">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4">
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -604,7 +604,7 @@ export default function FlagshipLandingPage() {
                             জাতীয় মানদণ্ড
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           ভেরিফায়েড
                         </span>
                       </div>
@@ -616,15 +616,15 @@ export default function FlagshipLandingPage() {
                         <h3 className="text-sm font-semibold text-[#1B2A4A] dark:text-slate-200 font-bengali">
                           জাতীয় শিক্ষাক্রম মানদণ্ড
                         </h3>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           মাধ্যমিক ও উচ্চ মাধ্যমিকের ৬৯টি অ্যাকাডেমিক অধ্যায়ের শতভাগ এনসিটিবি মান
                         </p>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="w-full h-1.5 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
-                      <div className="flex justify-between items-center text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
                         <span>এনসিটিবি অনুমোদিত</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">৬৯ / ৬৯ অধ্যায়</span>
                       </div>
@@ -632,7 +632,7 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* 3. 64 Districts P2P Offline */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-4">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4">
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -641,7 +641,7 @@ export default function FlagshipLandingPage() {
                             দেশব্যাপী রেজিলিয়েন্স
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           P2P মেশ
                         </span>
                       </div>
@@ -653,33 +653,33 @@ export default function FlagshipLandingPage() {
                         <h3 className="text-sm font-semibold text-[#1B2A4A] dark:text-slate-200 font-bengali">
                           P2P মেশ ক্লাসরুম
                         </h3>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           ইন্টারনেট ছাড়াই পরীক্ষা ও লোকাল সিঙ্ক এবং স্বয়ংক্রিয় ক্লাস্টার ব্যাকআপ
                         </p>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1.5">
                           <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
-                          <span className="w-6 h-[1.5px] bg-[#E5E2DA] dark:bg-slate-700" />
+                          <span className="w-6 h-[1.5px] bg-amber-200 dark:bg-slate-700" />
                           <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
-                          <span className="w-6 h-[1.5px] bg-[#E5E2DA] dark:bg-slate-700" />
+                          <span className="w-6 h-[1.5px] bg-amber-200 dark:bg-slate-700" />
                           <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
                         </div>
-                        <span className="text-[11px] text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                        <span className="text-[11px] text-[#525252] dark:text-slate-400 font-bengali">
                           ৪৯৫ উপজেলা
                         </span>
                       </div>
-                      <div className="text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
                         জিরো-প্যাকেট লস আর্কিটেকচার
                       </div>
                     </div>
                   </div>
 
                   {/* 4. 0% Intrusive Surveillance */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-4">
+                  <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4">
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -688,7 +688,7 @@ export default function FlagshipLandingPage() {
                             মর্যাদা ও অধিকার
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-[#E5E2DA] dark:border-[#262D3D] font-bengali">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
                           নিরাপদ
                         </span>
                       </div>
@@ -700,18 +700,18 @@ export default function FlagshipLandingPage() {
                         <h3 className="text-sm font-semibold text-[#1B2A4A] dark:text-slate-200 font-bengali">
                           জিরো-ভিডিও প্রক্টরিং
                         </h3>
-                        <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali leading-relaxed">
+                        <p className="text-xs text-[#525252] dark:text-slate-400 font-bengali leading-relaxed">
                           শিক্ষার্থী ডেটা সার্বভৌমত্ব ও মর্যাদা; কোনো ওয়েবক্যাম বা ফেসিয়াল ট্র্যাকিং নয়
                         </p>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+                    <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="flex items-center gap-1.5 text-xs text-[#0B5D3B] dark:text-emerald-400 font-bengali font-semibold">
                         <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
                         <span>এন্ড-টু-এন্ড এনক্রিপ্টেড ও সুরক্ষিত</span>
                       </div>
-                      <div className="text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
                         সার্বভৌম শিক্ষার্থী ডেটা নিরাপত্তা
                       </div>
                     </div>
@@ -727,17 +727,17 @@ export default function FlagshipLandingPage() {
               SECTION 3: CURATED JOURNEY PATHWAYS (4 Cards with Progress Bars)
               Warm Linen Background
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
                   পাঠ্যক্রম ও প্রস্তুতি
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight font-bengali">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
                   আপনার প্রয়োজনীয় শিক্ষাস্তর নির্বাচন করুন
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                   প্রতিটি স্তরের জন্য রয়েছে বিশেষায়িত প্রশ্ন ব্যাংক, লাইভ অনুশীলন, এবং বিশেষজ্ঞ শিক্ষকদের সহায়তায় সাজানো পাঠ্যক্রম।
                 </p>
               </div>
@@ -745,31 +745,31 @@ export default function FlagshipLandingPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 {/* 1. SSC */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#1B2A4A]/40 dark:hover:border-sky-500/40 transition-all duration-200">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs flex flex-col justify-between space-y-5 hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#1B2A4A] dark:text-sky-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                        <BookOpen className="w-5 h-5 text-[#B8862B]" />
+                      <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#1B2A4A] dark:text-sky-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
+                        <BookOpen className="w-5 h-5 text-[#ED8E22]" />
                       </div>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bengali">
                         ১০MS অল্টারনেটিভ • ৩ডি ল্যাব
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 9–10 • মাধ্যমিক (SSC ৯-১০)</span>
+                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">Class 9–10 • মাধ্যমিক (SSC ৯-১০)</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         মাধ্যমিক (SSC) বোর্ড প্রস্তুতি
                       </h3>
                     </div>
-                    <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                    <p className="text-xs text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                       সাধারণ গণিত, পদার্থবিজ্ঞান, রসায়ন ও উচ্চতর গণিতের বিগত ১০ বছরের সকল বোর্ডের নির্ভুল সৃজনশীল ও এমসিকিউ সমাধান।
                     </p>
                     <div className="space-y-1.5 pt-1">
                       <div className="flex items-center justify-between text-xs font-bengali">
-                        <span className="text-[#5B5B5B] dark:text-slate-400">সিলেবাস অগ্রগতি</span>
+                        <span className="text-[#525252] dark:text-slate-400">সিলেবাস অগ্রগতি</span>
                         <span className="font-semibold text-[#1B2A4A] dark:text-[#F5F2EB]">৬৮% সম্পন্ন</span>
                       </div>
-                      <div className="w-full h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 overflow-hidden">
+                      <div className="w-full h-1.5 rounded-full bg-amber-100 dark:bg-slate-700 overflow-hidden">
                         <div className="h-full bg-[#1B2A4A] dark:bg-sky-400 rounded-full w-[68%]" />
                       </div>
                     </div>
@@ -777,7 +777,7 @@ export default function FlagshipLandingPage() {
 
                   <Link
                     href="/learn?stage=SSC"
-                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-[#E5E2DA] dark:border-[#262D3D] text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 hover:text-[#065F46] transition font-bengali"
+                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-amber-200/60 dark:border-[#262D3D] text-xs font-semibold text-[#ED8E22] hover:text-[#D47C1A] transition font-bengali"
                   >
                     <span>এসএসসি পাঠ্যক্রম দেখুন</span>
                     <ArrowRight className="w-4 h-4" />
@@ -785,10 +785,10 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 2. HSC */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#065F46]/40 dark:hover:border-emerald-500/40 transition-all duration-200">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs flex flex-col justify-between space-y-5 hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                      <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <Layers className="w-5 h-5 text-[#0B5D3B] dark:text-emerald-400" />
                       </div>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bengali">
@@ -796,20 +796,20 @@ export default function FlagshipLandingPage() {
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Class 11–12 • উচ্চ মাধ্যমিক (HSC ১১-১২)</span>
+                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">Class 11–12 • উচ্চ মাধ্যমিক (HSC ১১-১২)</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         উচ্চ মাধ্যমিক (HSC) বিজ্ঞান
                       </h3>
                     </div>
-                    <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                    <p className="text-xs text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                       পদার্থবিজ্ঞান ১ম ও ২য় পত্র, জৈব রসায়ন, ক্যালকুলাস ও জীববিজ্ঞানের জটিল তাত্ত্বিক অধ্যায়গুলোর বিশদ অ্যানালিটিক্স।
                     </p>
                     <div className="space-y-1.5 pt-1">
                       <div className="flex items-center justify-between text-xs font-bengali">
-                        <span className="text-[#5B5B5B] dark:text-slate-400">সিলেবাস অগ্রগতি</span>
+                        <span className="text-[#525252] dark:text-slate-400">সিলেবাস অগ্রগতি</span>
                         <span className="font-semibold text-[#065F46] dark:text-emerald-400">৮২% সম্পন্ন</span>
                       </div>
-                      <div className="w-full h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 overflow-hidden">
+                      <div className="w-full h-1.5 rounded-full bg-amber-100 dark:bg-slate-700 overflow-hidden">
                         <div className="h-full bg-[#065F46] dark:bg-emerald-500 rounded-full w-[82%]" />
                       </div>
                     </div>
@@ -817,7 +817,7 @@ export default function FlagshipLandingPage() {
 
                   <Link
                     href="/learn?stage=HSC"
-                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-[#E5E2DA] dark:border-[#262D3D] text-xs font-semibold text-[#065F46] dark:text-emerald-400 hover:text-[#087858] transition font-bengali"
+                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-amber-200/60 dark:border-[#262D3D] text-xs font-semibold text-[#065F46] dark:text-emerald-400 hover:text-[#087858] transition font-bengali"
                   >
                     <span>এইচএসসি সিলেবাস দেখুন</span>
                     <ArrowRight className="w-4 h-4" />
@@ -825,39 +825,39 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 3. Admission */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-[#B8862B]/40 dark:hover:border-amber-500/40 transition-all duration-200">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs flex flex-col justify-between space-y-5 hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] dark:text-amber-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                        <Target className="w-5 h-5 text-[#B8862B]" />
+                      <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#B8862B] dark:text-amber-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
+                        <Target className="w-5 h-5 text-[#ED8E22]" />
                       </div>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bengali">
                         Live MCQ বিকল্প • জিরো ল্যাগ
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">University Entrance</span>
+                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">University Entrance</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         বিশ্ববিদ্যালয় ও মেডিকেল ভর্তি
                       </h3>
                     </div>
-                    <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                    <p className="text-xs text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                       বুয়েট প্রিলিমিনারি, ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট এবং মেডিকেল নেগেটিভ মার্কিং মক টেস্ট ইঞ্জিন।
                     </p>
                     <div className="space-y-1.5 pt-1">
                       <div className="flex items-center justify-between text-xs font-bengali">
-                        <span className="text-[#5B5B5B] dark:text-slate-400">ভর্তি লক্ষ্য প্রস্তুতি</span>
+                        <span className="text-[#525252] dark:text-slate-400">ভর্তি লক্ষ্য প্রস্তুতি</span>
                         <span className="font-semibold text-[#B8862B] dark:text-amber-400">৪৫% সম্পন্ন</span>
                       </div>
-                      <div className="w-full h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 overflow-hidden">
-                        <div className="h-full bg-[#B8862B] dark:bg-amber-500 rounded-full w-[45%]" />
+                      <div className="w-full h-1.5 rounded-full bg-amber-100 dark:bg-slate-700 overflow-hidden">
+                        <div className="h-full bg-[#ED8E22] dark:bg-amber-500 rounded-full w-[45%]" />
                       </div>
                     </div>
                   </div>
 
                   <Link
                     href="/admission"
-                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-[#E5E2DA] dark:border-[#262D3D] text-xs font-semibold text-[#B8862B] dark:text-amber-400 hover:text-[#D97706] transition font-bengali"
+                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-amber-200/60 dark:border-[#262D3D] text-xs font-semibold text-[#ED8E22] hover:text-[#D47C1A] transition font-bengali"
                   >
                     <span>ভর্তি প্রস্তুতি হাব খুলুন</span>
                     <ArrowRight className="w-4 h-4" />
@@ -865,10 +865,10 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* 4. Tuition & Career */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-all duration-200">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs flex flex-col justify-between space-y-5 hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200">
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-slate-700 dark:text-slate-300 flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
+                      <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-slate-700 dark:text-slate-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <Users className="w-5 h-5 text-[#1B2A4A] dark:text-slate-300" />
                       </div>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-50 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bengali">
@@ -876,20 +876,20 @@ export default function FlagshipLandingPage() {
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#5B5B5B] dark:text-slate-400 uppercase font-sans">Marketplace & Career</span>
+                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">Marketplace & Career</span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
                         টিউশন ও স্কিল লেজার
                       </h3>
                     </div>
-                    <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                    <p className="text-xs text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                       দ্বিপাক্ষিক এসক্রো সুরক্ষিত হোম ও অনলাইন টিউশন এবং অপরিবর্তনীয় একাডেমিক সিভি ও মেধা সনদ।
                     </p>
                     <div className="space-y-1.5 pt-1">
                       <div className="flex items-center justify-between text-xs font-bengali">
-                        <span className="text-[#5B5B5B] dark:text-slate-400">প্রোফাইল ভেরিফিকেশন</span>
+                        <span className="text-[#525252] dark:text-slate-400">প্রোফাইল ভেরিফিকেশন</span>
                         <span className="font-semibold text-slate-700 dark:text-slate-300">৯০% প্রোফাইল</span>
                       </div>
-                      <div className="w-full h-1.5 rounded-full bg-[#E5E2DA] dark:bg-slate-700 overflow-hidden">
+                      <div className="w-full h-1.5 rounded-full bg-amber-100 dark:bg-slate-700 overflow-hidden">
                         <div className="h-full bg-slate-700 dark:bg-slate-300 rounded-full w-[90%]" />
                       </div>
                     </div>
@@ -897,7 +897,7 @@ export default function FlagshipLandingPage() {
 
                   <Link
                     href="/tuition"
-                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-[#E5E2DA] dark:border-[#262D3D] text-xs font-semibold text-[#1B2A4A] dark:text-slate-200 hover:text-[#0A2540] transition font-bengali"
+                    className="inline-flex items-center justify-between w-full pt-3.5 border-t border-amber-200/60 dark:border-[#262D3D] text-xs font-semibold text-[#1B2A4A] dark:text-slate-200 hover:text-[#ED8E22] transition font-bengali"
                   >
                     <span>টিউশন মার্কেটপ্লেস</span>
                     <ArrowRight className="w-4 h-4" />
@@ -907,7 +907,7 @@ export default function FlagshipLandingPage() {
               </div>
 
               {/* Subject Explorer Carousel (Swiper & KaTeX Formulas) */}
-              <div className="pt-10 border-t border-[#E5E2DA] dark:border-[#262D3D]">
+              <div className="pt-10 border-t border-amber-200/60 dark:border-[#262D3D]">
                 <SubjectExplorerCarousel />
               </div>
 
@@ -916,19 +916,19 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 4: 3D STEM VIRTUAL LABS (Interactive Simulators + KaTeX Math)
-              Lightly Tinted Warm Accent Band
+              Warm Sunshine Accent Band
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFF6DD]/40 dark:bg-gray-900/60 border-b border-amber-200/50 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FFF6DD]/60 dark:bg-gray-900/60 border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
                   গবেষণা ও চিন্তন দক্ষতা (3D STEM)
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight font-bengali">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
                   ৩ডি স্টেম ভার্চুয়াল বিজ্ঞান ল্যাবরেটরি
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                   মুখস্থ বিদ্যার বিকল্প হিসেবে গভীর চিন্তন দক্ষতা ও সমস্যা সমাধানের জন্য প্রস্তুত বিশেষায়িত ত্রিমাত্রিক টুলস।
                 </p>
               </div>
@@ -937,23 +937,23 @@ export default function FlagshipLandingPage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
                 {/* Lab 1: Physics Projectile Motion */}
-                <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all flex flex-col justify-between space-y-5">
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF8F3] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-400 text-xs font-semibold border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Atom className="w-4 h-4" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-400 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D]">
+                      <Atom className="w-4 h-4 text-[#ED8E22]" />
                       <span>৩ডি ইন্টারেক্টিভ সিমুলেটর • Physics</span>
                     </div>
 
                     <h3 className="text-xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                       প্রক্ষেপক গতিবিদ্যা সিমুলেটর (Projectile Motion)
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-bengali">
+                    <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-300 leading-relaxed font-bengali">
                       ক্যাননের নিক্ষেপ কোণ, বেগ ও মধ্যাকর্ষণ ত্বরণ পরিবর্তন করে প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতা নির্ণয় করুন। সমীকরণ: H = (v0² sin²θ) / 2g।
                     </p>
 
                     {/* Crisp KaTeX Preview Box */}
-                    <div className="p-3.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] space-y-2 text-xs">
-                      <div className="flex items-center justify-between text-[#5B5B5B] dark:text-slate-400">
+                    <div className="p-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] space-y-2 text-xs">
+                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400">
                         <span>পদার্থবিজ্ঞান ১ম পত্র • গতিবিদ্যা</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">৬০ FPS ক্যানভাস</span>
                       </div>
@@ -969,7 +969,7 @@ export default function FlagshipLandingPage() {
                   <button
                     type="button"
                     onClick={() => setActiveLabModal('physics')}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#065F46] hover:bg-[#0B5D3B] text-white font-semibold text-sm shadow-[0_3px_0_0_#044332] active:translate-y-0.5 transition-all min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#065F46] hover:bg-[#0B5D3B] text-white font-semibold text-sm shadow-md active:scale-95 transition-all min-h-[44px]"
                   >
                     <Play className="w-4 h-4 text-emerald-200" />
                     <span>ল্যাব চালু করুন (Physics Projectile Lab)</span>
@@ -977,23 +977,23 @@ export default function FlagshipLandingPage() {
                 </div>
 
                 {/* Lab 2: Chemistry Molecular Geometry */}
-                <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-5">
+                <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all flex flex-col justify-between space-y-5">
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF8F3] dark:bg-[#0E1526] text-[#0A2540] dark:text-sky-300 text-xs font-semibold border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Atom className="w-4 h-4" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0A2540] dark:text-sky-300 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D]">
+                      <Atom className="w-4 h-4 text-[#ED8E22]" />
                       <span>৩ডি ইন্টারেক্টিভ সিমুলেটর • Chemistry</span>
                     </div>
 
                     <h3 className="text-xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                       ৩ডি আণবিক জ্যামিতি ও সংকরায়ন (Molecular Geometry)
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-bengali">
+                    <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-300 leading-relaxed font-bengali">
                       VSEPR তত্ত্ব ও sp, sp², sp³ সংকরায়নের ত্রিমাত্রিক বন্ধন কোণ ও পরমাণুর অবস্থান ব্রাউজারে ৩ডি স্পেসে ঘুরিয়ে পর্যবেক্ষণ করুন।
                     </p>
 
                     {/* Crisp KaTeX Preview Box */}
-                    <div className="p-3.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] space-y-2 text-xs">
-                      <div className="flex items-center justify-between text-[#5B5B5B] dark:text-slate-400">
+                    <div className="p-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] space-y-2 text-xs">
+                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400">
                         <span>রসায়ন ১ম পত্র • রাসায়নিক বন্ধন</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">VSEPR 3D Engine</span>
                       </div>
@@ -1009,7 +1009,7 @@ export default function FlagshipLandingPage() {
                   <button
                     type="button"
                     onClick={() => setActiveLabModal('chemistry')}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white font-semibold text-sm shadow-[0_3px_0_0_#051329] active:translate-y-0.5 transition-all min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#0A2540] hover:bg-[#123358] text-white font-semibold text-sm shadow-md active:scale-95 transition-all min-h-[44px]"
                   >
                     <Play className="w-4 h-4 text-amber-300" />
                     <span>ল্যাব চালু করুন (Chemistry Molecular Lab)</span>
@@ -1025,16 +1025,20 @@ export default function FlagshipLandingPage() {
               SECTION 5: LIVE CHALLENGE & SOCRATIC AI INSTANT SOLVER
               Warm Linen Surface
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 
                 {/* Live Challenge Spotlight Card (8:00 PM National Olympiad) */}
-                <div className="lg:col-span-7 p-7 sm:p-8 rounded-2xl bg-[#1B2A4A] text-white border border-[#2B3F6C] shadow-sm flex flex-col justify-between space-y-6">
-                  <div className="space-y-3.5">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-amber-300 text-xs font-semibold border border-white/10">
-                      <Trophy className="w-4 h-4" />
+                <div className="lg:col-span-7 p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-[#1B2A4A] via-[#162441] to-[#0D1D38] text-white border border-amber-500/30 shadow-[0_4px_24px_-4px_rgba(237,142,34,0.18)] flex flex-col justify-between space-y-6 relative overflow-hidden">
+                  {/* Subtle Amber Glow in Corner */}
+                  <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
+
+                  <div className="space-y-3.5 relative z-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-semibold border border-white/15">
+                      <span className="h-2 w-2 rounded-full bg-amber-400 shrink-0 animate-pulse" aria-hidden="true" />
+                      <Trophy className="w-4 h-4 text-amber-300" />
                       <span>জাতীয় লাইভ কুইজ প্রতিযোগিতা ২০২৬ (রাত ৮:০০)</span>
                     </div>
 
@@ -1046,17 +1050,17 @@ export default function FlagshipLandingPage() {
                     </p>
 
                     {/* Countdown Timer Display */}
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <span className="text-[11px] uppercase tracking-wider text-slate-400 font-sans">
+                        <span className="text-[11px] uppercase tracking-wider text-amber-200/80 font-sans">
                           লাইভ কাউন্টডাউন (countdown)
                         </span>
-                        <div className="text-xl sm:text-2xl font-serif font-bold text-amber-300 tabular-nums">
+                        <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-300 tabular-nums">
                           {String(countdown.hours).padStart(2, '0')}:{String(countdown.minutes).padStart(2, '0')}:{String(countdown.seconds).padStart(2, '0')}
                         </div>
                       </div>
                       <div className="text-right space-y-0.5">
-                        <span className="text-[11px] uppercase tracking-wider text-slate-400 font-sans">
+                        <span className="text-[11px] uppercase tracking-wider text-slate-300 font-sans">
                           অংশগ্রহণকারী
                         </span>
                         <div className="text-sm sm:text-base font-semibold text-emerald-300 font-bengali">
@@ -1068,29 +1072,29 @@ export default function FlagshipLandingPage() {
 
                   <Link
                     href="/live-challenge"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-[#1B2A4A] font-bold text-sm shadow-sm transition-all active:translate-y-0.5 min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#ED8E22] hover:bg-[#D47C1A] text-white font-bold text-sm shadow-md transition-all active:scale-95 min-h-[44px] relative z-10"
                   >
-                    <Trophy className="w-4 h-4 text-[#1B2A4A]" />
+                    <Trophy className="w-4 h-4 text-amber-200" />
                     <span>লাইভ লবিতে যোগ দিন</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
                 {/* Socratic AI Instant Solver Banner */}
-                <div className="lg:col-span-5 p-7 sm:p-8 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] shadow-sm flex flex-col justify-between space-y-6">
+                <div className="lg:col-span-5 p-7 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all flex flex-col justify-between space-y-6">
                   <div className="space-y-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] flex items-center justify-center border border-[#E5E2DA] dark:border-[#262D3D]">
-                      <Sparkles className="w-5 h-5 text-[#B8862B]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#ED8E22] flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
+                      <Sparkles className="w-5 h-5 text-[#ED8E22]" />
                     </div>
 
                     <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                       সক্রেটিক এআই তাৎক্ষণিক সমাধান
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-300 leading-relaxed font-bengali">
+                    <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-300 leading-relaxed font-bengali">
                       যেকোনো প্রশ্নের ছবি তুলুন বা লিখুন। সরাসরি উত্তর না দিয়ে ধাপে ধাপে গাণিতিক সংকেত ও সূত্রের মাধ্যমে যুক্তি গড়ে তোলে।
                     </p>
 
-                    <div className="p-3.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                    <div className="p-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] text-xs text-[#525252] dark:text-slate-400 font-bengali">
                       গণিত, পদার্থবিজ্ঞান এবং রসায়নের জটিল গাণিতিক সমস্যার জন্য সার্বক্ষণিক ব্যক্তিগত শিক্ষক।
                     </div>
                   </div>
@@ -1102,7 +1106,7 @@ export default function FlagshipLandingPage() {
                       const btn = document.getElementById('global-socratic-trigger');
                       if (btn) btn.setAttribute('data-active', 'true');
                     }}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white font-semibold text-sm shadow-[0_3px_0_0_#051329] active:translate-y-0.5 transition-all min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#0A2540] hover:bg-[#123358] text-white font-semibold text-sm shadow-md active:scale-95 transition-all min-h-[44px]"
                   >
                     <Sparkles className="w-4 h-4 text-amber-300" />
                     <span>সক্রেটিক টিউটর চালু করুন</span>
@@ -1116,34 +1120,35 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 6: W3C PROOF-OF-SKILL CERTIFICATE SHOWCASE
+              Warm Linen Background
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFDF9] dark:bg-gray-900/80 border-b border-gray-200/80 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFDF9] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
                   যাচাইযোগ্য মেধা সনদ (W3C)
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight font-bengali">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
                   W3C ক্রিপ্টোগ্রাফিক ভেরিফাইড মেধা ও দক্ষতা সনদ
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                <p className="text-xs sm:text-sm text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                   ব্লকচেইন-মানসম্পন্ন ক্রিপ্টোগ্রাফিক হ্যাশযুক্ত সনদ যা বিশ্ববিদ্যালয়, শিক্ষক এবং আন্তর্জাতিক নিয়োগকারীদের কাছে সরাসরি যাচাইযোগ্য।
                 </p>
               </div>
 
               {/* Certificate Component Preview & Action Toolbar */}
               <div className="max-w-4xl mx-auto space-y-5">
-                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 p-3 sm:p-6 bg-white dark:bg-[#121B2D] shadow-sm">
+                <div className="rounded-2xl border border-amber-200/70 dark:border-gray-700 p-3 sm:p-6 bg-white dark:bg-[#121B2D] shadow-xs">
                   <ProofOfSkillCard certificate={SAMPLE_CERTIFICATE} />
                 </div>
 
-                <div className="p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+                <div className="p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-gray-700 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
                   <div className="space-y-1 text-center sm:text-left">
-                    <span className="text-xs font-semibold text-[#5B5B5B] dark:text-slate-400">
+                    <span className="text-xs font-semibold text-[#525252] dark:text-slate-400">
                       সনদ আইডি: {SAMPLE_CERTIFICATE.cert_id} • প্রাপক: {SAMPLE_CERTIFICATE.student_name}
                     </span>
-                    <div className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali">
+                    <div className="text-xs text-[#525252] dark:text-slate-400 font-bengali">
                       শেয়ার অপশন: LinkedIn • Facebook • ডাইরেক্ট ভেরিফিকেশন লিঙ্ক
                     </div>
                   </div>
@@ -1158,10 +1163,10 @@ export default function FlagshipLandingPage() {
 
                     <Link
                       href={`/verify/${SAMPLE_CERTIFICATE.cert_id}`}
-                      className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-[#FFFCF6] dark:hover:bg-[#1A263E] text-xs font-semibold text-[#1B2A4A] dark:text-[#F5F2EB] transition inline-flex items-center gap-1.5"
+                      className="px-4 py-2.5 rounded-full border border-amber-200/80 dark:border-gray-700 hover:bg-[#FFF9EB] dark:hover:bg-[#1A263E] text-xs font-semibold text-[#1B2A4A] dark:text-[#F5F2EB] transition inline-flex items-center gap-1.5"
                     >
                       <span>যাচাই পৃষ্ঠা</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-3.5 h-3.5 text-[#ED8E22]" />
                     </Link>
                   </div>
                 </div>
@@ -1174,7 +1179,7 @@ export default function FlagshipLandingPage() {
               SECTION 6.5: STUDENT TESTIMONIALS & SUCCESS STORIES (Swiper)
               Warm Linen Background
               =================================================================== */}
-          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-14 sm:py-16 md:py-20 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <StudentStoriesCarousel />
             </div>
@@ -1183,10 +1188,10 @@ export default function FlagshipLandingPage() {
           {/* ===================================================================
               SECTION 7: TRUST BADGES & 69 ENTERPRISE MODULES DIRECTORY
               =================================================================== */}
-          <section className="py-12 sm:py-14 bg-[#FFFCF6] dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-800 transition-colors duration-300">
+          <section className="py-12 sm:py-14 bg-[#FFFCF6] dark:bg-[#0B0F19] border-b border-amber-200/60 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
               
-              <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+              <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
                 
                 <div className="space-y-1 text-center md:text-left max-w-xl">
                   <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
@@ -1195,32 +1200,32 @@ export default function FlagshipLandingPage() {
                   <h3 className="text-base sm:text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                     নিরাপদ জাতীয় পেমেন্ট ও প্রাতিষ্ঠানিক ডিজিটাল সুরক্ষা
                   </h3>
-                  <p className="text-xs text-[#5B5B5B] dark:text-slate-400 leading-relaxed font-bengali">
+                  <p className="text-xs text-[#525252] dark:text-slate-400 leading-relaxed font-bengali">
                     বাংলাদেশ ব্যাংক রেগুলেশন এবং আন্তর্জাতিক ডব্লিউথ্রিসি (W3C) ভেরিফাইড ক্রেডেনশিয়াল মানদণ্ড অনুযায়ী পরিচালিত।
                   </p>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   {/* bKash */}
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/80 dark:border-[#262D3D]">
                     <span className="w-2 h-2 rounded-full bg-[#E2136E]" />
                     <span className="text-xs font-semibold text-[#E2136E]">bKash Verified</span>
                   </div>
 
                   {/* Nagad */}
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/80 dark:border-[#262D3D]">
                     <span className="w-2 h-2 rounded-full bg-[#F7941D]" />
                     <span className="text-xs font-semibold text-[#F7941D]">Nagad Verified</span>
                   </div>
 
                   {/* SSLCommerz */}
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/80 dark:border-[#262D3D]">
                     <span className="w-2 h-2 rounded-full bg-[#0B5D3B]" />
                     <span className="text-xs font-semibold text-[#1B2A4A] dark:text-slate-200">SSLCommerz Escrow</span>
                   </div>
 
                   {/* W3C */}
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/80 dark:border-[#262D3D]">
                     <span className="w-2 h-2 rounded-full bg-[#0B5D3B]" />
                     <span className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400">W3C Compliant</span>
                   </div>
@@ -1229,21 +1234,21 @@ export default function FlagshipLandingPage() {
               </div>
 
               {/* Direct Modules Directory Link Card */}
-              <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#262D3D] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
                 <div className="space-y-0.5 text-center sm:text-left">
                   <div className="text-sm font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
                     ৬৯টি এন্টারপ্রাইজ মডিউল ডিরেক্টরি
                   </div>
-                  <p className="text-xs text-[#5B5B5B] dark:text-slate-400">
+                  <p className="text-xs text-[#525252] dark:text-slate-400">
                     একাডেমিক, ভর্তি, রেজিলিয়েন্স, স্টেম স্যান্ডবক্স এবং এন্টারপ্রাইজ ককপিটের পূর্ণ ক্যাটালগ।
                   </p>
                 </div>
                 <Link
                   href="/modules"
-                  className="px-5 py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-semibold transition flex items-center gap-2 shrink-0 shadow-sm"
+                  className="px-5 py-2.5 rounded-full bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-semibold transition flex items-center gap-2 shrink-0 shadow-sm"
                 >
                   <span>মডিউল ডিরেক্টরি দেখুন</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-amber-300" />
                 </Link>
               </div>
 
@@ -1252,12 +1257,19 @@ export default function FlagshipLandingPage() {
 
           {/* ===================================================================
               SECTION 8: CLOSING ACADEMIC CALL TO ACTION
-              GoEdu Deep Charcoal Slate Gradient Background
+              GoEdu Deep Charcoal Slate Gradient Background with Warm Golden Glow
               =================================================================== */}
-          <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#213130] via-slate-900 to-[#1E293B] text-white border-t border-gray-800">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#213130] via-slate-900 to-[#121B2D] text-white border-t border-amber-900/40 overflow-hidden">
+            {/* Golden radial ambient top glow */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-36 bg-amber-400/10 blur-3xl pointer-events-none"
+              aria-hidden="true"
+            />
+
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
               
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-semibold border border-white/10 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-semibold border border-white/15 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[#ED8E22] shrink-0 animate-pulse" aria-hidden="true" />
                 <GraduationCap className="w-4 h-4 text-[#ED8E22]" />
                 <span>অগ্রযাত্রায় যুক্ত হোন • বাংলাদেশের শিক্ষার ভবিষ্যৎ</span>
               </div>
@@ -1283,7 +1295,7 @@ export default function FlagshipLandingPage() {
 
                 <Link
                   href="/about"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all min-h-[48px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all min-h-[48px]"
                 >
                   <FileText className="w-4 h-4 text-slate-300" />
                   <span>প্রাতিষ্ঠানিক লক্ষ্য ও পরিচিতি</span>

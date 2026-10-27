@@ -90,7 +90,7 @@ export default function TuitionPage() {
         })}
       />
 
-      <div className="min-h-screen bg-[#FAF8F3] dark:bg-[#0A1120] text-slate-900 dark:text-slate-100 transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#0A2540] selection:text-white">
+      <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
         <Navbar currentStage="সুরক্ষিত টিউশন মার্কেটপ্লেস" />
@@ -98,7 +98,7 @@ export default function TuitionPage() {
         <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
           
           {/* Header & Value Proposition */}
-          <div className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+          <div className="space-y-4 border-b border-amber-200/60 dark:border-[#262D3D] pb-6">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
                 <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
@@ -132,7 +132,7 @@ export default function TuitionPage() {
               {/* Primary Action Button */}
               <button
                 onClick={() => setIsWizardOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold text-xs sm:text-sm shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition-all cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition-all cursor-pointer whitespace-nowrap"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>টিউটর রিকোয়ারমেন্ট দিন</span>
@@ -163,7 +163,7 @@ export default function TuitionPage() {
           </div>
 
           {/* Master View Navigation Tabs */}
-          <div className="border-b border-slate-200 dark:border-slate-800 font-bengali">
+          <div className="border-b border-amber-200/60 dark:border-[#262D3D] font-bengali">
             <nav
               role="tablist"
               aria-label="টিউশন ভিউ নির্বাচন"
@@ -175,7 +175,7 @@ export default function TuitionPage() {
                 onClick={() => setActiveTab('job_board')}
                 className={`inline-flex items-center gap-2 py-3 px-1 border-b-2 text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   activeTab === 'job_board'
-                    ? 'border-[#0A2540] dark:border-emerald-500 text-[#0A2540] dark:text-emerald-400'
+                    ? 'border-[#ED8E22] dark:border-amber-400 text-[#ED8E22] dark:text-amber-400'
                     : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
                 }`}
               >
@@ -189,7 +189,7 @@ export default function TuitionPage() {
                 onClick={() => setActiveTab('tutors')}
                 className={`inline-flex items-center gap-2 py-3 px-1 border-b-2 text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   activeTab === 'tutors'
-                    ? 'border-[#0A2540] dark:border-emerald-500 text-[#0A2540] dark:text-emerald-400'
+                    ? 'border-[#ED8E22] dark:border-amber-400 text-[#ED8E22] dark:text-amber-400'
                     : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
                 }`}
               >
@@ -203,7 +203,7 @@ export default function TuitionPage() {
                 onClick={() => setActiveTab('calculator')}
                 className={`inline-flex items-center gap-2 py-3 px-1 border-b-2 text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   activeTab === 'calculator'
-                    ? 'border-[#0A2540] dark:border-emerald-500 text-[#0A2540] dark:text-emerald-400'
+                    ? 'border-[#ED8E22] dark:border-amber-400 text-[#ED8E22] dark:text-amber-400'
                     : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
                 }`}
               >
@@ -217,7 +217,7 @@ export default function TuitionPage() {
                 onClick={() => setActiveTab('safety')}
                 className={`inline-flex items-center gap-2 py-3 px-1 border-b-2 text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   activeTab === 'safety'
-                    ? 'border-[#0A2540] dark:border-emerald-500 text-[#0A2540] dark:text-emerald-400'
+                    ? 'border-[#ED8E22] dark:border-amber-400 text-[#ED8E22] dark:text-amber-400'
                     : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
                 }`}
               >

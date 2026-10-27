@@ -104,7 +104,7 @@ export const VerifiedTutorDirectory: React.FC<VerifiedTutorDirectoryProps> = ({
         {filteredTutors.map((tutor) => (
           <article
             key={tutor.id}
-            className="flex flex-col justify-between bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 space-y-4"
+            className="flex flex-col justify-between bg-white dark:bg-[#121B2D] rounded-3xl border border-amber-200/70 dark:border-[#262D3D] p-5 sm:p-6 shadow-xs hover:border-[#ED8E22]/60 hover:shadow-md transition-all duration-200 space-y-4"
           >
             <div>
               {/* Header: Scholar Monogram (Strictly Zero External Scraped Photos) */}
