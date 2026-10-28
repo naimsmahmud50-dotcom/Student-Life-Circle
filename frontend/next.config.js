@@ -9,15 +9,21 @@
  *            image pipelines with responsive device viewports, tree-shaking via
  *            `optimizePackageImports` (for Lucide-React icon sets), strict
  *            immutable caching for static chunks, and OWASP ASVS L2 security headers.
+ *            Supports dynamic static export and basePath resolution for GitHub Pages CI/CD.
  * AUDIENCE:  Frontend Architects, DevOps Engineers, Core Web Vitals Reviewers & Security Auditors
  * STANDARDS: Core Web Vitals (LCP < 1.2s, INP < 100ms, CLS = 0), Strict Zero-Emoji Policy
  * ========================================================================================
  */
 
+const isExport = process.env.NEXT_EXPORT === 'true' || process.env.GITHUB_ACTIONS === 'true';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* Standalone build output for ultra-lightweight Docker containers (< 120MB) */
-  output: 'standalone',
+  /* Dynamic build output: 'export' for GitHub Pages, 'standalone' for Docker containerization */
+  output: isExport ? 'export' : 'standalone',
+  ...(basePath ? { basePath, assetPrefix: `${basePath}/` } : {}),
+  trailingSlash: isExport ? true : false,
   reactStrictMode: true,
   poweredByHeader: false,
 
@@ -30,6 +36,7 @@ const nextConfig = {
 
   /* Modern next-gen image optimization pipeline */
   images: {
+    unoptimized: isExport ? true : false,
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [360, 412, 640, 768, 1024, 1280, 1536],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
@@ -43,94 +50,99 @@ const nextConfig = {
     ],
   },
 
-  /* Security and Performance HTTP Response Headers */
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          ...(process.env.NODE_ENV !== 'production'
-            ? [
+  /* Security and Performance HTTP Response Headers (active only for server runtime) */
+  ...(isExport
+    ? {}
+    : {
+        async headers() {
+          return [
+            {
+              source: '/(.*)',
+              headers: [
+                ...(process.env.NODE_ENV !== 'production'
+                  ? [
+                      {
+                        key: 'Clear-Site-Data',
+                        value: '"cache"',
+                      },
+                    ]
+                  : []),
+                {
+                  key: 'X-Content-Type-Options',
+                  value: 'nosniff',
+                },
+                {
+                  key: 'X-Frame-Options',
+                  value: 'DENY',
+                },
+                {
+                  key: 'X-XSS-Protection',
+                  value: '1; mode=block',
+                },
+                {
+                  key: 'Referrer-Policy',
+                  value: 'strict-origin-when-cross-origin',
+                },
+                {
+                  key: 'Permissions-Policy',
+                  value: 'camera=(), microphone=(), geolocation=(), payment=()',
+                },
+              ],
+            },
+            {
+              source: '/api/(.*)',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
+                },
+                {
+                  key: 'Pragma',
+                  value: 'no-cache',
+                },
+                {
+                  key: 'Expires',
+                  value: '0',
+                },
+              ],
+            },
+            {
+              source: '/sw.js',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'no-store, no-cache, must-revalidate',
+                },
                 {
                   key: 'Clear-Site-Data',
-                  value: '"cache"',
+                  value: '"cache", "storage"',
                 },
-              ]
-            : []),
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), payment=()',
-          },
-        ],
-      },
-      {
-        source: '/api/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
-          },
-          {
-            key: 'Pragma',
-            value: 'no-cache',
-          },
-          {
-            key: 'Expires',
-            value: '0',
-          },
-        ],
-      },
-      {
-        source: '/sw.js',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate',
-          },
-          {
-            key: 'Clear-Site-Data',
-            value: '"cache", "storage"',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: process.env.NODE_ENV === 'production'
-              ? 'public, max-age=31536000, immutable'
-              : 'no-store, no-cache, must-revalidate',
-          },
-        ],
-      },
-      {
-        source: '/manifest.json',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=604800',
-          },
-        ],
-      },
-    ];
-  },
+              ],
+            },
+            {
+              source: '/_next/static/(.*)',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value:
+                    process.env.NODE_ENV === 'production'
+                      ? 'public, max-age=31536000, immutable'
+                      : 'no-store, no-cache, must-revalidate',
+                },
+              ],
+            },
+            {
+              source: '/manifest.json',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'public, max-age=86400, stale-while-revalidate=604800',
+                },
+              ],
+            },
+          ];
+        },
+      }),
 };
 
 module.exports = nextConfig;
