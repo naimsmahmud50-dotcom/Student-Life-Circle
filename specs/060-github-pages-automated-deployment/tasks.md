@@ -1,7 +1,7 @@
 # Tasks: Automated GitHub Pages Deployment
 
 - **Feature ID:** `060-github-pages-automated-deployment`
-- **Domain:** DevOps / CI/CD / Static Site Generation / GitHub Actions
+- **Domain:** DevOps / CI/CD / Static Site Generation / GitHub Pages
 - **Status:** Completed
 - **Zero-Emoji Discipline:** Strictly applied across all tasks and artifacts.
 
@@ -24,16 +24,14 @@
 
 - [x] **Task 3: Export Scripts in `frontend/package.json`**
   - [x] Add `"build:pages": "NEXT_PUBLIC_BASE_PATH=/Student-Life-Circle NEXT_EXPORT=true next build && touch out/.nojekyll"` to `frontend/package.json`.
+  - [x] Add `"deploy:pages": "npm run build:pages && bash ../scripts/deploy-gh-pages.sh"` to `frontend/package.json`.
 
-- [x] **Task 4: GitHub Actions Deployment Workflow (`.github/workflows/deploy-pages.yml`)**
-  - [x] Create directory `.github/workflows`.
-  - [x] Write `.github/workflows/deploy-pages.yml` with workflow triggers (`push` to `main`, `workflow_dispatch`).
-  - [x] Configure permissions (`pages: write`, `id-token: write`, `contents: read`).
-  - [x] Set up caching for npm dependencies.
-  - [x] Add actions: `actions/checkout@v4`, `actions/setup-node@v4`, `actions/configure-pages@v5`, `actions/upload-pages-artifact@v3`, `actions/deploy-pages@v4`.
+- [x] **Task 4: Deployment Automation Script (`scripts/deploy-gh-pages.sh`)**
+  - [x] Create `scripts/deploy-gh-pages.sh` to stage static build with `.nojekyll` and push to `origin gh-pages`.
+  - [x] Make script executable (`chmod +x scripts/deploy-gh-pages.sh`).
 
 - [x] **Task 5: Repository README.md Update**
-  - [x] Add deployment status badge and live link to `README.md`.
+  - [x] Add deployment badges and live URL to `README.md`.
   - [x] Remove all legacy emojis to adhere to the strict Zero-Emoji policy.
 
 - [x] **Task 6: Local Validation & Asset Verification**
@@ -42,8 +40,8 @@
   - [x] Verify `frontend/out/index.html` references `/Student-Life-Circle/_next/static/...`.
   - [x] Test standard build or development to ensure zero regressions for non-export modes.
 
-- [x] **Task 7: Git Commit, Push & Client Live Link Verification**
+- [x] **Task 7: Git Commit, Push & Remote Deployment**
   - [x] Stage all modified and new files.
   - [x] Commit with structured zero-emoji message.
-  - [x] Push to `origin main`.
-  - [x] Provide user instructions for GitHub Pages activation in repo settings.
+  - [x] Push `main` to `origin main`.
+  - [x] Push static export to `origin gh-pages`.
