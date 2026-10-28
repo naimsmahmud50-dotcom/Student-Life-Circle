@@ -190,96 +190,26 @@ export default function LiveChallengePage() {
         {/* Sticky Unified Global Navigation */}
         <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
 
-        {/* Live Challenge Bespoke Atmospheric Hero with CHALLENGE Watermark */}
-        <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
-          {/* GoEdu Stadium Golden Aura */}
-          <div
-            className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-0"
-            style={{
-              height: '100%',
-              minHeight: '260px',
-              background:
-                'radial-gradient(ellipse 65% 90% at 50% 100%, rgba(255, 178, 0, 0.45) 0%, rgba(237, 142, 34, 0.20) 45%, rgba(253, 215, 70, 0) 100%)'
-            }}
-            aria-hidden="true"
+        {/* 1. Live MCQ Signature Hero Section (Exact Elevation from Reference Screenshot) */}
+        {isLoading ? (
+          <div className="w-full py-16 bg-[#080C24] flex items-center justify-center border-b border-[#1E294B] animate-pulse">
+            <div className="max-w-4xl w-full mx-auto px-4 space-y-6 text-center">
+              <div className="h-6 bg-slate-800 rounded-full w-48 mx-auto"></div>
+              <div className="h-12 bg-slate-800/80 rounded-2xl w-3/4 mx-auto"></div>
+              <div className="h-16 bg-slate-800/40 rounded-2xl w-1/2 mx-auto"></div>
+            </div>
+          </div>
+        ) : (
+          <LiveMcqHeroSection
+            challenge={challenge}
+            timeRemainingSeconds={timeRemainingSeconds}
+            formatTimer={formatTimer}
+            isLoading={isLoading}
+            onOpenRulesModal={() => setIsRulesModalOpen(true)}
           />
-
-          {/* Giant Typographic Watermark */}
-          <div
-            className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
-            aria-hidden="true"
-          >
-            <p
-              className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,20vw,15rem)] uppercase tracking-wider select-none opacity-85"
-              style={{
-                lineHeight: 0.95,
-                backgroundImage:
-                  'linear-gradient(to bottom, rgba(243, 172, 8, 0.28) 15%, rgba(253, 215, 70, 0.02) 100%)'
-              }}
-            >
-              CHALLENGE
-            </p>
-          </div>
-
-          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#ED8E22] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
-                <Trophy className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                জাতীয় স্টেম ও মেধা অলিম্পিয়াড ২০২৬
-              </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
-                <Users className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                ৫০,০০০+ প্রতিযোগী শিক্ষার্থী লাইভ
-              </span>
-            </div>
-
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div className="space-y-2 max-w-3xl">
-                <h1 className="text-2xl sm:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight">
-                  দেশব্যাপী লাইভ অলিম্পিয়াড ও মেধা মূল্যায়ন
-                </h1>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-bengali">
-                  সার্ভার-অথরিটেটিভ মিলি-সেকেন্ড নির্ভুল টাইমার, জিরো-চিট অ্যান্টি-ট্যাম্পার প্রোটোকল ও রিয়েল-টাইম জাতীয় মেধা তালিকা।
-                </p>
-              </div>
-
-              <a
-                href="#central-leaderboard"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] text-xs font-bold text-[#1B2A4A] dark:text-amber-300 shadow-xs hover:border-[#ED8E22] transition-all whitespace-nowrap self-start md:self-auto"
-              >
-                <Award className="w-4 h-4 text-[#ED8E22]" />
-                <span>লাইভ মেধা তালিকা দেখুন</span>
-              </a>
-            </div>
-          </div>
-        </section>
+        )}
 
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12 sm:space-y-16">
-          
-          {/* 1. Live MCQ Signature Hero V2 Section & Skeleton Loading */}
-          {isLoading ? (
-            <div className="p-8 sm:p-12 rounded-3xl bg-[#060610] border border-slate-800 space-y-6 animate-pulse">
-              <div className="h-6 bg-slate-800 rounded-lg w-1/4"></div>
-              <div className="h-12 bg-slate-800/80 rounded-xl w-3/4"></div>
-              <div className="h-24 bg-slate-800/40 rounded-2xl"></div>
-              <div className="hidden">
-                <span>{challenge.registeredCount} প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
-                <span>মিলি-সেকেন্ড একুরেট বাফার</span>
-                <span>সার্ভার-অথরিটেটিভ টাইমার</span>
-                <span className="bg-[#991B1B]">নেগেটিভ মার্কিং: -০.২৫</span>
-                <span>{challenge.titleBn}</span>
-                <Link href="/practice?challenge=active" className="active:translate-y-1 active:shadow-none">পরীক্ষায় অংশগ্রহণ করুন</Link>
-              </div>
-            </div>
-          ) : (
-            <LiveMcqHeroSection
-              challenge={challenge}
-              timeRemainingSeconds={timeRemainingSeconds}
-              formatTimer={formatTimer}
-              isLoading={isLoading}
-              onOpenRulesModal={() => setIsRulesModalOpen(true)}
-            />
-          )}
 
           {/* 2. Track & Category Selector (Inspired by Live MCQ cats section) */}
           <LiveCategoryTrackSelector />
