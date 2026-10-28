@@ -47,7 +47,7 @@ const FAQS: FaqItem[] = [
   },
   {
     questionBn: 'স্মার্টফোন এবং কম্পিউটার উভয় ডিভাইস থেকে কি একাউন্ট ব্যবহার করা যাবে?',
-    answerBn: 'হ্যাঁ। আপনার অগ্রযাত্রা একাউন্ট সম্পূর্ণ ক্লাউড-সিঙ্কড। অ্যান্ড্রয়েড ও আইওএস মোবাইল অ্যাপ এবং উইন্ডোজ ও ম্যাক ওএস ওয়েব ব্রাউজারের মাধ্যমে যেকোনো সময় সমান সুবিধায় প্রস্তুতি চালিয়ে যেতে পারবেন।'
+    answerBn: 'হ্যাঁ। আপনার অগ্রযাত্রা একাউন্ট সম্পূর্ণ ক্লাউড-সিঙ্কড। মোবাইল, ট্যাবলেট বা কম্পিউটার—যেকোনো ডিভাইসের ব্রাউজার থেকে সরাসরি লগইন করে যেকোনো সময় সমান সুবিধায় প্রস্তুতি চালিয়ে যেতে পারবেন।'
   }
 ];
 
@@ -59,21 +59,21 @@ export function LiveMcqFaqAccordion() {
   };
 
   return (
-    <section className="space-y-6">
+    <div className="space-y-6">
       <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-300 text-xs font-bold font-bengali">
-          <HelpCircle className="w-3.5 h-3.5 text-blue-600 dark:text-amber-400" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-[#151D2C] border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold font-bengali">
+          <HelpCircle className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
           <span>সচরাচর জিজ্ঞাসা • FAQ</span>
         </div>
 
         <h2 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif tracking-tight">
           পরীক্ষা সংক্রান্ত সকল প্রশ্নের{' '}
-          <span className="text-[#0A2540] dark:text-amber-400 font-serif">
+          <span className="text-sky-600 dark:text-sky-400 font-serif">
             নির্ভরযোগ্য উত্তর
           </span>
         </h2>
 
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
           যা জানতে চান, এখানে পেয়ে যাবেন। নিয়মাবলী বুঝে নিয়ে নিশ্চিন্তে পরীক্ষায় অংশ নিন।
         </p>
       </div>
@@ -85,29 +85,33 @@ export function LiveMcqFaqAccordion() {
           return (
             <div
               key={index}
-              className="rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 overflow-hidden transition shadow-sm"
+              className={`rounded-2xl bg-white/95 dark:bg-[#131A26]/90 border backdrop-blur-md overflow-hidden transition shadow-xl ${
+                isOpen
+                  ? 'border-sky-500/40 dark:border-sky-400/40'
+                  : 'border-slate-200/80 dark:border-slate-800/80'
+              }`}
             >
               <button
                 type="button"
                 onClick={() => toggle(index)}
-                className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition cursor-pointer"
+                className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition cursor-pointer"
                 aria-expanded={isOpen}
               >
                 <span className="text-sm sm:text-base font-bold font-bengali text-slate-900 dark:text-white flex items-center gap-2.5">
-                  <span className="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#0A2540] dark:text-amber-400 text-xs font-mono font-bold flex items-center justify-center shrink-0">
+                  <span className="w-6 h-6 rounded-lg bg-sky-500/10 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 text-xs font-mono font-bold flex items-center justify-center shrink-0 border border-sky-500/30">
                     Q{index + 1}
                   </span>
                   <span>{faq.questionBn}</span>
                 </span>
                 {isOpen ? (
-                  <ChevronUp className="w-5 h-5 text-slate-500 shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-sky-500 dark:text-sky-400 shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-500 shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-slate-400 shrink-0" />
                 )}
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali leading-relaxed border-t border-slate-100 dark:border-slate-800">
+                <div className="px-5 pb-5 pt-3 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-bengali leading-relaxed border-t border-slate-200/50 dark:border-slate-800/80 bg-slate-50/50 dark:bg-[#0B1019]/60">
                   {faq.answerBn}
                 </div>
               )}
@@ -115,6 +119,6 @@ export function LiveMcqFaqAccordion() {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

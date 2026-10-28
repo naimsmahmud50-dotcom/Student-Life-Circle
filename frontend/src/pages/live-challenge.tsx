@@ -209,124 +209,421 @@ export default function LiveChallengePage() {
           />
         )}
 
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12 sm:space-y-16">
+        <main className="flex-1 w-full flex flex-col">
 
-          {/* 2. Track & Category Selector (Inspired by Live MCQ cats section) */}
-          <LiveCategoryTrackSelector />
-
-          {/* 3. Dynamic Academic Info Panel & Notice Board */}
-          <DynamicInfoNoticeBoard />
-
-          {/* 4. Free Demo Exam Box (Inspired by Live MCQ dxb section) */}
-          <LiveFreeDemoExamBox />
-
-          {/* 5. 4-Step Academic Pathway Roadmap (Inspired by Live MCQ how section) */}
-          <LiveHowItWorksPathway />
-
-          {/* 6. Live Exam Subject Weightage Breakdown */}
-          <SubjectWeightageBreakdown />
-
-          {/* 7. Interactive Digital OMR Sheet Simulator */}
-          <InteractiveOmrSimulator />
-
-          {/* 8. Real-Time Central Leaderboard & Pseudonymous Privacy Controls */}
-          <div id="central-leaderboard" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Leaderboard Table (8 cols) */}
-            <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-amber-100 dark:border-[#262D3D]">
-                <div>
-                  <h2 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
-                    <Award className="w-5 h-5 text-[#ED8E22]" />
-                    <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
-                  </h2>
-                  <p className="text-xs text-slate-500 font-bengali mt-1">
-                    রিয়েল-টাইমে WebSocket ব্রডকাস্টের মাধ্যমে স্কোরের পরিবর্তন প্রদর্শিত হচ্ছে।
-                  </p>
-                </div>
-
-                <span className="text-xs font-mono text-slate-500">
-                  আপডেট: প্রতি ৫ সেকেন্ড
-                </span>
-              </div>
-
-              {/* Dignified Academic Leaderboard Reveal with Motion transitions & KPI count-up */}
-              <AcademicLeaderboardReveal
-                entries={visibleEntries}
-                registeredCount={challenge.registeredCount}
-              />
+          {/* 2. Track & Category Selector (Royal Sapphire & Cyan Lapis) */}
+          <section id="exam-tracks" className="relative overflow-hidden w-full bg-[#07132B] dark:bg-[#061024] border-b border-sky-900/40 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(14, 165, 233, 0.16) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(56, 189, 248, 0.35) 10%, rgba(14, 165, 233, 0.02) 100%)'
+                }}
+              >
+                TRACKS
+              </p>
             </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveCategoryTrackSelector />
+            </div>
+          </section>
 
-            {/* Sidebar Cards (4 cols): Privacy, Rules & Live Analytics */}
-            <div className="lg:col-span-4 space-y-6">
-              {/* Privacy Controls & Exam Ethics Card */}
-              <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-amber-100 dark:border-[#262D3D]">
-                  <div className="flex items-center gap-2.5">
-                    <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                    <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
-                      পরীক্ষার নিয়মাবলী ও নিরাপত্তা
-                    </h3>
-                  </div>
-                </div>
+          {/* 3. Dynamic Academic Info Panel & Notice Board (Deep Obsidian & Crimson Alert) */}
+          <section id="notice-bulletin" className="relative overflow-hidden w-full bg-[#130B14] dark:bg-[#100812] border-b border-rose-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(225, 29, 72, 0.16) 0%, rgba(244, 63, 94, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(251, 113, 133, 0.35) 10%, rgba(244, 63, 94, 0.02) 100%)'
+                }}
+              >
+                BULLETIN
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <DynamicInfoNoticeBoard />
+            </div>
+          </section>
 
-                <div className="space-y-4 text-xs font-bengali text-slate-600 dark:text-slate-400 leading-[1.75]">
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <p>সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।</p>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <p>প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।</p>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <Lock className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                    <p>প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।</p>
-                  </div>
-                </div>
+          {/* 4. Free Demo Exam Box (Midnight Navy & Electric Azure) */}
+          <section id="free-demo" className="relative overflow-hidden w-full bg-[#0A1628] dark:bg-[#071120] border-b border-cyan-900/40 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6, 182, 212, 0.16) 0%, rgba(59, 130, 246, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(34, 211, 238, 0.35) 10%, rgba(6, 182, 212, 0.02) 100%)'
+                }}
+              >
+                DEMO EXAM
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveFreeDemoExamBox />
+            </div>
+          </section>
 
-                {/* View Full Protocol Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsRulesModalOpen(true)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#FFF9EB] hover:bg-[#FFF6DD] dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-amber-200/60 dark:border-slate-700 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
-                >
-                  <ShieldCheck className="w-4 h-4 text-[#ED8E22]" />
-                  <span>সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন</span>
-                </button>
+          {/* 5. 4-Step Academic Pathway Roadmap (Deep Scholar Emerald & Mint) */}
+          <section id="pathway-steps" className="relative overflow-hidden w-full bg-[#061815] dark:bg-[#041210] border-b border-emerald-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16, 185, 129, 0.16) 0%, rgba(5, 150, 105, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(52, 211, 153, 0.35) 10%, rgba(16, 185, 129, 0.02) 100%)'
+                }}
+              >
+                PATHWAY
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveHowItWorksPathway />
+            </div>
+          </section>
 
-                <div className="pt-4 border-t border-amber-100 dark:border-[#262D3D]">
-                  <label className="flex items-center gap-3 cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      checked={optOutRanking}
-                      onChange={(e) => handleToggleOptOut(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#ED8E22] focus:ring-[#ED8E22] border-slate-300"
-                    />
-                    <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
-                      পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন
+          {/* 6. Live Exam Subject Weightage Breakdown (Cosmic Ultraviolet & Purple Sky) */}
+          <section id="syllabus-weightage" className="relative overflow-hidden w-full bg-[#0F0B24] dark:bg-[#0B071A] border-b border-purple-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(168, 85, 247, 0.16) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(192, 132, 252, 0.35) 10%, rgba(168, 85, 247, 0.02) 100%)'
+                }}
+              >
+                WEIGHTAGE
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <SubjectWeightageBreakdown />
+            </div>
+          </section>
+
+          {/* 7. Interactive Digital OMR Sheet Simulator (Lapis Lazuli & Golden Seal) */}
+          <section id="omr-simulator" className="relative overflow-hidden w-full bg-[#0B152A] dark:bg-[#081020] border-b border-indigo-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(99, 102, 241, 0.16) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(129, 140, 248, 0.35) 10%, rgba(99, 102, 241, 0.02) 100%)'
+                }}
+              >
+                OMR SHEET
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <InteractiveOmrSimulator />
+            </div>
+          </section>
+
+          {/* 8. Real-Time Central Leaderboard & Sidebar Cards (Deep Charcoal & Golden Arena) */}
+          <section id="central-leaderboard" className="relative overflow-hidden w-full bg-[#14120C] dark:bg-[#100E08] border-b border-amber-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245, 158, 11, 0.18) 0%, rgba(234, 88, 12, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(251, 191, 36, 0.35) 10%, rgba(245, 158, 11, 0.02) 100%)'
+                }}
+              >
+                LEADERBOARD
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Leaderboard Table (8 cols) */}
+                <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#18150E]/90 backdrop-blur-md border border-amber-500/25 shadow-xl space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-amber-200/50 dark:border-amber-900/40">
+                    <div>
+                      <h2 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
+                        <Award className="w-5 h-5 text-amber-500" />
+                        <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
+                      </h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1">
+                        রিয়েল-টাইমে WebSocket ব্রডকাস্টের মাধ্যমে স্কোরের পরিবর্তন প্রদর্শিত হচ্ছে।
+                      </p>
+                    </div>
+
+                    <span className="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+                      আপডেট: প্রতি ৫ সেকেন্ড
                     </span>
-                  </label>
+                  </div>
+
+                  {/* Dignified Academic Leaderboard Reveal with Motion transitions & KPI count-up */}
+                  <AcademicLeaderboardReveal
+                    entries={visibleEntries}
+                    registeredCount={challenge.registeredCount}
+                  />
                 </div>
+
+                {/* Sidebar Cards (4 cols): Privacy, Rules & Live Analytics */}
+                <div className="lg:col-span-4 space-y-6">
+                  {/* Privacy Controls & Exam Ethics Card */}
+                  <div className="p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-[#18150E]/90 backdrop-blur-md border border-amber-500/25 shadow-xl space-y-6">
+                    <div className="flex items-center justify-between pb-4 border-b border-amber-200/50 dark:border-amber-900/40">
+                      <div className="flex items-center gap-2.5">
+                        <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                        <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
+                          পরীক্ষার নিয়মাবলী ও নিরাপত্তা
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4 text-xs font-bengali text-slate-600 dark:text-slate-300 leading-[1.75]">
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <p>সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।</p>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <p>প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।</p>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <Lock className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                        <p>প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।</p>
+                      </div>
+                    </div>
+
+                    {/* View Full Protocol Button */}
+                    <button
+                      type="button"
+                      onClick={() => setIsRulesModalOpen(true)}
+                      className="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
+                    >
+                      <ShieldCheck className="w-4 h-4 text-amber-500" />
+                      <span>সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন</span>
+                    </button>
+
+                    <div className="pt-4 border-t border-amber-200/50 dark:border-amber-900/40">
+                      <label className="flex items-center gap-3 cursor-pointer select-none">
+                        <input
+                          type="checkbox"
+                          checked={optOutRanking}
+                          onChange={(e) => handleToggleOptOut(e.target.checked)}
+                          className="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 border-slate-300"
+                        />
+                        <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
+                          পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* National Percentile & Revision Queue Card */}
+                  <LiveExamAnalyticsCard />
+                </div>
+
               </div>
-
-              {/* National Percentile & Revision Queue Card */}
-              <LiveExamAnalyticsCard />
             </div>
+          </section>
 
-          </div>
+          {/* 9. Multi-Track Daily Exam Routine Matrix (Deep Marine Teal & Ocean Breeze) */}
+          <section id="exam-routines" className="relative overflow-hidden w-full bg-[#08181A] dark:bg-[#051214] border-b border-teal-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(20, 184, 166, 0.16) 0%, rgba(14, 165, 233, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(45, 212, 191, 0.35) 10%, rgba(20, 184, 166, 0.02) 100%)'
+                }}
+              >
+                ROUTINE
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveExamRoutineMatrix />
+            </div>
+          </section>
 
-          {/* 9. Multi-Track Daily Exam Routine Matrix */}
-          <LiveExamRoutineMatrix />
+          {/* 10. 14-Feature Examination Suite (Cosmic Amethyst & Magenta) */}
+          <section id="feature-showcase" className="relative overflow-hidden w-full bg-[#130A20] dark:bg-[#0E0617] border-b border-fuchsia-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(217, 70, 239, 0.15) 0%, rgba(147, 51, 234, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(232, 121, 249, 0.35) 10%, rgba(217, 70, 239, 0.02) 100%)'
+                }}
+              >
+                FEATURES
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveMcqFeatureShowcase />
+            </div>
+          </section>
 
-          {/* 10. 14-Feature Examination Suite */}
-          <LiveMcqFeatureShowcase />
+          {/* 11. Accredited Academic Mentors & Hall of Fame (Warm Terracotta & Auburn Bronze) */}
+          <section id="mentor-hall-of-fame" className="relative overflow-hidden w-full bg-[#18110D] dark:bg-[#120C09] border-b border-orange-950/50 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(249, 115, 22, 0.16) 0%, rgba(217, 119, 6, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(251, 146, 60, 0.35) 10%, rgba(249, 115, 22, 0.02) 100%)'
+                }}
+              >
+                MENTORS
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveMentorAndHallOfFame />
+            </div>
+          </section>
 
-          {/* 11. Accredited Academic Mentors & Hall of Fame Panel */}
-          <LiveMentorAndHallOfFame />
-
-          {/* 12. Candidate FAQ Accordion */}
-          <LiveMcqFaqAccordion />
+          {/* 12. Candidate FAQ Accordion (Deep Slate Charcoal & Soft Starlight) */}
+          <section id="candidate-faqs" className="relative overflow-hidden w-full bg-[#0D111A] dark:bg-[#090C13] border-b border-slate-800/60 py-14 sm:py-20 transition-colors">
+            <div
+              className="absolute inset-0 pointer-events-none select-none z-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(100, 116, 139, 0.18) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 80%)'
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute z-0 pointer-events-none select-none w-full top-4 left-0 flex justify-center overflow-hidden"
+              aria-hidden="true"
+            >
+              <p
+                className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(4rem,20vw,16rem)] uppercase tracking-wider select-none opacity-20"
+                style={{
+                  lineHeight: 0.9,
+                  backgroundImage:
+                    'linear-gradient(to bottom, rgba(148, 163, 184, 0.35) 10%, rgba(100, 116, 139, 0.02) 100%)'
+                }}
+              >
+                QUESTIONS
+              </p>
+            </div>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LiveMcqFaqAccordion />
+            </div>
+          </section>
 
         </main>
 

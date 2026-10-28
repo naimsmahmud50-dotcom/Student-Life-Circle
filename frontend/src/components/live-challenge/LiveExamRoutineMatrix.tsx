@@ -243,34 +243,34 @@ export const LiveExamRoutineMatrix: React.FC = () => {
   });
 
   return (
-    <section 
+    <div 
       aria-label="দৈনিক ও সাপ্তাহিক লাইভ পরীক্ষার রুটিন ম্যাট্রিক্স"
-      className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6"
+      className="p-6 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#0A1F22]/90 backdrop-blur-md border border-teal-500/25 shadow-xl space-y-6"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-teal-200/50 dark:border-teal-900/40">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold font-mono text-[#0A2540] dark:text-amber-300 uppercase tracking-wider">
-            <Calendar className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-bold font-mono text-teal-600 dark:text-teal-300 uppercase tracking-wider">
+            <Calendar className="w-4 h-4 text-teal-500 dark:text-teal-400" />
             <span>দেশব্যাপী লাইভ পরীক্ষার সময়সূচি ও রুটিন</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white mt-1">
             দৈনিক পরীক্ষার রুটিন ও সিলেবাস ম্যাট্রিক্স
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali mt-1">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali mt-1">
             এনসিটিবি পাঠ্যবই এবং জাতীয় বোর্ড পরীক্ষার কাঠামো অনুসারে নির্ধারিত দৈনিক লাইভ ও আর্কাইভ টেস্ট।
           </p>
         </div>
 
         {/* Temporal Filters: Today, Tomorrow, Archive */}
-        <div className="inline-flex p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 self-start md:self-auto">
+        <div className="inline-flex p-1 rounded-2xl bg-slate-100 dark:bg-[#061618] border border-teal-500/25 self-start md:self-auto">
           <button
             type="button"
             onClick={() => setActiveTab('today')}
             className={`px-4 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               activeTab === 'today'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-teal-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             আজকের পরীক্ষা
@@ -280,8 +280,8 @@ export const LiveExamRoutineMatrix: React.FC = () => {
             onClick={() => setActiveTab('tomorrow')}
             className={`px-4 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               activeTab === 'tomorrow'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-teal-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             আগামীকালের রুটিন
@@ -291,8 +291,8 @@ export const LiveExamRoutineMatrix: React.FC = () => {
             onClick={() => setActiveTab('archive')}
             className={`px-4 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               activeTab === 'archive'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-teal-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-teal-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             আর্কাইভ ও মেধা তালিকা
@@ -309,8 +309,8 @@ export const LiveExamRoutineMatrix: React.FC = () => {
             onClick={() => setSelectedTrack(track.id)}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold font-bengali whitespace-nowrap transition-all border ${
               selectedTrack === track.id
-                ? 'bg-[#0A2540] text-white border-[#0A2540] shadow-sm'
-                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60'
+                ? 'bg-teal-600 text-white border-teal-500 shadow-sm'
+                : 'bg-white dark:bg-[#061618] text-slate-700 dark:text-teal-200 border-teal-500/20 hover:border-teal-400'
             }`}
           >
             <span>{track.labelBn}</span>
@@ -320,12 +320,12 @@ export const LiveExamRoutineMatrix: React.FC = () => {
 
       {/* Routine Cards Grid */}
       {filteredExams.length === 0 ? (
-        <div className="p-8 text-center rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800">
-          <BookOpen className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+        <div className="p-8 text-center rounded-2xl bg-slate-50 dark:bg-[#061618]/60 border border-teal-500/20">
+          <BookOpen className="w-8 h-8 text-teal-400 mx-auto mb-2" />
           <p className="text-sm font-bold font-bengali text-slate-700 dark:text-slate-300">
             এই ক্যাটাগরিতে এই সময়ের জন্য কোনো নির্ধারিত পরীক্ষা নেই।
           </p>
-          <p className="text-xs text-slate-500 font-bengali mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1">
             অনুগ্রহ করে অন্য ক্যাটাগরি অথবা আগামীকালের রুটিন চেক করুন।
           </p>
         </div>
@@ -334,7 +334,7 @@ export const LiveExamRoutineMatrix: React.FC = () => {
           {filteredExams.map((item) => (
             <div
               key={item.id}
-              className="p-5 sm:p-6 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition flex flex-col justify-between gap-4"
+              className="p-5 sm:p-6 rounded-2xl bg-white/95 dark:bg-[#061618]/90 border border-teal-500/25 hover:border-teal-400/50 transition flex flex-col justify-between gap-4 shadow-sm"
             >
               <div className="space-y-3">
                 {/* Status Badges */}
@@ -346,23 +346,23 @@ export const LiveExamRoutineMatrix: React.FC = () => {
                     </span>
                   )}
                   {item.status === 'scheduled' && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-[11px] font-bold font-bengali flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
+                    <span className="px-2.5 py-0.5 rounded-full bg-teal-500/15 text-teal-700 dark:text-teal-300 border border-teal-500/30 text-[11px] font-bold font-bengali flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-teal-500" />
                       <span>নির্ধারিত</span>
                     </span>
                   )}
                   {item.status === 'completed' && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-amber-800 text-amber-100 text-[11px] font-bold font-bengali flex items-center gap-1">
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-[11px] font-bold font-bengali flex items-center gap-1">
                       <CheckCircle2 className="w-3 h-3" />
                       <span>আর্কাইভ</span>
                     </span>
                   )}
                   
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#991B1B]/15 text-[#991B1B] dark:text-rose-300 border border-[#991B1B]/30 text-[11px] font-mono font-bold">
+                  <span className="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[11px] font-mono font-bold">
                     নেগেটিভ: -{item.negativeMarkRatio.toFixed(2)}
                   </span>
 
-                  <span className="px-2.5 py-0.5 rounded-full bg-slate-200/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 text-[11px] font-mono">
+                  <span className="px-2.5 py-0.5 rounded-full bg-slate-200/60 dark:bg-[#0D282C] text-slate-700 dark:text-teal-200 text-[11px] font-mono border border-teal-500/15">
                     {item.totalQuestions} টি প্রশ্ন • {item.durationMinutes} মিনিট
                   </span>
                 </div>
@@ -373,8 +373,8 @@ export const LiveExamRoutineMatrix: React.FC = () => {
                 </h3>
 
                 {/* NCTB Citation */}
-                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 text-xs font-bengali text-slate-600 dark:text-slate-300">
-                  <BookOpen className="w-4 h-4 text-[#0A2540] dark:text-amber-400 shrink-0 mt-0.5" />
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#0D282C] border border-teal-500/20 flex items-start gap-2 text-xs font-bengali text-slate-600 dark:text-slate-300">
+                  <BookOpen className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-slate-800 dark:text-slate-200">সিলেবাস রেফারেন্স: </span>
                     <span>{item.nctbCitationBn}</span>
@@ -382,28 +382,28 @@ export const LiveExamRoutineMatrix: React.FC = () => {
                 </div>
 
                 {/* Meta details */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bengali text-slate-500 pt-1">
+                <div className="flex flex-wrap items-center gap-4 text-xs font-bengali text-slate-500 dark:text-slate-400 pt-1">
                   <div className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock className="w-3.5 h-3.5 text-teal-500" />
                     <span>{item.examTimeBn}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5" />
+                    <Users className="w-3.5 h-3.5 text-teal-500" />
                     <span>{item.enrolledStudentsCount.toLocaleString()} জন পরীক্ষার্থী</span>
                   </div>
                 </div>
               </div>
 
               {/* Action Button */}
-              <div className="pt-3 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-slate-500">
+              <div className="pt-3 border-t border-teal-200/40 dark:border-teal-900/30 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                   পাস মার্ক: {item.passMarkPercent}%
                 </span>
 
                 {item.status === 'live_now' ? (
                   <Link
                     href="/practice?challenge=active"
-                    className="px-5 py-2.5 rounded-xl bg-[#0A2540] text-white hover:bg-slate-800 font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px]"
+                    className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px] shadow-sm"
                   >
                     <span>টেস্টে যোগ দিন</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -412,7 +412,7 @@ export const LiveExamRoutineMatrix: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => alert('এই পরীক্ষার সিলেবাস অনুসরণে অনুশীলন শুরু করার জন্য অনুশীলন পেজে যান।')}
-                    className="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 hover:bg-slate-100 font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px]"
+                    className="px-5 py-2.5 rounded-xl bg-white dark:bg-[#0D282C] text-slate-900 dark:text-teal-100 border border-teal-500/30 hover:bg-teal-50 dark:hover:bg-teal-900/40 font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px]"
                   >
                     <span>প্রস্তুতি নিন</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -420,7 +420,7 @@ export const LiveExamRoutineMatrix: React.FC = () => {
                 ) : (
                   <Link
                     href="/practice?challenge=archive"
-                    className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px]"
+                    className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0D282C] text-slate-800 dark:text-teal-200 hover:bg-slate-200 dark:hover:bg-teal-900/40 border border-teal-500/20 font-bold font-bengali text-xs flex items-center gap-1.5 transition min-h-[44px]"
                   >
                     <span>প্রশ্ন ও সমাধান দেখুন</span>
                     <FileText className="w-3.5 h-3.5" />
@@ -431,6 +431,6 @@ export const LiveExamRoutineMatrix: React.FC = () => {
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 };

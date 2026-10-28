@@ -254,7 +254,7 @@ export function LiveMcqHeroSection({
           <div className="rounded-3xl bg-[#0D1535]/85 backdrop-blur-xl border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.5)] p-6 sm:p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-white/5">
               
-              {/* Metric 1: অ্যাপ ব্যবহারকারী */}
+              {/* Metric 1: নিবন্ধিত শিক্ষার্থী */}
               <div className="space-y-2 pt-4 md:pt-0">
                 <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-400/30 flex items-center justify-center mx-auto text-amber-400 shadow-sm">
                   <Users className="w-5 h-5 text-amber-400" />
@@ -263,7 +263,7 @@ export function LiveMcqHeroSection({
                   ২৪ লাখ+
                 </div>
                 <div className="text-xs text-slate-300 font-bengali">
-                  অ্যাপ ব্যবহারকারী
+                  নিবন্ধিত শিক্ষার্থী
                 </div>
               </div>
 

@@ -184,7 +184,7 @@ const SUITE_FEATURES: SuiteFeature[] = [
     category: 'exam_omr',
     tagBn: 'নেট ছাড়া প্রস্তুতি',
     titleBn: 'অফলাইন সেকশন ও লোকাল বাফার ইঞ্জিন',
-    descriptionBn: 'ইন্টারনেট ড্রপ হলেও পরীক্ষা থামবে না। আপনার ডিভাইসে ডাউনলোডকৃত প্রশ্নপত্রে অফলাইনে পরীক্ষা দিন; নেট পেলেই অটো-সিঙ্ক হবে।',
+    descriptionBn: 'ইন্টারনেট ড্রপ হলেও পরীক্ষা থামবে না। আপনার ডিভাইসে স্বয়ংক্রিয়ভাবে সংরক্ষিত প্রশ্নপত্রে অফলাইনে পরীক্ষা দিন; নেট পেলেই অটো-সিঙ্ক হবে।',
     highlightBn: 'জিরো ডেটা লস গ্যারান্টি',
     ctaTextBn: 'অফলাইন মোড',
     ctaHref: '/offline',
@@ -226,34 +226,34 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
   });
 
   return (
-    <section
+    <div
       aria-label="অগ্রযাত্রা এক্সামিনেশন স্যুট"
-      className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-8"
+      className="p-6 sm:p-10 rounded-3xl bg-white/95 dark:bg-[#1A0C2C]/90 backdrop-blur-md border border-fuchsia-500/25 shadow-xl space-y-8"
     >
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-fuchsia-200/50 dark:border-fuchsia-900/40">
         <div className="space-y-2 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[#0A2540] dark:text-amber-300 text-xs font-mono font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 dark:bg-fuchsia-500/20 border border-fuchsia-500/30 text-fuchsia-600 dark:text-fuchsia-300 text-xs font-mono font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-fuchsia-500" />
             <span>অগ্রযাত্রা এক্সামিনেশন স্যুট • ১৪টি ফ্ল্যাগশিপ ফিচার</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black font-bengali text-slate-900 dark:text-white tracking-tight">
             লাইভ এমসিকিউ-এর সকল আধুনিক শক্তি, এবার সম্পূর্ণ উন্মুক্ত ও উন্নত
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
             স্মার্ট সার্চ, ডিজিটাল ওএমআর শিট, টপিক গুরু, অফলাইন বাফার থেকে শুরু করে তথ্যকল্পদ্রুম—শিক্ষার্থীদের পরীক্ষার পূর্ণাঙ্গ প্রস্তুতি নিশ্চিত করতে প্রস্তুত এক সমন্বিত একাডেমিক পরিবেশ।
           </p>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-[#10071C] border border-fuchsia-500/25">
           <button
             type="button"
             onClick={() => setSelectedCategory('all')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               selectedCategory === 'all'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-fuchsia-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             সমস্ত ফিচার (১৪)
@@ -263,8 +263,8 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
             onClick={() => setSelectedCategory('exam_omr')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               selectedCategory === 'exam_omr'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-fuchsia-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             লাইভ পরীক্ষা ও ওএমআর
@@ -274,8 +274,8 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
             onClick={() => setSelectedCategory('smart_study')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               selectedCategory === 'smart_study'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-fuchsia-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             স্মার্ট স্টাডি ও রিভিশন
@@ -285,8 +285,8 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
             onClick={() => setSelectedCategory('analytics_merit')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold font-bengali transition-all ${
               selectedCategory === 'analytics_merit'
-                ? 'bg-[#0A2540] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-fuchsia-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             অ্যানালিটিক্স ও মেধা
@@ -301,12 +301,12 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
           return (
             <div
               key={feat.id}
-              className="p-6 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition flex flex-col justify-between gap-5 group"
+              className="p-6 rounded-2xl bg-white/95 dark:bg-[#10071C]/90 border border-fuchsia-500/20 hover:border-fuchsia-500/50 transition flex flex-col justify-between gap-5 group shadow-sm"
             >
               <div className="space-y-3">
                 {/* Header Badge & Icon */}
                 <div className="flex items-center justify-between gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-[#0A2540] dark:text-amber-300 group-hover:scale-105 transition-transform shadow-xs">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#200D38] border border-fuchsia-500/30 flex items-center justify-center text-fuchsia-600 dark:text-fuchsia-300 group-hover:scale-105 transition-transform shadow-xs">
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold font-bengali ${feat.badgeColorClass}`}>
@@ -320,20 +320,20 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
                   {feat.descriptionBn}
                 </p>
               </div>
 
               {/* Highlight and CTA */}
-              <div className="pt-3 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-2">
-                <span className="text-[11px] font-mono text-slate-500 truncate">
+              <div className="pt-3 border-t border-fuchsia-200/40 dark:border-fuchsia-900/30 flex items-center justify-between gap-2">
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 truncate">
                   {feat.highlightBn}
                 </span>
 
                 <Link
                   href={feat.ctaHref}
-                  className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 text-[#0A2540] dark:text-amber-300 border border-slate-200 dark:border-slate-700 hover:bg-[#0A2540] hover:text-white dark:hover:bg-amber-400 dark:hover:text-[#0A2540] font-bold font-bengali text-xs flex items-center gap-1 transition whitespace-nowrap min-h-[36px]"
+                  className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-[#200D38] text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-500/30 hover:bg-fuchsia-600 hover:text-white dark:hover:bg-fuchsia-500 dark:hover:text-white font-bold font-bengali text-xs flex items-center gap-1 transition whitespace-nowrap min-h-[36px]"
                 >
                   <span>{feat.ctaTextBn}</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -343,6 +343,6 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 };

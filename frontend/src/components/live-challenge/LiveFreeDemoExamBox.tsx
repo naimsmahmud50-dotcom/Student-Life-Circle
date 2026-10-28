@@ -25,8 +25,8 @@ export function LiveFreeDemoExamBox() {
   const [isDiagnosticStarted, setIsDiagnosticStarted] = useState<boolean>(false);
 
   return (
-    <section id="demo-exam" className="relative overflow-hidden rounded-3xl bg-[#07192F] text-white p-8 sm:p-12 border border-[#1E3A5F] shadow-xl">
-      {/* Refined Architectural Hairline Grid (Zero AI Glow) */}
+    <div id="demo-exam" className="relative overflow-hidden rounded-3xl bg-[#07192F]/90 backdrop-blur-md text-white p-8 sm:p-12 border border-cyan-500/25 shadow-2xl">
+      {/* Refined Architectural Hairline Grid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -43,7 +43,7 @@ export function LiveFreeDemoExamBox() {
         
         {/* Left Column: Copy & Specs */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A2540] border border-[#1E3A5F] text-xs font-bold font-bengali text-amber-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A2540]/80 border border-cyan-500/30 text-xs font-bold font-bengali text-amber-300">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             <span>সরাসরি মেধা যাচাই • কোনো রেজিস্ট্রেশন ছাড়াই</span>
           </div>
@@ -61,9 +61,9 @@ export function LiveFreeDemoExamBox() {
             </p>
           </div>
 
-          {/* Specs List (Live MCQ Style - Clean Editorial Frames) */}
+          {/* Specs List */}
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-            <li className="p-3.5 rounded-xl bg-[#0A2540] border border-[#1E3A5F]">
+            <li className="p-3.5 rounded-xl bg-[#0A2540]/80 border border-cyan-500/25">
               <div className="text-xl sm:text-2xl font-black font-mono text-amber-300 flex items-baseline gap-1">
                 ২০ <span className="text-xs font-bengali text-slate-300 font-normal">টি</span>
               </div>
@@ -72,7 +72,7 @@ export function LiveFreeDemoExamBox() {
               </div>
             </li>
 
-            <li className="p-3.5 rounded-xl bg-[#0A2540] border border-[#1E3A5F]">
+            <li className="p-3.5 rounded-xl bg-[#0A2540]/80 border border-cyan-500/25">
               <div className="text-xl sm:text-2xl font-black font-mono text-sky-300 flex items-baseline gap-1">
                 ১৫ <span className="text-xs font-bengali text-slate-300 font-normal">মিনিট</span>
               </div>
@@ -81,7 +81,7 @@ export function LiveFreeDemoExamBox() {
               </div>
             </li>
 
-            <li className="p-3.5 rounded-xl bg-[#0A2540] border border-[#991B1B]/70 col-span-2 sm:col-span-1">
+            <li className="p-3.5 rounded-xl bg-[#0A2540]/80 border border-rose-500/40 col-span-2 sm:col-span-1">
               <div className="text-xl sm:text-2xl font-black font-mono text-rose-300">
                 -০.২৫
               </div>
@@ -109,12 +109,12 @@ export function LiveFreeDemoExamBox() {
         </div>
 
         {/* Right Column: Live Diagnostic Preview Box */}
-        <div className="lg:col-span-5 p-6 rounded-2xl bg-[#061426] border border-[#1E3A5F] shadow-2xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="lg:col-span-5 p-6 rounded-2xl bg-[#061426]/95 border border-cyan-500/30 shadow-2xl space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20">
             <span className="text-xs font-mono text-amber-300 font-bold uppercase">
               নমুনা প্রশ্ন ০১ • এইচএসসি পদার্থবিজ্ঞান
             </span>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
               সঠিক উত্তর: +১.০
             </span>
           </div>
@@ -125,7 +125,7 @@ export function LiveFreeDemoExamBox() {
             </p>
 
             <div className="space-y-2 text-xs font-bengali">
-              <div className="p-2.5 rounded-xl bg-[#0A2540] border border-[#1E3A5F] text-slate-300 flex items-center gap-2.5 hover:bg-[#0E3559] cursor-pointer transition">
+              <div className="p-2.5 rounded-xl bg-[#0A2540]/80 border border-cyan-500/20 text-slate-300 flex items-center gap-2.5 hover:bg-[#0E3559] cursor-pointer transition">
                 <span className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center text-[11px] font-mono">ক</span>
                 <span>দোলনকাল অপরিবর্তিত থাকবে</span>
               </div>
@@ -133,19 +133,19 @@ export function LiveFreeDemoExamBox() {
                 <span className="w-5 h-5 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center text-[11px] font-mono font-bold">খ</span>
                 <span>দোলনকাল √২ গুণ বৃদ্ধি পাবে (সঠিক)</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-[#0A2540] border border-[#1E3A5F] text-slate-300 flex items-center gap-2.5 hover:bg-[#0E3559] cursor-pointer transition">
+              <div className="p-2.5 rounded-xl bg-[#0A2540]/80 border border-cyan-500/20 text-slate-300 flex items-center gap-2.5 hover:bg-[#0E3559] cursor-pointer transition">
                 <span className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center text-[11px] font-mono">গ</span>
                 <span>দোলনকাল অর্ধেক হবে</span>
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#0A2540] border border-[#1E3A5F] text-[11px] text-slate-300 font-bengali leading-relaxed">
+            <div className="p-3 rounded-xl bg-[#0A2540]/90 border border-cyan-500/25 text-[11px] text-slate-300 font-bengali leading-relaxed">
               <strong className="text-amber-300 font-mono">ব্যাখ্যা (T = 2π√(L/g)):</strong> দোলনকাল কার্যকর দৈর্ঘ্যের বর্গমূলের সমানুপাতিক। সুতরাং L দ্বিগুণ হলে T পরিবর্তিত হয়ে √২ গুণ হবে।
             </div>
           </div>
         </div>
 
       </div>
-    </section>
+    </div>
   );
 }

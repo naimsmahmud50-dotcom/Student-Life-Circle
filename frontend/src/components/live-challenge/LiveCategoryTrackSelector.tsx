@@ -125,15 +125,15 @@ export function LiveCategoryTrackSelector() {
           <span>বিষয় ও পরীক্ষা ক্যাটাগরি</span>
         </div>
 
-        <h2 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif tracking-tight">
+        <h2 className="text-xl sm:text-3xl font-bold text-white font-serif tracking-tight">
           অগ্রযাত্রায় কোন কোন{' '}
-          <span className="text-[#B45309] dark:text-amber-400 font-serif">
+          <span className="text-sky-400 font-serif">
             পরীক্ষার প্রস্তুতি
           </span>{' '}
           নিতে পারবেন?
         </h2>
 
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali">
+        <p className="text-xs sm:text-sm text-slate-300 font-bengali">
           টার্গেট যেটাই হোক, পূর্ণাঙ্গ প্রস্তুতি ও রিয়েল-টাইম লাইভ পরীক্ষা এক প্ল্যাটফরমে
         </p>
       </div>
@@ -150,8 +150,8 @@ export function LiveCategoryTrackSelector() {
               onClick={() => setSelectedTrackId(track.id)}
               className={`p-6 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-white dark:bg-slate-900 border-[#0A2540] dark:border-amber-400 shadow-md ring-2 ring-[#0A2540]/10'
-                  : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm'
+                  ? 'bg-white/95 dark:bg-[#0E2244]/90 border-sky-400 shadow-xl ring-2 ring-sky-400/20'
+                  : 'bg-white/90 dark:bg-[#0A1A32]/75 backdrop-blur-md border-sky-900/40 dark:border-sky-800/50 hover:border-sky-400/50 shadow-md'
               }`}
             >
               <div className="space-y-4">
@@ -168,19 +168,19 @@ export function LiveCategoryTrackSelector() {
                   <h3 className="text-base sm:text-lg font-bold font-bengali text-slate-900 dark:text-white">
                     {track.nameBn}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
                     {track.shortDescBn}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-slate-500 font-medium">
+              <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 font-medium">
                   {track.statsBn}
                 </span>
                 <Link
                   href={`/practice?track=${track.id}`}
-                  className="inline-flex items-center gap-1 text-xs font-bold font-bengali text-[#0A2540] dark:text-amber-400 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold font-bengali text-sky-700 dark:text-sky-300 hover:underline"
                 >
                   <span>প্রস্তুতি শুরু</span>
                   <ChevronRight className="w-3.5 h-3.5" />

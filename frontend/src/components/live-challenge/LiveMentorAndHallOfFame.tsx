@@ -98,31 +98,31 @@ export function LiveMentorAndHallOfFame() {
   const [activeTab, setActiveTab] = useState<'mentors' | 'achievers'>('mentors');
 
   return (
-    <section className="space-y-6">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2 border-b border-orange-200/50 dark:border-orange-900/40">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold font-bengali">
-            <Award className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 dark:bg-orange-500/20 border border-orange-500/30 text-orange-700 dark:text-orange-300 text-xs font-bold font-bengali">
+            <Award className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
             <span>অভিজ্ঞ মেন্টর প্যানেল ও হল অফ ফেম</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white font-bengali">
             দেশের সেরা ক্যাডার, শিক্ষক ও শীর্ষ বিজয়ীদের গাইডলাইন
           </h2>
-          <p className="text-xs text-slate-500 font-bengali">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali">
             Live MCQ-এর ঐতিহ্য বজায় রেখে শতভাগ নির্ভরযোগ্য ও যাচাইকৃত শিক্ষক প্যানেলের সরাসরি তত্ত্বাবধান
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <div className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-[#1A0E0A] border border-orange-500/25">
           <button
             type="button"
             onClick={() => setActiveTab('mentors')}
             className={`px-4 py-1.5 rounded-lg text-xs font-bold font-bengali transition ${
               activeTab === 'mentors'
-                ? 'bg-white dark:bg-slate-900 text-[#0A2540] dark:text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                ? 'bg-orange-500 text-white shadow-sm'
+                : 'text-slate-600 dark:text-orange-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             মেন্টর ও ইন্সট্রাক্টর
@@ -132,8 +132,8 @@ export function LiveMentorAndHallOfFame() {
             onClick={() => setActiveTab('achievers')}
             className={`px-4 py-1.5 rounded-lg text-xs font-bold font-bengali transition ${
               activeTab === 'achievers'
-                ? 'bg-white dark:bg-slate-900 text-[#0A2540] dark:text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                ? 'bg-orange-500 text-white shadow-sm'
+                : 'text-slate-600 dark:text-orange-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             হল অফ ফেম (সফলতা)
@@ -147,14 +147,14 @@ export function LiveMentorAndHallOfFame() {
           {MENTORS.map((m) => (
             <div
               key={m.nameBn}
-              className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm hover:border-[#0A2540] dark:hover:border-amber-400 transition flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-white/95 dark:bg-[#180E09]/90 border border-orange-500/25 shadow-xl hover:border-orange-500/50 transition flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-[#0A2540] text-amber-300 font-bold font-mono text-sm flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-orange-600 text-white font-bold font-mono text-sm flex items-center justify-center shadow-sm">
                     {m.nameBn.charAt(0)}
                   </div>
-                  <span className="text-[10px] font-bold font-bengali px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                  <span className="text-[10px] font-bold font-bengali px-2 py-0.5 rounded-full bg-orange-500/10 dark:bg-orange-500/20 text-orange-800 dark:text-orange-300 border border-orange-500/20">
                     {m.badgeBn}
                   </span>
                 </div>
@@ -163,16 +163,16 @@ export function LiveMentorAndHallOfFame() {
                   <h3 className="text-sm font-bold font-bengali text-slate-900 dark:text-white">
                     {m.nameBn}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
                     {m.designationBn}
                   </p>
-                  <p className="text-[11px] text-slate-500 font-bengali">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bengali">
                     {m.institutionBn}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1.5 text-[11px] font-bengali text-emerald-700 dark:text-emerald-400">
+              <div className="pt-3 mt-3 border-t border-orange-200/40 dark:border-orange-900/30 flex items-center gap-1.5 text-[11px] font-bengali text-emerald-700 dark:text-emerald-400">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{m.cadreTrackBn}</span>
               </div>
@@ -187,18 +187,18 @@ export function LiveMentorAndHallOfFame() {
           {ACHIEVERS.map((achiever) => (
             <div
               key={achiever.nameBn}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-4"
+              className="p-6 rounded-2xl bg-white/95 dark:bg-[#180E09]/90 border border-orange-500/25 shadow-xl space-y-4"
             >
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-sm font-bold font-bengali text-slate-900 dark:text-white">
                     {achiever.nameBn}
                   </h3>
-                  <span className="text-xs text-slate-500 font-bengali block">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-bengali block">
                     {achiever.examBn}
                   </span>
                 </div>
-                <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">
+                <div className="p-2 rounded-xl bg-orange-500/15 text-orange-600 dark:text-orange-300 border border-orange-500/30">
                   <Trophy className="w-5 h-5" />
                 </div>
               </div>
@@ -212,13 +212,13 @@ export function LiveMentorAndHallOfFame() {
                 </span>
               </div>
 
-              <blockquote className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed italic border-l-2 border-amber-400 pl-3">
+              <blockquote className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed italic border-l-2 border-orange-400 pl-3">
                 "{achiever.quoteBn}"
               </blockquote>
             </div>
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }

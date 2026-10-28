@@ -36,34 +36,34 @@ const DEFAULT_CHAPTERS: ChapterWeightage[] = [
 
 export const SubjectWeightageBreakdown: React.FC = () => {
   return (
-    <section
+    <div
       aria-label="বিষয়ভিত্তিক প্রশ্ন বণ্টন ও মূল্যায়ন সূত্রাবলী"
-      className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6"
+      className="p-6 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#160E30]/90 backdrop-blur-md border border-purple-500/25 shadow-xl space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-purple-200/50 dark:border-purple-900/40">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold font-mono text-[#0A2540] dark:text-amber-300 uppercase tracking-wider">
-            <BarChart3 className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-bold font-mono text-purple-600 dark:text-purple-300 uppercase tracking-wider">
+            <BarChart3 className="w-4 h-4 text-purple-500 dark:text-purple-400" />
             <span>সিলেবাস ওয়েইটেজ ও মার্কিং ম্যাট্রিক্স</span>
           </div>
           <h2 className="text-lg sm:text-xl font-bold font-bengali text-slate-900 dark:text-white mt-1">
             লাইভ পরীক্ষার প্রশ্ন বণ্টন ও কাট-মার্ক পূর্বাভাস
           </h2>
         </div>
-        <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-bold self-start sm:self-auto">
+        <span className="px-3 py-1 rounded-full bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 text-xs font-mono font-bold self-start sm:self-auto">
           মোট পূর্ণমান: ২৫ নম্বর
         </span>
       </div>
 
       {/* Visual Proportional Bar */}
       <div className="space-y-2">
-        <div className="flex justify-between text-xs font-bengali text-slate-600 dark:text-slate-400">
+        <div className="flex justify-between text-xs font-bengali text-slate-600 dark:text-slate-300">
           <span>অধ্যায়ভিত্তিক প্রশ্ন অনুপাত</span>
-          <span>১০০% কভারেজ (২৫টি প্রশ্ন)</span>
+          <span className="text-purple-600 dark:text-purple-300 font-mono">১০০% কভারেজ (২৫টি প্রশ্ন)</span>
         </div>
 
-        <div className="h-4 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex">
+        <div className="h-4 w-full rounded-full bg-slate-100 dark:bg-slate-800/80 overflow-hidden flex border border-purple-500/20">
           {DEFAULT_CHAPTERS.map((ch, idx) => (
             <div
               key={idx}
@@ -77,14 +77,14 @@ export const SubjectWeightageBreakdown: React.FC = () => {
         {/* Legend */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
           {DEFAULT_CHAPTERS.map((ch, idx) => (
-            <div key={idx} className="p-2.5 rounded-xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <div key={idx} className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#1C123B]/80 border border-purple-500/20">
               <div className="flex items-center gap-1.5 mb-1">
                 <span className={`w-2.5 h-2.5 rounded-full ${ch.colorClass.split(' ')[0]}`} />
                 <span className="text-xs font-bold font-bengali text-slate-800 dark:text-slate-200 truncate">
                   {ch.chapterBn}
                 </span>
               </div>
-              <div className="text-[11px] font-mono text-slate-500">
+              <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                 {ch.questionCount} প্রশ্ন • {ch.percentage}%
               </div>
             </div>
@@ -94,7 +94,7 @@ export const SubjectWeightageBreakdown: React.FC = () => {
 
       {/* Marking Evaluation Formulas (4 Cards) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-        <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40">
+        <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-500/30">
           <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 text-xs font-bold font-bengali mb-1">
             <FileCheck2 className="w-4 h-4" />
             <span>সঠিক উত্তর</span>
@@ -107,20 +107,20 @@ export const SubjectWeightageBreakdown: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#991B1B]/5 dark:bg-[#991B1B]/20 border border-[#991B1B]/20 dark:border-[#991B1B]/40">
-          <div className="flex items-center gap-2 text-[#991B1B] dark:text-rose-300 text-xs font-bold font-bengali mb-1">
+        <div className="p-4 rounded-2xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-500/30">
+          <div className="flex items-center gap-2 text-rose-800 dark:text-rose-300 text-xs font-bold font-bengali mb-1">
             <AlertTriangle className="w-4 h-4" />
             <span>নেগেটিভ মার্কিং</span>
           </div>
-          <div className="text-xl font-black font-mono text-[#991B1B] dark:text-rose-300">
+          <div className="text-xl font-black font-mono text-rose-700 dark:text-rose-300">
             -০.২৫ <span className="text-xs font-bengali font-normal">কর্তন</span>
           </div>
-          <p className="text-[11px] text-[#991B1B]/80 dark:text-rose-300/80 font-bengali mt-1">
+          <p className="text-[11px] text-rose-700/80 dark:text-rose-300/80 font-bengali mt-1">
             ভুল উত্তরের জন্য ২৫% নম্বর কাটা যাবে।
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40">
+        <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-500/30">
           <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 text-xs font-bold font-bengali mb-1">
             <Target className="w-4 h-4" />
             <span>পাস মার্ক থ্রেশহোল্ড</span>
@@ -133,19 +133,19 @@ export const SubjectWeightageBreakdown: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-          <div className="flex items-center gap-2 text-[#0A2540] dark:text-amber-300 text-xs font-bold font-bengali mb-1">
+        <div className="p-4 rounded-2xl bg-purple-50/60 dark:bg-[#1F1442]/80 border border-purple-500/30">
+          <div className="flex items-center gap-2 text-purple-700 dark:text-purple-300 text-xs font-bold font-bengali mb-1">
             <Award className="w-4 h-4" />
             <span>প্রত্যাশিত কাট-মার্ক</span>
           </div>
-          <div className="text-xl font-black font-mono text-[#0A2540] dark:text-amber-300">
+          <div className="text-xl font-black font-mono text-purple-700 dark:text-purple-300">
             ১৮.৫+ <span className="text-xs font-bengali font-normal">নম্বর</span>
           </div>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bengali mt-1">
+          <p className="text-[11px] text-purple-700/80 dark:text-purple-300/80 font-bengali mt-1">
             শীর্ষ ৫% জাতীয় মেধা তালিকার কাট-অফ পয়েন্ট।
           </p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

@@ -69,12 +69,12 @@ export const DynamicInfoNoticeBoard: React.FC = () => {
     <section
       id="notice-board"
       aria-label="ডাইনামিক ইনফো প্যানেল ও লাইভ বুলেটিন"
-      className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-6"
+      className="p-6 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#1A0E1C]/90 backdrop-blur-md border border-rose-500/25 shadow-xl space-y-6"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-rose-200/50 dark:border-rose-900/40">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold font-mono text-[#0A2540] dark:text-amber-300 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-xs font-bold font-mono text-rose-600 dark:text-rose-400 uppercase tracking-wider">
             <Bell className="w-4 h-4" />
             <span>লাইভ নোটিফিকেশন ফিড</span>
           </div>
@@ -82,7 +82,7 @@ export const DynamicInfoNoticeBoard: React.FC = () => {
             ডাইনামিক ইনফো প্যানেল ও শিক্ষাবোর্ড নোটিশ
           </h2>
         </div>
-        <span className="text-xs font-mono text-slate-500">
+        <span className="text-xs font-mono text-rose-600 dark:text-rose-400 font-bold px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20">
           রিয়েল-টাইমে হালনাগাদকৃত
         </span>
       </div>
@@ -92,7 +92,7 @@ export const DynamicInfoNoticeBoard: React.FC = () => {
         {NOTICES.map((notice) => (
           <div
             key={notice.id}
-            className="p-4 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            className="p-4 rounded-2xl bg-white/80 dark:bg-[#150A17]/80 border border-rose-900/20 dark:border-rose-900/40 hover:border-rose-500/40 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
           >
             <div className="space-y-1.5 max-w-3xl">
               <div className="flex items-center gap-2">

@@ -70,14 +70,14 @@ export function LiveHowItWorksPathway() {
           <span>৪টি ধারাবাহিক ধাপ</span>
         </div>
 
-        <h2 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif tracking-tight">
+        <h2 className="text-xl sm:text-3xl font-bold text-white font-serif tracking-tight">
           অগ্রযাত্রা কীভাবে আপনার{' '}
-          <span className="text-[#0A2540] dark:text-amber-400 font-serif">
+          <span className="text-emerald-400 font-serif">
             প্রস্তুতিতে সাহায্য করবে?
           </span>
         </h2>
 
-        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali">
+        <p className="text-xs sm:text-sm text-slate-300 font-bengali">
           সহজ রেজিস্ট্রেশন থেকে চূড়ান্ত জাতীয় মেধা তালিকায় অবস্থান অর্জন — ধাপে ধাপে স্বয়ংসম্পূর্ণ প্রস্তুতি
         </p>
       </div>
@@ -90,14 +90,14 @@ export function LiveHowItWorksPathway() {
           return (
             <div
               key={step.numberBn}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-white/95 dark:bg-[#07241E]/85 backdrop-blur-md border border-emerald-500/25 shadow-md hover:shadow-xl hover:border-emerald-400/50 transition flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl sm:text-4xl font-black font-mono text-[#0A2540] dark:text-amber-400">
+                  <span className="text-3xl sm:text-4xl font-black font-mono text-emerald-700 dark:text-emerald-400">
                     {step.numberBn}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[#0A2540] dark:text-slate-200">
+                  <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 border border-emerald-500/20">
                     <Icon className="w-5 h-5" />
                   </div>
                 </div>
@@ -106,17 +106,17 @@ export function LiveHowItWorksPathway() {
                   <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
                     {step.titleBn}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
                     {step.descBn}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-[11px] font-bold font-bengali text-slate-500">
+              <div className="pt-4 mt-4 border-t border-slate-200 dark:border-emerald-900/40 flex items-center justify-between">
+                <span className="text-[11px] font-bold font-bengali text-slate-500 dark:text-emerald-300/80">
                   {step.badgeBn}
                 </span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
               </div>
             </div>
           );
