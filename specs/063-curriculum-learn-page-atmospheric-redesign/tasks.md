@@ -8,4 +8,4 @@
 - [x] Task 6: Implement Board Exam Pedagogical Roadmap (`GUIDELINES`) and Curriculum FAQ Accordion (`ACADEMIC`) in `frontend/src/pages/learn.tsx`.
 - [x] Task 7: Run TypeScript compilation check (`npx tsc --noEmit`) and Zero-Emoji scan.
 - [x] Task 8: Verify Next.js production static export (`npm --prefix frontend run build:pages`).
-- [ ] Task 9: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
+- [x] Task 9: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
