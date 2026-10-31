@@ -20,6 +20,7 @@ import {
   RotateCcw,
   Sparkles,
   ChevronRight,
+  ChevronDown,
   Video,
   Award,
   Layers,
@@ -30,7 +31,13 @@ import {
   FileText,
   BookmarkCheck,
   Check,
-  ExternalLink
+  ExternalLink,
+  Search,
+  HelpCircle,
+  Lightbulb,
+  Target,
+  ListChecks,
+  BookMarked
 } from 'lucide-react';
 import { AppHead, createCourseSchema } from '@/components/layout/Head';
 import { Navbar } from '@/components/layout/Navbar';
@@ -435,10 +442,30 @@ export default function LearnPage() {
   const [selectedStage, setSelectedStage] = useState<'ALL' | 'SSC' | 'HSC' | 'ADMISSION'>('HSC');
   const [activeVideoLecture, setActiveVideoLecture] = useState<{ id: string; title: string } | null>(null);
   const [activeNotesChapter, setActiveNotesChapter] = useState<{ chapter: ChapterItem; subjectTitle: string } | null>(null);
+  const [chapterSearchQuery, setChapterSearchQuery] = useState<string>('');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  const filteredSubjects = selectedStage === 'ALL'
+  const stageFilteredSubjects = selectedStage === 'ALL'
     ? CURATED_SUBJECTS
     : CURATED_SUBJECTS.filter((s) => s.stage === selectedStage);
+
+  const filteredSubjects = chapterSearchQuery.trim() === ''
+    ? stageFilteredSubjects
+    : stageFilteredSubjects
+        .map((sub) => {
+          const q = chapterSearchQuery.trim().toLowerCase();
+          const matchingChapters = sub.chapters.filter(
+            (ch) =>
+              ch.titleBn.toLowerCase().includes(q) ||
+              sub.titleBn.toLowerCase().includes(q) ||
+              (ch.summaryNotes?.overview && ch.summaryNotes.overview.toLowerCase().includes(q))
+          );
+          return {
+            ...sub,
+            chapters: matchingChapters
+          };
+        })
+        .filter((sub) => sub.chapters.length > 0);
 
   return (
     <>
@@ -465,6 +492,7 @@ export default function LearnPage() {
             category="এনসিটিবি অনুমোদিত ২০২৬ কারিকুলাম"
             title="পাঠ্যক্রম ও অধ্যায়ভিত্তিক শিক্ষা"
             subtitle="জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (NCTB) অনুমোদিত পাঠ্যবই অনুযায়ী প্রতিটি বিষয়ের পুঙ্খানুপুঙ্খ অধ্যায়, ধারণাগত শিখনফল, বোর্ড প্রশ্নের সংকলন এবং রিভিশন গাইড।"
+            watermarkText="CURRICULUM"
             breadcrumbs={[
               { label: 'নীড়পাতা', href: '/' },
               { label: 'পাঠ্যক্রম ও লার্নিং' }
@@ -477,276 +505,646 @@ export default function LearnPage() {
             ]}
           />
 
-          {/* Level Switcher: Unified Shared Tabs */}
-          <div className="border-b border-[#E5E2DA] dark:border-slate-800 pb-1">
-            <Tabs
-              defaultValue={selectedStage}
-              value={selectedStage}
-              onValueChange={(val) => setSelectedStage(val as any)}
-            >
-              <TabsList className="bg-transparent border-none p-0 gap-2 sm:gap-4 flex-wrap">
+          {/* Section 1: Level Switcher & Chapter Search Console */}
+          <div className="relative overflow-hidden rounded-3xl border border-amber-200/60 dark:border-[#262D3D] bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md p-5 sm:p-7 shadow-xs">
+            {/* Ambient Warm Amber Glow */}
+            <div
+              className="pointer-events-none absolute -right-20 -top-20 w-80 h-80 rounded-full bg-radial from-amber-400/12 via-amber-300/5 to-transparent blur-3xl"
+              aria-hidden="true"
+            />
+            
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#ED8E22] animate-pulse" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8862B] dark:text-[#ED8E22] font-sans">
+                    CURRICULUM LEVEL SELECTOR
+                  </span>
+                </div>
+                <h2 className="text-lg sm:text-xl font-bold font-bengali text-[#0A2540] dark:text-white">
+                  শিক্ষাক্রমের স্তর নির্বাচন ও অধ্যায় অনুসন্ধান
+                </h2>
+                <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali">
+                  আপনার কাঙ্ক্ষিত শ্রেণি বা স্তর নির্বাচন করে নির্দিষ্ট বিষয়ের অধ্যায় ও টপিকগুলো ফিল্টার করুন
+                </p>
+              </div>
+
+              {/* Stage Filter Buttons */}
+              <div className="flex flex-wrap items-center gap-2">
                 {[
-                  { key: 'HSC', label: 'এইচএসসি (Class 11-12)' },
-                  { key: 'SSC', label: 'এসএসসি (Class 9-10)' },
-                  { key: 'ALL', label: 'সকল স্তর' },
-                  { key: 'ADMISSION', label: 'বিশ্ববিদ্যালয় ভর্তি' },
-                ].map((tab) => (
-                  <TabsTrigger
-                    key={tab.key}
-                    value={tab.key}
-                    className="data-[state=active]:bg-[#1B2A4A] data-[state=active]:text-white data-[state=active]:shadow-[0_4px_0_0_#051329] active:translate-y-1 min-h-[44px] px-4 py-2 rounded-lg font-bengali text-sm font-semibold transition-all border border-[#E5E2DA] dark:border-slate-800 hover:bg-[#FAF8F3] dark:hover:bg-slate-800"
+                  { key: 'HSC', label: 'এইচএসসি (Class 11-12)', badge: '১০ অধ্যায়' },
+                  { key: 'SSC', label: 'এসএসসি (Class 9-10)', badge: '৮ অধ্যায়' },
+                  { key: 'ADMISSION', label: 'বিশ্ববিদ্যালয় ভর্তি', badge: '১০ অধ্যায়' },
+                  { key: 'ALL', label: 'সকল স্তর', badge: '২৮ অধ্যায়' },
+                ].map((tab) => {
+                  const isActive = selectedStage === tab.key;
+                  return (
+                    <button
+                      key={tab.key}
+                      type="button"
+                      onClick={() => setSelectedStage(tab.key as any)}
+                      className={`group relative flex items-center gap-2 px-4 py-2.5 rounded-xl font-bengali text-xs sm:text-sm font-bold transition-all min-h-[44px] cursor-pointer ${
+                        isActive
+                          ? 'bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none'
+                          : 'bg-[#FAF8F3] dark:bg-slate-900 text-[#1B2A4A] dark:text-slate-300 border border-[#E5E2DA] dark:border-slate-800 hover:border-[#ED8E22]/50 hover:bg-amber-50/50 dark:hover:bg-slate-800'
+                      }`}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        className={`text-[10px] font-sans px-1.5 py-0.5 rounded-md ${
+                          isActive
+                            ? 'bg-white/20 text-white'
+                            : 'bg-amber-100/80 dark:bg-slate-800 text-[#B8862B] dark:text-amber-400'
+                        }`}
+                      >
+                        {tab.badge}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Chapter & Topic Search Bar */}
+            <div className="relative z-10 mt-5 pt-5 border-t border-amber-100 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={chapterSearchQuery}
+                  onChange={(e) => setChapterSearchQuery(e.target.value)}
+                  placeholder="অধ্যায় বা বিষয়ের নাম দিয়ে খুঁজুন (যেমন: ভেক্টর, নিউটনিয়ান বলবিদ্যা, অন্তরীকরণ)..."
+                  className="w-full pl-10 pr-10 py-2.5 rounded-xl text-xs sm:text-sm font-bengali bg-white dark:bg-slate-900 border border-[#E5E2DA] dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]/50 focus:border-[#ED8E22] text-[#1B2A4A] dark:text-white placeholder:text-slate-400 transition"
+                />
+                {chapterSearchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setChapterSearchQuery('')}
+                    aria-label="অনুসন্ধান মুছুন"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                   >
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+              {chapterSearchQuery && (
+                <div className="flex items-center gap-2 text-xs font-bengali text-[#0B5D3B] dark:text-emerald-400 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>ফিল্টার সক্রিয়: {filteredSubjects.reduce((acc, s) => acc + s.chapters.length, 0)}টি অধ্যায় পাওয়া গেছে</span>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Spaced-Repetition Revision Queue (আজকের রিভিশন কিউ) */}
-          <Card className="border-[#E5E2DA] shadow-xs">
-            <CardHeader className="border-b border-[#E5E2DA] pb-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#FEF9EE] flex items-center justify-center text-[#B8862B] border border-[#F6E6C2]">
-                    <RotateCcw className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg sm:text-xl font-bold font-bengali text-[#1B2A4A] dark:text-white">
-                      স্পেসড-রিপিটিশন রিভিশন কিউ (আজকের রিভিশন তালিকা)
-                    </CardTitle>
-                    <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali pt-0.5">
-                      বৈজ্ঞানিক ব্যবধানযুক্ত পুনরাবৃত্তি (SM-2 মডেল) অনুযায়ী বিস্মৃতি প্রতিরোধে আজকের পাঠগুলো অনুশীলন করুন
-                    </p>
-                  </div>
-                </div>
-                <Badge variant="warning" size="md">
-                  ৩টি টপিক আজ বাকি
-                </Badge>
-              </div>
-            </CardHeader>
+          {/* Section 2: Spaced-Repetition Revision Queue (আজকের রিভিশন কিউ) */}
+          <div className="relative overflow-hidden rounded-3xl border border-emerald-200/70 dark:border-emerald-950/70 bg-[#F4FAF6]/90 dark:bg-[#071714]/90 p-6 sm:p-8 shadow-xs">
+            {/* Background Typographic Watermark */}
+            <div
+              className="pointer-events-none absolute right-4 -bottom-6 text-7xl sm:text-8xl md:text-9xl font-black tracking-tight text-emerald-900/[0.04] dark:text-emerald-300/[0.03] select-none uppercase font-sans"
+              aria-hidden="true"
+            >
+              REVISION
+            </div>
 
-            <CardContent className="pt-5">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="p-4 rounded-xl bg-[#FAF8F3] dark:bg-slate-900 border border-[#E5E2DA] dark:border-slate-800 flex flex-col justify-between space-y-3">
+            {/* Ambient Emerald Aura */}
+            <div
+              className="pointer-events-none absolute -left-16 -top-16 w-72 h-72 rounded-full bg-radial from-emerald-400/12 via-emerald-300/5 to-transparent blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-emerald-200/60 dark:border-emerald-900/60 pb-5">
+              <div className="flex items-start sm:items-center gap-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-100/80 dark:bg-emerald-900/40 flex items-center justify-center text-[#0B5D3B] dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shadow-xs shrink-0">
+                  <RotateCcw className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+                      SM-2 SCIENTIFIC SPACING
+                    </span>
+                    <Badge variant="success" size="sm">অ্যালগরিদম ট্র্যাকার</Badge>
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-bold font-bengali text-[#0A2540] dark:text-white pt-0.5">
+                    স্পেসড-রিপিটিশন রিভিশন কিউ (আজকের পাঠ তালিকা)
+                  </h2>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
+                    বৈজ্ঞানিক ব্যবধানযুক্ত পুনরাবৃত্তি অনুযায়ী বিস্মৃতি প্রতিরোধে আজকের ৩টি নির্ধারিত পাঠ অবিলম্বে অনুশীলন করুন
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-100/90 dark:bg-amber-950/60 text-[#B8862B] dark:text-amber-300 font-bengali text-xs font-bold border border-amber-300/60 dark:border-amber-800/60">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>৩টি টপিক আজ বাকি</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="relative z-10 pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="group p-5 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-[#223344] hover:border-[#0A2540] dark:hover:border-emerald-500/60 shadow-xs transition-all flex flex-col justify-between space-y-4">
                   <div>
-                    <Badge variant="brand" size="sm" className="mb-2">পদার্থবিজ্ঞান ১ম পত্র</Badge>
-                    <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-white font-bengali">
-                      নিউটনিয়ান বলবিদ্যা (ঘূর্ণন গতিশক্তি)
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <Badge variant="brand" size="sm">পদার্থবিজ্ঞান ১ম পত্র</Badge>
+                      <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/50 text-[#B8862B] dark:text-amber-400 border border-amber-200 dark:border-amber-900/60">
+                        ব্যবধান: ৩য় দিন
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-[#0A2540] dark:text-white font-bengali group-hover:text-[#ED8E22] transition-colors">
+                      নিউটনিয়ান বলবিদ্যা (ঘূর্ণন গতিশক্তি ও জড়তার ভ্রামক)
                     </h3>
-                    <span className="text-[11px] text-[#B8862B] font-bengali mt-1 block">ব্যবধান: ৩য় দিন</span>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1.5 line-clamp-2">
+                      টর্ক, কৌণিক ভরবেগ ও গোলকের অক্ষ সাপেক্ষে জড়তার ভ্রামকের মূল প্রতিপাদন।
+                    </p>
                   </div>
                   <Link
                     href="/practice?topic=newtonian_rotation"
-                    className="text-xs font-semibold font-bengali text-[#1B2A4A] hover:underline flex items-center justify-between pt-2 border-t border-[#E5E2DA]/60"
+                    className="mt-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs font-bold font-bengali text-[#0A2540] dark:text-emerald-400 flex items-center justify-between group-hover:translate-x-0.5 transition-transform"
                   >
-                    <span>রিভিশন কুইজ শুরু করুন</span>
+                    <span className="flex items-center gap-1.5">
+                      <Play className="w-3.5 h-3.5 text-[#ED8E22]" />
+                      <span>রিভিশন কুইজ শুরু করুন</span>
+                    </span>
                     <ChevronRight className="w-4 h-4 text-[#B8862B]" />
                   </Link>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#FAF8F3] dark:bg-slate-900 border border-[#E5E2DA] dark:border-slate-800 flex flex-col justify-between space-y-3">
+                <div className="group p-5 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-[#223344] hover:border-[#0A2540] dark:hover:border-emerald-500/60 shadow-xs transition-all flex flex-col justify-between space-y-4">
                   <div>
-                    <Badge variant="success" size="sm" className="mb-2">রসায়ন ১ম পত্র</Badge>
-                    <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-white font-bengali">
-                      কোয়ান্টাম সংখ্যা ও হুন্ডের নীতি
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <Badge variant="success" size="sm">রসায়ন ১ম পত্র</Badge>
+                      <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-[#0B5D3B] dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/60">
+                        ব্যবধান: ৭ম দিন
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-[#0A2540] dark:text-white font-bengali group-hover:text-[#0B5D3B] transition-colors">
+                      কোয়ান্টাম সংখ্যা, পাউলির নীতি ও হুন্ডের নীতি
                     </h3>
-                    <span className="text-[11px] text-[#B8862B] font-bengali mt-1 block">ব্যবধান: ৭ম দিন</span>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1.5 line-clamp-2">
+                      চারটি কোয়ান্টাম সংখ্যার তাৎপর্য ও ক্রোমিয়াম/কপারের ব্যতিক্রমী ইলেকট্রন বিন্যাস।
+                    </p>
                   </div>
                   <Link
                     href="/practice?topic=quantum_hund"
-                    className="text-xs font-semibold font-bengali text-[#0B5D3B] hover:underline flex items-center justify-between pt-2 border-t border-[#E5E2DA]/60"
+                    className="mt-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs font-bold font-bengali text-[#0B5D3B] dark:text-emerald-400 flex items-center justify-between group-hover:translate-x-0.5 transition-transform"
                   >
-                    <span>রিভিশন কুইজ শুরু করুন</span>
+                    <span className="flex items-center gap-1.5">
+                      <Play className="w-3.5 h-3.5 text-[#0B5D3B]" />
+                      <span>রিভিশন কুইজ শুরু করুন</span>
+                    </span>
                     <ChevronRight className="w-4 h-4 text-[#0B5D3B]" />
                   </Link>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#FAF8F3] dark:bg-slate-900 border border-[#E5E2DA] dark:border-slate-800 flex flex-col justify-between space-y-3">
+                <div className="group p-5 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-[#223344] hover:border-[#0A2540] dark:hover:border-emerald-500/60 shadow-xs transition-all flex flex-col justify-between space-y-4">
                   <div>
-                    <Badge variant="default" size="sm" className="mb-2">উচ্চতর গণিত ১ম পত্র</Badge>
-                    <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-white font-bengali">
-                      অন্তরীকরণ (ত্রিকোণমিতিক ডেরিভেটিভ)
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <Badge variant="default" size="sm">উচ্চতর গণিত ১ম পত্র</Badge>
+                      <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/50 text-[#1B2A4A] dark:text-blue-300 border border-blue-200 dark:border-blue-900/60">
+                        ব্যবধান: ১৪তম দিন
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-[#0A2540] dark:text-white font-bengali group-hover:text-[#1B2A4A] transition-colors">
+                      অন্তরীকরণ (ত্রিকোণমিতিক ডেরিভেটিভ ও চেইন রুল)
                     </h3>
-                    <span className="text-[11px] text-[#B8862B] font-bengali mt-1 block">ব্যবধান: ১৪তম দিন</span>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1.5 line-clamp-2">
+                      ফাংশনের ফাংশন অন্তরীকরণ ও স্পর্শক-অভিলম্বের সমীকরণ নির্ণয়ের বোর্ড কৌশল।
+                    </p>
                   </div>
                   <Link
                     href="/practice?topic=calculus_trig"
-                    className="text-xs font-semibold font-bengali text-[#1B2A4A] hover:underline flex items-center justify-between pt-2 border-t border-[#E5E2DA]/60"
+                    className="mt-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs font-bold font-bengali text-[#0A2540] dark:text-blue-400 flex items-center justify-between group-hover:translate-x-0.5 transition-transform"
                   >
-                    <span>রিভিশন কুইজ শুরু করুন</span>
-                    <ChevronRight className="w-4 h-4 text-[#1B2A4A]" />
+                    <span className="flex items-center gap-1.5">
+                      <Play className="w-3.5 h-3.5 text-[#0A2540] dark:text-blue-400" />
+                      <span>রিভিশন কুইজ শুরু করুন</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-[#0A2540] dark:text-blue-400" />
                   </Link>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Subjects & Chapters Section */}
-          {isLoading ? (
-            <div className="space-y-6 animate-pulse">
-              {[1, 2].map((i) => (
-                <div key={i} className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-[#E5E2DA] space-y-4">
-                  <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/4"></div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="h-24 bg-[#FAF8F3] dark:bg-slate-800/60 rounded-xl"></div>
-                    <div className="h-24 bg-[#FAF8F3] dark:bg-slate-800/60 rounded-xl"></div>
-                  </div>
-                </div>
-              ))}
             </div>
-          ) : (
-            <div className="space-y-8">
-              {filteredSubjects.map((sub) => (
-                <Card key={sub.id} className="border-[#E5E2DA] overflow-hidden shadow-xs">
-                  
-                  {/* Subject Header with Progress Gauge */}
-                  <CardHeader className="bg-[#FAF8F3] dark:bg-slate-900/60 border-b border-[#E5E2DA] p-5 sm:p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="brand" size="sm">
-                            {sub.stage}
-                          </Badge>
-                          <span className="text-xs text-[#5B5B5B] font-sans">
-                            {sub.titleEn}
-                          </span>
-                        </div>
-                        <CardTitle className="text-xl sm:text-2xl font-serif font-bold text-[#1B2A4A] dark:text-white">
-                          {sub.titleBn}
-                        </CardTitle>
-                      </div>
+          </div>
 
-                      {/* Circular Overall Subject Progress */}
-                      <div className="flex items-center gap-3 self-start sm:self-auto">
-                        <div className="relative w-12 h-12 shrink-0 flex items-center justify-center">
-                          <svg className="w-12 h-12 -rotate-90" viewBox="0 0 36 36">
-                            <path
-                              className="text-slate-200 dark:text-slate-800"
-                              strokeWidth="3.2"
-                              stroke="currentColor"
-                              fill="none"
-                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                            <path
-                              className="text-[#0A2540] dark:text-[#B8862B] transition-all duration-500"
-                              strokeDasharray={`${sub.completedPercent}, 100`}
-                              strokeWidth="3.2"
-                              strokeLinecap="round"
-                              stroke="currentColor"
-                              fill="none"
-                              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                          </svg>
-                          <span className="absolute text-xs font-sans font-bold text-[#1B2A4A] dark:text-white tabular-nums">
-                            {sub.completedPercent}%
-                          </span>
+          {/* Section 3: NCTB Subjects & Chapters Matrix */}
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-[#262D3D] bg-[#FAFBFD]/90 dark:bg-[#0A1220]/90 p-6 sm:p-8 shadow-xs">
+            {/* Background Typographic Watermark */}
+            <div
+              className="pointer-events-none absolute right-6 -bottom-6 text-7xl sm:text-8xl md:text-9xl font-black tracking-tight text-slate-900/[0.03] dark:text-white/[0.02] select-none uppercase font-sans"
+              aria-hidden="true"
+            >
+              SYLLABUS
+            </div>
+
+            {/* Ambient Navy Aura */}
+            <div
+              className="pointer-events-none absolute -right-20 -top-20 w-80 h-80 rounded-full bg-radial from-blue-500/8 via-indigo-500/4 to-transparent blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 dark:border-slate-800 pb-5 mb-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#0A2540] dark:text-sky-400 font-sans">
+                    NCTB CURRICULUM SYLLABUS
+                  </span>
+                  <Badge variant="brand" size="sm">অধ্যায়ভিত্তিক মডিউল</Badge>
+                </div>
+                <h2 className="text-lg sm:text-2xl font-serif font-bold text-[#0A2540] dark:text-white pt-0.5">
+                  পাঠ্যবইয়ের বিষয় ও অধ্যায়সমূহের পূর্ণাঙ্গ তালিকা
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
+                  প্রতিটি অধ্যায়ের কনসেপ্ট নোটস, গাণিতিক সূত্রাবলী, ভিডিও লেকচার এবং বোর্ড প্রশ্নের অনুশীলন
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bengali text-slate-500 dark:text-slate-400">
+                  মোট বিষয়: <strong className="font-sans text-[#0A2540] dark:text-white">{filteredSubjects.length}</strong> টি
+                </span>
+              </div>
+            </div>
+
+            {/* Subject Cards List */}
+            {isLoading ? (
+              <div className="space-y-6 animate-pulse">
+                {[1, 2].map((i) => (
+                  <div key={i} className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 space-y-4">
+                    <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/4"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="h-24 bg-slate-100 dark:bg-slate-800/60 rounded-xl"></div>
+                      <div className="h-24 bg-slate-100 dark:bg-slate-800/60 rounded-xl"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : filteredSubjects.length === 0 ? (
+              <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div className="w-12 h-12 rounded-full bg-amber-50 dark:bg-amber-950/60 text-[#B8862B] flex items-center justify-center mx-auto mb-3">
+                  <Search className="w-6 h-6" />
+                </div>
+                <h3 className="text-base font-bold font-bengali text-[#0A2540] dark:text-white">
+                  কোনো অধ্যায় খুঁজে পাওয়া যায়নি
+                </h3>
+                <p className="text-xs text-slate-500 font-bengali mt-1">
+                  অনুসন্ধান কীওয়ার্ড পরিবর্তন করুন অথবা স্তর ফিল্টার রিসেট করুন।
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setChapterSearchQuery('');
+                    setSelectedStage('ALL');
+                  }}
+                  className="mt-4 text-xs font-bengali cursor-pointer"
+                >
+                  ফিল্টার রিসেট করুন
+                </Button>
+              </div>
+            ) : (
+              <div className="relative z-10 space-y-8">
+                {filteredSubjects.map((sub) => (
+                  <div
+                    key={sub.id}
+                    className="rounded-2xl border border-slate-200/90 dark:border-[#223344] bg-white dark:bg-[#0B121E] overflow-hidden shadow-xs hover:border-[#0A2540]/30 transition-all"
+                  >
+                    {/* Subject Header with Progress Gauge */}
+                    <div className="bg-[#FAF8F3] dark:bg-slate-900/80 border-b border-slate-200/80 dark:border-slate-800 p-5 sm:p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <Badge variant="brand" size="sm">
+                              {sub.stage}
+                            </Badge>
+                            <span className="text-xs text-slate-500 font-sans">
+                              {sub.titleEn}
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0A2540] dark:text-white">
+                            {sub.titleBn}
+                          </h3>
                         </div>
 
-                        <div className="text-left text-xs">
-                          <span className="block font-bold font-bengali text-[#1B2A4A] dark:text-white">মোট অগ্রগতি</span>
-                          <span className="text-[#5B5B5B] font-bengali">{sub.chaptersCount} টি অধ্যায়</span>
+                        {/* Circular Overall Subject Progress */}
+                        <div className="flex items-center gap-3 self-start sm:self-auto bg-white dark:bg-slate-900 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xs">
+                          <div className="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                            <svg className="w-12 h-12 -rotate-90" viewBox="0 0 36 36">
+                              <path
+                                className="text-slate-200 dark:text-slate-800"
+                                strokeWidth="3.2"
+                                stroke="currentColor"
+                                fill="none"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                              />
+                              <path
+                                className="text-[#0A2540] dark:text-[#ED8E22] transition-all duration-500"
+                                strokeDasharray={`${sub.completedPercent}, 100`}
+                                strokeWidth="3.2"
+                                strokeLinecap="round"
+                                stroke="currentColor"
+                                fill="none"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                              />
+                            </svg>
+                            <span className="absolute text-xs font-sans font-bold text-[#0A2540] dark:text-white tabular-nums">
+                              {sub.completedPercent}%
+                            </span>
+                          </div>
+
+                          <div className="text-left text-xs">
+                            <span className="block font-bold font-bengali text-[#0A2540] dark:text-white">সিলেবাস কভারেজ</span>
+                            <span className="text-slate-500 font-bengali">{sub.chapters.length} টি অধ্যায় দৃশ্যমান</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </CardHeader>
 
-                  {/* Chapters List */}
-                  <CardContent className="p-5 sm:p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {sub.chapters.map((ch) => (
-                        <div
-                          key={ch.id}
-                          className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-[#E5E2DA] dark:border-slate-800 hover:border-[#1B2A4A]/40 transition-all flex flex-col justify-between gap-3"
-                        >
-                          <div className="flex items-start gap-3 min-w-0">
-                            {/* Circular Progress Gauge */}
-                            <div className="relative w-10 h-10 shrink-0 flex items-center justify-center mt-0.5">
-                              <svg className="w-10 h-10 -rotate-90" viewBox="0 0 36 36">
-                                <path
-                                  className="text-slate-200 dark:text-slate-800"
-                                  strokeWidth="3"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                />
-                                <path
-                                  className={ch.progressPercent === 100 ? 'text-[#0B5D3B]' : 'text-[#1B2A4A]'}
-                                  strokeDasharray={`${ch.progressPercent}, 100`}
-                                  strokeWidth="3"
-                                  strokeLinecap="round"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                />
-                              </svg>
-                              <span className="absolute text-[11px] font-sans font-bold text-[#1B2A4A] dark:text-slate-300">
-                                {ch.number}
-                              </span>
-                            </div>
-
-                            <div className="min-w-0 flex-1">
-                              <div className="flex items-center gap-2">
-                                <h3 className="text-sm font-bold font-bengali text-[#1B2A4A] dark:text-white truncate">
-                                  {ch.titleBn}
-                                </h3>
-                                {ch.progressPercent === 100 && (
-                                  <Badge variant="success" size="sm">সম্পন্ন</Badge>
-                                )}
+                    {/* Chapters List */}
+                    <div className="p-5 sm:p-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {sub.chapters.map((ch) => (
+                          <div
+                            key={ch.id}
+                            className="p-4 sm:p-5 rounded-xl bg-[#FAFBFD] dark:bg-[#070D18] border border-slate-200/80 dark:border-slate-800 hover:border-[#0A2540] dark:hover:border-slate-600 transition-all flex flex-col justify-between gap-4 group"
+                          >
+                            <div className="flex items-start gap-3.5 min-w-0">
+                              {/* Circular Progress Gauge */}
+                              <div className="relative w-11 h-11 shrink-0 flex items-center justify-center mt-0.5">
+                                <svg className="w-11 h-11 -rotate-90" viewBox="0 0 36 36">
+                                  <path
+                                    className="text-slate-200 dark:text-slate-800"
+                                    strokeWidth="3"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <path
+                                    className={ch.progressPercent === 100 ? 'text-[#0B5D3B]' : 'text-[#0A2540] dark:text-sky-400'}
+                                    strokeDasharray={`${ch.progressPercent}, 100`}
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                </svg>
+                                <span className="absolute text-xs font-sans font-bold text-[#0A2540] dark:text-slate-300">
+                                  {ch.number}
+                                </span>
                               </div>
-                              <span className="text-xs text-[#5B5B5B] font-bengali block pt-0.5">
-                                {ch.topicCount} টি পাঠ • {ch.progressPercent}% সম্পন্ন
-                              </span>
+
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <h4 className="text-sm sm:text-base font-bold font-bengali text-[#0A2540] dark:text-white group-hover:text-[#ED8E22] transition-colors">
+                                    {ch.titleBn}
+                                  </h4>
+                                  {ch.progressPercent === 100 && (
+                                    <span className="inline-flex items-center gap-1 text-[11px] font-bold font-bengali px-2 py-0.5 rounded-md bg-emerald-100 text-[#0B5D3B] dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                      <Check className="w-3 h-3" />
+                                      সম্পন্ন
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="text-xs text-slate-500 dark:text-slate-400 font-bengali block pt-1">
+                                  {ch.topicCount} টি পাঠ • {ch.progressPercent}% সম্পন্ন
+                                </span>
+                              </div>
                             </div>
-                          </div>
 
-                          {/* Actions: Notes Drawer, Video Lecture & Practice */}
-                          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#E5E2DA]/60">
-                            {ch.summaryNotes && (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => setActiveNotesChapter({ chapter: ch, subjectTitle: sub.titleBn })}
-                                className="text-xs text-[#1B2A4A] min-h-[36px]"
-                              >
-                                <FileText className="w-3.5 h-3.5 mr-1 text-[#B8862B]" />
-                                <span>পড়ুন ও নোটস</span>
-                              </Button>
-                            )}
-
-                            <div className="flex items-center gap-2 ml-auto">
-                              {ch.videoLectureId && (
+                            {/* Actions: Notes Drawer, Video Lecture & Practice */}
+                            <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-200/70 dark:border-slate-800">
+                              {ch.summaryNotes && (
                                 <button
                                   type="button"
-                                  onClick={() => setActiveVideoLecture({ id: ch.videoLectureId!, title: ch.titleBn })}
-                                  className="p-2 rounded-lg bg-[#FAF8F3] dark:bg-slate-800 text-[#1B2A4A] hover:bg-[#1B2A4A] hover:text-white transition border border-[#E5E2DA] dark:border-slate-700 cursor-pointer min-h-[36px]"
-                                  title="লেকচার ভিডিও দেখুন"
-                                  aria-label={`লেকচার ভিডিও দেখুন: ${ch.titleBn}`}
+                                  onClick={() => setActiveNotesChapter({ chapter: ch, subjectTitle: sub.titleBn })}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold font-bengali text-[#0A2540] dark:text-slate-200 hover:bg-amber-50 hover:border-amber-300 dark:hover:bg-slate-800 transition min-h-[36px] cursor-pointer"
                                 >
-                                  <Video className="w-4 h-4" />
+                                  <FileText className="w-3.5 h-3.5 text-[#B8862B]" />
+                                  <span>পড়ুন ও নোটস</span>
                                 </button>
                               )}
 
-                              <Link
-                                href={`/practice?chapter=${ch.id}`}
-                                className="px-3.5 py-1.5 rounded-lg bg-[#0A2540] hover:bg-[#081c30] text-white font-bengali text-xs shadow-[0_3px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 min-h-[36px]"
-                                title="অধ্যায় অনুশীলন করুন"
-                                aria-label={`অনুশীলন করুন: ${ch.titleBn}`}
-                              >
-                                <Play className="w-3.5 h-3.5 text-[#B8862B]" />
-                                <span>অনুশীলন</span>
-                              </Link>
+                              <div className="flex items-center gap-2 ml-auto">
+                                {ch.videoLectureId && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setActiveVideoLecture({ id: ch.videoLectureId!, title: ch.titleBn })}
+                                    className="p-2 rounded-lg bg-white dark:bg-slate-800 text-[#0A2540] dark:text-slate-200 hover:bg-[#0A2540] hover:text-white transition border border-slate-200 dark:border-slate-700 cursor-pointer min-h-[36px]"
+                                    title="লেকচার ভিডিও দেখুন"
+                                    aria-label={`লেকচার ভিডিও দেখুন: ${ch.titleBn}`}
+                                  >
+                                    <Video className="w-4 h-4" />
+                                  </button>
+                                )}
+
+                                <Link
+                                  href={`/practice?chapter=${ch.id}`}
+                                  className="px-4 py-1.5 rounded-lg bg-[#0A2540] hover:bg-[#081c30] text-white font-bengali text-xs font-bold shadow-[0_3px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 min-h-[36px]"
+                                  title="অধ্যায় অনুশীলন করুন"
+                                  aria-label={`অনুশীলন করুন: ${ch.titleBn}`}
+                                >
+                                  <Play className="w-3.5 h-3.5 text-[#ED8E22]" />
+                                  <span>অনুশীলন</span>
+                                </Link>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </CardContent>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-                </Card>
-              ))}
+          {/* Section 4: Board Examination Pedagogical Roadmap */}
+          <div className="relative overflow-hidden rounded-3xl border border-amber-200/70 dark:border-[#262D3D] bg-[#FFFDF9]/90 dark:bg-[#0C111C]/90 p-6 sm:p-8 shadow-xs">
+            {/* Background Typographic Watermark */}
+            <div
+              className="pointer-events-none absolute right-4 -bottom-6 text-7xl sm:text-8xl md:text-9xl font-black tracking-tight text-amber-900/[0.04] dark:text-amber-400/[0.02] select-none uppercase font-sans"
+              aria-hidden="true"
+            >
+              GUIDELINES
             </div>
-          )}
+
+            {/* Ambient Warm Amber Aura */}
+            <div
+              className="pointer-events-none absolute -left-16 -top-16 w-80 h-80 rounded-full bg-radial from-amber-400/12 via-amber-200/5 to-transparent blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-amber-200/60 dark:border-slate-800 pb-5 mb-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8862B] dark:text-[#ED8E22] font-sans">
+                    ACADEMIC METHODOLOGY & MASTERY
+                  </span>
+                  <Badge variant="warning" size="sm">বোর্ড স্ট্যান্ডার্ড</Badge>
+                </div>
+                <h2 className="text-lg sm:text-2xl font-serif font-bold text-[#0A2540] dark:text-white pt-0.5">
+                  বোর্ড পরীক্ষা ও পাঠ্যক্রম প্রস্তুতি রোডম্যাপ
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
+                  এনসিটিবি মূল পাঠ্যবই এবং জাতীয় শিক্ষাক্রমের আলোকে শীর্ষ ফলাফলের ৪টি প্রমাণিত শিক্ষাদান ধাপ
+                </p>
+              </div>
+            </div>
+
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#080E18]/95 border border-amber-200/80 dark:border-slate-800 flex flex-col justify-between space-y-3 shadow-2xs">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-amber-100/80 dark:bg-amber-950/60 flex items-center justify-center text-[#B8862B] dark:text-amber-300 mb-3 border border-amber-200 dark:border-amber-900/60">
+                    <Lightbulb className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
+                    ১. ধারণাগত শিখনফল (Concept First)
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
+                    প্রতিটি অধ্যায়ের মৌলিক সংজ্ঞা, ভৌত ব্যাখ্যা ও মূল সূত্রের প্রতিপাদন গভীরভাবে আয়ত্ত করুন।
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#B8862B] font-bengali font-bold">
+                  বোর্ড সিলেবাস ১০০% কভার্ড
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#080E18]/95 border border-amber-200/80 dark:border-slate-800 flex flex-col justify-between space-y-3 shadow-2xs">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-emerald-100/80 dark:bg-emerald-950/60 flex items-center justify-center text-[#0B5D3B] dark:text-emerald-300 mb-3 border border-emerald-200 dark:border-emerald-900/60">
+                    <ListChecks className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
+                    ২. বোর্ড প্রশ্ন সংকলন (Board Archives)
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
+                    সকল শিক্ষা বোর্ডের বিগত ৮ বছরের সৃজনশীল (CQ) ও বহুনির্বাচনী (MCQ) প্রশ্নের টাইপভিত্তিক সমাধান।
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#0B5D3B] font-bengali font-bold">
+                  টাইপভিত্তিক বোর্ড আর্কাইভ
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#080E18]/95 border border-amber-200/80 dark:border-slate-800 flex flex-col justify-between space-y-3 shadow-2xs">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-sky-100/80 dark:bg-sky-950/60 flex items-center justify-center text-[#0A2540] dark:text-sky-300 mb-3 border border-sky-200 dark:border-sky-900/60">
+                    <BookMarked className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
+                    ৩. সূত্র ও হ্যান্ডনোট (LaTeX Formulas)
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
+                    পরীক্ষার আগের রাতে দ্রুত চোখ বুলিয়ে নেয়ার জন্য প্রয়োজনীয় সব গাণিতিক ফর্মুলার সুবিন্যস্ত শিট।
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#0A2540] dark:text-sky-400 font-bengali font-bold">
+                  কুইক রিভিশন রেডি
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#080E18]/95 border border-amber-200/80 dark:border-slate-800 flex flex-col justify-between space-y-3 shadow-2xs">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-purple-100/80 dark:bg-purple-950/60 flex items-center justify-center text-purple-700 dark:text-purple-300 mb-3 border border-purple-200 dark:border-purple-900/60">
+                    <Target className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
+                    ৪. স্মার্ট প্র্যাকটিস ট্র্যাকার (Adaptive Exam)
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
+                    আপনার দুর্বল টপিকগুলো স্বয়ংক্রিয়ভাবে শনাক্ত করে পুনরায় অনুশীলনের সুপারিশ প্রদান করবে।
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-purple-700 dark:text-purple-300 font-bengali font-bold">
+                  দুর্বলতা দূরীকরণ ব্যবস্থা
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 5: Curriculum FAQ Accordions */}
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-[#262D3D] bg-[#FAF8F3]/90 dark:bg-[#0A1220]/90 p-6 sm:p-8 shadow-xs">
+            {/* Background Typographic Watermark */}
+            <div
+              className="pointer-events-none absolute right-4 -bottom-6 text-7xl sm:text-8xl md:text-9xl font-black tracking-tight text-slate-900/[0.03] dark:text-white/[0.02] select-none uppercase font-sans"
+              aria-hidden="true"
+            >
+              ACADEMIC
+            </div>
+
+            {/* Ambient Aura */}
+            <div
+              className="pointer-events-none absolute -right-16 -top-16 w-80 h-80 rounded-full bg-radial from-slate-400/10 via-slate-300/5 to-transparent blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 dark:border-slate-800 pb-5 mb-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#0A2540] dark:text-sky-400 font-sans">
+                    NCTB CURRICULUM FAQ
+                  </span>
+                  <Badge variant="default" size="sm">সাধারণ জিজ্ঞাসা</Badge>
+                </div>
+                <h2 className="text-lg sm:text-2xl font-serif font-bold text-[#0A2540] dark:text-white pt-0.5">
+                  পাঠ্যক্রম ও অধ্যয়ন নির্দেশিকা সংক্রান্ত প্রশ্নোত্তর
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
+                  বোর্ড পরীক্ষা প্রস্তুতি ও কারিকুলাম ট্র্যাকিং নিয়ে শিক্ষার্থীদের বহুল জিজ্ঞাসিত প্রশ্নসমূহ
+                </p>
+              </div>
+            </div>
+
+            <div className="relative z-10 space-y-3 max-w-4xl">
+              {[
+                {
+                  q: 'এখানে দেওয়া পাঠ্যক্রম কি ২০২৬ সালের সর্বশেষ এনসিটিবি সিলেবাস অনুযায়ী সাজানো?',
+                  a: 'হ্যাঁ, জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (NCTB) অনুমোদিত সর্বশেষ পাঠ্যবই এবং বোর্ড পরীক্ষার প্রশ্নকাঠামো মেনেই প্রতিটি অধ্যায় ও টপিক অন্তর্ভুক্ত করা হয়েছে।'
+                },
+                {
+                  q: 'স্পেসড-রিপিটিশন (SM-2) রিভিশন পদ্ধতি কীভাবে আমাকে সাহায্য করবে?',
+                  a: 'মনোবিজ্ঞানী এবিংহাউসের বিস্মৃতি রেখা (Forgetting Curve) অনুযায়ী মানুষ পড়ার কিছুদিনের মধ্যেই অধিকাংশ ভুলে যায়। আমাদের SM-2 মডেল নির্দিষ্ট ব্যবধানে (১ম, ৩য়, ৭ম ও ১৪তম দিন) আপনাকে রিভিশন কুইজ নেওয়ার তাগিদ দেয়, যা দীর্ঘমেয়াদী স্মৃতিশক্তি নিশ্চিত করে।'
+                },
+                {
+                  q: 'অধ্যায়ের হ্যান্ডনোট এবং গাণিতিক সূত্রাবলী কি প্রিন্ট বা অফলাইনে সংরক্ষণ করা যায়?',
+                  a: 'প্রতিটি অধ্যায়ের "পড়ুন ও নোটস" ড্রয়ারে প্রয়োজনীয় সকল গাণিতিক সূত্র LaTeX ফরম্যাটে উপস্থাপিত। আপনি যে কোনো ডিভাইস থেকে এগুলো সহজে পাঠ করতে পারেন এবং ব্রাউজারের প্রিন্ট অপশন ব্যবহার করে পিডিএফ আকারে সংরক্ষণ করতে পারেন।'
+                },
+                {
+                  q: 'সৃজনশীল প্রশ্ন (CQ) লেখার ক্ষেত্রে কোন বিষয়ের উপর জোর দেওয়া উচিত?',
+                  a: 'জ্ঞান ও অনুধাবনমূলক প্রশ্নের জন্য পাঠ্যবইয়ের সঠিক সংজ্ঞা ও ব্যাখ্যা জরুরি। প্রয়োগ ও উচ্চতর দক্ষতার ক্ষেত্রে গাণিতিক সূত্রের সঠিক উপস্থাপনা, একক ও যথাযথ চিত্র অঙ্কন নিশ্চিত করতে হবে।'
+                }
+              ].map((item, idx) => {
+                const isOpen = openFaqIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-[#070D18]/95 overflow-hidden transition-all shadow-2xs"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bengali font-bold text-sm sm:text-base text-[#0A2540] dark:text-white hover:text-[#ED8E22] transition cursor-pointer"
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <HelpCircle className="w-4 h-4 text-[#B8862B] shrink-0" />
+                        <span>{item.q}</span>
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
+                          isOpen ? 'rotate-180 text-[#ED8E22]' : ''
+                        }`}
+                      />
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali leading-relaxed border-t border-slate-100 dark:border-slate-800/60">
+                        {item.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
         </main>
 
