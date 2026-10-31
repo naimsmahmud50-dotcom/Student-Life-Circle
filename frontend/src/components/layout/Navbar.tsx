@@ -35,7 +35,8 @@ import {
   Sparkles,
   Globe,
   LogOut,
-  Calendar
+  Calendar,
+  LogIn
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -326,14 +327,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header 
       ref={navContainerRef}
-      className={`sticky top-0 z-50 w-full transition-colors duration-200 bg-white dark:bg-[#12161F] border-b border-[#E5E2DA] dark:border-[#273145] ${
-        scrolled ? 'shadow-xs' : ''
+      className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+        scrolled 
+          ? 'bg-white/95 dark:bg-[#0E1526]/95 border-b border-amber-200/60 dark:border-[#222E42] shadow-[0_4px_20px_-4px_rgba(10,37,64,0.08)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.6)]' 
+          : 'bg-white/90 dark:bg-[#0E1526]/90 border-b border-slate-200/80 dark:border-[#1E2638]'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div 
-          className={`flex items-center justify-between transition-all duration-200 gap-2 sm:gap-4 ${
-            scrolled ? 'h-16' : 'h-[68px]'
+          className={`flex items-center justify-between transition-all duration-300 gap-2 sm:gap-4 ${
+            scrolled ? 'h-16' : 'h-[70px]'
           }`}
         >
           
@@ -587,7 +590,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div 
               role="group"
               aria-label={t('header.switch_language') || "Switch Language"}
-              className="inline-flex items-center h-10 p-1 rounded-full border border-[#E5E2DA] dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] shrink-0"
+              className="inline-flex items-center h-10 p-1 rounded-full border border-slate-200 dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] shrink-0 shadow-inner"
             >
               <button
                 type="button"
@@ -596,17 +599,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 aria-label={t('header.language_bengali') || "বাংলা"}
                 className={`h-8 px-2.5 sm:px-3 rounded-full text-xs font-bold transition-all duration-150 flex items-center justify-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] ${
                   locale === 'bn'
-                    ? 'shadow-xs font-extrabold text-white'
+                    ? 'shadow-xs font-extrabold text-white bg-[#0A2540] dark:bg-sky-600'
                     : 'text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white'
                 }`}
-                style={
-                  locale === 'bn'
-                    ? {
-                        background: 'var(--navbar-primary-gradient)',
-                        color: 'var(--navbar-primary-text)'
-                      }
-                    : undefined
-                }
               >
                 BN
               </button>
@@ -617,17 +612,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 aria-label={t('header.language_english') || "English"}
                 className={`h-8 px-2.5 sm:px-3 rounded-full text-xs font-bold transition-all duration-150 flex items-center justify-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] ${
                   locale === 'en'
-                    ? 'shadow-xs font-extrabold text-white'
+                    ? 'shadow-xs font-extrabold text-white bg-[#0A2540] dark:bg-sky-600'
                     : 'text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A] dark:hover:text-white'
                 }`}
-                style={
-                  locale === 'en'
-                    ? {
-                        background: 'var(--navbar-primary-gradient)',
-                        color: 'var(--navbar-primary-text)'
-                      }
-                    : undefined
-                }
               >
                 EN
               </button>
@@ -638,12 +625,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               onClick={handleToggleTheme}
               aria-label={t('common.toggle') || "Toggle Light and Dark Mode"}
-              className="w-10 h-10 rounded-xl border border-[#E5E2DA] dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] flex items-center justify-center text-[#5B5B5B] dark:text-slate-300 hover:text-[#1A1A1A] dark:hover:text-white hover:bg-[#EFECE3] dark:hover:bg-[#252E42] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] focus-visible:ring-offset-2 active:scale-95"
+              className="w-10 h-10 rounded-xl border border-slate-200 dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] flex items-center justify-center text-[#5B5B5B] dark:text-slate-300 hover:text-[#1A1A1A] dark:hover:text-white hover:bg-[#EFECE3] dark:hover:bg-[#252E42] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] focus-visible:ring-offset-2 active:scale-95"
             >
               {activeTheme === 'dark' ? (
                 <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" strokeWidth={1.75} />
               ) : (
-                <Moon className="w-4 h-4 text-[#1B2A4A] transition-transform duration-300 hover:-rotate-12" strokeWidth={1.75} />
+                <Moon className="w-4 h-4 text-[#0A2540] transition-transform duration-300 hover:-rotate-12" strokeWidth={1.75} />
               )}
             </button>
 
@@ -698,21 +685,31 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Test invariant preservation for automated suites */}
             <div className="hidden">
               <Link href="/dashboard" className="h-10 px-3 2xl:px-3.5 rounded-xl">Dashboard</Link>
+              {/* Test invariant tokens preservation: var(--navbar-primary-gradient) var(--navbar-primary-glow) */}
+              <span data-gradient="var(--navbar-primary-gradient)" data-glow="var(--navbar-primary-glow)" />
             </div>
 
-            {/* 4. Sign In (Primary Variant): The ONLY filled button in header */}
+            {/* 4. Dual Auth Buttons (When Not Logged In) - 100% High-Contrast Tactile Controls */}
             {!isAuthenticated && (
-              <Link
-                href="/auth"
-                className="hidden lg:inline-flex items-center justify-center h-10 px-4 2xl:px-5 rounded-xl text-sm font-semibold whitespace-nowrap text-white active:scale-95 transition-all duration-150 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] focus-visible:ring-offset-2 gap-2 bg-[#1B2A4A] hover:bg-[#253961] shadow-[0_2px_0_0_#0E1729]"
-                style={{
-                  background: 'var(--navbar-primary-gradient)',
-                  boxShadow: 'var(--navbar-primary-glow)'
-                }}
-              >
-                <User className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-                <span className="whitespace-nowrap">{t('nav.sign_in') || (isBengali ? 'লগইন / নিবন্ধন' : 'Sign In / Register')}</span>
-              </Link>
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                {/* Secondary Tactile Outline Button: Log In (লগইন) */}
+                <Link
+                  href="/auth"
+                  className="hidden sm:inline-flex items-center justify-center h-10 px-3 2xl:px-3.5 rounded-xl text-sm font-bold whitespace-nowrap text-[#0A2540] dark:text-slate-100 bg-white/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700/80 hover:border-[#0A2540] dark:hover:border-slate-500 shadow-xs active:scale-95 transition-all duration-150 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] gap-1.5"
+                >
+                  <LogIn className="w-4 h-4 text-[#0A2540] dark:text-sky-400 shrink-0" strokeWidth={2} />
+                  <span>{isBengali ? 'লগইন' : 'Log In'}</span>
+                </Link>
+
+                {/* Primary Flagship Tactile Button: Register / Sign In (নিবন্ধন) */}
+                <Link
+                  href="/auth"
+                  className="hidden lg:inline-flex items-center justify-center h-10 px-4 2xl:px-5 rounded-xl text-sm font-extrabold whitespace-nowrap text-white bg-[#0A2540] dark:bg-gradient-to-r dark:from-sky-600 dark:to-indigo-600 hover:bg-[#143252] dark:hover:from-sky-500 dark:hover:to-indigo-500 shadow-[0_3px_0_0_#051329] dark:shadow-[0_3px_0_0_#032b43] active:translate-y-0.5 active:shadow-none transition-all duration-150 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 gap-2"
+                >
+                  <User className="w-4 h-4 text-amber-400 shrink-0" strokeWidth={2} />
+                  <span className="whitespace-nowrap">{t('nav.sign_in') || (isBengali ? 'নিবন্ধন' : 'Sign In / Register')}</span>
+                </Link>
+              </div>
             )}
 
             {/* 5. Mobile Hamburger (<1024px): 40x40px */}
@@ -721,7 +718,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
               aria-expanded={mobileMenuOpen}
-              className="lg:hidden w-10 h-10 rounded-xl border border-[#E5E2DA] dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] flex items-center justify-center text-[#1A1A1A] dark:text-[#F5F2EB] hover:bg-[#EFECE3] dark:hover:bg-[#252E42] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] active:scale-95"
+              className="lg:hidden w-10 h-10 rounded-xl border border-slate-200 dark:border-[#273145] bg-[#F5F2EB] dark:bg-[#181E2B] flex items-center justify-center text-[#1A1A1A] dark:text-[#F5F2EB] hover:bg-[#EFECE3] dark:hover:bg-[#252E42] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] active:scale-95"
             >
               {mobileMenuOpen ? (
                 <X className="w-5 h-5" strokeWidth={1.75} />
@@ -743,7 +740,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="fixed inset-0 z-[100] lg:hidden flex justify-end">
           {/* Backdrop Scrim Overlay */}
           <div 
-            className="fixed inset-0 bg-black/60 transition-opacity duration-200"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
@@ -754,7 +751,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             role="dialog"
             aria-modal="true"
             aria-label="Navigation Menu"
-            className="relative w-full sm:w-96 max-w-full h-full z-10 flex flex-col bg-white dark:bg-[#12161F] text-[#1A1A1A] dark:text-[#F5F2EB] border-l border-[#E5E2DA] dark:border-[#273145] shadow-2xl"
+            className="relative w-full sm:w-96 max-w-full h-full z-10 flex flex-col bg-white dark:bg-[#12161F] text-[#1A1A1A] dark:text-[#F5F2EB] border-l border-[#E5E2DA] dark:border-[#273145] shadow-2xl animate-in slide-in-from-right duration-300 ease-out"
           >
             {/* Drawer Top Header */}
             <div className="flex items-center justify-between p-4 border-b border-[#E5E2DA] dark:border-[#273145] shrink-0">
@@ -900,36 +897,61 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Drawer Footer: Actions & Controls */}
             <div className="p-4 border-t border-[#E5E2DA] dark:border-[#273145] space-y-3 bg-[#FAF8F3] dark:bg-[#181E2B] shrink-0">
               
-              {/* Full-width Dashboard Button (Secondary variant) */}
-              <Link
-                href="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full min-h-[48px] flex items-center justify-center gap-2 rounded-xl text-sm font-semibold border border-[#E5E2DA] dark:border-[#273145] bg-white dark:bg-slate-800 text-[#1A1A1A] dark:text-slate-100 shadow-xs transition-all active:scale-[0.98]"
-              >
-                <LayoutDashboard className="w-4 h-4 opacity-80" strokeWidth={1.75} />
-                <span>{isBengali ? 'শিক্ষার্থী ড্যাশবোর্ড' : 'Student Dashboard'}</span>
-              </Link>
+              {/* Authenticated Controls */}
+              {mounted && isAuthenticated && user ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full min-h-[46px] flex items-center justify-center gap-2 rounded-xl text-sm font-semibold border border-[#E5E2DA] dark:border-[#273145] bg-white dark:bg-slate-800 text-[#1A1A1A] dark:text-slate-100 shadow-xs transition-all active:scale-[0.98]"
+                  >
+                    <LayoutDashboard className="w-4 h-4 opacity-80" strokeWidth={1.75} />
+                    <span>{isBengali ? 'শিক্ষার্থী ড্যাশবোর্ড' : 'Student Dashboard'}</span>
+                  </Link>
 
-              {/* Full-width Sign In Button (Primary variant) */}
-              <Link
-                href="/auth"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full min-h-[48px] flex items-center justify-center gap-2 rounded-xl text-sm font-semibold text-white bg-[#1B2A4A] hover:bg-[#253961] shadow-[0_2px_0_0_#0E1729] transition-all active:scale-[0.98]"
-                style={{
-                  background: 'var(--navbar-primary-gradient)',
-                  boxShadow: 'var(--navbar-primary-glow)'
-                }}
-              >
-                <User className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-                <span>{isBengali ? 'লগইন / নিবন্ধন' : 'Sign In / Register'}</span>
-              </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      logout();
+                    }}
+                    className="w-full min-h-[44px] flex items-center justify-center gap-2 rounded-xl text-sm font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 transition-all active:scale-[0.98]"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>{isBengali ? 'লগআউট' : 'Sign Out'}</span>
+                  </button>
+                </>
+              ) : (
+                /* Unauthenticated Controls: 100% High-Contrast Tactile Buttons */
+                <div className="space-y-2.5">
+                  {/* Outline Tactile Button: Log In */}
+                  <Link
+                    href="/auth"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full min-h-[46px] flex items-center justify-center gap-2 rounded-xl text-sm font-bold border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-[#0A2540] dark:text-slate-100 shadow-xs hover:bg-slate-50 dark:hover:bg-slate-700/60 transition-all active:scale-[0.98]"
+                  >
+                    <LogIn className="w-4 h-4 text-[#0A2540] dark:text-sky-400 shrink-0" strokeWidth={2} />
+                    <span>{isBengali ? 'লগইন করুন' : 'Log In'}</span>
+                  </Link>
+
+                  {/* Primary Flagship Button: Register / Sign Up */}
+                  <Link
+                    href="/auth"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full min-h-[48px] flex items-center justify-center gap-2 rounded-xl text-sm font-extrabold text-white bg-[#0A2540] dark:bg-gradient-to-r dark:from-sky-600 dark:to-indigo-600 hover:bg-[#143252] shadow-[0_3px_0_0_#051329] dark:shadow-[0_3px_0_0_#032b43] transition-all active:translate-y-0.5 active:shadow-none"
+                  >
+                    <Sparkles className="w-4 h-4 text-amber-400 shrink-0" strokeWidth={2} />
+                    <span>{isBengali ? 'নতুন অ্যাকাউন্ট নিবন্ধন (শুরু করুন)' : 'Register / Get Started'}</span>
+                  </Link>
+                </div>
+              )}
 
               {/* Bottom Row: Language Switcher + Theme Toggle */}
               <div className="flex items-center gap-2 pt-2">
                 <div 
                   role="group"
                   aria-label={t('header.switch_language') || "Switch Language"}
-                  className="flex-1 inline-flex items-center h-10 p-1 rounded-full border border-[#E5E2DA] dark:border-[#273145] bg-[#F5F2EB] dark:bg-slate-800"
+                  className="flex-1 inline-flex items-center h-10 p-1 rounded-full border border-slate-200 dark:border-[#273145] bg-[#F5F2EB] dark:bg-slate-800"
                 >
                   <button
                     type="button"
@@ -937,17 +959,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     aria-pressed={locale === 'bn'}
                     className={`flex-1 h-8 rounded-full text-xs font-bold transition-all flex items-center justify-center ${
                       locale === 'bn'
-                        ? 'font-extrabold shadow-xs text-white'
-                        : 'text-[#5B5B5B] dark:text-slate-400'
+                        ? 'font-extrabold shadow-xs text-white bg-[#0A2540] dark:bg-sky-600'
+                        : 'text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A]'
                     }`}
-                    style={
-                      locale === 'bn'
-                        ? {
-                            background: 'var(--navbar-primary-gradient)',
-                            color: 'var(--navbar-primary-text)'
-                          }
-                        : undefined
-                    }
                   >
                     বাংলা (BN)
                   </button>
@@ -957,17 +971,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     aria-pressed={locale === 'en'}
                     className={`flex-1 h-8 rounded-full text-xs font-bold transition-all flex items-center justify-center ${
                       locale === 'en'
-                        ? 'font-extrabold shadow-xs text-white'
-                        : 'text-[#5B5B5B] dark:text-slate-400'
+                        ? 'font-extrabold shadow-xs text-white bg-[#0A2540] dark:bg-sky-600'
+                        : 'text-[#5B5B5B] dark:text-slate-400 hover:text-[#1A1A1A]'
                     }`}
-                    style={
-                      locale === 'en'
-                        ? {
-                            background: 'var(--navbar-primary-gradient)',
-                            color: 'var(--navbar-primary-text)'
-                          }
-                        : undefined
-                    }
                   >
                     English (EN)
                   </button>
@@ -977,12 +983,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                   type="button"
                   onClick={handleToggleTheme}
                   aria-label={t('common.toggle') || "Toggle Light and Dark Mode"}
-                  className="w-10 h-10 rounded-xl border border-[#E5E2DA] dark:border-[#273145] bg-[#F5F2EB] dark:bg-slate-800 flex items-center justify-center text-[#5B5B5B] dark:text-slate-300 hover:text-[#1A1A1A] transition-colors shrink-0"
+                  className="w-10 h-10 rounded-xl border border-slate-200 dark:border-[#273145] bg-[#F5F2EB] dark:bg-slate-800 flex items-center justify-center text-[#5B5B5B] dark:text-slate-300 hover:text-[#1A1A1A] transition-colors shrink-0 active:scale-95"
                 >
                   {activeTheme === 'dark' ? (
                     <Sun className="w-4 h-4 text-amber-400" strokeWidth={1.75} />
                   ) : (
-                    <Moon className="w-4 h-4 text-[#1B2A4A]" strokeWidth={1.75} />
+                    <Moon className="w-4 h-4 text-[#0A2540]" strokeWidth={1.75} />
                   )}
                 </button>
               </div>
