@@ -45,3 +45,9 @@
   - [x] Commit with structured zero-emoji message.
   - [x] Push `main` to `origin main`.
   - [x] Push static export to `origin gh-pages`.
+
+- [x] **Task 8: GitHub Repository Homepage Link & Topics Integration**
+  - [x] Update repository homepage URL to `https://naimsmahmud50-dotcom.github.io/Student-Life-Circle/` via `gh repo edit`.
+  - [x] Enrich repository topics (`nextjs`, `react`, `fastapi`, `education`, `learning-platform`, `bangladesh`, `github-pages`, `tailwindcss`, `typescript`).
+  - [x] Verify link display on GitHub repository About sidebar.
+
