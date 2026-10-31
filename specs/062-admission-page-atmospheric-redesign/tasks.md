@@ -8,4 +8,4 @@
 - [x] Task 6: Implement Tab 4 (Negative Marking Strategy & Guidelines) and Tab 5 (Admission Policies & FAQ Accordions) in `frontend/src/pages/admission.tsx`.
 - [x] Task 7: Run TypeScript compilation check (`npx tsc --noEmit`) and Zero-Emoji scan.
 - [x] Task 8: Verify Next.js production static export (`npm --prefix frontend run build:pages`).
-- [ ] Task 9: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
+- [x] Task 9: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
