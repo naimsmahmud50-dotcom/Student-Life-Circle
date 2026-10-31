@@ -189,7 +189,12 @@ export default function TuitionPage() {
             </div>
             <TuitionCategoryPills
               selectedCategoryId={selectedCategory}
-              onSelectCategory={(id) => setSelectedCategory(id)}
+              onSelectCategory={(id) => {
+                setSelectedCategory(id);
+                if (activeTab !== 'job_board' && activeTab !== 'tutors') {
+                  setActiveTab('job_board');
+                }
+              }}
             />
           </div>
 
@@ -263,11 +268,14 @@ export default function TuitionPage() {
             {activeTab === 'job_board' && (
               <TuitionJobBoard
                 initialCategory={selectedCategory}
+                onCategoryChange={(catId) => setSelectedCategory(catId as TuitionCategoryInfo['id'])}
                 onRequestTutorClick={() => setIsWizardOpen(true)}
               />
             )}
 
-            {activeTab === 'tutors' && <VerifiedTutorDirectory />}
+            {activeTab === 'tutors' && (
+              <VerifiedTutorDirectory selectedCategory={selectedCategory} />
+            )}
 
             {activeTab === 'calculator' && (
               <TuitionSalaryCalculator

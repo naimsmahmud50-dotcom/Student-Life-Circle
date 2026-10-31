@@ -85,3 +85,15 @@ test('TC-TE-05: Tuition FAQ coverage for both guardians and tutors', () => {
     assert.ok(f.answerBn.length > 20, 'FAQ answer must be comprehensive');
   });
 });
+
+test('TC-TE-06: All defined tuition categories have corresponding job entries', () => {
+  const specificCategories = TUITION_CATEGORIES.filter((c) => c.id !== 'all');
+  specificCategories.forEach((cat) => {
+    const matchingJobs = TUITION_JOBS.filter((j) => j.category === cat.id);
+    assert.ok(
+      matchingJobs.length > 0,
+      `Category ${cat.id} (${cat.nameBn}) must have at least one job in TUITION_JOBS`
+    );
+  });
+});
+

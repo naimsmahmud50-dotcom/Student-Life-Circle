@@ -25,10 +25,12 @@ import {
 
 interface VerifiedTutorDirectoryProps {
   className?: string;
+  selectedCategory?: string;
 }
 
 export const VerifiedTutorDirectory: React.FC<VerifiedTutorDirectoryProps> = ({
   className = '',
+  selectedCategory = 'all',
 }) => {
   const [selectedInstitution, setSelectedInstitution] = useState<string>('ALL');
   const [selectedSubject, setSelectedSubject] = useState<string>('ALL');
@@ -42,8 +44,12 @@ export const VerifiedTutorDirectory: React.FC<VerifiedTutorDirectoryProps> = ({
     const matchesSubject =
       selectedSubject === 'ALL' ||
       tutor.preferredSubjects.some((s) => s.includes(selectedSubject));
+    const matchesCategory =
+      !selectedCategory ||
+      selectedCategory === 'all' ||
+      tutor.preferredCategories.includes(selectedCategory);
 
-    return matchesInstitution && matchesSubject;
+    return matchesInstitution && matchesSubject && matchesCategory;
   });
 
   const handleConsentSubmit = (e: React.FormEvent) => {

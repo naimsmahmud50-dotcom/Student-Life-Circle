@@ -6,8 +6,8 @@
  * STANDARDS: Zero-Emoji, Pure Lucide SVGs, High Contrast, Tactile Buttons, WCAG 2.2 AAA
  */
 
-import React, { useState } from 'react';
-import { TuitionJob, TUITION_JOBS } from './data/tuitionElevationData';
+import React, { useState, useEffect } from 'react';
+import { TuitionJob, TUITION_JOBS, TUITION_CATEGORIES } from './data/tuitionElevationData';
 import {
   Search,
   Filter,
@@ -29,18 +29,31 @@ import {
 interface TuitionJobBoardProps {
   className?: string;
   initialCategory?: string;
+  onCategoryChange?: (categoryId: string) => void;
   onRequestTutorClick?: () => void;
 }
 
 export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
   className = '',
   initialCategory = 'all',
+  onCategoryChange,
   onRequestTutorClick,
 }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedDistrict, setSelectedDistrict] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [selectedMode, setSelectedMode] = useState<string>('ALL');
+
+  useEffect(() => {
+    setSelectedCategory(initialCategory);
+  }, [initialCategory]);
+
+  const handleCategoryReset = () => {
+    setSelectedCategory('all');
+    if (onCategoryChange) {
+      onCategoryChange('all');
+    }
+  };
 
   // Apply Modal state
   const [applyingJob, setApplyingJob] = useState<TuitionJob | null>(null);
@@ -131,6 +144,29 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             )}
           </div>
         </div>
+
+        {selectedCategory !== 'all' && (
+          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <span className="text-slate-500 font-bengali">ক্যাটাগরি ফিল্টার:</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#0A2540] dark:bg-emerald-900 text-white font-semibold text-xs shadow-xs">
+              <span>
+                {TUITION_CATEGORIES.find((c) => c.id === selectedCategory)?.nameBn || selectedCategory}
+              </span>
+              <button
+                type="button"
+                onClick={handleCategoryReset}
+                className="hover:text-amber-300 transition-colors cursor-pointer p-0.5 rounded-full"
+                title="ফিল্টার রিসেট করুন"
+                aria-label="ফিল্টার রিসেট করুন"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </span>
+            <span className="text-slate-400 text-[11px]">
+              ({filteredJobs.length} টি টিউশন পাওয়া গেছে)
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Jobs Listing Grid */}
@@ -252,6 +288,15 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             <p className="text-xs text-slate-500 mt-1">
               অন্য কোনো জেলা বা বিষয় নির্বাচন করে পুনরায় চেষ্টা করুন।
             </p>
+            {selectedCategory !== 'all' && (
+              <button
+                type="button"
+                onClick={handleCategoryReset}
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0A2540] dark:bg-emerald-800 text-white text-xs font-bold hover:bg-[#081d33] dark:hover:bg-emerald-700 transition-colors cursor-pointer"
+              >
+                সকল ক্যাটাগরি দেখুন
+              </button>
+            )}
           </div>
         )}
       </div>
