@@ -9,4 +9,4 @@
 - [x] Task 7: Elevate Post-Exam Socratic Completion View with watermark `MASTERY` and answer review in `frontend/src/pages/practice.tsx`.
 - [x] Task 8: Run TypeScript compilation check (`npx tsc --noEmit`) and Zero-Emoji scan.
 - [x] Task 9: Verify Next.js production static export (`npm --prefix frontend run build:pages`).
-- [ ] Task 10: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
+- [x] Task 10: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
