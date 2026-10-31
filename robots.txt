@@ -1,0 +1,28 @@
+# DEVELOPER ARCHITECTURE NOTE:
+# MODULE:    Grand Public Production Launch & System Handover
+# TOPIC:     Phase 141 SEO, 64-District OpenGraph Engine, Production CI/CD & National Handover
+# FILE:      frontend/public/robots.txt
+# PHASE:     Phase 141 - Grand Public Production Launch & Final Handover
+# PURPOSE:   Search engine robot directives and canonical sitemap declaration
+# STANDARDS: Zero-Emoji, Zero-IDOR, Production Grade, WCAG 2.2 AAA, Full 64-District Support
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /quarantine/
+
+# Explicit Bot Directives
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Canonical XML Sitemap
+Sitemap: https://studentlifecircle.com/sitemap.xml
