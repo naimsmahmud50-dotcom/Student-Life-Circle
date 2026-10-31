@@ -9,4 +9,4 @@
 - [x] Task 7: Elevate `frontend/src/pages/career.tsx` Tab 4 cryptographic snapshot builder and skills grid.
 - [x] Task 8: Run TypeScript compiler check (`npx tsc --noEmit`), node test suite, and Zero-Emoji scan.
 - [x] Task 9: Verify Next.js static export (`npm --prefix frontend run build:pages`).
-- [ ] Task 10: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
+- [x] Task 10: Commit changes and push to GitHub Pages deployment (`bash scripts/deploy-gh-pages.sh`).
