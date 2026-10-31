@@ -283,14 +283,50 @@ export default function CareerPage() {
             <div className="space-y-6">
               
               {/* Sealed Cryptographic CV Snapshot Builder Showcase */}
-              <div className="rounded-3xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-sm space-y-5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-                  <div>
-                    <h2 className="text-lg font-bold flex items-center gap-2 font-bengali text-[#0A2540] dark:text-white">
-                      <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                      <span>সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট বিল্ডার (SHA-256 Ledger)</span>
+              <div className="relative overflow-hidden rounded-3xl border border-amber-200/70 dark:border-amber-950/70 bg-[#FFFDF5]/90 dark:bg-[#0E131E]/90 p-6 sm:p-8 shadow-xs space-y-6">
+                
+                {/* Soft Golden Ledger Halo */}
+                <div
+                  className="absolute bottom-0 right-0 w-full pointer-events-none select-none z-0"
+                  style={{
+                    height: '100%',
+                    minHeight: '260px',
+                    background:
+                      'radial-gradient(ellipse 65% 90% at 80% 100%, rgba(245, 158, 11, 0.14) 0%, rgba(245, 158, 11, 0.03) 50%, transparent 100%)'
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Ambient Typographic Watermark */}
+                <div
+                  className="absolute z-0 pointer-events-none select-none w-full top-2 sm:top-4 left-0 flex justify-center overflow-hidden"
+                  aria-hidden="true"
+                >
+                  <p
+                    className="font-black bg-clip-text text-transparent w-full text-center m-0 text-[18vw] md:text-[clamp(3.5rem,18vw,12rem)] uppercase tracking-wider select-none opacity-85"
+                    style={{
+                      lineHeight: 0.95,
+                      backgroundImage:
+                        'linear-gradient(to bottom, rgba(245, 158, 11, 0.20) 15%, rgba(245, 158, 11, 0.01) 100%)'
+                    }}
+                  >
+                    VERIFIED
+                  </p>
+                </div>
+
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-amber-200/60 dark:border-slate-800 pb-5">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100/90 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300/80 dark:border-amber-800 shadow-xs font-bengali">
+                        <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
+                        ডিজিটাল লেজার সুরক্ষা
+                      </span>
+                    </div>
+
+                    <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A2540] dark:text-white">
+                      সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট বিল্ডার (SHA-256 Ledger)
                     </h2>
-                    <p className="text-xs text-slate-500 font-bengali mt-1">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
                       আবেদনকারী ও নিয়োগকর্তা উভয়ের বিশ্বাসযোগ্যতা রক্ষায় প্রতিটি অ্যাপ্লিকেশনের সাথে অপরিবর্তনীয় টাইমস্ট্যাম্পড স্ন্যাপশট যুক্ত থাকে
                     </p>
                   </div>
@@ -298,7 +334,7 @@ export default function CareerPage() {
                   <button
                     disabled={isMintingSnapshot}
                     onClick={handleMintSealedSnapshot}
-                    className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 cursor-pointer"
+                    className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
                   >
                     <Lock className="w-3.5 h-3.5 text-amber-300" />
                     <span>{isMintingSnapshot ? "তৈরি হচ্ছে..." : "নতুন সিলগালা স্ন্যাপশট তৈরি করুন"}</span>
@@ -306,74 +342,83 @@ export default function CareerPage() {
                 </div>
 
                 {/* Snapshot Metadata Box */}
-                <div className="p-4 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2 text-xs">
-                      <span className="text-slate-500 font-bengali">সর্বশেষ ভেরিফায়েড সিভি হ্যাশ:</span>
-                      <span className="font-mono font-bold text-slate-900 dark:text-amber-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-300 dark:border-slate-700">
+                <div className="relative z-10 p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2 text-xs">
+                      <span className="text-slate-600 dark:text-slate-300 font-bold font-bengali">সর্বশেষ ভেরিফায়েড সিভি হ্যাশ:</span>
+                      <span className="font-mono font-bold text-slate-900 dark:text-amber-300 bg-amber-50/80 dark:bg-slate-900 px-3 py-1 rounded-lg border border-amber-200/80 dark:border-slate-700 shadow-xs">
                         {latestSealedSnapshot}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 flex items-center gap-1.5 font-bengali">
+                    <p className="text-xs text-slate-500 font-bengali flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span>টাইমস্ট্যাম্প: ১৮ অক্টোবর ২০২৬, ২০:১৫:০০ বিএসটি • ডিজিটাল সিগনেচার: ভেরিফায়েড</span>
+                      <span>টাইমস্ট্যাম্প: ১৮ অক্টোবর ২০২৬, ২০:১৫:০০ বিএসটি • ডিজিটাল সিগনেচার: শতভাগ ভেরিফায়েড</span>
                     </p>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleCopyHash}
-                      className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-200 text-xs font-bengali font-bold flex items-center gap-1.5 transition cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bengali font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs active:translate-y-0.5"
                     >
                       <Copy className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{copySuccess ? "কপি সম্পন্ন!" : "হ্যাশ কপি"}</span>
+                      <span>{copySuccess ? "কপি সম্পন্ন!" : "হ্যাশ কপি করুন"}</span>
                     </button>
                   </div>
                 </div>
               </div>
 
               {/* Verifiable Skills Grid */}
-              <div className="rounded-3xl border-2 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-sm space-y-5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
-                  <div>
-                    <h2 className="text-lg font-bold flex items-center gap-2 font-bengali text-[#0A2540] dark:text-white">
-                      <Code className="w-5 h-5 text-[#0A2540] dark:text-amber-300" />
-                      <span>প্রমাণযুক্ত দক্ষতাসমূহ (Evidence-Backed Skills)</span>
+              <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-[#262D3D] bg-white/95 dark:bg-[#0B0F19]/95 p-6 sm:p-8 shadow-xs space-y-6">
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 dark:border-slate-800 pb-5">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#0A2540] dark:text-amber-300 border border-slate-200 dark:border-slate-800 shadow-xs font-bengali">
+                        <Code className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
+                        দক্ষতা পোর্টফোলিও
+                      </span>
+                    </div>
+
+                    <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A2540] dark:text-white">
+                      প্রমাণযুক্ত দক্ষতাসমূহ (Evidence-Backed Skills)
                     </h2>
-                    <p className="text-xs text-slate-500 font-bengali mt-1">প্রতিটি স্কিলের সাথে গিটহাব রিপোজিটরি অথবা লাইভ প্রজেক্ট ডেমো সংযুক্ত</p>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
+                      প্রতিটি স্কিলের সাথে গিটহাব রিপোজিটরি অথবা লাইভ প্রজেক্ট ডেমো সরাসরি ভেরিফিকেশনের জন্য সংযুক্ত
+                    </p>
                   </div>
+
                   <button 
                     onClick={() => setIsCvBuilderOpen(true)}
-                    className="px-4 py-2 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-200 text-xs font-bold font-bengali transition cursor-pointer"
+                    className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-200 text-xs font-bold font-bengali transition cursor-pointer shadow-xs active:translate-y-0.5 self-start sm:self-auto"
                   >
                     সিভি এডিট ও নতুন দক্ষতা
                   </button>
                 </div>
 
                 {isLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-pulse">
+                  <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 animate-pulse">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-[#FAFAF8] dark:bg-slate-800/40 space-y-3">
+                      <div key={i} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-[#FAFAF8] dark:bg-slate-800/40 space-y-3">
                         <div className="h-5 w-24 bg-slate-200 dark:bg-slate-800 rounded-md" />
                         <div className="h-6 w-3/4 bg-slate-200 dark:bg-slate-800 rounded-md" />
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4">
                     {skills.map((skill) => (
                       <div
                         key={skill.id}
-                        className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-[#FAFAF8] dark:bg-slate-950/60 flex flex-col justify-between hover:border-slate-300 transition"
+                        className="p-5 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-[#FAFAF8] dark:bg-slate-950/60 flex flex-col justify-between hover:border-amber-300 dark:hover:border-amber-500/50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
                       >
                         <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+                          <div className="flex items-center justify-between mb-2.5">
+                            <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
                               {skill.proficiency}
                             </span>
                             {skill.isVerified ? (
                               <span className="inline-flex items-center text-[11px] font-bold text-emerald-700 dark:text-emerald-400 font-bengali">
-                                <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
+                                <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-600" />
                                 যাচাইকৃত প্রমাণ
                               </span>
                             ) : (
@@ -383,16 +428,16 @@ export default function CareerPage() {
                             )}
                           </div>
 
-                          <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                          <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-[#0A2540] dark:group-hover:text-amber-300 transition-colors">
                             {skill.name}
                           </h3>
                         </div>
 
-                        <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                        <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between">
                           <span className="text-xs font-mono text-slate-500 truncate max-w-[180px]">
                             {skill.evidenceUrl}
                           </span>
-                          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                          <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-600 transition-colors" />
                         </div>
                       </div>
                     ))}
