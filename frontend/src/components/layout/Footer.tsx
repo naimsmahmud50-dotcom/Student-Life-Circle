@@ -343,72 +343,106 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
 
           {/* Column 4: Contact & Helpdesk */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-sans flex items-center gap-2">
-              <PhoneCall className="w-4 h-4 text-[#ED8E22]" strokeWidth={1.75} />
-              <span className="font-bengali font-bold">{isBengali ? 'যোগাযোগ ও সাপোর্ট' : 'Contact & Support'}</span>
+              <PhoneCall className="w-4 h-4 text-[#ED8E22]" strokeWidth={2} />
+              <span className="font-bengali font-bold text-sm tracking-tight">{isBengali ? 'যোগাযোগ ও সাপোর্ট' : 'Contact & Support'}</span>
             </h3>
-            <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+
+            <div className="space-y-2.5">
+              {/* Hotline Action Card */}
               <a
                 href="tel:16250"
-                title={isBengali ? 'অফিসিয়াল হটলাইনে কল করুন: ১৬xxx' : 'Call Support Hotline: 16xxx'}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-[#ED8E22] hover:bg-amber-500/5 shadow-xs transition-all active:scale-[0.98] group"
+                title="হটলাইন: ১৬২৫০ (১৬xxx)"
+                data-hotline="১৬xxx"
+                className="group relative flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-amber-500/[0.07] via-white to-amber-500/[0.04] dark:from-slate-800/90 dark:to-slate-900/90 border border-amber-200/80 dark:border-slate-700/80 hover:border-[#ED8E22] hover:shadow-md transition-all duration-200 active:scale-[0.98]"
               >
-                <div className="flex items-center gap-2">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#ED8E22] group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
-                    {isBengali ? 'হটলাইন:' : 'Hotline:'}
-                  </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 dark:bg-amber-400/15 border border-amber-400/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#ED8E22] transition-all duration-200">
+                    <PhoneCall className="w-4 h-4 text-[#ED8E22] group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 font-bengali">
+                      {isBengali ? 'হটলাইন (টোল-ফ্রি)' : 'Hotline (Toll-Free)'}
+                    </div>
+                    <div className="text-sm font-extrabold text-slate-900 dark:text-white font-sans tracking-wide">
+                      {isBengali ? '১৬২৫০' : '16250'}
+                    </div>
+                  </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 font-sans font-bold text-[11px] tracking-wide group-hover:border-[#ED8E22] shadow-xs">
-                  ১৬xxx (16xxx)
+                <span className="px-2 py-0.5 rounded-md bg-amber-100/80 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 border border-amber-300/60 dark:border-amber-700/50 text-[10px] font-bold font-bengali group-hover:bg-[#ED8E22] group-hover:text-white group-hover:border-[#ED8E22] transition-all shrink-0">
+                  {isBengali ? 'কল করুন' : 'Call'}
                 </span>
               </a>
 
+              {/* Child Helpline Action Card */}
               <a
                 href="tel:1098"
-                title={isBengali ? 'শিশু হেল্পলাইনে ফ্রি কল করুন: ১০৯৮' : 'Call Free Child Helpline: 1098'}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-emerald-500 hover:bg-emerald-50/20 shadow-xs transition-all active:scale-[0.98] group"
+                title="শিশু হেল্পলাইন: ১০৯৮ (1098)"
+                data-helpline="১০৯৮"
+                className="group relative flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-500/[0.07] via-white to-emerald-500/[0.04] dark:from-slate-800/90 dark:to-slate-900/90 border border-emerald-200/80 dark:border-slate-700/80 hover:border-emerald-500 hover:shadow-md transition-all duration-200 active:scale-[0.98]"
               >
-                <div className="flex items-center gap-2">
-                  <HeartHandshake className="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
-                    {isBengali ? 'শিশু হেল্পলাইন:' : 'Child Helpline:'}
-                  </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/15 dark:bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-emerald-600 transition-all duration-200">
+                    <HeartHandshake className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 font-bengali">
+                      {isBengali ? 'শিশু হেল্পলাইন' : 'Child Helpline'}
+                    </div>
+                    <div className="text-sm font-extrabold text-slate-900 dark:text-white font-sans tracking-wide">
+                      {isBengali ? '১০৯৮' : '1098'}
+                    </div>
+                  </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/60 font-sans font-bold text-[11px] tracking-wide group-hover:border-emerald-500 shadow-xs">
-                  ১০৯৮ (1098)
+                <span className="px-2 py-0.5 rounded-md bg-emerald-100/80 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 border border-emerald-300/60 dark:border-emerald-700/50 text-[10px] font-bold font-bengali group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all shrink-0">
+                  {isBengali ? 'ফ্রি সেবা' : 'Toll-Free'}
                 </span>
               </a>
 
+              {/* National Emergency Action Card */}
               <a
                 href="tel:999"
-                title={isBengali ? 'জরুরি সেবা ৯৯৯ এ কল করুন' : 'Call Emergency Services: 999'}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-amber-500 hover:bg-amber-50/20 shadow-xs transition-all active:scale-[0.98] group"
+                title="জাতীয় জরুরি সেবা: ৯৯৯ (999)"
+                data-emergency="৯৯৯"
+                className="group relative flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-red-500/[0.06] via-white to-red-500/[0.03] dark:from-slate-800/90 dark:to-slate-900/90 border border-red-200/80 dark:border-slate-700/80 hover:border-red-500 hover:shadow-md transition-all duration-200 active:scale-[0.98]"
               >
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
-                    {isBengali ? 'জরুরি সেবা:' : 'Emergency:'}
-                  </span>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-red-500/15 dark:bg-red-400/15 border border-red-400/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-red-600 transition-all duration-200">
+                    <ShieldCheck className="w-4 h-4 text-red-600 dark:text-red-400 group-hover:text-white transition-colors" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 font-bengali">
+                      {isBengali ? 'জাতীয় জরুরি সেবা' : 'National Emergency'}
+                    </div>
+                    <div className="text-sm font-extrabold text-slate-900 dark:text-white font-sans tracking-wide">
+                      {isBengali ? '৯৯৯' : '999'}
+                    </div>
+                  </div>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-700/60 font-sans font-bold text-[11px] tracking-wide group-hover:border-amber-500 shadow-xs">
-                  ৯৯৯ (999)
+                <span className="px-2 py-0.5 rounded-md bg-red-100/80 dark:bg-red-950/60 text-red-900 dark:text-red-200 border border-red-300/60 dark:border-red-700/50 text-[10px] font-bold font-sans group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 transition-all shrink-0">
+                  24/7
                 </span>
               </a>
 
-              <div className="pt-1">
-                <a
-                  href="mailto:support@ogrojatra.edu.bd"
-                  title={isBengali ? 'ইমেইল পাঠাতে ক্লিক করুন' : 'Send an Email to Support'}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-[#ED8E22] hover:bg-amber-500/5 text-slate-700 dark:text-slate-300 hover:text-[#ED8E22] font-sans font-medium text-xs transition-all shadow-xs active:scale-[0.98] group"
-                >
-                  <Mail className="w-4 h-4 text-[#ED8E22] group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-sans font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#ED8E22] truncate text-xs">
+              {/* Official Support Email Card */}
+              <a
+                href="mailto:support@ogrojatra.edu.bd"
+                title="সাপোর্ট ইমেইল পাঠান: support@ogrojatra.edu.bd"
+                className="group relative flex items-center gap-2.5 p-3 rounded-xl bg-gradient-to-r from-sky-500/[0.06] via-white to-sky-500/[0.03] dark:from-slate-800/90 dark:to-slate-900/90 border border-sky-200/80 dark:border-slate-700/80 hover:border-sky-500 hover:shadow-md transition-all duration-200 active:scale-[0.98]"
+              >
+                <div className="w-8 h-8 rounded-lg bg-sky-500/15 dark:bg-sky-400/15 border border-sky-400/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-sky-600 transition-all duration-200">
+                  <Mail className="w-4 h-4 text-sky-600 dark:text-sky-400 group-hover:text-white transition-colors" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 font-bengali">
+                    {isBengali ? 'ইমেইল সাপোর্ট ডেস্ক' : 'Official Support Desk'}
+                  </div>
+                  <div className="text-xs font-bold text-slate-900 dark:text-slate-100 font-sans tracking-tight truncate group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                     support@ogrojatra.edu.bd
-                  </span>
-                </a>
-              </div>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
 
