@@ -25,7 +25,8 @@ import {
   CheckCircle2,
   BookOpen,
   Compass,
-  Mail
+  Mail,
+  Globe
 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 
@@ -34,7 +35,7 @@ export interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = () => {
-  const { t, isBengali } = useTranslation();
+  const { t, isBengali, toggleLocale } = useTranslation();
 
   return (
     <footer className="relative overflow-hidden w-full bg-[#FAF7F0] dark:bg-[#0D1524] text-slate-700 dark:text-slate-300 font-sans transition-colors duration-300">
@@ -158,7 +159,7 @@ export const Footer: React.FC<FooterProps> = () => {
           ----------------------------------------------------------------------- */}
       <div className="relative z-10 bg-white/70 dark:bg-[#111A2E]/70 backdrop-blur-md border-b border-amber-200/50 dark:border-slate-800/80 px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-400/30 text-amber-800 dark:text-amber-200 font-semibold shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-400/30 text-amber-900 dark:text-amber-200 font-semibold font-bengali tracking-normal shadow-xs">
             <ShieldCheck className="w-4 h-4 text-[#ED8E22] shrink-0" />
             <span>
               {isBengali
@@ -168,15 +169,15 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 text-xs">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 shadow-xs hover:border-amber-400/50 transition">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-slate-800 dark:text-slate-200 font-bengali font-semibold shadow-xs hover:border-emerald-400/60 hover:bg-emerald-50/40 dark:hover:bg-slate-800 transition cursor-default">
               <Lock className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
               <span>ISO 27001 সার্টিফাইড ডেটা ভল্ট</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-amber-700 dark:text-amber-300 shadow-xs hover:border-amber-400/50 transition">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-amber-900 dark:text-amber-300 font-bengali font-semibold shadow-xs hover:border-amber-400/60 hover:bg-amber-50/40 dark:hover:bg-slate-800 transition cursor-default">
               <Award className="w-3.5 h-3.5 text-[#ED8E22] shrink-0" />
               <span>OWASP ASVS L2 সিকিউরিটি আর্কিটেকচার</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-emerald-700 dark:text-emerald-300 shadow-xs hover:border-emerald-400/50 transition">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-emerald-900 dark:text-emerald-300 font-bengali font-semibold shadow-xs hover:border-emerald-400/60 hover:bg-emerald-50/40 dark:hover:bg-slate-800 transition cursor-default">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
               <span>WCAG 2.2 AAA কমপ্লায়েন্ট</span>
             </span>
@@ -224,13 +225,13 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-sans flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-[#ED8E22]" strokeWidth={1.75} />
-              <span>{isBengali ? 'শ্রেণি ও স্তর' : 'Levels'}</span>
+              <span className="font-bengali font-bold">{isBengali ? 'শ্রেণি ও স্তর' : 'Levels'}</span>
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link
                   href="/learn?stage=SSC"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'এসএসসি (৯ম ও ১০ম)' : 'SSC Curriculum'}</span>
@@ -239,7 +240,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/learn?stage=HSC"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'এইচএসসি (বিজ্ঞান/মানবিক/ব্যবসায়)' : 'HSC Curriculum'}</span>
@@ -248,7 +249,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/admission"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'বিশ্ববিদ্যালয় ও মেডিকেল ভর্তি' : 'University Admission'}</span>
@@ -257,7 +258,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/career"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'ক্যারিয়ার ও স্কিল লেজার' : 'Career & Skills'}</span>
@@ -270,13 +271,13 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-sans flex items-center gap-2">
               <Compass className="w-4 h-4 text-[#ED8E22]" strokeWidth={1.75} />
-              <span>{isBengali ? 'রিসোর্স' : 'Resources'}</span>
+              <span className="font-bengali font-bold">{isBengali ? 'রিসোর্স' : 'Resources'}</span>
             </h3>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link
                   href="/board-archives"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'বোর্ড প্রশ্ন ব্যাংক' : 'Board Question Bank'}</span>
@@ -285,7 +286,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/practice"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'অনুশীলন ও মডেল টেস্ট' : 'Adaptive Practice'}</span>
@@ -294,7 +295,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/live-challenge"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'লাইভ অলিম্পিয়াড চ্যালেঞ্জ' : 'Live Challenge'}</span>
@@ -303,7 +304,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/modules?category=stem-labs"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'স্টেম ল্যাব (stem-labs)' : 'STEM Labs'}</span>
@@ -312,7 +313,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/tuition"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'টিউশন ও ট্রাস্ট' : 'Tuition & Trust'}</span>
@@ -321,7 +322,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <li>
                 <Link
                   href="/verify"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'সনদ যাচাই (/verify)' : 'Certificate Verification'}</span>
@@ -332,7 +333,7 @@ export const Footer: React.FC<FooterProps> = () => {
                   id="footer-global-socratic-trigger"
                   data-trigger="global-socratic-trigger"
                   href="/socratic/solver"
-                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group"
+                  className="text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all flex items-center gap-2 py-1 group font-bengali font-medium"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-[#ED8E22] group-hover:scale-125 transition-all shrink-0"></span>
                   <span>{isBengali ? 'সক্রেটিক এআই টিউটর' : 'Socratic AI Tutor'}</span>
@@ -345,28 +346,67 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-sans flex items-center gap-2">
               <PhoneCall className="w-4 h-4 text-[#ED8E22]" strokeWidth={1.75} />
-              <span>{isBengali ? 'যোগাযোগ' : 'Contact'}</span>
+              <span className="font-bengali font-bold">{isBengali ? 'যোগাযোগ ও সাপোর্ট' : 'Contact & Support'}</span>
             </h3>
-            <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/80 dark:bg-[#152136]/75 border border-slate-200/80 dark:border-slate-700/60 shadow-xs">
-                <span className="text-slate-500 dark:text-slate-400">হটলাইন:</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 font-mono font-bold text-[11px]">১৬xxx (16xxx)</span>
-              </div>
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/80 dark:bg-[#152136]/75 border border-slate-200/80 dark:border-slate-700/60 shadow-xs">
-                <span className="text-slate-500 dark:text-slate-400">শিশু হেল্পলাইন:</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/60 font-mono font-bold text-[11px]">১০৯৮ (1098)</span>
-              </div>
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/80 dark:bg-[#152136]/75 border border-slate-200/80 dark:border-slate-700/60 shadow-xs">
-                <span className="text-slate-500 dark:text-slate-400">জরুরি সেবা:</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-700/60 font-mono font-bold text-[11px]">৯৯৯ (999)</span>
-              </div>
+            <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+              <a
+                href="tel:16250"
+                title={isBengali ? 'অফিসিয়াল হটলাইনে কল করুন: ১৬xxx' : 'Call Support Hotline: 16xxx'}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-[#ED8E22] hover:bg-amber-500/5 shadow-xs transition-all active:scale-[0.98] group"
+              >
+                <div className="flex items-center gap-2">
+                  <PhoneCall className="w-3.5 h-3.5 text-[#ED8E22] group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
+                    {isBengali ? 'হটলাইন:' : 'Hotline:'}
+                  </span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 font-sans font-bold text-[11px] tracking-wide group-hover:border-[#ED8E22] shadow-xs">
+                  ১৬xxx (16xxx)
+                </span>
+              </a>
+
+              <a
+                href="tel:1098"
+                title={isBengali ? 'শিশু হেল্পলাইনে ফ্রি কল করুন: ১০৯৮' : 'Call Free Child Helpline: 1098'}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-emerald-500 hover:bg-emerald-50/20 shadow-xs transition-all active:scale-[0.98] group"
+              >
+                <div className="flex items-center gap-2">
+                  <HeartHandshake className="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
+                    {isBengali ? 'শিশু হেল্পলাইন:' : 'Child Helpline:'}
+                  </span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700/60 font-sans font-bold text-[11px] tracking-wide group-hover:border-emerald-500 shadow-xs">
+                  ১০৯৮ (1098)
+                </span>
+              </a>
+
+              <a
+                href="tel:999"
+                title={isBengali ? 'জরুরি সেবা ৯৯৯ এ কল করুন' : 'Call Emergency Services: 999'}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-amber-500 hover:bg-amber-50/20 shadow-xs transition-all active:scale-[0.98] group"
+              >
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-bengali font-semibold text-xs text-slate-700 dark:text-slate-300">
+                    {isBengali ? 'জরুরি সেবা:' : 'Emergency:'}
+                  </span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-700/60 font-sans font-bold text-[11px] tracking-wide group-hover:border-amber-500 shadow-xs">
+                  ৯৯৯ (999)
+                </span>
+              </a>
+
               <div className="pt-1">
                 <a
                   href="mailto:support@ogrojatra.edu.bd"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/80 dark:bg-[#152136]/75 border border-slate-200/80 dark:border-slate-700/60 hover:border-[#ED8E22] text-slate-700 dark:text-slate-300 hover:text-[#ED8E22] font-mono text-xs transition shadow-xs"
+                  title={isBengali ? 'ইমেইল পাঠাতে ক্লিক করুন' : 'Send an Email to Support'}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/90 dark:bg-[#152136]/90 border border-slate-200/80 dark:border-slate-700/60 hover:border-[#ED8E22] hover:bg-amber-500/5 text-slate-700 dark:text-slate-300 hover:text-[#ED8E22] font-sans font-medium text-xs transition-all shadow-xs active:scale-[0.98] group"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[#ED8E22]" />
-                  <span>support@ogrojatra.edu.bd</span>
+                  <Mail className="w-4 h-4 text-[#ED8E22] group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-sans font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#ED8E22] truncate text-xs">
+                    support@ogrojatra.edu.bd
+                  </span>
                 </a>
               </div>
             </div>
@@ -376,20 +416,35 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-sans flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#ED8E22]" strokeWidth={1.75} />
-              <span>{isBengali ? 'নীতিমালা ও সুরক্ষা' : 'Legal & Safety'}</span>
+              <span className="font-bengali font-bold">{isBengali ? 'নীতিমালা ও সুরক্ষা' : 'Legal & Safety'}</span>
             </h3>
             <ul className="space-y-2 text-xs">
-              <li className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition py-1">
-                <Lock className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span>{isBengali ? 'অপ্রাপ্তবয়স্কদের তথ্য সুরক্ষা' : 'Minor Data Protection'}</span>
+              <li>
+                <Link
+                  href="/terms"
+                  className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all py-1 font-bengali font-medium group"
+                >
+                  <Lock className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <span>{isBengali ? 'অপ্রাপ্তবয়স্কদের তথ্য সুরক্ষা' : 'Minor Data Protection'}</span>
+                </Link>
               </li>
-              <li className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition py-1">
-                <HeartHandshake className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span>{isBengali ? 'সুরক্ষিত টিউশন ও এসক্রো সম্মতি' : 'Escrow Tuition Trust'}</span>
+              <li>
+                <Link
+                  href="/tuition"
+                  className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all py-1 font-bengali font-medium group"
+                >
+                  <HeartHandshake className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <span>{isBengali ? 'সুরক্ষিত টিউশন ও এসক্রো সম্মতি' : 'Escrow Tuition Trust'}</span>
+                </Link>
               </li>
-              <li className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition py-1">
-                <FileText className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
-                <span>{isBengali ? 'ব্যবহারের শর্তাবলী' : 'Terms of Service'}</span>
+              <li>
+                <Link
+                  href="/terms"
+                  className="flex items-start gap-2 text-slate-600 dark:text-slate-300 hover:text-[#ED8E22] dark:hover:text-[#ED8E22] hover:translate-x-1 transition-all py-1 font-bengali font-medium group"
+                >
+                  <FileText className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5 group-hover:text-[#ED8E22] group-hover:scale-110 transition-all" />
+                  <span>{isBengali ? 'ব্যবহারের শর্তাবলী' : 'Terms of Service'}</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -417,7 +472,7 @@ export const Footer: React.FC<FooterProps> = () => {
             <div className="flex flex-wrap items-center justify-center gap-3">
               {/* bKash Official SVG Badge */}
               <div
-                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-pink-500/60 shadow-xs transition"
+                className="group flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-pink-500/60 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default"
                 title="bKash Direct Verified Merchant"
               >
                 <svg
@@ -435,12 +490,12 @@ export const Footer: React.FC<FooterProps> = () => {
                     bKash
                   </text>
                 </svg>
-                <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300 font-semibold">Verified</span>
+                <span className="text-[10px] font-sans font-bold tracking-wider uppercase text-slate-600 dark:text-slate-300">Verified</span>
               </div>
 
               {/* Nagad Official SVG Badge */}
               <div
-                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-orange-500/60 shadow-xs transition"
+                className="group flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-orange-500/60 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default"
                 title="Nagad Direct Verified Merchant"
               >
                 <svg
@@ -458,12 +513,12 @@ export const Footer: React.FC<FooterProps> = () => {
                     Nagad
                   </text>
                 </svg>
-                <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300 font-semibold">Verified</span>
+                <span className="text-[10px] font-sans font-bold tracking-wider uppercase text-slate-600 dark:text-slate-300">Verified</span>
               </div>
 
               {/* SSLCommerz Escrow Gateway */}
               <div
-                className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-sky-500/60 shadow-xs transition"
+                className="group flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-sky-500/60 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default"
                 title="SSLCommerz PCI-DSS Compliant Payment Gateway"
               >
                 <svg
@@ -480,7 +535,7 @@ export const Footer: React.FC<FooterProps> = () => {
                     SSLCOMMERZ
                   </text>
                 </svg>
-                <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300 font-semibold">PCI-DSS</span>
+                <span className="text-[10px] font-sans font-bold tracking-wider uppercase text-slate-600 dark:text-slate-300">PCI-DSS</span>
               </div>
             </div>
           </div>
@@ -490,19 +545,33 @@ export const Footer: React.FC<FooterProps> = () => {
             TIER 4: Bottom Bar - Copyright, Digital Safety & Standards
             --------------------------------------------------------------------- */}
         <div className="mt-10 pt-8 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-4">
-          <p className="text-center sm:text-left font-bengali">
+          <p className="text-center sm:text-left font-bengali font-normal">
             © ২০২৬ অগ্রযাত্রা (Student Life Circle). গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের ডিজিটাল নিরাপত্তা আইন ও আন্তর্জাতিক ডেটা সুরক্ষা মানদণ্ড অনুযায়ী পরিচালিত।
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 border border-emerald-400/30 text-emerald-800 dark:text-emerald-300 font-semibold shadow-xs">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 border border-emerald-400/30 text-emerald-800 dark:text-emerald-300 font-sans font-bold text-[11px] shadow-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               WCAG 2.2 AAA
             </span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="px-2.5 py-1 rounded-md bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 font-bengali">জিরো-ইমোজি পলিসি</span>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all font-bengali font-semibold shadow-2xs hover:shadow-xs active:scale-95"
+              title="জিরো-ইমোজি পলিসি ও প্ল্যাটফর্ম পরিচিতি"
+            >
+              <span>জিরো-ইমোজি পলিসি</span>
+            </Link>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="px-2.5 py-1 rounded-md bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 font-bengali">বাংলা ও ইংরেজি সংস্করণ</span>
+            <button
+              type="button"
+              onClick={toggleLocale}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-[#ED8E22] hover:text-[#ED8E22] dark:hover:text-[#ED8E22] transition-all font-bengali font-semibold shadow-2xs hover:shadow-xs cursor-pointer active:scale-95"
+              title={isBengali ? 'ইংরেজি সংস্করণে সুইচ করুন' : 'Switch to Bengali version'}
+            >
+              <Globe className="w-3.5 h-3.5 text-[#ED8E22]" />
+              <span>বাংলা ও ইংরেজি সংস্করণ</span>
+            </button>
           </div>
         </div>
 
