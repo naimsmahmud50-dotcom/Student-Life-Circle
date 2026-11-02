@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { ThemeToggle } from '../components/ui/theme-toggle';
-import { CheckCircle2, ShieldCheck, Smartphone, Info } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Smartphone } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 import { UserRole } from '@/lib/auth-types';
 
@@ -71,26 +71,14 @@ export default function AuthPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Determine user role based on credentials/identifier
-    let roles: UserRole[] = [UserRole.STUDENT];
-    const lowerId = identifier.toLowerCase().trim();
-    if (lowerId.includes('admin')) {
-      roles = [UserRole.ADMIN];
-    } else if (lowerId.includes('reviewer')) {
-      roles = [UserRole.SUBJECT_REVIEWER];
-    }
+    // Public authentication strictly issues Student / General User role
+    const roles: UserRole[] = [UserRole.STUDENT];
 
     const resolvedUser = {
       id: `usr_${Date.now().toString(36)}`,
       email: identifier.includes('@') ? identifier : undefined,
       phone: !identifier.includes('@') ? identifier : undefined,
-      fullName:
-        fullName ||
-        (roles.includes(UserRole.ADMIN)
-          ? 'ড. রফিকুল ইসলাম (সুপার অ্যাডমিন)'
-          : roles.includes(UserRole.SUBJECT_REVIEWER)
-          ? 'অধ্যাপক শামসুল আলম (বিষয় পর্যালোচক)'
-          : 'তানভীর আহমেদ'),
+      fullName: fullName || 'তানভীর আহমেদ',
       roles,
     };
 
@@ -102,14 +90,10 @@ export default function AuthPage() {
       expiresInSeconds: 86400 * 7,
     });
 
-    if (redirectTo && typeof redirectTo === 'string' && redirectTo.startsWith('/')) {
+    if (redirectTo && typeof redirectTo === 'string' && redirectTo.startsWith('/') && !redirectTo.startsWith('/admin')) {
       router.push(decodeURIComponent(redirectTo));
     } else {
-      router.push(
-        roles.includes(UserRole.ADMIN) || roles.includes(UserRole.SUBJECT_REVIEWER)
-          ? '/admin'
-          : '/dashboard'
-      );
+      router.push('/dashboard');
     }
   };
 
@@ -167,18 +151,6 @@ export default function AuthPage() {
               </button>
             </div>
 
-            {/* Redirect Notice if coming from protected route */}
-            {redirectTo && (
-              <div className="p-3.5 rounded-xl bg-[#FFFBEB] dark:bg-[#1E1B13] border border-amber-300 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5 animate-in fade-in">
-                <Info className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" strokeWidth={1.75} />
-                <div className="space-y-0.5">
-                  <span className="font-bold font-bengali block">প্রশাসনিক অঞ্চলে প্রবেশের অনুরোধ</span>
-                  <p className="font-normal font-sans leading-relaxed text-[11px] text-amber-800 dark:text-amber-300">
-                    সংরক্ষিত প্রশাসনিক অঞ্চলে প্রবেশের জন্য অনুমোদিত অ্যাডমিন বা বিষয় পর্যালোচক অ্যাকাউন্টে লগইন করুন।
-                  </p>
-                </div>
-              </div>
-            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -348,34 +320,12 @@ export default function AuthPage() {
 
             </form>
 
-            {/* Quick Demo Credentials */}
+            {/* Quick Student Demo Credential */}
             <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#263147] space-y-2">
               <span className="text-[11px] text-[#5A687D] dark:text-[#94A3B8] font-sans block font-medium">
-                টেস্টিং বা ডেমো রোল লগইন:
+                দ্রুত টেস্ট অ্যাকাউন্ট (শিক্ষার্থী):
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode('LOGIN');
-                    setIdentifier('admin@ogrojatra.edu.bd');
-                    setPassword('AdminPass1234');
-                  }}
-                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#1B2A4A] dark:text-[#A8B7D8] font-sans text-[11px] font-semibold"
-                >
-                  অ্যাডমিন (Admin)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode('LOGIN');
-                    setIdentifier('reviewer@ogrojatra.edu.bd');
-                    setPassword('ReviewerPass1234');
-                  }}
-                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#065F46] dark:text-emerald-400 font-sans text-[11px] font-semibold"
-                >
-                  পর্যালোচক (Reviewer)
-                </button>
                 <button
                   type="button"
                   onClick={() => {
@@ -385,7 +335,7 @@ export default function AuthPage() {
                   }}
                   className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#5A687D] dark:text-slate-300 font-sans text-[11px] font-semibold"
                 >
-                  শিক্ষার্থী (Student)
+                  শিক্ষার্থী (Student Demo)
                 </button>
               </div>
             </div>
