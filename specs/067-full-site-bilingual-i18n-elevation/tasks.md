@@ -19,6 +19,6 @@
 - [x] T012: Run strict zero-emoji scanner on `frontend/src/pages/index.tsx`.
 
 ## Phase 4: Git Commit & Production Deployment
-- [ ] T013: Commit changes to `main` and push to `origin/main`.
-- [ ] T014: Build and deploy static export to `gh-pages` and verify live HTTP 200 response.
+- [x] T013: Commit changes to `main` and push to `origin/main`.
+- [x] T014: Build and deploy static export to `gh-pages` and verify live HTTP 200 response.
 
