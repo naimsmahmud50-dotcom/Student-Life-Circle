@@ -194,7 +194,7 @@
    * 6. MODULAR TYPOGRAPHY SCALE (1.250 Major Third)
    * ========================================================================== */
   --font-serif-bengali: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
-  --font-sans-bengali: 'Noto Sans Bengali', 'Tiro Bangla', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans-bengali: 'Noto Serif Bengali', 'Tiro Bangla', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, serif;
   --font-serif-english: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
   --font-sans-english: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 

@@ -42,8 +42,8 @@
 
   /* Typography Fallbacks & Feature Settings */
   --lc-font-serif: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
-  --lc-font-sans: 'Noto Sans Bengali', 'Tiro Bangla', 'Hind Siliguri', system-ui, -apple-system, sans-serif;
-  --lc-font-mono: 'JetBrains Mono', 'Noto Sans Bengali', monospace;
+  --lc-font-sans: 'Noto Serif Bengali', 'Tiro Bangla', 'Noto Sans Bengali', system-ui, serif;
+  --lc-font-mono: 'JetBrains Mono', 'Noto Serif Bengali', monospace;
 
   background-color: var(--lc-bg-paper);
   color: var(--lc-ink-primary);
