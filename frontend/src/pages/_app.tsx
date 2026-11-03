@@ -51,7 +51,8 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
       if (process.env.NODE_ENV === 'production') {
         const handleLoad = () => {
-          navigator.serviceWorker.register('/sw.js')
+          const swPath = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/sw.js`;
+          navigator.serviceWorker.register(swPath)
             .then((registration) => {
               setSwRegistration(registration);
             })
