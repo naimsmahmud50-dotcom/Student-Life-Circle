@@ -41,3 +41,23 @@
 - [x] T032: Run strict zero-emoji regex scan across all modified files.
 - [x] T033: Git commit to `main`, push to `origin/main`, deploy to `gh-pages` via `scripts/deploy-gh-pages.sh --rebuild` and verify live HTTP 200.
 
+## Phase 7: Academic Learning Hub Bilingual Elevation (`frontend/src/pages/learn.tsx`)
+- [x] T034: Add `titleEn` and `summaryNotesEn` to `ChapterItem` interface and all 14 chapters in `CURATED_SUBJECTS` in `frontend/src/pages/learn.tsx`.
+- [x] T035: Bilingual elevation for `AppHead`, `Navbar`, and `PageHeader` in `frontend/src/pages/learn.tsx`.
+- [x] T036: Bilingual elevation for Section 1 (Level Switcher & Chapter Search Console).
+- [x] T037: Bilingual elevation for Section 2 (Spaced-Repetition Revision Queue), strictly preserving tested Bengali assertions.
+- [x] T038: Bilingual elevation for Section 3 (NCTB Subjects & Chapters Matrix, gauges, cards).
+- [x] T039: Bilingual elevation for Section 4 (Pedagogical Roadmap) & Section 5 (Curriculum FAQs).
+- [x] T040: Bilingual elevation for Chapter Editorial Notes Drawer & HLS Video Lecture Modal.
+- [x] T041: Quality Assurance (TypeScript zero-error & backend test suite verification).
+- [x] T042: Commit to `main`, push to `origin/main`, deploy to `gh-pages` and verify live HTTP 200 for `/learn/`.
+
+## Phase 8: University Admission Battleground Hub Bilingual Elevation (`frontend/src/pages/admission.tsx` & subcomponents)
+- [ ] T043: Bilingual elevation for `AdmissionTarget` and static data models in `frontend/src/pages/admission.tsx`.
+- [ ] T044: Bilingual elevation for `AppHead`, `Navbar`, and Flagship Hero/PageHeader.
+- [ ] T045: Bilingual elevation for Admission Target Blueprint Grid & Negative Marking Analytics (`target_du`, `target_buet`, `target_medical`, `-০.২৫`).
+- [ ] T046: Bilingual elevation for `AdmissionCounselingMatrix.tsx` and `MigrationCascadeVisualizer.tsx`.
+- [ ] T047: Bilingual elevation for Admission Calculator & FAQ Accordions.
+- [ ] T048: Quality Assurance (TypeScript, Phase 98 test suite, strict zero-emoji scan).
+- [ ] T049: Git commit, push to `origin/main`, rebuild & deploy to GitHub Pages, and verify live HTTP 200.
+
