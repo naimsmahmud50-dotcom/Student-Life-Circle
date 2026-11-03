@@ -15,6 +15,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../lib/i18n';
 import { AppHead, createJobPostingSchema } from '../components/layout/Head';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -45,6 +46,7 @@ import {
 } from '../components/tuition';
 
 export default function TuitionPage() {
+  const { isBengali } = useTranslation();
   const [activeTab, setActiveTab] = useState<'job_board' | 'tutors' | 'calculator' | 'safety'>('job_board');
   const [selectedCategory, setSelectedCategory] = useState<TuitionCategoryInfo['id']>('all');
   const [isWizardOpen, setIsWizardOpen] = useState<boolean>(false);
@@ -76,24 +78,24 @@ export default function TuitionPage() {
   return (
     <>
       <AppHead
-        title="সুরক্ষিত টিউশন মার্কেটপ্লেস ও দ্বিপাক্ষিক সম্মতি হাব | অগ্রযাত্রা"
-        description="বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট), ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের যাচাইকৃত শিক্ষকদের সুরক্ষিত প্ল্যাটফর্ম। ২ দিনের ফ্রি ট্রায়াল ও জিরো স্ক্যাম গ্যারান্টি।"
+        title={isBengali ? "সুরক্ষিত টিউশন মার্কেটপ্লেস ও দ্বিপাক্ষিক সম্মতি হাব | অগ্রযাত্রা" : "Secure Tuition Marketplace & Bilateral Consent Hub | Agragoti"}
+        description={isBengali ? "বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট), ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের যাচাইকৃত শিক্ষকদের সুরক্ষিত প্ল্যাটফর্ম। ২ দিনের ফ্রি ট্রায়াল ও জিরো স্ক্যাম গ্যারান্টি।" : "Secure platform connecting verified educators from BUET, DU, and Medical Colleges. 2-day free trial and zero-scam guarantee."}
         canonicalUrl="/tuition"
         ogType="website"
         structuredData={createJobPostingSchema({
-          title: "ভেরিফায়েড হোম ও অনলাইন টিউটর রিকোয়ারমেন্ট",
-          description: "এনসিটিবি, ইংলিশ ভার্সন ও ক্যামব্রিজ শিক্ষার্থীদের জন্য দ্বিপাক্ষিক সম্মতি ভিত্তিক বিশ্বস্ত টিউটরিং সংযোগ।",
+          title: isBengali ? "ভেরিফায়েড হোম ও অনলাইন টিউটর রিকোয়ারমেন্ট" : "Verified Home & Online Tutor Requirement",
+          description: isBengali ? "এনসিটিবি, ইংলিশ ভার্সন ও ক্যামব্রিজ শিক্ষার্থীদের জন্য দ্বিপাক্ষিক সম্মতি ভিত্তিক বিশ্বস্ত টিউটরিং সংযোগ।" : "Bilateral consent-based trusted tutoring connection for NCTB, English Version, and Cambridge students.",
           datePosted: "2026-10-26",
-          hiringOrganization: "অগ্রযাত্রা টিউশন নেটওয়ার্ক",
-          location: "ঢাকা / চট্টগ্রাম / রাজশাহী / সিলেট",
-          baseSalary: "৮০০০",
+          hiringOrganization: isBengali ? "অগ্রযাত্রা টিউশন নেটওয়ার্ক" : "Agragoti Tuition Network",
+          location: isBengali ? "ঢাকা / চট্টগ্রাম / রাজশাহী / সিলেট" : "Dhaka / Chattogram / Rajshahi / Sylhet",
+          baseSalary: isBengali ? "৮০০০" : "8000",
         })}
       />
 
       <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
-        <Navbar currentStage="সুরক্ষিত টিউশন মার্কেটপ্লেস" />
+        <Navbar currentStage={isBengali ? "সুরক্ষিত টিউশন মার্কেটপ্লেস" : "Tuition Marketplace"} />
 
         {/* Tuition Bespoke Atmospheric Hero with TUITION Watermark */}
         <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
@@ -130,19 +132,19 @@ export default function TuitionPage() {
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
                 <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                দ্বিপাক্ষিক সম্মতি ও ভেরিফায়েড ম্যাচিং
+                {isBengali ? "দ্বিপাক্ষিক সম্মতি ও ভেরিফায়েড ম্যাচিং" : "Bilateral Consent & Verified Matching"}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-slate-700 dark:text-slate-300 border border-amber-200/70 dark:border-slate-700">
                 <Lock className="w-3.5 h-3.5 mr-1 text-slate-500" />
-                জিরো স্ক্যাম ও গোপনীয়তা নিশ্চিত
+                {isBengali ? "জিরো স্ক্যাম ও গোপনীয়তা নিশ্চিত" : "Zero Scam & Absolute Privacy"}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                 <CreditCard className="w-3.5 h-3.5 mr-1 text-blue-600" />
-                ২ দিনের ফ্রি ট্রায়াল ক্লাস
+                {isBengali ? "২ দিনের ফ্রি ট্রায়াল ক্লাস" : "2-Day Free Trial Class"}
               </span>
               {isMinorProtected && (
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
-                  অভিভাবক প্রোটেকশন মোড সক্রিয়
+                  {isBengali ? "অভিভাবক প্রোটেকশন মোড সক্রিয়" : "Parental Protection Mode Active"}
                 </span>
               )}
             </div>
@@ -150,10 +152,10 @@ export default function TuitionPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="space-y-2 max-w-3xl">
                 <h1 className="text-2xl sm:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight">
-                  সুরক্ষিত টিউশন মার্কেটপ্লেস ও টিউটর ম্যাচিং
+                  {isBengali ? "সুরক্ষিত টিউশন মার্কেটপ্লেস ও টিউটর ম্যাচিং" : "Secure Tuition Marketplace & Scholar Matching"}
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                  বুয়েট, ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের জাতীয় পরিচয়পত্র (NID) ও একাডেমিক ডিগ্রি যাচাইকৃত শিক্ষকবৃন্দের সাথে বিশ্বস্ত সংযোগ। উভয় পক্ষের সম্মতি ছাড়া কোনো ফোন নম্বর উন্মুক্ত নয়।
+                  {isBengali ? "বুয়েট, ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল কলেজের জাতীয় পরিচয়পত্র (NID) ও একাডেমিক ডিগ্রি যাচাইকৃত শিক্ষকবৃন্দের সাথে বিশ্বস্ত সংযোগ। উভয় পক্ষের সম্মতি ছাড়া কোনো ফোন নম্বর উন্মুক্ত নয়।" : "Trusted connection to educators from BUET, DU, and Medical Colleges with verified NID and academic credentials. No phone numbers are revealed without bilateral consent."}
                 </p>
               </div>
 
@@ -163,7 +165,7 @@ export default function TuitionPage() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition-all cursor-pointer whitespace-nowrap self-start md:self-auto"
               >
                 <PlusCircle className="w-4 h-4" />
-                <span>টিউটর রিকোয়ারমেন্ট দিন</span>
+                <span>{isBengali ? "টিউটর রিকোয়ারমেন্ট দিন" : "Post Tutor Requirement"}</span>
               </button>
             </div>
           </div>
@@ -173,7 +175,7 @@ export default function TuitionPage() {
 
           {/* Skeleton Loader during loading state */}
           {isLoading && (
-            <div className="animate-pulse space-y-4" role="status" aria-label="লোড হচ্ছে">
+            <div className="animate-pulse space-y-4" role="status" aria-label={isBengali ? "লোড হচ্ছে" : "Loading"}>
               <div className="h-14 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
               <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-3xl" />
             </div>
@@ -185,7 +187,7 @@ export default function TuitionPage() {
           {/* Stream & Category Filter Pills */}
           <div className="space-y-2">
             <div className="text-xs font-bold text-slate-500 font-bengali uppercase tracking-wider px-1">
-              ক্যাটাগরি অনুযায়ী টিউশন ফিল্টার:
+              {isBengali ? "ক্যাটাগরি অনুযায়ী টিউশন ফিল্টার:" : "Filter Tuition by Category:"}
             </div>
             <TuitionCategoryPills
               selectedCategoryId={selectedCategory}
@@ -202,7 +204,7 @@ export default function TuitionPage() {
           <div className="border-b border-amber-200/60 dark:border-[#262D3D] font-bengali">
             <nav
               role="tablist"
-              aria-label="টিউশন ভিউ নির্বাচন"
+              aria-label={isBengali ? "টিউশন ভিউ নির্বাচন" : "Select Tuition View"}
               className="flex items-center gap-2 sm:gap-6 overflow-x-auto no-scrollbar"
             >
               <button
@@ -216,7 +218,7 @@ export default function TuitionPage() {
                 }`}
               >
                 <Briefcase className="w-4 h-4" />
-                <span>লাইভ টিউশন জব বোর্ড</span>
+                <span>{isBengali ? "লাইভ টিউশন জব বোর্ড" : "Live Tuition Job Board"}</span>
               </button>
 
               <button
@@ -230,7 +232,7 @@ export default function TuitionPage() {
                 }`}
               >
                 <Users className="w-4 h-4" />
-                <span>ভেরিফায়েড টিউটর ডিরেক্টরি</span>
+                <span>{isBengali ? "ভেরিফায়েড টিউটর ডিরেক্টরি" : "Verified Tutor Directory"}</span>
               </button>
 
               <button
@@ -244,7 +246,7 @@ export default function TuitionPage() {
                 }`}
               >
                 <Calculator className="w-4 h-4" />
-                <span>পারিশ্রমিক ক্যালকুলেটর</span>
+                <span>{isBengali ? "পারিশ্রমিক ক্যালকুলেটর" : "Salary Calculator"}</span>
               </button>
 
               <button
@@ -258,7 +260,7 @@ export default function TuitionPage() {
                 }`}
               >
                 <HelpCircle className="w-4 h-4" />
-                <span>নিরাপত্তা, ট্রায়াল ও FAQ</span>
+                <span>{isBengali ? "নিরাপত্তা, ট্রায়াল ও FAQ" : "Trust, Trial & FAQs"}</span>
               </button>
             </nav>
           </div>
@@ -304,17 +306,19 @@ export default function TuitionPage() {
         <Modal
           isOpen={!!selectedTuitionForConsent}
           onClose={() => setSelectedTuitionForConsent(null)}
-          title="দ্বিপাক্ষিক যোগাযোগ সম্মতি ও এসক্রো মাইলস্টোন"
+          title={isBengali ? "দ্বিপাক্ষিক যোগাযোগ সম্মতি ও এসক্রো মাইলস্টোন" : "Bilateral Contact Consent & Escrow Milestone"}
         >
           <div className="space-y-4 p-4 font-bengali text-xs">
             <p>
-              এসক্রো মাইলস্টোন ও দ্বিপাক্ষিক সম্মতি নিশ্চিত করুন। এলাকা: {selectedThana} (ধানমন্ডি)।
+              {isBengali
+                ? `এসক্রো মাইলস্টোন ও দ্বিপাক্ষিক সম্মতি নিশ্চিত করুন। এলাকা: ${selectedThana} (ধানমন্ডি)।`
+                : `Confirm escrow milestone and bilateral consent. Area: ${selectedThana} (Dhanmondi).`}
             </p>
             <button
               onClick={() => requestTuitionConsent(selectedTuitionForConsent.id)}
               className="px-5 py-2.5 rounded-xl bg-[#0A2540] text-white font-bold active:translate-y-1 active:shadow-none"
             >
-              অনুমোদন নিশ্চিত করুন
+              {isBengali ? "অনুমোদন নিশ্চিত করুন" : "Confirm Consent"}
             </button>
           </div>
         </Modal>

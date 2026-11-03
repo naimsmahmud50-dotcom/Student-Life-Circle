@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import {
   X,
   CheckCircle2,
@@ -36,6 +37,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
   onClose,
   onSuccessSubmit,
 }) => {
+  const { isBengali } = useTranslation();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [generatedJobId, setGeneratedJobId] = useState<string | null>(null);
@@ -118,18 +120,18 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 uppercase tracking-wider mb-1">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>অভিভাবকদের জন্য সম্পূর্ণ ফ্রি সার্ভিস</span>
+              <span>{isBengali ? "অভিভাবকদের জন্য সম্পূর্ণ ফ্রি সার্ভিস" : "100% Free Service for Guardians"}</span>
             </div>
             <h3
               id="wizard-modal-title"
               className="text-lg sm:text-xl font-bold font-bengali text-slate-900 dark:text-white"
             >
-              টিউটর রিকোয়ারমেন্ট পোস্ট করুন
+              {isBengali ? "টিউটর রিকোয়ারমেন্ট পোস্ট করুন" : "Post Tutor Requirement"}
             </h3>
           </div>
           <button
             onClick={handleReset}
-            aria-label="উইন্ডো বন্ধ করুন"
+            aria-label={isBengali ? "উইন্ডো বন্ধ করুন" : "Close window"}
             className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -141,16 +143,16 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
           <div className="px-5 sm:px-6 pt-4 pb-2 bg-slate-50 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center justify-between text-xs font-semibold font-bengali text-slate-500 mb-2">
               <span className={currentStep >= 1 ? 'text-emerald-700 dark:text-emerald-400' : ''}>
-                ১. মোড ও মাধ্যম
+                {isBengali ? "১. মোড ও মাধ্যম" : "1. Mode & Medium"}
               </span>
               <span className={currentStep >= 2 ? 'text-emerald-700 dark:text-emerald-400' : ''}>
-                ২. শ্রেণি ও বিষয়
+                {isBengali ? "২. শ্রেণি ও বিষয়" : "2. Grade & Subjects"}
               </span>
               <span className={currentStep >= 3 ? 'text-emerald-700 dark:text-emerald-400' : ''}>
-                ৩. বাজেট ও সময়
+                {isBengali ? "৩. বাজেট ও সময়" : "3. Budget & Schedule"}
               </span>
               <span className={currentStep >= 4 ? 'text-emerald-700 dark:text-emerald-400' : ''}>
-                ৪. ঠিকানা ও সাবমিট
+                {isBengali ? "৪. ঠিকানা ও সাবমিট" : "4. Location & Submit"}
               </span>
             </div>
             <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
@@ -171,27 +173,35 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h4 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-                আপনার রিকোয়ারমেন্ট সফলভাবে পোস্ট হয়েছে!
+                {isBengali ? "আপনার রিকোয়ারমেন্ট সফলভাবে পোস্ট হয়েছে!" : "Your requirement has been posted successfully!"}
               </h4>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-                আপনার জব আইডি: <strong className="font-mono text-emerald-700">{generatedJobId}</strong>। পরবর্তী ২৪ থেকে ৪৮ ঘণ্টার মধ্যে আপনার চাহিদামাফিক শীর্ষ ৩-৫ জন যাচাইকৃত শিক্ষকের সিভি আপনার মোবাইলে পাঠানো হবে।
+                {isBengali ? (
+                  <>
+                    আপনার জব আইডি: <strong className="font-mono text-emerald-700">{generatedJobId}</strong>। পরবর্তী ২৪ থেকে ৪৮ ঘণ্টার মধ্যে আপনার চাহিদামাফিক শীর্ষ ৩-৫ জন যাচাইকৃত শিক্ষকের সিভি আপনার মোবাইলে পাঠানো হবে।
+                  </>
+                ) : (
+                  <>
+                    Your Job ID: <strong className="font-mono text-emerald-700">{generatedJobId}</strong>. Top 3-5 verified educator profiles matching your criteria will be delivered to you within 24-48 hours.
+                  </>
+                )}
               </p>
 
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 max-w-md mx-auto text-left text-xs space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">শ্রেণি ও মাধ্যম:</span>
+                  <span className="text-slate-500">{isBengali ? "শ্রেণি ও মাধ্যম:" : "Grade & Medium:"}</span>
                   <span className="font-bold text-slate-800 dark:text-white">{classGrade} ({medium})</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">নির্বাচিত বিষয়:</span>
+                  <span className="text-slate-500">{isBengali ? "নির্বাচিত বিষয়:" : "Selected Subjects:"}</span>
                   <span className="font-bold text-slate-800 dark:text-white">{selectedSubjects.join(', ')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">বাজেট ও সময়:</span>
-                  <span className="font-bold text-emerald-700">{salaryOffer} ({daysPerWeek} দিন/সপ্তাহ)</span>
+                  <span className="text-slate-500">{isBengali ? "বাজেট ও সময়:" : "Budget & Schedule:"}</span>
+                  <span className="font-bold text-emerald-700">{salaryOffer} ({isBengali ? `${daysPerWeek} দিন/সপ্তাহ` : `${daysPerWeek} days/week`})</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">এলাকা:</span>
+                  <span className="text-slate-500">{isBengali ? "এলাকা:" : "Area:"}</span>
                   <span className="font-bold text-slate-800 dark:text-white">{thana}, {district}</span>
                 </div>
               </div>
@@ -201,7 +211,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                   onClick={handleReset}
                   className="px-6 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs sm:text-sm shadow-sm transition-all"
                 >
-                  টিউশন ড্যাশবোর্ডে ফিরে যান
+                  {isBengali ? "টিউশন ড্যাশবোর্ডে ফিরে যান" : "Back to Tuition Dashboard"}
                 </button>
               </div>
             </div>
@@ -213,13 +223,13 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 <div className="space-y-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                      টিউশনের ধরন নির্বাচন করুন:
+                      {isBengali ? "টিউশনের ধরন নির্বাচন করুন:" : "Select Tuition Mode:"}
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
-                        { id: 'হোম টিউশন', label: 'হোম টিউশন', desc: 'শিক্ষক বাসায় আসবেন', icon: Home },
-                        { id: 'অনলাইন টিউশন', label: 'অনলাইন টিউশন', desc: 'ভার্চুয়াল ১-১ ক্লাস', icon: Laptop },
-                        { id: 'গ্রুপ ব্যাচ', label: 'গ্রুপ ব্যাচ', desc: '৩-৫ জনের গ্রুপ', icon: Users },
+                        { id: 'হোম টিউশন', labelBn: 'হোম টিউশন', labelEn: 'Home Tuition', descBn: 'শিক্ষক বাসায় আসবেন', descEn: 'In-person home sessions', icon: Home },
+                        { id: 'অনলাইন টিউশন', labelBn: 'অনলাইন টিউশন', labelEn: 'Online Tuition', descBn: 'ভার্চুয়াল ১-১ ক্লাস', descEn: 'Virtual 1-on-1 sessions', icon: Laptop },
+                        { id: 'গ্রুপ ব্যাচ', labelBn: 'গ্রুপ ব্যাচ', labelEn: 'Group Batch', descBn: '৩-৫ জনের গ্রুপ', descEn: 'Small group of 3-5 students', icon: Users },
                       ].map((t) => {
                         const Icon = t.icon;
                         const isSelected = mode === t.id;
@@ -235,8 +245,8 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                             }`}
                           >
                             <Icon className={`w-5 h-5 mb-2 ${isSelected ? 'text-emerald-700' : 'text-slate-400'}`} />
-                            <div className="font-bold text-xs sm:text-sm">{t.label}</div>
-                            <div className="text-[11px] text-slate-500 mt-0.5">{t.desc}</div>
+                            <div className="font-bold text-xs sm:text-sm">{isBengali ? t.labelBn : t.labelEn}</div>
+                            <div className="text-[11px] text-slate-500 mt-0.5">{isBengali ? t.descBn : t.descEn}</div>
                           </button>
                         );
                       })}
@@ -245,28 +255,28 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                      শিক্ষার্থীর পাঠ্যক্রম / মাধ্যম:
+                      {isBengali ? "শিক্ষার্থীর পাঠ্যক্রম / মাধ্যম:" : "Curriculum Medium:"}
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
                       {[
-                        'বাংলা মাধ্যম',
-                        'ইংলিশ ভার্সন',
-                        'ইংলিশ মিডিয়াম (Cambridge)',
-                        'ইংলিশ মিডিয়াম (Edexcel)',
-                        'ধর্মীয় ও কুরআন শিক্ষা',
-                        'ভর্তি পরীক্ষা প্রস্তুতি',
+                        { id: 'বাংলা মাধ্যম', labelBn: 'বাংলা মাধ্যম', labelEn: 'Bangla Medium' },
+                        { id: 'ইংলিশ ভার্সন', labelBn: 'ইংলিশ ভার্সন', labelEn: 'English Version' },
+                        { id: 'ইংলিশ মিডিয়াম (Cambridge)', labelBn: 'ইংলিশ মিডিয়াম (Cambridge)', labelEn: 'Cambridge O/A Level' },
+                        { id: 'ইংলিশ মিডিয়াম (Edexcel)', labelBn: 'ইংলিশ মিডিয়াম (Edexcel)', labelEn: 'Edexcel O/A Level' },
+                        { id: 'ধর্মীয় ও কুরআন শিক্ষা', labelBn: 'ধর্মীয় ও কুরআন শিক্ষা', labelEn: 'Quran & Islamic Studies' },
+                        { id: 'ভর্তি পরীক্ষা প্রস্তুতি', labelBn: 'ভর্তি পরীক্ষা প্রস্তুতি', labelEn: 'Admission Preparation' },
                       ].map((m) => (
                         <button
-                          key={m}
+                          key={m.id}
                           type="button"
-                          onClick={() => setMedium(m)}
+                          onClick={() => setMedium(m.id)}
                           className={`p-2.5 rounded-xl border text-center font-medium transition-all ${
-                            medium === m
+                            medium === m.id
                               ? 'bg-[#0A2540] text-white border-[#0A2540]'
                               : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                           }`}
                         >
-                          {m}
+                          {isBengali ? m.labelBn : m.labelEn}
                         </button>
                       ))}
                     </div>
@@ -279,47 +289,47 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 <div className="space-y-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                      শিক্ষার্থীর শ্রেণি / গ্রেড:
+                      {isBengali ? "শিক্ষার্থীর শ্রেণি / গ্রেড:" : "Student Grade / Class:"}
                     </label>
                     <select
                       value={classGrade}
                       onChange={(e) => setClassGrade(e.target.value)}
                       className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
                     >
-                      <option value="১ম - ৫ম শ্রেণি (প্রাইমারি)">১ম - ৫ম শ্রেণি (প্রাইমারি)</option>
-                      <option value="৬ষ্ঠ - ৮ম শ্রেণি (জুনিয়র)">৬ষ্ঠ - ৮ম শ্রেণি (নতুন শিক্ষাক্রম)</option>
-                      <option value="৯ম শ্রেণি (এসএসসি ২০২৮)">৯ম শ্রেণি (এসএসসি ২০২৮)</option>
-                      <option value="১০ম শ্রেণি (এসএসসি ২০২৭)">১০ম শ্রেণি (এসএসসি ২০২৭)</option>
-                      <option value="একাদশ শ্রেণি (এইচএসসি ২০২৭)">একাদশ শ্রেণি (এইচএসসি ২০২৭)</option>
-                      <option value="দ্বাদশ শ্রেণি (এইচএসসি ২০২৬)">দ্বাদশ শ্রেণি (এইচএসসি ২০২৬)</option>
-                      <option value="বিশ্ববিদ্যালয় এডমিশন ২০২৬">বিশ্ববিদ্যালয় এডমিশন ২০২৬</option>
-                      <option value="ও/এ লেভেল (ক্যামব্রিজ/এডেক্সেল)">ও/এ লেভেল (ক্যামব্রিজ/এডেক্সেল)</option>
+                      <option value="১ম - ৫ম শ্রেণি (প্রাইমারি)">{isBengali ? "১ম - ৫ম শ্রেণি (প্রাইমারি)" : "Class 1 - 5 (Primary)"}</option>
+                      <option value="৬ষ্ঠ - ৮ম শ্রেণি (জুনিয়র)">{isBengali ? "৬ষ্ঠ - ৮ম শ্রেণি (নতুন শিক্ষাক্রম)" : "Class 6 - 8 (Junior Secondary)"}</option>
+                      <option value="৯ম শ্রেণি (এসএসসি ২০২৮)">{isBengali ? "৯ম শ্রেণি (এসএসসি ২০২৮)" : "Class 9 (SSC 2028)"}</option>
+                      <option value="১০ম শ্রেণি (এসএসসি ২০২৭)">{isBengali ? "১০ম শ্রেণি (এসএসসি ২০২৭)" : "Class 10 (SSC 2027)"}</option>
+                      <option value="একাদশ শ্রেণি (এইচএসসি ২০২৭)">{isBengali ? "একাদশ শ্রেণি (এইচএসসি ২০২৭)" : "Class 11 (HSC 2027)"}</option>
+                      <option value="দ্বাদশ শ্রেণি (এইচএসসি ২০২৬)">{isBengali ? "দ্বাদশ শ্রেণি (এইচএসসি ২০২৬)" : "Class 12 (HSC 2026)"}</option>
+                      <option value="বিশ্ববিদ্যালয় এডমিশন ২০২৬">{isBengali ? "বিশ্ববিদ্যালয় এডমিশন ২০২৬" : "University Admission 2026"}</option>
+                      <option value="ও/এ লেভেল (ক্যামব্রিজ/এডেক্সেল)">{isBengali ? "ও/এ লেভেল (ক্যামব্রিজ/এডেক্সেল)" : "O/A Level (Cambridge/Edexcel)"}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                      যেসব বিষয় পড়াতে হবে (একাধিক সিলেক্ট করুন):
+                      {isBengali ? "যেসব বিষয় পড়াতে হবে (একাধিক সিলেক্ট করুন):" : "Subjects to teach (select multiple):"}
                     </label>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {[
-                        'পদার্থবিজ্ঞান',
-                        'রসায়ন',
-                        'উচ্চতর গণিত',
-                        'জীববিজ্ঞান',
-                        'সাধারণ গণিত',
-                        'ইংরেজি ১ম ও ২য়',
-                        'বাংলা ১ম ও ২য়',
-                        'তথ্যপ্রযুক্তি (ICT)',
-                        'সাধারণ বিজ্ঞান',
-                        'হিসাববিজ্ঞান',
+                        { id: 'পদার্থবিজ্ঞান', bn: 'পদার্থবিজ্ঞান', en: 'Physics' },
+                        { id: 'রসায়ন', bn: 'রসায়ন', en: 'Chemistry' },
+                        { id: 'উচ্চতর গণিত', bn: 'উচ্চতর গণিত', en: 'Higher Math' },
+                        { id: 'জীববিজ্ঞান', bn: 'জীববিজ্ঞান', en: 'Biology' },
+                        { id: 'সাধারণ গণিত', bn: 'সাধারণ গণিত', en: 'General Math' },
+                        { id: 'ইংরেজি ১ম ও ২য়', bn: 'ইংরেজি ১ম ও ২য়', en: 'English 1st & 2nd' },
+                        { id: 'বাংলা ১ম ও ২য়', bn: 'বাংলা ১ম ও ২য়', en: 'Bangla 1st & 2nd' },
+                        { id: 'তথ্যপ্রযুক্তি (ICT)', bn: 'তথ্যপ্রযুক্তি (ICT)', en: 'ICT' },
+                        { id: 'সাধারণ বিজ্ঞান', bn: 'সাধারণ বিজ্ঞান', en: 'General Science' },
+                        { id: 'হিসাববিজ্ঞান', bn: 'হিসাববিজ্ঞান', en: 'Accounting' },
                       ].map((sub) => {
-                        const isSelected = selectedSubjects.includes(sub);
+                        const isSelected = selectedSubjects.includes(sub.id);
                         return (
                           <button
-                            key={sub}
+                            key={sub.id}
                             type="button"
-                            onClick={() => toggleSubject(sub)}
+                            onClick={() => toggleSubject(sub.id)}
                             className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
                               isSelected
                                 ? 'bg-emerald-800 text-white border-emerald-900 font-bold'
@@ -327,7 +337,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                             }`}
                           >
                             {isSelected ? <Check className="w-3.5 h-3.5" /> : <span>+</span>}
-                            <span>{sub}</span>
+                            <span>{isBengali ? sub.bn : sub.en}</span>
                           </button>
                         );
                       })}
@@ -336,7 +346,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                     <form onSubmit={handleAddCustomSubject} className="flex gap-2">
                       <input
                         type="text"
-                        placeholder="অন্য কোনো বিষয় লিখুন (যেমন: ড্রয়িং, তাজবীদ)..."
+                        placeholder={isBengali ? "অন্য কোনো বিষয় লিখুন (যেমন: ড্রয়িং, তাজবীদ)..." : "Add other subjects (e.g. Fine Arts, Tajweed)..."}
                         value={customSubject}
                         onChange={(e) => setCustomSubject(e.target.value)}
                         className="flex-1 p-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white"
@@ -345,7 +355,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                         type="submit"
                         className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold"
                       >
-                        যোগ করুন
+                        {isBengali ? "যোগ করুন" : "Add"}
                       </button>
                     </form>
                   </div>
@@ -372,7 +382,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                                 : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                             }`}
                           >
-                            {d} দিন
+                            {isBengali ? `${d} দিন` : `${d} Days`}
                           </button>
                         ))}
                       </div>
@@ -380,13 +390,13 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                        মাসিক পারিশ্রমিক বাজেট:
+                        {isBengali ? "মাসিক পারিশ্রমিক বাজেট:" : "Monthly Salary Budget:"}
                       </label>
                       <input
                         type="text"
                         value={salaryOffer}
                         onChange={(e) => setSalaryOffer(e.target.value)}
-                        placeholder="যেমন: ৮,০০০ - ১০,০০০ টাকা"
+                        placeholder={isBengali ? "যেমন: ৮,০০০ - ১০,০০০ টাকা" : "e.g. BDT 8,000 - 10,000"}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
                       />
                     </div>
@@ -395,33 +405,33 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                        শিক্ষকের জেন্ডার পছন্দ:
+                        {isBengali ? "শিক্ষকের জেন্ডার পছন্দ:" : "Tutor Gender Preference:"}
                       </label>
                       <select
                         value={genderPreference}
                         onChange={(e) => setGenderPreference(e.target.value)}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
                       >
-                        <option value="যেকোনো অভিজ্ঞ টিউটর">যেকোনো অভিজ্ঞ টিউটর</option>
-                        <option value="পুরুষ টিউটর আবশ্যক">পুরুষ টিউটর আবশ্যক</option>
-                        <option value="মহিলা টিউটর আবশ্যক">মহিলা টিউটর আবশ্যক</option>
+                        <option value="যেকোনো অভিজ্ঞ টিউটর">{isBengali ? "যেকোনো অভিজ্ঞ টিউটর" : "Any experienced tutor"}</option>
+                        <option value="পুরুষ টিউটর আবশ্যক">{isBengali ? "পুরুষ টিউটর আবশ্যক" : "Male tutor required"}</option>
+                        <option value="মহিলা টিউটর আবশ্যক">{isBengali ? "মহিলা টিউটর আবশ্যক" : "Female tutor required"}</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                        শিক্ষকের প্রত্যাশিত বিশ্ববিদ্যালয়:
+                        {isBengali ? "শিক্ষকের প্রত্যাশিত বিশ্ববিদ্যালয়:" : "Preferred University:"}
                       </label>
                       <select
                         value={preferredInstitution}
                         onChange={(e) => setPreferredInstitution(e.target.value)}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
                       >
-                        <option value="বুয়েট / ঢাবি / মেডিকেল">বুয়েট / ঢাবি / মেডিকেল (অগ্রাধিকার)</option>
-                        <option value="শুধুমাত্র বুয়েট (BUET)">শুধুমাত্র বুয়েট (BUET)</option>
-                        <option value="শুধুমাত্র ঢাকা বিশ্ববিদ্যালয় (DU)">শুধুমাত্র ঢাকা বিশ্ববিদ্যালয় (DU)</option>
-                        <option value="মেডিকেল কলেজ (MBBS)">মেডিকেল কলেজ (MBBS)</option>
-                        <option value="যেকোনো সরকারি বিশ্ববিদ্যালয়">যেকোনো সরকারি বিশ্ববিদ্যালয়</option>
+                        <option value="বুয়েট / ঢাবি / মেডিকেল">{isBengali ? "বুয়েট / ঢাবি / মেডিকেল (অগ্রাধিকার)" : "BUET / DU / Medical (Priority)"}</option>
+                        <option value="শুধুমাত্র বুয়েট (BUET)">{isBengali ? "শুধুমাত্র বুয়েট (BUET)" : "BUET Only"}</option>
+                        <option value="শুধুমাত্র ঢাকা বিশ্ববিদ্যালয় (DU)">{isBengali ? "শুধুমাত্র ঢাকা বিশ্ববিদ্যালয় (DU)" : "Dhaka University Only"}</option>
+                        <option value="মেডিকেল কলেজ (MBBS)">{isBengali ? "মেডিকেল কলেজ (MBBS)" : "Medical College (MBBS)"}</option>
+                        <option value="যেকোনো সরকারি বিশ্ববিদ্যালয়">{isBengali ? "যেকোনো সরকারি বিশ্ববিদ্যালয়" : "Any Public University"}</option>
                       </select>
                     </div>
                   </div>
@@ -434,30 +444,30 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                        জেলা:
+                        {isBengali ? "জেলা:" : "District:"}
                       </label>
                       <select
                         value={district}
                         onChange={(e) => setDistrict(e.target.value)}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
                       >
-                        <option value="ঢাকা">ঢাকা</option>
-                        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-                        <option value="রাজশাহী">রাজশাহী</option>
-                        <option value="সিলেট">সিলেট</option>
-                        <option value="খুলনা">খুলনা</option>
+                        <option value="ঢাকা">{isBengali ? "ঢাকা" : "Dhaka"}</option>
+                        <option value="চট্টগ্রাম">{isBengali ? "চট্টগ্রাম" : "Chattogram"}</option>
+                        <option value="রাজশাহী">{isBengali ? "রাজশাহী" : "Rajshahi"}</option>
+                        <option value="সিলেট">{isBengali ? "সিলেট" : "Sylhet"}</option>
+                        <option value="খুলনা">{isBengali ? "খুলনা" : "Khulna"}</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                        থানা / এলাকা:
+                        {isBengali ? "থানা / এলাকা:" : "Thana / Area:"}
                       </label>
                       <input
                         type="text"
                         value={thana}
                         onChange={(e) => setThana(e.target.value)}
-                        placeholder="যেমন: ধানমন্ডি, উত্তরা, মিরপুর..."
+                        placeholder={isBengali ? "যেমন: ধানমন্ডি, উত্তরা, মিরপুর..." : "e.g., Dhanmondi, Uttara, Mirpur..."}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white"
                       />
                     </div>
@@ -465,13 +475,13 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      বিস্তারিত ঠিকানা / রোড নং:
+                      {isBengali ? "বিস্তারিত ঠিকানা / রোড নং:" : "Detailed Address / Road No:"}
                     </label>
                     <input
                       type="text"
                       value={areaDetails}
                       onChange={(e) => setAreaDetails(e.target.value)}
-                      placeholder="যেমন: রোড নং ৭, হাউজ ১২, ব্লক ডি..."
+                      placeholder={isBengali ? "যেমন: রোড নং ৭, হাউজ ১২, ব্লক ডি..." : "e.g., Road 7, House 12, Block D..."}
                       className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white"
                     />
                   </div>
@@ -479,26 +489,26 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                        অভিভাবকের নাম:
+                        {isBengali ? "অভিভাবকের নাম:" : "Guardian Name:"}
                       </label>
                       <input
                         type="text"
                         value={guardianName}
                         onChange={(e) => setGuardianName(e.target.value)}
-                        placeholder="আপনার নাম লিখুন..."
+                        placeholder={isBengali ? "আপনার নাম লিখুন..." : "Enter guardian name..."}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                        মোবাইল নম্বর (যোগাযোগের জন্য):
+                        {isBengali ? "মোবাইল নম্বর (যোগাযোগের জন্য):" : "Mobile Number (For Contact):"}
                       </label>
                       <input
                         type="tel"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="০১৭১১******"
+                        placeholder={isBengali ? "০১৭১১******" : "01711******"}
                         className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white font-mono"
                       />
                     </div>
@@ -506,13 +516,13 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      বিশেষ কোনো নির্দেশনা থাকলে লিখুন:
+                      {isBengali ? "বিশেষ কোনো নির্দেশনা থাকলে লিখুন:" : "Special Instructions / Notes:"}
                     </label>
                     <textarea
                       rows={2}
                       value={specialNote}
                       onChange={(e) => setSpecialNote(e.target.value)}
-                      placeholder="যেমন: শিক্ষার্থী ইংরেজিতে কিছুটা দুর্বল, একটু যত্ন নিয়ে বুঝিয়ে পড়াতে হবে..."
+                      placeholder={isBengali ? "যেমন: শিক্ষার্থী ইংরেজিতে কিছুটা দুর্বল, একটু যত্ন নিয়ে বুঝিয়ে পড়াতে হবে..." : "e.g., Student is struggling with fundamentals, needs patient guidance..."}
                       className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white"
                     />
                   </div>
@@ -532,7 +542,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold font-bengali hover:bg-slate-100"
               >
                 <ChevronLeft className="w-4 h-4" />
-                <span>পূর্ববর্তী ধাপ</span>
+                <span>{isBengali ? "পূর্ববর্তী ধাপ" : "Previous Step"}</span>
               </button>
             ) : (
               <div />
@@ -544,7 +554,7 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 onClick={() => setCurrentStep(currentStep + 1)}
                 className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#0A2540] text-white text-xs sm:text-sm font-bold font-bengali hover:bg-slate-900 transition-all"
               >
-                <span>পরবর্তী ধাপ</span>
+                <span>{isBengali ? "পরবর্তী ধাপ" : "Next Step"}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             ) : (
@@ -555,11 +565,11 @@ export const TutorRequestWizardModal: React.FC<TutorRequestWizardModalProps> = (
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold font-bengali shadow-sm transition-all"
               >
                 {isSubmitting ? (
-                  <span>জমা দেওয়া হচ্ছে...</span>
+                  <span>{isBengali ? "জমা দেওয়া হচ্ছে..." : "Submitting..."}</span>
                 ) : (
                   <>
                     <CheckCircle2 className="w-4 h-4" />
-                    <span>রিকোয়ারমেন্ট পোস্ট সম্পন্ন করুন</span>
+                    <span>{isBengali ? "রিকোয়ারমেন্ট পোস্ট সম্পন্ন করুন" : "Complete Requirement Posting"}</span>
                   </>
                 )}
               </button>

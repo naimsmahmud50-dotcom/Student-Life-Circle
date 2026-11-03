@@ -7,6 +7,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import { TuitionJob, TUITION_JOBS, TUITION_CATEGORIES } from './data/tuitionElevationData';
 import {
   Search,
@@ -39,6 +40,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
   onCategoryChange,
   onRequestTutorClick,
 }) => {
+  const { isBengali } = useTranslation();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedDistrict, setSelectedDistrict] = useState<string>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
@@ -63,12 +65,16 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
   const [applySuccessMessage, setApplySuccessMessage] = useState<string | null>(null);
 
   const filteredJobs = TUITION_JOBS.filter((job) => {
+    const searchLower = searchQuery.toLowerCase();
     const matchesSearch =
       searchQuery === '' ||
-      job.titleBn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.subjectsBn.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      job.areaBn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.thana.toLowerCase().includes(searchQuery.toLowerCase());
+      job.titleBn.toLowerCase().includes(searchLower) ||
+      (job.titleEn && job.titleEn.toLowerCase().includes(searchLower)) ||
+      job.subjectsBn.some((s) => s.toLowerCase().includes(searchLower)) ||
+      (job.subjectsEn && job.subjectsEn.some((s) => s.toLowerCase().includes(searchLower))) ||
+      job.areaBn.toLowerCase().includes(searchLower) ||
+      (job.areaEn && job.areaEn.toLowerCase().includes(searchLower)) ||
+      job.thana.toLowerCase().includes(searchLower);
 
     const matchesDistrict = selectedDistrict === 'ALL' || job.district === selectedDistrict;
     const matchesCategory = selectedCategory === 'all' || job.category === selectedCategory;
@@ -82,7 +88,11 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
     if (!applyingJob) return;
 
     setAppliedJobs([...appliedJobs, applyingJob.id]);
-    setApplySuccessMessage(`দ্বিপাক্ষিক সম্মতির অনুরোধ সফলভাবে পাঠানো হয়েছে। অভিভাবক জব ${applyingJob.id}-এ সম্মতি দিলে সরাসরি যোগাযোগ উন্মুক্ত হবে।`);
+    setApplySuccessMessage(
+      isBengali
+        ? `দ্বিপাক্ষিক সম্মতির অনুরোধ সফলভাবে পাঠানো হয়েছে। অভিভাবক জব ${applyingJob.id}-এ সম্মতি দিলে সরাসরি যোগাযোগ উন্মুক্ত হবে।`
+        : `Bilateral consent request sent successfully. Direct contact will be unmasked once the guardian grants consent for job ${applyingJob.id}.`
+    );
 
     setTimeout(() => {
       setApplySuccessMessage(null);
@@ -101,7 +111,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="বিষয়, শ্রেণি বা এলাকা দিয়ে খুঁজুন..."
+              placeholder={isBengali ? "বিষয়, শ্রেণি বা এলাকা দিয়ে খুঁজুন..." : "Search by subject, grade, or area..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0A2540]"
@@ -113,25 +123,25 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              aria-label="জেলা নির্বাচন করুন"
+              aria-label={isBengali ? "জেলা নির্বাচন করুন" : "Select district"}
               className="flex-1 sm:flex-initial p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
             >
-              <option value="ALL">সকল জেলা</option>
-              <option value="ঢাকা">ঢাকা</option>
-              <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-              <option value="রাজশাহী">রাজশাহী</option>
+              <option value="ALL">{isBengali ? "সকল জেলা" : "All Districts"}</option>
+              <option value="ঢাকা">{isBengali ? "ঢাকা" : "Dhaka"}</option>
+              <option value="চট্টগ্রাম">{isBengali ? "চট্টগ্রাম" : "Chattogram"}</option>
+              <option value="রাজশাহী">{isBengali ? "রাজশাহী" : "Rajshahi"}</option>
             </select>
 
             {/* Mode Filter */}
             <select
               value={selectedMode}
               onChange={(e) => setSelectedMode(e.target.value)}
-              aria-label="টিউশন মোড নির্বাচন করুন"
+              aria-label={isBengali ? "টিউশন মোড নির্বাচন করুন" : "Select tuition mode"}
               className="flex-1 sm:flex-initial p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bengali text-slate-800 dark:text-white"
             >
-              <option value="ALL">সকল মোড</option>
-              <option value="হোম টিউশন">হোম টিউশন</option>
-              <option value="অনলাইন টিউশন">অনলাইন টিউশন</option>
+              <option value="ALL">{isBengali ? "সকল মোড" : "All Modes"}</option>
+              <option value="হোম টিউশন">{isBengali ? "হোম টিউশন" : "Home Tuition"}</option>
+              <option value="অনলাইন টিউশন">{isBengali ? "অনলাইন টিউশন" : "Online Tuition"}</option>
             </select>
 
             {onRequestTutorClick && (
@@ -139,7 +149,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                 onClick={onRequestTutorClick}
                 className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 active:bg-emerald-950 text-white font-bold text-xs shadow-sm transition-all whitespace-nowrap cursor-pointer"
               >
-                + রিকোয়ারমেন্ট পোস্ট করুন
+                {isBengali ? "+ রিকোয়ারমেন্ট পোস্ট করুন" : "+ Post Requirement"}
               </button>
             )}
           </div>
@@ -147,23 +157,25 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
 
         {selectedCategory !== 'all' && (
           <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
-            <span className="text-slate-500 font-bengali">ক্যাটাগরি ফিল্টার:</span>
+            <span className="text-slate-500 font-bengali">{isBengali ? "ক্যাটাগরি ফিল্টার:" : "Category Filter:"}</span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#0A2540] dark:bg-emerald-900 text-white font-semibold text-xs shadow-xs">
               <span>
-                {TUITION_CATEGORIES.find((c) => c.id === selectedCategory)?.nameBn || selectedCategory}
+                {isBengali
+                  ? (TUITION_CATEGORIES.find((c) => c.id === selectedCategory)?.nameBn || selectedCategory)
+                  : (TUITION_CATEGORIES.find((c) => c.id === selectedCategory)?.nameEn || selectedCategory)}
               </span>
               <button
                 type="button"
                 onClick={handleCategoryReset}
                 className="hover:text-amber-300 transition-colors cursor-pointer p-0.5 rounded-full"
-                title="ফিল্টার রিসেট করুন"
-                aria-label="ফিল্টার রিসেট করুন"
+                title={isBengali ? "ফিল্টার রিসেট করুন" : "Reset filter"}
+                aria-label={isBengali ? "ফিল্টার রিসেট করুন" : "Reset filter"}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             </span>
             <span className="text-slate-400 text-[11px]">
-              ({filteredJobs.length} টি টিউশন পাওয়া গেছে)
+              {isBengali ? `(${filteredJobs.length} টি টিউশন পাওয়া গেছে)` : `(${filteredJobs.length} tuitions found)`}
             </span>
           </div>
         )}
@@ -194,23 +206,27 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                           : 'bg-slate-100 text-slate-600 border border-slate-300'
                       }`}
                     >
-                      {job.status === 'open' ? 'আবেদন চলছে' : job.status === 'shortlisting' ? 'বাছাই চলছে' : 'নিশ্চিতকৃত'}
+                      {job.status === 'open'
+                        ? (isBengali ? 'আবেদন চলছে' : 'Accepting Applications')
+                        : job.status === 'shortlisting'
+                        ? (isBengali ? 'বাছাই চলছে' : 'Shortlisting')
+                        : (isBengali ? 'নিশ্চিতকৃত' : 'Confirmed')}
                     </span>
                   </div>
 
                   {/* Title & Grade */}
                   <div>
                     <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
-                      {job.titleBn}
+                      {isBengali ? job.titleBn : (job.titleEn || job.titleBn)}
                     </h3>
                     <div className="text-xs font-semibold text-emerald-800 dark:text-emerald-400 mt-0.5">
-                      {job.classGradeBn}
+                      {isBengali ? job.classGradeBn : (job.classGradeEn || job.classGradeBn)}
                     </div>
                   </div>
 
                   {/* Subjects Badges */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {job.subjectsBn.map((sub, idx) => (
+                    {(isBengali ? job.subjectsBn : (job.subjectsEn || job.subjectsBn)).map((sub, idx) => (
                       <span
                         key={idx}
                         className="text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700"
@@ -224,28 +240,30 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                   <div className="p-3.5 rounded-2xl bg-[#FAF8F3] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs space-y-1.5">
                     <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                       <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      <span className="truncate">{job.areaBn}, {job.district} ({job.mode})</span>
+                      <span className="truncate">
+                        {isBengali ? job.areaBn : (job.areaEn || job.areaBn)}, {job.district} ({isBengali ? job.mode : (job.mode === 'হোম টিউশন' ? 'Home Tuition' : 'Online Tuition')})
+                      </span>
                     </div>
                     <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                       <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      <span>সপ্তাহে {job.daysPerWeek} দিন</span>
+                      <span>{isBengali ? `সপ্তাহে ${job.daysPerWeek} দিন` : `${job.daysPerWeek} days/week`}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                       <UserCheck className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      <span>{job.genderPreferenceBn}</span>
+                      <span>{isBengali ? job.genderPreferenceBn : (job.genderPreferenceEn || job.genderPreferenceBn)}</span>
                     </div>
                   </div>
 
                   {/* Tutor Requirement Note */}
                   <p className="text-xs text-slate-600 dark:text-slate-400 italic line-clamp-2">
-                    &ldquo;{job.tutorRequirementBn}&rdquo;
+                    &ldquo;{isBengali ? job.tutorRequirementBn : (job.tutorRequirementEn || job.tutorRequirementBn)}&rdquo;
                   </p>
 
                   {/* Masked Contact Shield */}
                   <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <span className="text-slate-500 font-bengali">যোগাযোগ:</span>
+                    <span className="text-slate-500 font-bengali">{isBengali ? "যোগাযোগ:" : "Contact:"}</span>
                     <span className="font-mono text-slate-700 dark:text-slate-300 font-bold">
-                      ০১৭*** (দ্বিপাক্ষিক লক)
+                      {isBengali ? "০১৭*** (দ্বিপাক্ষিক লক)" : "017*** (Bilateral Lock)"}
                     </span>
                   </div>
                 </div>
@@ -253,26 +271,26 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                 {/* Footer: Salary & Action Button */}
                 <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 font-bengali">
                   <div>
-                    <div className="text-[11px] text-slate-500 font-medium">মাসিক পারিশ্রমিক</div>
+                    <div className="text-[11px] text-slate-500 font-medium">{isBengali ? "মাসিক পারিশ্রমিক" : "Monthly Salary"}</div>
                     <div className="text-sm font-bold font-mono text-emerald-800 dark:text-emerald-400 leading-tight">
-                      {job.salaryBn}
+                      {isBengali ? job.salaryBn : (job.salaryEn || job.salaryBn)}
                     </div>
                   </div>
 
                   {isApplied ? (
                     <span className="inline-flex items-center justify-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-4 py-3 rounded-2xl border border-emerald-200">
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>আবেদনকৃত</span>
+                      <span>{isBengali ? "আবেদনকৃত" : "Applied"}</span>
                     </span>
                   ) : (
                     <button
                       onClick={() => setApplyingJob(job)}
                       disabled={job.status === 'confirmed'}
-                      aria-label="দ্বিপাক্ষিক সম্মতির আবেদন করুন"
+                      aria-label={isBengali ? "দ্বিপাক্ষিক সম্মতির আবেদন করুন" : "Apply with bilateral consent"}
                       className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white text-xs font-bold transition-all shadow-[0_3px_0_0_#071D33] active:translate-y-0.5 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A2540] disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1.5"
                     >
                       <Lock className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                      <span>দ্বিপাক্ষিক সম্মতির আবেদন করুন</span>
+                      <span>{isBengali ? "দ্বিপাক্ষিক সম্মতির আবেদন করুন" : "Apply with Consent"}</span>
                     </button>
                   )}
                 </div>
@@ -283,10 +301,10 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
           <div className="col-span-full py-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 font-bengali">
             <Briefcase className="w-10 h-10 text-slate-300 mx-auto mb-3" />
             <h4 className="text-base font-bold text-slate-800 dark:text-white">
-              এই ফিল্টারে কোনো টিউশন জব খুঁজে পাওয়া যায়নি
+              {isBengali ? "এই ফিল্টারে কোনো টিউশন জব খুঁজে পাওয়া যায়নি" : "No tuition jobs found matching this filter"}
             </h4>
             <p className="text-xs text-slate-500 mt-1">
-              অন্য কোনো জেলা বা বিষয় নির্বাচন করে পুনরায় চেষ্টা করুন।
+              {isBengali ? "অন্য কোনো জেলা বা বিষয় নির্বাচন করে পুনরায় চেষ্টা করুন।" : "Try adjusting your district or subject selection."}
             </p>
             {selectedCategory !== 'all' && (
               <button
@@ -294,7 +312,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                 onClick={handleCategoryReset}
                 className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0A2540] dark:bg-emerald-800 text-white text-xs font-bold hover:bg-[#081d33] dark:hover:bg-emerald-700 transition-colors cursor-pointer"
               >
-                সকল ক্যাটাগরি দেখুন
+                {isBengali ? "সকল ক্যাটাগরি দেখুন" : "View All Categories"}
               </button>
             )}
           </div>
@@ -314,7 +332,7 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
               <div>
                 <span className="text-[11px] font-mono font-bold text-slate-500">{applyingJob.id}</span>
                 <h3 id="apply-modal-title" className="text-base font-bold text-slate-900 dark:text-white">
-                  দ্বিপাক্ষিক যোগাযোগ সম্মতি
+                  {isBengali ? "দ্বিপাক্ষিক যোগাযোগ সম্মতি" : "Bilateral Contact Consent"}
                 </h3>
               </div>
               <button
@@ -332,32 +350,36 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
             ) : (
               <form onSubmit={handleApplySubmit} className="space-y-4 text-xs">
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
-                  <div className="font-bold text-slate-800 dark:text-white">{applyingJob.titleBn}</div>
-                  <div className="text-slate-500">পারিশ্রমিক: <strong className="text-emerald-700">{applyingJob.salaryBn}</strong> | এলাকা: {applyingJob.areaBn}</div>
+                  <div className="font-bold text-slate-800 dark:text-white">
+                    {isBengali ? applyingJob.titleBn : (applyingJob.titleEn || applyingJob.titleBn)}
+                  </div>
+                  <div className="text-slate-500">
+                    {isBengali ? "পারিশ্রমিক:" : "Salary:"} <strong className="text-emerald-700">{isBengali ? applyingJob.salaryBn : (applyingJob.salaryEn || applyingJob.salaryBn)}</strong> | {isBengali ? "এলাকা:" : "Area:"} {isBengali ? applyingJob.areaBn : (applyingJob.areaEn || applyingJob.areaBn)}
+                  </div>
                 </div>
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    আপনার মোবাইল নম্বর (ভেরিফায়েড অ্যাকাউন্ট):
+                    {isBengali ? "আপনার মোবাইল নম্বর (ভেরিফায়েড অ্যাকাউন্ট):" : "Your Mobile Number (Verified Account):"}
                   </label>
                   <input
                     type="tel"
                     value={tutorPhone}
                     onChange={(e) => setTutorPhone(e.target.value)}
-                    placeholder="০১৭১১******"
+                    placeholder={isBengali ? "০১৭১১******" : "01711******"}
                     className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-mono"
                   />
                 </div>
 
                 <div>
                   <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    অভিভাবকের উদ্দেশ্যে সংক্ষিপ্ত বার্তা / অভিজ্ঞতা:
+                    {isBengali ? "অভিভাবকের উদ্দেশ্যে সংক্ষিপ্ত বার্তা / অভিজ্ঞতা:" : "Brief Message to Guardian / Experience:"}
                   </label>
                   <textarea
                     rows={3}
                     value={coverNote}
                     onChange={(e) => setCoverNote(e.target.value)}
-                    placeholder="আপনার বিশ্ববিদ্যালয়, বিভাগ এবং এই বিষয়ে পূর্বে পড়ানোর অভিজ্ঞতা লিখুন..."
+                    placeholder={isBengali ? "আপনার বিশ্ববিদ্যালয়, বিভাগ এবং এই বিষয়ে পূর্বে পড়ানোর অভিজ্ঞতা লিখুন..." : "Share your university, department, and relevant tutoring experience..."}
                     className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white"
                   />
                 </div>
@@ -365,8 +387,10 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                 <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs flex items-start gap-2.5">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" />
                   <div>
-                    <span className="font-semibold block mb-0.5">দ্বিপাক্ষিক অনুমোদন নীতি:</span>
-                    গোপনীয়তা নীতিমালার আওতায় উভয় পক্ষ সম্মতি প্রদান না করা পর্যন্ত সরাসরি ফোন নম্বর উন্মুক্ত হয় না। ২ দিনের ফ্রি ট্রায়াল ক্লাসে সম্মত থাকতে হবে।
+                    <span className="font-semibold block mb-0.5">{isBengali ? "দ্বিপাক্ষিক অনুমোদন নীতি:" : "Bilateral Consent Policy:"}</span>
+                    {isBengali
+                      ? "গোপনীয়তা নীতিমালার আওতায় উভয় পক্ষ সম্মতি প্রদান না করা পর্যন্ত সরাসরি ফোন নম্বর উন্মুক্ত হয় না। ২ দিনের ফ্রি ট্রায়াল ক্লাসে সম্মত থাকতে হবে।"
+                      : "Under our privacy policy, direct contact numbers remain masked until both parties grant bilateral consent. Both parties agree to a 2-day free trial."}
                   </div>
                 </div>
 
@@ -376,14 +400,14 @@ export const TuitionJobBoard: React.FC<TuitionJobBoardProps> = ({
                     onClick={() => setApplyingJob(null)}
                     className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
                   >
-                    বাতিল
+                    {isBengali ? "বাতিল" : "Cancel"}
                   </button>
                   <button
                     type="submit"
                     className="px-6 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold flex items-center gap-1.5 cursor-pointer shadow-sm"
                   >
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>সম্মতি নিশ্চিত করুন</span>
+                    <span>{isBengali ? "সম্মতি নিশ্চিত করুন" : "Confirm Consent"}</span>
                   </button>
                 </div>
               </form>

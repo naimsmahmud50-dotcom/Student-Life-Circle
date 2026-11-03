@@ -62,12 +62,12 @@
 - [x] T049: Git commit, push to `origin/main`, rebuild & deploy to GitHub Pages, and verify live HTTP 200.
 
 ## Phase 9: Tuition Match & Escrow Milestone Hub Bilingual Elevation (`frontend/src/pages/tuition.tsx` & subcomponents)
-- [ ] T050: Bilingual elevation for `TutorProfile` and `TuitionPost` static data models in `frontend/src/pages/tuition.tsx`.
-- [ ] T051: Bilingual elevation for `AppHead`, `Navbar`, and PageHeader in `frontend/src/pages/tuition.tsx`.
-- [ ] T052: Bilingual elevation for Thana multi-vector filter console (`selectedThana`, `ধানমন্ডি`).
-- [ ] T053: Bilingual elevation for Verified Teacher Cards (`isVerifiedTutor`, credentials, subjects, hourly rates).
-- [ ] T054: Bilingual elevation for Escrow Milestone Policy & Consent Modal (`escrowEligible`, `এসক্রো মাইলস্টোন`, `requestTuitionConsent`, `Modal`).
-- [ ] T055: Quality Assurance (TypeScript, test suite, strict zero-emoji scan).
+- [x] T050: Bilingual elevation for `TutorProfile` and `TuitionPost` static data models in `frontend/src/pages/tuition.tsx`.
+- [x] T051: Bilingual elevation for `AppHead`, `Navbar`, and PageHeader in `frontend/src/pages/tuition.tsx`.
+- [x] T052: Bilingual elevation for Thana multi-vector filter console (`selectedThana`, `ধানমন্ডি`).
+- [x] T053: Bilingual elevation for Verified Teacher Cards (`isVerifiedTutor`, credentials, subjects, hourly rates).
+- [x] T054: Bilingual elevation for Escrow Milestone Policy & Consent Modal (`escrowEligible`, `এসক্রো মাইলস্টোন`, `requestTuitionConsent`, `Modal`).
+- [x] T055: Quality Assurance (TypeScript, test suite, strict zero-emoji scan).
 - [ ] T056: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/tuition/`.
 
 

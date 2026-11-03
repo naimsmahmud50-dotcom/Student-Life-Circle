@@ -7,6 +7,7 @@
  */
 
 import React, { useRef, useState, useEffect } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import { TUITION_CATEGORIES, TuitionCategoryInfo } from './data/tuitionElevationData';
 import {
   GraduationCap,
@@ -54,6 +55,7 @@ export const TuitionCategoryPills: React.FC<TuitionCategoryPillsProps> = ({
   onSelectCategory,
   className = '',
 }) => {
+  const { isBengali } = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
   const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
@@ -96,7 +98,7 @@ export const TuitionCategoryPills: React.FC<TuitionCategoryPillsProps> = ({
           type="button"
           onClick={() => handleScroll('left')}
           className="absolute -left-3 z-10 p-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer hidden md:flex items-center justify-center active:scale-95"
-          aria-label="বামে স্ক্রোল করুন"
+          aria-label={isBengali ? "বামে স্ক্রোল করুন" : "Scroll left"}
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -107,7 +109,7 @@ export const TuitionCategoryPills: React.FC<TuitionCategoryPillsProps> = ({
         ref={scrollRef}
         onScroll={checkScroll}
         role="tablist"
-        aria-label="টিউশন ক্যাটাগরি নির্বাচন"
+        aria-label={isBengali ? "টিউশন ক্যাটাগরি নির্বাচন" : "Select tuition category"}
         className="flex items-center gap-2 overflow-x-auto scroll-smooth py-1 px-0.5 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full select-none"
       >
         {TUITION_CATEGORIES.map((cat) => {
@@ -125,7 +127,7 @@ export const TuitionCategoryPills: React.FC<TuitionCategoryPillsProps> = ({
               }`}
             >
               {renderCategoryIcon(cat.iconName)}
-              <span className="font-bengali whitespace-nowrap">{cat.nameBn}</span>
+              <span className="font-bengali whitespace-nowrap">{isBengali ? cat.nameBn : (cat.nameEn || cat.nameBn)}</span>
               <span
                 className={`text-[11px] font-mono font-bold px-1.5 py-0.2 rounded ${
                   isSelected
@@ -146,7 +148,7 @@ export const TuitionCategoryPills: React.FC<TuitionCategoryPillsProps> = ({
           type="button"
           onClick={() => handleScroll('right')}
           className="absolute -right-3 z-10 p-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer hidden md:flex items-center justify-center active:scale-95"
-          aria-label="ডানে স্ক্রোল করুন"
+          aria-label={isBengali ? "ডানে স্ক্রোল করুন" : "Scroll right"}
         >
           <ChevronRight className="w-4 h-4" />
         </button>

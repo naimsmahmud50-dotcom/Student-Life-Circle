@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import { TUITION_FAQS, TuitionFAQItem } from './data/tuitionElevationData';
 import {
   ShieldCheck,
@@ -28,6 +29,7 @@ interface TuitionTrustAndSafetySectionProps {
 export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySectionProps> = ({
   className = '',
 }) => {
+  const { isBengali } = useTranslation();
   const [openFaqId, setOpenFaqId] = useState<string>('faq-g1');
   const [activeFaqTab, setActiveFaqTab] = useState<'guardian' | 'tutor'>('guardian');
 
@@ -47,16 +49,18 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
         <div className="text-center max-w-2xl mx-auto px-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>নিরাপদ ও নির্ভরযোগ্য টিউশন নেটওয়ার্ক</span>
+            <span>{isBengali ? "নিরাপদ ও নির্ভরযোগ্য টিউশন নেটওয়ার্ক" : "Safe & Trustworthy Tuition Network"}</span>
           </span>
           <h3
             id="trust-safety-heading"
             className="mt-3 text-2xl sm:text-3xl font-bold font-serif text-slate-900 dark:text-white"
           >
-            কেন অগ্রযাত্রা টিউশন মার্কেটপ্লেস সবচেয়ে বিশ্বস্ত?
+            {isBengali ? "কেন অগ্রযাত্রা টিউশন মার্কেটপ্লেস সবচেয়ে বিশ্বস্ত?" : "Why Agragoti Tuition Marketplace Is Bangladesh's Most Trusted?"}
           </h3>
           <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            শিক্ষার্থী, অভিভাবক ও শিক্ষকদের শতভাগ নিরাপত্তা নিশ্চিত করার ৪ স্তরের সুরক্ষা ব্যবস্থা
+            {isBengali
+              ? "শিক্ষার্থী, অভিভাবক ও শিক্ষকদের শতভাগ নিরাপত্তা নিশ্চিত করার ৪ স্তরের সুরক্ষা ব্যবস্থা"
+              : "A 4-tier security framework ensuring 100% protection for students, parents, and educators"}
           </p>
         </div>
 
@@ -67,10 +71,12 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
               <FileCheck2 className="w-5 h-5" />
             </div>
             <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
-              ১. জাতীয় পরিচয়পত্র ও সনদ যাচাই
+              {isBengali ? "১. জাতীয় পরিচয়পত্র ও সনদ যাচাই" : "1. NID & Degree Verification"}
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              প্রতিটি শিক্ষকের জাতীয় পরিচয়পত্র (NID) এবং বিশ্ববিদ্যালয় স্টুডেন্ট আইডি ও ট্রান্সক্রিপ্ট নিখুঁতভাবে যাচাই করে ভেরিফায়েড ব্যাজ দেওয়া হয়।
+              {isBengali
+                ? "প্রতিটি শিক্ষকের জাতীয় পরিচয়পত্র (NID) এবং বিশ্ববিদ্যালয় স্টুডেন্ট আইডি ও ট্রান্সক্রিপ্ট নিখুঁতভাবে যাচাই করে ভেরিফায়েড ব্যাজ দেওয়া হয়।"
+                : "Every educator's National ID (NID), student ID card, and academic transcripts are rigorously authenticated before badge issuance."}
             </p>
           </div>
 
@@ -80,10 +86,12 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
               <CalendarCheck2 className="w-5 h-5" />
             </div>
             <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
-              ২. ২ দিনের ফ্রি ট্রায়াল ক্লাস
+              {isBengali ? "২. ২ দিনের ফ্রি ট্রায়াল ক্লাস" : "2. 2-Day Free Trial Sessions"}
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              শিক্ষক ও শিক্ষার্থীর বোঝাপড়া যাচাইয়ের জন্য প্রথম ২ দিন বিনামূল্যে ট্রায়াল ক্লাস। শতভাগ সন্তুষ্ট হলেই কেবল টিউশন চুক্তি নিশ্চিত করবেন।
+              {isBengali
+                ? "শিক্ষক ও শিক্ষার্থীর বোঝাপড়া যাচাইয়ের জন্য প্রথম ২ দিন বিনামূল্যে ট্রায়াল ক্লাস। শতভাগ সন্তুষ্ট হলেই কেবল টিউশন চুক্তি নিশ্চিত করবেন।"
+                : "2 complimentary trial sessions to evaluate pedagogy and student comfort. Finalize tuition agreement only when 100% satisfied."}
             </p>
           </div>
 
@@ -93,10 +101,12 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
               <ShieldCheck className="w-5 h-5" />
             </div>
             <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
-              ৩. ০ টাকা অগ্রিম ও নো-স্ক্যাম নীতি
+              {isBengali ? "৩. ০ টাকা অগ্রিম ও নো-স্ক্যাম নীতি" : "3. BDT 0 Advance Fee & Zero Scam"}
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              অভিভাবকদের কাছ থেকে কোনো রেজিস্ট্রেশন চার্জ বা অগ্রিম ফি নেওয়া হয় না। কোনো ভুয়া মিডিয়া বা অগ্রিম কমিশনের ঝামেলামুক্ত।
+              {isBengali
+                ? "অভিভাবকদের কাছ থেকে কোনো রেজিস্ট্রেশন চার্জ বা অগ্রিম ফি নেওয়া হয় না। কোনো ভুয়া মিডিয়া বা অগ্রিম কমিশনের ঝামেলামুক্ত।"
+                : "Zero registration charges or advance fees for guardians. Free from unregulated middlemen or upfront commission deductions."}
             </p>
           </div>
 
@@ -106,10 +116,12 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
               <CreditCard className="w-5 h-5" />
             </div>
             <h4 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
-              ৪. দ্বিপাক্ষিক সম্মতি ও এসক্রো ট্রাস্ট
+              {isBengali ? "৪. দ্বিপাক্ষিক সম্মতি ও এসক্রো ট্রাস্ট" : "4. Bilateral Consent & Escrow Trust"}
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              উভয় পক্ষের সম্মতি ছাড়া নম্বর উন্মুক্ত নয়। এছাড়া মাসের বেতন এসক্রো মাইলস্টোন প্রোটেকশনে সম্পূর্ণ নিরাপদ থাকে।
+              {isBengali
+                ? "উভয় পক্ষের সম্মতি ছাড়া নম্বর উন্মুক্ত নয়। এছাড়া মাসের বেতন এসক্রো মাইলস্টোন প্রোটেকশনে সম্পূর্ণ নিরাপদ থাকে।"
+                : "Direct contact numbers remain masked until mutual consent is verified. Monthly honorarium is safeguarded via escrow milestones."}
             </p>
           </div>
         </div>
@@ -121,7 +133,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
           <div className="flex items-center gap-2">
             <HelpCircle className="w-5 h-5 text-emerald-700" />
             <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-              সাধারণ জিজ্ঞাসা (FAQ)
+              {isBengali ? "সাধারণ জিজ্ঞাসা (FAQ)" : "Frequently Asked Questions (FAQ)"}
             </h4>
           </div>
 
@@ -135,7 +147,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}
             >
-              অভিভাবকদের প্রশ্ন
+              {isBengali ? "অভিভাবকদের প্রশ্ন" : "Parent Questions"}
             </button>
             <button
               onClick={() => setActiveFaqTab('tutor')}
@@ -145,7 +157,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}
             >
-              শিক্ষকদের প্রশ্ন
+              {isBengali ? "শিক্ষকদের প্রশ্ন" : "Tutor Questions"}
             </button>
           </div>
         </div>
@@ -163,7 +175,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
                   aria-expanded={isOpen}
                   className="w-full p-4 text-left flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-slate-800 dark:text-white hover:text-emerald-800 transition-colors"
                 >
-                  <span>{faq.questionBn}</span>
+                  <span>{isBengali ? faq.questionBn : (faq.questionEn || faq.questionBn)}</span>
                   {isOpen ? (
                     <ChevronUp className="w-4 h-4 text-slate-400 shrink-0" />
                   ) : (
@@ -172,7 +184,7 @@ export const TuitionTrustAndSafetySection: React.FC<TuitionTrustAndSafetySection
                 </button>
                 {isOpen && (
                   <div className="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/60 pt-3">
-                    {faq.answerBn}
+                    {isBengali ? faq.answerBn : (faq.answerEn || faq.answerBn)}
                   </div>
                 )}
               </div>

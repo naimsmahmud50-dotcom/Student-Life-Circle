@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import { useTranslation } from '../../lib/i18n';
 import { Users, Briefcase, Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 interface TuitionStatsHeaderProps {
@@ -14,8 +15,10 @@ interface TuitionStatsHeaderProps {
 }
 
 export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ className = '' }) => {
+  const { isBengali } = useTranslation();
+
   return (
-    <section className={`w-full ${className}`} aria-label="টিউশন প্ল্যাটফর্ম পরিসংখ্যান">
+    <section className={`w-full ${className}`} aria-label={isBengali ? "টিউশন প্ল্যাটফর্ম পরিসংখ্যান" : "Tuition Platform Statistics"}>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Metric 1: Active Tutors */}
         <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
@@ -24,10 +27,10 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-white leading-none">
-              ১৫,০০০+
+              {isBengali ? "১৫,০০০+" : "15,000+"}
             </div>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-medium font-bengali">
-              যাচাইকৃত সক্রিয় টিউটর
+              {isBengali ? "যাচাইকৃত সক্রিয় টিউটর" : "Verified Active Tutors"}
             </div>
           </div>
         </div>
@@ -39,10 +42,10 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-white leading-none">
-              ১,৪২০+
+              {isBengali ? "১,৪২০+" : "1,420+"}
             </div>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-medium font-bengali">
-              লাইভ টিউশন রিকোয়ারমেন্ট
+              {isBengali ? "লাইভ টিউশন রিকোয়ারমেন্ট" : "Live Tuition Requirements"}
             </div>
           </div>
         </div>
@@ -54,11 +57,11 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-white leading-none flex items-center gap-1">
-              <span>৪.৯</span>
-              <span className="text-xs text-slate-400 font-sans">/৫</span>
+              <span>{isBengali ? "৪.৯" : "4.9"}</span>
+              <span className="text-xs text-slate-400 font-sans">{isBengali ? "/৫" : "/5"}</span>
             </div>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-medium font-bengali">
-              গড় অভিভাবক সন্তুষ্টি
+              {isBengali ? "গড় অভিভাবক সন্তুষ্টি" : "Average Parent Satisfaction"}
             </div>
           </div>
         </div>
@@ -70,10 +73,10 @@ export const TuitionStatsHeader: React.FC<TuitionStatsHeaderProps> = ({ classNam
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold font-mono text-emerald-700 dark:text-emerald-400 leading-none">
-              ০ টাকা
+              {isBengali ? "০ টাকা" : "BDT 0"}
             </div>
             <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-medium font-bengali">
-              অগ্রিম ফি ও ২ দিন ফ্রি ট্রায়াল
+              {isBengali ? "অগ্রিম ফি ও ২ দিন ফ্রি ট্রায়াল" : "Advance Fee & 2-Day Free Trial"}
             </div>
           </div>
         </div>
