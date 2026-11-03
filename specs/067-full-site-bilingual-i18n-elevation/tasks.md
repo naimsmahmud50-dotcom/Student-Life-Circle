@@ -80,7 +80,7 @@
 - [x] T063: Bilingual elevation for `BdjobsProCvBuilderModal.tsx` and `EmployerJobPostingWizardModal.tsx`.
 - [x] T064: Bilingual elevation for Verifiable Skills & Sealed Cryptographic CV Snapshot Builder in `frontend/src/pages/career.tsx` (`latestSealedSnapshot`, `cvSnapshotId`, `SHORTLISTED`, `apiClient.getCareerProfile`, `animate-pulse`).
 - [x] T065: Quality Assurance (TypeScript zero-error, backend test suite, strict zero-emoji scan).
-- [ ] T066: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/career/`.
+- [x] T066: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/career/`.
 
 
 
