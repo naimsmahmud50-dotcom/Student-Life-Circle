@@ -39,5 +39,5 @@
 - [x] T030: Run TypeScript verification (`cd frontend && npx tsc --noEmit`).
 - [x] T031: Run backend test suites (`backend/tests/test_phase98_3_unified_subpages.py`, `backend/tests/test_phase98_flagship_ui_elevation.py`, `backend/tests/test_phase95_bilingual_localization.py`).
 - [x] T032: Run strict zero-emoji regex scan across all modified files.
-- [ ] T033: Git commit to `main`, push to `origin/main`, deploy to `gh-pages` via `scripts/deploy-gh-pages.sh --rebuild` and verify live HTTP 200.
+- [x] T033: Git commit to `main`, push to `origin/main`, deploy to `gh-pages` via `scripts/deploy-gh-pages.sh --rebuild` and verify live HTTP 200.
 
