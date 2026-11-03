@@ -53,11 +53,21 @@
 - [x] T042: Commit to `main`, push to `origin/main`, deploy to `gh-pages` and verify live HTTP 200 for `/learn/`.
 
 ## Phase 8: University Admission Battleground Hub Bilingual Elevation (`frontend/src/pages/admission.tsx` & subcomponents)
-- [ ] T043: Bilingual elevation for `AdmissionTarget` and static data models in `frontend/src/pages/admission.tsx`.
-- [ ] T044: Bilingual elevation for `AppHead`, `Navbar`, and Flagship Hero/PageHeader.
-- [ ] T045: Bilingual elevation for Admission Target Blueprint Grid & Negative Marking Analytics (`target_du`, `target_buet`, `target_medical`, `-০.২৫`).
-- [ ] T046: Bilingual elevation for `AdmissionCounselingMatrix.tsx` and `MigrationCascadeVisualizer.tsx`.
-- [ ] T047: Bilingual elevation for Admission Calculator & FAQ Accordions.
-- [ ] T048: Quality Assurance (TypeScript, Phase 98 test suite, strict zero-emoji scan).
-- [ ] T049: Git commit, push to `origin/main`, rebuild & deploy to GitHub Pages, and verify live HTTP 200.
+- [x] T043: Bilingual elevation for `AdmissionTarget` and static data models in `frontend/src/pages/admission.tsx`.
+- [x] T044: Bilingual elevation for `AppHead`, `Navbar`, and Flagship Hero/PageHeader.
+- [x] T045: Bilingual elevation for Admission Target Blueprint Grid & Negative Marking Analytics (`target_du`, `target_buet`, `target_medical`, `-০.২৫`).
+- [x] T046: Bilingual elevation for `AdmissionCounselingMatrix.tsx` and `MigrationCascadeVisualizer.tsx`.
+- [x] T047: Bilingual elevation for Admission Calculator & FAQ Accordions.
+- [x] T048: Quality Assurance (TypeScript, Phase 98 test suite, strict zero-emoji scan).
+- [x] T049: Git commit, push to `origin/main`, rebuild & deploy to GitHub Pages, and verify live HTTP 200.
+
+## Phase 9: Tuition Match & Escrow Milestone Hub Bilingual Elevation (`frontend/src/pages/tuition.tsx` & subcomponents)
+- [ ] T050: Bilingual elevation for `TutorProfile` and `TuitionPost` static data models in `frontend/src/pages/tuition.tsx`.
+- [ ] T051: Bilingual elevation for `AppHead`, `Navbar`, and PageHeader in `frontend/src/pages/tuition.tsx`.
+- [ ] T052: Bilingual elevation for Thana multi-vector filter console (`selectedThana`, `ধানমন্ডি`).
+- [ ] T053: Bilingual elevation for Verified Teacher Cards (`isVerifiedTutor`, credentials, subjects, hourly rates).
+- [ ] T054: Bilingual elevation for Escrow Milestone Policy & Consent Modal (`escrowEligible`, `এসক্রো মাইলস্টোন`, `requestTuitionConsent`, `Modal`).
+- [ ] T055: Quality Assurance (TypeScript, test suite, strict zero-emoji scan).
+- [ ] T056: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/tuition/`.
+
 

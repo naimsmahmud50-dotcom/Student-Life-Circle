@@ -13,6 +13,7 @@
  */
 
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import {
   GraduationCap,
   Award,
@@ -35,8 +36,11 @@ import {
 export interface AdmissionProgram {
   program_id: string;
   institution_name: string;
+  institution_name_en?: string;
   department_name: string;
+  department_name_en?: string;
   short_name: string;
+  short_name_en?: string;
   total_capacity: number;
   historical_cutoff_rank: number;
   category: string;
@@ -55,8 +59,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'BUET_CSE',
     institution_name: 'বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET)',
+    institution_name_en: 'Bangladesh University of Engineering and Technology (BUET)',
     department_name: 'কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)',
+    department_name_en: 'Computer Science and Engineering (CSE)',
     short_name: 'বুয়েট সিএসই',
+    short_name_en: 'BUET CSE',
     total_capacity: 120,
     historical_cutoff_rank: 165,
     category: 'Engineering',
@@ -65,8 +72,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'BUET_EEE',
     institution_name: 'বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET)',
+    institution_name_en: 'Bangladesh University of Engineering and Technology (BUET)',
     department_name: 'ইলেকট্রিক্যাল অ্যান্ড ইলেকট্রনিক ইঞ্জিনিয়ারিং (EEE)',
+    department_name_en: 'Electrical and Electronic Engineering (EEE)',
     short_name: 'বুয়েট ট্রিপল-ই',
+    short_name_en: 'BUET EEE',
     total_capacity: 195,
     historical_cutoff_rank: 450,
     category: 'Engineering',
@@ -75,8 +85,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'DMC_MBBS',
     institution_name: 'ঢাকা মেডিকেল কলেজ (DMC)',
+    institution_name_en: 'Dhaka Medical College (DMC)',
     department_name: 'ব্যাচেলর অব মেডিসিন অ্যান্ড ব্যাচেলর অব সার্জারি (MBBS)',
+    department_name_en: 'Bachelor of Medicine and Surgery (MBBS)',
     short_name: 'ডিএমসি এমবিবিএস',
+    short_name_en: 'DMC MBBS',
     total_capacity: 230,
     historical_cutoff_rank: 260,
     category: 'Medical',
@@ -85,8 +98,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'DU_CSE',
     institution_name: 'ঢাকা বিশ্ববিদ্যালয় (DU)',
+    institution_name_en: 'University of Dhaka (DU)',
     department_name: 'কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)',
+    department_name_en: 'Computer Science and Engineering (CSE)',
     short_name: 'ঢাবি সিএসই',
+    short_name_en: 'DU CSE',
     total_capacity: 60,
     historical_cutoff_rank: 320,
     category: 'Science',
@@ -95,8 +111,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'DU_EEE',
     institution_name: 'ঢাকা বিশ্ববিদ্যালয় (DU)',
+    institution_name_en: 'University of Dhaka (DU)',
     department_name: 'ইলেকট্রিক্যাল অ্যান্ড ইলেকট্রনিক ইঞ্জিনিয়ারিং (EEE)',
+    department_name_en: 'Electrical and Electronic Engineering (EEE)',
     short_name: 'ঢাবি ট্রিপল-ই',
+    short_name_en: 'DU EEE',
     total_capacity: 70,
     historical_cutoff_rank: 680,
     category: 'Science',
@@ -105,8 +124,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'JU_CSE',
     institution_name: 'জাহাঙ্গীরনগর বিশ্ববিদ্যালয় (JU)',
+    institution_name_en: 'Jahangirnagar University (JU)',
     department_name: 'কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)',
+    department_name_en: 'Computer Science and Engineering (CSE)',
     short_name: 'জাবি সিএসই',
+    short_name_en: 'JU CSE',
     total_capacity: 55,
     historical_cutoff_rank: 850,
     category: 'Science',
@@ -115,8 +137,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'CKET_CSE',
     institution_name: 'চুয়েট-কুয়েট-রুয়েট সমন্বিত প্রকৌশল গুচ্ছ (CKET)',
+    institution_name_en: 'CUET-KUET-RUET Combined Engineering Cluster (CKET)',
     department_name: 'কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)',
+    department_name_en: 'Computer Science and Engineering (CSE)',
     short_name: 'প্রকৌশল গুচ্ছ সিএসই',
+    short_name_en: 'Engineering Cluster CSE',
     total_capacity: 180,
     historical_cutoff_rank: 1150,
     category: 'Engineering',
@@ -125,8 +150,11 @@ const DEFAULT_PROGRAMS: AdmissionProgram[] = [
   {
     program_id: 'RU_CSE',
     institution_name: 'রাজশাহী বিশ্ববিদ্যালয় (RU)',
+    institution_name_en: 'University of Rajshahi (RU)',
     department_name: 'কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)',
+    department_name_en: 'Computer Science and Engineering (CSE)',
     short_name: 'রাবি সিএসই',
+    short_name_en: 'RU CSE',
     total_capacity: 50,
     historical_cutoff_rank: 1380,
     category: 'Science',
@@ -141,6 +169,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
   onSavePreferences,
   className = ''
 }) => {
+  const { isBengali } = useTranslation();
   const [meritRank, setMeritRank] = useState<number>(initialRank);
   const [selectedQuota, setSelectedQuota] = useState<string>('GENERAL');
   const [preferenceList, setPreferenceList] = useState<string[]>([
@@ -172,7 +201,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
     if (meritRank <= effectiveCutoff * 0.70) {
       return {
         percent: Math.min(98, Math.round(92 + ((effectiveCutoff * 0.7 - meritRank) / effectiveCutoff) * 6)),
-        label: 'উচ্চ সম্ভাবনা',
+        label: isBengali ? 'উচ্চ সম্ভাবনা' : 'High Probability',
         gradient: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-emerald-300',
         barColor: 'bg-emerald-500'
       };
@@ -180,7 +209,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
       const progress = (effectiveCutoff - meritRank) / (effectiveCutoff * 0.30);
       return {
         percent: Math.round(65 + progress * 24),
-        label: 'সন্তোষজনক',
+        label: isBengali ? 'সন্তোষজনক' : 'Competitive',
         gradient: 'from-blue-500/20 to-teal-500/20 border-blue-500/40 text-blue-300',
         barColor: 'bg-blue-500'
       };
@@ -188,14 +217,14 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
       const progress = (effectiveCutoff * 1.35 - meritRank) / (effectiveCutoff * 0.35);
       return {
         percent: Math.round(25 + progress * 35),
-        label: 'উচ্চাকাঙ্ক্ষী লক্ষ্য',
+        label: isBengali ? 'উচ্চাকাঙ্ক্ষী লক্ষ্য' : 'Aspirational Target',
         gradient: 'from-amber-500/20 to-orange-500/20 border-amber-500/40 text-amber-300',
         barColor: 'bg-amber-500'
       };
     } else {
       return {
         percent: Math.max(8, Math.round(20 - ((meritRank - effectiveCutoff * 1.35) / effectiveCutoff) * 12)),
-        label: 'ঝুঁকিপূর্ণ',
+        label: isBengali ? 'ঝুঁকিপূর্ণ' : 'High Risk',
         gradient: 'from-rose-500/20 to-red-500/20 border-rose-500/40 text-rose-300',
         barColor: 'bg-rose-500'
       };
@@ -251,11 +280,12 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-white font-sans flex items-center gap-2.5">
               <GraduationCap className="w-6 h-6 text-blue-400" />
-              <span>পছন্দক্রম ম্যাট্রিক্স ও ভর্তি সম্ভাবনা বিশ্লেষক</span>
+              <span>{isBengali ? 'পছন্দক্রম ম্যাট্রিক্স ও ভর্তি সম্ভাবনা বিশ্লেষক' : 'Preference Matrix & Admission Chance Forecaster'}</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl font-bengali leading-relaxed">
-              গেলে-শ্যাপলি অ্যালগরিদমের কারণে পছন্দক্রম সত্যবাদী রাখা সম্পূর্ণ নিরাপদ। উপরের পছন্দ না পেলে স্বয়ংক্রিয়ভাবে
-              পরের পছন্দ বিবেচিত হবে, কোনো পেনাল্টি বা আসন হারানোর ঝুঁকি নেই।
+              {isBengali 
+                ? 'গেলে-শ্যাপলি অ্যালগরিদমের কারণে পছন্দক্রম সত্যবাদী রাখা সম্পূর্ণ নিরাপদ। উপরের পছন্দ না পেলে স্বয়ংক্রিয়ভাবে পরের পছন্দ বিবেচিত হবে, কোনো পেনাল্টি বা আসন হারানোর ঝুঁকি নেই।' 
+                : 'Truthful preference ranking is Pareto-optimal under the Gale-Shapley Deferred Acceptance algorithm. If a higher choice is not allocated, lower choices are considered without penalty.'}
             </p>
           </div>
 
@@ -267,9 +297,9 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
             <div className="space-y-0.5">
               <div className="text-sm font-semibold text-white font-sans">{candidateName}</div>
               <div className="text-xs text-slate-400 flex items-center gap-2 font-mono">
-                <span>মেধা স্কোর: {initialScore}</span>
+                <span>{isBengali ? 'মেধা স্কোর:' : 'Merit Score:'} {initialScore}</span>
                 <span className="text-slate-600">|</span>
-                <span className="text-emerald-400 font-semibold font-sans">মেধা ক্রম: #{meritRank}</span>
+                <span className="text-emerald-400 font-semibold font-sans">{isBengali ? 'মেধা ক্রম:' : 'Rank:'} #{meritRank}</span>
               </div>
             </div>
           </div>
@@ -279,7 +309,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-300 font-sans flex items-center justify-between">
-              <span>সিমুলেটেড মেধা ক্রম (Merit Rank)</span>
+              <span>{isBengali ? 'সিমুলেটেড মেধা ক্রম (Merit Rank)' : 'Simulated Merit Rank'}</span>
               <span className="text-blue-400 font-mono">#{meritRank}</span>
             </label>
             <input
@@ -294,24 +324,24 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
               className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
             />
             <div className="flex justify-between text-[11px] text-slate-500 font-mono">
-              <span>#1 (শীর্ষ মেধা)</span>
-              <span>#500 (বুয়েট/ডিএমসি কাটঅফ)</span>
-              <span>#2000 (বিশ্ববিদ্যালয় কাটঅফ)</span>
+              <span>{isBengali ? '#১ (শীর্ষ মেধা)' : '#1 (Top Merit)'}</span>
+              <span>{isBengali ? '#৫০০ (বুয়েট/ডিএমসি কাটঅফ)' : '#500 (BUET/DMC Cutoff)'}</span>
+              <span>{isBengali ? '#২০০০ (বিশ্ববিদ্যালয় কাটঅফ)' : '#2000 (Varsity Cutoff)'}</span>
             </div>
           </div>
 
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-300 font-sans flex items-center gap-1.5">
               <Award className="w-3.5 h-3.5 text-amber-400" />
-              <span>কোটা ক্যাটাগরি (স্বয়ংক্রিয় সাধারণ স্পিল-ওভার প্রযোজ্য)</span>
+              <span>{isBengali ? 'কোটা ক্যাটাগরি (স্বয়ংক্রিয় সাধারণ স্পিল-ওভার প্রযোজ্য)' : 'Quota Category (Auto General Spill-over)'}</span>
             </label>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
               {[
-                { id: 'GENERAL', label: 'সাধারণ' },
-                { id: 'FREEDOM_FIGHTER', label: 'মুক্তিযোদ্ধা' },
-                { id: 'TRIBAL', label: 'উপজাতি' },
-                { id: 'DISTRICT', label: 'জেলা' },
-                { id: 'SPECIAL_NEEDS', label: 'প্রতিবন্ধী' }
+                { id: 'GENERAL', labelBn: 'সাধারণ', labelEn: 'General' },
+                { id: 'FREEDOM_FIGHTER', labelBn: 'মুক্তিযোদ্ধা', labelEn: 'Freedom Fighter' },
+                { id: 'TRIBAL', labelBn: 'উপজাতি', labelEn: 'Ethnic' },
+                { id: 'DISTRICT', labelBn: 'জেলা', labelEn: 'District' },
+                { id: 'SPECIAL_NEEDS', labelBn: 'প্রতিবন্ধী', labelEn: 'Disability' }
               ].map((q) => (
                 <button
                   key={q.id}
@@ -326,7 +356,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                       : 'bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/60'
                   }`}
                 >
-                  {q.label}
+                  {isBengali ? q.labelBn : q.labelEn}
                 </button>
               ))}
             </div>
@@ -340,7 +370,9 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-blue-400" />
             <h3 className="text-base font-bold text-white font-sans">
-              আপনার সক্রিয় পছন্দক্রম ({preferenceList.length}টি বিভাগ নির্বাচিত)
+              {isBengali 
+                ? `আপনার সক্রিয় পছন্দক্রম (${preferenceList.length}টি বিভাগ নির্বাচিত)` 
+                : `Your Active Preferences (${preferenceList.length} Departments Selected)`}
             </h3>
           </div>
           <span className="text-xs text-slate-400 font-mono">DRAG & DROP / ARROW SORTED</span>
@@ -365,7 +397,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-sm sm:text-base font-bold text-white font-sans">
-                        {program.department_name}
+                        {isBengali ? program.department_name : (program.department_name_en || program.department_name)}
                       </span>
                       <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono border border-slate-700">
                         {program.cluster}
@@ -373,10 +405,10 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                     </div>
                     <div className="text-xs text-slate-400 font-bengali flex items-center gap-2">
                       <Building2 className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{program.institution_name}</span>
+                      <span>{isBengali ? program.institution_name : (program.institution_name_en || program.institution_name)}</span>
                       <span className="text-slate-600">•</span>
                       <span className="font-mono text-slate-300">
-                        বিগত কাটঅফ: #{program.historical_cutoff_rank}
+                        {isBengali ? `বিগত কাটঅফ: #${program.historical_cutoff_rank}` : `Past Cutoff: #${program.historical_cutoff_rank}`}
                       </span>
                     </div>
                   </div>
@@ -408,7 +440,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                       disabled={index === 0}
                       onClick={() => handleMoveUp(index)}
                       className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent"
-                      title="উপরে নিন"
+                      title={isBengali ? "উপরে নিন" : "Move Up"}
                     >
                       <ChevronUp className="w-4 h-4" />
                     </button>
@@ -417,7 +449,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                       disabled={index === preferenceList.length - 1}
                       onClick={() => handleMoveDown(index)}
                       className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent"
-                      title="নিচে নিন"
+                      title={isBengali ? "নিচে নিন" : "Move Down"}
                     >
                       <ChevronDown className="w-4 h-4" />
                     </button>
@@ -425,7 +457,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                       type="button"
                       onClick={() => handleRemove(program.program_id)}
                       className="p-1.5 rounded-lg text-rose-400/80 hover:text-rose-300 hover:bg-rose-950/40 ml-1"
-                      title="মুছে ফেলুন"
+                      title={isBengali ? "মুছে ফেলুন" : "Remove"}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -441,7 +473,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
           <div className="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-3">
             <div className="text-xs font-semibold text-slate-400 font-sans flex items-center gap-1.5">
               <Plus className="w-3.5 h-3.5 text-blue-400" />
-              <span>পছন্দক্রমে আরও বিভাগ যুক্ত করুন:</span>
+              <span>{isBengali ? 'পছন্দক্রমে আরও বিভাগ যুক্ত করুন:' : 'Add more departments to preference list:'}</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {availableToAdd.map((p) => (
@@ -452,7 +484,7 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/80 text-xs text-slate-200 transition-all font-sans"
                 >
                   <Plus className="w-3 h-3 text-blue-400" />
-                  <span>{p.short_name}</span>
+                  <span>{isBengali ? p.short_name : (p.short_name_en || p.short_name)}</span>
                 </button>
               ))}
             </div>
@@ -464,17 +496,23 @@ export const AdmissionCounselingMatrix: React.FC<AdmissionCounselingMatrixProps>
           <div className="text-xs text-slate-400 flex items-center gap-2">
             <Info className="w-4 h-4 text-blue-400 shrink-0" />
             <span>
-              সংরক্ষণের পর কেন্দ্রীয় কাউন্সেলিং সার্ভারে আপনার পছন্দক্রম আপডেট হবে এবং তাৎক্ষণিক এলোকেশন সিমুলেট করা যাবে।
+              {isBengali 
+                ? 'সংরক্ষণের পর কেন্দ্রীয় কাউন্সেলিং সার্ভারে আপনার পছন্দক্রম আপডেট হবে এবং তাৎক্ষণিক এলোকেশন সিমুলেট করা যাবে।'
+                : 'Saving updates your preference ranking on the central counseling engine to simulate instant allocations.'}
             </span>
           </div>
 
           <button
             type="button"
             onClick={handleSave}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-sans text-sm font-semibold shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-sans text-sm font-semibold shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <CheckCircle2 className="w-4 h-4" />
-            <span>{isSaved ? 'পছন্দক্রম সংরক্ষিত হয়েছে' : 'পছন্দক্রম সংরক্ষণ করুন'}</span>
+            <span>
+              {isSaved 
+                ? (isBengali ? 'পছন্দক্রম সংরক্ষিত হয়েছে' : 'Preferences Saved') 
+                : (isBengali ? 'পছন্দক্রম সংরক্ষণ করুন' : 'Save Preferences')}
+            </span>
           </button>
         </div>
       </div>

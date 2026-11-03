@@ -13,6 +13,7 @@
  */
 
 import React, { useState } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import {
   TrendingUp,
   ArrowRight,
@@ -35,11 +36,13 @@ export interface MigrationStep {
   from_program: string;
   to_program: string;
   upgrade_description: string;
+  upgrade_description_en?: string;
 }
 
 export interface CascadeRound {
   round_number: number;
   title: string;
+  title_en?: string;
   active_students: number;
   matched_students: number;
   migrations: MigrationStep[];
@@ -55,6 +58,7 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
   {
     round_number: 1,
     title: 'প্রথম পর্যায়: প্রাথমিক মেধাভিত্তিক আসন বরাদ্দ',
+    title_en: 'Phase 1: Initial Merit-Based Seat Allocation',
     active_students: 120,
     matched_students: 112,
     migrations: [],
@@ -70,6 +74,7 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
   {
     round_number: 2,
     title: 'দ্বিতীয় পর্যায়: মেডিকেলে ভর্তি ও বুয়েট আসন বাতিলের পর প্রথম মাইগ্রেশন',
+    title_en: 'Phase 2: First Migration Following Medical & BUET Candidate Withdrawals',
     active_students: 110,
     matched_students: 110,
     migrations: [
@@ -79,7 +84,8 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
         merit_rank: 168,
         from_program: 'BUET_EEE',
         to_program: 'BUET_CSE',
-        upgrade_description: 'বুয়েট ট্রিপল-ই থেকে বুয়েট সিএসইতে আসন মাইগ্রেশন'
+        upgrade_description: 'বুয়েট ট্রিপল-ই থেকে বুয়েট সিএসইতে আসন মাইগ্রেশন',
+        upgrade_description_en: 'Seat migrated upward from BUET EEE to BUET CSE'
       },
       {
         student_id: 'STU_215',
@@ -87,7 +93,8 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
         merit_rank: 325,
         from_program: 'JU_CSE',
         to_program: 'DU_CSE',
-        upgrade_description: 'জাবি সিএসই থেকে ঢাবি সিএসইতে আসন মাইগ্রেশন'
+        upgrade_description: 'জাবি সিএসই থেকে ঢাবি সিএসইতে আসন মাইগ্রেশন',
+        upgrade_description_en: 'Seat migrated upward from JU CSE to DU CSE'
       },
       {
         student_id: 'STU_482',
@@ -95,7 +102,8 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
         merit_rank: 462,
         from_program: 'CKET_CSE',
         to_program: 'BUET_EEE',
-        upgrade_description: 'প্রকৌশল গুচ্ছ থেকে বুয়েট ট্রিপল-ই তে আসন মাইগ্রেশন'
+        upgrade_description: 'প্রকৌশল গুচ্ছ থেকে বুয়েট ট্রিপল-ই তে আসন মাইগ্রেশন',
+        upgrade_description_en: 'Seat migrated upward from Engineering Cluster to BUET EEE'
       }
     ],
     program_cutoffs: {
@@ -110,6 +118,7 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
   {
     round_number: 3,
     title: 'তৃতীয় পর্যায়: চূড়ান্ত মাইগ্রেশন ও কোটা স্পিল-ওভার সমন্বয়',
+    title_en: 'Phase 3: Final Cascade Migration & Quota Spillover Balancing',
     active_students: 110,
     matched_students: 110,
     migrations: [
@@ -119,7 +128,8 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
         merit_rank: 340,
         from_program: 'DU_EEE',
         to_program: 'DU_CSE',
-        upgrade_description: 'ঢাবি ট্রিপল-ই থেকে ঢাবি সিএসইতে কোটা স্পিল-ওভার মাইগ্রেশন'
+        upgrade_description: 'ঢাবি ট্রিপল-ই থেকে ঢাবি সিএসইতে কোটা স্পিল-ওভার মাইগ্রেশন',
+        upgrade_description_en: 'Quota spillover upward migration from DU EEE to DU CSE'
       },
       {
         student_id: 'STU_890',
@@ -127,7 +137,8 @@ const MOCK_CASCADE_ROUNDS: CascadeRound[] = [
         merit_rank: 885,
         from_program: 'অপেক্ষমাণ তালিকা',
         to_program: 'JU_CSE',
-        upgrade_description: 'অপেক্ষমাণ তালিকা থেকে জাবি সিএসইতে চূড়ান্ত অন্তর্ভুক্তি'
+        upgrade_description: 'অপেক্ষমাণ তালিকা থেকে জাবি সিএসইতে চূড়ান্ত অন্তর্ভুক্তি',
+        upgrade_description_en: 'Final absorption from Waiting List into JU CSE'
       }
     ],
     program_cutoffs: {
@@ -145,6 +156,7 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
   className = '',
   onSimulationRun
 }) => {
+  const { isBengali } = useTranslation();
   const [currentRoundIndex, setCurrentRoundIndex] = useState<number>(1);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
 
@@ -180,11 +192,12 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
             </div>
             <h3 className="text-xl font-bold text-white font-sans flex items-center gap-2.5">
               <Layers className="w-5 h-5 text-blue-400" />
-              <span>আসন মাইগ্রেশন রিপল ও ঊর্ধ্বমুখী বরাদ্দ সিমুলেশন</span>
+              <span>{isBengali ? 'আসন মাইগ্রেশন রিপল ও ঊর্ধ্বমুখী বরাদ্দ সিমুলেশন' : 'Seat Migration Ripple & Upward Reallocation Simulator'}</span>
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 font-bengali max-w-2xl leading-relaxed">
-              মেডিকেল বা উচ্চতর বুয়েট বিভাগে শিক্ষার্থী ভর্তি হওয়ার পর ঢাবি বা গুচ্ছে আসন শূন্য হলে কীভাবে নিচ থেকে
-              মেধা অনুযায়ী প্রার্থীরা স্বয়ংক্রিয়ভাবে উপরের পছন্দের বিভাগে উন্নীত হন, তা দেখুন।
+              {isBengali 
+                ? 'মেডিকেল বা উচ্চতর বুয়েট বিভাগে শিক্ষার্থী ভর্তি হওয়ার পর ঢাবি বা গুচ্ছে আসন শূন্য হলে কীভাবে নিচ থেকে মেধা অনুযায়ী প্রার্থীরা স্বয়ংক্রিয়ভাবে উপরের পছন্দের বিভাগে উন্নীত হন, তা দেখুন।' 
+                : 'Simulate how candidate withdrawals from Medical or top BUET programs create vacancies that cascade down, upgrading applicants to higher choices automatically.'}
             </p>
           </div>
 
@@ -192,10 +205,14 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
             type="button"
             disabled={isSimulating}
             onClick={handleRunSimulation}
-            className="px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-sans text-xs sm:text-sm font-semibold shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2 shrink-0"
+            className="px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-sans text-xs sm:text-sm font-semibold shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
           >
             <RefreshCw className={`w-4 h-4 ${isSimulating ? 'animate-spin' : ''}`} />
-            <span>{isSimulating ? 'সিমুলেশন চলছে...' : 'মাইগ্রেশন সিমুলেশন চালু করুন'}</span>
+            <span>
+              {isSimulating 
+                ? (isBengali ? 'সিমুলেশন চলছে...' : 'Simulating...') 
+                : (isBengali ? 'মাইগ্রেশন সিমুলেশন চালু করুন' : 'Run Migration Simulation')}
+            </span>
           </button>
         </div>
 
@@ -206,15 +223,21 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
               key={round.round_number}
               type="button"
               onClick={() => setCurrentRoundIndex(idx)}
-              className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-sans transition-all flex flex-col sm:flex-row items-center justify-center gap-2 ${
+              className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-sans transition-all flex flex-col sm:flex-row items-center justify-center gap-2 cursor-pointer ${
                 currentRoundIndex === idx
                   ? 'bg-blue-600 text-white shadow-md font-semibold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <span className="font-mono font-bold">রাউন্ড {round.round_number}</span>
+              <span className="font-mono font-bold">
+                {isBengali ? `রাউন্ড ${round.round_number}` : `Round ${round.round_number}`}
+              </span>
               <span className="hidden md:inline text-[11px] opacity-80">
-                {idx === 0 ? 'প্রাথমিক' : idx === 1 ? '১ম মাইগ্রেশন' : 'চূড়ান্ত'}
+                {idx === 0 
+                  ? (isBengali ? 'প্রাথমিক' : 'Initial') 
+                  : idx === 1 
+                  ? (isBengali ? '১ম মাইগ্রেশন' : '1st Migration') 
+                  : (isBengali ? 'চূড়ান্ত' : 'Final')}
               </span>
             </button>
           ))}
@@ -225,13 +248,13 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <h4 className="text-sm font-bold text-white font-sans flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-400" />
-              <span>{activeRound.title}</span>
+              <span>{isBengali ? activeRound.title : (activeRound.title_en || activeRound.title)}</span>
             </h4>
             <div className="flex items-center gap-3 text-xs font-mono text-slate-400">
-              <span>বরাদ্দপ্রাপ্ত: {activeRound.matched_students} জন</span>
+              <span>{isBengali ? `বরাদ্দপ্রাপ্ত: ${activeRound.matched_students} জন` : `Allocated: ${activeRound.matched_students}`}</span>
               <span>•</span>
               <span className="text-emerald-400 font-semibold">
-                মাইগ্রেশন সম্পন্ন: {activeRound.migrations.length} জন
+                {isBengali ? `মাইগ্রেশন সম্পন্ন: ${activeRound.migrations.length} জন` : `Migrations: ${activeRound.migrations.length}`}
               </span>
             </div>
           </div>
@@ -240,7 +263,7 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
           {activeRound.migrations.length > 0 ? (
             <div className="space-y-3 pt-2">
               <div className="text-xs font-semibold text-slate-400 font-sans">
-                এই রাউন্ডে আসন প্রাপ্তি ও ঊর্ধ্বমুখী উন্নয়ন:
+                {isBengali ? 'এই রাউন্ডে আসন প্রাপ্তি ও ঊর্ধ্বমুখী উন্নয়ন:' : 'Seat Allocations & Upward Upgrades in this Round:'}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {activeRound.migrations.map((mig) => (
@@ -252,11 +275,11 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-bold text-white font-sans">{mig.name}</span>
                         <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-500/30">
-                          মেধা: #{mig.merit_rank}
+                          {isBengali ? `মেধা: #${mig.merit_rank}` : `Rank: #${mig.merit_rank}`}
                         </span>
                       </div>
                       <div className="text-[11px] text-slate-300 font-bengali">
-                        {mig.upgrade_description}
+                        {isBengali ? mig.upgrade_description : (mig.upgrade_description_en || mig.upgrade_description)}
                       </div>
                     </div>
 
@@ -271,7 +294,9 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
             </div>
           ) : (
             <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 text-xs text-slate-400 text-center font-bengali">
-              প্রাথমিক রাউন্ডে মেধা তালিকা ও প্রথম পছন্দের ভিত্তিতে ১০০% স্থিতিশীল বরাদ্দ কার্যকর হয়েছে।
+              {isBengali 
+                ? 'প্রাথমিক রাউন্ডে মেধা তালিকা ও প্রথম পছন্দের ভিত্তিতে ১০০% স্থিতিশীল বরাদ্দ কার্যকর হয়েছে।'
+                : 'Initial round executed 100% stable matching based on merit ranking and candidate first choices.'}
             </div>
           )}
         </div>
@@ -281,7 +306,7 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
           <div className="flex items-center justify-between text-xs">
             <span className="font-semibold text-slate-300 font-sans flex items-center gap-1.5">
               <Building2 className="w-3.5 h-3.5 text-blue-400" />
-              <span>এই রাউন্ড শেষে প্রধান বিভাগসমূহের কাটঅফ মেধা ক্রম:</span>
+              <span>{isBengali ? 'এই রাউন্ড শেষে প্রধান বিভাগসমূহের কাটঅফ মেধা ক্রম:' : 'Closing Cutoff Ranks by Department after this Round:'}</span>
             </span>
             <span className="text-slate-500 font-mono">DYNAMIC CUT-OFF EXPANSION</span>
           </div>
@@ -298,7 +323,7 @@ export const MigrationCascadeVisualizer: React.FC<MigrationCascadeVisualizerProp
                 </div>
                 <div className="text-[10px] text-emerald-400 font-mono flex items-center justify-center gap-0.5">
                   <ArrowUpRight className="w-3 h-3" />
-                  <span>কাটঅফ সম্প্রসারিত</span>
+                  <span>{isBengali ? 'কাটঅফ সম্প্রসারিত' : 'Cutoff Expanded'}</span>
                 </div>
               </div>
             ))}

@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { AppHead, createCourseSchema } from '../components/layout/Head';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
+import { useTranslation } from '../lib/i18n';
 import { 
   GraduationCap, 
   Search, 
@@ -55,97 +56,136 @@ import { MigrationCascadeVisualizer } from '../components/admission/MigrationCas
 interface AdmissionTarget {
   id: string;
   nameBn: string;
+  nameEn?: string;
   category: 'ENGINEERING' | 'GENERAL_VARSITY' | 'MEDICAL' | 'GST_CLUSTER';
   units: string;
+  unitsEn?: string;
   circularStatus: 'VERIFIED' | 'PENDING_UPDATE';
   lastCheckedDate: string;
+  lastCheckedDateEn?: string;
   totalMocksAvailable: number;
   negativeMarking: string;
+  negativeMarkingEn?: string;
   cutOffScore: string;
   probabilityPercent: number;
   seatCount: string;
+  seatCountEn?: string;
   examDate: string;
+  examDateEn?: string;
 }
 
 const FALLBACK_TARGETS: AdmissionTarget[] = [
   {
     id: "target_du",
     nameBn: "ঢাকা বিশ্ববিদ্যালয় (DU)",
+    nameEn: "University of Dhaka (DU)",
     category: "GENERAL_VARSITY",
     units: "ক-ইউনিট (বিজ্ঞান অনুষদ), খ-ইউনিট (কলা ও সামাজিক বিজ্ঞান), গ-ইউনিট (ব্যবসায়)",
+    unitsEn: "A-Unit (Faculty of Science), B-Unit (Arts & Social Sciences), C-Unit (Business Studies)",
     circularStatus: "VERIFIED",
     lastCheckedDate: "১০ অক্টোবর ২০২৬",
+    lastCheckedDateEn: "10 October 2026",
     totalMocksAvailable: 25,
     negativeMarking: "-০.২৫ প্রতি ভুল উত্তরে",
+    negativeMarkingEn: "-0.25 per incorrect answer",
     cutOffScore: "৭২.৫০ / ১২০",
     probabilityPercent: 84,
     seatCount: "১,৮৫১টি আসন (ক-ইউনিট)",
-    examDate: "০৫ ডিসেম্বর ২০২৬"
+    seatCountEn: "1,851 seats (A-Unit)",
+    examDate: "০৫ ডিসেম্বর ২০২৬",
+    examDateEn: "05 December 2026"
   },
   {
     id: "target_buet",
     nameBn: "বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET)",
+    nameEn: "Bangladesh University of Engineering and Technology (BUET)",
     category: "ENGINEERING",
     units: "ইঞ্জিনিয়ারিং ও স্থাপত্য বিভাগ (প্রিলিমিনারি ও লিখিত)",
+    unitsEn: "Engineering & Architecture (Preliminary & Written)",
     circularStatus: "VERIFIED",
     lastCheckedDate: "০৮ অক্টোবর ২০২৬",
+    lastCheckedDateEn: "08 October 2026",
     totalMocksAvailable: 18,
     negativeMarking: "-০.২৫ (প্রিলিমিনারি টেস্ট)",
+    negativeMarkingEn: "-0.25 (Preliminary Test)",
     cutOffScore: "৭৮.০০ / ১০০",
     probabilityPercent: 76,
     seatCount: "১,৩০৫টি আসন",
-    examDate: "১২ ডিসেম্বর ২০২৬"
+    seatCountEn: "1,305 seats",
+    examDate: "১২ ডিসেম্বর ২০২৬",
+    examDateEn: "12 December 2026"
   },
   {
     id: "target_medical",
     nameBn: "জাতীয় মেডিকেল ভর্তি পরীক্ষা (MBBS/BDS)",
+    nameEn: "National Medical Admission Test (MBBS/BDS)",
     category: "MEDICAL",
     units: "৩৭টি সরকারি ও বেসরকারি মেডিকেল কলেজ",
+    unitsEn: "37 Public & Private Medical Colleges",
     circularStatus: "VERIFIED",
     lastCheckedDate: "১২ অক্টোবর ২০২৬",
+    lastCheckedDateEn: "12 October 2026",
     totalMocksAvailable: 30,
     negativeMarking: "-০.২৫ প্রতি ভুল উত্তরে",
+    negativeMarkingEn: "-0.25 per incorrect answer",
     cutOffScore: "৬৮.৫০ / ১০০",
     probabilityPercent: 71,
     seatCount: "৫,৩৮০টি সরকারি আসন",
-    examDate: "১৯ ডিসেম্বর ২০২৬"
+    seatCountEn: "5,380 public seats",
+    examDate: "১৯ ডিসেম্বর ২০২৬",
+    examDateEn: "19 December 2026"
   },
   {
     id: "target_gst",
     nameBn: "জিএসটি গুচ্ছভুক্ত বিশ্ববিদ্যালয়সমূহ (GST Cluster)",
+    nameEn: "GST Cluster Universities",
     category: "GST_CLUSTER",
     units: "২৪টি সমন্বিত সাধারণ ও বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (A, B, C ইউনিট)",
+    unitsEn: "24 Integrated General, Science & Technology Universities (A, B, C Units)",
     circularStatus: "VERIFIED",
     lastCheckedDate: "০৬ অক্টোবর ২০২৬",
+    lastCheckedDateEn: "06 October 2026",
     totalMocksAvailable: 20,
     negativeMarking: "-০.২৫ প্রতি ভুল উত্তরে",
+    negativeMarkingEn: "-0.25 per incorrect answer",
     cutOffScore: "৫৬.০০ / ১০০",
     probabilityPercent: 88,
     seatCount: "২২,৫০০+ আসন",
-    examDate: "২৬ ডিসেম্বর ২০২৬"
+    seatCountEn: "22,500+ seats",
+    examDate: "২৬ ডিসেম্বর ২০২৬",
+    examDateEn: "26 December 2026"
   }
 ];
 
 const ADMISSION_FAQS = [
   {
     question: "সেকেন্ড টাইম ভর্তি পরীক্ষার নিয়ম ও মার্কস কর্তন নীতি কী?",
-    answer: "মেডিকেল ভর্তি পরীক্ষায় দ্বিতীয়বার অংশগ্রহণকারীদের মোট প্রাপ্ত নম্বর থেকে ৫ নম্বর (এবং পূর্ববর্তী শিক্ষাবর্ষে সরকারি মেডিকেল/ডেন্টালে ভর্তিকৃতদের ক্ষেত্রে ৭.৫ নম্বর) কর্তন করা হয়। ঢাকা বিশ্ববিদ্যালয় ও বুয়েটে সেকেন্ড টাইম সুযোগ নেই। তবে জিএসটি গুচ্ছ, জাহাঙ্গীরনগর বিশ্ববিদ্যালয় (JU) ও রাজশাহী বিশ্ববিদ্যালয়ে (RU) সেকেন্ড টাইম সুযোগ বিদ্যমান।"
+    questionEn: "What are the rules and score deduction policies for second-time admission candidates?",
+    answer: "মেডিকেল ভর্তি পরীক্ষায় দ্বিতীয়বার অংশগ্রহণকারীদের মোট প্রাপ্ত নম্বর থেকে ৫ নম্বর (এবং পূর্ববর্তী শিক্ষাবর্ষে সরকারি মেডিকেল/ডেন্টালে ভর্তিকৃতদের ক্ষেত্রে ৭.৫ নম্বর) কর্তন করা হয়। ঢাকা বিশ্ববিদ্যালয় ও বুয়েটে সেকেন্ড টাইম সুযোগ নেই। তবে জিএসটি গুচ্ছ, জাহাঙ্গীরনগর বিশ্ববিদ্যালয় (JU) ও রাজশাহী বিশ্ববিদ্যালয়ে (RU) সেকেন্ড টাইম সুযোগ বিদ্যমান।",
+    answerEn: "In the Medical admission test, second-time applicants incur a 5-mark deduction (and 7.5 marks if previously admitted to a public medical or dental college). DU and BUET do not permit second-time attempts, whereas GST Cluster, JU, and RU actively allow second-time candidates."
   },
   {
     question: "বুয়েট ও অন্যান্য প্রকৌশল ভর্তি পরীক্ষায় কোন কোন ক্যালকুলেটর অনুমোদিত?",
-    answer: "বুয়েট ভর্তি পরীক্ষায় শুধুমাত্র নন-প্রোগ্রামেবল সায়েন্টিফিক ক্যালকুলেটর অনুমোদিত (যেমন: Casio fx-991ES Plus, fx-991EX ClassWiz, fx-100MS ইত্যাদি)। মেমরি স্টোরেজ বা টেক্সট সেভ করা যায় এমন কোনো প্রোগ্রামেবল ক্যালকুলেটর পরীক্ষার হলে সম্পূর্ণ নিষিদ্ধ।"
+    questionEn: "Which scientific calculators are officially permitted in BUET and engineering entrance exams?",
+    answer: "বুয়েট ভর্তি পরীক্ষায় শুধুমাত্র নন-প্রোগ্রামেবল সায়েন্টিফিক ক্যালকুলেটর অনুমোদিত (যেমন: Casio fx-991ES Plus, fx-991EX ClassWiz, fx-100MS ইত্যাদি)। মেমরি স্টোরেজ বা টেক্সট সেভ করা যায় এমন কোনো প্রোগ্রামেবল ক্যালকুলেটর পরীক্ষার হলে সম্পূর্ণ নিষিদ্ধ।",
+    answerEn: "Only non-programmable scientific calculators (such as Casio fx-991ES Plus, fx-991EX ClassWiz, fx-100MS) are approved for BUET entrance exams. Any programmable calculator featuring persistent text or matrix memory storage is strictly prohibited."
   },
   {
-    question: "নেগেটিভ মার্কিং পলিসি কীভাবে চূড়ান্ত স্কোর প্রভাবিত করে?",
-    answer: "প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যায়। চারটি ভুল উত্তরের পেনাল্টিতে ১টি সঠিক উত্তরের সমান মার্ক কর্তন হয়। তাই আন্দাজে উত্তর না দিয়ে অপশন এলিমিনেশন মেথডে নিশ্চিত হওয়া ছাড়া উত্তর দাগানো পরিহার করাই কাট-অফ সুরক্ষিত রাখার মূল চাবিকাঠি।"
+    question: "নেগেティブ মার্কিং পলিসি কীভাবে চূড়ান্ত স্কোর প্রভাবিত করে?",
+    questionEn: "How does the negative marking penalty affect your final admission score?",
+    answer: "প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যায়। চারটি ভুল উত্তরের পেনাল্টিতে ১টি সঠিক উত্তরের সমান মার্ক কর্তন হয়। তাই আন্দাজে উত্তর না দিয়ে অপশন এলিমিনেশন মেথডে নিশ্চিত হওয়া ছাড়া উত্তর দাগানো পরিহার করাই কাট-অফ সুরক্ষিত রাখার মূল চাবিকাঠি।",
+    answerEn: "0.25 marks are deducted for every incorrect response. Four incorrect answers wipe out the score of an entire correct answer. Avoiding blind guesses and relying on the elimination method is vital to safeguarding your cut-off score."
   },
   {
     question: "কোটা সংক্রান্ত আবেদন ও প্রয়োজনীয় প্রত্যয়নপত্র কী কী?",
-    answer: "মুক্তিযোদ্ধা, উপজাতি/ক্ষুদ্র নৃগোষ্ঠী, শারীরিক প্রতিবন্ধী ও পোষ্য কোটায় আবেদনকারীদের সংশ্লিষ্ট মন্ত্রণালয়ের উপযুক্ত কর্তৃপক্ষ কর্তৃক ইস্যুকৃত মূল সনদপত্র ও অনলাইন ভেরিফিকেশন ট্র্যাকিং নম্বর আবেদনের সময় নির্ভুলভাবে প্রদান করতে হবে।"
+    questionEn: "What certificates and credentials are required for quota applications?",
+    answer: "মুক্তিযোদ্ধা, উপজাতি/ক্ষুদ্র নৃগোষ্ঠী, শারীরিক প্রতিবন্ধী ও পোষ্য কোটায় আবেদনকারীদের সংশ্লিষ্ট মন্ত্রণালয়ের উপযুক্ত কর্তৃপক্ষ কর্তৃক ইস্যুকৃত মূল সনদপত্র ও অনলাইন ভেরিফিকেশন ট্র্যাকিং নম্বর আবেদনের সময় নির্ভুলভাবে প্রদান করতে হবে।",
+    answerEn: "Applicants under Freedom Fighter, Tribal/Ethnic Minority, Differently-Abled, or Ward quotas must provide original certificates and online verification tracking numbers issued by the designated ministry authorities during application."
   }
 ];
 
 export default function AdmissionPage() {
+  const { isBengali } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [targets, setTargets] = useState<AdmissionTarget[]>(FALLBACK_TARGETS);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -185,7 +225,12 @@ export default function AdmissionPage() {
 
   const filtered = targets.filter((t) => {
     const matchesCategory = selectedCategory === 'ALL' || t.category === selectedCategory;
-    const matchesQuery = !searchQuery || t.nameBn.toLowerCase().includes(searchQuery.toLowerCase()) || t.units.toLowerCase().includes(searchQuery.toLowerCase());
+    const q = searchQuery.toLowerCase();
+    const matchesQuery = !searchQuery || 
+      t.nameBn.toLowerCase().includes(q) || 
+      (t.nameEn && t.nameEn.toLowerCase().includes(q)) ||
+      t.units.toLowerCase().includes(q) ||
+      (t.unitsEn && t.unitsEn.toLowerCase().includes(q));
     return matchesCategory && matchesQuery;
   });
 
@@ -231,13 +276,13 @@ export default function AdmissionPage() {
   return (
     <>
       <AppHead
-        title="বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব (Admission Matrix) | অগ্রযাত্রা"
-        description="ঢাকা বিশ্ববিদ্যালয়, বুয়েট, মেডিকেল ও জিএসটি গুচ্ছ ভর্তি পরীক্ষার অফিশিয়াল সার্কুলার, বিষয়ভিত্তিক নেগেティブ মার্কিং মডেল টেস্ট ও কাট-মার্ক অ্যানালিটিক্স।"
+        title={isBengali ? "বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব (Admission Matrix) | অগ্রযাত্রা" : "University Admission Matrix & Blueprint Hub | Agrogoti"}
+        description={isBengali ? "ঢাকা বিশ্ববিদ্যালয়, বুয়েট, মেডিকেল ও জিএসটি গুচ্ছ ভর্তি পরীক্ষার অফিশিয়াল সার্কুলার, বিষয়ভিত্তিক নেগেটিভ মার্কিং মডেল টেস্ট ও কাট-মার্ক অ্যানালিটিক্স।" : "Official circulars, subjectwise negative marking model tests, and cut-off score analytics for DU, BUET, Medical, and GST Cluster admission tests."}
         canonicalUrl="/admission"
         ogType="course"
         structuredData={createCourseSchema({
-          name: "বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি ও গেইল-শ্যাপলি ম্যাচিং",
-          description: "বুয়েট, ঢাবি, মেডিকেল ও জিএসটি পরীক্ষার নেগেティブ মার্কিং প্রস্তুতি প্ল্যাটফর্ম",
+          name: isBengali ? "বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি ও গেইল-শ্যাপলি ম্যাচিং" : "University Admission Preparation & Gale-Shapley Matching",
+          description: isBengali ? "বুয়েট, ঢাবি, মেডিকেল ও জিএসটি পরীক্ষার নেগেটিভ মার্কিং প্রস্তুতি প্ল্যাটফর্ম" : "Negative marking preparation platform for BUET, DU, Medical, and GST exams",
           educationalLevel: "University Admission",
           url: "https://ogrojatra.edu.bd/admission"
         })}
@@ -246,7 +291,7 @@ export default function AdmissionPage() {
       <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
-        <Navbar currentStage="বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব" />
+        <Navbar currentStage={isBengali ? "বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব" : "University Admission Hub"} />
 
         {/* Admission Bespoke Atmospheric Hero with ADMISSION Watermark */}
         <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
@@ -283,25 +328,26 @@ export default function AdmissionPage() {
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#ED8E22] border border-amber-200/70 dark:border-slate-700 shadow-xs">
                 <Target className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                পরীক্ষা-নির্দিষ্ট প্রস্তুতি মোড
+                {isBengali ? 'পরীক্ষা-নির্দিষ্ট প্রস্তুতি মোড' : 'Exam-Specific Prep Mode'}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
                 <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                অফিশিয়াল সার্কুলার ও ব্লুপ্রিন্ট সমন্বিত
+                {isBengali ? 'অফিশিয়াল সার্কুলার ও ব্লুপ্রিন্ট সমন্বিত' : 'Official Circulars & Blueprints Integrated'}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-slate-700 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700">
                 <Award className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                জাতীয় মেধাভিত্তিক ম্যাচিং
+                {isBengali ? 'জাতীয় মেধাভিত্তিক ম্যাচিং' : 'National Merit-Based Matching'}
               </span>
             </div>
 
             <div className="space-y-2 max-w-4xl">
               <h1 className="text-2xl sm:text-4xl font-serif font-bold tracking-tight text-[#1B2A4A] dark:text-[#F5F2EB]">
-                বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব
+                {isBengali ? 'বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি হাব' : 'University Admission Matrix & Blueprint Hub'}
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-bengali">
-                ঢাকা বিশ্ববিদ্যালয় (DU Ka), বুয়েট (BUET), মেডিকেল (MBBS/BDS) এবং জিএসটি গুচ্ছ ভর্তি পরীক্ষার অফিশিয়াল সিলেবাস,
-                নেগেটিভ মার্কিং (-০.২৫) অ্যালগরিদম এবং বিগত বছরের কাট-অফ নম্বর অনুযায়ী প্রস্তুতি ও রিয়েল-টাইম চান্স প্রবাবিলিটি যাচাই করুন।
+                {isBengali 
+                  ? 'ঢাকা বিশ্ববিদ্যালয় (DU Ka), বুয়েট (BUET), মেডিকেল (MBBS/BDS) এবং জিএসটি গুচ্ছ ভর্তি পরীক্ষার অফিশিয়াল সিলেবাস, নেগেটিভ মার্কিং (-০.২৫) অ্যালগরিদম এবং বিগত বছরের কাট-অফ নম্বর অনুযায়ী প্রস্তুতি ও রিয়েল-টাইম চান্স প্রবাবিলিটি যাচাই করুন।' 
+                  : 'Verify official syllabi, negative marking (-0.25) algorithms, and real-time admission probability based on past cut-offs for DU Ka, BUET, Medical, and GST Cluster exams.'}
               </p>
             </div>
 
@@ -310,20 +356,20 @@ export default function AdmissionPage() {
               <div className="space-y-1.5">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#FFF9EB] dark:bg-amber-950/60 text-[#ED8E22] border border-amber-200/80 dark:border-amber-800">
                   <Sparkles className="w-3.5 h-3.5 text-[#ED8E22]" />
-                  <span>কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর</span>
+                  <span>{isBengali ? 'কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর' : 'Cut-Off Forecaster & Sigmoid Rank Predictor'}</span>
                 </div>
                 <h3 className="text-base sm:text-lg font-bold text-[#1B2A4A] dark:text-white font-bengali">
-                  স্বায়ত্তশাসিত চান্স মিটার ও বিশ্ববিদ্যালয় ম্যাচিং
+                  {isBengali ? 'স্বায়ত্তশাসিত চান্স মিটার ও বিশ্ববিদ্যালয় ম্যাচিং' : 'Autonomous Chance Meter & University Matching'}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali max-w-2xl">
-                  আপনার এসএসসি/এইচএসসি জিপিএ ও টেস্ট স্কোর ইনপুট দিয়ে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছের ক্যালিব্রেটেড চান্স মিটার যাচাই করুন।
+                  {isBengali ? 'আপনার এসএসসি/এইচএসসি জিপিএ ও টেস্ট স্কোর ইনপুট দিয়ে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছের ক্যালিব্রেটেড চান্স মিটার যাচাই করুন।' : 'Enter your SSC/HSC GPA and diagnostic test scores to check calibrated admission chances for BUET, DU, Medical, and GST.'}
                 </p>
               </div>
               <Link
                 href="/admission/predictor"
                 className="shrink-0 px-5 py-2.5 bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold text-xs sm:text-sm rounded-2xl shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 cursor-pointer"
               >
-                <span>ফোরকাস্টার ওপেন করুন</span>
+                <span>{isBengali ? 'ফোরকাস্টার ওপেন করুন' : 'Open Forecaster'}</span>
                 <ArrowRight className="w-4 h-4 text-white" />
               </Link>
             </div>
@@ -336,9 +382,11 @@ export default function AdmissionPage() {
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-                    ৪টি ক্লাস্টার
+                    {isBengali ? '৪টি ক্লাস্টার' : '4 Clusters'}
                   </div>
-                  <div className="text-xs text-slate-500 font-bengali">পাবলিক, ইঞ্জি., মেডিকেল ও গুচ্ছ</div>
+                  <div className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'পাবলিক, ইঞ্জি., মেডিকেল ও গুচ্ছ' : 'Public, Engg., Medical & GST'}
+                  </div>
                 </div>
               </div>
 
@@ -348,9 +396,11 @@ export default function AdmissionPage() {
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-                    ৩১,০৩৬+
+                    {isBengali ? '৩১,০৩৬+' : '31,036+'}
                   </div>
-                  <div className="text-xs text-slate-500 font-bengali">মোট সমন্বিত সরকারি আসন</div>
+                  <div className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'মোট সমন্বিত সরকারি আসন' : 'Total Public University Seats'}
+                  </div>
                 </div>
               </div>
 
@@ -360,9 +410,11 @@ export default function AdmissionPage() {
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-                    ৯৩টি
+                    {isBengali ? '৯৩টি' : '93 Mocks'}
                   </div>
-                  <div className="text-xs text-slate-500 font-bengali">পূর্ণাঙ্গ ও বিষয়ভিত্তিক মডেল টেস্ট</div>
+                  <div className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'পূর্ণাঙ্গ ও বিষয়ভিত্তিক মডেল টেস্ট' : 'Full & Subject Mock Tests'}
+                  </div>
                 </div>
               </div>
 
@@ -372,9 +424,11 @@ export default function AdmissionPage() {
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-                    -০.২৫
+                    {isBengali ? "-০.২৫" : "-0.25"}
                   </div>
-                  <div className="text-xs text-slate-500 font-bengali">নেগেটিভ মার্কিং পলিসি ক্যালিব্রেশন</div>
+                  <div className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'নেগেটিভ মার্কিং পলিসি ক্যালিব্রেশন' : 'Negative Marking Calibration'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -390,7 +444,7 @@ export default function AdmissionPage() {
                 }`}
               >
                 <Target className="w-3.5 h-3.5" />
-                <span>বিশ্ববিদ্যালয় ব্লুপ্রিন্ট ও মডেল টেস্ট (Targets)</span>
+                <span>{isBengali ? 'বিশ্ববিদ্যালয় ব্লুপ্রিন্ট ও মডেল টেস্ট (Targets)' : 'University Blueprints & Mocks (Targets)'}</span>
               </button>
 
               <button
@@ -402,7 +456,7 @@ export default function AdmissionPage() {
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
-                <span>চয়েস লিস্ট ও কাউন্সেলিং রুম (Counseling)</span>
+                <span>{isBengali ? 'চয়েস লিস্ট ও কাউন্সেলিং রুম (Counseling)' : 'Choice List & Counseling Room (Counseling)'}</span>
               </button>
 
               <button
@@ -414,7 +468,7 @@ export default function AdmissionPage() {
                 }`}
               >
                 <Layers className="w-3.5 h-3.5" />
-                <span>আসন মাইগ্রেশন ক্যাসকেড (Migration Ripple)</span>
+                <span>{isBengali ? 'আসন মাইগ্রেশন ক্যাসকেড (Migration Ripple)' : 'Seat Migration Cascade (Migration Ripple)'}</span>
               </button>
 
               <button
@@ -426,7 +480,7 @@ export default function AdmissionPage() {
                 }`}
               >
                 <BookOpen className="w-3.5 h-3.5" />
-                <span>নেগেটিভ মার্কিং স্ট্র্যাটেজি ও গাইড</span>
+                <span>{isBengali ? 'নেগেটিভ মার্কিং স্ট্র্যাটেজি ও গাইড' : 'Negative Marking Strategy & Guide'}</span>
               </button>
 
               <button
@@ -438,7 +492,7 @@ export default function AdmissionPage() {
                 }`}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
-                <span>ভর্তি নীতিমালা ও এফএকিউ (Policies)</span>
+                <span>{isBengali ? 'ভর্তি নীতিমালা ও এফএকিউ (Policies)' : 'Admission Policies & FAQs (Policies)'}</span>
               </button>
             </div>
 
@@ -468,15 +522,15 @@ export default function AdmissionPage() {
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 font-bengali mr-1 flex items-center gap-1">
                       <Filter className="w-3.5 h-3.5 text-[#ED8E22]" />
-                      <span>ক্লাস্টার:</span>
+                      <span>{isBengali ? 'ক্লাস্টার:' : 'Cluster:'}</span>
                     </span>
 
                     {[
-                      { key: 'ALL', label: 'সকল বিশ্ববিদ্যালয়', count: targets.length },
-                      { key: 'GENERAL_VARSITY', label: 'সাধারণ পাবলিক (DU, JU, RU)', count: targets.filter(t => t.category === 'GENERAL_VARSITY').length },
-                      { key: 'ENGINEERING', label: 'ইঞ্জিনিয়ারিং (BUET, CKRUET)', count: targets.filter(t => t.category === 'ENGINEERING').length },
-                      { key: 'MEDICAL', label: 'মেডিকেল (MBBS / BDS)', count: targets.filter(t => t.category === 'MEDICAL').length },
-                      { key: 'GST_CLUSTER', label: 'গুচ্ছ ক্লাস্টার (GST)', count: targets.filter(t => t.category === 'GST_CLUSTER').length },
+                      { key: 'ALL', labelBn: 'সকল বিশ্ববিদ্যালয়', labelEn: 'All Universities', count: targets.length },
+                      { key: 'GENERAL_VARSITY', labelBn: 'সাধারণ পাবলিক (DU, JU, RU)', labelEn: 'General Public (DU, JU, RU)', count: targets.filter(t => t.category === 'GENERAL_VARSITY').length },
+                      { key: 'ENGINEERING', labelBn: 'ইঞ্জিনিয়ারিং (BUET, CKRUET)', labelEn: 'Engineering (BUET, CKRUET)', count: targets.filter(t => t.category === 'ENGINEERING').length },
+                      { key: 'MEDICAL', labelBn: 'মেডিকেল (MBBS / BDS)', labelEn: 'Medical (MBBS / BDS)', count: targets.filter(t => t.category === 'MEDICAL').length },
+                      { key: 'GST_CLUSTER', labelBn: 'গুচ্ছ ক্লাস্টার (GST)', labelEn: 'GST Cluster (GST)', count: targets.filter(t => t.category === 'GST_CLUSTER').length },
                     ].map((cat) => (
                       <button
                         key={cat.key}
@@ -489,7 +543,7 @@ export default function AdmissionPage() {
                           }
                         `}
                       >
-                        <span>{cat.label}</span>
+                        <span>{isBengali ? cat.labelBn : cat.labelEn}</span>
                         <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${selectedCategory === cat.key ? "bg-white/20 text-white dark:text-slate-950" : "bg-slate-100 dark:bg-slate-800 text-slate-500"}`}>
                           {cat.count}
                         </span>
@@ -502,7 +556,7 @@ export default function AdmissionPage() {
                     <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#ED8E22]" />
                     <input
                       type="text"
-                      placeholder="বিশ্ববিদ্যালয় বা ইউনিট খুঁজুন (যেমন: BUET, ক-ইউনিট)..."
+                      placeholder={isBengali ? "বিশ্ববিদ্যালয় বা ইউনিট খুঁজুন (যেমন: BUET, ক-ইউনিট)..." : "Search university or unit (e.g. BUET, A-Unit)..."}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-9 py-2.5 text-xs sm:text-sm rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-slate-700/80 text-slate-900 dark:text-white placeholder:text-slate-400 font-bengali focus:outline-none focus:ring-2 focus:ring-[#ED8E22]/30 focus:border-[#ED8E22] shadow-xs transition"
@@ -511,7 +565,7 @@ export default function AdmissionPage() {
                       <button
                         onClick={() => setSearchQuery('')}
                         className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 cursor-pointer"
-                        aria-label="ক্লিয়ার সার্চ"
+                        aria-label={isBengali ? "ক্লিয়ার সার্চ" : "Clear search"}
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
@@ -558,16 +612,20 @@ export default function AdmissionPage() {
                   <div className="flex items-center gap-2.5">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#0A2540] dark:text-blue-300 border border-slate-200 dark:border-slate-800 shadow-xs font-bengali">
                       <Target className="w-3.5 h-3.5 mr-1.5 text-[#ED8E22]" />
-                      ভর্তি পরীক্ষা ব্লুপ্রিন্ট
+                      {isBengali ? 'ভর্তি পরীক্ষা ব্লুপ্রিন্ট' : 'Admission Exam Blueprints'}
                     </span>
                     <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                      মোট <strong className="text-slate-900 dark:text-white font-mono">{filtered.length}</strong> টি বিশ্ববিদ্যালয় টার্গেট সক্রিয় রয়েছে
+                      {isBengali ? (
+                        <>মোট <strong className="text-slate-900 dark:text-white font-mono">{filtered.length}</strong> টি বিশ্ববিদ্যালয় টার্গেট সক্রিয় রয়েছে</>
+                      ) : (
+                        <>Total <strong className="text-slate-900 dark:text-white font-mono">{filtered.length}</strong> university targets active</>
+                      )}
                     </span>
                   </div>
 
                   <span className="text-xs text-slate-500 font-bengali flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>২০২৬ শিক্ষাবর্ষের অফিশিয়াল সিলেবাস ও কাট-অফ সমন্বিত</span>
+                    <span>{isBengali ? '২০২৬ শিক্ষাবর্ষের অফিশিয়াল সিলেবাস ও কাট-অফ সমন্বিত' : 'Integrated with 2026 official syllabus & cut-offs'}</span>
                   </span>
                 </div>
 
@@ -594,10 +652,10 @@ export default function AdmissionPage() {
                       </div>
                       <div className="space-y-1">
                         <h3 className="text-base font-bold text-slate-900 dark:text-white font-bengali">
-                          কোনো বিশ্ববিদ্যালয় লক্ষ্য পাওয়া যায়নি
+                          {isBengali ? 'কোনো বিশ্ববিদ্যালয় লক্ষ্য পাওয়া যায়নি' : 'No University Targets Found'}
                         </h3>
                         <p className="text-xs text-slate-500 font-bengali max-w-sm mx-auto leading-relaxed">
-                          আপনার দেওয়া ফিল্টার বা সার্চ শব্দের সাথে মিল পাওয়া যায়নি। ফিল্টার পরিবর্তন করে পুনরায় চেষ্টা করুন।
+                          {isBengali ? 'আপনার দেওয়া ফিল্টার বা সার্চ শব্দের সাথে মিল পাওয়া যায়নি। ফিল্টার পরিবর্তন করে পুনরায় চেষ্টা করুন।' : 'No matches found for your filter or search query. Try adjusting your search criteria.'}
                         </p>
                       </div>
                       <button
@@ -608,7 +666,7 @@ export default function AdmissionPage() {
                         className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white text-xs font-bold font-bengali shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 mx-auto cursor-pointer"
                       >
                         <RotateCcw className="w-3.5 h-3.5 text-amber-300" />
-                        <span>ফিল্টার রিসেট করুন</span>
+                        <span>{isBengali ? 'ফিল্টার রিসেট করুন' : 'Reset Filters'}</span>
                       </button>
                     </div>
                   ) : (
@@ -630,12 +688,12 @@ export default function AdmissionPage() {
                                 {target.circularStatus === 'VERIFIED' ? (
                                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold font-bengali bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shadow-xs">
                                     <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                                    অফিশিয়াল সার্কুলার ভেরিফায়েড
+                                    {isBengali ? 'অফিশিয়াল সার্কুলার ভেরিফায়েড' : 'Official Circular Verified'}
                                   </span>
                                 ) : (
                                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold font-bengali bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 shadow-xs">
                                     <AlertCircle className="w-3.5 h-3.5 mr-1 text-amber-600" />
-                                    খসড়া তথ্য (যাচাইাধীন)
+                                    {isBengali ? 'খসড়া তথ্য (যাচাইাধীন)' : 'Draft Info (Under Review)'}
                                   </span>
                                 )}
                               </div>
@@ -647,10 +705,10 @@ export default function AdmissionPage() {
                                 </div>
                                 <div className="space-y-1">
                                   <h2 className="text-lg sm:text-xl font-bold font-bengali text-[#0A2540] dark:text-white group-hover:text-[#ED8E22] dark:group-hover:text-amber-300 transition-colors">
-                                    {target.nameBn}
+                                    {isBengali ? target.nameBn : (target.nameEn || target.nameBn)}
                                   </h2>
                                   <p className="text-xs text-slate-500 font-medium font-bengali leading-relaxed">
-                                    ইউনিটসমূহ: {target.units}
+                                    {isBengali ? `ইউনিটসমূহ: ${target.units}` : `Units: ${target.unitsEn || target.units}`}
                                   </p>
                                 </div>
                               </div>
@@ -658,21 +716,21 @@ export default function AdmissionPage() {
                               {/* Negative Marking Badge in Burgundy Crimson (#991B1B) & Stats Container */}
                               <div className="p-4 sm:p-5 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs space-y-3.5 shadow-xs">
                                 <div className="flex items-center justify-between pb-2.5 border-b border-slate-200 dark:border-slate-800">
-                                  <span className="text-slate-600 dark:text-slate-400 font-bengali font-medium">নেগেটিভ মার্কিং পলিসি:</span>
+                                  <span className="text-slate-600 dark:text-slate-400 font-bengali font-medium">{isBengali ? 'নেগেটিভ মার্কিং পলিসি:' : 'Negative Marking Policy:'}</span>
                                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold font-mono bg-[#991B1B]/10 text-[#991B1B] border border-[#991B1B]/30 dark:bg-[#991B1B]/20 dark:text-rose-300 dark:border-[#991B1B]/40 shadow-xs">
-                                    {target.negativeMarking}
+                                    {isBengali ? target.negativeMarking : (target.negativeMarkingEn || target.negativeMarking)}
                                   </span>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3 text-xs">
                                   <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs">
-                                    <span className="text-slate-500 font-bengali block">উপলব্ধ মডেল টেস্ট:</span>
+                                    <span className="text-slate-500 font-bengali block">{isBengali ? 'উপলব্ধ মডেল টেস্ট:' : 'Available Mocks:'}</span>
                                     <span className="font-mono font-bold text-slate-900 dark:text-white text-base tabular-nums">
-                                      {target.totalMocksAvailable} টি
+                                      {target.totalMocksAvailable} {isBengali ? 'টি' : 'Tests'}
                                     </span>
                                   </div>
                                   <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs">
-                                    <span className="text-slate-500 font-bengali block">বিগত বছরের কাট-অফ:</span>
+                                    <span className="text-slate-500 font-bengali block">{isBengali ? 'বিগত বছরের কাট-অফ:' : 'Past Year Cut-Off:'}</span>
                                     <span className="font-mono font-bold text-[#0A2540] dark:text-amber-300 text-base tabular-nums">
                                       {target.cutOffScore}
                                     </span>
@@ -684,7 +742,7 @@ export default function AdmissionPage() {
                                   <div className="flex justify-between items-center text-xs">
                                     <span className="text-slate-700 dark:text-slate-300 flex items-center gap-1 font-bengali font-semibold">
                                       <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
-                                      কাট-অফ অতিক্রমের সম্ভাব্য হার:
+                                      {isBengali ? 'কাট-অফ অতিক্রমের সম্ভাব্য হার:' : 'Cut-Off Clearance Probability:'}
                                     </span>
                                     <span className="font-mono font-black text-emerald-700 dark:text-emerald-400 tabular-nums">
                                       {target.probabilityPercent}%
@@ -701,11 +759,11 @@ export default function AdmissionPage() {
                                 <div className="flex flex-wrap justify-between gap-1 text-[11px] text-slate-500 font-bengali pt-1 border-t border-slate-200/60 dark:border-slate-800">
                                   <span className="flex items-center gap-1">
                                     <Users className="w-3.5 h-3.5 text-slate-400" />
-                                    <span>আসন সংখ্যা: {target.seatCount}</span>
+                                    <span>{isBengali ? `আসন সংখ্যা: ${target.seatCount}` : `Seats: ${target.seatCountEn || target.seatCount}`}</span>
                                   </span>
                                   <span className="flex items-center gap-1 text-slate-500">
                                     <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                                    <span>পরীক্ষার তারিখ: {target.examDate}</span>
+                                    <span>{isBengali ? `পরীক্ষার তারিখ: ${target.examDate}` : `Exam Date: ${target.examDateEn || target.examDate}`}</span>
                                   </span>
                                 </div>
                               </div>
@@ -721,7 +779,7 @@ export default function AdmissionPage() {
                                 className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 font-bold font-bengali text-xs shadow-xs active:translate-y-0.5 transition flex items-center justify-center gap-1.5 cursor-pointer"
                               >
                                 <Compass className="w-3.5 h-3.5 text-slate-500" />
-                                <span>ডায়াগনস্টিক টেস্ট</span>
+                                <span>{isBengali ? 'ডায়াগনস্টিক টেস্ট' : 'Diagnostic Test'}</span>
                               </button>
                               <button 
                                 onClick={() => {
@@ -730,7 +788,7 @@ export default function AdmissionPage() {
                                 }}
                                 className="px-4 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center justify-center gap-1.5 cursor-pointer"
                               >
-                                <span>মডেল টেস্ট দিন</span>
+                                <span>{isBengali ? 'মডেল টেস্ট দিন' : 'Take Model Test'}</span>
                                 <ArrowRight className="w-4 h-4 text-amber-300" />
                               </button>
                             </div>
@@ -784,14 +842,14 @@ export default function AdmissionPage() {
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100/90 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300/80 dark:border-emerald-800 shadow-xs font-bengali">
                       <Compass className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
-                      গেইল-শ্যাপলি অ্যালগরিদম ম্যাচিং
+                      <span>{isBengali ? 'গেইল-শ্যাপলি অ্যালগরিদম ম্যাচিং' : 'Gale-Shapley Algorithm Matching'}</span>
                     </span>
                   </div>
                   <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0B251F] dark:text-[#E8F8F4]">
-                    ভর্তি কাউন্সেলিং রুম ও বিশ্ববিদ্যালয় চয়েস লিস্ট বিল্ডার
+                    {isBengali ? 'ভর্তি কাউন্সেলিং রুম ও বিশ্ববিদ্যালয় চয়েস লিস্ট বিল্ডার' : 'Admission Counseling Room & University Choice List Builder'}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                    পছন্দক্রম সাজিয়ে রিয়েল-টাইম ভর্তি সম্ভাবনা ও কোটা স্পিলওভার পর্যালোচনা করুন
+                    {isBengali ? 'পছন্দক্রম সাজিয়ে রিয়েল-টাইম ভর্তি সম্ভাবনা ও কোটা স্পিলওভার পর্যালোচনা করুন' : 'Order your preferences to analyze real-time admission chances and quota spillovers'}
                   </p>
                 </div>
 
@@ -841,14 +899,14 @@ export default function AdmissionPage() {
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-950/60 text-indigo-900 dark:text-indigo-300 border border-indigo-300/80 dark:border-indigo-800 shadow-xs font-bengali">
                       <Layers className="w-3.5 h-3.5 mr-1 text-indigo-600 dark:text-indigo-400" />
-                      আপওয়ার্ড সিট ক্যাসকেড টেলিমেট্রি
+                      <span>{isBengali ? 'আপওয়ার্ড সিট ক্যাসকেড টেলিমেট্রি' : 'Upward Seat Cascade Telemetry'}</span>
                     </span>
                   </div>
                   <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A1A3A] dark:text-[#EEF2FF]">
-                    মাল্টি-রাউন্ড বিশ্ববিদ্যালয় আসন মাইগ্রেশন ও ভ্যাকেন্সি রিপল সিমুলেটর
+                    {isBengali ? 'মাল্টি-রাউন্ড বিশ্ববিদ্যালয় আসন মাইগ্রেশন ও ভ্যাকেন্সি রিপল সিমুলেটর' : 'Multi-Round University Seat Migration & Vacancy Ripple Simulator'}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                    বুয়েট ও মেডিকেল ভর্তির পর বিশ্ববিদ্যালয়সমূহে আসন শূন্য হওয়া এবং আপওয়ার্ড মাইগ্রেশন দেখুন
+                    {isBengali ? 'বুয়েট ও মেডিকেল ভর্তির পর বিশ্ববিদ্যালয়সমূহে আসন শূন্য হওয়া এবং আপওয়ার্ড মাইগ্রেশন দেখুন' : 'Simulate vacancies and upward seat migration after BUET and Medical admissions'}
                   </p>
                 </div>
 
@@ -898,15 +956,15 @@ export default function AdmissionPage() {
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100/90 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300/80 dark:border-amber-800 shadow-xs font-bengali">
                       <BookOpen className="w-3.5 h-3.5 mr-1 text-amber-600 dark:text-amber-400" />
-                      ভর্তি পরীক্ষা ট্যাকটিক্যাল গাইড
+                      <span>{isBengali ? 'ভর্তি পরীক্ষা ট্যাকটিক্যাল গাইড' : 'Admission Exam Tactical Guide'}</span>
                     </span>
                   </div>
 
                   <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#1E293B] dark:text-[#F8FAFC]">
-                    নেগেটিভ মার্কিং নিয়ন্ত্রণ ও বিষয়ভিত্তিক প্রস্তুতি কৌশল
+                    {isBengali ? 'নেগেটিভ মার্কিং নিয়ন্ত্রণ ও বিষয়ভিত্তিক প্রস্তুতি কৌশল' : 'Negative Marking Control & Subject Strategy'}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                    শীর্ষস্থানীয় বিশ্ববিদ্যালয় ও মেডিকেল পরীক্ষায় নেগেটিভ মার্কিংয়ের পেনাল্টি এড়িয়ে কাট-অফ সুরক্ষিত রাখার নির্দেশিকা
+                    {isBengali ? 'শীর্ষস্থানীয় বিশ্ববিদ্যালয় ও মেডিকেল পরীক্ষায় নেগেটিভ মার্কিংয়ের পেনাল্টি এড়িয়ে কাট-অফ সুরক্ষিত রাখার নির্দেশিকা' : 'Guidelines to avoid negative marking penalties and secure cut-offs across top universities and medical exams'}
                   </p>
                 </div>
 
@@ -915,40 +973,40 @@ export default function AdmissionPage() {
                   <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs space-y-2.5 hover:shadow-md transition">
                     <span className="text-xs font-bold text-rose-700 dark:text-rose-400 font-bengali flex items-center gap-1.5">
                       <Percent className="w-4 h-4 text-rose-600" />
-                      <span>১. ০.২৫ পেনাল্টি মিনিমাইজেশন</span>
+                      <span>{isBengali ? '১. ০.২৫ পেনাল্টি মিনিমাইজেশন' : '1. 0.25 Penalty Minimization'}</span>
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                      আন্দাজে উত্তর না দিয়ে অপশন এলিমিনেশন মেথড ব্যবহার করুন। দুটি অপশন নিশ্চিতভাবে বাদ দিতে পারলে তবেই রিস্ক নিন।
+                      {isBengali ? 'আন্দাজে উত্তর না দিয়ে অপশন এলিমিনেশন মেথড ব্যবহার করুন। দুটি অপশন নিশ্চিতভাবে বাদ দিতে পারলে তবেই রিস্ক নিন।' : 'Avoid blind guessing and use option elimination. Only take calculated risks if you can definitively eliminate at least two options.'}
                     </p>
                   </div>
 
                   <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs space-y-2.5 hover:shadow-md transition">
                     <span className="text-xs font-bold text-[#0A2540] dark:text-amber-300 font-bengali flex items-center gap-1.5">
                       <Clock className="w-4 h-4 text-[#ED8E22]" />
-                      <span>২. টাইম ম্যানেজমেন্ট পেসিং</span>
+                      <span>{isBengali ? '২. টাইম ম্যানেজমেন্ট পেসিং' : '2. Time Management Pacing'}</span>
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                      প্রতিটি বহুনির্বাচনী প্রশ্নের জন্য সর্বোচ্চ ৩৬ থেকে ৪৫ সেকেন্ড বরাদ্দ রাখুন। জটিল গাণিতিক সমস্যা পরবর্তী রাউন্ডের জন্য রাখুন।
+                      {isBengali ? 'প্রতিটি বহুনির্বাচনী প্রশ্নের জন্য সর্বোচ্চ ৩৬ থেকে ৪৫ সেকেন্ড বরাদ্দ রাখুন। জটিল গাণিতিক সমস্যা পরবর্তী রাউন্ডের জন্য রাখুন।' : 'Allocate a maximum of 36 to 45 seconds per MCQ. Save complex mathematical calculations for the second pass.'}
                     </p>
                   </div>
 
                   <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs space-y-2.5 hover:shadow-md transition">
                     <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 font-bengali flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>৩. হাই-ইয়েল্ড চ্যাপ্টার ব্লুপ্রিন্ট</span>
+                      <span>{isBengali ? '৩. হাই-ইয়েল্ড চ্যাপ্টার ব্লুপ্রিন্ট' : '3. High-Yield Chapter Blueprint'}</span>
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                      বিগত ১০ বছরের প্রশ্ন এনালাইসিস করে পদার্থ, রসায়ন, গণিত ও জীববিজ্ঞানের শীর্ষ ৭০% প্রশ্ন যে অধ্যায়গুলো থেকে আসে সেগুলো রিভিশন দিন।
+                      {isBengali ? 'বিগত ১০ বছরের প্রশ্ন এনালাইসিস করে পদার্থ, রসায়ন, গণিত ও জীববিজ্ঞানের শীর্ষ ৭০% প্রশ্ন যে অধ্যায়গুলো থেকে আসে সেগুলো রিভিশন দিন।' : 'Review high-yield chapters in Physics, Chemistry, Math, and Biology that account for 70% of questions based on 10-year archives.'}
                     </p>
                   </div>
 
                   <div className="p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs space-y-2.5 hover:shadow-md transition">
                     <span className="text-xs font-bold text-indigo-700 dark:text-indigo-400 font-bengali flex items-center gap-1.5">
                       <Calculator className="w-4 h-4 text-indigo-600" />
-                      <span>৪. ক্যালকুলেটর ও হ্যান্ড শর্টকাট</span>
+                      <span>{isBengali ? '৪. ক্যালকুলেটর ও হ্যান্ড শর্টকাট' : '4. Calculator & Mental Math'}</span>
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                      বুয়েটের জন্য fx-991ES Plus ক্যালকুলেটরের দ্রুত ব্যবহারের কৌশল এবং ঢাবি/মেডিকেলের জন্য ক্যালকুলেটরহীন মানসিক হিসাব চর্চা করুন।
+                      {isBengali ? 'বুয়েটের জন্য fx-991ES Plus ক্যালকুলেটরের দ্রুত ব্যবহারের কৌশল এবং ঢাবি/মেডিকেলের জন্য ক্যালকুলেটরহীন মানসিক হিসাব চর্চা করুন।' : 'Master rapid fx-991ES Plus shortcuts for BUET, and practice non-calculator mental arithmetic for DU and Medical exams.'}
                     </p>
                   </div>
                 </div>
@@ -958,34 +1016,34 @@ export default function AdmissionPage() {
                   <table className="w-full text-left text-xs font-bengali border-collapse">
                     <thead>
                       <tr className="border-b border-amber-200/60 dark:border-slate-800 bg-amber-50/70 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
-                        <th className="p-4 font-bold">ইউনিভার্সিটি ক্লাস্টার</th>
-                        <th className="p-4 font-bold">পদার্থবিজ্ঞান</th>
-                        <th className="p-4 font-bold">রসায়ন</th>
-                        <th className="p-4 font-bold">উচ্চতর গণিত</th>
-                        <th className="p-4 font-bold">জীববিজ্ঞান / অন্যান্য</th>
+                        <th className="p-4 font-bold">{isBengali ? 'ইউনিভার্সিটি ক্লাস্টার' : 'University Cluster'}</th>
+                        <th className="p-4 font-bold">{isBengali ? 'পদার্থবিজ্ঞান' : 'Physics'}</th>
+                        <th className="p-4 font-bold">{isBengali ? 'রসায়ন' : 'Chemistry'}</th>
+                        <th className="p-4 font-bold">{isBengali ? 'উচ্চতর গণিত' : 'Higher Math'}</th>
+                        <th className="p-4 font-bold">{isBengali ? 'জীববিজ্ঞান / অন্যান্য' : 'Biology / Other'}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-amber-100/60 dark:divide-slate-800">
                       <tr className="hover:bg-amber-50/40 dark:hover:bg-slate-800/40 transition">
-                        <td className="p-4 font-bold text-slate-900 dark:text-white">ঢাকা বিশ্ববিদ্যালয় (ক-ইউনিট)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২৫ নম্বর (MCQ + লিখিত)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২৫ নম্বর (MCQ + লিখিত)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২৫ নম্বর (বাধ্যতামূলক/ঐচ্ছিক)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২৫ নম্বর (বাধ্যতামূলক/ঐচ্ছিক)</td>
+                        <td className="p-4 font-bold text-slate-900 dark:text-white">{isBengali ? 'ঢাকা বিশ্ববিদ্যালয় (ক-ইউনিট)' : 'Dhaka University (Ka-Unit)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২৫ নম্বর (MCQ + লিখিত)' : '25 Marks (MCQ + Written)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২৫ নম্বর (MCQ + লিখিত)' : '25 Marks (MCQ + Written)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২৫ নম্বর (বাধ্যতামূলক/ঐচ্ছিক)' : '25 Marks (Compulsory/Optional)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২৫ নম্বর (বাধ্যতামূলক/ঐচ্ছিক)' : '25 Marks (Compulsory/Optional)'}</td>
                       </tr>
                       <tr className="hover:bg-amber-50/40 dark:hover:bg-slate-800/40 transition">
-                        <td className="p-4 font-bold text-slate-900 dark:text-white">বুয়েট (প্রিলি ও লিখিত)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">১০০ নম্বর লিখিত</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">১০০ নম্বর লিখিত</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২০০ নম্বর লিখিত</td>
-                        <td className="p-4 text-slate-400">প্রযোজ্য নয়</td>
+                        <td className="p-4 font-bold text-slate-900 dark:text-white">{isBengali ? 'বুয়েট (প্রিলি ও লিখিত)' : 'BUET (Preliminary & Written)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '১০০ নম্বর লিখিত' : '100 Marks Written'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '১০০ নম্বর লিখিত' : '100 Marks Written'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২০০ নম্বর লিখিত' : '200 Marks Written'}</td>
+                        <td className="p-4 text-slate-400">{isBengali ? 'প্রযোজ্য নয়' : 'Not Applicable'}</td>
                       </tr>
                       <tr className="hover:bg-amber-50/40 dark:hover:bg-slate-800/40 transition">
-                        <td className="p-4 font-bold text-slate-900 dark:text-white">জাতীয় মেডিকেল (MBBS)</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২০ নম্বর</td>
-                        <td className="p-4 text-slate-700 dark:text-slate-300">২৫ নম্বর</td>
-                        <td className="p-4 text-slate-400">প্রযোজ্য নয়</td>
-                        <td className="p-4 text-emerald-700 dark:text-emerald-400 font-bold">৩০ নম্বর (জীববিজ্ঞান) + ইংরেজি ১৫ + জিকে ১০</td>
+                        <td className="p-4 font-bold text-slate-900 dark:text-white">{isBengali ? 'জাতীয় মেডিকেল (MBBS)' : 'National Medical (MBBS)'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২০ নম্বর' : '20 Marks'}</td>
+                        <td className="p-4 text-slate-700 dark:text-slate-300">{isBengali ? '২৫ নম্বর' : '25 Marks'}</td>
+                        <td className="p-4 text-slate-400">{isBengali ? 'প্রযোজ্য নয়' : 'Not Applicable'}</td>
+                        <td className="p-4 text-emerald-700 dark:text-emerald-400 font-bold">{isBengali ? '৩০ নম্বর (জীববিজ্ঞান) + ইংরেজি ১৫ + জিকে ১০' : '30 Marks (Biology) + English 15 + GK 10'}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -1021,15 +1079,15 @@ export default function AdmissionPage() {
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-emerald-800 dark:text-emerald-300 border border-slate-200 dark:border-slate-800 shadow-xs font-bengali">
                       <HelpCircle className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                      ভর্তি নির্দেশিকা ও সচরাচর জিজ্ঞাসা
+                      <span>{isBengali ? 'ভর্তি নির্দেশিকা ও সচরাচর জিজ্ঞাসা' : 'Admission Guidelines & FAQs'}</span>
                     </span>
                   </div>
 
                   <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A2540] dark:text-white">
-                    সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (Admission FAQ)
+                    {isBengali ? 'সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (Admission FAQ)' : 'Frequently Asked Questions (Admission FAQ)'}
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                    বিশ্ববিদ্যালয় ভর্তি পরীক্ষা, ক্যালকুলেটর নীতিমালা, কোটা নিয়মাবলী ও নেগেটিভ মার্কিং সম্পর্কিত তথ্যাদি
+                    {isBengali ? 'বিশ্ববিদ্যালয় ভর্তি পরীক্ষা, ক্যালকুলেটর নীতিমালা, কোটা নিয়মাবলী ও নেগেটিভ মার্কিং সম্পর্কিত তথ্যাদি' : 'University entrance exam details, calculator rules, quota policies, and negative marking information'}
                   </p>
                 </div>
 
@@ -1045,7 +1103,7 @@ export default function AdmissionPage() {
                           onClick={() => toggleFaq(idx)}
                           className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-slate-900 dark:text-white font-bengali hover:text-[#0A2540] dark:hover:text-amber-300 transition cursor-pointer"
                         >
-                          <span>{faq.question}</span>
+                          <span>{isBengali ? faq.question : (faq.questionEn || faq.question)}</span>
                           {isOpen ? (
                             <ChevronUp className="w-4 h-4 text-[#ED8E22] shrink-0" />
                           ) : (
@@ -1055,7 +1113,7 @@ export default function AdmissionPage() {
 
                         {isOpen && (
                           <div className="px-4 sm:px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed border-t border-slate-200/60 dark:border-slate-800 pt-3.5">
-                            {faq.answer}
+                            {isBengali ? faq.answer : (faq.answerEn || faq.answer)}
                           </div>
                         )}
                       </div>
