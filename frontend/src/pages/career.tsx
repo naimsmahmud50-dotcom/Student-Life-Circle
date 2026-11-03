@@ -11,6 +11,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../lib/i18n';
 import { AppHead } from '../components/layout/Head';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -100,6 +101,7 @@ const INITIAL_APPLICATIONS: ApplicationItem[] = [
 ];
 
 export default function CareerPage() {
+  const { isBengali } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [skills, setSkills] = useState<SkillItem[]>(FALLBACK_SKILLS);
   const [applications, setApplications] = useState<ApplicationItem[]>(INITIAL_APPLICATIONS);
@@ -198,8 +200,8 @@ export default function CareerPage() {
   return (
     <>
       <AppHead
-        title="দক্ষতা প্রমাণ ও ক্যারিয়ার হাব (Career Portfolio) | অগ্রযাত্রা"
-        description="প্রমাণ-ভিত্তিক স্কিল ব্যাজ, অপরিবর্তনীয় সিভিস্ন্যাপশট এবং শীর্ষস্থানীয় বাংলাদেশি প্রযুক্তি ও এন্টারপ্রাইজ নিয়োগকারী সংযোগ।"
+        title={isBengali ? "দক্ষতা প্রমাণ ও ক্যারিয়ার হাব (Career Portfolio) | অগ্রযাত্রা" : "Proof-of-Skill & Career Portfolio Hub | Agragoti"}
+        description={isBengali ? "প্রমাণ-ভিত্তিক স্কিল ব্যাজ, অপরিবর্তনীয় সিভিস্ন্যাপশট এবং শীর্ষস্থানীয় বাংলাদেশি প্রযুক্তি ও এন্টারপ্রাইজ নিয়োগকারী সংযোগ।" : "Evidence-backed skill badges, cryptographic CV snapshots, and direct recruitment pathways to leading tech and enterprise employers."}
         canonicalUrl="/career"
         ogType="website"
       />
@@ -207,7 +209,7 @@ export default function CareerPage() {
       <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] transition-colors duration-200 flex flex-col justify-between font-sans selection:bg-[#ED8E22] selection:text-white">
         
         {/* Global Standard Navigation Bar */}
-        <Navbar currentStage="দক্ষতা প্রমাণ ও ক্যারিয়ার হাব" />
+        <Navbar currentStage={isBengali ? "দক্ষতা প্রমাণ ও ক্যারিয়ার হাব" : "Career Portfolio & Job Hub"} />
 
         <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1">
           
@@ -319,15 +321,17 @@ export default function CareerPage() {
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100/90 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300/80 dark:border-amber-800 shadow-xs font-bengali">
                         <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
-                        ডিজিটাল লেজার সুরক্ষা
+                        {isBengali ? "ডিজিটাল লেজার সুরক্ষা" : "Digital Ledger Security"}
                       </span>
                     </div>
 
                     <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A2540] dark:text-white">
-                      সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট বিল্ডার (SHA-256 Ledger)
+                      {isBengali ? "সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট বিল্ডার (SHA-256 Ledger)" : "Cryptographic Sealed CV Snapshot Builder (SHA-256 Ledger)"}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                      আবেদনকারী ও নিয়োগকর্তা উভয়ের বিশ্বাসযোগ্যতা রক্ষায় প্রতিটি অ্যাপ্লিকেশনের সাথে অপরিবর্তনীয় টাইমস্ট্যাম্পড স্ন্যাপশট যুক্ত থাকে
+                      {isBengali
+                        ? "আবেদনকারী ও নিয়োগকর্তা উভয়ের বিশ্বাসযোগ্যতা রক্ষায় প্রতিটি অ্যাপ্লিকেশনের সাথে অপরিবর্তনীয় টাইমস্ট্যাম্পড স্ন্যাপশট যুক্ত থাকে"
+                        : "Immutable timestamped snapshots attached to every job application to preserve verification integrity for candidates and employers."}
                     </p>
                   </div>
 
@@ -337,7 +341,11 @@ export default function CareerPage() {
                     className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 cursor-pointer shrink-0 self-start sm:self-auto"
                   >
                     <Lock className="w-3.5 h-3.5 text-amber-300" />
-                    <span>{isMintingSnapshot ? "তৈরি হচ্ছে..." : "নতুন সিলগালা স্ন্যাপশট তৈরি করুন"}</span>
+                    <span>
+                      {isMintingSnapshot
+                        ? (isBengali ? "তৈরি হচ্ছে..." : "Minting...")
+                        : (isBengali ? "নতুন সিলগালা স্ন্যাপশট তৈরি করুন" : "Generate New Sealed Snapshot")}
+                    </span>
                   </button>
                 </div>
 
@@ -345,14 +353,20 @@ export default function CareerPage() {
                 <div className="relative z-10 p-5 rounded-2xl bg-white/95 dark:bg-[#111A2C]/95 border border-amber-200/70 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <span className="text-slate-600 dark:text-slate-300 font-bold font-bengali">সর্বশেষ ভেরিফায়েড সিভি হ্যাশ:</span>
+                      <span className="text-slate-600 dark:text-slate-300 font-bold font-bengali">
+                        {isBengali ? "সর্বশেষ ভেরিফায়েড সিভি হ্যাশ:" : "Latest Verified CV Hash:"}
+                      </span>
                       <span className="font-mono font-bold text-slate-900 dark:text-amber-300 bg-amber-50/80 dark:bg-slate-900 px-3 py-1 rounded-lg border border-amber-200/80 dark:border-slate-700 shadow-xs">
                         {latestSealedSnapshot}
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 font-bengali flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span>টাইমস্ট্যাম্প: ১৮ অক্টোবর ২০২৬, ২০:১৫:০০ বিএসটি • ডিজিটাল সিগনেচার: শতভাগ ভেরিফায়েড</span>
+                      <span>
+                        {isBengali
+                          ? "টাইমস্ট্যাম্প: ১৮ অক্টোবর ২০২৬, ২০:১৫:০০ বিএসটি • ডিজিটাল সিগনেচার: শতভাগ ভেরিফায়েড"
+                          : "Timestamp: 18 Oct 2026, 20:15:00 BST • Digital Signature: 100% Cryptographically Verified"}
+                      </span>
                     </p>
                   </div>
 
@@ -362,7 +376,11 @@ export default function CareerPage() {
                       className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bengali font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs active:translate-y-0.5"
                     >
                       <Copy className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{copySuccess ? "কপি সম্পন্ন!" : "হ্যাশ কপি করুন"}</span>
+                      <span>
+                        {copySuccess
+                          ? (isBengali ? "কপি সম্পন্ন!" : "Copied!")
+                          : (isBengali ? "হ্যাশ কপি করুন" : "Copy Hash")}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -375,15 +393,17 @@ export default function CareerPage() {
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#0A2540] dark:text-amber-300 border border-slate-200 dark:border-slate-800 shadow-xs font-bengali">
                         <Code className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                        দক্ষতা পোর্টফোলিও
+                        {isBengali ? "দক্ষতা পোর্টফোলিও" : "Skills Portfolio"}
                       </span>
                     </div>
 
                     <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0A2540] dark:text-white">
-                      প্রমাণযুক্ত দক্ষতাসমূহ (Evidence-Backed Skills)
+                      {isBengali ? "প্রমাণযুক্ত দক্ষতাসমূহ (Evidence-Backed Skills)" : "Evidence-Backed Skills"}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-                      প্রতিটি স্কিলের সাথে গিটহাব রিপোজিটরি অথবা লাইভ প্রজেক্ট ডেমো সরাসরি ভেরিফিকেশনের জন্য সংযুক্ত
+                      {isBengali
+                        ? "প্রতিটি স্কিলের সাথে গিটহাব রিপোজিটরি অথবা লাইভ প্রজেক্ট ডেমো সরাসরি ভেরিফিকেশনের জন্য সংযুক্ত"
+                        : "Each technical competency is paired directly with verifiable GitHub repositories or production project demos."}
                     </p>
                   </div>
 
@@ -391,7 +411,7 @@ export default function CareerPage() {
                     onClick={() => setIsCvBuilderOpen(true)}
                     className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-200 text-xs font-bold font-bengali transition cursor-pointer shadow-xs active:translate-y-0.5 self-start sm:self-auto"
                   >
-                    সিভি এডিট ও নতুন দক্ষতা
+                    {isBengali ? "সিভি এডিট ও নতুন দক্ষতা" : "Edit CV & Add Skills"}
                   </button>
                 </div>
 
@@ -419,11 +439,11 @@ export default function CareerPage() {
                             {skill.isVerified ? (
                               <span className="inline-flex items-center text-[11px] font-bold text-emerald-700 dark:text-emerald-400 font-bengali">
                                 <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                                যাচাইকৃত প্রমাণ
+                                {isBengali ? "যাচাইকৃত প্রমাণ" : "Verified Proof"}
                               </span>
                             ) : (
                               <span className="text-[11px] text-slate-400 font-bengali">
-                                যাচাই অপেক্ষমাণ
+                                {isBengali ? "যাচাই অপেক্ষমাণ" : "Pending Verification"}
                               </span>
                             )}
                           </div>

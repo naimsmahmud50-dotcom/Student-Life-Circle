@@ -70,4 +70,17 @@
 - [x] T055: Quality Assurance (TypeScript, test suite, strict zero-emoji scan).
 - [x] T056: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/tuition/`.
 
+## Phase 10: Career Pathway & Portfolio Hub Bilingual Elevation (`frontend/src/pages/career.tsx` & subcomponents)
+- [x] T057: Bilingual elevation for `CareerJob`, `GovtCircular`, `SalaryBenchmark`, `CareerFaq` data structures in `careerElevationData.ts`.
+- [x] T058: Bilingual elevation for `AppHead`, `Navbar`, and Flagship Header in `frontend/src/pages/career.tsx`.
+- [x] T059: Bilingual elevation for `CareerStatsHeader.tsx` (Master stats telemetry & Tab navigation).
+- [x] T060: Bilingual elevation for `CareerSearchFilterBar.tsx` and `CareerCategoryGrid.tsx`.
+- [x] T061: Bilingual elevation for `CareerJobBoard.tsx`, `JobDetailModal.tsx`, and `JobApplyModal.tsx`.
+- [x] T062: Bilingual elevation for `CareerATSApplicationPipeline.tsx` and `GovtCircularsAndCareerGuide.tsx`.
+- [x] T063: Bilingual elevation for `BdjobsProCvBuilderModal.tsx` and `EmployerJobPostingWizardModal.tsx`.
+- [x] T064: Bilingual elevation for Verifiable Skills & Sealed Cryptographic CV Snapshot Builder in `frontend/src/pages/career.tsx` (`latestSealedSnapshot`, `cvSnapshotId`, `SHORTLISTED`, `apiClient.getCareerProfile`, `animate-pulse`).
+- [x] T065: Quality Assurance (TypeScript zero-error, backend test suite, strict zero-emoji scan).
+- [ ] T066: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/career/`.
+
+
 

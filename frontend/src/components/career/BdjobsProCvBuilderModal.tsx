@@ -20,6 +20,7 @@ import {
   Sparkles,
   Award
 } from 'lucide-react';
+import { useTranslation } from '../../lib/i18n';
 
 interface BdjobsProCvBuilderModalProps {
   isOpen: boolean;
@@ -32,6 +33,7 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
   onClose,
   sealedSnapshotHash
 }) => {
+  const { isBengali } = useTranslation();
   const [activeTab, setActiveTab] = useState<'personal' | 'academic' | 'skills' | 'experience' | 'preview'>('preview');
 
   // Candidate Data State
@@ -59,14 +61,16 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-black text-slate-900 dark:text-white font-bengali">
-                  অগ্রযাত্রা প্রফেশনাল সিভি বিল্ডার
+                  {isBengali ? "অগ্রযাত্রা প্রফেশনাল সিভি বিল্ডার" : "Agragoti Professional CV Builder"}
                 </h2>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300">
-                  বিডিজবস ফরম্যাট স্ট্যান্ডার্ড
+                  {isBengali ? "বিডিজবস ফরম্যাট স্ট্যান্ডার্ড" : "Bdjobs Format Standard"}
                 </span>
               </div>
               <p className="text-xs text-slate-500 font-bengali mt-0.5">
-                বাংলাদেশি করপোরেট ও বহুজাতিক প্রতিষ্ঠানের জন্য অনুমোদিত স্ট্যান্ডার্ড লেআউট
+                {isBengali
+                  ? "বাংলাদেশি করপোরেট ও বহুজাতিক প্রতিষ্ঠানের জন্য অনুমোদিত স্ট্যান্ডার্ড লেআউট"
+                  : "Standardized layout approved for Bangladeshi corporate and multinational employers"}
               </p>
             </div>
           </div>
@@ -74,8 +78,12 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
           {/* Completeness Meter (85%) */}
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <span className="text-xs text-slate-500 font-bengali block">প্রোফাইল সম্পূর্ণতা:</span>
-              <span className="text-sm font-black text-[#0A2540] dark:text-amber-300 font-mono">৮৫% সম্পন্ন</span>
+              <span className="text-xs text-slate-500 font-bengali block">
+                {isBengali ? "প্রোফাইল সম্পূর্ণতা:" : "Profile Completeness:"}
+              </span>
+              <span className="text-sm font-black text-[#0A2540] dark:text-amber-300 font-mono">
+                {isBengali ? "৮৫% সম্পন্ন" : "85% Complete"}
+              </span>
             </div>
             <div className="w-16 bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
               <div className="bg-emerald-600 h-full w-[85%]" />
@@ -93,11 +101,11 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
         {/* Tab Navigation */}
         <div className="flex items-center gap-2 px-6 pt-3 border-b border-slate-200 dark:border-slate-800 overflow-x-auto">
           {[
-            { id: 'preview', label: 'সিভি প্রিভিউ (Standard View)', icon: FileText },
-            { id: 'personal', label: 'ব্যক্তিগত তথ্য', icon: User },
-            { id: 'academic', label: 'শিক্ষাগত যোগ্যতা', icon: GraduationCap },
-            { id: 'skills', label: 'দক্ষতা ও প্রমাণ', icon: Code },
-            { id: 'experience', label: 'অভিজ্ঞতা ও ইন্টার্নশিপ', icon: Briefcase }
+            { id: 'preview', label: isBengali ? 'সিভি প্রিভিউ (Standard View)' : 'CV Preview (Standard View)', icon: FileText },
+            { id: 'personal', label: isBengali ? 'ব্যক্তিগত তথ্য' : 'Personal Information', icon: User },
+            { id: 'academic', label: isBengali ? 'শিক্ষাগত যোগ্যতা' : 'Academic Credentials', icon: GraduationCap },
+            { id: 'skills', label: isBengali ? 'দক্ষতা ও প্রমাণ' : 'Skills & Evidence', icon: Code },
+            { id: 'experience', label: isBengali ? 'অভিজ্ঞতা ও ইন্টার্নশিপ' : 'Experience & Internships', icon: Briefcase }
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -131,10 +139,14 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
                     {candidateName}
                   </h1>
                   <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
-                    সফটওয়্যার ইঞ্জিনিয়ার (FastAPI / Next.js / PostgreSQL)
+                    {isBengali
+                      ? "সফটওয়্যার ইঞ্জিনিয়ার (FastAPI / Next.js / PostgreSQL)"
+                      : "Software Engineer (FastAPI / Next.js / PostgreSQL)"}
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    ইমেইল: {candidateEmail} • ফোন: {candidatePhone} • ঠিকানা: {candidateLocation}
+                    {isBengali
+                      ? `ইমেইল: ${candidateEmail} • ফোন: ${candidatePhone} • ঠিকানা: ${candidateLocation}`
+                      : `Email: ${candidateEmail} • Phone: ${candidatePhone} • Location: ${candidateLocation}`}
                   </p>
                 </div>
 
@@ -149,17 +161,27 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               {/* Education Section */}
               <div className="space-y-2">
                 <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-amber-300 border-b border-slate-200 dark:border-slate-800 pb-1">
-                  শিক্ষাগত যোগ্যতা (Educational Background)
+                  {isBengali ? "শিক্ষাগত যোগ্যতা (Educational Background)" : "Educational Background"}
                 </h3>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
                     <div>
-                      <span className="font-bold">বিএসসি ইন কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)</span>
-                      <p className="text-slate-500 font-bengali">ঢাকা বিশ্ববিদ্যালয় (University of Dhaka)</p>
+                      <span className="font-bold">
+                        {isBengali
+                          ? "বিএসসি ইন কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE)"
+                          : "B.Sc. in Computer Science & Engineering (CSE)"}
+                      </span>
+                      <p className="text-slate-500 font-bengali">
+                        {isBengali ? "ঢাকা বিশ্ববিদ্যালয় (University of Dhaka)" : "University of Dhaka"}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <span className="font-mono font-bold">সিজিপিএ: ৩.৮৫ / ৪.০০</span>
-                      <p className="text-slate-400">উত্তীর্ণ: ২০২৬</p>
+                      <span className="font-mono font-bold">
+                        {isBengali ? "সিজিপিএ: ৩.৮৫ / ৪.০০" : "CGPA: 3.85 / 4.00"}
+                      </span>
+                      <p className="text-slate-400">
+                        {isBengali ? "উত্তীর্ণ: ২০২৬" : "Passing: 2026"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -168,7 +190,7 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               {/* Verified Technical Skills */}
               <div className="space-y-2">
                 <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-amber-300 border-b border-slate-200 dark:border-slate-800 pb-1">
-                  প্রমাণযুক্ত কারিগরি দক্ষতা (Evidence-Backed Skills)
+                  {isBengali ? "প্রমাণযুক্ত কারিগরি দক্ষতা (Evidence-Backed Skills)" : "Evidence-Backed Skills"}
                 </h3>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
@@ -185,15 +207,21 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               {/* Professional Experience / Internships */}
               <div className="space-y-2">
                 <h3 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-amber-300 border-b border-slate-200 dark:border-slate-800 pb-1">
-                  অভিজ্ঞতা ও প্রকল্পসমূহ (Experience & Projects)
+                  {isBengali ? "অভিজ্ঞতা ও প্রকল্পসমূহ (Experience & Projects)" : "Experience & Projects"}
                 </h3>
                 <div className="text-xs space-y-1">
                   <div className="flex justify-between">
-                    <span className="font-bold">জুনিয়র সফটওয়্যার ইন্টার্ন — চালডাল টেক ল্যাব</span>
-                    <span className="font-mono text-slate-500">জুন ২০২৫ - ডিসেম্বর ২০২৫</span>
+                    <span className="font-bold">
+                      {isBengali ? "জুনিয়র সফটওয়্যার ইন্টার্ন — চালডাল টেক ল্যাব" : "Junior Software Intern — Chaldal Tech Lab"}
+                    </span>
+                    <span className="font-mono text-slate-500">
+                      {isBengali ? "জুন ২০২৫ - ডিসেম্বর ২০২৫" : "June 2025 - December 2025"}
+                    </span>
                   </div>
                   <p className="text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
-                    মাইক্রোসার্ভিস এপিআই ডিজাইন, ক্যাশিং অপ্টিমাইজেশন এবং স্বয়ংক্রিয় টেস্ট কেস পরিচালনা।
+                    {isBengali
+                      ? "মাইক্রোসার্ভিস এপিআই ডিজাইন, ক্যাশিং অপ্টিমাইজেশন এবং স্বয়ংক্রিয় টেস্ট কেস পরিচালনা।"
+                      : "Microservices API architecture, cache latency optimization, and automated test suite design."}
                   </p>
                 </div>
               </div>
@@ -204,7 +232,9 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
           {activeTab === 'personal' && (
             <div className="space-y-4 max-w-xl">
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">পূর্ণ নাম:</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                  {isBengali ? "পূর্ণ নাম:" : "Full Name:"}
+                </label>
                 <input
                   type="text"
                   value={candidateName}
@@ -214,7 +244,9 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">ইমেইল:</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                  {isBengali ? "ইমেইল:" : "Email:"}
+                </label>
                 <input
                   type="email"
                   value={candidateEmail}
@@ -224,7 +256,9 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">বর্তমান ঠিকানা:</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                  {isBengali ? "বর্তমান ঠিকানা:" : "Current Address:"}
+                </label>
                 <input
                   type="text"
                   value={candidateLocation}
@@ -238,7 +272,11 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
           {activeTab !== 'preview' && activeTab !== 'personal' && (
             <div className="p-8 text-center text-slate-500 font-bengali text-xs">
               <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto mb-2" />
-              <span>আপনার একাডেমিক ও স্কিল পোর্টফোলিও স্বয়ংক্রিয়ভাবে অগ্রযাত্রা ডাটাবেজ থেকে যাচাইকৃত রয়েছে।</span>
+              <span>
+                {isBengali
+                  ? "আপনার একাডেমিক ও স্কিল পোর্টফোলিও স্বয়ংক্রিয়ভাবে অগ্রযাত্রা ডাটাবেজ থেকে যাচাইকৃত রয়েছে।"
+                  : "Your academic credentials and skill portfolio are automatically verified against the Agragoti database."}
+              </span>
             </div>
           )}
 
@@ -248,7 +286,11 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
         <div className="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-[#FAFAF8] dark:bg-slate-950/60 flex items-center justify-between gap-4">
           <div className="text-xs text-slate-500 font-bengali flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>সিলগালা সিভি হ্যাশ: {sealedSnapshotHash.substring(0, 20)}...</span>
+            <span>
+              {isBengali
+                ? `সিলগালা সিভি হ্যাশ: ${sealedSnapshotHash.substring(0, 20)}...`
+                : `Sealed CV Hash: ${sealedSnapshotHash.substring(0, 20)}...`}
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -257,14 +299,14 @@ export const BdjobsProCvBuilderModal: React.FC<BdjobsProCvBuilderModalProps> = (
               className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-300 text-xs font-bold font-bengali flex items-center gap-1.5 cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>প্রিন্ট / PDF সংরক্ষণ</span>
+              <span>{isBengali ? "প্রিন্ট / PDF সংরক্ষণ" : "Print / Export PDF"}</span>
             </button>
 
             <button
               onClick={onClose}
               className="px-5 py-2 rounded-xl bg-[#0A2540] text-white text-xs font-bold font-bengali cursor-pointer"
             >
-              সম্পন্ন
+              {isBengali ? "সম্পন্ন" : "Done"}
             </button>
           </div>
         </div>

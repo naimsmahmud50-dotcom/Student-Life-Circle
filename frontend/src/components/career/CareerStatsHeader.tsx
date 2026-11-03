@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { useTranslation } from '../../lib/i18n';
 import { 
   Briefcase, 
   Building2, 
@@ -30,6 +31,8 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
   onSelectTab,
   activeTab
 }) => {
+  const { isBengali } = useTranslation();
+
   return (
     <div className="relative overflow-hidden rounded-3xl border border-amber-200/70 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] p-6 sm:p-8 shadow-xs space-y-6">
       {/* GoEdu Career Horizon Sunburst Glow */}
@@ -68,24 +71,25 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#ED8E22] border border-amber-200/70 dark:border-[#262D3D] shadow-xs">
                 <Briefcase className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                অগ্রযাত্রা ক্যারিয়ার হাব
+                {isBengali ? "অগ্রযাত্রা ক্যারিয়ার হাব" : "Agragoti Career Hub"}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
                 <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                শতভাগ ভেরিফায়েড নিয়োগকর্তা
+                {isBengali ? "শতভাগ ভেরিফায়েড নিয়োগকর্তা" : "100% Verified Employers"}
               </span>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-slate-700 dark:text-slate-300 border border-amber-200/60 dark:border-slate-700">
                 <Award className="w-3.5 h-3.5 mr-1 text-[#ED8E22]" />
-                সরকারি ও করপোরেট সার্কুলার
+                {isBengali ? "সরকারি ও করপোরেট সার্কুলার" : "Govt & Corporate Circulars"}
               </span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl font-serif font-bold tracking-tight font-bengali text-[#1B2A4A] dark:text-[#F5F2EB]">
-              অন্বেষণ ও কর্মসংস্থান পোর্টাল
+              {isBengali ? "অন্বেষণ ও কর্মসংস্থান পোর্টাল" : "Career Discovery & Employment Portal"}
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-3xl font-bengali leading-relaxed">
-              বাংলাদেশের শীর্ষস্থানীয় প্রযুক্তি, ব্যাংকিং, বহুজাতিক কোম্পানি এবং সরকারি চাকরির বিশ্বস্ত সংযোগ।
-              একাডেমিক অর্জনের সাথে সিলগালা ক্রিপ্টোগ্রাফিক সিভি যুক্ত করে সরাসরি আবেদন করুন।
+              {isBengali
+                ? "বাংলাদেশের শীর্ষস্থানীয় প্রযুক্তি, ব্যাংকিং, বহুজাতিক কোম্পানি এবং সরকারি চাকরির বিশ্বস্ত সংযোগ। একাডেমিক অর্জনের সাথে সিলগালা ক্রিপ্টোগ্রাফিক সিভি যুক্ত করে সরাসরি আবেদন করুন।"
+                : "Direct gateway to premier Bangladeshi tech, banking, multinational, and government careers. Apply with verifiable cryptographic CV snapshots backed by verified academic credentials."}
             </p>
           </div>
 
@@ -96,7 +100,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
               className="w-full sm:w-auto px-4 py-2.5 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-slate-700 hover:bg-amber-50/50 text-[#1B2A4A] dark:text-white font-bold font-bengali text-xs shadow-xs active:translate-y-0.5 transition flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <FileText className="w-4 h-4 text-emerald-600" />
-              <span>প্রফেশনাল সিভি তৈরি করুন</span>
+              <span>{isBengali ? "প্রফেশনাল সিভি তৈরি করুন" : "Build Professional CV"}</span>
             </button>
 
             <button
@@ -104,7 +108,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
               className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-[#ED8E22] hover:bg-[#D97D1A] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#C57013] active:translate-y-1 active:shadow-none transition flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <PlusCircle className="w-4 h-4 text-amber-100" />
-              <span>পোস্ট এ জব (নিয়োগদাতা)</span>
+              <span>{isBengali ? "পোস্ট এ জব (নিয়োগদাতা)" : "Post a Job (Employers)"}</span>
             </button>
           </div>
         </div>
@@ -118,9 +122,9 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-              ৮,৪৫০+
+              {isBengali ? "৮,৪৫০+" : "8,450+"}
             </div>
-            <div className="text-xs text-slate-500 font-bengali">সক্রিয় চাকরির সুযোগ</div>
+            <div className="text-xs text-slate-500 font-bengali">{isBengali ? "সক্রিয় চাকরির সুযোগ" : "Active Career Openings"}</div>
           </div>
         </div>
 
@@ -130,9 +134,9 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-              ১,২০০+
+              {isBengali ? "১,২০০+" : "1,200+"}
             </div>
-            <div className="text-xs text-slate-500 font-bengali">নিবন্ধিত কোম্পানি</div>
+            <div className="text-xs text-slate-500 font-bengali">{isBengali ? "নিবন্ধিত কোম্পানি" : "Registered Companies"}</div>
           </div>
         </div>
 
@@ -142,9 +146,9 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-              ৫২০+
+              {isBengali ? "৫২০+" : "520+"}
             </div>
-            <div className="text-xs text-slate-500 font-bengali">সরকারি সার্কুলার পদ</div>
+            <div className="text-xs text-slate-500 font-bengali">{isBengali ? "সরকারি সার্কুলার পদ" : "Govt Circular Posts"}</div>
           </div>
         </div>
 
@@ -154,9 +158,9 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-black font-bengali text-slate-900 dark:text-white">
-              ৯৮.৪%
+              {isBengali ? "৯৮.৪%" : "98.4%"}
             </div>
-            <div className="text-xs text-slate-500 font-bengali">যাচাইকৃত প্রার্থী রেটিং</div>
+            <div className="text-xs text-slate-500 font-bengali">{isBengali ? "যাচাইকৃত প্রার্থী রেটিং" : "Candidate Trust Rating"}</div>
           </div>
         </div>
       </div>
@@ -172,7 +176,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           }`}
         >
           <Briefcase className="w-3.5 h-3.5" />
-          <span>লাইভ জব বোর্ড (Jobs)</span>
+          <span>{isBengali ? "লাইভ জব বোর্ড (Jobs)" : "Live Job Board"}</span>
         </button>
 
         <button
@@ -184,7 +188,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           }`}
         >
           <Users className="w-3.5 h-3.5" />
-          <span>আবেদন পাইপলাইন (My Applications)</span>
+          <span>{isBengali ? "আবেদন পাইপলাইন (My Applications)" : "Application Pipeline"}</span>
         </button>
 
         <button
@@ -196,7 +200,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           }`}
         >
           <Award className="w-3.5 h-3.5" />
-          <span>সরকারি সার্কুলার ও ক্যারিয়ার গাইড</span>
+          <span>{isBengali ? "সরকারি সার্কুলার ও ক্যারিয়ার গাইড" : "Govt Circulars & Guides"}</span>
         </button>
 
         <button
@@ -208,7 +212,7 @@ export const CareerStatsHeader: React.FC<CareerStatsHeaderProps> = ({
           }`}
         >
           <ShieldCheck className="w-3.5 h-3.5" />
-          <span>প্রমাণযুক্ত স্কিল ও সিলগালা স্ন্যাপশট</span>
+          <span>{isBengali ? "প্রমাণযুক্ত স্কিল ও সিলগালা স্ন্যাপশট" : "Verified Skills & Sealed CV"}</span>
         </button>
       </div>
 

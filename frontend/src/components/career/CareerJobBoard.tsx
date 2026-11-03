@@ -22,6 +22,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { CareerJob, VERIFIED_CAREER_JOBS } from './data/careerElevationData';
+import { useTranslation } from '../../lib/i18n';
 import { JobDetailModal } from './JobDetailModal';
 import { JobApplyModal } from './JobApplyModal';
 
@@ -48,6 +49,7 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
   sealedSnapshotHash,
   onApplicationSubmitted
 }) => {
+  const { isBengali } = useTranslation();
   const [activeDetailJob, setActiveDetailJob] = useState<CareerJob | null>(null);
   const [activeApplyJob, setActiveApplyJob] = useState<CareerJob | null>(null);
   const [sortBy, setSortBy] = useState<'deadline' | 'salary' | 'recent'>('recent');
@@ -58,10 +60,11 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
       // Keyword matching
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
-        const matchesTitle = job.title.toLowerCase().includes(query);
-        const matchesCompany = job.companyName.toLowerCase().includes(query);
-        const matchesIndustry = job.companyIndustry.toLowerCase().includes(query);
-        const matchesReqs = job.educationRequirements.some(r => r.toLowerCase().includes(query));
+        const matchesTitle = job.title.toLowerCase().includes(query) || (job.titleEn ? job.titleEn.toLowerCase().includes(query) : false);
+        const matchesCompany = job.companyName.toLowerCase().includes(query) || (job.companyNameEn ? job.companyNameEn.toLowerCase().includes(query) : false);
+        const matchesIndustry = job.companyIndustry.toLowerCase().includes(query) || (job.companyIndustryEn ? job.companyIndustryEn.toLowerCase().includes(query) : false);
+        const matchesReqs = job.educationRequirements.some(r => r.toLowerCase().includes(query)) ||
+          (job.educationRequirementsEn ? job.educationRequirementsEn.some(r => r.toLowerCase().includes(query)) : false);
         if (!matchesTitle && !matchesCompany && !matchesIndustry && !matchesReqs) return false;
       }
 
@@ -139,26 +142,36 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
         <div className="flex items-center gap-2.5">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white dark:bg-[#121B2D] text-[#0A2540] dark:text-blue-300 border border-slate-200 dark:border-slate-800 shadow-xs font-bengali">
             <Briefcase className="w-3.5 h-3.5 mr-1.5 text-[#ED8E22]" />
-            লাইভ জব ফিড
+            {isBengali ? "লাইভ জব ফিড" : "Live Job Feed"}
           </span>
           <span className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 font-bengali">
-            মোট <strong className="text-slate-900 dark:text-white font-mono">{filteredJobs.length}</strong> টি সার্কুলার পাওয়া গেছে
+            {isBengali ? (
+              <>মোট <strong className="text-slate-900 dark:text-white font-mono">{filteredJobs.length}</strong> টি সার্কুলার পাওয়া গেছে</>
+            ) : (
+              <>Found <strong className="text-slate-900 dark:text-white font-mono">{filteredJobs.length}</strong> verified openings</>
+            )}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="text-xs text-slate-500 font-bengali flex items-center gap-1">
             <ArrowUpDown className="w-3.5 h-3.5" />
-            <span>সাজান:</span>
+            <span>{isBengali ? "সাজান:" : "Sort by:"}</span>
           </span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
             className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-bengali text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer shadow-xs transition"
           >
-            <option value="recent">জনপ্রিয়তা ও আবেদন সংখ্যা</option>
-            <option value="deadline">আবেদনের শেষ তারিখ (নিকটবর্তী)</option>
-            <option value="salary">সর্বোচ্চ মাসিক বেতন</option>
+            <option value="recent">
+              {isBengali ? "জনপ্রিয়তা ও আবেদন সংখ্যা" : "Popularity & Applicants"}
+            </option>
+            <option value="deadline">
+              {isBengali ? "আবেদনের শেষ তারিখ (নিকটবর্তী)" : "Deadline (Closing Soon)"}
+            </option>
+            <option value="salary">
+              {isBengali ? "সর্বোচ্চ মাসিক বেতন" : "Highest Monthly Salary"}
+            </option>
           </select>
         </div>
       </div>
@@ -172,10 +185,12 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
             </div>
             <div className="space-y-1">
               <h3 className="text-base font-bold text-slate-900 dark:text-white font-bengali">
-                কোনো চাকরির বিজ্ঞপ্তি পাওয়া যায়নি
+                {isBengali ? "কোনো চাকরির বিজ্ঞপ্তি পাওয়া যায়নি" : "No Job Circulars Found"}
               </h3>
               <p className="text-xs text-slate-500 font-bengali max-w-sm mx-auto leading-relaxed">
-                আপনার দেওয়া ফিল্টার বা সার্চ শব্দের সাথে মিল পাওয়া যায়নি। ফিল্টার রিসেট করে পুনরায় অনুসন্ধান করুন।
+                {isBengali
+                  ? "আপনার দেওয়া ফিল্টার বা সার্চ শব্দের সাথে মিল পাওয়া যায়নি। ফিল্টার রিসেট করে পুনরায় অনুসন্ধান করুন।"
+                  : "No job postings matched your filters or search keywords. Please reset filters and try again."}
               </p>
             </div>
             <button
@@ -183,7 +198,7 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
               className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white text-xs font-bold font-bengali shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 mx-auto cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5 text-amber-300" />
-              <span>ফিল্টার রিসেট করুন</span>
+              <span>{isBengali ? "ফিল্টার রিসেট করুন" : "Reset Filters"}</span>
             </button>
           </div>
         ) : (
@@ -209,21 +224,21 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                       {job.isHotJob && (
                         <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200 dark:border-rose-800 flex items-center gap-1">
                           <Clock className="w-3 h-3 text-rose-600" />
-                          হট জব
+                          {isBengali ? "হট জব" : "Hot Job"}
                         </span>
                       )}
 
                       {job.orgType === 'GOVT' && (
                         <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800 flex items-center gap-1">
                           <Building2 className="w-3 h-3 text-amber-600" />
-                          সরকারি সার্কুলার
+                          {isBengali ? "সরকারি সার্কুলার" : "Govt Circular"}
                         </span>
                       )}
 
                       {job.jobNature === 'INTERNSHIP' && (
                         <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1">
                           <GraduationCap className="w-3 h-3 text-blue-600" />
-                          ইন্টার্নশিপ
+                          {isBengali ? "ইন্টার্নশিপ" : "Internship"}
                         </span>
                       )}
                     </div>
@@ -232,15 +247,15 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                       onClick={() => setActiveDetailJob(job)}
                       className="text-base sm:text-lg font-black text-slate-900 dark:text-white font-bengali group-hover:text-[#ED8E22] dark:group-hover:text-amber-300 transition-colors cursor-pointer"
                     >
-                      {job.title}
+                      {isBengali ? job.title : (job.titleEn || job.title)}
                     </h3>
 
                     <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 flex flex-wrap items-center gap-2 font-bengali">
-                      <span>{job.companyName}</span>
+                      <span>{isBengali ? job.companyName : (job.companyNameEn || job.companyName)}</span>
                       <span className="text-slate-400">•</span>
                       <span className="text-slate-500 font-normal flex items-center gap-1">
                         <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                        {job.locationDistrict}
+                        {isBengali ? job.locationDistrict : (job.locationDistrictEn || job.locationDistrict)}
                       </span>
                     </p>
 
@@ -248,17 +263,27 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                     <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-500 font-bengali">
                       <span className="flex items-center gap-1">
                         <Briefcase className="w-3.5 h-3.5 text-slate-400" />
-                        <span>অভিজ্ঞতা: {job.experienceYears}</span>
+                        <span>
+                          {isBengali
+                            ? `অভিজ্ঞতা: ${job.experienceYears}`
+                            : `Experience: ${job.experienceYearsEn || job.experienceYears}`}
+                        </span>
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Users className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{job.vacancy} টি পদ</span>
+                        <span>
+                          {isBengali ? `${job.vacancy} টি পদ` : `${job.vacancy} Positions`}
+                        </span>
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1 text-rose-700 dark:text-rose-400 font-medium">
                         <Clock className="w-3.5 h-3.5" />
-                        <span>শেষ সময়: {job.deadline}</span>
+                        <span>
+                          {isBengali
+                            ? `শেষ সময়: ${job.deadline}`
+                            : `Deadline: ${job.deadlineEn || job.deadline}`}
+                        </span>
                       </span>
                     </div>
                   </div>
@@ -267,9 +292,13 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                 {/* Right Column: Salary & CTAs */}
                 <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-slate-800 shrink-0">
                   <div className="text-left md:text-right">
-                    <div className="text-xs text-slate-500 font-bengali">মাসিক বেতন:</div>
+                    <div className="text-xs text-slate-500 font-bengali">
+                      {isBengali ? "মাসিক বেতন:" : "Monthly Salary:"}
+                    </div>
                     <div className="text-sm sm:text-base font-black text-emerald-700 dark:text-emerald-400 font-bengali">
-                      {job.minSalary.toLocaleString('bn-BD')} - {job.maxSalary.toLocaleString('bn-BD')} ৳
+                      {isBengali
+                        ? `${job.minSalary.toLocaleString('bn-BD')} - ${job.maxSalary.toLocaleString('bn-BD')} ৳`
+                        : `৳ ${job.minSalary.toLocaleString('en-US')} - ${job.maxSalary.toLocaleString('en-US')}`}
                     </div>
                   </div>
 
@@ -280,7 +309,7 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                       className="px-3.5 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-300 text-xs font-bold font-bengali shadow-xs transition flex items-center gap-1.5 cursor-pointer"
                     >
                       <Eye className="w-3.5 h-3.5 text-slate-500" />
-                      <span>বিস্তারিত</span>
+                      <span>{isBengali ? "বিস্তারিত" : "Details"}</span>
                     </button>
 
                     <button
@@ -289,7 +318,7 @@ export const CareerJobBoard: React.FC<CareerJobBoardProps> = ({
                       className="px-5 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white text-xs font-bold font-bengali shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-1.5 cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5 text-amber-300" />
-                      <span>আবেদন</span>
+                      <span>{isBengali ? "আবেদন" : "Apply"}</span>
                     </button>
                   </div>
                 </div>

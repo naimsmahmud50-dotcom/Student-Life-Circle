@@ -19,6 +19,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { CareerJob } from './data/careerElevationData';
+import { useTranslation } from '../../lib/i18n';
 
 interface JobApplyModalProps {
   job: CareerJob | null;
@@ -44,6 +45,7 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
   sealedSnapshotHash,
   onApplicationSubmitted
 }) => {
+  const { isBengali } = useTranslation();
   const [expectedSalary, setExpectedSalary] = useState<string>('40000');
   const [coverNote, setCoverNote] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -66,9 +68,9 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
     if (submittedData && job) {
       onApplicationSubmitted({
         jobId: job.id,
-        companyName: job.companyName,
-        role: job.title,
-        appliedDate: "২৬ অক্টোবর ২০২৬",
+        companyName: isBengali ? job.companyName : (job.companyNameEn || job.companyName),
+        role: isBengali ? job.title : (job.titleEn || job.title),
+        appliedDate: isBengali ? "২৬ অক্টোবর ২০২৬" : "26 October 2026",
         stage: 'APPLIED',
         cvSnapshotId: sealedSnapshotHash,
         expectedSalary: Number(expectedSalary) || job.minSalary,
@@ -97,24 +99,24 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#0A2540] text-amber-300">
-                অনলাইন আবেদন ফর্ম
+                {isBengali ? "অনলাইন আবেদন ফর্ম" : "Online Application Form"}
               </span>
               <span className="text-xs text-slate-500 font-mono font-bold">
                 {job.id}
               </span>
             </div>
             <h2 className="text-lg font-black text-slate-900 dark:text-white font-bengali">
-              {job.title}
+              {isBengali ? job.title : (job.titleEn || job.title)}
             </h2>
             <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali mt-0.5">
-              {job.companyName}
+              {isBengali ? job.companyName : (job.companyNameEn || job.companyName)}
             </p>
           </div>
 
           <button
             onClick={handleClose}
             className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
-            aria-label="Close modal"
+            aria-label={isBengali ? "বন্ধ করুন" : "Close modal"}
           >
             <X className="w-5 h-5" />
           </button>
@@ -128,20 +130,28 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
             </div>
 
             <h3 className="text-xl font-black text-slate-900 dark:text-white font-bengali">
-              আবেদন সফলভাবে গৃহীত হয়েছে!
+              {isBengali ? "আবেদন সফলভাবে গৃহীত হয়েছে!" : "Application Successfully Submitted!"}
             </h3>
             
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali max-w-md mx-auto leading-relaxed">
-              আপনার সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট নিয়োগকারী প্রতিষ্ঠান <strong>{job.companyName}</strong>-এর এইচআর ড্যাশবোর্ডে তালিকাভুক্ত হয়েছে।
+              {isBengali ? (
+                <>আপনার সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট নিয়োগকারী প্রতিষ্ঠান <strong>{job.companyName}</strong>-এর এইচআর ড্যাশবোর্ডে তালিকাভুক্ত হয়েছে।</>
+              ) : (
+                <>Your sealed cryptographic CV snapshot has been dispatched to the HR portal of <strong>{job.companyNameEn || job.companyName}</strong>.</>
+              )}
             </p>
 
             <div className="p-4 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 max-w-sm mx-auto text-left space-y-1.5">
               <div className="flex items-center justify-between text-xs font-bengali">
-                <span className="text-slate-500">অ্যাপ্লিকেশন ট্র্যাকিং আইডি:</span>
+                <span className="text-slate-500">
+                  {isBengali ? "অ্যাপ্লিকেশন ট্র্যাকিং আইডি:" : "Application Tracking ID:"}
+                </span>
                 <span className="font-mono font-bold text-[#0A2540] dark:text-amber-300">{submittedData.trackingId}</span>
               </div>
               <div className="flex items-center justify-between text-xs font-bengali">
-                <span className="text-slate-500">সিভি স্ন্যাপশট হ্যাশ:</span>
+                <span className="text-slate-500">
+                  {isBengali ? "সিভি স্ন্যাপশট হ্যাশ:" : "CV Snapshot Hash:"}
+                </span>
                 <span className="font-mono text-[11px] text-slate-600 dark:text-slate-400 truncate max-w-[150px]">{sealedSnapshotHash}</span>
               </div>
             </div>
@@ -150,7 +160,7 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
               onClick={handleFinish}
               className="mt-4 px-6 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-sm cursor-pointer"
             >
-              সম্পন্ন করুন
+              {isBengali ? "সম্পন্ন করুন" : "Complete & Dismiss"}
             </button>
           </div>
         ) : (
@@ -162,10 +172,12 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
               <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
               <div className="space-y-1 text-xs">
                 <span className="font-bold text-emerald-900 dark:text-emerald-300 font-bengali">
-                  সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট সংযুক্ত
+                  {isBengali ? "সিলগালা ক্রিপ্টোগ্রাফিক সিভি স্ন্যাপশট সংযুক্ত" : "Sealed Cryptographic CV Snapshot Attached"}
                 </span>
                 <p className="text-slate-600 dark:text-slate-400 font-bengali leading-relaxed">
-                  আপনার বর্তমান ভেরিফায়েড প্রফেশনাল প্রোফাইল ও একাডেমিক স্কোর হ্যাশ আকারে লক থাকবে।
+                  {isBengali
+                    ? "আপনার বর্তমান ভেরিফায়েড প্রফেশনাল প্রোফাইল ও একাডেমিক স্কোর হ্যাশ আকারে লক থাকবে।"
+                    : "Your verified professional profile and academic credentials will remain locked in tamper-evident hash form."}
                 </p>
                 <div className="font-mono text-[11px] font-bold text-emerald-800 dark:text-emerald-400 bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 inline-block">
                   {sealedSnapshotHash}
@@ -176,7 +188,7 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
             {/* Expected Salary Input */}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                মাসিক প্রত্যাশিত পারিশ্রমিক / বেতন (টাকায়):
+                {isBengali ? "মাসিক প্রত্যাশিত পারিশ্রমিক / বেতন (টাকায়):" : "Expected Monthly Compensation (BDT):"}
               </label>
               <div className="relative">
                 <Banknote className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -184,25 +196,31 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
                   type="number"
                   value={expectedSalary}
                   onChange={(e) => setExpectedSalary(e.target.value)}
-                  placeholder="যেমন: ৪০০০"
+                  placeholder={isBengali ? "যেমন: ৪০০০" : "e.g. 40000"}
                   className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs sm:text-sm font-bengali text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0A2540]"
                 />
               </div>
               <p className="text-[11px] text-slate-500 font-bengali">
-                বিজ্ঞাপিত বেতন স্কেল: {job.minSalary.toLocaleString('bn-BD')} - {job.maxSalary.toLocaleString('bn-BD')} টাকা
+                {isBengali
+                  ? `বিজ্ঞাপিত বেতন স্কেল: ${job.minSalary.toLocaleString('bn-BD')} - ${job.maxSalary.toLocaleString('bn-BD')} টাকা`
+                  : `Advertised Scale: ৳ ${job.minSalary.toLocaleString('en-US')} - ${job.maxSalary.toLocaleString('en-US')}`}
               </p>
             </div>
 
             {/* Priority Note / Cover Letter */}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                সংক্ষিপ্ত কভার নোট / আবেদন বার্তা (ঐচ্ছিক):
+                {isBengali ? "সংক্ষিপ্ত কভার নোট / আবেদন বার্তা (ঐচ্ছিক):" : "Short Cover Note / Application Pitch (Optional):"}
               </label>
               <textarea
                 rows={3}
                 value={coverNote}
                 onChange={(e) => setCoverNote(e.target.value)}
-                placeholder="নিয়োগকর্তার উদ্দেশে আপনার প্রাসঙ্গিক অভিজ্ঞতা বা শিক্ষাগত বিশেষত্ব উল্লেখ করুন..."
+                placeholder={
+                  isBengali
+                    ? "নিয়োগকর্তার উদ্দেশে আপনার প্রাসঙ্গিক অভিজ্ঞতা বা শিক্ষাগত বিশেষত্ব উল্লেখ করুন..."
+                    : "Highlight your relevant experiences or unique qualifications for the hiring team..."
+                }
                 className="w-full p-3 rounded-2xl bg-[#FAFAF8] dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs sm:text-sm font-bengali text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0A2540]"
               />
             </div>
@@ -214,7 +232,7 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
                 onClick={handleClose}
                 className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 text-slate-700 dark:text-slate-300 text-xs font-bold font-bengali transition cursor-pointer"
               >
-                বাতিল করুন
+                {isBengali ? "বাতিল করুন" : "Cancel"}
               </button>
 
               <button
@@ -223,7 +241,11 @@ export const JobApplyModal: React.FC<JobApplyModalProps> = ({
                 className="px-6 py-2.5 rounded-2xl bg-[#0A2540] hover:bg-[#081c30] text-white font-bold font-bengali text-xs shadow-[0_4px_0_0_#071D33] active:translate-y-1 active:shadow-none transition flex items-center gap-2 cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5 text-amber-300" />
-                <span>{isSubmitting ? "আবেদন জমা হচ্ছে..." : "আবেদন নিশ্চিত করুন"}</span>
+                <span>
+                  {isSubmitting
+                    ? (isBengali ? "আবেদন জমা হচ্ছে..." : "Submitting...")
+                    : (isBengali ? "আবেদন নিশ্চিত করুন" : "Confirm Application")}
+                </span>
               </button>
             </div>
 

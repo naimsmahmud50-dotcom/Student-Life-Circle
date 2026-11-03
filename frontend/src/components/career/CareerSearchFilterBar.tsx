@@ -18,6 +18,7 @@ import {
   Building2,
   Compass
 } from 'lucide-react';
+import { useTranslation } from '../../lib/i18n';
 import { BANGLADESH_DIVISIONS, CAREER_CATEGORIES } from './data/careerElevationData';
 
 interface CareerSearchFilterBarProps {
@@ -53,6 +54,8 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
   onClearFilters,
   hasActiveFilters
 }) => {
+  const { isBengali } = useTranslation();
+
   return (
     <div className="relative overflow-hidden rounded-3xl border border-amber-200/60 dark:border-[#262D3D] bg-white/95 dark:bg-[#0B0F19]/95 backdrop-blur-md p-5 sm:p-7 shadow-xs space-y-4">
       
@@ -75,14 +78,18 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="পদবি, কোম্পানি বা দক্ষতার নাম লিখুন (যেমন: Python, MTO, ব্র্যাক)..."
+            placeholder={
+              isBengali
+                ? "পদবি, কোম্পানি বা দক্ষতার নাম লিখুন (যেমন: Python, MTO, ব্র্যাক)..."
+                : "Search by title, role, company or keyword (e.g. Python, MTO, BRAC)..."
+            }
             className="w-full pl-10 pr-10 py-3 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-slate-700/80 text-xs sm:text-sm font-bengali text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ED8E22]/30 focus:border-[#ED8E22] shadow-xs transition"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
               className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-md transition cursor-pointer"
-              aria-label="ক্লিয়ার সার্চ"
+              aria-label={isBengali ? "ক্লিয়ার সার্চ" : "Clear search"}
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -99,7 +106,7 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
           >
             {BANGLADESH_DIVISIONS.map((div) => (
               <option key={div.id} value={div.id}>
-                {div.nameBn}
+                {isBengali ? div.nameBn : div.nameEn}
               </option>
             ))}
           </select>
@@ -114,10 +121,12 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
             onChange={(e) => onCategoryChange(e.target.value)}
             className="w-full pl-10 pr-9 py-3 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-slate-700/80 text-xs sm:text-sm font-bengali text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#ED8E22]/30 focus:border-[#ED8E22] appearance-none cursor-pointer shadow-xs transition"
           >
-            <option value="all">সকল ক্যাটাগরি (All Categories)</option>
+            <option value="all">
+              {isBengali ? "সকল ক্যাটাগরি (All Categories)" : "All Categories"}
+            </option>
             {CAREER_CATEGORIES.map((cat) => (
               <option key={cat.id} value={cat.id}>
-                {cat.nameBn} ({cat.jobCount})
+                {isBengali ? cat.nameBn : (cat.nameEn || cat.nameBn)} ({cat.jobCount})
               </option>
             ))}
           </select>
@@ -133,14 +142,14 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 font-bengali mr-1 flex items-center gap-1">
             <Filter className="w-3.5 h-3.5 text-[#ED8E22]" />
-            <span>কাজের ধরন:</span>
+            <span>{isBengali ? "কাজের ধরন:" : "Job Nature:"}</span>
           </span>
 
           {[
-            { id: 'all', label: 'সব' },
-            { id: 'FULL_TIME', label: 'ফুল-টাইম' },
-            { id: 'INTERNSHIP', label: 'ইন্টার্নশিপ ও ফ্রেশার' },
-            { id: 'CONTRACTUAL', label: 'চুক্তিভিত্তিক' }
+            { id: 'all', label: isBengali ? 'সব' : 'All' },
+            { id: 'FULL_TIME', label: isBengali ? 'ফুল-টাইম' : 'Full-Time' },
+            { id: 'INTERNSHIP', label: isBengali ? 'ইন্টার্নশিপ ও ফ্রেশার' : 'Internship & Fresher' },
+            { id: 'CONTRACTUAL', label: isBengali ? 'চুক্তিভিত্তিক' : 'Contractual' }
           ].map((item) => (
             <button
               key={item.id}
@@ -168,7 +177,7 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
             }`}
           >
             <Building2 className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-            <span>সরকারি সার্কুলার</span>
+            <span>{isBengali ? "সরকারি সার্কুলার" : "Govt Circulars"}</span>
           </button>
 
           <button
@@ -180,7 +189,7 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
             }`}
           >
             <Compass className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span>এনজিও</span>
+            <span>{isBengali ? "এনজিও" : "NGOs"}</span>
           </button>
 
           <button
@@ -192,7 +201,7 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
             }`}
           >
             <Clock className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
-            <span>হট জবস (জরুরি)</span>
+            <span>{isBengali ? "হট জবস (জরুরি)" : "Hot Jobs (Urgent)"}</span>
           </button>
 
           {hasActiveFilters && (
@@ -201,7 +210,7 @@ export const CareerSearchFilterBar: React.FC<CareerSearchFilterBarProps> = ({
               className="px-3.5 py-1.5 rounded-xl text-xs font-bengali font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-900/40 hover:bg-rose-100 dark:hover:bg-rose-950/60 transition flex items-center gap-1 cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>ফিল্টার রিসেট</span>
+              <span>{isBengali ? "ফিল্টার রিসেট" : "Reset Filters"}</span>
             </button>
           )}
 

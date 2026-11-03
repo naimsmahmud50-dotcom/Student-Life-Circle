@@ -22,6 +22,7 @@ import {
   Check
 } from 'lucide-react';
 import { CareerJob, CAREER_CATEGORIES } from './data/careerElevationData';
+import { useTranslation } from '../../lib/i18n';
 
 interface EmployerJobPostingWizardModalProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
   onClose,
   onJobCreated
 }) => {
+  const { isBengali } = useTranslation();
   const [step, setStep] = useState<number>(1);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
@@ -121,10 +123,12 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
             </div>
             <div>
               <h2 className="text-lg font-black text-slate-900 dark:text-white font-bengali">
-                পোস্ট এ জব (নিয়োগকর্তা ড্যাশবোর্ড)
+                {isBengali ? "পোস্ট এ জব (নিয়োগকর্তা ড্যাশবোর্ড)" : "Post a Vacancy (Employer Portal)"}
               </h2>
               <p className="text-xs text-slate-500 font-bengali">
-                ধাপ {step} এর ৪: {step === 1 ? 'কোম্পানি প্রোফাইল' : step === 2 ? 'পদের বিবরণ' : step === 3 ? 'যোগ্যতা ও দায়িত্ব' : 'বেতন ও প্রকাশনা'}
+                {isBengali
+                  ? `ধাপ ${step} এর ৪: ${step === 1 ? 'কোম্পানি প্রোফাইল' : step === 2 ? 'পদের বিবরণ' : step === 3 ? 'যোগ্যতা ও দায়িত্ব' : 'বেতন ও প্রকাশনা'}`
+                  : `Step ${step} of 4: ${step === 1 ? 'Company Profile' : step === 2 ? 'Job Role Details' : step === 3 ? 'Criteria & Duties' : 'Compensation & Publish'}`}
               </p>
             </div>
           </div>
@@ -132,6 +136,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
           <button
             onClick={handleClose}
             className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white transition cursor-pointer"
+            aria-label={isBengali ? "বন্ধ করুন" : "Close modal"}
           >
             <X className="w-5 h-5" />
           </button>
@@ -155,16 +160,18 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
               <Check className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-black text-slate-900 dark:text-white font-bengali">
-              চাকরির বিজ্ঞপ্তিটি সফলভাবে প্রকাশিত হয়েছে!
+              {isBengali ? "চাকরির বিজ্ঞপ্তিটি সফলভাবে প্রকাশিত হয়েছে!" : "Job Vacancy Published Successfully!"}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali max-w-md mx-auto">
-              আপনার বিজ্ঞপ্তিটি অগ্রযাত্রা ও বিডিজবস-ক্লাস ক্যারিয়ার ফিডে লাইভ রয়েছে। প্রার্থীরা সিলগালা সিভি স্ন্যাপশটের মাধ্যমে আবেদন করতে পারবেন।
+              {isBengali
+                ? "আপনার বিজ্ঞপ্তিটি অগ্রযাত্রা ও বিডিজবস-ক্লাস ক্যারিয়ার ফিডে লাইভ রয়েছে। প্রার্থীরা সিলগালা সিভি স্ন্যাপশটের মাধ্যমে আবেদন করতে পারবেন।"
+                : "Your circular is now live across the verified career board. Candidates can submit applications with their sealed cryptographic CV snapshots."}
             </p>
             <button
               onClick={handleClose}
               className="mt-4 px-6 py-2.5 rounded-2xl bg-[#0A2540] text-white text-xs font-bold font-bengali cursor-pointer"
             >
-              ফিডে ফিরে যান
+              {isBengali ? "ফিডে ফিরে যান" : "Return to Board"}
             </button>
           </div>
         ) : (
@@ -175,21 +182,21 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
               <div className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    প্রতিষ্ঠানের নাম (Company Name):
+                    {isBengali ? "প্রতিষ্ঠানের নাম (Company Name):" : "Company Name:"}
                   </label>
                   <input
                     type="text"
                     required
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    placeholder="যেমন: ব্রেনস্টেশন ২৩ / ব্র্যাক"
+                    placeholder={isBengali ? "যেমন: ব্রেনস্টেশন ২৩ / ব্র্যাক" : "e.g. Brain Station 23 / BRAC"}
                     className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-[#FAFAF8] dark:bg-slate-950 text-xs font-bengali text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    শিল্প / সেক্টর (Industry):
+                    {isBengali ? "শিল্প / সেক্টর (Industry):" : "Industry / Sector:"}
                   </label>
                   <input
                     type="text"
@@ -201,7 +208,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    কর্মস্থল / জেলা (Workplace District):
+                    {isBengali ? "কর্মস্থল / জেলা (Workplace District):" : "Workplace / District:"}
                   </label>
                   <input
                     type="text"
@@ -218,34 +225,40 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
               <div className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    চাকরির পদবি (Job Title):
+                    {isBengali ? "চাকরির পদবি (Job Title):" : "Job Title:"}
                   </label>
                   <input
                     type="text"
                     required
                     value={jobTitle}
                     onChange={(e) => setJobTitle(e.target.value)}
-                    placeholder="যেমন: জুনিয়র পাইথন ডেভেলপার"
+                    placeholder={isBengali ? "যেমন: জুনিয়র পাইথন ডেভেলপার" : "e.g. Junior Python Developer"}
                     className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-[#FAFAF8] dark:bg-slate-950 text-xs font-bengali text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">ক্যাটাগরি:</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                      {isBengali ? "ক্যাটাগরি:" : "Category:"}
+                    </label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                       className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-[#FAFAF8] dark:bg-slate-950 text-xs font-bengali text-slate-900 dark:text-white"
                     >
                       {CAREER_CATEGORIES.map((c) => (
-                        <option key={c.id} value={c.id}>{c.nameBn}</option>
+                        <option key={c.id} value={c.id}>
+                          {isBengali ? c.nameBn : (c.nameEn || c.nameBn)}
+                        </option>
                       ))}
                     </select>
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">খালি পদ সংখ্যা:</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                      {isBengali ? "খালি পদ সংখ্যা:" : "Vacancy Count:"}
+                    </label>
                     <input
                       type="number"
                       value={vacancy}
@@ -256,12 +269,14 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">কাজের ধরন:</label>
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                    {isBengali ? "কাজের ধরন:" : "Job Nature:"}
+                  </label>
                   <div className="flex gap-2">
                     {[
-                      { id: 'FULL_TIME', label: 'ফুল-টাইম' },
-                      { id: 'INTERNSHIP', label: 'ইন্টার্নশিপ' },
-                      { id: 'CONTRACTUAL', label: 'চুক্তিভিত্তিক' }
+                      { id: 'FULL_TIME', label: isBengali ? 'ফুল-টাইম' : 'Full-Time' },
+                      { id: 'INTERNSHIP', label: isBengali ? 'ইন্টার্নশিপ' : 'Internship' },
+                      { id: 'CONTRACTUAL', label: isBengali ? 'চুক্তিভিত্তিক' : 'Contractual' }
                     ].map((n) => (
                       <button
                         type="button"
@@ -286,20 +301,20 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
               <div className="space-y-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    অভিজ্ঞতার প্রয়োজনীয়তা:
+                    {isBengali ? "অভিজ্ঞতার প্রয়োজনীয়তা:" : "Experience Requirement:"}
                   </label>
                   <input
                     type="text"
                     value={experienceYears}
                     onChange={(e) => setExperienceYears(e.target.value)}
-                    placeholder="যেমন: ০ - ১ বছর (ফ্রেশার স্বাগতম)"
+                    placeholder={isBengali ? "যেমন: ০ - ১ বছর (ফ্রেশার স্বাগতম)" : "e.g. 0 - 1 Years (Freshers Welcome)"}
                     className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-[#FAFAF8] dark:bg-slate-950 text-xs font-bengali text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    শিক্ষাগত যোগ্যতা:
+                    {isBengali ? "শিক্ষাগত যোগ্যতা:" : "Educational Qualification:"}
                   </label>
                   <input
                     type="text"
@@ -311,7 +326,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    দায়িত্বসমূহ (লাইন ব্রেক দিয়ে লিখুন):
+                    {isBengali ? "দায়িত্বসমূহ (লাইন ব্রেক দিয়ে লিখুন):" : "Key Responsibilities (One per line):"}
                   </label>
                   <textarea
                     rows={3}
@@ -328,7 +343,9 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">সর্বনিম্ন বেতন (টাকা):</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                      {isBengali ? "সর্বনিম্ন বেতন (টাকা):" : "Minimum Salary (BDT):"}
+                    </label>
                     <input
                       type="number"
                       value={minSalary}
@@ -337,7 +354,9 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">সর্বোচ্চ বেতন (টাকা):</label>
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
+                      {isBengali ? "সর্বোচ্চ বেতন (টাকা):" : "Maximum Salary (BDT):"}
+                    </label>
                     <input
                       type="number"
                       value={maxSalary}
@@ -349,7 +368,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300 font-bengali">
-                    আবেদনের শেষ তারিখ:
+                    {isBengali ? "আবেদনের শেষ তারিখ:" : "Application Deadline:"}
                   </label>
                   <input
                     type="text"
@@ -361,7 +380,11 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
 
                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 font-bengali flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>অগ্রযাত্রা ভেরিফায়েড নিয়োগকর্তা চুক্তি ও স্বচ্ছতা পলিসি প্রযোজ্য হবে।</span>
+                  <span>
+                    {isBengali
+                      ? "অগ্রযাত্রা ভেরিফায়েড নিয়োগকর্তা চুক্তি ও স্বচ্ছতা পলিসি প্রযোজ্য হবে।"
+                      : "Subject to Agragoti Verified Employer Terms & Transparency Guidelines."}
+                  </span>
                 </div>
               </div>
             )}
@@ -375,7 +398,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
                   className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold font-bengali text-slate-700 dark:text-slate-300 flex items-center gap-1.5 cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>পূর্ববর্তী</span>
+                  <span>{isBengali ? "পূর্ববর্তী" : "Back"}</span>
                 </button>
               ) : <div />}
 
@@ -385,7 +408,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
                   onClick={handleNext}
                   className="px-5 py-2.5 rounded-xl bg-[#0A2540] text-white text-xs font-bold font-bengali flex items-center gap-1.5 cursor-pointer"
                 >
-                  <span>পরবর্তী ধাপ</span>
+                  <span>{isBengali ? "পরবর্তী ধাপ" : "Next Step"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               ) : (
@@ -395,7 +418,7 @@ export const EmployerJobPostingWizardModal: React.FC<EmployerJobPostingWizardMod
                   className="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold font-bengali shadow-sm flex items-center gap-1.5 cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
-                  <span>বিজ্ঞপ্তিটি এখনই প্রকাশ করুন</span>
+                  <span>{isBengali ? "বিজ্ঞপ্তিটি এখনই প্রকাশ করুন" : "Publish Job Vacancy Now"}</span>
                 </button>
               )}
             </div>

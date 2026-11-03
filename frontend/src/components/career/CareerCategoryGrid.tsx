@@ -23,6 +23,7 @@ import {
   Layers,
   Sparkles
 } from 'lucide-react';
+import { useTranslation } from '../../lib/i18n';
 import { CAREER_CATEGORIES, CareerCategory } from './data/careerElevationData';
 
 interface CareerCategoryGridProps {
@@ -34,6 +35,7 @@ export const CareerCategoryGrid: React.FC<CareerCategoryGridProps> = ({
   selectedCategory,
   onSelectCategory
 }) => {
+  const { isBengali } = useTranslation();
   const [activeTab, setActiveTab] = useState<'functional' | 'special_skill'>('functional');
 
   const filteredCategories = CAREER_CATEGORIES.filter(c => c.type === activeTab);
@@ -94,15 +96,19 @@ export const CareerCategoryGrid: React.FC<CareerCategoryGridProps> = ({
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100/90 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300/80 dark:border-emerald-800 shadow-xs">
               <Layers className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
-              ক্যারিয়ার সেক্টর ম্যাট্রিক্স
+              {isBengali ? "ক্যারিয়ার সেক্টর ম্যাট্রিক্স" : "Career Sector Matrix"}
             </span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight font-bengali text-[#0B251F] dark:text-[#E8F8F4]">
-            শিল্প ও পেশাভিত্তিক কাজের ক্ষেত্র (Job Categories)
+            {isBengali
+              ? "শিল্প ও পেশাভিত্তিক কাজের ক্ষেত্র (Job Categories)"
+              : "Industry & Skill-Based Job Categories"}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali">
-            বাংলাদেশের শীর্ষস্থানীয় সেক্টর অনুযায়ী পছন্দের ক্ষেত্রে সরাসরি নিয়োগ বিজ্ঞপ্তি ফিল্টার করুন
+            {isBengali
+              ? "বাংলাদেশের শীর্ষস্থানীয় সেক্টর অনুযায়ী পছন্দের ক্ষেত্রে সরাসরি নিয়োগ বিজ্ঞপ্তি ফিল্টার করুন"
+              : "Filter verified vacancies directly by leading employment sectors across Bangladesh"}
           </p>
         </div>
 
@@ -116,7 +122,7 @@ export const CareerCategoryGrid: React.FC<CareerCategoryGridProps> = ({
                 : 'text-slate-600 dark:text-slate-300 hover:text-emerald-900 dark:hover:text-white'
             }`}
           >
-            ফাংশনাল ক্যাটাগরি (৮)
+            {isBengali ? "ফাংশনাল ক্যাটাগরি (৮)" : "Functional Sectors (8)"}
           </button>
           <button
             onClick={() => setActiveTab('special_skill')}
@@ -126,7 +132,7 @@ export const CareerCategoryGrid: React.FC<CareerCategoryGridProps> = ({
                 : 'text-slate-600 dark:text-slate-300 hover:text-emerald-900 dark:hover:text-white'
             }`}
           >
-            স্পেশাল স্কিল্ড ও টেকনিক্যাল (৪)
+            {isBengali ? "স্পেশাল স্কিল্ড ও টেকনিক্যাল (৪)" : "Special Skilled & Technical (4)"}
           </button>
         </div>
       </div>
@@ -151,20 +157,24 @@ export const CareerCategoryGrid: React.FC<CareerCategoryGridProps> = ({
                     {getCategoryIcon(cat.iconName)}
                   </div>
                   <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-white dark:bg-[#071714] border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 shadow-xs">
-                    {cat.jobCount} টি চাকরি
+                    {isBengali ? `${cat.jobCount} টি চাকরি` : `${cat.jobCount} Jobs`}
                   </span>
                 </div>
 
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white font-bengali group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
-                  {cat.nameBn}
+                  {isBengali ? cat.nameBn : (cat.nameEn || cat.nameBn)}
                 </h3>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bengali mt-1.5 line-clamp-2 leading-relaxed">
-                  {cat.description}
+                  {isBengali ? cat.description : (cat.descriptionEn || cat.description)}
                 </p>
               </div>
 
               <div className="mt-4 pt-2.5 border-t border-emerald-100/80 dark:border-emerald-900/50 flex items-center justify-between text-xs font-bold text-emerald-800 dark:text-emerald-300 font-bengali">
-                <span>{isSelected ? 'নির্বাচিত ফিল্টার (বাতিল করতে ক্লিক)' : 'বিজ্ঞপ্তি দেখুন'}</span>
+                <span>
+                  {isSelected
+                    ? (isBengali ? 'নির্বাচিত ফিল্টার (বাতিল করতে ক্লিক)' : 'Selected Filter (Click to reset)')
+                    : (isBengali ? 'বিজ্ঞপ্তি দেখুন' : 'Explore Jobs')}
+                </span>
                 <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </button>
