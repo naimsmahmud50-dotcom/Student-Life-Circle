@@ -68,6 +68,6 @@
 - [x] T053: Bilingual elevation for Verified Teacher Cards (`isVerifiedTutor`, credentials, subjects, hourly rates).
 - [x] T054: Bilingual elevation for Escrow Milestone Policy & Consent Modal (`escrowEligible`, `এসক্রো মাইলস্টোন`, `requestTuitionConsent`, `Modal`).
 - [x] T055: Quality Assurance (TypeScript, test suite, strict zero-emoji scan).
-- [ ] T056: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/tuition/`.
+- [x] T056: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/tuition/`.
 
 
