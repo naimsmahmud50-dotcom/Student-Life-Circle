@@ -59,7 +59,7 @@ export const Academic3DToggle: React.FC<Academic3DToggleProps> = ({
         aria-label="ত্রিমাত্রিক ৩ডি ভিজুয়ালাইজেশন নিয়ন্ত্রণ"
         onClick={toggle3D}
         title={`দৃশ্যপট মোড পরিবর্তন: ${reason} (ক্লিক করুন)`}
-        className={`btn-tactile-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold select-none transition-all cursor-pointer ${
+        className={`btn-tactile-outline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-bengali select-none transition-all cursor-pointer ${
           is3DAllowed
             ? 'bg-[#F0EDE6] dark:bg-[#172030] border-emerald-600/40 dark:border-emerald-500/40 text-emerald-900 dark:text-emerald-300'
             : 'bg-[#FDFCF9] dark:bg-[#111827] border-[#E5E2DA] dark:border-[#263147] text-[#5A687D] dark:text-[#94A3B8]'

@@ -142,13 +142,13 @@ module.exports = {
         '2xl': '16px',
       },
       fontFamily: {
-        sans: ['Hind Siliguri', 'Inter', 'Noto Sans Bengali', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['"Noto Sans Bengali"', 'Inter', '"Tiro Bangla"', 'Hind Siliguri', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         'serif-bengali': ['"Noto Serif Bengali"', '"Tiro Bangla"', '"Source Serif 4"', 'Georgia', 'serif'],
         'serif-english': ['"Source Serif 4"', 'Lora', 'Georgia', '"Times New Roman"', 'serif'],
-        'sans-bengali': ['"Hind Siliguri"', '"Noto Sans Bengali"', 'system-ui', 'sans-serif'],
+        'sans-bengali': ['"Noto Sans Bengali"', '"Tiro Bangla"', 'Hind Siliguri', 'system-ui', 'sans-serif'],
         'sans-english': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['"Noto Serif Bengali"', '"Source Serif 4"', 'Plus Jakarta Sans', 'serif'],
-        bengali: ['Hind Siliguri', 'Noto Sans Bengali', 'sans-serif'],
+        bengali: ['"Noto Sans Bengali"', '"Tiro Bangla"', 'Hind Siliguri', 'sans-serif'],
         tabular: ['Inter', 'monospace'],
       },
       minHeight: {

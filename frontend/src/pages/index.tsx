@@ -167,7 +167,7 @@ export default function FlagshipLandingPage() {
                   
                   {/* National Accreditation Chip & 3D Depth Controller */}
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 border border-amber-200/80 dark:border-gray-700 text-xs font-semibold text-gray-700 dark:text-gray-200 shadow-xs">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 border border-amber-200/80 dark:border-gray-700 text-xs font-semibold font-bengali text-gray-700 dark:text-gray-200 shadow-xs">
                       <ShieldCheck className="w-4 h-4 text-[#ED8E22] shrink-0" />
                       <span>জাতীয় শিক্ষাক্রম (NCTB) মানদণ্ডে পরিচালিত • ৬৪ জেলায় সমন্বিত</span>
                     </div>
