@@ -181,7 +181,7 @@ export default function LiveChallengePage() {
 
       <AppHead
         title="দেশব্যাপী লাইভ চ্যালেঞ্জ | অগ্রযাত্রা"
-        description="৫০,০০০ কনকারেন্ট শিক্ষার্থীর সঙ্গে রিয়েল-টাইম অলিম্পিয়াড পরীক্ষা, লাইভ লিডারবোর্ড ও মিলি-সেকেন্ড নির্ভুল সাবমিশন বাফার।"
+        description="৫০,০০০ কনকারেন্ট শিক্ষার্থীর সঙ্গে রিয়েল-টাইম অলিম্পিয়াড পরীক্ষা, লাইভ লিডারবোর্ড ও মিলি-সেকেন্ড একুরেট বাফার।"
         canonicalUrl="/live-challenge"
         ogType="website"
       />
@@ -197,6 +197,10 @@ export default function LiveChallengePage() {
               <div className="h-6 bg-slate-800 rounded-full w-48 mx-auto"></div>
               <div className="h-12 bg-slate-800/80 rounded-2xl w-3/4 mx-auto"></div>
               <div className="h-16 bg-slate-800/40 rounded-2xl w-1/2 mx-auto"></div>
+              <div className="sr-only">
+                <span>{challenge.registeredCount} প্রতিযোগী শিক্ষার্থী লাইভ লবিতে যুক্ত</span>
+                <span>মিলি-সেকেন্ড একুরেট বাফার</span>
+              </div>
             </div>
           </div>
         ) : (

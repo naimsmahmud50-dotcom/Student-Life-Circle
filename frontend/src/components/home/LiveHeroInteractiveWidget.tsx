@@ -23,13 +23,11 @@ import {
 } from 'lucide-react';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
 import { LazyAcademic3DScene } from '@/components/3d';
-
-const BENGALI_DIGITS = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-function toBn(num: number | string): string {
-  return String(num).replace(/\d/g, (d) => BENGALI_DIGITS[parseInt(d, 10)]);
-}
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 export const LiveHeroInteractiveWidget: React.FC = () => {
+  const { isBengali } = useTranslation();
+
   // Dual-View Mode: 'globe' (3D Armillary Sphere) or 'physics' (Kinematic Trajectory)
   const [activeHeroTab, setActiveHeroTab] = useState<'globe' | 'physics'>('globe');
 
@@ -37,6 +35,9 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
   const [velocity, setVelocity] = useState<number>(32); // m/s (10 - 50)
   const [angle, setAngle] = useState<number>(45); // degrees (15 - 75)
   const g = 9.8;
+
+  const formatNum = (num: number | string): string =>
+    isBengali ? toBengaliDigits(num) : String(num);
 
   // Real-time kinematic calculations
   const { range, maxHeight, flightTime, trajectoryPath, isBullseye } = useMemo(() => {
@@ -80,17 +81,20 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
             <span className="absolute w-1.5 h-1.5 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
           </div>
           <div className="text-xs font-semibold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
-            <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">৪,৮৫০+</span> শিক্ষার্থী এখন লাইভ প্রস্তুতি নিচ্ছে
+            <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">
+              {isBengali ? '৪,৮৫০+' : '4,850+'}
+            </span>{' '}
+            {isBengali ? 'শিক্ষার্থী এখন লাইভ প্রস্তুতি নিচ্ছে' : 'students active in live preparation'}
           </div>
         </div>
 
         <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#B8862B] border border-[#E5E2DA] dark:border-[#262D3D] font-bengali shrink-0">
-          ৬৪ জেলা সংযুক্ত
+          {isBengali ? '৬৪ জেলা সংযুক্ত' : '64 Districts Connected'}
         </span>
       </div>
 
       {/* 2. Dual-Perspective Mode Switcher */}
-      <div role="tablist" aria-label="হিরো ইন্টারেক্টিভ ল্যাব নির্বাচক" className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
+      <div role="tablist" aria-label={isBengali ? 'হিরো ইন্টারেক্টিভ ল্যাব নির্বাচক' : 'Hero interactive lab switcher'} className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
         <button
           type="button"
           role="tab"
@@ -103,7 +107,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
           }`}
         >
           <Compass className="w-3.5 h-3.5" />
-          <span>৩ডি স্কলার গ্লোব</span>
+          <span>{isBengali ? '৩ডি স্কলার গ্লোব' : '3D Scholar Globe'}</span>
         </button>
         <button
           type="button"
@@ -117,7 +121,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
           }`}
         >
           <Atom className="w-3.5 h-3.5" />
-          <span>প্রক্ষেপক সিমুলেটর</span>
+          <span>{isBengali ? 'প্রক্ষেপক সিমুলেটর' : 'Projectile Simulator'}</span>
         </button>
       </div>
 
@@ -128,14 +132,18 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
                 <Compass className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
-                <span>একাডেমিক ৩ডি স্কলার গ্লোব ও অ্যাস্ট্রোনমি</span>
+                <span>
+                  {isBengali ? 'একাডেমিক ৩ডি স্কলার গ্লোব ও অ্যাস্ট্রোনমি' : 'Academic 3D Scholar Globe & Astronomy'}
+                </span>
               </div>
               <h3 className="text-sm sm:text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
-                জাতীয় শিক্ষাক্রম মহাজাগতিক পরিমাপক ও আর্মিলারি গোলক
+                {isBengali
+                  ? 'জাতীয় শিক্ষাক্রম মহাজাগতিক পরিমাপক ও আর্মিলারি গোলক'
+                  : 'National Curriculum Celestial Armillary Sphere & Measure'}
               </h3>
             </div>
             <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 text-[11px] font-semibold border border-[#E5E2DA] dark:border-[#263147] font-bengali">
-              ২৩°৪১′ উত্তর • ৯০°২১′ পূর্ব
+              {isBengali ? '২৩°৪১′ উত্তর • ৯০°২১′ পূর্ব' : '23°41′ N • 90°21′ E'}
             </span>
           </div>
 
@@ -145,11 +153,15 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
 
           <div className="p-3 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#263147] space-y-1 text-xs">
             <div className="flex items-center justify-between text-[#5B5B5B] dark:text-slate-400 text-[11px] font-bengali">
-              <span>অ্যাকাডেমিক অবজেক্টস</span>
-              <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">প্রসিডিউরাল থ্রি.জেএস ইঞ্জিন</span>
+              <span>{isBengali ? 'অ্যাকাডেমিক অবজেক্টস' : 'Academic Objects'}</span>
+              <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">
+                {isBengali ? 'প্রসিডিউরাল থ্রি.জেএস ইঞ্জিন' : 'Procedural Three.js Engine'}
+              </span>
             </div>
             <p className="text-[#1B2A4A] dark:text-[#E2E8F0] text-[11px] font-bengali leading-relaxed">
-              ব্রাস সেলেস্টিয়াল রিং, ২৩.৫° ট্রপিক্যাল সোলেস্টিস এক্সিস, টার্নড টিল্ট পেডেস্টাল এবং বাংলাদেশের অবস্থান সূচক সার্বভৌমিক আলোকশিখা।
+              {isBengali
+                ? 'ব্রাস সেলেস্টিয়াল রিং, ২৩.৫° ট্রপিক্যাল সোলেস্টিস এক্সিস, টার্নড টিল্ট পেডেস্টাল এবং বাংলাদেশের অবস্থান সূচক সার্বভৌমিক আলোকশিখা।'
+                : 'Brass celestial rings, 23.5° tropical solstice axis, turned tilt pedestal, and coordinate light locator for Bangladesh.'}
             </p>
           </div>
 
@@ -157,7 +169,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
             href="/practice?subject=Physics"
             className="w-full py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-bold font-bengali transition flex items-center justify-center gap-2 shadow-xs active:translate-y-0.5"
           >
-            <span>পদার্থবিজ্ঞান ও জ্যোতির্বিদ্যা পাঠ অন্বেষণ করুন</span>
+            <span>{isBengali ? 'পদার্থবিজ্ঞান ও জ্যোতির্বিদ্যা পাঠ অন্বেষণ করুন' : 'Explore Physics & Astronomy Modules'}</span>
             <ArrowRight className="w-4 h-4 text-amber-300" />
           </Link>
         </div>
@@ -169,21 +181,21 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
             <div className="space-y-0.5">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
                 <Atom className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
-                <span>ইন্টারেক্টিভ সায়েন্স প্লেগ্রাউন্ড</span>
+                <span>{isBengali ? 'ইন্টারেক্টিভ সায়েন্স প্লেগ্রাউন্ড' : 'Interactive Science Playground'}</span>
               </div>
               <h3 className="text-sm sm:text-base font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
-                প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতা নির্ণয়
+                {isBengali ? 'প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতা নির্ণয়' : 'Calculate Projectile Range & Max Height'}
               </h3>
             </div>
 
             {isBullseye ? (
               <span className="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#0B5D3B] dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800 flex items-center gap-1 animate-pulse">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#0B5D3B] dark:text-emerald-400" />
-                <span>লক্ষ্যভেদ!</span>
+                <span>{isBengali ? 'লক্ষ্যভেদ!' : 'Target Hit!'}</span>
               </span>
             ) : (
               <span className="px-2.5 py-1 rounded-md bg-[#FAF8F3] dark:bg-[#0E1526] text-[#5B5B5B] dark:text-slate-400 text-[11px] font-semibold border border-[#E5E2DA] dark:border-[#263147] font-bengali">
-                এইচএসসি পদার্থ ১ম পত্র
+                {isBengali ? 'এইচএসসি পদার্থ ১ম পত্র' : 'HSC Physics 1st Paper'}
               </span>
             )}
           </div>
@@ -193,9 +205,9 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
           {/* Target Zone Marker */}
           <div
             className="absolute bottom-2 right-12 w-14 h-6 border-b-2 border-dashed border-[#B8862B] bg-[#B8862B]/10 rounded flex items-center justify-center text-[9px] font-bold text-[#B8862B] font-bengali z-0"
-            title="টার্গেট অঞ্চল: ৮৫মি - ১১০মি"
+            title={isBengali ? 'টার্গেট অঞ্চল: ৮৫মি - ১১০মি' : 'Target Zone: 85m - 110m'}
           >
-            টার্গেট জোন
+            {isBengali ? 'টার্গেট জোন' : 'Target Zone'}
           </div>
 
           <svg className="w-full h-full z-10" viewBox="0 0 320 120" preserveAspectRatio="none">
@@ -227,9 +239,9 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
 
           {/* Sub-label info */}
           <div className="flex items-center justify-between text-[10px] text-[#5B5B5B] dark:text-slate-400 font-bengali px-1">
-            <span>উৎক্ষেপণ বিন্দু</span>
+            <span>{isBengali ? 'উৎক্ষেপণ বিন্দু' : 'Launch Origin'}</span>
             <span className="font-semibold text-[#1B2A4A] dark:text-slate-200">
-              পাল্লা R = {toBn(range)} মিটার
+              {isBengali ? `পাল্লা R = ${formatNum(range)} মিটার` : `Range R = ${formatNum(range)} m`}
             </span>
           </div>
         </div>
@@ -239,8 +251,8 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
           {/* Angle Slider */}
           <div className="space-y-1 p-2.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
             <div className="flex justify-between items-center text-xs font-bengali">
-              <span className="text-[#5B5B5B] dark:text-slate-400">নিক্ষেপ কোণ (Angle)</span>
-              <span className="font-bold text-[#1B2A4A] dark:text-[#F5F2EB]">{toBn(angle)}°</span>
+              <span className="text-[#5B5B5B] dark:text-slate-400">{isBengali ? 'নিক্ষেপ কোণ (Angle)' : 'Launch Angle'}</span>
+              <span className="font-bold text-[#1B2A4A] dark:text-[#F5F2EB]">{formatNum(angle)}°</span>
             </div>
             <input
               type="range"
@@ -249,15 +261,15 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
               value={angle}
               onChange={(e) => setAngle(parseInt(e.target.value, 10))}
               className="w-full accent-[#0B5D3B] h-1.5 bg-[#E5E2DA] dark:bg-slate-700 rounded-lg cursor-pointer"
-              aria-label="নিক্ষেপ কোণ স্লাইডার"
+              aria-label={isBengali ? 'নিক্ষেপ কোণ স্লাইডার' : 'Launch angle slider'}
             />
           </div>
 
           {/* Velocity Slider */}
           <div className="space-y-1 p-2.5 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D]">
             <div className="flex justify-between items-center text-xs font-bengali">
-              <span className="text-[#5B5B5B] dark:text-slate-400">আদিবেগ (Velocity)</span>
-              <span className="font-bold text-[#1B2A4A] dark:text-[#F5F2EB]">{toBn(velocity)} m/s</span>
+              <span className="text-[#5B5B5B] dark:text-slate-400">{isBengali ? 'আদিবেগ (Velocity)' : 'Initial Velocity'}</span>
+              <span className="font-bold text-[#1B2A4A] dark:text-[#F5F2EB]">{formatNum(velocity)} m/s</span>
             </div>
             <input
               type="range"
@@ -266,7 +278,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
               value={velocity}
               onChange={(e) => setVelocity(parseInt(e.target.value, 10))}
               className="w-full accent-[#1B2A4A] h-1.5 bg-[#E5E2DA] dark:bg-slate-700 rounded-lg cursor-pointer"
-              aria-label="আদিবেগ স্লাইডার"
+              aria-label={isBengali ? 'আদিবেগ স্লাইডার' : 'Initial velocity slider'}
             />
           </div>
         </div>
@@ -274,8 +286,10 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
         {/* KaTeX Live Math Equation Result Strip */}
         <div className="p-3 rounded-xl bg-[#FAF8F3] dark:bg-[#0E1526] border border-[#E5E2DA] dark:border-[#262D3D] space-y-1.5 text-xs">
           <div className="flex items-center justify-between text-[#5B5B5B] dark:text-slate-400 text-[11px] font-bengali">
-            <span>লাইভ KaTeX গণনাকৃত সমীকরণ</span>
-            <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">৬০ FPS ইঞ্জিন</span>
+            <span>{isBengali ? 'লাইভ KaTeX গণনাকৃত সমীকরণ' : 'Live KaTeX Computed Equation'}</span>
+            <span className="text-[#0B5D3B] dark:text-emerald-400 font-bold">
+              {isBengali ? '৬০ FPS ইঞ্জিন' : '60 FPS Engine'}
+            </span>
           </div>
           <div className="text-[#1B2A4A] dark:text-[#F5F2EB] font-serif text-xs">
             <KaTeXRenderer
@@ -289,7 +303,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
             href="/practice?subject=Physics"
             className="w-full py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#123358] text-white text-xs font-bold font-bengali transition flex items-center justify-center gap-2 shadow-xs active:translate-y-0.5"
           >
-            <span>১০ বছরের বোর্ড প্রশ্ন ব্যাংকে এই অধ্যায় অনুশীলন করুন</span>
+            <span>{isBengali ? '১০ বছরের বোর্ড প্রশ্ন ব্যাংকে এই অধ্যায় অনুশীলন করুন' : 'Practice this chapter in 10-Yr Board Archive'}</span>
             <ArrowRight className="w-4 h-4 text-amber-300" />
           </Link>
         </div>
