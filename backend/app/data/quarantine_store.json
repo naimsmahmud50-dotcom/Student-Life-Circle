@@ -189,7 +189,7 @@
       "options": [],
       "quarantine_reason": "Typo in stem statement",
       "quarantined_by": "usr_reviewer_01",
-      "quarantined_at": "2026-10-26T07:04:49.111937+00:00",
+      "quarantined_at": "2026-11-02T13:28:44.453307+00:00",
       "affected_attempts_count": 0
     },
     {
@@ -205,7 +205,7 @@
       "options": [],
       "quarantine_reason": "Incorrect formula in option B",
       "quarantined_by": "usr_reviewer_01",
-      "quarantined_at": "2026-10-26T07:04:49.134466+00:00",
+      "quarantined_at": "2026-11-02T13:28:44.474963+00:00",
       "affected_attempts_count": 0
     },
     {
@@ -221,10 +221,10 @@
       "options": [],
       "quarantine_reason": "Second review reason",
       "quarantined_by": "reviewer_2",
-      "quarantined_at": "2026-10-26T07:04:59.864155+00:00",
+      "quarantined_at": "2026-11-02T13:28:33.553329+00:00",
       "affected_attempts_count": 0,
       "restored_by": "reviewer_2",
-      "restored_at": "2026-10-26T07:04:59.868843+00:00",
+      "restored_at": "2026-11-02T13:28:33.558039+00:00",
       "restore_reason": "Board fixed question duplicate click"
     },
     {
@@ -240,10 +240,10 @@
       "options": [],
       "quarantine_reason": "Answer key ambiguity reported by 20 students",
       "quarantined_by": "usr_admin_01",
-      "quarantined_at": "2026-10-26T07:04:59.873090+00:00",
+      "quarantined_at": "2026-11-02T13:28:33.562377+00:00",
       "affected_attempts_count": 1,
       "restored_by": "usr_admin_01",
-      "restored_at": "2026-10-26T07:04:59.875387+00:00",
+      "restored_at": "2026-11-02T13:28:33.565024+00:00",
       "restore_reason": "Corrected and verified"
     },
     {
@@ -3288,7 +3288,151 @@
       "affected_attempts_count": 0,
       "recalculated": false,
       "timestamp": "2026-10-26T07:04:59.875387+00:00"
+    },
+    {
+      "audit_id": "aud_0253",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_chem_505",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Typo in stem statement",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:20:46.285038+00:00"
+    },
+    {
+      "audit_id": "aud_0254",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_phys_404",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Incorrect formula in option B",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:20:46.307080+00:00"
+    },
+    {
+      "audit_id": "aud_0255",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_chem_505",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Typo in stem statement",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:28:21.820827+00:00"
+    },
+    {
+      "audit_id": "aud_0256",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_phys_404",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Incorrect formula in option B",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:28:21.841362+00:00"
+    },
+    {
+      "audit_id": "aud_0257",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "First review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:28:33.550832+00:00"
+    },
+    {
+      "audit_id": "aud_0258",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Second review reason",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:28:33.553329+00:00"
+    },
+    {
+      "audit_id": "aud_0259",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_1",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:28:33.555716+00:00"
+    },
+    {
+      "audit_id": "aud_0260",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_concurrent_test_1",
+      "actor_id": "reviewer_2",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Board fixed question duplicate click",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:28:33.558039+00:00"
+    },
+    {
+      "audit_id": "aud_0261",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Answer key ambiguity reported by 20 students",
+      "affected_attempts_count": 1,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:28:33.562377+00:00"
+    },
+    {
+      "audit_id": "aud_0262",
+      "action": "RESTORE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "q_phys_flawed_02",
+      "actor_id": "usr_admin_01",
+      "actor_role": "ADMIN",
+      "reason": "Corrected and verified",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:28:33.565024+00:00"
+    },
+    {
+      "audit_id": "aud_0263",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_chem_505",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Typo in stem statement",
+      "affected_attempts_count": 0,
+      "recalculated": false,
+      "timestamp": "2026-11-02T13:28:44.453307+00:00"
+    },
+    {
+      "audit_id": "aud_0264",
+      "action": "QUARANTINE_QUESTION",
+      "entity_type": "QUESTION",
+      "entity_id": "qst_phys_404",
+      "actor_id": "usr_reviewer_01",
+      "actor_role": "SUBJECT_REVIEWER",
+      "reason": "Incorrect formula in option B",
+      "affected_attempts_count": 0,
+      "recalculated": true,
+      "timestamp": "2026-11-02T13:28:44.474963+00:00"
     }
   ],
-  "updated_at": "2026-10-26T07:04:59.875395+00:00"
+  "updated_at": "2026-11-02T13:28:44.474983+00:00"
 }
