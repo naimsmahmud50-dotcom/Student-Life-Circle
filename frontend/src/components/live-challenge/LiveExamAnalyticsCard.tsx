@@ -19,8 +19,10 @@ import {
   Layers,
   ArrowUpRight
 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
 
 export const LiveExamAnalyticsCard: React.FC = () => {
+  const { isBengali } = useTranslation();
   const [autoSyncRevision, setAutoSyncRevision] = useState<boolean>(true);
 
   return (
@@ -30,10 +32,10 @@ export const LiveExamAnalyticsCard: React.FC = () => {
         <TrendingUp className="w-5 h-5 text-amber-500" />
         <div>
           <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
-            জাতীয় পারসেন্টাইল ও রিভিশন কিউ
+            {isBengali ? 'জাতীয় পারসেন্টাইল ও রিভিশন কিউ' : 'National Percentile & Revision Queue'}
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-0.5">
-            রিয়েল-টাইম জাতীয় অ্যানালিটিক্স ও দুর্বলতা দূরীকরণ
+            {isBengali ? 'রিয়েল-টাইম জাতীয় অ্যানালিটিক্স ও দুর্বলতা দূরীকরণ' : 'Real-time National Analytics & Remediation'}
           </p>
         </div>
       </div>
@@ -44,11 +46,11 @@ export const LiveExamAnalyticsCard: React.FC = () => {
           <div className="flex items-center gap-2">
             <Award className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span className="text-xs font-bold font-bengali text-slate-800 dark:text-slate-200">
-              টপ ১% জাতীয় মেধা
+              {isBengali ? 'টপ ১% জাতীয় মেধা' : 'Top 1% National Merit'}
             </span>
           </div>
           <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-300">
-            ২২.৫+ / ২৫.০
+            {isBengali ? '২২.৫+ / ২৫.০' : '22.5+ / 25.0'}
           </span>
         </div>
 
@@ -56,11 +58,11 @@ export const LiveExamAnalyticsCard: React.FC = () => {
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-slate-600 dark:text-slate-400" />
             <span className="text-xs font-bold font-bengali text-slate-800 dark:text-slate-200">
-              প্রত্যাশিত কাট-মার্ক (৯০%+)
+              {isBengali ? 'প্রত্যাশিত কাট-মার্ক (৯০%+)' : 'Projected Cut-off (90%+)'}
             </span>
           </div>
           <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
-            ১৮.৫ / ২৫.০
+            {isBengali ? '১৮.৫ / ২৫.০' : '18.5 / 25.0'}
           </span>
         </div>
 
@@ -68,11 +70,11 @@ export const LiveExamAnalyticsCard: React.FC = () => {
           <div className="flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-emerald-600" />
             <span className="text-xs font-bold font-bengali text-slate-800 dark:text-slate-200">
-              জাতীয় গড় স্কোর (Mean)
+              {isBengali ? 'জাতীয় গড় স্কোর (Mean)' : 'National Mean Score'}
             </span>
           </div>
           <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
-            ১৪.২ / ২৫.০
+            {isBengali ? '১৪.২ / ২৫.০' : '14.2 / 25.0'}
           </span>
         </div>
       </div>
@@ -83,10 +85,10 @@ export const LiveExamAnalyticsCard: React.FC = () => {
           <RotateCcw className="w-4 h-4 text-amber-800 dark:text-amber-300 shrink-0 mt-0.5" />
           <div>
             <h4 className="text-xs font-bold font-bengali text-amber-900 dark:text-amber-200">
-              ভুল উত্তরের স্মার্ট রিভিশন কিউ (Auto-Queue)
+              {isBengali ? 'ভুল উত্তরের স্মার্ট রিভিশন কিউ (Auto-Queue)' : 'Smart Error Revision Queue (Auto-Queue)'}
             </h4>
             <p className="text-[11px] text-amber-800/90 dark:text-amber-300/80 font-bengali mt-0.5 leading-relaxed">
-              পরীক্ষা চলাকালীন যেকোনো ভুল উত্তর দিলে তা স্বয়ংক্রিয়ভাবে আপনার দৈনিক স্পেসড-রিপিটিশন রিভিশন ড্যাশবোর্ডে জমা হবে।
+              {isBengali ? 'পরীক্ষা চলাকালীন যেকোনো ভুল উত্তর দিলে তা স্বয়ংক্রিয়ভাবে আপনার দৈনিক স্পেসড-রিপিটিশন রিভিশন ড্যাশবোর্ডে জমা হবে।' : 'Any mistake made during the exam is automatically queued into your daily spaced-repetition revision dashboard.'}
             </p>
           </div>
         </div>
@@ -99,7 +101,7 @@ export const LiveExamAnalyticsCard: React.FC = () => {
             className="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 border-amber-400"
           />
           <span className="text-xs font-bengali text-amber-950 dark:text-amber-100 font-bold">
-            ভুল উত্তরগুলো স্বয়ংক্রিয়ভাবে রিভিশন কিউতে যোগ করুন
+            {isBengali ? 'ভুল উত্তরগুলো স্বয়ংক্রিয়ভাবে রিভিশন কিউতে যোগ করুন' : 'Automatically sync incorrect answers to revision queue'}
           </span>
         </label>
       </div>

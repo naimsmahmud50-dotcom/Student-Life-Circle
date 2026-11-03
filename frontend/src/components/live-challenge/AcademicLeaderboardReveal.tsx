@@ -16,6 +16,7 @@ import React, { useState, useEffect } from 'react';
 import { Award, ShieldCheck } from 'lucide-react';
 import { LazyMotion, domAnimation, m, useReducedMotion } from '@/lib/motion';
 import type { Variants } from 'motion/react';
+import { useTranslation } from '@/lib/i18n';
 
 export interface LeaderboardEntry {
   rank: number;
@@ -35,6 +36,7 @@ export function AcademicLeaderboardReveal({
   entries,
   registeredCount
 }: AcademicLeaderboardRevealProps) {
+  const { isBengali } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
   const [revealed, setRevealed] = useState<boolean>(false);
 
@@ -90,47 +92,55 @@ export function AcademicLeaderboardReveal({
               </div>
               <div>
                 <h3 className="text-sm sm:text-base font-bold font-serif text-white tracking-wide">
-                  জাতীয় মেধা মূল্যায়ন ও শীর্ষ ফলাফল
+                  {isBengali ? 'জাতীয় মেধা মূল্যায়ন ও শীর্ষ ফলাফল' : 'National Merit Evaluation & Top Results'}
                 </h3>
                 <p className="text-[11px] text-slate-300 font-bengali">
-                  এনসিটিবি ও বিশ্ববিদ্যালয় স্ট্যান্ডার্ডে যাচাইকৃত লাইভ নির্ভুলতা
+                  {isBengali ? 'এনসিটিবি ও বিশ্ববিদ্যালয় স্ট্যান্ডার্ডে যাচাইকৃত লাইভ নির্ভুলতা' : 'Live accuracy verified to NCTB and University standards'}
                 </p>
               </div>
             </div>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-600/40 text-[11px] font-mono text-emerald-300">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>নেগেটিভ মার্কিং নির্ভুলতা নিশ্চিত</span>
+              <span>{isBengali ? 'নেগেটিভ মার্কিং নির্ভুলতা নিশ্চিত' : 'Negative Marking Verified'}</span>
             </div>
           </div>
 
           {/* 4 Evaluated National KPIs */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-center">
             <div className="p-2.5 rounded-xl bg-[#0A2540]/60 border border-white/5">
-              <span className="text-[10px] text-slate-400 font-bengali block">সর্বোচ্চ নম্বর</span>
+              <span className="text-[10px] text-slate-400 font-bengali block">
+                {isBengali ? 'সর্বোচ্চ নম্বর' : 'Highest Score'}
+              </span>
               <span className="text-base sm:text-lg font-mono font-bold text-amber-300 tabular-nums">
-                {highestScore.toFixed(1)} / ২৫.০
+                {highestScore.toFixed(1)} / {isBengali ? '২৫.০' : '25.0'}
               </span>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[#0A2540]/60 border border-white/5">
-              <span className="text-[10px] text-slate-400 font-bengali block">গড় নির্ভুলতা</span>
+              <span className="text-[10px] text-slate-400 font-bengali block">
+                {isBengali ? 'গড় নির্ভুলতা' : 'Avg Accuracy'}
+              </span>
               <span className="text-base sm:text-lg font-mono font-bold text-emerald-300 tabular-nums">
                 {avgAccuracy}%
               </span>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[#0A2540]/60 border border-white/5">
-              <span className="text-[10px] text-slate-400 font-bengali block">শীর্ষ স্ট্রিক</span>
+              <span className="text-[10px] text-slate-400 font-bengali block">
+                {isBengali ? 'শীর্ষ স্ট্রিক' : 'Peak Streak'}
+              </span>
               <span className="text-base sm:text-lg font-mono font-bold text-sky-300 tabular-nums">
-                {maxStreak} টি
+                {maxStreak} {isBengali ? 'টি' : 'Streak'}
               </span>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[#0A2540]/60 border border-white/5">
-              <span className="text-[10px] text-slate-400 font-bengali block">মোট প্রতিযোগী</span>
+              <span className="text-[10px] text-slate-400 font-bengali block">
+                {isBengali ? 'মোট প্রতিযোগী' : 'Total Examinees'}
+              </span>
               <span className="text-base sm:text-lg font-mono font-bold text-slate-200 tabular-nums">
-                {registeredCount.toLocaleString()} জন
+                {registeredCount.toLocaleString()} {isBengali ? 'জন' : 'Candidates'}
               </span>
             </div>
           </div>
@@ -165,7 +175,7 @@ export function AcademicLeaderboardReveal({
                       ? 'bg-[#78350F] text-amber-100 border border-amber-600/40'
                       : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                   }`}
-                  aria-label={`র‌্যাংক ${entry.rank}`}
+                  aria-label={isBengali ? `র‌্যাংক ${entry.rank}` : `Rank ${entry.rank}`}
                 >
                   {entry.rank}
                 </div>
@@ -177,12 +187,12 @@ export function AcademicLeaderboardReveal({
                     </span>
                     {entry.isCurrentUser && (
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-bengali bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-700">
-                        আপনি
+                        {isBengali ? 'আপনি' : 'You'}
                       </span>
                     )}
                   </div>
                   <span className="text-[11px] text-slate-500 font-mono block">
-                    সঠিকতা: {entry.accuracyPercent}% • স্ট্রিক: {entry.streakCount}
+                    {isBengali ? `সঠিকতা: ${entry.accuracyPercent}% • স্ট্রিক: ${entry.streakCount}` : `Accuracy: ${entry.accuracyPercent}% • Streak: ${entry.streakCount}`}
                   </span>
                 </div>
               </div>
@@ -192,7 +202,7 @@ export function AcademicLeaderboardReveal({
                   {entry.score.toFixed(1)}
                 </div>
                 <span className="text-[10px] text-slate-400 font-bengali block">
-                  নম্বর
+                  {isBengali ? 'নম্বর' : 'Score'}
                 </span>
               </div>
             </m.div>

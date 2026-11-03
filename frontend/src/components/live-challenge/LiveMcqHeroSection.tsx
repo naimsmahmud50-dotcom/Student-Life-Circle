@@ -36,6 +36,7 @@ import {
   Sparkles,
   FileEdit
 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
 
 interface LiveMcqHeroSectionProps {
   challenge: {
@@ -62,6 +63,7 @@ export function LiveMcqHeroSection({
   isLoading,
   onOpenRulesModal
 }: LiveMcqHeroSectionProps) {
+  const { isBengali } = useTranslation();
   return (
     <section className="relative overflow-hidden w-full bg-[#080C24] text-white pt-10 pb-16 sm:pt-14 sm:pb-20 border-b border-[#1E294B] shadow-2xl selection:bg-[#FF8A00] selection:text-white">
       
@@ -186,24 +188,32 @@ export function LiveMcqHeroSection({
         {/* Top Capsule Badge: সঠিক প্রস্তুতি, সহজ প্রিলি */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161C3D]/90 border border-indigo-400/30 text-indigo-200 text-xs font-medium backdrop-blur-sm shadow-md">
           <span className="w-2 h-2 rounded-full bg-indigo-400 inline-block animate-pulse" />
-          <span className="font-bengali">সঠিক প্রস্তুতি, সহজ প্রিলি</span>
+          <span className="font-bengali">{isBengali ? 'সঠিক প্রস্তুতি, সহজ প্রিলি' : 'Precision Preparation, Confident Success'}</span>
         </div>
 
         {/* Majestic Dual-Line Headline */}
         <div className="space-y-1">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white font-serif tracking-tight leading-[1.25]">
-            ঘরে বসেই সকল প্রতিযোগিতামূলক
+            {isBengali ? 'ঘরে বসেই সকল প্রতিযোগিতামূলক' : 'Comprehensive Preparation for All'}
           </h1>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-serif tracking-tight leading-[1.25] bg-gradient-to-r from-[#FF5722] via-[#FF8A00] to-[#FFA000] bg-clip-text text-transparent">
-            চাকরির পূর্ণাঙ্গ প্রস্তুতি
+            {isBengali ? 'চাকরির পূর্ণাঙ্গ প্রস্তুতি' : 'Competitive Exams from Home'}
           </h2>
         </div>
 
         {/* Explanatory Subtitle with Highlighted 24 Lakh+ Tag */}
         <p className="text-xs sm:text-sm lg:text-base text-slate-300 font-bengali leading-relaxed max-w-3xl mx-auto">
-          বিসিএস, ব্যাংক, প্রাইমারি, NTRCA, ৯ম-২০তম গ্রেড, বার কাউন্সিল, বিজেএস-সহ সকল
-          প্রতিযোগিতামূলক পরীক্ষার প্রস্তুতিতে ২০১৭ সাল থেকে দেশের প্রথম ও সর্ববৃহৎ প্ল্যাটফর্ম Live MCQ™
-          এখন <span className="inline-block px-2.5 py-0.5 rounded-md bg-[#182348] border border-white/20 text-white font-bold text-xs sm:text-sm shadow-inner">২৪ লাখ+</span> চাকরিপ্রার্থীর আস্থার নাম।
+          {isBengali ? (
+            <>
+              বিসিএস, ব্যাংক, প্রাইমারি, NTRCA, ৯ম-২০তম গ্রেড, বার কাউন্সিল, বিজেএস-সহ সকল
+              প্রতিযোগিতামূলক পরীক্ষার প্রস্তুতিতে ২০১৭ সাল থেকে দেশের প্রথম ও সর্ববৃহৎ প্ল্যাটফর্ম Live MCQ™
+              এখন <span className="inline-block px-2.5 py-0.5 rounded-md bg-[#182348] border border-white/20 text-white font-bold text-xs sm:text-sm shadow-inner">২৪ লাখ+</span> চাকরিপ্রার্থীর আস্থার নাম।
+            </>
+          ) : (
+            <>
+              The pioneer and largest competitive examination platform since 2017 for BCS, Bank, Primary, NTRCA, 9th-20th Grade, Bar Council, and BJS — trusted by over <span className="inline-block px-2.5 py-0.5 rounded-md bg-[#182348] border border-white/20 text-white font-bold text-xs sm:text-sm shadow-inner">2.4 Million+</span> candidates nationwide.
+            </>
+          )}
         </p>
 
         {/* Dual Primary Action CTA Pill Buttons */}
@@ -215,7 +225,7 @@ export function LiveMcqHeroSection({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0284C7] to-[#2563EB] hover:from-[#0369A1] hover:to-[#1D4ED8] text-white font-bold font-bengali text-sm shadow-[0_6px_25px_rgba(2,132,199,0.35)] transition-all transform active:scale-95"
           >
             <GraduationCap className="w-4 h-4 text-white" />
-            <span>৪৫তম স্পেশাল বিসিএস</span>
+            <span>{isBengali ? '৪৫তম স্পেশাল বিসিএস' : '45th Special BCS'}</span>
           </Link>
 
           {/* Button 2: Right Orange-to-Coral Gradient Pill */}
@@ -224,7 +234,7 @@ export function LiveMcqHeroSection({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#E65100] via-[#F57C00] to-[#FF9800] hover:from-[#BF360C] hover:to-[#E65100] text-white font-bold font-bengali text-sm shadow-[0_6px_25px_rgba(245,124,0,0.35)] transition-all transform active:scale-95"
           >
             <FileEdit className="w-4 h-4 text-white" />
-            <span>পরীক্ষা দিন</span>
+            <span>{isBengali ? 'পরীক্ষা দিন' : 'Take Exam'}</span>
           </Link>
 
         </div>
@@ -233,9 +243,9 @@ export function LiveMcqHeroSection({
         <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D1535]/90 border border-amber-400/30 text-xs font-mono font-bold text-amber-300 shadow-inner">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>সার্ভার-অথরিটেটিভ টাইমার: {formatTimer(timeRemainingSeconds || 1200)}</span>
+            <span>{isBengali ? `সার্ভার-অথরিটেটিভ টাইমার: ${formatTimer(timeRemainingSeconds || 1200)}` : `Server Authoritative Timer: ${formatTimer(timeRemainingSeconds || 1200)}`}</span>
             <span className="text-slate-500">•</span>
-            <span className="text-rose-300">নেগেটিভ: -০.২৫</span>
+            <span className="text-rose-300">{isBengali ? 'নেগেটিভ: -০.২৫' : 'Negative: -0.25'}</span>
           </div>
 
           <button
@@ -244,7 +254,7 @@ export function LiveMcqHeroSection({
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-300 transition"
           >
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>পরীক্ষার নিয়মাবলী</span>
+            <span>{isBengali ? 'পরীক্ষার নিয়মাবলী' : 'Exam Rules'}</span>
           </button>
         </div>
 
@@ -260,10 +270,10 @@ export function LiveMcqHeroSection({
                   <Users className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-[#FFB300] tracking-tight">
-                  ২৪ লাখ+
+                  {isBengali ? '২৪ লাখ+' : '2.4M+'}
                 </div>
                 <div className="text-xs text-slate-300 font-bengali">
-                  নিবন্ধিত শিক্ষার্থী
+                  {isBengali ? 'নিবন্ধিত শিক্ষার্থী' : 'Registered Candidates'}
                 </div>
               </div>
 
@@ -273,10 +283,10 @@ export function LiveMcqHeroSection({
                   <FileText className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-[#FFB300] tracking-tight">
-                  ৭.৫ লাখ+
+                  {isBengali ? '৭.৫ লাখ+' : '750K+'}
                 </div>
                 <div className="text-xs text-slate-300 font-bengali">
-                  আর্কাইভ MCQ (reference-সহ ব্যাখ্যা)
+                  {isBengali ? 'আর্কাইভ MCQ (reference-সহ ব্যাখ্যা)' : 'Archived MCQs (with references)'}
                 </div>
               </div>
 
@@ -286,10 +296,10 @@ export function LiveMcqHeroSection({
                   <Users className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-[#FFB300] tracking-tight">
-                  ৩০ হাজার+
+                  {isBengali ? '৩০ হাজার+' : '30K+'}
                 </div>
                 <div className="text-xs text-slate-300 font-bengali">
-                  প্রতিদিন গড় ব্যবহারকারী
+                  {isBengali ? 'প্রতিদিন গড় ব্যবহারকারী' : 'Daily Active Users'}
                 </div>
               </div>
 
@@ -299,10 +309,10 @@ export function LiveMcqHeroSection({
                   <Award className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-[#FFB300] tracking-tight">
-                  ১০+
+                  {isBengali ? '১০+' : '10+'}
                 </div>
                 <div className="text-xs text-slate-300 font-bengali">
-                  বছরের অভিজ্ঞতা
+                  {isBengali ? 'বছরের অভিজ্ঞতা' : 'Years of Excellence'}
                 </div>
               </div>
 

@@ -30,6 +30,7 @@ import {
   Filter,
   ArrowRight
 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
 
 export type FeatureCategory = 'all' | 'exam_omr' | 'smart_study' | 'analytics_merit';
 
@@ -37,10 +38,15 @@ export interface SuiteFeature {
   id: string;
   category: 'exam_omr' | 'smart_study' | 'analytics_merit';
   tagBn: string;
+  tagEn: string;
   titleBn: string;
+  titleEn: string;
   descriptionBn: string;
+  descriptionEn: string;
   highlightBn: string;
+  highlightEn: string;
   ctaTextBn: string;
+  ctaTextEn: string;
   ctaHref: string;
   icon: React.ElementType;
   badgeColorClass: string;
@@ -51,10 +57,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'smart_search',
     category: 'smart_study',
     tagBn: 'স্মার্ট টুল',
+    tagEn: 'Smart Tool',
     titleBn: 'স্মার্ট সার্চ ও কনসেপ্ট ফাইন্ডার',
+    titleEn: 'Smart Search & Concept Finder',
     descriptionBn: 'যেকোনো গাণিতিক সূত্র, বৈজ্ঞানিক তত্ত্ব বা টপিক লিখে এক ট্যাপেই প্রাসঙ্গিক সব বহুনির্বাচনী প্রশ্ন ও এনসিটিবি ব্যাখ্যায় পৌঁছে যান।',
+    descriptionEn: 'Type any mathematical formula, scientific theorem, or topic to instantly fetch relevant MCQs and NCTB textbook explanations.',
     highlightBn: 'ভুল বানানেও সঠিক প্রশ্ন অনুসন্ধান',
+    highlightEn: 'Accurate query parsing even with typos',
     ctaTextBn: 'অনুসন্ধান করুন',
+    ctaTextEn: 'Search Now',
     ctaHref: '/practice',
     icon: Search,
     badgeColorClass: 'bg-[#0A2540] text-amber-300'
@@ -63,10 +74,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'topic_guru',
     category: 'smart_study',
     tagBn: 'মাইক্রো-লার্নিং',
+    tagEn: 'Micro-Learning',
     titleBn: 'টপিক গুরু ও চ্যাপ্টার ডিকনস্ট্রাকশন',
+    titleEn: 'Topic Guru & Chapter Deconstruction',
     descriptionBn: 'বোর্ড সিলেবাসকে ছোট ছোট সাব-টপিকে ভাগ করে মাইক্রো-প্রস্তুতি নিন এবং তাৎক্ষণিক Random Quiz জেনারেট করে নিজের দখল যাচাই করুন।',
+    descriptionEn: 'Break down the board syllabus into micro-subtopics, take targeted lessons, and generate instant random quizzes to test your grasp.',
     highlightBn: '১০০% অধ্যায়ভিত্তিক প্রস্তুতি কভারেজ',
+    highlightEn: '100% Chapterwise Coverage',
     ctaTextBn: 'টপিক বাছুন',
+    ctaTextEn: 'Select Topic',
     ctaHref: '/learn',
     icon: BookOpen,
     badgeColorClass: 'bg-emerald-800 text-white'
@@ -75,10 +91,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'omr_mode',
     category: 'exam_omr',
     tagBn: 'বাস্তব অভিজ্ঞতা',
+    tagEn: 'Real Experience',
     titleBn: 'ডিজিটাল ওএমআর শিট মোড (OMR Mode)',
+    titleEn: 'Digital OMR Sheet Mode',
     descriptionBn: 'ঘরে বসেই আসল বোর্ড ও বিশ্ববিদ্যালয় ভর্তি পরীক্ষার ওএমআর শিটের মতো ডিজিটাল বৃত্ত ভরাট করে পরীক্ষার নির্ভুল অভিজ্ঞতা অর্জন করুন।',
+    descriptionEn: 'Simulate authentic board and university entrance exam conditions by bubbling digital OMR answer sheets from home.',
     highlightBn: 'স্পর্শসংবেদনশীল ওএমআর অ্যানিমেশন',
+    highlightEn: 'Tactile bubble-filling animation',
     ctaTextBn: 'ওএমআর প্র্যাকটিস',
+    ctaTextEn: 'Practice OMR',
     ctaHref: '#omr-simulator',
     icon: CheckCircle2,
     badgeColorClass: 'bg-[#0A2540] text-white'
@@ -87,10 +108,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'vocab_booster',
     category: 'smart_study',
     tagBn: 'ফর্মুলা ডেক',
+    tagEn: 'Formula Deck',
     titleBn: 'ভোকাবুলারি ও ফর্মুলা বুস্টার প্রো',
+    titleEn: 'Vocabulary & Formula Booster Pro',
     descriptionBn: 'পদার্থবিজ্ঞান, রসায়ন ও উচ্চতর গণিতের গুরুত্বপূর্ণ সূত্রাবলী, ধ্রুবক ও মেডিকেল-ভর্তি উপযোগী ৫২০+ বৈজ্ঞানিক পরিভাষা।',
+    descriptionEn: 'Essential formulas, physical constants, and 520+ medical entrance scientific terms across Physics, Chemistry, and Math.',
     highlightBn: '২৬টি গ্রুপে সাজানো স্পেসড ডেক',
+    highlightEn: '26 structured spaced decks',
     ctaTextBn: 'ফর্মুলা রিভিশন',
+    ctaTextEn: 'Revise Formulas',
     ctaHref: '/curriculum/lexicon',
     icon: Sparkles,
     badgeColorClass: 'bg-amber-800 text-amber-100'
@@ -99,10 +125,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'info_vault',
     category: 'smart_study',
     tagBn: 'প্রামাণ্য রেফারেন্স',
+    tagEn: 'Canonical Reference',
     titleBn: 'তথ্যকল্পদ্রুম ও বিতর্কিত প্রশ্ন সমাধান',
+    titleEn: 'Canonical Fact Vault & Ambiguity Resolver',
     descriptionBn: 'বিগত বোর্ড ও ভর্তি পরীক্ষার বিভিন্ন প্রচলিত বিভ্রান্তিমূলক প্রশ্নের এনসিটিবি পাঠ্যবই ও জাতীয় কারিকুলাম রেফারেন্সসহ নির্ভুল সমাধান।',
+    descriptionEn: 'Authoritative solutions with NCTB citations for controversial and commonly disputed board and admission exam questions.',
     highlightBn: 'বোর্ড নিরীক্ষক অনুমোদিত ব্যাখ্যা',
+    highlightEn: 'Board auditor certified explanations',
     ctaTextBn: 'রেফারেন্স দেখুন',
+    ctaTextEn: 'View References',
     ctaHref: '/board-archives',
     icon: ShieldCheck,
     badgeColorClass: 'bg-slate-800 text-slate-100'
@@ -111,10 +142,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'job_admission_sol',
     category: 'exam_omr',
     tagBn: 'প্রশ্নব্যাংক',
+    tagEn: 'Question Bank',
     titleBn: 'সেন্ট্রাল বোর্ড ও বিশ্ববিদ্যালয় ভর্তি সল্যুশন',
+    titleEn: 'Central Board & University Admission Solutions',
     descriptionBn: 'ঢাকা বিশ্ববিদ্যালয়, বুয়েট, মেডিকেল এবং বিগত ১০ বছরের সকল শিক্ষা বোর্ডের প্রশ্নপত্র অধ্যায়ভিত্তিক ফিল্টারিং ও পূর্ণাঙ্গ সল্যুশন।',
+    descriptionEn: 'Chapterwise filtered questions and step-by-step solutions covering DU, BUET, Medical, and 10+ years of Education Board exams.',
     highlightBn: 'বিগত ২০ বছরের সমাধান সংগ্রহ',
+    highlightEn: '20-year archived solutions',
     ctaTextBn: 'প্রশ্নব্যাংক এক্সপ্লোর',
+    ctaTextEn: 'Explore Bank',
     ctaHref: '/board-archives',
     icon: FileText,
     badgeColorClass: 'bg-slate-700 text-slate-100'
@@ -123,10 +159,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'central_result',
     category: 'analytics_merit',
     tagBn: 'জাতীয় মেধা',
+    tagEn: 'National Merit',
     titleBn: 'সেন্ট্রাল রেজাল্ট ও রিয়েল-টাইম মেধা তালিকা',
+    titleEn: 'Central Results & Real-time Merit List',
     descriptionBn: '৫০,০০০+ প্রতিযোগীর মাঝে আপনার জাতীয় অবস্থান, বিষয়ভিত্তিক সঠিকতা শতাংশ, পারসেন্টাইল ও সম্ভাব্য কাট-মার্কের গভীর বিশ্লেষণ।',
+    descriptionEn: 'Real-time percentile ranking, subject-wise accuracy breakdown, and cut-off score projections among 50,000+ competitors.',
     highlightBn: 'রিয়েল-টাইম লাইভ লিডারবোর্ড',
+    highlightEn: 'Real-time live leaderboard',
     ctaTextBn: 'মেধা তালিকা দেখুন',
+    ctaTextEn: 'View Merit List',
     ctaHref: '#central-leaderboard',
     icon: Award,
     badgeColorClass: 'bg-[#0A2540] text-amber-300'
@@ -135,10 +176,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'quiz_master',
     category: 'exam_omr',
     tagBn: 'কাস্টম টেস্ট',
+    tagEn: 'Custom Test',
     titleBn: 'কুইজ মাস্টার ও নিজস্ব টেস্ট জেনারেটর',
+    titleEn: 'Quiz Master & Custom Test Generator',
     descriptionBn: 'নিজের সময় ও দুর্বলতা অনুসারে বিষয়, নির্দিষ্ট অধ্যায় এবং প্রশ্নের সংখ্যা নির্ধারণ করে মুহূর্তেই নিজস্ব মক টেস্ট প্রস্তুত করুন।',
+    descriptionEn: 'Create tailor-made mock tests in seconds by selecting subjects, specific chapters, question count, and timer constraints.',
     highlightBn: 'সম্পূর্ণ স্বনির্ধারিত প্রশ্নকাঠামো',
+    highlightEn: 'Fully configurable exam blueprints',
     ctaTextBn: 'কুইজ তৈরি করুন',
+    ctaTextEn: 'Create Quiz',
     ctaHref: '/practice',
     icon: Layers,
     badgeColorClass: 'bg-emerald-700 text-white'
@@ -147,10 +193,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'dynamic_panel',
     category: 'analytics_merit',
     tagBn: 'লাইভ নোটিশ',
+    tagEn: 'Live Notice',
     titleBn: 'ডাইনামিক ইনফো প্যানেল ও বোর্ড আপডেট',
+    titleEn: 'Dynamic Info Panel & Board Updates',
     descriptionBn: 'সকল শিক্ষা বোর্ডের রুটিন পরিবর্তন, প্রবেশপত্র নির্দেশিকা, আসন বিন্যাস ও জাতীয় অলিম্পিয়াড শিডিউল সরাসরি লাইভ প্যানেলে হালনাগাদ।',
+    descriptionEn: 'Instant official notices on board exam schedules, admit card guidelines, seat plans, and national olympiad timetables.',
     highlightBn: 'সরাসরি অফিসিয়াল নোটিফিকেশন',
+    highlightEn: 'Direct verified official notifications',
     ctaTextBn: 'নোটিশ বোর্ড',
+    ctaTextEn: 'Notice Board',
     ctaHref: '#notice-board',
     icon: Bell,
     badgeColorClass: 'bg-amber-900 text-amber-100'
@@ -159,10 +210,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'wrong_unanswered',
     category: 'smart_study',
     tagBn: 'দুর্বলতা দূরীকরণ',
+    tagEn: 'Remediation',
     titleBn: 'ভুল ও অনুত্তরিত প্রশ্ন ব্যাংক (Wrong & Unanswered)',
+    titleEn: 'Mistake & Unanswered Question Vault',
     descriptionBn: 'লাইভ পরীক্ষা বা অনুশীলনে ভুল করা কিংবা উত্তর না দেওয়া প্রশ্নগুলো স্বয়ংক্রিয়ভাবে সংরক্ষিত হয়ে আপনার দুর্বলতা কাটিয়ে তুলতে সাহায্য করে।',
+    descriptionEn: 'Automatically archives every wrong or skipped MCQ during exams into your spaced repetition queue to systematically plug learning gaps.',
     highlightBn: 'স্বয়ংক্রিয় স্পেসড রিপিটিশন কিউ',
+    highlightEn: 'Automated spaced repetition queue',
     ctaTextBn: 'রিভিশন ডেস্কে যান',
+    ctaTextEn: 'Open Revision Desk',
     ctaHref: '/dashboard',
     icon: RotateCcw,
     badgeColorClass: 'bg-[#991B1B] text-white'
@@ -171,10 +227,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'central_archive',
     category: 'exam_omr',
     tagBn: 'প্রশ্নভাণ্ডার',
+    tagEn: 'Exam Archive',
     titleBn: '১০ বছরের সেন্ট্রাল আর্কাইভ ও রি-টেস্ট',
+    titleEn: '10-Year Central Archive & Re-Test',
     descriptionBn: 'বিগত অনুষ্ঠিত সকল লাইভ চ্যালেঞ্জ ও অলিম্পিয়াড পরীক্ষার প্রশ্ন একসাথে সংরক্ষিত—যেকোনো সময় রি-টেস্ট দিয়ে নিজেকে ঝালিয়ে নিন।',
+    descriptionEn: 'Every past live challenge and olympiad paper preserved forever—take full-timed re-tests whenever you want to benchmark improvement.',
     highlightBn: 'সম্পূর্ণ বিনামূল্যে আনলিমিটেড এক্সেস',
+    highlightEn: '100% Free unlimited access',
     ctaTextBn: 'আর্কাইভ দেখুন',
+    ctaTextEn: 'Explore Archive',
     ctaHref: '/board-archives',
     icon: Archive,
     badgeColorClass: 'bg-slate-800 text-white'
@@ -183,10 +244,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'offline_vault',
     category: 'exam_omr',
     tagBn: 'নেট ছাড়া প্রস্তুতি',
+    tagEn: 'Offline Ready',
     titleBn: 'অফলাইন সেকশন ও লোকাল বাফার ইঞ্জিন',
+    titleEn: 'Offline Mode & Local Buffer Engine',
     descriptionBn: 'ইন্টারনেট ড্রপ হলেও পরীক্ষা থামবে না। আপনার ডিভাইসে স্বয়ংক্রিয়ভাবে সংরক্ষিত প্রশ্নপত্রে অফলাইনে পরীক্ষা দিন; নেট পেলেই অটো-সিঙ্ক হবে।',
+    descriptionEn: 'Internet drops will never stop your exam. Offline-cached questions let you finish your test seamlessly; auto-syncs once reconnected.',
     highlightBn: 'জিরো ডেটা লস গ্যারান্টি',
+    highlightEn: 'Zero data loss guarantee',
     ctaTextBn: 'অফলাইন মোড',
+    ctaTextEn: 'Offline Mode',
     ctaHref: '/offline',
     icon: WifiOff,
     badgeColorClass: 'bg-emerald-900 text-emerald-100'
@@ -195,10 +261,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'my_section',
     category: 'analytics_merit',
     tagBn: 'ব্যক্তিগত ডেস্ক',
+    tagEn: 'Personal Desk',
     titleBn: 'মাই সেকশন ও পার্সোনালাইজড ট্র্যাকার',
+    titleEn: 'My Section & Personalized Tracker',
     descriptionBn: 'শিক্ষার্থীর নিজস্ব পছন্দের সাবজেক্ট, দৈনিক স্টাডি রুটিন এবং দুর্বল অধ্যায়ের অগ্রগতি গ্রাফ নিয়ে সজ্জিত ব্যক্তিগত ড্যাশবোর্ড।',
+    descriptionEn: 'A dedicated student cockpit tracking bookmarked subjects, daily study routines, and weak chapter velocity graphs.',
     highlightBn: 'লক্ষ্যভিত্তিক একাডেমিক অগ্রগতি',
+    highlightEn: 'Goal-driven academic progress',
     ctaTextBn: 'আমার প্রোফাইল',
+    ctaTextEn: 'My Profile',
     ctaHref: '/dashboard',
     icon: UserCheck,
     badgeColorClass: 'bg-[#0A2540] text-slate-100'
@@ -207,10 +278,15 @@ const SUITE_FEATURES: SuiteFeature[] = [
     id: 'multiplayer_battle',
     category: 'exam_omr',
     tagBn: 'লাইভ ডুয়েল',
+    tagEn: 'Live Duel',
     titleBn: 'মাল্টিপ্লেয়ার স্টাডি ব্যাটল ও লাইভ পড',
+    titleEn: 'Multiplayer Study Battle & Live Pods',
     descriptionBn: 'সহপাঠী বা স্টাডি পডের বন্ধুদের সাথে সরাসরি রিয়েল-টাইম লাইভ কুইজ প্রতিযোগিতায় অংশ নিয়ে পড়াশোনাকে করুন রোমাঞ্চকর ও কার্যকর।',
+    descriptionEn: 'Challenge classmates and study pod peers to real-time synchronous MCQ duels for engaging and high-retention practice.',
     highlightBn: 'মিলিসেকেন্ড সিনক্রোনাইজড ডুয়েল',
+    highlightEn: 'Millisecond synchronized duels',
     ctaTextBn: 'ব্যাটলে যোগ দিন',
+    ctaTextEn: 'Join Battle',
     ctaHref: '/study-pod',
     icon: Swords,
     badgeColorClass: 'bg-purple-900 text-purple-100'
@@ -218,6 +294,7 @@ const SUITE_FEATURES: SuiteFeature[] = [
 ];
 
 export const LiveMcqFeatureShowcase: React.FC = () => {
+  const { isBengali } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<FeatureCategory>('all');
 
   const filteredFeatures = SUITE_FEATURES.filter((feat) => {
@@ -227,7 +304,7 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
 
   return (
     <div
-      aria-label="অগ্রযাত্রা এক্সামিনেশন স্যুট"
+      aria-label={isBengali ? 'অগ্রযাত্রা এক্সামিনেশন স্যুট' : 'Agrojatra Examination Suite'}
       className="p-6 sm:p-10 rounded-3xl bg-white/95 dark:bg-[#1A0C2C]/90 backdrop-blur-md border border-fuchsia-500/25 shadow-xl space-y-8"
     >
       {/* Section Header */}
@@ -235,13 +312,17 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
         <div className="space-y-2 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 dark:bg-fuchsia-500/20 border border-fuchsia-500/30 text-fuchsia-600 dark:text-fuchsia-300 text-xs font-mono font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-fuchsia-500" />
-            <span>অগ্রযাত্রা এক্সামিনেশন স্যুট • ১৪টি ফ্ল্যাগশিপ ফিচার</span>
+            <span>{isBengali ? 'অগ্রযাত্রা এক্সামিনেশন স্যুট • ১৪টি ফ্ল্যাগশিপ ফিচার' : 'Agrojatra Examination Suite • 14 Flagship Features'}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black font-bengali text-slate-900 dark:text-white tracking-tight">
-            লাইভ এমসিকিউ-এর সকল আধুনিক শক্তি, এবার সম্পূর্ণ উন্মুক্ত ও উন্নত
+            {isBengali 
+              ? 'লাইভ এমসিকিউ-এর সকল আধুনিক শক্তি, এবার সম্পূর্ণ উন্মুক্ত ও উন্নত' 
+              : 'All Modern Strengths of Live MCQ, Now Fully Open & Elevated'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-            স্মার্ট সার্চ, ডিজিটাল ওএমআর শিট, টপিক গুরু, অফলাইন বাফার থেকে শুরু করে তথ্যকল্পদ্রুম—শিক্ষার্থীদের পরীক্ষার পূর্ণাঙ্গ প্রস্তুতি নিশ্চিত করতে প্রস্তুত এক সমন্বিত একাডেমিক পরিবেশ।
+            {isBengali 
+              ? 'স্মার্ট সার্চ, ডিজিটাল ওএমআর শিট, টপিক গুরু, অফলাইন বাফার থেকে শুরু করে তথ্যকল্পদ্রুম—শিক্ষার্থীদের পরীক্ষার পূর্ণাঙ্গ প্রস্তুতি নিশ্চিত করতে প্রস্তুত এক সমন্বিত একাডেমিক পরিবেশ।' 
+              : 'From Smart Search, Digital OMR, Topic Guru, and Offline Buffer to the Fact Vault—a unified academic ecosystem engineered for comprehensive exam readiness.'}
           </p>
         </div>
 
@@ -256,7 +337,7 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                 : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            সমস্ত ফিচার (১৪)
+            {isBengali ? 'সমস্ত ফিচার (১৪)' : 'All Features (14)'}
           </button>
           <button
             type="button"
@@ -267,7 +348,7 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                 : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            লাইভ পরীক্ষা ও ওএমআর
+            {isBengali ? 'লাইভ পরীক্ষা ও ওএমআর' : 'Live Exams & OMR'}
           </button>
           <button
             type="button"
@@ -278,7 +359,7 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                 : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            স্মার্ট স্টাডি ও রিভিশন
+            {isBengali ? 'স্মার্ট স্টাডি ও রিভিশন' : 'Smart Study & Revision'}
           </button>
           <button
             type="button"
@@ -289,7 +370,7 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                 : 'text-slate-600 dark:text-fuchsia-200 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            অ্যানালিটিক্স ও মেধা
+            {isBengali ? 'অ্যানালিটিক্স ও মেধা' : 'Analytics & Merit'}
           </button>
         </div>
       </div>
@@ -310,32 +391,32 @@ export const LiveMcqFeatureShowcase: React.FC = () => {
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold font-bengali ${feat.badgeColorClass}`}>
-                    {feat.tagBn}
+                    {isBengali ? feat.tagBn : feat.tagEn}
                   </span>
                 </div>
 
                 {/* Title */}
                 <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white leading-snug">
-                  {feat.titleBn}
+                  {isBengali ? feat.titleBn : feat.titleEn}
                 </h3>
 
                 {/* Description */}
                 <p className="text-xs text-slate-600 dark:text-slate-300 font-bengali leading-relaxed">
-                  {feat.descriptionBn}
+                  {isBengali ? feat.descriptionBn : feat.descriptionEn}
                 </p>
               </div>
 
               {/* Highlight and CTA */}
               <div className="pt-3 border-t border-fuchsia-200/40 dark:border-fuchsia-900/30 flex items-center justify-between gap-2">
                 <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 truncate">
-                  {feat.highlightBn}
+                  {isBengali ? feat.highlightBn : feat.highlightEn}
                 </span>
 
                 <Link
                   href={feat.ctaHref}
                   className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-[#200D38] text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-500/30 hover:bg-fuchsia-600 hover:text-white dark:hover:bg-fuchsia-500 dark:hover:text-white font-bold font-bengali text-xs flex items-center gap-1 transition whitespace-nowrap min-h-[36px]"
                 >
-                  <span>{feat.ctaTextBn}</span>
+                  <span>{isBengali ? feat.ctaTextBn : feat.ctaTextEn}</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

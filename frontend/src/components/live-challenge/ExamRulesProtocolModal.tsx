@@ -20,6 +20,7 @@ import {
   X,
   FileText
 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
 
 interface ExamRulesProtocolModalProps {
   isOpen: boolean;
@@ -30,6 +31,8 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
   isOpen,
   onClose
 }) => {
+  const { isBengali } = useTranslation();
+
   // Handle ESC key to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -62,10 +65,10 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             </div>
             <div>
               <h2 id="exam-rules-title" className="text-lg sm:text-xl font-bold font-bengali text-slate-900 dark:text-white">
-                লাইভ পরীক্ষার নিয়মাবলী ও অ্যান্টি-চিট প্রোটোকল
+                {isBengali ? 'লাইভ পরীক্ষার নিয়মাবলী ও অ্যান্টি-চিট প্রোটোকল' : 'Live Examination Rules & Anti-Cheat Protocols'}
               </h2>
               <p className="text-xs text-slate-500 font-bengali mt-0.5">
-                অংশগ্রহণের পূর্বে প্রোটোকলগুলো মনোযোগ সহকারে পড়ুন।
+                {isBengali ? 'অংশগ্রহণের পূর্বে প্রোটোকলগুলো মনোযোগ সহকারে পড়ুন।' : 'Please read the examination protocols carefully before participating.'}
               </p>
             </div>
           </div>
@@ -73,7 +76,7 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            aria-label="নিয়মাবলী বন্ধ করুন"
+            aria-label={isBengali ? 'নিয়মাবলী বন্ধ করুন' : 'Close examination rules'}
             className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition"
           >
             <X className="w-5 h-5" />
@@ -87,10 +90,12 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             <Clock className="w-5 h-5 text-[#0A2540] dark:text-amber-300 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-slate-900 dark:text-white mb-1">
-                ১. সার্ভার-অথরিটেটিভ টাইমার ও অটো-সাবমিশন
+                {isBengali ? '১. সার্ভার-অথরিটেটিভ টাইমার ও অটো-সাবমিশন' : '1. Server-Authoritative Timer & Auto-Submission'}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                পরীক্ষাটি সেন্ট্রাল সার্ভার ঘড়ির সাথে সিঙ্ক্রোনাইজড। স্থানীয় ডিভাইসের সময় পরিবর্তন করলেও কোনো প্রভাব পড়বে না। বরাদ্দকৃত সময় শেষ হওয়ার সাথে সাথে আপনার উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হয়ে যাবে।
+                {isBengali 
+                  ? 'পরীক্ষাটি সেন্ট্রাল সার্ভার ঘড়ির সাথে সিঙ্ক্রোনাইজড। স্থানীয় ডিভাইসের সময় পরিবর্তন করলেও কোনো প্রভাব পড়বে না। বরাদ্দকৃত সময় শেষ হওয়ার সাথে সাথে আপনার উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হয়ে যাবে।'
+                  : 'The exam is synchronized with the central server clock. Changing your local device time has no effect. Once the allotted time expires, your answers will be automatically submitted.'}
               </p>
             </div>
           </div>
@@ -100,10 +105,12 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             <AlertTriangle className="w-5 h-5 text-[#991B1B] dark:text-rose-300 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-[#991B1B] dark:text-rose-300 mb-1">
-                ২. অ্যান্টি-চিট গার্ড ও ট্যাব পরিবর্তন সতর্কতা
+                {isBengali ? '২. অ্যান্টি-চিট গার্ড ও ট্যাব পরিবর্তন সতর্কতা' : '2. Anti-Cheat Guard & Tab Switch Warning'}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                লাইভ চলাকালীন অন্য কোনো ব্রাউজার ট্যাব, উইন্ডো বা অ্যাপ্লিকেশনে সুইচ করলে সিস্টেম তা স্বয়ংক্রিয়ভাবে সনাক্ত করবে। ৩ বার পেজ পরিবর্তন বা ফোকাস হারালে উত্তরপত্র অন-দ্য-স্পট ডিসকোয়ালিফাই ও সাবমিট হতে পারে।
+                {isBengali 
+                  ? 'লাইভ চলাকালীন অন্য কোনো ব্রাউজার ট্যাব, উইন্ডো বা অ্যাপ্লিকেশনে সুইচ করলে সিস্টেম তা স্বয়ংক্রিয়ভাবে সনাক্ত করবে। ৩ বার পেজ পরিবর্তন বা ফোকাস হারালে উত্তরপত্র অন-দ্য-স্পট ডিসকোয়ালিফাই ও সাবমিট হতে পারে।'
+                  : 'Switching to another browser tab, window, or app during the live exam is automatically logged. 3 consecutive focus-loss infractions may result in on-the-spot disqualification and premature submission.'}
               </p>
             </div>
           </div>
@@ -113,10 +120,12 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             <FileText className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-slate-900 dark:text-white mb-1">
-                ৩. নেগেটিভ মার্কিং পদ্ধতি (-০.২৫)
+                {isBengali ? '৩. নেগেটিভ মার্কিং পদ্ধতি (-০.২৫)' : '3. Negative Marking Standard (-0.25)'}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কর্তন করা হবে। যে প্রশ্নের উত্তর দেওয়া হবে না, তার জন্য কোনো নম্বর কাটা হবে না। নিশ্চিত না হয়ে আন্দাজে উত্তর দেওয়া থেকে বিরত থাকুন।
+                {isBengali 
+                  ? 'প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কর্তন করা হবে। যে প্রশ্নের উত্তর দেওয়া হবে না, তার জন্য কোনো নম্বর কাটা হবে না। নিশ্চিত না হয়ে আন্দাজে উত্তর দেওয়া থেকে বিরত থাকুন।'
+                  : 'Each incorrect answer deducts 0.25 marks. Unanswered questions carry zero penalty. Avoid random guessing without reasonable certainty.'}
               </p>
             </div>
           </div>
@@ -126,10 +135,12 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             <WifiOff className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-slate-900 dark:text-white mb-1">
-                ৪. অফলাইন বাফার ও মিলি-সেকেন্ড নেটওয়ার্ক রেজিলিয়েন্স
+                {isBengali ? '৪. অফলাইন বাফার ও মিলি-সেকেন্ড নেটওয়ার্ক রেজিলিয়েন্স' : '4. Offline Buffer & Millisecond Network Resilience'}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                পরীক্ষার মাঝে ইন্টারনেট সংযোগ বিচ্ছিন্ন হলে আতঙ্কিত হবেন না। আপনার সিলেক্ট করা উত্তরগুলো স্থানীয় মেমরিতে নিরাপদে এনক্রিপ্টেড থাকবে এবং সংযোগ ফিরে আসার সাথে সাথে ব্যাকগ্রাউন্ডে সিঙ্ক হবে।
+                {isBengali 
+                  ? 'পরীক্ষার মাঝে ইন্টারনেট সংযোগ বিচ্ছিন্ন হলে আতঙ্কিত হবেন না। আপনার সিলেক্ট করা উত্তরগুলো স্থানীয় মেমরিতে নিরাপদে এনক্রিপ্টেড থাকবে এবং সংযোগ ফিরে আসার সাথে সাথে ব্যাকগ্রাউন্ডে সিঙ্ক হবে।'
+                  : 'Do not panic if your internet drops mid-exam. Your selected responses are encrypted in local device memory and seamlessly synced in the background the moment connection is restored.'}
               </p>
             </div>
           </div>
@@ -139,10 +150,12 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             <Lock className="w-5 h-5 text-slate-700 dark:text-slate-300 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-slate-900 dark:text-white mb-1">
-                ৫. গোপনীয়তা ও ছদ্মনাম লিডারবোর্ড
+                {isBengali ? '৫. গোপনীয়তা ও ছদ্মনাম লিডারবোর্ড' : '5. Privacy & Pseudonymous Leaderboard'}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                শিক্ষার্থীদের সুরক্ষায় লিডারবোর্ডে ফোন নম্বর সম্পূর্ণ গোপন রাখা হয়। আপনি চাইলে সেটিংস থেকে পাবলিক লিডারবোর্ড র‍্যাঙ্কিংয়ে আপনার স্কোর গোপন রাখার বিকল্প নির্বাচন করতে পারেন।
+                {isBengali 
+                  ? 'শিক্ষার্থীদের সুরক্ষায় লিডারবোর্ডে ফোন নম্বর সম্পূর্ণ গোপন রাখা হয়। আপনি চাইলে সেটিংস থেকে পাবলিক লিডারবোর্ড র‍্যাঙ্কিংয়ে আপনার স্কোর গোপন রাখার বিকল্প নির্বাচন করতে পারেন।'
+                  : 'To protect students, phone numbers and real identities are never disclosed on the leaderboard. You can also opt out of public leaderboard rankings at any time.'}
               </p>
             </div>
           </div>
@@ -152,7 +165,7 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
         <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-xs font-bengali text-emerald-700 dark:text-emerald-400">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
-            <span>প্রোটোকলগুলো এনসিটিবি ও জাতীয় প্রতিযোগিতামূলক নীতিমালার সাথে সামঞ্জস্যপূর্ণ</span>
+            <span>{isBengali ? 'প্রোটোকলগুলো এনসিটিবি ও জাতীয় প্রতিযোগিতামূলক নীতিমালার সাথে সামঞ্জস্যপূর্ণ' : 'Protocols comply with NCTB and national competitive examination standards'}</span>
           </div>
 
           <button
@@ -160,7 +173,7 @@ export const ExamRulesProtocolModal: React.FC<ExamRulesProtocolModalProps> = ({
             onClick={onClose}
             className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#0A2540] text-white hover:bg-slate-800 font-bold font-bengali text-xs transition min-h-[44px]"
           >
-            আমি নিয়মাবলী বুঝেছি ও একমত
+            {isBengali ? 'আমি নিয়মাবলী বুঝেছি ও একমত' : 'I Understand & Agree to the Rules'}
           </button>
         </div>
       </div>

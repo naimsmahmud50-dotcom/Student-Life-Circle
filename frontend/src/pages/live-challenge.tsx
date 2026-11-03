@@ -44,6 +44,7 @@ import { Footer } from '@/components/layout/Footer';
 import { apiClient } from '@/lib/api-client';
 import { useQuizStore } from '@/store/useQuizStore';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useTranslation } from '@/lib/i18n';
 import { LiveMcqHeroSection } from '@/components/live-challenge/LiveMcqHeroSection';
 import { LiveCategoryTrackSelector } from '@/components/live-challenge/LiveCategoryTrackSelector';
 import { LiveFreeDemoExamBox } from '@/components/live-challenge/LiveFreeDemoExamBox';
@@ -91,6 +92,7 @@ const FALLBACK_LEADERBOARD: LeaderboardEntry[] = [
 ];
 
 export default function LiveChallengePage() {
+  const { isBengali } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [challenge, setChallenge] = useState(FALLBACK_CHALLENGE);
   const [entries, setEntries] = useState<LeaderboardEntry[]>(FALLBACK_LEADERBOARD);
@@ -180,15 +182,15 @@ export default function LiveChallengePage() {
       </Head>
 
       <AppHead
-        title="দেশব্যাপী লাইভ চ্যালেঞ্জ | অগ্রযাত্রা"
-        description="৫০,০০০ কনকারেন্ট শিক্ষার্থীর সঙ্গে রিয়েল-টাইম অলিম্পিয়াড পরীক্ষা, লাইভ লিডারবোর্ড ও মিলি-সেকেন্ড একুরেট বাফার।"
+        title={isBengali ? "দেশব্যাপী লাইভ চ্যালেঞ্জ | অগ্রযাত্রা" : "Nationwide Live Challenge | Ogrojatra"}
+        description={isBengali ? "৫০,০০০ কনকারেন্ট শিক্ষার্থীর সঙ্গে রিয়েল-টাইম অলিম্পিয়াড পরীক্ষা, লাইভ লিডারবোর্ড ও মিলি-সেকেন্ড একুরেট বাফার।" : "Real-time Olympiad examination with 50,000 concurrent students, live leaderboard, and millisecond-accurate submission buffer."}
         canonicalUrl="/live-challenge"
         ogType="website"
       />
 
       <div className={`${styles.liveChallengeRoot} min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] font-sans selection:bg-[#ED8E22] selection:text-white`}>
         {/* Sticky Unified Global Navigation */}
-        <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
+        <Navbar currentStage={isBengali ? "দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" : "Nationwide Live Olympiad Challenge"} />
 
         {/* 1. Live MCQ Signature Hero Section (Exact Elevation from Reference Screenshot) */}
         {isLoading ? (
@@ -429,15 +431,15 @@ export default function LiveChallengePage() {
                     <div>
                       <h2 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white flex items-center gap-2">
                         <Award className="w-5 h-5 text-amber-500" />
-                        <span>সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)</span>
+                        <span>{isBengali ? 'সেন্ট্রাল রেজাল্ট ও মেধা তালিকা (শীর্ষ প্রতিযোগী)' : 'Central Results & Merit Standings (Top Competitors)'}</span>
                       </h2>
                       <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-1">
-                        রিয়েল-টাইমে WebSocket ব্রডকাস্টের মাধ্যমে স্কোরের পরিবর্তন প্রদর্শিত হচ্ছে।
+                        {isBengali ? 'রিয়েল-টাইমে WebSocket ব্রডকাস্টের মাধ্যমে স্কোরের পরিবর্তন প্রদর্শিত হচ্ছে।' : 'Score updates are broadcast in real time via high-throughput WebSockets.'}
                       </p>
                     </div>
 
                     <span className="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
-                      আপডেট: প্রতি ৫ সেকেন্ড
+                      {isBengali ? 'আপডেট: প্রতি ৫ সেকেন্ড' : 'Update: Every 5s'}
                     </span>
                   </div>
 
@@ -456,7 +458,7 @@ export default function LiveChallengePage() {
                       <div className="flex items-center gap-2.5">
                         <ShieldCheck className="w-5 h-5 text-emerald-500" />
                         <h3 className="text-base font-bold font-bengali text-slate-900 dark:text-white">
-                          পরীক্ষার নিয়মাবলী ও নিরাপত্তা
+                          {isBengali ? 'পরীক্ষার নিয়মাবলী ও নিরাপত্তা' : 'Examination Rules & Integrity Protocol'}
                         </h3>
                       </div>
                     </div>
@@ -464,15 +466,15 @@ export default function LiveChallengePage() {
                     <div className="space-y-4 text-xs font-bengali text-slate-600 dark:text-slate-300 leading-[1.75]">
                       <div className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <p>সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।</p>
+                        <p>{isBengali ? 'সার্ভার সময় অনুসারে পরীক্ষা পরিচালিত হবে। সময় সমাপ্তির সাথে সাথে উত্তরপত্র স্বয়ংক্রিয়ভাবে জমা হবে।' : 'Exams are synchronized to server authoritative time. Answer sheets submit automatically when the clock expires.'}</p>
                       </div>
                       <div className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                        <p>প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।</p>
+                        <p>{isBengali ? 'প্রতিটি ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা যাবে। উত্তর না দিলে কোনো নম্বর কর্তন হবে না।' : 'A deduction of 0.25 marks applies to each incorrect answer. Unanswered questions incur no penalty.'}</p>
                       </div>
                       <div className="flex items-start gap-2.5">
                         <Lock className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                        <p>প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।</p>
+                        <p>{isBengali ? 'প্রার্থীর ব্যক্তিগত নাম ও ফোন নম্বর সম্পূর্ণ গোপন রেখে ছদ্মনামে লিডারবোর্ডে স্কোর প্রদর্শিত হয়।' : 'Candidate identity and phone numbers remain strictly confidential; pseudonymous handles are shown on the leaderboard.'}</p>
                       </div>
                     </div>
 
@@ -483,7 +485,7 @@ export default function LiveChallengePage() {
                       className="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-xs font-bold font-bengali flex items-center justify-center gap-2 transition"
                     >
                       <ShieldCheck className="w-4 h-4 text-amber-500" />
-                      <span>সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন</span>
+                      <span>{isBengali ? 'সম্পূর্ণ অ্যান্টি-চিট প্রোটোকল দেখুন' : 'View Full Anti-Cheat Integrity Protocol'}</span>
                     </button>
 
                     <div className="pt-4 border-t border-amber-200/50 dark:border-amber-900/40">
@@ -495,7 +497,7 @@ export default function LiveChallengePage() {
                           className="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 border-slate-300"
                         />
                         <span className="text-xs font-bengali text-slate-700 dark:text-slate-300">
-                          পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন
+                          {isBengali ? 'পাবলিক লিডারবোর্ড থেকে আমার স্কোর গোপন রাখুন' : 'Keep my score private from the public leaderboard'}
                         </span>
                       </label>
                     </div>
