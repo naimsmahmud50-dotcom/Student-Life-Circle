@@ -61,7 +61,7 @@ import {
   Breadcrumb
 } from '@/components/ui';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
-import { useTranslation } from '@/lib/i18n';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 interface ChapterItem {
   id: string;
@@ -630,7 +630,13 @@ const CURATED_SUBJECTS: SubjectItem[] = [
 ];
 
 export default function LearnPage() {
-  const { isBengali } = useTranslation();
+  const { isBengali, locale, setLocale } = useTranslation();
+
+  React.useEffect(() => {
+    document.title = isBengali
+      ? "এনসিটিবি পাঠ্যক্রম ও অধ্যায়ভিত্তিক শিক্ষা | অগ্রযাত্রা"
+      : "NCTB Curriculum & Chapterwise Learning | Agragoti";
+  }, [isBengali]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedStage, setSelectedStage] = useState<'ALL' | 'SSC' | 'HSC' | 'ADMISSION'>('HSC');
   const [activeVideoLecture, setActiveVideoLecture] = useState<{ id: string; title: string } | null>(null);
@@ -666,7 +672,7 @@ export default function LearnPage() {
   return (
     <>
       <AppHead
-        title={isBengali ? "এনসিটিবি পাঠ্যক্রম ও অধ্যায়ভিত্তিক শিক্ষা | অগ্রযাত্রা" : "NCTB Curriculum & Chapterwise Learning | Agrogoti"}
+        title={isBengali ? "এনসিটিবি পাঠ্যক্রম ও অধ্যায়ভিত্তিক শিক্ষা | অগ্রযাত্রা" : "NCTB Curriculum & Chapterwise Learning | Agragoti"}
         description={isBengali ? "এনসিটিবি কারিকুলাম অনুযায়ী শ্রেণিভিত্তিক অধ্যায়, ইন্টারেক্টিভ ভিডিও লেকচার ও স্পেসড-রিপিটিশন রিভিশন কিউ।" : "Grade-wise chapters, interactive video lectures, and spaced-repetition revision queue following NCTB curriculum."}
         canonicalUrl="/learn"
         ogType="website"
@@ -695,7 +701,7 @@ export default function LearnPage() {
             ]}
             stats={[
               { label: isBengali ? 'কভার্ড বিষয়' : 'Subjects Covered', value: isBengali ? 'পদার্থ, রসায়ন, গণিত' : 'Physics, Chemistry, Math' },
-              { label: isBengali ? 'মোট অধ্যায়' : 'Total Chapters', value: isBengali ? '২৮টি অধ্যায়' : '28 Chapters' },
+              { label: isBengali ? 'মোট অধ্যায়' : 'Total Chapters', value: isBengali ? `${toBengaliDigits(28)}টি অধ্যায়` : '28 Chapters' },
               { label: isBengali ? 'ভিডিও লেকচার' : 'Video Lectures', value: isBengali ? '১০০% এইচডি' : '100% HD', highlight: true },
               { label: isBengali ? 'রিভিশন মেথড' : 'Revision Method', value: isBengali ? 'স্পেসড-রিপিটিশন' : 'Spaced-Repetition' }
             ]}
@@ -786,7 +792,7 @@ export default function LearnPage() {
               {chapterSearchQuery && (
                 <div className="flex items-center gap-2 text-xs font-bengali text-[#0B5D3B] dark:text-emerald-400 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>{isBengali ? `ফিল্টার সক্রিয়: ${filteredSubjects.reduce((acc, s) => acc + s.chapters.length, 0)}টি অধ্যায় পাওয়া গেছে` : `Filter active: ${filteredSubjects.reduce((acc, s) => acc + s.chapters.length, 0)} chapters found`}</span>
+                  <span>{isBengali ? `ফিল্টার সক্রিয়: ${toBengaliDigits(filteredSubjects.reduce((acc, s) => acc + s.chapters.length, 0))}টি অধ্যায় পাওয়া গেছে` : `Filter active: ${filteredSubjects.reduce((acc, s) => acc + s.chapters.length, 0)} chapters found`}</span>
                 </div>
               )}
             </div>
@@ -834,7 +840,7 @@ export default function LearnPage() {
               <div className="flex items-center gap-2 self-start sm:self-auto">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-100/90 dark:bg-amber-950/60 text-[#B8862B] dark:text-amber-300 font-bengali text-xs font-bold border border-amber-300/60 dark:border-amber-800/60">
                   <Clock className="w-3.5 h-3.5" />
-                  <span>{isBengali ? '৩টি টপিক আজ বাকি' : '3 Topics Remaining Today'}</span>
+                  <span>{isBengali ? `${toBengaliDigits(3)}টি টপিক আজ বাকি` : '3 Topics Remaining Today'}</span>
                 </span>
               </div>
             </div>
@@ -961,7 +967,7 @@ export default function LearnPage() {
 
               <div className="flex items-center gap-3">
                 <span className="text-xs font-bengali text-slate-500 dark:text-slate-400">
-                  {isBengali ? 'মোট বিষয়: ' : 'Total Subjects: '}<strong className="font-sans text-[#0A2540] dark:text-white">{filteredSubjects.length}</strong>{isBengali ? ' টি' : ''}
+                  {isBengali ? 'মোট বিষয়: ' : 'Total Subjects: '}<strong className="font-sans text-[#0A2540] dark:text-white">{isBengali ? toBengaliDigits(filteredSubjects.length) : filteredSubjects.length}</strong>{isBengali ? ' টি' : ''}
                 </span>
               </div>
             </div>
@@ -1048,7 +1054,7 @@ export default function LearnPage() {
                               />
                             </svg>
                             <span className="absolute text-xs font-sans font-bold text-[#0A2540] dark:text-white tabular-nums">
-                              {sub.completedPercent}%
+                              {isBengali ? toBengaliDigits(sub.completedPercent) : sub.completedPercent}%
                             </span>
                           </div>
 
@@ -1057,7 +1063,7 @@ export default function LearnPage() {
                               {isBengali ? 'সিলেবাস কভারেজ' : 'Syllabus Coverage'}
                             </span>
                             <span className="text-slate-500 font-bengali">
-                              {isBengali ? `${sub.chapters.length} টি অধ্যায় দৃশ্যমান` : `${sub.chapters.length} Chapters Visible`}
+                              {isBengali ? `${toBengaliDigits(sub.chapters.length)} টি অধ্যায় দৃশ্যমান` : `${sub.chapters.length} Chapters Visible`}
                             </span>
                           </div>
                         </div>
@@ -1094,7 +1100,7 @@ export default function LearnPage() {
                                   />
                                 </svg>
                                 <span className="absolute text-xs font-sans font-bold text-[#0A2540] dark:text-slate-300">
-                                  {ch.number}
+                                  {isBengali ? toBengaliDigits(ch.number) : ch.number}
                                 </span>
                               </div>
 
@@ -1111,7 +1117,7 @@ export default function LearnPage() {
                                   )}
                                 </div>
                                 <span className="text-xs text-slate-500 dark:text-slate-400 font-bengali block pt-1">
-                                  {isBengali ? `${ch.topicCount} টি পাঠ • ${ch.progressPercent}% সম্পন্ন` : `${ch.topicCount} Lessons • ${ch.progressPercent}% Completed`}
+                                  {isBengali ? `${toBengaliDigits(ch.topicCount)} টি পাঠ • ${toBengaliDigits(ch.progressPercent)}% সম্পন্ন` : `${ch.topicCount} Lessons • ${ch.progressPercent}% Completed`}
                                 </span>
                               </div>
                             </div>
@@ -1389,7 +1395,7 @@ export default function LearnPage() {
             <div className="flex items-center gap-2 border-b border-[#E5E2DA] pb-3">
               <Badge variant="brand" size="sm">{activeNotesChapter.subjectTitle}</Badge>
               <Badge variant="default" size="sm">
-                {isBengali ? `অধ্যায় ${activeNotesChapter.chapter.number}` : `Chapter ${activeNotesChapter.chapter.number}`}
+                {isBengali ? `অধ্যায় ${toBengaliDigits(activeNotesChapter.chapter.number)}` : `Chapter ${activeNotesChapter.chapter.number}`}
               </Badge>
               <span className="text-xs text-[#5B5B5B] ml-auto">
                 {isBengali

@@ -104,5 +104,16 @@
 - [x] T083: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
 - [x] T084: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/dashboard/`.
 
+## Phase 13: Learning Hub & NCTB Curriculum Navigation Bilingual Elevation (`frontend/src/pages/learn.tsx`)
+- [x] T085: Dynamic `useEffect` document.title sync & `AppHead` metadata brand consistency (`frontend/src/pages/learn.tsx`).
+- [x] T086: Bilingual elevation for PageHeader category, title, subtitle, breadcrumbs, and stats with numeral localization (`toBengaliDigits`).
+- [x] T087: Bilingual elevation for Curriculum Level Selector buttons & live Search feedback counters.
+- [x] T088: Bilingual elevation for Spaced-Repetition Revision Queue (SM-2 Scientific Spacing badges, remaining topics counter, day intervals).
+- [x] T089: Bilingual elevation for NCTB Subjects & Chapters Matrix (Subject coverage progress gauges, chapter list numbers, lessons & progress percentages).
+- [x] T090: Bilingual elevation for Chapter Actions (Read & Notes drawer, HLS video lecture launcher, Practice CTAs).
+- [x] T091: Bilingual elevation for Board Exam Pedagogical Roadmap (4 stages) & FAQ Accordions.
+- [x] T092: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
+- [ ] T093: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/learn/`.
+
 
 
