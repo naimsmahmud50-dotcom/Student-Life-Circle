@@ -82,5 +82,16 @@
 - [x] T065: Quality Assurance (TypeScript zero-error, backend test suite, strict zero-emoji scan).
 - [x] T066: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/career/`.
 
+## Phase 11: Student Authentication & Minor-Safe Onboarding Bilingual Elevation (`frontend/src/pages/auth.tsx`)
+- [x] T067: Integrate `useTranslation()` hook, dynamic document title, `<Head>`, and `[BN | EN]` switcher in `frontend/src/pages/auth.tsx`.
+- [x] T068: Bilingual elevation for Brand Identity & Header (`অগ্রযাত্রা` / `Agragoti`, `নিরাপদ ও দীর্ঘমেয়াদি শিক্ষার্থী প্রোফাইল` / `Secure & Lifelong Student Profile`).
+- [x] T069: Bilingual elevation for Mode Switcher (`নতুন অ্যাকাউন্ট` / `New Account`, `লগইন করুন` / `Log In`).
+- [x] T070: Bilingual elevation for Registration Form fields (Full Name, Age, Curriculum Medium, Education Stage options).
+- [x] T071: Bilingual elevation for Minor-Safe Onboarding Alert (`শিশু ও অপ্রাপ্তবয়স্ক সুরক্ষা` / `Child & Minor Safety Guard`).
+- [x] T072: Bilingual elevation for Identifier, SMS OTP Verification workflow, and Password fields.
+- [x] T073: Bilingual elevation for Submit CTAs, Quick Student Demo Credential helper, Terms disclaimer, and Page Footer.
+- [x] T074: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
+- [ ] T075: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/auth/`.
+
 
 
