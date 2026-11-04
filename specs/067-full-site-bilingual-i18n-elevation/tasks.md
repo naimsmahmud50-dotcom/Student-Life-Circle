@@ -91,7 +91,7 @@
 - [x] T072: Bilingual elevation for Identifier, SMS OTP Verification workflow, and Password fields.
 - [x] T073: Bilingual elevation for Submit CTAs, Quick Student Demo Credential helper, Terms disclaimer, and Page Footer.
 - [x] T074: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
-- [ ] T075: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/auth/`.
+- [x] T075: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/auth/`.
 
 
 
