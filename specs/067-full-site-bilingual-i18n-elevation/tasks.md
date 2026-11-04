@@ -124,7 +124,7 @@
 - [x] T099: Bilingual elevation for Socratic AI Explanation Drawer & Formula Quick Cheat-Sheet.
 - [x] T100: Bilingual elevation for Exam Results Dialog & Performance Breakdown (Score, Accuracy, Time, Retake, and Review actions).
 - [x] T101: Quality Assurance (TypeScript zero-error check via `tsc --noEmit`, backend test suite execution, strict zero-emoji scan).
-- [ ] T102: Git commit, push to `origin/main`, deploy to GitHub Pages (`scripts/deploy-gh-pages.sh --rebuild`), and verify live HTTP 200 for `/practice/`.
+- [x] T102: Git commit, push to `origin/main`, deploy to GitHub Pages (`scripts/deploy-gh-pages.sh --rebuild`), and verify live HTTP 200 for `/practice/`.
 
 
 
