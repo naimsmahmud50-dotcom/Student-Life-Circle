@@ -115,5 +115,17 @@
 - [x] T092: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
 - [x] T093: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/learn/`.
 
+## Phase 14: Practice Exam Arena & Adaptive Quiz Hub Bilingual Elevation (`frontend/src/pages/practice.tsx`)
+- [x] T094: Integrate `useTranslation()` hook, dynamic document.title sync (`React.useEffect`), and bilingual `AppHead` metadata in `frontend/src/pages/practice.tsx`.
+- [x] T095: Bilingual elevation for `PageHeader` (Category badge, Title, Subtitle, Breadcrumbs, and Stat metrics with `toBengaliDigits`).
+- [x] T096: Bilingual elevation for Offline banner, Exam status alerts, and Timer bar (`লাইভ টাইমার` / `Live Timer`, `অফলাইন মোড` / `Offline Mode`).
+- [x] T097: Bilingual elevation for Question Arena & Option Cards (Question counters, Question stems BN/EN, Option labels, Keyboard shortcut instructions `১, ২, ৩, ৪ বা A, B, C, D` / `1, 2, 3, 4 or A, B, C, D`).
+- [x] T098: Bilingual elevation for Navigation & Exam Submission controls (Prev / Next buttons, Submit Answer, Submit Exam Script modal/actions).
+- [x] T099: Bilingual elevation for Socratic AI Explanation Drawer & Formula Quick Cheat-Sheet.
+- [x] T100: Bilingual elevation for Exam Results Dialog & Performance Breakdown (Score, Accuracy, Time, Retake, and Review actions).
+- [x] T101: Quality Assurance (TypeScript zero-error check via `tsc --noEmit`, backend test suite execution, strict zero-emoji scan).
+- [ ] T102: Git commit, push to `origin/main`, deploy to GitHub Pages (`scripts/deploy-gh-pages.sh --rebuild`), and verify live HTTP 200 for `/practice/`.
+
+
 
 

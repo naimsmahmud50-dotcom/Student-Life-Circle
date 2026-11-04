@@ -60,7 +60,7 @@ import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
 import { ServerTimer } from '@/components/quiz/server-timer';
 import { OptionCard } from '@/components/quiz/option-card';
 import { apiClient } from '@/lib/api-client';
-import { toBengaliDigits } from '@/lib/i18n';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 import { useQuizStore } from '@/store/useQuizStore';
 import { useFilterStore } from '@/store/useFilterStore';
 
@@ -68,9 +68,11 @@ export interface PracticeQuestion {
   id: string;
   stemBn: string;
   stemEn: string;
-  options: { id: string; key: 'A' | 'B' | 'C' | 'D'; shortcut: 1 | 2 | 3 | 4; textBn: string; isCorrect: boolean }[];
+  options: { id: string; key: 'A' | 'B' | 'C' | 'D'; shortcut: 1 | 2 | 3 | 4; textBn: string; textEn?: string; isCorrect: boolean }[];
   explanationBn: string;
+  explanationEn?: string;
   sourceCitation: string;
+  sourceCitationEn?: string;
 }
 
 export const FALLBACK_QUESTIONS: PracticeQuestion[] = [
@@ -79,140 +81,168 @@ export const FALLBACK_QUESTIONS: PracticeQuestion[] = [
     stemBn: "একটি বস্তুর ভর $m = 10\\text{ kg}$ এবং এর ওপর $F = 50\\text{ N}$ বল প্রয়োগ করা হলো। ত্বরণ $a$ কত হবে?",
     stemEn: "A body of mass 10 kg is subjected to a force of 50 N. What will be its acceleration?",
     options: [
-      { id: "opt_1a", key: "A", shortcut: 1, textBn: "$2\\text{ m/s}^2$", isCorrect: false },
-      { id: "opt_1b", key: "B", shortcut: 2, textBn: "$5\\text{ m/s}^2$", isCorrect: true },
-      { id: "opt_1c", key: "C", shortcut: 3, textBn: "$10\\text{ m/s}^2$", isCorrect: false },
-      { id: "opt_1d", key: "D", shortcut: 4, textBn: "$50\\text{ m/s}^2$", isCorrect: false },
+      { id: "opt_1a", key: "A", shortcut: 1, textBn: "$2\\text{ m/s}^2$", textEn: "$2\\text{ m/s}^2$", isCorrect: false },
+      { id: "opt_1b", key: "B", shortcut: 2, textBn: "$5\\text{ m/s}^2$", textEn: "$5\\text{ m/s}^2$", isCorrect: true },
+      { id: "opt_1c", key: "C", shortcut: 3, textBn: "$10\\text{ m/s}^2$", textEn: "$10\\text{ m/s}^2$", isCorrect: false },
+      { id: "opt_1d", key: "D", shortcut: 4, textBn: "$50\\text{ m/s}^2$", textEn: "$50\\text{ m/s}^2$", isCorrect: false },
     ],
     explanationBn: "নিউটনের ২য় সূত্র: $F = ma \\implies a = \\frac{F}{m} = \\frac{50}{10} = 5\\text{ m/s}^2।$",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৩য় অধ্যায় (বলবিদ্যা)"
+    explanationEn: "Newton's 2nd Law: $F = ma \\implies a = \\frac{F}{m} = \\frac{50}{10} = 5\\text{ m/s}^2.$",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৩য় অধ্যায় (বলবিদ্যা)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 3 (Dynamics)"
   },
   {
     id: "q_p2",
     stemBn: "মহাকর্ষীয় ধ্রুবক $G$ এর এসআই (SI) একক কোনটি?",
     stemEn: "What is the SI unit of gravitational constant G?",
     options: [
-      { id: "opt_2a", key: "A", shortcut: 1, textBn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-2}$", isCorrect: true },
-      { id: "opt_2b", key: "B", shortcut: 2, textBn: "$\\text{N}\\cdot\\text{m}\\cdot\\text{kg}^{-1}$", isCorrect: false },
-      { id: "opt_2c", key: "C", shortcut: 3, textBn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-1}$", isCorrect: false },
-      { id: "opt_2d", key: "D", shortcut: 4, textBn: "$\\text{N}\\cdot\\text{kg}^{-2}$", isCorrect: false },
+      { id: "opt_2a", key: "A", shortcut: 1, textBn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-2}$", textEn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-2}$", isCorrect: true },
+      { id: "opt_2b", key: "B", shortcut: 2, textBn: "$\\text{N}\\cdot\\text{m}\\cdot\\text{kg}^{-1}$", textEn: "$\\text{N}\\cdot\\text{m}\\cdot\\text{kg}^{-1}$", isCorrect: false },
+      { id: "opt_2c", key: "C", shortcut: 3, textBn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-1}$", textEn: "$\\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-1}$", isCorrect: false },
+      { id: "opt_2d", key: "D", shortcut: 4, textBn: "$\\text{N}\\cdot\\text{kg}^{-2}$", textEn: "$\\text{N}\\cdot\\text{kg}^{-2}$", isCorrect: false },
     ],
     explanationBn: "$F = G \\frac{m_1 m_2}{r^2} \\implies G = \\frac{F r^2}{m_1 m_2} = \\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-2}।$",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৬ষ্ঠ অধ্যায় (মহাকর্ষ)"
+    explanationEn: "$F = G \\frac{m_1 m_2}{r^2} \\implies G = \\frac{F r^2}{m_1 m_2} = \\text{N}\\cdot\\text{m}^2\\cdot\\text{kg}^{-2}.$",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৬ষ্ঠ অধ্যায় (মহাকর্ষ)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 6 (Gravitation)"
   },
   {
     id: "q_p3",
     stemBn: "সরল ছন্দিত স্পন্দনশীল কণার সাম্যাবস্থানে কোনটির মান সর্বোচ্চ হয়?",
     stemEn: "Which quantity is maximum at the equilibrium position of a simple harmonic oscillator?",
     options: [
-      { id: "opt_3a", key: "A", shortcut: 1, textBn: "বিভব শক্তি ($E_p$)", isCorrect: false },
-      { id: "opt_3b", key: "B", shortcut: 2, textBn: "গতিশক্তি ($E_k$)", isCorrect: true },
-      { id: "opt_3c", key: "C", shortcut: 3, textBn: "ত্বরণ ($a$)", isCorrect: false },
-      { id: "opt_3d", key: "D", shortcut: 4, textBn: "প্রত্যয়নী বল ($F$)", isCorrect: false },
+      { id: "opt_3a", key: "A", shortcut: 1, textBn: "বিভব শক্তি ($E_p$)", textEn: "Potential Energy ($E_p$)", isCorrect: false },
+      { id: "opt_3b", key: "B", shortcut: 2, textBn: "গতিশক্তি ($E_k$)", textEn: "Kinetic Energy ($E_k$)", isCorrect: true },
+      { id: "opt_3c", key: "C", shortcut: 3, textBn: "ত্বরণ ($a$)", textEn: "Acceleration ($a$)", isCorrect: false },
+      { id: "opt_3d", key: "D", shortcut: 4, textBn: "প্রত্যয়নী বল ($F$)", textEn: "Restoring Force ($F$)", isCorrect: false },
     ],
     explanationBn: "সাম্যাবস্থানে বেগ $v = \\omega A$ সর্বোচ্চ হওয়ায় গতিশক্তি $E_k = \\frac{1}{2}m\\omega^2 A^2$ সর্বোচ্চ হয়।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৮ম অধ্যায় (পর্যাবৃত্ত গতি)"
+    explanationEn: "At equilibrium, velocity $v = \\omega A$ is maximum, so kinetic energy $E_k = \\frac{1}{2}m\\omega^2 A^2$ is maximum.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৮ম অধ্যায় (পর্যাবৃত্ত গতি)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 8 (Periodic Motion)"
   },
   {
     id: "q_p4",
     stemBn: "পানির ত্রৈধ বিন্দুর তাপমাত্রা কেলভিন স্কেলে কত?",
     stemEn: "What is the triple point temperature of water in Kelvin scale?",
     options: [
-      { id: "opt_4a", key: "A", shortcut: 1, textBn: "$273.16\\text{ K}$", isCorrect: true },
-      { id: "opt_4b", key: "B", shortcut: 2, textBn: "$273.00\\text{ K}$", isCorrect: false },
-      { id: "opt_4c", key: "C", shortcut: 3, textBn: "$373.16\\text{ K}$", isCorrect: false },
-      { id: "opt_4d", key: "D", shortcut: 4, textBn: "$100.00\\text{ K}$", isCorrect: false },
+      { id: "opt_4a", key: "A", shortcut: 1, textBn: "$273.16\\text{ K}$", textEn: "$273.16\\text{ K}$", isCorrect: true },
+      { id: "opt_4b", key: "B", shortcut: 2, textBn: "$273.00\\text{ K}$", textEn: "$273.00\\text{ K}$", isCorrect: false },
+      { id: "opt_4c", key: "C", shortcut: 3, textBn: "$373.16\\text{ K}$", textEn: "$373.16\\text{ K}$", isCorrect: false },
+      { id: "opt_4d", key: "D", shortcut: 4, textBn: "$100.00\\text{ K}$", textEn: "$100.00\\text{ K}$", isCorrect: false },
     ],
     explanationBn: "বিশুদ্ধ বরফ, পানি ও জলীয় বাষ্পের তাপীয় সাম্যাবস্থার নির্দিষ্ট তাপমাত্রা $273.16\\text{ K}$।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ১১শ অধ্যায় (তাপগতিবিদ্যা)"
+    explanationEn: "The triple point temperature where pure ice, water, and water vapor coexist in thermal equilibrium is $273.16\\text{ K}$.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ১১শ অধ্যায় (তাপগতিবিদ্যা)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 11 (Thermodynamics)"
   },
   {
     id: "q_p5",
     stemBn: "আদর্শ গ্যাসের অভ্যন্তরীণ শক্তি শুধুমাত্র কোনটির ওপর নির্ভর করে?",
     stemEn: "Internal energy of an ideal gas depends solely upon which parameter?",
     options: [
-      { id: "opt_5a", key: "A", shortcut: 1, textBn: "চাপ ($P$)", isCorrect: false },
-      { id: "opt_5b", key: "B", shortcut: 2, textBn: "পরম তাপমাত্রা ($T$)", isCorrect: true },
-      { id: "opt_5c", key: "C", shortcut: 3, textBn: "আয়তন ($V$)", isCorrect: false },
-      { id: "opt_5d", key: "D", shortcut: 4, textBn: "ঘনত্ব ($\\rho$)", isCorrect: false },
+      { id: "opt_5a", key: "A", shortcut: 1, textBn: "চাপ ($P$)", textEn: "Pressure ($P$)", isCorrect: false },
+      { id: "opt_5b", key: "B", shortcut: 2, textBn: "পরম তাপমাত্রা ($T$)", textEn: "Absolute Temperature ($T$)", isCorrect: true },
+      { id: "opt_5c", key: "C", shortcut: 3, textBn: "আয়তন ($V$)", textEn: "Volume ($V$)", isCorrect: false },
+      { id: "opt_5d", key: "D", shortcut: 4, textBn: "ঘনত্ব ($\\rho$)", textEn: "Density ($\\rho$)", isCorrect: false },
     ],
     explanationBn: "জুলের সূত্রানুসারে আদর্শ গ্যাসের অভ্যন্তরীণ শক্তি $U$ শুধুমাত্র পরম তাপমাত্রা $T$ এর অপেক্ষক।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, তাপগতিবিদ্যা"
+    explanationEn: "According to Joule's Law, internal energy $U$ of an ideal gas depends solely on its absolute temperature $T$.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, তাপগতিবিদ্যা",
+    sourceCitationEn: "NCTB Physics 1st Paper, Thermodynamics"
   },
   {
     id: "q_p6",
     stemBn: "একটি কার্নো ইঞ্জিন $600\\text{ K}$ ও $300\\text{ K}$ তাপমাত্রায় কাজ করলে এর দক্ষতা $\\eta$ কত?",
     stemEn: "What is the efficiency of a Carnot engine operating between 600 K and 300 K?",
     options: [
-      { id: "opt_6a", key: "A", shortcut: 1, textBn: "$25\\%$", isCorrect: false },
-      { id: "opt_6b", key: "B", shortcut: 2, textBn: "$50\\%$", isCorrect: true },
-      { id: "opt_6c", key: "C", shortcut: 3, textBn: "$75\\%$", isCorrect: false },
-      { id: "opt_6d", key: "D", shortcut: 4, textBn: "$100\\%$", isCorrect: false },
+      { id: "opt_6a", key: "A", shortcut: 1, textBn: "$25\\%$", textEn: "$25\\%$", isCorrect: false },
+      { id: "opt_6b", key: "B", shortcut: 2, textBn: "$50\\%$", textEn: "$50\\%$", isCorrect: true },
+      { id: "opt_6c", key: "C", shortcut: 3, textBn: "$75\\%$", textEn: "$75\\%$", isCorrect: false },
+      { id: "opt_6d", key: "D", shortcut: 4, textBn: "$100\\%$", textEn: "$100\\%$", isCorrect: false },
     ],
     explanationBn: "$\\eta = 1 - \\frac{T_2}{T_1} = 1 - \\frac{300}{600} = 0.50 = 50\\%।$",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, তাপগতিবিদ্যা"
+    explanationEn: "$\\eta = 1 - \\frac{T_2}{T_1} = 1 - \\frac{300}{600} = 0.50 = 50\\%.$",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, তাপগতিবিদ্যা",
+    sourceCitationEn: "NCTB Physics 1st Paper, Thermodynamics"
   },
   {
     id: "q_p7",
     stemBn: "একটি তারের দৈর্ঘ্য দ্বিগুণ করতে প্রযুক্ত পীড়ন ও বিকৃতির অনুপাতকে কী বলে?",
     stemEn: "What is the ratio of tensile stress to tensile strain called?",
     options: [
-      { id: "opt_7a", key: "A", shortcut: 1, textBn: "দৃঢ়তার গুণাঙ্ক", isCorrect: false },
-      { id: "opt_7b", key: "B", shortcut: 2, textBn: "ইয়ং-এর গুণাঙ্ক ($Y$)", isCorrect: true },
-      { id: "opt_7c", key: "C", shortcut: 3, textBn: "পয়সনের অনুপাত", isCorrect: false },
-      { id: "opt_7d", key: "D", shortcut: 4, textBn: "আয়তন গুণাঙ্ক", isCorrect: false },
+      { id: "opt_7a", key: "A", shortcut: 1, textBn: "দৃঢ়তার গুণাঙ্ক", textEn: "Modulus of Rigidity", isCorrect: false },
+      { id: "opt_7b", key: "B", shortcut: 2, textBn: "ইয়ং-এর গুণাঙ্ক ($Y$)", textEn: "Young's Modulus ($Y$)", isCorrect: true },
+      { id: "opt_7c", key: "C", shortcut: 3, textBn: "পয়সনের অনুপাত", textEn: "Poisson's Ratio", isCorrect: false },
+      { id: "opt_7d", key: "D", shortcut: 4, textBn: "আয়তন গুণাঙ্ক", textEn: "Bulk Modulus", isCorrect: false },
     ],
     explanationBn: "স্থিতিস্থাপক সীমার মধ্যে দৈর্ঘ্য পীড়ন ও দৈর্ঘ্য বিকৃতির অনুপাতকে ইয়ং-এর গুণাঙ্ক বলে।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৭ম অধ্যায় (পদার্থের গাঠনিক ধর্ম)"
+    explanationEn: "Within the elastic limit, the ratio of tensile stress to tensile strain is known as Young's Modulus.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৭ম অধ্যায় (পদার্থের গাঠনিক ধর্ম)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 7 (Mechanical Properties of Matter)"
   },
   {
     id: "q_p8",
     stemBn: "স্থির তরঙ্গে পরপর দুটি নিস্পন্দ বিন্দুর মধ্যবর্তী দূরত্ব কত?",
     stemEn: "What is the distance between two consecutive nodes in a stationary wave?",
     options: [
-      { id: "opt_8a", key: "A", shortcut: 1, textBn: "$\\frac{\\lambda}{2}$", isCorrect: true },
-      { id: "opt_8b", key: "B", shortcut: 2, textBn: "$\\frac{\\lambda}{4}$", isCorrect: false },
-      { id: "opt_8c", key: "C", shortcut: 3, textBn: "$\\lambda$", isCorrect: false },
-      { id: "opt_8d", key: "D", shortcut: 4, textBn: "$2\\lambda$", isCorrect: false },
+      { id: "opt_8a", key: "A", shortcut: 1, textBn: "$\\frac{\\lambda}{2}$", textEn: "$\\frac{\\lambda}{2}$", isCorrect: true },
+      { id: "opt_8b", key: "B", shortcut: 2, textBn: "$\\frac{\\lambda}{4}$", textEn: "$\\frac{\\lambda}{4}$", isCorrect: false },
+      { id: "opt_8c", key: "C", shortcut: 3, textBn: "$\\lambda$", textEn: "$\\lambda$", isCorrect: false },
+      { id: "opt_8d", key: "D", shortcut: 4, textBn: "$2\\lambda$", textEn: "$2\\lambda$", isCorrect: false },
     ],
     explanationBn: "স্থির তরঙ্গে দুটি পরপর নিস্পন্দ বা সুস্পন্দ বিন্দুর মধ্যবর্তী দূরত্ব $\\frac{\\lambda}{2}$।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৯ম অধ্যায় (তরঙ্গ)"
+    explanationEn: "In a stationary wave, the distance between two consecutive nodes or antinodes is $\\frac{\\lambda}{2}$.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৯ম অধ্যায় (তরঙ্গ)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 9 (Waves)"
   },
   {
     id: "q_p9",
     stemBn: "কোনো সরল দোলকের কার্যকর দৈর্ঘ্য ৪ গুণ বৃদ্ধি করা হলে এর দোলনকাল কত গুণ হবে?",
     stemEn: "If the effective length of a simple pendulum is increased 4 times, how many times will its period become?",
     options: [
-      { id: "opt_9a", key: "A", shortcut: 1, textBn: "২ গুণ", isCorrect: true },
-      { id: "opt_9b", key: "B", shortcut: 2, textBn: "৪ গুণ", isCorrect: false },
-      { id: "opt_9c", key: "C", shortcut: 3, textBn: "১৬ গুণ", isCorrect: false },
-      { id: "opt_9d", key: "D", shortcut: 4, textBn: "অর্ধেক", isCorrect: false },
+      { id: "opt_9a", key: "A", shortcut: 1, textBn: "২ গুণ", textEn: "2 times", isCorrect: true },
+      { id: "opt_9b", key: "B", shortcut: 2, textBn: "৪ গুণ", textEn: "4 times", isCorrect: false },
+      { id: "opt_9c", key: "C", shortcut: 3, textBn: "১৬ গুণ", textEn: "16 times", isCorrect: false },
+      { id: "opt_9d", key: "D", shortcut: 4, textBn: "অর্ধেক", textEn: "Half", isCorrect: false },
     ],
     explanationBn: "$T = 2\\pi\\sqrt{\\frac{L}{g}} \\implies T \\propto \\sqrt{L}$। দৈর্ঘ্য ৪ গুণ হলে দোলনকাল $\\sqrt{4} = 2$ গুণ বৃদ্ধি পায়।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৮ম অধ্যায় (পর্যাবৃত্ত গতি)"
+    explanationEn: "$T = 2\\pi\\sqrt{\\frac{L}{g}} \\implies T \\propto \\sqrt{L}$. If length increases 4 times, the time period increases by $\\sqrt{4} = 2$ times.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ৮ম অধ্যায় (পর্যাবৃত্ত গতি)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 8 (Periodic Motion)"
   },
   {
     id: "q_p10",
     stemBn: "রুদ্ধতাপীয় প্রক্রিয়ায় চাপ $P$ ও আয়তন $V$ এর মধ্যকার সম্পর্ক কোনটি?",
     stemEn: "What is the relationship between pressure P and volume V in an adiabatic process?",
     options: [
-      { id: "opt_10a", key: "A", shortcut: 1, textBn: "$PV = \\text{ধ্রুবক}$", isCorrect: false },
-      { id: "opt_10b", key: "B", shortcut: 2, textBn: "$PV^\\gamma = \\text{ধ্রুবক}$", isCorrect: true },
-      { id: "opt_10c", key: "C", shortcut: 3, textBn: "$P^\\gamma V = \\text{ধ্রুবক}$", isCorrect: false },
-      { id: "opt_10d", key: "D", shortcut: 4, textBn: "$\\frac{P}{V} = \\text{ধ্রুবক}$", isCorrect: false },
+      { id: "opt_10a", key: "A", shortcut: 1, textBn: "$PV = \\text{ধ্রুবক}$", textEn: "$PV = \\text{constant}$", isCorrect: false },
+      { id: "opt_10b", key: "B", shortcut: 2, textBn: "$PV^\\gamma = \\text{ধ্রুবক}$", textEn: "$PV^\\gamma = \\text{constant}$", isCorrect: true },
+      { id: "opt_10c", key: "C", shortcut: 3, textBn: "$P^\\gamma V = \\text{ধ্রুবক}$", textEn: "$P^\\gamma V = \\text{constant}$", isCorrect: false },
+      { id: "opt_10d", key: "D", shortcut: 4, textBn: "$\\frac{P}{V} = \\text{ধ্রুবক}$", textEn: "$\\frac{P}{V} = \\text{constant}$", isCorrect: false },
     ],
     explanationBn: "রুদ্ধতাপীয় পরিবর্তনে সিস্টেম ও পরিবেশের মধ্যে তাপের আদান-প্রদান শূন্য হওয়ায় $PV^\\gamma = \\text{ধ্রুবক}$ প্রযোজ্য।",
-    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ১১শ অধ্যায় (তাপগতিবিদ্যা)"
+    explanationEn: "In an adiabatic process where heat exchange with the surroundings is zero, $PV^\\gamma = \\text{constant}$ applies.",
+    sourceCitation: "এনসিটিবি পদার্থবিজ্ঞান ১ম পত্র, ১১শ অধ্যায় (তাপগতিবিদ্যা)",
+    sourceCitationEn: "NCTB Physics 1st Paper, Chapter 11 (Thermodynamics)"
   }
 ];
 
 export default function PracticePage() {
+  const { isBengali, locale, setLocale } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [questions, setQuestions] = useState<PracticeQuestion[]>(FALLBACK_QUESTIONS);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isExamCompleted, setIsExamCompleted] = useState<boolean>(false);
   const [isOnline, setIsOnline] = useState<boolean>(true);
   const [correctCount, setCorrectCount] = useState<number>(0);
+
+  // Synchronize document title dynamically with active language
+  useEffect(() => {
+    document.title = isBengali
+      ? "যেকোনো সময় অনুশীলন (Anytime Practice) | অগ্রযাত্রা"
+      : "Anytime Practice & Adaptive Exam Arena | Agragoti";
+  }, [isBengali]);
 
   // Zustand stores
   const {
@@ -324,26 +354,41 @@ export default function PracticePage() {
   return (
     <>
       <AppHead
-        title="যেকোনো সময় অনুশীলন (Anytime Practice) | অগ্রযাত্রা"
-        description="এনসিটিবি প্রশ্নব্যাংক, স্বয়ংক্রিয় ম্যাথ সমীকরণ রেন্ডারিং এবং তাৎক্ষণিক সক্রেটিক এআই সহায়তা।"
+        title={isBengali ? "যেকোনো সময় অনুশীলন (Anytime Practice) | অগ্রযাত্রা" : "Anytime Practice & Adaptive Exam Arena | Agragoti"}
+        description={isBengali ? "এনসিটিবি প্রশ্নব্যাংক, স্বয়ংক্রিয় ম্যাথ সমীকরণ রেন্ডারিং এবং তাৎক্ষণিক সক্রেটিক এআই সহায়তা।" : "NCTB Question Bank, automated LaTeX equation rendering, and real-time Socratic AI assistance."}
         canonicalUrl="/practice"
         ogType="website"
       />
 
-      <div className="min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] font-sans selection:bg-[#ED8E22] selection:text-white transition-colors duration-200">
-        <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
+      <div className="min-h-screen flex flex-col bg-[#FFFCF6] dark:bg-[#090D16] text-[#213130] dark:text-[#F5F2EB] font-sans selection:bg-[#ED8E22] selection:text-white transition-colors duration-200">
+        <Navbar currentStage={isBengali ? "দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" : "Nationwide Live Olympiad Challenge"} />
 
         {/* Unified Editorial Page Header with PRACTICE Watermark */}
         <PageHeader
           watermarkText="PRACTICE"
-          title="এনসিটিবি অ্যাডাপ্টিভ প্র্যাকটিস এরিনা"
-          description="এইচএসসি পদার্থবিজ্ঞান ১ম পত্রের বিগত বোর্ড পরীক্ষা ও অলিম্পিয়াড স্ট্যান্ডার্ড KaTeX প্রশ্নমালা। তাৎক্ষণিক উত্তর যাচাই ও সক্রেটিক গাইডেন্স।"
+          title={isBengali ? "এনসিটিবি অ্যাডাপ্টিভ প্র্যাকটিস এরিনা" : "NCTB Adaptive Practice Arena"}
+          description={isBengali ? "এইচএসসি পদার্থবিজ্ঞান ১ম পত্রের বিগত বোর্ড পরীক্ষা ও অলিম্পিয়াড স্ট্যান্ডার্ড KaTeX প্রশ্নমালা। তাৎক্ষণিক উত্তর যাচাই ও সক্রেটিক গাইডেন্স।" : "HSC Physics 1st Paper past board exam & Olympiad standard KaTeX questions. Instant answer verification & Socratic guidance."}
           category="LIVE ADAPTIVE ARENA"
-          badgeText="এনসিটিবি প্রমিত পাঠ্যক্রম • শতভাগ অফলাইন সহনশীল"
+          badgeText={isBengali ? "এনসিটিবি প্রমিত পাঠ্যক্রম • শতভাগ অফলাইন সহনশীল" : "NCTB Standard Curriculum • 100% Offline Resilient"}
           breadcrumbs={[
-            { label: 'হোম', href: '/' },
-            { label: 'অনুশীলন হাব', href: '/practice' },
-            { label: 'পদার্থবিজ্ঞান ১ম পত্র' }
+            { label: isBengali ? 'হোম' : 'Home', href: '/' },
+            { label: isBengali ? 'অনুশীলন হাব' : 'Practice Hub', href: '/practice' },
+            { label: isBengali ? 'পদার্থবিজ্ঞান ১ম পত্র' : 'Physics 1st Paper' }
+          ]}
+          stats={[
+            {
+              label: isBengali ? 'মোট প্রশ্ন' : 'Questions',
+              value: isBengali ? `${toBengaliDigits(questions.length)}টি` : `${questions.length} Items`,
+            },
+            {
+              label: isBengali ? 'সময় বরাদ্দ' : 'Time Limit',
+              value: isBengali ? `${toBengaliDigits(15)} মিনিট` : '15 Mins',
+            },
+            {
+              label: isBengali ? 'নেগেটিভ মার্কিং' : 'Negative Mark',
+              value: isBengali ? '০.০০' : '0.00',
+              highlight: true
+            }
           ]}
           actions={
             <div className="flex items-center gap-3">
@@ -355,12 +400,12 @@ export default function PracticePage() {
               {isOnline ? (
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-mono">
                   <Wifi className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>অনলাইন সিঙ্কড</span>
+                  <span>{isBengali ? 'অনলাইন সিঙ্কড' : 'Online Synced'}</span>
                 </div>
               ) : (
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-mono">
                   <WifiOff className="w-3.5 h-3.5 text-amber-600" />
-                  <span>অফলাইন বাফার</span>
+                  <span>{isBengali ? 'অফলাইন বাফার' : 'Offline Buffer'}</span>
                 </div>
               )}
             </div>
@@ -381,7 +426,7 @@ export default function PracticePage() {
               <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-amber-100 dark:border-slate-800">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ED8E22] to-[#B8862B] text-white flex items-center justify-center font-bold text-sm font-mono shadow-xs">
-                    {toBengaliDigits(activeQuestionIndex + 1)}
+                    {isBengali ? toBengaliDigits(activeQuestionIndex + 1) : activeQuestionIndex + 1}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
@@ -391,7 +436,9 @@ export default function PracticePage() {
                       </span>
                     </div>
                     <h3 className="text-sm sm:text-base font-bold font-bengali text-[#0A2540] dark:text-white">
-                      প্রশ্ন {toBengaliDigits(activeQuestionIndex + 1)} / {toBengaliDigits(questions.length)} • কোনো নেগেটিভ মার্কিং নেই
+                      {isBengali
+                        ? `প্রশ্ন ${toBengaliDigits(activeQuestionIndex + 1)} / ${toBengaliDigits(questions.length)} • কোনো নেগেটিভ মার্কিং নেই`
+                        : `Question ${activeQuestionIndex + 1} of ${questions.length} • No Negative Marking`}
                     </h3>
                   </div>
                 </div>
@@ -400,10 +447,14 @@ export default function PracticePage() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <div className="flex items-center gap-2 text-xs font-bengali">
                     <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 font-bold">
-                      উত্তর সম্পন্ন: {toBengaliDigits(Object.keys(answers).length)}টি
+                      {isBengali
+                        ? `উত্তর সম্পন্ন: ${toBengaliDigits(Object.keys(answers).length)}টি`
+                        : `Answered: ${Object.keys(answers).length} of ${questions.length}`}
                     </span>
                     <span className="px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-[#B8862B] dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/60 font-bold">
-                      বাকি: {toBengaliDigits(Math.max(0, questions.length - Object.keys(answers).length))}টি
+                      {isBengali
+                        ? `বাকি: ${toBengaliDigits(Math.max(0, questions.length - Object.keys(answers).length))}টি`
+                        : `Remaining: ${Math.max(0, questions.length - Object.keys(answers).length)}`}
                     </span>
                   </div>
 
@@ -420,10 +471,12 @@ export default function PracticePage() {
               <div className="relative z-10 pt-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-slate-600 dark:text-slate-400 font-bengali">
-                    কুইক নেভিগেটর (যেকোনো প্রশ্নে সরাসরি যান):
+                    {isBengali ? 'কুইক নেভিগেটর (যেকোনো প্রশ্নে সরাসরি যান):' : 'Quick Navigator (Jump directly to any question):'}
                   </span>
                   <span className="text-[11px] text-slate-500 font-mono">
-                    {Math.round(((Object.keys(answers).length) / questions.length) * 100)}% সম্পন্ন
+                    {isBengali
+                      ? `${toBengaliDigits(Math.round(((Object.keys(answers).length) / questions.length) * 100))}% সম্পন্ন`
+                      : `${Math.round(((Object.keys(answers).length) / questions.length) * 100)}% Completed`}
                   </span>
                 </div>
 
@@ -443,10 +496,14 @@ export default function PracticePage() {
                             ? 'bg-emerald-50 dark:bg-emerald-950/50 text-[#0B5D3B] dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 hover:border-emerald-500'
                             : 'bg-[#FAF8F3] dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-[#E5E2DA] dark:border-slate-800 hover:border-[#ED8E22]/50 hover:bg-amber-50/50'
                         }`}
-                        title={`প্রশ্ন ${toBengaliDigits(idx + 1)} ${isAnswered ? '(উত্তর সম্পন্ন)' : '(বাকি)'}`}
-                        aria-label={`প্রশ্ন ${idx + 1}`}
+                        title={
+                          isBengali
+                            ? `প্রশ্ন ${toBengaliDigits(idx + 1)} ${isAnswered ? '(উত্তর সম্পন্ন)' : '(বাকি)'}`
+                            : `Question ${idx + 1} ${isAnswered ? '(Answered)' : '(Pending)'}`
+                        }
+                        aria-label={isBengali ? `প্রশ্ন ${toBengaliDigits(idx + 1)}` : `Question ${idx + 1}`}
                       >
-                        <span className="font-mono">{toBengaliDigits(idx + 1)}</span>
+                        <span className="font-mono">{isBengali ? toBengaliDigits(idx + 1) : idx + 1}</span>
                         {isAnswered ? (
                           <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400 mt-0.5" />
                         ) : (
@@ -485,42 +542,56 @@ export default function PracticePage() {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
                     NCTB ADAPTIVE EVALUATION
                   </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#0B5D3B] font-bold font-bengali">
-                    মূল্যায়ন সম্পন্ন
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[#0B5D3B] dark:text-emerald-300 font-bold font-bengali">
+                    {isBengali ? 'মূল্যায়ন সম্পন্ন' : 'Evaluation Complete'}
                   </span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold font-serif text-[#0A2540] dark:text-white">
-                  জাতীয় লাইভ অলিম্পিয়াড ও বোর্ড প্রস্তুতি সম্পন্ন হয়েছে
+                  {isBengali ? 'জাতীয় লাইভ অলিম্পিয়াড ও বোর্ড প্রস্তুতি সম্পন্ন হয়েছে' : 'National Live Olympiad & Board Exam Practice Complete'}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali max-w-lg mx-auto">
-                  আপনার উত্তরপত্র এনসিটিবি প্রমিত সার্ভারে সফলভাবে মূল্যায়িত হয়েছে। নিচে আপনার বিস্তারিত পারফরম্যান্স বিশ্লেষণ ও উত্তরমালা পর্যালোচনা করুন।
+                  {isBengali
+                    ? 'আপনার উত্তরপত্র এনসিটিবি প্রমিত সার্ভারে সফলভাবে মূল্যায়িত হয়েছে। নিচে আপনার বিস্তারিত পারফরম্যান্স বিশ্লেষণ ও উত্তরমালা পর্যালোচনা করুন।'
+                    : 'Your answer script has been successfully evaluated against NCTB standard criteria. Review your performance breakdown and detailed solutions below.'}
                 </p>
               </div>
 
               {/* Performance Metrics Cards */}
               <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
                 <div className="p-5 rounded-2xl bg-[#FAFAF8] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center space-y-1 shadow-2xs">
-                  <span className="text-xs text-slate-500 font-bengali">অর্জিত স্কোর</span>
+                  <span className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'অর্জিত স্কোর' : 'Score Achieved'}
+                  </span>
                   <div className="text-3xl font-black font-mono text-[#0A2540] dark:text-amber-300">
-                    {toBengaliDigits(correctCount)} / {toBengaliDigits(questions.length)}
+                    {isBengali ? toBengaliDigits(correctCount) : correctCount} / {isBengali ? toBengaliDigits(questions.length) : questions.length}
                   </div>
                   <span className="text-[10px] text-emerald-600 font-mono font-bold">
-                    সঠিক উত্তর: {toBengaliDigits(correctCount)}টি
+                    {isBengali
+                      ? `সঠিক উত্তর: ${toBengaliDigits(correctCount)}টি`
+                      : `Correct Answers: ${correctCount} of ${questions.length}`}
                   </span>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-1 shadow-2xs">
-                  <span className="text-xs text-emerald-800 dark:text-emerald-300 font-bengali">জাতীয় পারসেন্টাইল</span>
+                  <span className="text-xs text-emerald-800 dark:text-emerald-300 font-bengali">
+                    {isBengali ? 'জাতীয় পারসেন্টাইল' : 'National Percentile'}
+                  </span>
                   <div className="text-3xl font-black font-display text-emerald-700 dark:text-emerald-400">
-                    {toBengaliDigits(Math.min(99.5, Math.max(75, correctCount * 10)))}%
+                    {isBengali
+                      ? toBengaliDigits(Math.min(99.5, Math.max(75, correctCount * 10)))
+                      : Math.min(99.5, Math.max(75, correctCount * 10))}%
                   </div>
-                  <span className="text-[10px] text-emerald-700 font-bengali font-bold">শীর্ষ জাতীয় মেধা তালিকা</span>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bengali font-bold">
+                    {isBengali ? 'শীর্ষ জাতীয় মেধা তালিকা' : 'Top National Merit Rank'}
+                  </span>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#FAFAF8] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center space-y-1 shadow-2xs">
-                  <span className="text-xs text-slate-500 font-bengali">সাবমিশন মোড</span>
+                  <span className="text-xs text-slate-500 font-bengali">
+                    {isBengali ? 'সাবমিশন মোড' : 'Submission Mode'}
+                  </span>
                   <div className="text-sm font-bold font-mono text-[#0A2540] dark:text-slate-200 pt-1">
-                    আইডেমপোটেন্ট ভেরিফাইড
+                    {isBengali ? 'আইডেমপোটেন্ট ভেরিফাইড' : 'Idempotent Verified'}
                   </div>
                   <span className="text-[10px] text-slate-500 font-mono">X-Idempotency-Key OK</span>
                 </div>
@@ -530,30 +601,52 @@ export default function PracticePage() {
               <div className="relative z-10 p-6 rounded-2xl bg-[#FAFBFD] dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-4 max-w-3xl mx-auto shadow-2xs">
                 <div className="flex items-center gap-2 text-sm font-bold font-bengali text-[#0A2540] dark:text-amber-300">
                   <Sparkles className="w-4 h-4 text-[#ED8E22]" />
-                  <span>সক্রেটিক অধ্যায়ভিত্তিক পারফরম্যান্স বিশ্লেষণ (Socratic Breakdown):</span>
+                  <span>
+                    {isBengali
+                      ? 'সক্রেটিক অধ্যায়ভিত্তিক পারফরম্যান্স বিশ্লেষণ (Socratic Breakdown):'
+                      : 'Socratic Chapter-wise Performance Breakdown:'}
+                  </span>
                 </div>
                 
                 <div className="space-y-3 text-xs sm:text-sm font-bengali text-slate-700 dark:text-slate-300">
                   <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
                     <span className="flex items-center gap-2">
                       <Target className="w-3.5 h-3.5 text-[#B8862B]" />
-                      <span>১. নিউটোনীয় বলবিদ্যা ও গতির সূত্রাবলী (৩য় অধ্যায়):</span>
+                      <span>
+                        {isBengali
+                          ? '১. নিউটোনীয় বলবিদ্যা ও গতির সূত্রাবলী (৩য় অধ্যায়):'
+                          : '1. Newtonian Mechanics & Laws of Motion (Chapter 3):'}
+                      </span>
                     </span>
-                    <span className="font-mono font-bold text-emerald-600">১০০% আয়ত্ত</span>
+                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                      {isBengali ? '১০০% আয়ত্ত' : '100% Mastery'}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
                     <span className="flex items-center gap-2">
                       <Target className="w-3.5 h-3.5 text-[#B8862B]" />
-                      <span>২. মহাকর্ষ ও পর্যায়বৃত্ত গতি (৬ষ্ঠ ও ৮ম অধ্যায়):</span>
+                      <span>
+                        {isBengali
+                          ? '২. মহাকর্ষ ও পর্যায়বৃত্ত গতি (৬ষ্ঠ ও ৮ম অধ্যায়):'
+                          : '2. Gravitation & Periodic Motion (Chapters 6 & 8):'}
+                      </span>
                     </span>
-                    <span className="font-mono font-bold text-emerald-600">১০০% আয়ত্ত</span>
+                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                      {isBengali ? '১০০% আয়ত্ত' : '100% Mastery'}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
                       <Target className="w-3.5 h-3.5 text-[#B8862B]" />
-                      <span>৩. তাপগতিবিদ্যা ও কার্নো ইঞ্জিন চক্র (১১শ অধ্যায়):</span>
+                      <span>
+                        {isBengali
+                          ? '৩. তাপগতিবিদ্যা ও কার্নো ইঞ্জিন চক্র (১১শ অধ্যায়):'
+                          : '3. Thermodynamics & Carnot Engine Cycle (Chapter 11):'}
+                      </span>
                     </span>
-                    <span className="font-mono font-bold text-emerald-600">১০০% আয়ত্ত</span>
+                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                      {isBengali ? '১০০% আয়ত্ত' : '100% Mastery'}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -563,11 +656,15 @@ export default function PracticePage() {
                 <button
                   type="button"
                   onClick={() => setShowFullReview(!showFullReview)}
-                  className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-bengali font-bold text-sm text-[#0A2540] dark:text-white hover:bg-slate-100 transition cursor-pointer"
+                  className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-bengali font-bold text-sm text-[#0A2540] dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                 >
                   <span className="flex items-center gap-2">
                     <ListChecks className="w-4 h-4 text-[#ED8E22]" />
-                    <span>সকল ১০টি প্রশ্নের উত্তরমালা ও বিস্তারিত সমাধান পর্যালোচনা</span>
+                    <span>
+                      {isBengali
+                        ? 'সকল ১০টি প্রশ্নের উত্তরমালা ও বিস্তারিত সমাধান পর্যালোচনা'
+                        : 'Review All 10 Questions, Answers & Detailed Explanations'}
+                    </span>
                   </span>
                   <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showFullReview ? 'rotate-180 text-[#ED8E22]' : ''}`} />
                 </button>
@@ -587,37 +684,43 @@ export default function PracticePage() {
                         >
                           <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
                             <span className="text-xs font-bold font-mono text-slate-500">
-                              প্রশ্ন {toBengaliDigits(idx + 1)}
+                              {isBengali ? `প্রশ্ন ${toBengaliDigits(idx + 1)}` : `Question ${idx + 1}`}
                             </span>
                             {isUserCorrect ? (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                                <Check className="w-3 h-3" /> সঠিক
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                                <Check className="w-3 h-3" /> {isBengali ? 'সঠিক' : 'Correct'}
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
-                                <XCircle className="w-3 h-3" /> ভুল
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/60 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-800">
+                                <XCircle className="w-3 h-3" /> {isBengali ? 'ভুল' : 'Incorrect'}
                               </span>
                             )}
                           </div>
 
                           <div className="text-sm font-bold text-[#0A2540] dark:text-white font-bengali">
-                            <KaTeXRenderer mathContent={q.stemBn} />
+                            <KaTeXRenderer mathContent={isBengali ? q.stemBn : (q.stemEn || q.stemBn)} />
                           </div>
 
                           <div className="text-xs space-y-1 font-bengali text-slate-600 dark:text-slate-300">
                             <div>
-                              আপনার উত্তর: <strong className={isUserCorrect ? 'text-emerald-700' : 'text-rose-700'}>{userOpt ? userOpt.key + '. ' : 'উত্তর দেননি'}</strong>
-                              {userOpt && <KaTeXRenderer mathContent={userOpt.textBn} />}
+                              {isBengali ? 'আপনার উত্তর: ' : 'Your Answer: '}
+                              <strong className={isUserCorrect ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-700 dark:text-rose-400'}>
+                                {userOpt ? userOpt.key + '. ' : (isBengali ? 'উত্তর দেননি' : 'Not answered')}
+                              </strong>
+                              {userOpt && <KaTeXRenderer mathContent={isBengali ? userOpt.textBn : (userOpt.textEn || userOpt.textBn)} />}
                             </div>
                             <div>
-                              সঠিক উত্তর: <strong className="text-emerald-700">{correctOpt?.key}. </strong>
-                              {correctOpt && <KaTeXRenderer mathContent={correctOpt.textBn} />}
+                              {isBengali ? 'সঠিক উত্তর: ' : 'Correct Answer: '}
+                              <strong className="text-emerald-700 dark:text-emerald-400">{correctOpt?.key}. </strong>
+                              {correctOpt && <KaTeXRenderer mathContent={isBengali ? correctOpt.textBn : (correctOpt.textEn || correctOpt.textBn)} />}
                             </div>
                           </div>
 
                           <div className="p-3 rounded-xl bg-[#FAF8F3] dark:bg-slate-950/60 border border-amber-100 dark:border-slate-800 text-xs font-bengali text-slate-700 dark:text-slate-300">
-                            <span className="font-bold text-[#0A2540] block mb-1">সমাধান ও ব্যাখ্যা:</span>
-                            <KaTeXRenderer mathContent={q.explanationBn} />
+                            <span className="font-bold text-[#0A2540] dark:text-white block mb-1">
+                              {isBengali ? 'সমাধান ও ব্যাখ্যা:' : 'Solution & Explanation:'}
+                            </span>
+                            <KaTeXRenderer mathContent={isBengali ? q.explanationBn : (q.explanationEn || q.explanationBn)} />
                           </div>
                         </div>
                       );
@@ -639,7 +742,7 @@ export default function PracticePage() {
                   icon={<RotateCcw className="w-4 h-4 text-[#B8862B]" />}
                   className="font-bengali min-h-[46px]"
                 >
-                  পুনরায় অনুশীলন শুরু করুন
+                  {isBengali ? 'পুনরায় অনুশীলন শুরু করুন' : 'Retake Practice Exam'}
                 </Button>
 
                 <Link href="/dashboard">
@@ -650,7 +753,7 @@ export default function PracticePage() {
                     iconPosition="right"
                     className="font-bengali min-h-[46px] shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none bg-[#0A2540]"
                   >
-                    ড্যাশবোর্ডে ফলাফল সংরক্ষণ করুন
+                    {isBengali ? 'ড্যাশবোর্ডে ফলাফল সংরক্ষণ করুন' : 'Save Results to Dashboard'}
                   </Button>
                 </Link>
               </div>
@@ -683,25 +786,25 @@ export default function PracticePage() {
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0A2540] text-white text-xs font-bengali font-bold shadow-2xs">
                       <Target className="w-3.5 h-3.5 text-[#ED8E22]" />
-                      <span>প্রশ্ন নং {toBengaliDigits(activeQuestionIndex + 1)}</span>
+                      <span>{isBengali ? `প্রশ্ন নং ${toBengaliDigits(activeQuestionIndex + 1)}` : `Question ${activeQuestionIndex + 1}`}</span>
                     </span>
                     <span className="text-xs px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-slate-800 text-[#B8862B] dark:text-amber-300 border border-amber-200/60 dark:border-slate-700 font-bengali font-semibold">
-                      এইচএসসি পদার্থবিজ্ঞান ১ম পত্র
+                      {isBengali ? 'এইচএসসি পদার্থবিজ্ঞান ১ম পত্র' : 'HSC Physics 1st Paper'}
                     </span>
                     <span className="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-[#0B5D3B] dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60 font-bengali font-semibold">
-                      বোর্ড ও অলিম্পিয়াড স্ট্যান্ডার্ড
+                      {isBengali ? 'বোর্ড ও অলিম্পিয়াড স্ট্যান্ডার্ড' : 'Board & Olympiad Standard'}
                     </span>
                   </div>
 
                   <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400 hidden sm:block">
-                    [১-৪ / A-D কিবোর্ড প্রেস সমর্থিত]
+                    {isBengali ? '[১-৪ / A-D কিবোর্ড প্রেস সমর্থিত]' : '[Keys 1-4 / A-D supported]'}
                   </div>
                 </div>
 
                 {/* Question Stem with KaTeX High-Contrast Rendering */}
                 <div className="relative z-10 space-y-3">
                   <div className="text-base sm:text-xl font-bold text-[#0A2540] dark:text-white font-bengali leading-[1.8] bg-white/70 dark:bg-[#111A2B]/70 p-5 rounded-2xl border border-amber-100 dark:border-slate-800 shadow-2xs">
-                    <KaTeXRenderer mathContent={currentQ.stemBn} />
+                    <KaTeXRenderer mathContent={isBengali ? currentQ.stemBn : (currentQ.stemEn || currentQ.stemBn)} />
                   </div>
                 </div>
 
@@ -710,8 +813,9 @@ export default function PracticePage() {
                   {currentQ.options.map((opt) => (
                     <OptionCard
                       key={opt.id}
+                      id={opt.id}
                       label={opt.key}
-                      text={opt.textBn}
+                      text={isBengali ? opt.textBn : (opt.textEn || opt.textBn)}
                       shortcutKey={opt.shortcut}
                       isSelected={selectedOptionId === opt.id}
                       isCorrect={isSubmitted ? opt.isCorrect : undefined}
@@ -727,23 +831,29 @@ export default function PracticePage() {
                     {isCurrentCorrect ? (
                       <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 dark:text-emerald-300 font-bengali">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                        <span>অভিনন্দন! আপনার উত্তরটি সঠিক হয়েছে।</span>
+                        <span>{isBengali ? 'অভিনন্দন! আপনার উত্তরটি সঠিক হয়েছে।' : 'Congratulations! Your answer is correct.'}</span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 text-xs font-bold text-rose-700 dark:text-rose-400 font-bengali">
                         <XCircle className="w-4 h-4 text-rose-600" />
-                        <span>আপনার প্রদত্ত উত্তরটি সঠিক নয়। সঠিক ব্যাখ্যা নিচে দেখে নিন:</span>
+                        <span>
+                          {isBengali
+                            ? 'আপনার প্রদত্ত উত্তরটি সঠিক নয়। সঠিক ব্যাখ্যা নিচে দেখে নিন:'
+                            : 'Your chosen answer is incorrect. Review the correct explanation below:'}
+                        </span>
                         <span className="ml-auto px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 text-[11px] font-mono">
-                          রিভিশন কিউ-তে যুক্ত
+                          {isBengali ? 'রিভিশন কিউ-তে যুক্ত' : 'Added to Revision Queue'}
                         </span>
                       </div>
                     )}
                     <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-bengali leading-[1.8]">
-                      <KaTeXRenderer mathContent={currentQ.explanationBn} />
+                      <KaTeXRenderer mathContent={isBengali ? currentQ.explanationBn : (currentQ.explanationEn || currentQ.explanationBn)} />
                     </div>
                     <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 pt-2 border-t border-emerald-200/60 dark:border-emerald-800/60 font-mono">
                       <BookOpen className="w-3.5 h-3.5 text-[#B8862B]" />
-                      <span>সূত্র: {currentQ.sourceCitation}</span>
+                      <span>
+                        {isBengali ? `সূত্র: ${currentQ.sourceCitation}` : `Source: ${currentQ.sourceCitationEn || currentQ.sourceCitation}`}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -762,7 +872,7 @@ export default function PracticePage() {
                     icon={<Sparkles className="w-4 h-4 text-[#B8862B]" />}
                     className="min-h-[42px] font-bengali"
                   >
-                    <span>সক্রেটিক সংকেত (AI Hint)</span>
+                    <span>{isBengali ? 'সক্রেটিক সংকেত (AI Hint)' : 'Socratic AI Hint'}</span>
                   </Button>
 
                   {/* Question Navigation Controls with Tactile 3D Depth */}
@@ -772,11 +882,11 @@ export default function PracticePage() {
                       size="md"
                       onClick={handlePrev}
                       disabled={activeQuestionIndex === 0}
-                      aria-label="পূর্ববর্তী প্রশ্ন"
+                      aria-label={isBengali ? "পূর্ববর্তী প্রশ্ন" : "Previous Question"}
                       className="px-4 min-h-[42px]"
                     >
                       <ArrowLeft className="w-4 h-4 mr-1.5" />
-                      <span className="font-bengali">পূর্ববর্তী</span>
+                      <span className="font-bengali">{isBengali ? 'পূর্ববর্তী' : 'Previous'}</span>
                     </Button>
 
                     {!isSubmitted ? (
@@ -788,7 +898,7 @@ export default function PracticePage() {
                         data-testid="submit-answer-btn"
                         className="shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none min-h-[42px] font-bengali px-5"
                       >
-                        উত্তর যাচাই করুন
+                        {isBengali ? 'উত্তর যাচাই করুন' : 'Verify Answer'}
                       </Button>
                     ) : activeQuestionIndex === questions.length - 1 ? (
                       <Button
@@ -799,7 +909,7 @@ export default function PracticePage() {
                         data-testid="submit-exam-script-btn"
                         className="shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none min-h-[42px] font-bengali px-6 bg-[#0A2540]"
                       >
-                        সম্পূর্ণ খাতা জমা দিন
+                        {isBengali ? 'সম্পূর্ণ খাতা জমা দিন' : 'Submit Exam Script'}
                       </Button>
                     ) : (
                       <Button
@@ -811,7 +921,7 @@ export default function PracticePage() {
                         data-testid="next-question-btn"
                         className="shadow-[0_4px_0_0_#033829] active:translate-y-1 active:shadow-none min-h-[42px] font-bengali px-5"
                       >
-                        পরবর্তী প্রশ্ন
+                        {isBengali ? 'পরবর্তী প্রশ্ন' : 'Next Question'}
                       </Button>
                     )}
                   </div>
@@ -848,15 +958,17 @@ export default function PracticePage() {
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
                       RAPID REVISION COMPANION
                     </span>
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#0B5D3B] font-bold font-bengali">
-                      LaTeX সমীকরণ
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-[#0B5D3B] dark:text-emerald-300 font-bold font-bengali">
+                      {isBengali ? 'LaTeX সমীকরণ' : 'LaTeX Equations'}
                     </span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold font-bengali text-[#0A2540] dark:text-white pt-0.5">
-                    পদার্থবিজ্ঞান ১ম পত্র: প্রয়োজনীয় গাণিতিক সূত্রাবলী
+                    {isBengali ? 'পদার্থবিজ্ঞান ১ম পত্র: প্রয়োজনীয় গাণিতিক সূত্রাবলী' : 'Physics 1st Paper: Essential Mathematical Formulas'}
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
-                    অনুশীলন চলাকালীন প্রশ্নের সমাধান ও দ্রুত সূত্র পর্যালোচনার জন্য সংক্ষিপ্ত ফর্মুলা শিট
+                    {isBengali
+                      ? 'অনুশীলন চলাকালীন প্রশ্নের সমাধান ও দ্রুত সূত্র পর্যালোচনার জন্য সংক্ষিপ্ত ফর্মুলা শিট'
+                      : 'Quick formula cheat-sheet for reference and rapid review during live practice'}
                   </p>
                 </div>
               </div>
@@ -864,9 +976,9 @@ export default function PracticePage() {
               <button
                 type="button"
                 onClick={() => setIsFormulaExpanded(!isFormulaExpanded)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800 text-xs font-bold font-bengali text-[#0A2540] dark:text-emerald-300 hover:bg-emerald-50 transition cursor-pointer self-start sm:self-auto"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800 text-xs font-bold font-bengali text-[#0A2540] dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-slate-800 transition cursor-pointer self-start sm:self-auto"
               >
-                <span>{isFormulaExpanded ? 'সংক্ষিপ্ত করুন' : 'বিস্তারিত দেখুন'}</span>
+                <span>{isFormulaExpanded ? (isBengali ? 'সংক্ষিপ্ত করুন' : 'Collapse') : (isBengali ? 'বিস্তারিত দেখুন' : 'Expand')}</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isFormulaExpanded ? 'rotate-180' : ''}`} />
               </button>
             </div>
@@ -876,7 +988,7 @@ export default function PracticePage() {
                 <div className="p-4 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-slate-800 shadow-2xs space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#0A2540] dark:text-white font-bengali">
                     <span className="w-2 h-2 rounded-full bg-[#ED8E22]" />
-                    <span>বলবিদ্যা ও ত্বরণ</span>
+                    <span>{isBengali ? 'বলবিদ্যা ও ত্বরণ' : 'Mechanics & Acceleration'}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 font-sans text-xs overflow-x-auto">
                     <KaTeXRenderer mathContent="F = ma \implies a = \frac{F}{m}" />
@@ -889,7 +1001,7 @@ export default function PracticePage() {
                 <div className="p-4 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-slate-800 shadow-2xs space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#0A2540] dark:text-white font-bengali">
                     <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                    <span>মহাকর্ষ ও ধ্রুবক</span>
+                    <span>{isBengali ? 'মহাকর্ষ ও ধ্রুবক' : 'Gravitation & Constants'}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 font-sans text-xs overflow-x-auto">
                     <KaTeXRenderer mathContent="F = G \frac{m_1 m_2}{r^2}" />
@@ -902,7 +1014,7 @@ export default function PracticePage() {
                 <div className="p-4 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-slate-800 shadow-2xs space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#0A2540] dark:text-white font-bengali">
                     <span className="w-2 h-2 rounded-full bg-blue-600" />
-                    <span>পর্যাবৃত্ত গতি ও দোলক</span>
+                    <span>{isBengali ? 'পর্যাবৃত্ত গতি ও দোলক' : 'Periodic Motion & Oscillator'}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 font-sans text-xs overflow-x-auto">
                     <KaTeXRenderer mathContent="T = 2\pi\sqrt{\frac{L}{g}} \implies T \propto \sqrt{L}" />
@@ -915,10 +1027,10 @@ export default function PracticePage() {
                 <div className="p-4 rounded-2xl bg-white/95 dark:bg-[#0B141C]/95 border border-emerald-200/80 dark:border-slate-800 shadow-2xs space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#0A2540] dark:text-white font-bengali">
                     <span className="w-2 h-2 rounded-full bg-purple-600" />
-                    <span>তাপগতিবিদ্যা ও কার্নো</span>
+                    <span>{isBengali ? 'তাপগতিবিদ্যা ও কার্নো' : 'Thermodynamics & Carnot'}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 font-sans text-xs overflow-x-auto">
-                    <KaTeXRenderer mathContent="PV^\gamma = \text{ধ্রুবক}" />
+                    <KaTeXRenderer mathContent={isBengali ? "PV^\\gamma = \\text{ধ্রুবক}" : "PV^\\gamma = \\text{constant}"} />
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 font-sans text-xs overflow-x-auto">
                     <KaTeXRenderer mathContent="\eta = 1 - \frac{T_2}{T_1} = \frac{W}{Q_1}" />
@@ -951,14 +1063,16 @@ export default function PracticePage() {
                     ASSESSMENT FRAMEWORK
                   </span>
                   <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[#0A2540] dark:text-slate-300 font-bold font-bengali">
-                    মূল্যায়ন নির্দেশিকা
+                    {isBengali ? 'মূল্যায়ন নির্দেশিকা' : 'Evaluation Framework'}
                   </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-serif font-bold text-[#0A2540] dark:text-white pt-0.5">
-                  অ্যাডাপ্টিভ প্র্যাকটিস এরিনার নিয়ম ও মেধা পরিমাপের মানদণ্ড
+                  {isBengali ? 'অ্যাডাপ্টিভ প্র্যাকটিস এরিনার নিয়ম ও মেধা পরিমাপের মানদণ্ড' : 'Adaptive Practice Arena Rules & Assessment Standards'}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
-                  শিক্ষার্থীদের আত্মবিশ্বাস বৃদ্ধি এবং জাতীয় স্তরে নিখুঁত প্রস্তুতির জন্য ৪টি প্রধান মূলনীতি
+                  {isBengali
+                    ? 'শিক্ষার্থীদের আত্মবিশ্বাস বৃদ্ধি এবং জাতীয় স্তরে নিখুঁত প্রস্তুতির জন্য ৪টি প্রধান মূলনীতি'
+                    : '4 core pedagogical pillars to build learner confidence and national-level mastery'}
                 </p>
               </div>
             </div>
@@ -970,14 +1084,16 @@ export default function PracticePage() {
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
-                    ১. নেগেটিভ মার্কিং শূন্য
+                    {isBengali ? '১. নেগেটিভ মার্কিং শূন্য' : '1. Zero Negative Marking'}
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
-                    ভুল উত্তরের জন্য কোনো নম্বর কাটা হবে না। নির্ভয়ে প্রতিটি প্রশ্ন সমাধান করে ধারণা স্পষ্ট করুন।
+                    {isBengali
+                      ? 'ভুল উত্তরের জন্য কোনো নম্বর কাটা হবে না। নির্ভয়ে প্রতিটি প্রশ্ন সমাধান করে ধারণা স্পষ্ট করুন।'
+                      : 'No marks deducted for wrong answers. Solve questions fearlessly to clarify fundamental concepts.'}
                   </p>
                 </div>
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#B8862B] font-bengali font-bold">
-                  ভয়হীন লার্নিং পরিবেশ
+                  {isBengali ? 'ভয়হীন লার্নিং পরিবেশ' : 'Fear-free Learning Space'}
                 </div>
               </div>
 
@@ -987,14 +1103,16 @@ export default function PracticePage() {
                     <Wifi className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
-                    ২. অফলাইন বাফার সিস্টেম
+                    {isBengali ? '২. অফলাইন বাফার সিস্টেম' : '2. Offline Buffer System'}
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
-                    নেটওয়ার্ক ড্রপ করলেও লোকাল বাফারে প্রতিটি উত্তর সুরক্ষিত থাকবে এবং পুনরায় সংযুক্ত হলে সিঙ্ক হবে।
+                    {isBengali
+                      ? 'নেটওয়ার্ক ড্রপ করলেও লোকাল বাফারে প্রতিটি উত্তর সুরক্ষিত থাকবে এবং পুনরায় সংযুক্ত হলে সিঙ্ক হবে।'
+                      : 'Responses are safely preserved in local buffer during network drops and sync on reconnection.'}
                   </p>
                 </div>
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#0B5D3B] font-bengali font-bold">
-                  শতভাগ সংযোগ বিচ্ছিন্ন সহনশীল
+                  {isBengali ? 'শতভাগ সংযোগ বিচ্ছিন্ন সহনশীল' : '100% Offline Resilient'}
                 </div>
               </div>
 
@@ -1004,14 +1122,16 @@ export default function PracticePage() {
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
-                    ৩. আইডেমপোটেন্ট সাবমিশন
+                    {isBengali ? '৩. আইডেমপোটেন্ট সাবমিশন' : '3. Idempotent Submissions'}
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
-                    ক্রিপ্টোগ্রাফিক কী দ্বারা প্রতিটি উত্তর ভেরিফাইড থাকে, ফলে ডুপ্লিকেট কাউন্টিংয়ের ঝুঁকি শূন্য।
+                    {isBengali
+                      ? 'ক্রিপ্টোগ্রাফিক কী দ্বারা প্রতিটি উত্তর ভেরিফাইড থাকে, ফলে ডুপ্লিকেট কাউন্টিংয়ের ঝুঁকি শূন্য।'
+                      : 'Every response is cryptographically keyed to eliminate duplicate submissions.'}
                   </p>
                 </div>
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-[#0A2540] dark:text-sky-400 font-bengali font-bold">
-                  ডেটাবেজ ও সার্ভার সিকিউরড
+                  {isBengali ? 'ডেটাবেজ ও সার্ভার সিকিউরড' : 'Database & Server Secured'}
                 </div>
               </div>
 
@@ -1021,14 +1141,16 @@ export default function PracticePage() {
                     <Brain className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
-                    ৪. সক্রেটিক পারফরম্যান্স
+                    {isBengali ? '৪. সক্রেটিক পারফরম্যান্স' : '4. Socratic Mastery Review'}
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-bengali leading-relaxed mt-2">
-                    ভুল হওয়া টপিকগুলো স্বয়ংক্রিয়ভাবে স্পেসড-রিপিটিশন রিভিশন কিউতে জমা হবে পরবর্তী অনুশীলনের জন্য।
+                    {isBengali
+                      ? 'ভুল হওয়া টপিকগুলো স্বয়ংক্রিয়ভাবে স্পেসড-রিপিটিশন রিভিশন কিউতে জমা হবে পরবর্তী অনুশীলনের জন্য।'
+                      : 'Challenging topics are automatically queued into spaced-repetition revision cycles.'}
                   </p>
                 </div>
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-purple-700 dark:text-purple-300 font-bengali font-bold">
-                  স্বয়ংক্রিয় রিভিশন ট্র্যাকিং
+                  {isBengali ? 'স্বয়ংক্রিয় রিভিশন ট্র্যাকিং' : 'Automated Revision Tracking'}
                 </div>
               </div>
             </div>
@@ -1056,15 +1178,17 @@ export default function PracticePage() {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8862B] dark:text-[#ED8E22] font-sans">
                     EXAMINATION STRATEGY FAQ
                   </span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100 text-[#B8862B] font-bold font-bengali">
-                    কৌশল ও প্রস্তুতি
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-[#B8862B] dark:text-amber-300 font-bold font-bengali">
+                    {isBengali ? 'কৌশল ও প্রস্তুতি' : 'Strategy & Prep'}
                   </span>
                 </div>
                 <h3 className="text-lg sm:text-2xl font-serif font-bold text-[#0A2540] dark:text-white pt-0.5">
-                  অনুশীলন ও বোর্ড পরীক্ষা প্রস্তুতি কৌশল সংক্রান্ত প্রশ্নোত্তর
+                  {isBengali ? 'অনুশীলন ও বোর্ড পরীক্ষা প্রস্তুতি কৌশল সংক্রান্ত প্রশ্নোত্তর' : 'Practice & Board Exam Preparation FAQ'}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bengali pt-0.5">
-                  পদার্থবিজ্ঞানের এমসিকিউ ও গাণিতিক সমস্যা দ্রুত সমাধানের প্রমাণিত পদ্ধতি
+                  {isBengali
+                    ? 'পদার্থবিজ্ঞানের এমসিকিউ ও গাণিতিক সমস্যা দ্রুত সমাধানের প্রমাণিত পদ্ধতি'
+                    : 'Proven methods for solving physics MCQs and numerical problems with speed and precision'}
                 </p>
               </div>
             </div>
@@ -1072,20 +1196,36 @@ export default function PracticePage() {
             <div className="relative z-10 space-y-3 max-w-4xl">
               {[
                 {
-                  q: 'পদার্থবিজ্ঞানের গাণিতিক প্রশ্নে সময় বাঁচানোর সেরা উপায় কী?',
-                  a: 'প্রশ্নে কী কী উপাত্ত দেওয়া আছে তা চিহ্নিত করে সরাসরি সূত্র প্রয়োগ করুন। অপশনগুলোর একক এবং মানের পার্থক্য লক্ষ্য করলে অনেক সময় পূর্ণ গণনা না করেই সঠিক অপশন অনুমান করা যায়।'
+                  q: isBengali
+                    ? 'পদার্থবিজ্ঞানের গাণিতিক প্রশ্নে সময় বাঁচানোর সেরা উপায় কী?'
+                    : 'What is the best way to save time on physics numerical questions?',
+                  a: isBengali
+                    ? 'প্রশ্নে কী কী উপাত্ত দেওয়া আছে তা চিহ্নিত করে সরাসরি সূত্র প্রয়োগ করুন। অপশনগুলোর একক এবং মানের পার্থক্য লক্ষ্য করলে অনেক সময় পূর্ণ গণনা না করেই সঠিক অপশন অনুমান করা যায়।'
+                    : 'Identify given variables and apply formulas directly. Inspecting option units and orders of magnitude often reveals the correct answer without lengthy manual calculation.'
                 },
                 {
-                  q: 'কিবোর্ড শর্টকাট (১, ২, ৩, ৪ বা A, B, C, D) কীভাবে কাজ করে?',
-                  a: 'কম্পিউটার বা ল্যাপটপে অনুশীলন করার সময় মাউস ব্যবহার না করেই কিবোর্ডের ১, ২, ৩, ৪ অথবা A, B, C, D কি চেপে সরাসরি অপশন নির্বাচন করা যায়। এটি রিয়েল-টাইম অলিম্পিয়াড প্রতিযোগিতায় সময় বাঁচায়।'
+                  q: isBengali
+                    ? 'কিবোর্ড শর্টকাট (১, ২, ৩, ৪ বা A, B, C, D) কীভাবে কাজ করে?'
+                    : 'How do keyboard shortcuts (1, 2, 3, 4 or A, B, C, D) work?',
+                  a: isBengali
+                    ? 'কম্পিউটার বা ল্যাপটপে অনুশীলন করার সময় মাউস ব্যবহার না করেই কিবোর্ডের ১, ২, ৩, ৪ অথবা A, B, C, D কি চেপে সরাসরি অপশন নির্বাচন করা যায়। এটি রিয়েল-টাইম অলিম্পিয়াড প্রতিযোগিতায় সময় বাঁচায়।'
+                    : 'When practicing on desktop or laptop, press 1, 2, 3, 4 or A, B, C, D to select options instantly without touching the mouse, saving vital seconds in live Olympiads.'
                 },
                 {
-                  q: 'ভুল উত্তর দিলে কি সেই প্রশ্ন পুনরায় অনুশীলনের সুযোগ পাব?',
-                  a: 'হ্যাঁ, আপনি কোনো প্রশ্নের ভুল উত্তর সাবমিট করলে আমাদের অ্যাডাপ্টিভ অ্যালগরিদম স্বয়ংক্রিয়ভাবে সেই টপিকটি আপনার "স্পেসড-রিপিটিশন রিভিশন কিউ"-তে ৩য়, ৭ম ও ১৪তম দিনের রিভিশন হিসেবে যুক্ত করে নেবে।'
+                  q: isBengali
+                    ? 'ভুল উত্তর দিলে কি সেই প্রশ্ন পুনরায় অনুশীলনের সুযোগ পাব?'
+                    : 'If I answer incorrectly, will I get a chance to practice that question again?',
+                  a: isBengali
+                    ? 'হ্যাঁ, আপনি কোনো প্রশ্নের ভুল উত্তর সাবমিট করলে আমাদের অ্যাডাপ্টিভ অ্যালগরিদম স্বয়ংক্রিয়ভাবে সেই টপিকটি আপনার "স্পেসড-রিপিটিশন রিভিশন কিউ"-তে ৩য়, ৭ম ও ১৪তম দিনের রিভিশন হিসেবে যুক্ত করে নেবে।'
+                    : 'Yes, whenever you submit an incorrect answer, our adaptive engine automatically queues that topic into your spaced-repetition revision schedule for days 3, 7, and 14.'
                 },
                 {
-                  q: 'এখানে দেওয়া প্রশ্নগুলো কি বোর্ড পরীক্ষা ও বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষার জন্য কার্যকর?',
-                  a: 'হ্যাঁ, প্রতিটি প্রশ্ন এনসিটিবি অনুমোদিত মূল পাঠ্যবই এবং ঢাকা বিশ্ববিদ্যালয়, বুয়েট প্রিলিমিনারি ও মেডিকেল ভর্তি পরীক্ষার স্ট্যান্ডার্ড বজায় রেখে সাজানো হয়েছে।'
+                  q: isBengali
+                    ? 'এখানে দেওয়া প্রশ্নগুলো কি বোর্ড পরীক্ষা ও বিশ্ববিদ্যালয়ের ভর্তি পরীক্ষার জন্য কার্যকর?'
+                    : 'Are these questions suitable for Board and University Admission exams?',
+                  a: isBengali
+                    ? 'হ্যাঁ, প্রতিটি প্রশ্ন এনসিটিবি অনুমোদিত মূল পাঠ্যবই এবং ঢাকা বিশ্ববিদ্যালয়, বুয়েট প্রিলিমিনারি ও মেডিকেল ভর্তি পরীক্ষার স্ট্যান্ডার্ড বজায় রেখে সাজানো হয়েছে।'
+                    : 'Yes, every question is calibrated against NCTB official textbooks and standards from Dhaka University, BUET Preliminary, and Medical admission tests.'
                 }
               ].map((item, idx) => {
                 const isOpen = openFaqIndex === idx;
