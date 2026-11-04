@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="50%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <filter id="iconShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- High-Resolution Rounded Squircle Canvas -->
+  <rect width="512" height="512" rx="120" fill="url(#iconBg)" filter="url(#iconShadow)" />
+
+  <!-- Academic Graduation Cap & Growth Vector Crest -->
+  <g transform="translate(106, 126)">
+    <!-- Mortarboard Top Rhombus -->
+    <path d="M 150 40 L 270 95 L 150 150 L 30 95 Z" fill="#ffffff" />
+    <!-- Skullcap Base -->
+    <path d="M 75 125 L 75 190 Q 150 230 225 190 L 225 125" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" />
+    <!-- Tassel Cord & Pendant -->
+    <path d="M 270 95 L 270 185" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" />
+    <circle cx="270" cy="195" r="10" fill="#fbbf24" />
+    <!-- Platform Accent Star / Spark -->
+    <path d="M 150 0 L 155 20 L 175 25 L 155 30 L 150 50 L 145 30 L 125 25 L 145 20 Z" fill="#fbbf24" />
+  </g>
+
+  <!-- Subtle Rim Glow -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.25" />
+</svg>
