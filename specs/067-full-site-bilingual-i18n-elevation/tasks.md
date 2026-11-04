@@ -113,7 +113,7 @@
 - [x] T090: Bilingual elevation for Chapter Actions (Read & Notes drawer, HLS video lecture launcher, Practice CTAs).
 - [x] T091: Bilingual elevation for Board Exam Pedagogical Roadmap (4 stages) & FAQ Accordions.
 - [x] T092: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
-- [ ] T093: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/learn/`.
+- [x] T093: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/learn/`.
 
 
 
