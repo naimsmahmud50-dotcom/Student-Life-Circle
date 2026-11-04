@@ -93,5 +93,16 @@
 - [x] T074: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
 - [x] T075: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/auth/`.
 
+## Phase 12: Student Personalized Dashboard Bilingual Elevation (`frontend/src/pages/dashboard.tsx`)
+- [x] T076: Bilingual elevation for AppHead metadata, Breadcrumb & Student Greeting (`স্বাগতম, তানজিম হাসান` / `Welcome, Tanzim Hasan`).
+- [x] T077: Bilingual elevation for Header Action Buttons (`আজকের পাঠে যান` / `Go to Today's Lesson`, `কুইজ প্র্যাকটিস` / `Quiz Practice`).
+- [x] T078: Bilingual elevation for Tier 1 Bento Hero Card (Badges, Goal headings, Stage selector pills, Study target ring, Quick Resume CTA).
+- [x] T079: Bilingual elevation for Tier 1 Real-Time Live Challenge Radar Card (Countdown timer units, localized numerals, lobby participant counter, Join CTA).
+- [x] T080: Bilingual elevation for Tier 2 4-Tier Metric Ribbon (Study streak, Solved questions, Accuracy rate, National percentile).
+- [x] T081: Bilingual elevation for Tier 3 3D STEM Virtual Labs Banner & Modal Launchers (Physics, Chemistry, Astronomy 3D simulations).
+- [x] T082: Bilingual elevation for Interactive 3D STEM Modal Dialogs (Headers, descriptions, close aria-labels).
+- [x] T083: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
+- [ ] T084: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/dashboard/`.
+
 
 
