@@ -102,7 +102,7 @@
 - [x] T081: Bilingual elevation for Tier 3 3D STEM Virtual Labs Banner & Modal Launchers (Physics, Chemistry, Astronomy 3D simulations).
 - [x] T082: Bilingual elevation for Interactive 3D STEM Modal Dialogs (Headers, descriptions, close aria-labels).
 - [x] T083: Quality Assurance (TypeScript zero-error check, backend test suites, strict zero-emoji scan).
-- [ ] T084: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/dashboard/`.
+- [x] T084: Git commit, push to `origin/main`, deploy to GitHub Pages, and verify live HTTP 200 for `/dashboard/`.
 
 
 
