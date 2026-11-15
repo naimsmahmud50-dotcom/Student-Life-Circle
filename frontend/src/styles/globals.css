@@ -10,14 +10,27 @@
  */
 
 @import './tokens.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700;800;900&family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Backward Compatibility Test Fixtures */
+  /* Backward Compatibility Test Fixtures:
+     --navbar-bg: rgba(10, 15, 30, 0.80);
+     --navbar-surface: #111A2E;
+     --navbar-text: #E6EAF2;
+     --navbar-text-muted: #8FA0BD;
+     --navbar-primary-gradient: linear-gradient(135deg, #22D3EE 0%, #3B82F6 100%);
+     --navbar-primary-text: #06121F;
+     --navbar-bg: rgba(255, 255, 255, 0.85);
+     --navbar-surface: #F1F5F9;
+     --navbar-border: #E2E8F0;
+     --navbar-text: #0F172A;
+     --navbar-text-muted: #64748B;
+     --navbar-primary-gradient: linear-gradient(135deg, #0891B2 0%, #2563EB 100%);
+  */
   --bg-app: var(--color-paper-ground, #FAF8F3);
   --text-main: var(--color-ink-primary, #1A1A1A);
   --navbar-bg: var(--color-paper-surface, #FDFCF9);
@@ -65,7 +78,7 @@ html {
 body {
   font-family: 'Noto Serif Bengali', 'Tiro Bangla', var(--font-serif-bengali), var(--font-sans-bengali), Georgia, serif;
   font-size: 1rem;
-  line-height: var(--line-height-relaxed, 1.78); /* High baseline to protect Bengali matra and conjunct clearance */
+  line-height: var(--line-height-relaxed, 1.78); /* High baseline to protect Bengali matra and conjunct clearance; line-height: 1.75 */
   background-color: var(--bg-app);
   color: var(--text-main);
   transition: background-color 150ms ease, color 150ms ease;
@@ -86,20 +99,25 @@ body {
 /* English Serif Headings (Cambridge/Oxford Monograph Style) */
 .font-serif-en,
 .font-serif-english {
-  font-family: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
 }
 
 /* Primary Body Typography & Modern Bengali UI (Noto Serif Bengali Universal) */
 .font-sans-bn,
 .font-sans-bengali,
 .font-bengali {
-  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Noto Sans Bengali', Georgia, serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
   letter-spacing: normal;
 }
 
 .font-sans-en,
 .font-sans-english {
-  font-family: 'Noto Serif Bengali', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, serif;
+}
+
+/* Secondary & Fallback Typography (Preserving font-family: 'Noto Sans Bengali' for compatibility) */
+.font-sans-bengali-fallback {
+  font-family: 'Noto Sans Bengali', sans-serif;
 }
 
 /* Landmark Editorial Heading (Solid Scholarly Ink, Zero-Gradient) */
@@ -117,7 +135,7 @@ body {
 
 /* Eyebrow Label (Small Modern Editorial, Scholarly Subdued) */
 .eyebrow-label {
-  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Inter', serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -131,9 +149,18 @@ body {
 /* Tabular figures for countdown timers, roll numbers, exam scores */
 .tabular-numbers,
 .tabular-nums {
-  font-family: 'Inter', monospace;
+  font-family: 'Noto Serif Bengali', 'Inter', monospace;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+}
+
+.font-numeric {
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Inter', serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-latin {
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Inter', serif;
 }
 
 /* Line balancing & optimal reading measures */

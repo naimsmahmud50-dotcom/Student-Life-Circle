@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Zero-IDOR, Workbox-Grade SW, idb Offline Vault, WCAG 2.2 AAA
  */
 
-const CACHE_VERSION = 'slc-v11-noto-serif-bengali-universal';
+const CACHE_VERSION = 'slc-v12-noto-serif-bengali-universal-live';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGES_CACHE = `${CACHE_VERSION}-pages`;
 const FONTS_CACHE = `${CACHE_VERSION}-fonts`;
@@ -36,9 +36,10 @@ const STATIC_MEDIA_REGEX = /\.(?:png|jpg|jpeg|svg|webp|avif|ico|gif)$/i;
 const STATIC_CODE_REGEX = /\.(?:css|js)$/i;
 
 /**
- * Service Worker Installation: Pre-caches critical app shell and offline portal
+ * Service Worker Installation: Pre-caches critical app shell and activates immediately
  */
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll(CORE_PRECACHE_URLS).catch((err) => {

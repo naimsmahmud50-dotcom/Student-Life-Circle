@@ -56,6 +56,20 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
           navigator.serviceWorker.register(swPath)
             .then((registration) => {
               setSwRegistration(registration);
+              registration.update().catch(() => {});
+              if (registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      newWorker.postMessage({ type: 'SKIP_WAITING' });
+                    }
+                  });
+                }
+              });
             })
             .catch((err) => {
               console.warn('PWA Service Worker registration non-fatal error:', err);
