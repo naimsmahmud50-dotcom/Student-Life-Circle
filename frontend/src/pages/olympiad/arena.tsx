@@ -34,13 +34,15 @@ import { AppHead } from '@/components/layout/Head';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
-import { toBengaliDigits } from '@/lib/i18n';
+import { toBengaliDigits, useTranslation } from '@/lib/i18n';
 
 // Types for competitive multiplayer tournament
 interface ParticipantPeer {
   id: string;
   name: string;
+  nameEn?: string;
   institution: string;
+  institutionEn?: string;
   eloRating: number;
   currentScore: number;
   latencyMs: number;
@@ -50,71 +52,104 @@ interface ParticipantPeer {
 interface BracketMatchNode {
   id: string;
   roundName: string;
+  roundNameEn?: string;
   playerA: string;
+  playerAEn?: string;
   playerB: string;
+  playerBEn?: string;
   scoreA?: number;
   scoreB?: number;
   winner?: string;
+  winnerEn?: string;
   isCurrentMatch?: boolean;
 }
 
 interface OlympiadQuestion {
   id: string;
   discipline: string;
+  disciplineEn?: string;
   stemBn: string;
   stemEn: string;
-  options: { id: string; key: 'A' | 'B' | 'C' | 'D'; textBn: string; isCorrect: boolean }[];
+  options: { id: string; key: 'A' | 'B' | 'C' | 'D'; textBn: string; textEn?: string; isCorrect: boolean }[];
   explanationBn: string;
+  explanationEn?: string;
   sourceCitation: string;
+  sourceCitationEn?: string;
 }
 
 const SAMPLE_QUESTIONS: OlympiadQuestion[] = [
   {
     id: "oly_stem_01",
     discipline: "পদার্থবিজ্ঞান (Physics)",
+    disciplineEn: "Physics (পদার্থবিজ্ঞান)",
     stemBn: "একটি রকেট মহাকাশে $v_0$ ধ্রুব বেগে গতিশীল। যদি প্রতি সেকেন্ডে $\\frac{dm}{dt} = -\\alpha m$ হারে ভর নির্গত হয়, তবে $t$ সময় পর রকেটের ত্বরণ $a(t)$ কত হবে?",
-    stemEn: "A rocket moves in space with a constant velocity. If mass is ejected at the rate dm/dt = -alpha*m with relative velocity u, what is the acceleration?",
+    stemEn: "A rocket moves in space with a constant velocity. If mass is ejected at the rate dm/dt = -alpha*m with relative velocity u, what is the acceleration $a(t)$ after time $t$?",
     options: [
-      { id: "opt_01a", key: "A", textBn: "$a(t) = \\alpha u$", isCorrect: true },
-      { id: "opt_01b", key: "B", textBn: "$a(t) = \\frac{u}{\\alpha}$", isCorrect: false },
-      { id: "opt_01c", key: "C", textBn: "$a(t) = \\alpha^2 u t$", isCorrect: false },
-      { id: "opt_01d", key: "D", textBn: "$a(t) = \\frac{\\alpha u}{t}$", isCorrect: false },
+      { id: "opt_01a", key: "A", textBn: "$a(t) = \\alpha u$", textEn: "$a(t) = \\alpha u$", isCorrect: true },
+      { id: "opt_01b", key: "B", textBn: "$a(t) = \\frac{u}{\\alpha}$", textEn: "$a(t) = \\frac{u}{\\alpha}$", isCorrect: false },
+      { id: "opt_01c", key: "C", textBn: "$a(t) = \\alpha^2 u t$", textEn: "$a(t) = \\alpha^2 u t$", isCorrect: false },
+      { id: "opt_01d", key: "D", textBn: "$a(t) = \\frac{\\alpha u}{t}$", textEn: "$a(t) = \\frac{\\alpha u}{t}$", isCorrect: false },
     ],
     explanationBn: "রকেটের ভর নির্গমন সমীকরণ $F = -u \\frac{dm}{dt} = u(\\alpha m)$। সুতরাং $a = \\frac{F}{m} = \\alpha u$, যা সময় $t$-এর ওপর অনির্ভরশীল।",
-    sourceCitation: "জাতীয় পদার্থবিজ্ঞান অলিম্পিয়াড (উচ্চ মাধ্যমিক স্তর)"
+    explanationEn: "Rocket thrust equation $F = -u \\frac{dm}{dt} = u(\\alpha m)$. Therefore $a = \\frac{F}{m} = \\alpha u$, which is independent of time $t$.",
+    sourceCitation: "জাতীয় পদার্থবিজ্ঞান অলিম্পিয়াড (উচ্চ মাধ্যমিক স্তর)",
+    sourceCitationEn: "National Physics Olympiad (Higher Secondary Level)"
   },
   {
     id: "oly_stem_02",
     discipline: "উচ্চতর গণিত (Higher Mathematics)",
+    disciplineEn: "Higher Mathematics (উচ্চতর গণিত)",
     stemBn: "বৃত্তাকার ক্ষেত্রফল $x^2 + y^2 \\le 4$ এবং অধিবৃত্ত $y^2 \\ge 3x$ দ্বারা আবদ্ধ সাধারণ ক্ষুদ্রতর অঞ্চলের ক্ষেত্রফল কত বর্গ একক?",
     stemEn: "What is the area of the smaller region enclosed by the circle x^2 + y^2 <= 4 and parabola y^2 >= 3x?",
     options: [
-      { id: "opt_02a", key: "A", textBn: "$\\frac{4\\pi}{3} - \\frac{\\sqrt{3}}{2}$", isCorrect: false },
-      { id: "opt_02b", key: "B", textBn: "$\\frac{2\\pi}{3} + \\frac{\\sqrt{3}}{2}$", isCorrect: false },
-      { id: "opt_02c", key: "C", textBn: "$\\frac{4\\pi}{3} + \\frac{\\sqrt{3}}{2}$", isCorrect: false },
-      { id: "opt_02d", key: "D", textBn: "$\\frac{4\\pi}{3} - \\frac{2\\sqrt{3}}{3}$", isCorrect: true },
+      { id: "opt_02a", key: "A", textBn: "$\\frac{4\\pi}{3} - \\frac{\\sqrt{3}}{2}$", textEn: "$\\frac{4\\pi}{3} - \\frac{\\sqrt{3}}{2}$", isCorrect: false },
+      { id: "opt_02b", key: "B", textBn: "$\\frac{2\\pi}{3} + \\frac{\\sqrt{3}}{2}$", textEn: "$\\frac{2\\pi}{3} + \\frac{\\sqrt{3}}{2}$", isCorrect: false },
+      { id: "opt_02c", key: "C", textBn: "$\\frac{4\\pi}{3} + \\frac{\\sqrt{3}}{2}$", textEn: "$\\frac{4\\pi}{3} + \\frac{\\sqrt{3}}{2}$", isCorrect: false },
+      { id: "opt_02d", key: "D", textBn: "$\\frac{4\\pi}{3} - \\frac{2\\sqrt{3}}{3}$", textEn: "$\\frac{4\\pi}{3} - \\frac{2\\sqrt{3}}{3}$", isCorrect: true },
     ],
     explanationBn: "ছেদবিন্দুদ্বয় $(1, \\pm\\sqrt{3})$। নির্দিষ্ট যৌগিক ইন্টিগ্রেশন প্রয়োগ করে নির্ণীত মোট ক্ষেত্রফল $\\frac{4\\pi}{3} - \\frac{2\\sqrt{3}}{3}$ বর্গ একক।",
-    sourceCitation: "বাংলাদেশ গণিত অলিম্পিয়াড (বিডিএমও হাইস্কুল ও কলেজ উইং)"
+    explanationEn: "Intersection points are $(1, \\pm\\sqrt{3})$. By definite integration, total enclosed area is $\\frac{4\\pi}{3} - \\frac{2\\sqrt{3}}{3}$ sq units.",
+    sourceCitation: "বাংলাদেশ গণিত অলিম্পিয়াড (বিডিএমও হাইস্কুল ও কলেজ উইং)",
+    sourceCitationEn: "Bangladesh Mathematical Olympiad (BdMO High School & College Wing)"
   },
   {
     id: "oly_stem_03",
     discipline: "রসায়ন (Chemistry)",
+    disciplineEn: "Chemistry (রসায়ন)",
     stemBn: "একটি প্রথম ক্রমের (First-order) তেজস্ক্রিয় ক্ষয় বিক্রিয়ায় $75\\%$ সম্পন্ন হতে $60$ মিনিট সময় লাগে। ওই বিক্রিয়াটির অর্ধায়ু ($t_{1/2}$) কত মিনিট?",
     stemEn: "A first-order radioactive decay takes 60 minutes to complete 75%. What is its half-life (t_1/2)?",
     options: [
-      { id: "opt_03a", key: "A", textBn: "$15\\text{ মিনিট}$", isCorrect: false },
-      { id: "opt_03b", key: "B", textBn: "$30\\text{ মিনিট}$", isCorrect: true },
-      { id: "opt_03c", key: "C", textBn: "$45\\text{ মিনিট}$", isCorrect: false },
-      { id: "opt_03d", key: "D", textBn: "$20\\text{ মিনিট}$", isCorrect: false },
+      { id: "opt_03a", key: "A", textBn: "$15\\text{ মিনিট}$", textEn: "$15\\text{ min}$", isCorrect: false },
+      { id: "opt_03b", key: "B", textBn: "$30\\text{ মিনিট}$", textEn: "$30\\text{ min}$", isCorrect: true },
+      { id: "opt_03c", key: "C", textBn: "$45\\text{ মিনিট}$", textEn: "$45\\text{ min}$", isCorrect: false },
+      { id: "opt_03d", key: "D", textBn: "$20\\text{ মিনিট}$", textEn: "$20\\text{ min}$", isCorrect: false },
     ],
     explanationBn: "$75\\%$ ক্ষয় অর্থ $2$টি অর্ধায়ু অতিক্রান্ত হওয়া ($100\\% \\to 50\\% \\to 25\\%$)। সুতরাং $2 \\times t_{1/2} = 60\\text{ মিনিট} \\implies t_{1/2} = 30\\text{ মিনিট}$।",
-    sourceCitation: "জাতীয় রসায়ন অলিম্পিয়াড (রসায়ন ১ম পত্র, রাসায়নিক পরিবর্তন)"
+    explanationEn: "$75\\%$ decay means 2 half-lives elapsed ($100\\% \\to 50\\% \\to 25\\%$). Hence $2 \\times t_{1/2} = 60\\text{ min} \\implies t_{1/2} = 30\\text{ min}$.",
+    sourceCitation: "জাতীয় রসায়ন অলিম্পিয়াড (রসায়ন ১ম পত্র, রাসায়নিক পরিবর্তন)",
+    sourceCitationEn: "National Chemistry Olympiad (Chemistry Paper 1, Chemical Changes)"
   }
 ];
 
 export default function OlympiadArenaPage() {
-  const [currentRound, setCurrentRound] = useState<string>("সেমি-ফাইনাল (Semi-Finals)");
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'জাতীয় লাইভ স্টেম অলিম্পিয়াড অ্যারেনা | অগ্রযাত্রা'
+      : 'National Live STEM Olympiad Arena | Ogrojatra';
+  }, [isBn]);
+
+  const [currentRound, setCurrentRound] = useState<string>(isBn ? "সেমি-ফাইনাল (Semi-Finals)" : "Semi-Finals");
+
+  useEffect(() => {
+    if (currentRound === "সেমি-ফাইনাল (Semi-Finals)" && !isBn) {
+      setCurrentRound("Semi-Finals");
+    } else if (currentRound === "Semi-Finals" && isBn) {
+      setCurrentRound("সেমি-ফাইনাল (Semi-Finals)");
+    }
+  }, [isBn]);
   const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
@@ -125,18 +160,18 @@ export default function OlympiadArenaPage() {
 
   // Participants in live competitive bracket
   const [participants] = useState<ParticipantPeer[]>([
-    { id: "p1", name: "রাকিবুল হাসান (আপনি)", institution: "ঢাকা কলেজ", eloRating: 1680, currentScore: 2, latencyMs: 18, isSelf: true },
-    { id: "p2", name: "তানভীর আহমেদ", institution: "নটর ডেম কলেজ", eloRating: 1675, currentScore: 2, latencyMs: 24 },
-    { id: "p3", name: "সৌমেন চক্রবর্তী", institution: "রাজশাহী কলেজ", eloRating: 1650, currentScore: 1, latencyMs: 32 },
-    { id: "p4", name: "ফারজানা শারমিন", institution: "ভিকারুননিসা নূন স্কুল অ্যান্ড কলেজ", eloRating: 1640, currentScore: 1, latencyMs: 29 },
+    { id: "p1", name: "রাকিবুল হাসান (আপনি)", nameEn: "Rakibul Hasan (You)", institution: "ঢাকা কলেজ", institutionEn: "Dhaka College", eloRating: 1680, currentScore: 2, latencyMs: 18, isSelf: true },
+    { id: "p2", name: "তানভীর আহমেদ", nameEn: "Tanvir Ahmed", institution: "নটর ডেম কলেজ", institutionEn: "Notre Dame College", eloRating: 1675, currentScore: 2, latencyMs: 24 },
+    { id: "p3", name: "সৌমেন চক্রবর্তী", nameEn: "Soumen Chakraborty", institution: "রাজশাহী কলেজ", institutionEn: "Rajshahi College", eloRating: 1650, currentScore: 1, latencyMs: 32 },
+    { id: "p4", name: "ফারজানা শারমিন", nameEn: "Farzana Sharmin", institution: "ভিকারুননিসা নূন স্কুল অ্যান্ড কলেজ", institutionEn: "Viqarunnisa Noon School & College", eloRating: 1640, currentScore: 1, latencyMs: 29 },
   ]);
 
   // Tournament ladder bracket nodes
   const bracketTree: BracketMatchNode[] = [
-    { id: "b1", roundName: "কোয়ার্টার ফাইনাল ১", playerA: "রাকিবুল হাসান", playerB: "সৌমেন চক্রবর্তী", scoreA: 3, scoreB: 1, winner: "রাকিবুল হাসান" },
-    { id: "b2", roundName: "কোয়ার্টার ফাইনাল ২", playerA: "তানভীর আহমেদ", playerB: "ফারজানা শারমিন", scoreA: 3, scoreB: 2, winner: "তানভীর আহমেদ" },
-    { id: "b3", roundName: "সেমি-ফাইনাল (চলমান)", playerA: "রাকিবুল হাসান", playerB: "তানভীর আহমেদ", isCurrentMatch: true },
-    { id: "b4", roundName: "গ্র্যান্ড ফাইনাল", playerA: "অপেক্ষমান", playerB: "অপেক্ষমান" }
+    { id: "b1", roundName: "কোয়ার্টার ফাইনাল ১", roundNameEn: "Quarter-Final 1", playerA: "রাকিবুল হাসান", playerAEn: "Rakibul Hasan", playerB: "সৌমেন চক্রবর্তী", playerBEn: "Soumen Chakraborty", scoreA: 3, scoreB: 1, winner: "রাকিবুল হাসান", winnerEn: "Rakibul Hasan" },
+    { id: "b2", roundName: "কোয়ার্টার ফাইনাল ২", roundNameEn: "Quarter-Final 2", playerA: "তানভীর আহমেদ", playerAEn: "Tanvir Ahmed", playerB: "ফারজানা শারমিন", playerBEn: "Farzana Sharmin", scoreA: 3, scoreB: 2, winner: "তানভীর আহমেদ", winnerEn: "Tanvir Ahmed" },
+    { id: "b3", roundName: "সেমি-ফাইনাল (চলমান)", roundNameEn: "Semi-Finals (Live)", playerA: "রাকিবুল হাসান", playerAEn: "Rakibul Hasan", playerB: "তানভীর আহমেদ", playerBEn: "Tanvir Ahmed", isCurrentMatch: true },
+    { id: "b4", roundName: "গ্র্যান্ড ফাইনাল", roundNameEn: "Grand Finals", playerA: "অপেক্ষমান", playerAEn: "TBD", playerB: "অপেক্ষমান", playerBEn: "TBD" }
   ];
 
   // Latency-compensated countdown timer
@@ -179,15 +214,15 @@ export default function OlympiadArenaPage() {
   return (
     <>
       <AppHead
-        title="জাতীয় লাইভ স্টেম অলিম্পিয়াড অ্যারেনা | অগ্রযাত্রা"
-        description="রিয়েল-টাইম মাল্টিপ্লেয়ার অলিম্পিয়াড টুর্নামেন্ট ব্র্যাকেট, Elo রেটিং ভিত্তিক পেয়ারিং এবং ল্যাটেন্সি-কম্পেনসেটেড টাইমার।"
+        title={isBn ? "জাতীয় লাইভ স্টেম অলিম্পিয়াড অ্যারেনা | অগ্রযাত্রা" : "National Live STEM Olympiad Arena | Ogrojatra"}
+        description={isBn ? "রিয়েল-টাইম মাল্টিপ্লেয়ার অলিম্পিয়াড টুর্নামেন্ট ব্র্যাকেট, Elo রেটিং ভিত্তিক পেয়ারিং এবং ল্যাটেন্সি-কম্পেনসেটেড টাইমার।" : "Real-time multiplayer Olympiad tournament bracket, Elo-rating matchmaking, and latency-compensated timer."}
         canonicalUrl="/olympiad/arena"
         ogType="website"
       />
 
       <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#0B132B] text-slate-900 dark:text-slate-100 font-sans selection:bg-[#0A2540] selection:text-white">
         {/* Sticky Global Navigation */}
-        <Navbar currentStage="দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" />
+        <Navbar currentStage={isBn ? "দেশব্যাপী লাইভ অলিম্পিয়াড চ্যালেঞ্জ" : "Nationwide Live Olympiad Challenge"} />
 
         {/* Main Tournament Arena Grid */}
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8" data-testid="olympiad-arena-container">
@@ -201,15 +236,15 @@ export default function OlympiadArenaPage() {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs font-bold font-mono">
-                    জাতীয় স্টেম অলিম্পিয়াড ২০২৬
+                    {isBn ? 'জাতীয় স্টেম অলিম্পিয়াড ২০২৬' : 'National STEM Olympiad 2026'}
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-bold flex items-center gap-1">
                     <Activity className="w-3 h-3 text-emerald-600" />
-                    <span>ল্যাটেন্সি সিঙ্কড ({peerLatencyMs}ms)</span>
+                    <span>{isBn ? `ল্যাটেন্সি সিঙ্কড (${peerLatencyMs}ms)` : `Latency Synced (${peerLatencyMs}ms) • ল্যাটেন্সি সিঙ্কড`}</span>
                   </span>
                 </div>
                 <h1 className="text-xl sm:text-2xl font-black font-bengali text-[#0A2540] dark:text-white pt-1">
-                  লাইভ টুর্নামেন্ট ল্যাডার: {currentRound}
+                  {isBn ? `লাইভ টুর্নামেন্ট ল্যাডার: ${currentRound}` : `Live Tournament Ladder: ${currentRound}`}
                 </h1>
               </div>
             </div>
@@ -217,17 +252,17 @@ export default function OlympiadArenaPage() {
             {/* Server-Synchronized Timer & Score */}
             <div className="flex items-center gap-4">
               <div className="px-4 py-2 rounded-xl bg-[#FAFAF8] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
-                <span className="text-[11px] text-slate-500 font-bengali block">অবশিষ্ট সময়</span>
+                <span className="text-[11px] text-slate-500 font-bengali block">{isBn ? 'অবশিষ্ট সময়' : 'Time Remaining'}</span>
                 <span className="text-xl font-mono font-black text-[#0A2540] dark:text-amber-300 flex items-center justify-center gap-1">
                   <Timer className="w-4 h-4 text-amber-600" />
-                  {toBengaliDigits(timeRemaining)}s
+                  {isBn ? toBengaliDigits(timeRemaining) : timeRemaining}s
                 </span>
               </div>
 
               <div className="px-5 py-2 rounded-xl bg-[#0A2540] text-white text-center shadow-sm">
-                <span className="text-[11px] text-slate-300 font-bengali block">আপনার পয়েন্ট</span>
+                <span className="text-[11px] text-slate-300 font-bengali block">{isBn ? 'আপনার পয়েন্ট' : 'Your Points'}</span>
                 <span className="text-xl font-mono font-black text-amber-300">
-                  {toBengaliDigits(selfScore)} / {toBengaliDigits(SAMPLE_QUESTIONS.length)}
+                  {isBn ? toBengaliDigits(selfScore) : selfScore} / {isBn ? toBengaliDigits(SAMPLE_QUESTIONS.length) : SAMPLE_QUESTIONS.length}
                 </span>
               </div>
             </div>
@@ -244,9 +279,9 @@ export default function OlympiadArenaPage() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2 text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
                     <Layers className="w-4 h-4 text-blue-600" />
-                    <span>টুর্নামেন্ট ব্র্যাকেট প্রগ্রেস (Bracket Ladder)</span>
+                    <span>{isBn ? 'টুর্নামেন্ট ব্র্যাকেট প্রগ্রেস (Bracket Ladder)' : 'Tournament Bracket Progress (ব্র্যাকেট ল্যাডার)'}</span>
                   </div>
-                  <span className="text-xs font-mono text-slate-500">সিঙ্গেল এলিমিনেশন</span>
+                  <span className="text-xs font-mono text-slate-500">{isBn ? 'সিঙ্গেল এলিমিনেশন' : 'Single Elimination'}</span>
                 </div>
 
                 <div className="space-y-3">
@@ -260,21 +295,21 @@ export default function OlympiadArenaPage() {
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs font-bold font-bengali text-slate-500 pb-1">
-                        <span>{b.roundName}</span>
+                        <span>{isBn ? b.roundName : (b.roundNameEn || b.roundName)}</span>
                         {b.isCurrentMatch && (
                           <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-mono">
-                            লাইভ দ্বৈরথ
+                            {isBn ? 'লাইভ দ্বৈরথ' : 'Live Duel'}
                           </span>
                         )}
                       </div>
                       <div className="flex items-center justify-between text-xs sm:text-sm font-bengali pt-1">
                         <div className="flex items-center gap-1.5 font-medium text-slate-800 dark:text-slate-200">
                           <Swords className="w-3.5 h-3.5 text-slate-400" />
-                          <span>{b.playerA} <strong className="font-mono text-slate-400">vs</strong> {b.playerB}</span>
+                          <span>{isBn ? b.playerA : (b.playerAEn || b.playerA)} <strong className="font-mono text-slate-400">vs</strong> {isBn ? b.playerB : (b.playerBEn || b.playerB)}</span>
                         </div>
                         {b.winner && (
                           <span className="text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                            জয়ী: {b.winner}
+                            {isBn ? 'জয়ী: ' : 'Winner: '}{isBn ? b.winner : (b.winnerEn || b.winner)}
                           </span>
                         )}
                       </div>
@@ -288,9 +323,9 @@ export default function OlympiadArenaPage() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2 text-sm font-bold font-bengali text-[#0A2540] dark:text-white">
                     <Users className="w-4 h-4 text-emerald-600" />
-                    <span>লাইভ অ্যারেনা লিডারবোর্ড (Elo Matchmaking)</span>
+                    <span>{isBn ? 'লাইভ অ্যারেনা লিডারবোর্ড (Elo Matchmaking)' : 'Live Arena Leaderboard (Elo Matchmaking)'}</span>
                   </div>
-                  <span className="text-xs font-mono text-slate-500">৪ প্রতিযোগী</span>
+                  <span className="text-xs font-mono text-slate-500">{isBn ? '৪ প্রতিযোগী' : '4 Competitors'}</span>
                 </div>
 
                 <div className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -302,10 +337,10 @@ export default function OlympiadArenaPage() {
                         </span>
                         <div>
                           <p className="text-xs sm:text-sm font-bold font-bengali text-slate-900 dark:text-slate-100 flex items-center gap-1">
-                            <span>{p.name}</span>
+                            <span>{isBn ? p.name : (p.nameEn || p.name)}</span>
                             {p.isSelf && <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">YOU</span>}
                           </p>
-                          <span className="text-[11px] text-slate-500 font-bengali">{p.institution}</span>
+                          <span className="text-[11px] text-slate-500 font-bengali">{isBn ? p.institution : (p.institutionEn || p.institution)}</span>
                         </div>
                       </div>
 
@@ -314,7 +349,7 @@ export default function OlympiadArenaPage() {
                           Elo: {p.eloRating}
                         </span>
                         <span className="text-[10px] font-mono text-slate-500">
-                          {p.latencyMs}ms • {toBengaliDigits(p.currentScore)} পয়েন্ট
+                          {p.latencyMs}ms • {isBn ? toBengaliDigits(p.currentScore) : p.currentScore} {isBn ? 'পয়েন্ট' : 'pts'}
                         </span>
                       </div>
                     </div>
@@ -336,32 +371,32 @@ export default function OlympiadArenaPage() {
                   
                   <div className="space-y-2">
                     <h2 className="text-2xl font-black font-bengali text-[#0A2540] dark:text-white">
-                      অলিম্পিয়াড সেমি-ফাইনাল রাউন্ড সম্পন্ন!
+                      {isBn ? 'অলিম্পিয়াড সেমি-ফাইনাল রাউন্ড সম্পন্ন!' : 'Olympiad Semi-Final Round Complete!'}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-bengali max-w-md mx-auto">
-                      আপনার ফলাফল এনসিটিবি এবং জাতীয় স্টেম অলিম্পিয়াড কেন্দ্রীয় সার্ভারে টাইম-লকড হ্যাশ দ্বারা সংরক্ষিত হয়েছে।
+                      {isBn ? 'আপনার ফলাফল এনসিটিবি এবং জাতীয় স্টেম অলিম্পিয়াড কেন্দ্রীয় সার্ভারে টাইম-লকড হ্যাশ দ্বারা সংরক্ষিত হয়েছে।' : 'Your results have been securely recorded on NCTB and National STEM Olympiad servers with a time-locked hash.'}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto">
                     <div className="p-4 rounded-xl bg-[#FAFAF8] dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                      <span className="text-xs text-slate-500 font-bengali block">অর্জিত পদক</span>
+                      <span className="text-xs text-slate-500 font-bengali block">{isBn ? 'অর্জিত পদক' : 'Medal Awarded'}</span>
                       <span className="text-lg font-black font-bengali text-amber-600 dark:text-amber-400">
-                        স্বর্ণপদক (Gold)
+                        {isBn ? 'স্বর্ণপদক (Gold)' : 'Gold Medal (স্বর্ণপদক)'}
                       </span>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#FAFAF8] dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                      <span className="text-xs text-slate-500 font-bengali block">নতুন Elo রেটিং</span>
+                      <span className="text-xs text-slate-500 font-bengali block">{isBn ? 'নতুন Elo রেটিং' : 'New Elo Rating'}</span>
                       <span className="text-lg font-mono font-black text-[#0A2540] dark:text-white">
-                        ১৭০৪ (+২৪)
+                        {isBn ? '১৭০৪ (+২৪)' : '1704 (+24)'}
                       </span>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#FAFAF8] dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                      <span className="text-xs text-slate-500 font-bengali block">ব্র্যাকেট স্ট্যাটাস</span>
+                      <span className="text-xs text-slate-500 font-bengali block">{isBn ? 'ব্র্যাকেট স্ট্যাটাস' : 'Bracket Status'}</span>
                       <span className="text-lg font-bold font-bengali text-emerald-600">
-                        ফাইনালে উত্তীর্ণ
+                        {isBn ? 'ফাইনালে উত্তীর্ণ' : 'Advanced to Finals'}
                       </span>
                     </div>
                   </div>
@@ -379,14 +414,14 @@ export default function OlympiadArenaPage() {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-[#0A2540] border border-slate-300 font-semibold font-bengali text-sm shadow-sm hover:bg-slate-50 transition active:translate-y-0.5"
                     >
                       <RotateCcw className="w-4 h-4" />
-                      <span>পুনরায় অনুশীলন করুন</span>
+                      <span>{isBn ? 'পুনরায় অনুশীলন করুন' : 'Practice Again'}</span>
                     </button>
 
                     <Link
                       href="/dashboard"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold font-bengali text-sm"
                     >
-                      <span>ড্যাশবোর্ডে ফিরে যান</span>
+                      <span>{isBn ? 'ড্যাশবোর্ডে ফিরে যান' : 'Return to Dashboard'}</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -399,15 +434,15 @@ export default function OlympiadArenaPage() {
                   <div className="space-y-3 pb-5 border-b border-slate-200 dark:border-slate-800">
                     <div className="flex items-center justify-between">
                       <span className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold font-bengali">
-                        {currentQ.discipline}
+                        {isBn ? currentQ.discipline : (currentQ.disciplineEn || currentQ.discipline)}
                       </span>
                       <span className="text-xs font-mono font-bold text-slate-500">
-                        প্রশ্ন {toBengaliDigits(questionIndex + 1)} / {toBengaliDigits(SAMPLE_QUESTIONS.length)}
+                        {isBn ? `প্রশ্ন ${toBengaliDigits(questionIndex + 1)} / ${toBengaliDigits(SAMPLE_QUESTIONS.length)}` : `Question ${questionIndex + 1} / ${SAMPLE_QUESTIONS.length}`}
                       </span>
                     </div>
 
                     <div className="text-base sm:text-lg font-bold font-bengali text-slate-900 dark:text-white leading-[1.8]">
-                      <KaTeXRenderer mathContent={currentQ.stemBn} />
+                      <KaTeXRenderer mathContent={isBn ? currentQ.stemBn : (currentQ.stemEn || currentQ.stemBn)} />
                     </div>
                   </div>
 
@@ -441,7 +476,7 @@ export default function OlympiadArenaPage() {
                               {opt.key}
                             </span>
                             <div className="text-sm font-bengali text-slate-800 dark:text-slate-200">
-                              <KaTeXRenderer mathContent={opt.textBn} />
+                              <KaTeXRenderer mathContent={isBn ? opt.textBn : (opt.textEn || opt.textBn)} />
                             </div>
                           </div>
 
@@ -463,20 +498,20 @@ export default function OlympiadArenaPage() {
                         {isSelectedCorrect ? (
                           <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
                             <CheckCircle2 className="w-4 h-4" />
-                            সঠিক উত্তর! পয়েন্ট যুক্ত হয়েছে।
+                            {isBn ? 'সঠিক উত্তর! পয়েন্ট যুক্ত হয়েছে।' : 'Correct answer! Points awarded.'}
                           </span>
                         ) : (
                           <span className="text-rose-700 dark:text-rose-400 flex items-center gap-1.5">
                             <XCircle className="w-4 h-4" />
-                            উত্তরটি সঠিক নয়।
+                            {isBn ? 'উত্তরটি সঠিক নয়।' : 'Incorrect answer.'}
                           </span>
                         )}
                       </div>
                       <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-bengali">
-                        <KaTeXRenderer mathContent={currentQ.explanationBn} />
+                        <KaTeXRenderer mathContent={isBn ? currentQ.explanationBn : (currentQ.explanationEn || currentQ.explanationBn)} />
                       </div>
                       <p className="text-[11px] text-slate-500 font-mono pt-1">
-                        উৎস: {currentQ.sourceCitation}
+                        {isBn ? 'উৎস: ' : 'Source: '}{isBn ? currentQ.sourceCitation : (currentQ.sourceCitationEn || currentQ.sourceCitation)}
                       </p>
                     </div>
                   )}
@@ -485,7 +520,7 @@ export default function OlympiadArenaPage() {
                   <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                     <span className="text-xs font-mono text-slate-500 flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                      টাইম-লকড হ্যাশ দ্বারা সংরক্ষিত
+                      {isBn ? 'টাইম-লকড হ্যাশ দ্বারা সংরক্ষিত' : 'Protected by Time-Locked Hash'}
                     </span>
 
                     {!isAnswerSubmitted ? (
@@ -496,7 +531,7 @@ export default function OlympiadArenaPage() {
                         className="px-6 py-2.5 bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold font-bengali text-sm rounded-lg disabled:opacity-50 min-h-[44px] cursor-pointer"
                         data-testid="olympiad-submit-btn"
                       >
-                        উত্তর জমা দিন
+                        {isBn ? 'উত্তর জমা দিন' : 'Submit Answer'}
                       </button>
                     ) : (
                       <button
@@ -505,7 +540,7 @@ export default function OlympiadArenaPage() {
                         className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold font-bengali text-sm rounded-lg min-h-[44px] cursor-pointer"
                         data-testid="olympiad-next-btn"
                       >
-                        <span>{questionIndex === SAMPLE_QUESTIONS.length - 1 ? 'রাউন্ড সমাপ্ত করুন' : 'পরবর্তী দ্বৈরথ'}</span>
+                        <span>{questionIndex === SAMPLE_QUESTIONS.length - 1 ? (isBn ? 'রাউন্ড সমাপ্ত করুন' : 'Complete Round') : (isBn ? 'পরবর্তী দ্বৈরথ' : 'Next Duel')}</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     )}

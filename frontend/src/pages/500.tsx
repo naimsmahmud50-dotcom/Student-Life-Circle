@@ -10,14 +10,23 @@
  * STANDARDS: UI/UX Pro Max, OWASP ASVS L2, Zero-Emoji, Human-Centric
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Home, RefreshCw, AlertCircle, ShieldCheck } from 'lucide-react';
 import { AppHead } from '@/components/layout/Head';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 export default function Custom500() {
+  const { language } = useTranslation();
+
+  useEffect(() => {
+    document.title = language === 'bn'
+      ? 'সার্ভার সংযোগে বিঘ্ন (৫০০) | অগ্রযাত্রা'
+      : 'Server Connection Interruption (500) | Ogrojatra';
+  }, [language]);
+
   const handleReload = () => {
     if (typeof window !== 'undefined') {
       window.location.reload();
@@ -27,14 +36,22 @@ export default function Custom500() {
   return (
     <>
       <AppHead
-        title="সার্ভার সংযোগে বিঘ্ন (৫০০) | অগ্রযাত্রা"
-        description="সার্ভারে সামান্য যান্ত্রিক গোলযোগ দেখা দিয়েছে, আমাদের কারিগরি দল বিষয়টি দেখছে। বাংলাদেশের জাতীয় ডিজিটাল শিক্ষামূলক প্ল্যাটফর্ম অগ্রযাত্রা।"
+        title={
+          language === 'bn'
+            ? 'সার্ভার সংযোগে বিঘ্ন (৫০০) | অগ্রযাত্রা'
+            : 'Server Connection Interruption (500) | Ogrojatra'
+        }
+        description={
+          language === 'bn'
+            ? 'সার্ভারে সামান্য যান্ত্রিক গোলযোগ দেখা দিয়েছে, আমাদের কারিগরি দল বিষয়টি দেখছে। বাংলাদেশের জাতীয় ডিজিটাল শিক্ষামূলক প্ল্যাটফর্ম অগ্রযাত্রা।'
+            : 'A minor technical disruption occurred on the server; our engineering team is addressing it. Ogrojatra - National Digital Educational Platform of Bangladesh.'
+        }
         canonicalUrl="/500"
         ogType="website"
       />
 
       <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#070D18] bg-academic-paper-grain text-[#1A1A1A] dark:text-[#F8FAFC] font-sans selection:bg-[#0A2540] selection:text-white transition-colors duration-200">
-        <Navbar currentStage="এইচএসসি বিজ্ঞান (HSC Science)" />
+        <Navbar currentStage={language === 'bn' ? 'এইচএসসি বিজ্ঞান (HSC Science)' : 'HSC Science'} />
 
         <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative overflow-hidden">
           <div className="max-w-2xl w-full text-center relative z-10 space-y-6">
@@ -45,18 +62,20 @@ export default function Custom500() {
             </div>
 
             {/* Display Numeral */}
-            <div className="space-y-3">
+            <div className="space-y-3 font-display">
               <span className="font-mono font-bold text-7xl sm:text-8xl tracking-tight text-[#0A2540] dark:text-[#A8B7D8] block select-none">
-                500
+                {language === 'bn' ? '৫০০' : '500'}
               </span>
               
               {/* Heartwarming Human Bengali Microcopy */}
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif-bn font-bold text-[#0A2540] dark:text-[#E8EFF8] leading-tight balance-text">
-                সার্ভারে সামান্য যান্ত্রিক গোলযোগ দেখা দিয়েছে, আমাদের কারিগরি দল বিষয়টি দেখছে
+                {language === 'bn' ? 'সার্ভারে সামান্য যান্ত্রিক গোলযোগ দেখা দিয়েছে, আমাদের কারিগরি দল বিষয়টি দেখছে' : 'A minor server disruption occurred; our technical team is investigating'}
               </h1>
 
               <p className="text-sm sm:text-base text-[#5A687D] dark:text-[#94A3B8] font-bengali leading-relaxed max-w-lg mx-auto editorial-measure">
-                আমরা স্বয়ংক্রিয়ভাবে ত্রুটির বিবরণ পেয়েছি এবং অতি দ্রুত তা স্বাভাবিক করার কাজ চলছে। তোমার যেকোনো সংরক্ষিত তথ্য বা পরীক্ষার খাতা সম্পূর্ণ নিরাপদ রয়েছে।
+                {language === 'bn'
+                  ? 'আমরা স্বয়ংক্রিয়ভাবে ত্রুটির বিবরণ পেয়েছি এবং অতি দ্রুত তা স্বাভাবিক করার কাজ চলছে। তোমার যেকোনো সংরক্ষিত তথ্য বা পরীক্ষার খাতা সম্পূর্ণ নিরাপদ রয়েছে।'
+                  : 'We have automatically received diagnostic logs and recovery is in progress. Any saved study data or submitted exam scripts remain completely safe and intact.'}
               </p>
             </div>
 
@@ -65,10 +84,10 @@ export default function Custom500() {
               <button
                 type="button"
                 onClick={handleReload}
-                className="btn-tactile-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-white font-semibold font-bengali text-sm sm:text-base rounded-xl shadow-paper-sm min-h-[48px] cursor-pointer"
+                className="btn-tactile-primary shadow-[0_4px_0_0_#1D4ED8] active:translate-y-1 active:shadow-none w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-white font-semibold font-bengali text-sm sm:text-base rounded-2xl shadow-paper-sm min-h-[48px] cursor-pointer"
               >
                 <RefreshCw className="w-5 h-5" strokeWidth={1.75} />
-                <span>পুনরায় চেষ্টা করুন</span>
+                <span>{language === 'bn' ? 'পুনরায় চেষ্টা করুন' : 'Try Again'}</span>
               </button>
 
               <Link
@@ -76,14 +95,18 @@ export default function Custom500() {
                 className="btn-tactile-outline w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-[#0A2540] dark:text-[#E8EFF8] font-semibold font-bengali text-sm sm:text-base rounded-xl min-h-[48px]"
               >
                 <Home className="w-5 h-5" strokeWidth={1.75} />
-                <span>হোমপেজে ফিরে যাও</span>
+                <span>{language === 'bn' ? 'হোমপেজে ফিরে যাও' : 'Return to Homepage'}</span>
               </Link>
             </div>
 
             {/* Platform Security Assurance */}
             <div className="pt-6 border-t border-[#E5E2DA] dark:border-[#263147] text-xs text-[#5A687D] dark:text-[#94A3B8] font-bengali inline-flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-700 dark:text-emerald-400" strokeWidth={1.75} />
-              <span>আইএসও ২৭০০১ ও পোস্টগ্রিস এসকিউএল পিআইটিআর সুরক্ষিত ডাটাবেস</span>
+              <span>
+                {language === 'bn'
+                  ? 'আইএসও ২৭০০১ ও পোস্টগ্রিস এসকিউএল পিআইটিআর সুরক্ষিত ডাটাবেস'
+                  : 'ISO 27001 & PostgreSQL PITR Secure Enterprise Database'}
+              </span>
             </div>
 
           </div>

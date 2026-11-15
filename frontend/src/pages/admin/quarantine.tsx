@@ -24,6 +24,7 @@ import { useAuth } from '@/lib/auth-context';
 import { UserRole, ADMIN_PANEL_ROLES } from '@/lib/auth-types';
 import { withAdminAuth } from '@/components/auth/AdminAuthGuard';
 import { apiClient } from '@/lib/api-client';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 interface QuarantineQuestion {
   id: string;
@@ -145,6 +146,9 @@ function formatBengaliTimestamp(isoOrText: string): string {
 }
 
 function AdminQuarantineConsole() {
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
   const { user, roles } = useAuth();
 
   const [questions, setQuestions] = useState<QuarantineQuestion[]>(DEFAULT_QUESTIONS);
@@ -153,6 +157,16 @@ function AdminQuarantineConsole() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [toast, setToast] = useState<ToastState | null>(null);
+
+  const pageTitle = isBn
+    ? "কনটেন্ট কোয়ারেন্টিন ও অডিট কনসোল | অগ্রযাত্রা অ্যাডমিন"
+    : "Content Quarantine & Audit Console | Ogrojatra Admin";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = pageTitle;
+    }
+  }, [pageTitle]);
 
   // Filters & Search
   const [filterStatus, setFilterStatus] = useState<'ALL' | 'FLAGGED' | 'QUARANTINED'>('ALL');
@@ -462,7 +476,7 @@ function AdminQuarantineConsole() {
   return (
     <>
       <Head>
-        <title>কনটেন্ট কোয়ারেন্টিন ও অডিট কনসোল | অগ্রযাত্রা অ্যাডমিন</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <div className="min-h-screen bg-[var(--bg-app)] text-[var(--text-main)] transition-colors duration-200">
@@ -473,12 +487,16 @@ function AdminQuarantineConsole() {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-semibold px-2 py-0.5 rounded bg-[var(--color-danger-subtle)] text-[var(--color-danger)] border border-[var(--color-danger-border)]">
-                  অ্যাডমিন অপারেশনস
+                  {isBn ? "অ্যাডমিন অপারেশনস" : "Admin Operations"}
                 </span>
-                <h1 className="text-xl font-bold">প্রশ্ন কোয়ারেন্টিন ও কোয়ালিটি কন্ট্রোল</h1>
+                <h1 className="text-xl font-bold">
+                  {isBn ? "প্রশ্ন কোয়ারেন্টিন ও কোয়ালিটি কন্ট্রোল" : "Question Quarantine & Quality Control"}
+                </h1>
               </div>
               <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                পরীক্ষার ন্যায্যতা রক্ষায় ত্রুটিযুক্ত প্রশ্ন এক ক্লিকে সাময়িক প্রত্যাহার, ডাটাবেজ পারসিসটেন্স ও অপরিবর্তনীয় অডিট ট্রেইল
+                {isBn
+                  ? "পরীক্ষার ন্যায্যতা রক্ষায় ত্রুটিযুক্ত প্রশ্ন এক ক্লিকে সাময়িক প্রত্যাহার, ডাটাবেজ পারসিসটেন্স ও অপরিবর্তনীয় অডিট ট্রেইল"
+                  : "Protect examination integrity: 1-click quarantine isolation, real database persistence, and immutable audit trail."}
               </p>
             </div>
             <div className="flex items-center space-x-3">
@@ -486,7 +504,7 @@ function AdminQuarantineConsole() {
                 href="/admin"
                 className="text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] underline underline-offset-4"
               >
-                অ্যাডমিন ড্যাশবোর্ড
+                {isBn ? "অ্যাডমিন ড্যাশবোর্ড" : "Admin Dashboard"}
               </Link>
               <ThemeToggle />
             </div>
@@ -495,7 +513,7 @@ function AdminQuarantineConsole() {
 
         {/* User Alert / Toast Banner */}
         {toast && (
-          <aside aria-label="বিজ্ঞপ্তি" className="max-w-6xl mx-auto px-4 pt-4">
+          <aside aria-label={isBn ? "বিজ্ঞপ্তি" : "Notification"} className="max-w-6xl mx-auto px-4 pt-4">
             <div
               className={`p-4 rounded-xl border flex items-center justify-between text-sm ${
                 toast.type === 'error'
@@ -505,7 +523,7 @@ function AdminQuarantineConsole() {
             >
               <div className="flex items-center space-x-3">
                 <span className="font-semibold text-xs px-2 py-0.5 rounded bg-[var(--bg-surface)] border border-current">
-                  {toast.type === 'error' ? 'ত্রুটি' : 'সফল'}
+                  {toast.type === 'error' ? (isBn ? 'ত্রুটি' : 'Error') : (isBn ? 'সফল' : 'Success')}
                 </span>
                 <span>{toast.message}</span>
               </div>
@@ -517,7 +535,7 @@ function AdminQuarantineConsole() {
                     onClick={toast.retryAction}
                     className="text-xs h-8"
                   >
-                    পুনরায় চেষ্টা করুন
+                    {isBn ? 'পুনরায় চেষ্টা করুন' : 'Retry'}
                   </Button>
                 )}
                 <Button
@@ -526,7 +544,7 @@ function AdminQuarantineConsole() {
                   onClick={() => setToast(null)}
                   className="text-xs h-8"
                 >
-                  বন্ধ করুন
+                  {isBn ? 'বন্ধ করুন' : 'Dismiss'}
                 </Button>
               </div>
             </div>
@@ -539,7 +557,7 @@ function AdminQuarantineConsole() {
             <div className="p-4 rounded-xl border border-[var(--color-danger-border)] bg-[var(--color-danger-subtle)] text-[var(--color-danger)] flex items-center justify-between text-sm">
               <span>{errorMsg}</span>
               <Button variant="outline" size="sm" onClick={loadData}>
-                পুনরায় লোড করুন
+                {isBn ? 'পুনরায় লোড করুন' : 'Reload'}
               </Button>
             </div>
           </div>
@@ -551,19 +569,27 @@ function AdminQuarantineConsole() {
           <section className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-bold">রিপোর্ট হওয়া প্রশ্নসমূহ (Flagged Items Queue)</h2>
+                <h2 className="text-lg font-bold">
+                  {isBn ? 'রিপোর্ট হওয়া প্রশ্নসমূহ (Flagged Items Queue)' : 'Reported Questions (Flagged Items Queue)'}
+                </h2>
                 <p className="text-xs text-[var(--text-muted)]">
-                  শিক্ষার্থী ও শিক্ষকদের কাছ থেকে জমা পড়া অভিযোগ ও কোয়ারেন্টিনে থাকা প্রশ্নের তালিকা
+                  {isBn
+                    ? 'শিক্ষার্থী ও শিক্ষকদের কাছ থেকে জমা পড়া অভিযোগ ও কোয়ারেন্টিনে থাকা প্রশ্নের তালিকা'
+                    : 'List of reported issues from learners and active quarantined question inventory'}
                 </p>
               </div>
 
               {/* Status Counters */}
               <div className="flex items-center space-x-2">
                 <Badge variant="warning">
-                  {questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length} টি অনিষ্পন্ন
+                  {isBn
+                    ? `${toBengaliDigits(questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length)} টি অনিষ্পন্ন`
+                    : `${questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length} Pending`}
                 </Badge>
                 <Badge variant="danger">
-                  {questions.filter((q) => q.status === 'QUARANTINED').length} টি কোয়ারেন্টিন
+                  {isBn
+                    ? `${toBengaliDigits(questions.filter((q) => q.status === 'QUARANTINED').length)} টি কোয়ারেন্টিন`
+                    : `${questions.filter((q) => q.status === 'QUARANTINED').length} Quarantined`}
                 </Badge>
               </div>
             </div>
@@ -581,7 +607,7 @@ function AdminQuarantineConsole() {
                       : 'text-[var(--text-muted)] hover:bg-[var(--bg-surface-elevated)]'
                   }`}
                 >
-                  সকল ({questions.length})
+                  {isBn ? 'সকল' : 'All'} ({isBn ? toBengaliDigits(questions.length) : questions.length})
                 </button>
                 <button
                   type="button"
@@ -592,7 +618,7 @@ function AdminQuarantineConsole() {
                       : 'text-[var(--text-muted)] hover:bg-[var(--bg-surface-elevated)]'
                   }`}
                 >
-                  রিপোর্ট / অনিষ্পন্ন ({questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length})
+                  {isBn ? 'রিপোর্ট / অনিষ্পন্ন' : 'Reported / Pending'} ({isBn ? toBengaliDigits(questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length) : questions.filter((q) => q.status !== 'QUARANTINED' && q.reportsCount > 0).length})
                 </button>
                 <button
                   type="button"
@@ -603,7 +629,7 @@ function AdminQuarantineConsole() {
                       : 'text-[var(--text-muted)] hover:bg-[var(--bg-surface-elevated)]'
                   }`}
                 >
-                  কোয়ারেন্টিন কার্যকর ({questions.filter((q) => q.status === 'QUARANTINED').length})
+                  {isBn ? 'কোয়ারেন্টিন কার্যকর' : 'Quarantined'} ({isBn ? toBengaliDigits(questions.filter((q) => q.status === 'QUARANTINED').length) : questions.filter((q) => q.status === 'QUARANTINED').length})
                 </button>
               </div>
 
@@ -613,7 +639,7 @@ function AdminQuarantineConsole() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="প্রশ্ন আইডি বা বিষয় খুঁজুন..."
+                  placeholder={isBn ? 'প্রশ্ন আইডি বা বিষয় খুঁজুন...' : 'Search question ID or subject...'}
                   className="w-full sm:w-64 text-xs px-3 py-1.5 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-1 focus:ring-[var(--focus-ring)]"
                 />
                 {searchQuery && (
@@ -622,7 +648,7 @@ function AdminQuarantineConsole() {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-2 top-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--text-main)]"
                   >
-                    মুছুন
+                    {isBn ? 'মুছুন' : 'Clear'}
                   </button>
                 )}
               </div>
@@ -644,8 +670,8 @@ function AdminQuarantineConsole() {
               </div>
             ) : filteredQuestions.length === 0 ? (
               <div className="p-8 text-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-muted)] space-y-2">
-                <p className="text-sm font-medium">কোনো প্রশ্ন পাওয়া যায়নি।</p>
-                <p className="text-xs">ফিল্টার পরিবর্তন করে পুনরায় দেখুন।</p>
+                <p className="text-sm font-medium">{isBn ? 'কোনো প্রশ্ন পাওয়া যায়নি।' : 'No questions found.'}</p>
+                <p className="text-xs">{isBn ? 'ফিল্টার পরিবর্তন করে পুনরায় দেখুন।' : 'Try adjusting your search or filters.'}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -664,28 +690,30 @@ function AdminQuarantineConsole() {
                           {q.subject}
                         </span>
                         {q.status === 'QUARANTINED' ? (
-                          <Badge variant="danger">কোয়ারেন্টিন কার্যকর</Badge>
+                          <Badge variant="danger">{isBn ? 'কোয়ারেন্টিন কার্যকর' : 'Quarantined'}</Badge>
                         ) : (
-                          <Badge variant="warning">{q.reportsCount} টি অভিযোগ</Badge>
+                          <Badge variant="warning">
+                            {isBn ? `${toBengaliDigits(q.reportsCount)} টি অভিযোগ` : `${q.reportsCount} Reports`}
+                          </Badge>
                         )}
                       </div>
                       <p className="text-base font-semibold leading-relaxed">
-                        {q.stemBn}
+                        {q.stemEn && !isBn ? q.stemEn : q.stemBn}
                       </p>
                       {q.status === 'QUARANTINED' ? (
                         <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface-elevated)] p-2 rounded-lg border border-[var(--border-subtle)] space-y-0.5">
                           <p>
-                            <strong className="text-[var(--color-danger)]">কোয়ারেন্টিনের কারণ:</strong> {q.quarantineReason || 'অডিট টিম কর্তৃক প্রত্যাহার'}
+                            <strong className="text-[var(--color-danger)]">{isBn ? 'কোয়ারেন্টিনের কারণ:' : 'Quarantine Reason:'}</strong> {q.quarantineReason || (isBn ? 'অডিট টিম কর্তৃক প্রত্যাহার' : 'Withdrawn by audit team')}
                           </p>
                           {q.quarantinedBy && (
                             <p className="text-[11px] text-[var(--text-muted)]">
-                              দায়িত্বপ্রাপ্ত: {q.quarantinedBy}
+                              {isBn ? 'দায়িত্বপ্রাপ্ত:' : 'Actor:'} {q.quarantinedBy}
                             </p>
                           )}
                         </div>
                       ) : (
                         <p className="text-xs text-[var(--color-danger)] font-medium">
-                          অভিযোগের কারণ: {q.primaryIssue || 'শিক্ষার্থী রিপোর্ট পর্যালোচনাধীন'}
+                          {isBn ? 'অভিযোগের কারণ:' : 'Reported Issue:'} {q.primaryIssue || (isBn ? 'শিক্ষার্থী রিপোর্ট পর্যালোচনাধীন' : 'Student report under SME review')}
                         </p>
                       )}
                     </div>
@@ -698,7 +726,7 @@ function AdminQuarantineConsole() {
                           onClick={() => handleOpenQuarantineModal(q)}
                           disabled={isProcessing}
                         >
-                          কোয়ারেন্টিন করুন
+                          {isBn ? 'কোয়ারেন্টিন করুন' : 'Quarantine'}
                         </Button>
                       ) : (
                         <Button
@@ -708,7 +736,7 @@ function AdminQuarantineConsole() {
                           disabled={isProcessing}
                           className="border-[var(--color-brand)] text-[var(--color-brand)] hover:bg-[var(--bg-surface-elevated)]"
                         >
-                          পুনর্বহাল করুন
+                          {isBn ? 'পুনর্বহাল করুন' : 'Restore'}
                         </Button>
                       )}
                     </div>
@@ -722,13 +750,17 @@ function AdminQuarantineConsole() {
           <section className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-bold">অপরিবর্তনীয় অডিট ট্রেইল (Immutable Audit Log)</h2>
+                <h2 className="text-lg font-bold">
+                  {isBn ? 'অপরিবর্তনীয় অডিট ট্রেইল (Immutable Audit Log)' : 'Immutable Audit Log'}
+                </h2>
                 <p className="text-xs text-[var(--text-muted)]">
-                  অ্যাডমিন ও রিভিউরদের নেওয়া প্রতিটি কোয়ারেন্টিন ও পুনর্বহাল সিদ্ধান্তের ক্রমানুসারিক লগ
+                  {isBn
+                    ? 'অ্যাডমিন ও রিভিউরদের নেওয়া প্রতিটি কোয়ারেন্টিন ও পুনর্বহাল সিদ্ধান্তের ক্রমানুসারিক লগ'
+                    : 'Chronological append-only record of all quarantine and restoration actions'}
                 </p>
               </div>
               <Badge variant="outline">
-                {auditLogs.length} টি রেকর্ড
+                {isBn ? `${toBengaliDigits(auditLogs.length)} টি রেকর্ড` : `${auditLogs.length} Records`}
               </Badge>
             </div>
 
@@ -746,7 +778,7 @@ function AdminQuarantineConsole() {
               </div>
             ) : auditLogs.length === 0 ? (
               <div className="p-6 text-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-muted)] text-xs">
-                কোনো অডিট রেকর্ড পাওয়া যায়নি।
+                {isBn ? 'কোনো অডিট রেকর্ড পাওয়া যায়নি।' : 'No audit records found.'}
               </div>
             ) : (
               <div className="space-y-3">
@@ -764,10 +796,10 @@ function AdminQuarantineConsole() {
                       </span>
                     </div>
                     <p className="text-xs text-[var(--text-subtle)]">
-                      প্রশ্ন আইডি: <strong>{log.questionId}</strong> | দায়িত্বপ্রাপ্ত: <strong>{log.actor}</strong>
+                      {isBn ? 'প্রশ্ন আইডি:' : 'Question ID:'} <strong>{log.questionId}</strong> | {isBn ? 'দায়িত্বপ্রাপ্ত:' : 'Actor:'} <strong>{log.actor}</strong>
                     </p>
                     <p className="text-xs text-[var(--text-main)] pt-1">
-                      <strong>অডিট কারণ:</strong> {log.reason}
+                      <strong>{isBn ? 'অডিট কারণ:' : 'Audit Reason:'}</strong> {log.reason}
                     </p>
                   </div>
                 ))}
@@ -782,27 +814,34 @@ function AdminQuarantineConsole() {
           <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
             <div className="max-w-lg w-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 shadow-2xl space-y-5">
               <div className="space-y-1">
-                <Badge variant="danger">কোয়ারেন্টিন সতর্কতা</Badge>
-                <h3 className="text-xl font-bold mt-1">প্রশ্নটি কি কোয়ারেন্টিন করতে চান?</h3>
+                <Badge variant="danger">{isBn ? 'কোয়ারেন্টিন সতর্কতা' : 'Quarantine Warning'}</Badge>
+                <h3 className="text-xl font-bold mt-1">
+                  {isBn ? 'প্রশ্নটি কি কোয়ারেন্টিন করতে চান?' : 'Confirm Quarantine for this Question?'}
+                </h3>
                 <p className="text-xs text-[var(--text-muted)]">
-                  কোয়ারেন্টিন করা হলে প্রশ্নটি তাৎক্ষণিকভাবে সকল ভবিষ্যৎ পরীক্ষা থেকে স্থগিত করা হবে এবং সার্ভার ডাটাবেজে রেকর্ড করা হবে।
+                  {isBn
+                    ? 'কোয়ারেন্টিন করা হলে প্রশ্নটি তাৎক্ষণিকভাবে সকল ভবিষ্যৎ পরীক্ষা থেকে স্থগিত করা হবে এবং সার্ভার ডাটাবেজে রেকর্ড করা হবে।'
+                    : 'When quarantined, this item will immediately be withdrawn from all upcoming exams and logged in server audit.'}
                 </p>
               </div>
 
               <div className="p-3 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-xs space-y-1">
-                <p className="font-bold">প্রশ্ন: {quarantineTarget.stemBn}</p>
-                <p className="text-[var(--text-muted)]">আইডি: {quarantineTarget.id}</p>
+                <p className="font-bold">
+                  {isBn ? 'প্রশ্ন: ' : 'Question: '}
+                  {quarantineTarget.stemEn && !isBn ? quarantineTarget.stemEn : quarantineTarget.stemBn}
+                </p>
+                <p className="text-[var(--text-muted)]">{isBn ? 'আইডি: ' : 'ID: '}{quarantineTarget.id}</p>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[var(--text-main)]">
-                  অডিট কারণ লিখুন (বাধ্যতামূলক):
+                  {isBn ? 'অডিট কারণ লিখুন (বাধ্যতামূলক):' : 'Enter Audit Reason (Mandatory):'}
                 </label>
                 <textarea
                   rows={3}
                   value={quarantineReason}
                   onChange={(e) => setQuarantineReason(e.target.value)}
-                  placeholder="যেমন: অপশন A ও C উভয়ই সঠিক হওয়ায় সাময়িক প্রত্যাহার..."
+                  placeholder={isBn ? 'যেমন: অপশন A ও C উভয়ই সঠিক হওয়ায় সাময়িক প্রত্যাহার...' : 'e.g., Temporary withdrawal due to multiple correct options...'}
                   className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
                 />
               </div>
@@ -813,14 +852,14 @@ function AdminQuarantineConsole() {
                   onClick={() => setQuarantineTarget(null)}
                   disabled={isProcessing}
                 >
-                  বাতিল
+                  {isBn ? 'বাতিল' : 'Cancel'}
                 </Button>
                 <Button
                   variant="danger"
                   isLoading={isProcessing}
                   onClick={handleConfirmQuarantine}
                 >
-                  কোয়ারেন্টিন নিশ্চিত করুন
+                  {isBn ? 'কোয়ারেন্টিন নিশ্চিত করুন' : 'Confirm Quarantine'}
                 </Button>
               </div>
             </div>
@@ -832,27 +871,34 @@ function AdminQuarantineConsole() {
           <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
             <div className="max-w-lg w-full rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 shadow-2xl space-y-5">
               <div className="space-y-1">
-                <Badge variant="outline">প্রশ্ন সক্রিয়করণ</Badge>
-                <h3 className="text-xl font-bold mt-1">প্রশ্নটি কি পরীক্ষা পুলে পুনর্বহাল করতে চান?</h3>
+                <Badge variant="outline">{isBn ? 'প্রশ্ন সক্রিয়করণ' : 'Question Reactivation'}</Badge>
+                <h3 className="text-xl font-bold mt-1">
+                  {isBn ? 'প্রশ্নটি কি পরীক্ষা পুলে পুনর্বহাল করতে চান?' : 'Confirm Restoration to Exam Pool?'}
+                </h3>
                 <p className="text-xs text-[var(--text-muted)]">
-                  পুনর্বহাল করা হলে প্রশ্নটি সক্রিয় পরীক্ষার প্রশ্ন পুলে পুনরায় অন্তর্ভুক্ত হবে এবং শিক্ষার্থীরা এটি অনুশীলনে দেখতে পাবে।
+                  {isBn
+                    ? 'পুনর্বহাল করা হলে প্রশ্নটি সক্রিয় পরীক্ষার প্রশ্ন পুলে পুনরায় অন্তর্ভুক্ত হবে এবং শিক্ষার্থীরা এটি অনুশীলনে দেখতে পাবে।'
+                    : 'When restored, this item is re-enabled in active exam pools for students.'}
                 </p>
               </div>
 
               <div className="p-3 rounded-lg bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] text-xs space-y-1">
-                <p className="font-bold">প্রশ্ন: {restoreTarget.stemBn}</p>
-                <p className="text-[var(--text-muted)]">আইডি: {restoreTarget.id}</p>
+                <p className="font-bold">
+                  {isBn ? 'প্রশ্ন: ' : 'Question: '}
+                  {restoreTarget.stemEn && !isBn ? restoreTarget.stemEn : restoreTarget.stemBn}
+                </p>
+                <p className="text-[var(--text-muted)]">{isBn ? 'আইডি: ' : 'ID: '}{restoreTarget.id}</p>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[var(--text-main)]">
-                  পুনর্বহালের সুনির্দিষ্ট কারণ লিখুন (বাধ্যতামূলক):
+                  {isBn ? 'পুনর্বহালের সুনির্দিষ্ট কারণ লিখুন (বাধ্যতামূলক):' : 'Enter Restoration Reason (Mandatory):'}
                 </label>
                 <textarea
                   rows={3}
                   value={restoreReason}
                   onChange={(e) => setRestoreReason(e.target.value)}
-                  placeholder="যেমন: বিষয় বিশেষজ্ঞ টিম কর্তৃক অপশন ও ব্যাখ্যা যাচাইপূর্বক সংশোধন সম্পন্ন..."
+                  placeholder={isBn ? 'যেমন: বিষয় বিশেষজ্ঞ টিম কর্তৃক অপশন ও ব্যাখ্যা যাচাইপূর্বক সংশোধন সম্পন্ন...' : 'e.g., Verified and corrected by subject matter experts...'}
                   className="w-full text-sm p-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-app)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]"
                 />
               </div>
@@ -863,14 +909,14 @@ function AdminQuarantineConsole() {
                   onClick={() => setRestoreTarget(null)}
                   disabled={isProcessing}
                 >
-                  বাতিল
+                  {isBn ? 'বাতিল' : 'Cancel'}
                 </Button>
                 <Button
                   variant="primary"
                   isLoading={isProcessing}
                   onClick={handleConfirmRestore}
                 >
-                  পুনর্বহাল নিশ্চিত করুন
+                  {isBn ? 'পুনর্বহাল নিশ্চিত করুন' : 'Confirm Restoration'}
                 </Button>
               </div>
             </div>

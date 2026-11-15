@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, WCAG 2.2 AAA, Pure Academic Design, NCTB Aligned
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   BookOpen,
@@ -35,7 +35,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 type AcademicMedium = 'BANGLA' | 'ENGLISH_VERSION' | 'BILINGUAL_DUAL' | 'INLINE_ANNOTATED';
 type SubjectFilter = 'ALL' | 'PHYSICS' | 'CHEMISTRY' | 'HIGHER_MATH' | 'BIOLOGY';
@@ -243,11 +243,27 @@ const BENCHMARK_EXAM_QUESTIONS: ExamQuestion[] = [
 ];
 
 export default function CurriculumLexiconPage() {
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
   const [activeMedium, setActiveMedium] = useState<AcademicMedium>('BANGLA');
   const [selectedSubject, setSelectedSubject] = useState<SubjectFilter>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showExplanation, setShowExplanation] = useState<Record<string, boolean>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const title = isBn
+    ? "দ্বিভাষিক এনসিটিবি কারিকুলাম ও পরিভাষা লেক্সিকন | স্টুডেন্ট লাইফ সার্কেল"
+    : "Bilingual NCTB Curriculum & Terminology Lexicon | Student Life Circle";
+  const description = isBn
+    ? "এনসিটিবি বিজ্ঞান ও গণিত বিষয়ের শতভাগ নির্ভুল বাংলা মাধ্যম ও ইংলিশ ভার্সন দ্বিভাষিক পরিভাষা অভিধান এবং রিয়েল-টাইম প্রশ্নপত্র লোকালাইজেশন প্ল্যাটফর্ম।"
+    : "Standardized bilingual NCTB science and mathematics terminology lexicon and instant medium localization platform.";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = title;
+    }
+  }, [title]);
 
   // Filtered Lexicon Entries
   const filteredLexicon = useMemo(() => {
@@ -280,22 +296,22 @@ export default function CurriculumLexiconPage() {
   return (
     <>
       <AppHead
-        title="দ্বিভাষিক এনসিটিবি কারিকুলাম ও পরিভাষা লেক্সিকন | স্টুডেন্ট লাইফ সার্কেল"
-        description="এনসিটিবি বিজ্ঞান ও গণিত বিষয়ের শতভাগ নির্ভুল বাংলা মাধ্যম ও ইংলিশ ভার্সন দ্বিভাষিক পরিভাষা অভিধান এবং রিয়েল-টাইম প্রশ্নপত্র লোকালাইজেশন প্ল্যাটফর্ম।"
+        title={title}
+        description={description}
       />
 
       <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col font-sans">
-        <Navbar />
+        <Navbar currentStage={isBn ? "এনসিটিবি পরিভাষা (Lexicon)" : "NCTB Curriculum Lexicon"} />
 
         <main className="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
           {/* Breadcrumb Navigation */}
           <div className="mb-6">
             <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-              <Link href="/" className="hover:text-[#0A2540] transition-colors">হোম</Link>
+              <Link href="/" className="hover:text-[#0A2540] transition-colors">{isBn ? "হোম" : "Home"}</Link>
               <span>/</span>
-              <span className="text-[#0A2540] font-semibold">এনসিটিবি পাঠ্যক্রম রূপান্তর</span>
+              <span className="text-[#0A2540] font-semibold">{isBn ? "এনসিটিবি পাঠ্যক্রম রূপান্তর" : "NCTB Curriculum Transition"}</span>
               <span>/</span>
-              <span className="text-slate-400">দ্বিভাষিক লেক্সিকন ও মাধ্যম সুইচ (Phase 136)</span>
+              <span className="text-slate-400">{isBn ? "দ্বিভাষিক লেক্সিকন ও মাধ্যম সুইচ (Phase 136)" : "Bilingual Lexicon & Medium Switch (Phase 136)"}</span>
             </div>
 
             {/* Academic Journal Top Banner */}
@@ -306,11 +322,13 @@ export default function CurriculumLexiconPage() {
                     <Languages className="w-5 h-5" />
                   </div>
                   <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
-                    দ্বিভাষিক কারিকুলাম ও এনসিটিবি পরিভাষা লেক্সিকন
+                    {isBn ? "দ্বিভাষিক কারিকুলাম ও এনসিটিবি পরিভাষা লেক্সিকন" : "Bilingual Curriculum & NCTB Terminology Lexicon"}
                   </h1>
                 </div>
                 <p className="text-xs text-slate-300 max-w-3xl">
-                  বাংলা মাধ্যম (Bangla Medium) ও ইংলিশ ভার্সন (English Version) শিক্ষার্থীদের জন্য বিজ্ঞান ও গণিত বিষয়ের স্ট্যান্ডার্ড পারিভাষিক ম্যাপিং, সাইড-বাই-সাইড প্রশ্নপত্র প্রিভিউ ও কনটেক্সচুয়াল ডেফিনিশন।
+                  {isBn
+                    ? "বাংলা মাধ্যম (Bangla Medium) ও ইংলিশ ভার্সন (English Version) শিক্ষার্থীদের জন্য বিজ্ঞান ও গণিত বিষয়ের স্ট্যান্ডার্ড পারিভাষিক ম্যাপিং, সাইড-বাই-সাইড প্রশ্নপত্র প্রিভিউ ও কনটেক্সচুয়াল ডেফিনিশন।"
+                    : "Standardized terminology mapping, side-by-side exam preview, and contextual definitions for Bangla Medium & English Version students across Science and Math."}
                 </p>
               </div>
 
@@ -321,10 +339,10 @@ export default function CurriculumLexiconPage() {
                 </div>
                 <div>
                   <div className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
-                    এনসিটিবি স্ট্যান্ডার্ড: একাদশ-দ্বাদশ ও নবম-দশম
+                    {isBn ? "এনসিটিবি স্ট্যান্ডার্ড: একাদশ-দ্বাদশ ও নবম-দশম" : "NCTB Standards: Grades 9-12 (SSC/HSC)"}
                   </div>
                   <div className="text-xs font-mono text-slate-200">
-                    লেক্সিকন ভাণ্ডার: {toBengaliDigits(BENCHMARK_LEXICON_DATA.length)}টি প্রমিত পরিভাষা
+                    {isBn ? "লেক্সিকন ভাণ্ডার: " : "Lexicon Corpus: "}{isBn ? toBengaliDigits(BENCHMARK_LEXICON_DATA.length) : BENCHMARK_LEXICON_DATA.length}{isBn ? "টি প্রমিত পরিভাষা" : " Standardized Terms"}
                   </div>
                 </div>
               </div>
@@ -337,7 +355,7 @@ export default function CurriculumLexiconPage() {
               <div className="flex items-center gap-2">
                 <Sliders className="w-4 h-4 text-[#B45309]" />
                 <span className="text-xs font-bold text-[#0A2540] uppercase tracking-wide">
-                  প্রশ্নপত্র প্রদর্শন মোড নির্বাচন করুন (Medium Switcher):
+                  {isBn ? "প্রশ্নপত্র প্রদর্শন মোড নির্বাচন করুন (Medium Switcher):" : "Select Exam Medium & Preview Mode:"}
                 </span>
               </div>
 
@@ -353,7 +371,7 @@ export default function CurriculumLexiconPage() {
                   }`}
                 >
                   <BookOpen className="w-3.5 h-3.5" />
-                  <span>বাংলা মাধ্যম</span>
+                  <span>{isBn ? "বাংলা মাধ্যম" : "Bangla Medium"}</span>
                 </button>
 
                 <button
@@ -379,7 +397,7 @@ export default function CurriculumLexiconPage() {
                   }`}
                 >
                   <Columns className="w-3.5 h-3.5" />
-                  <span>সাইড-বাই-সাইড</span>
+                  <span>{isBn ? "সাইড-বাই-সাইড" : "Side-by-Side"}</span>
                 </button>
 
                 <button
@@ -392,7 +410,7 @@ export default function CurriculumLexiconPage() {
                   }`}
                 >
                   <Layers className="w-3.5 h-3.5" />
-                  <span>ইনলাইন টীকা</span>
+                  <span>{isBn ? "ইনলাইন টীকা" : "Inline Gloss"}</span>
                 </button>
               </div>
             </div>
@@ -406,20 +424,20 @@ export default function CurriculumLexiconPage() {
                   <div>
                     <h2 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
                       <FileText className="w-4 h-4 text-[#B45309]" />
-                      <span>লাইভ প্রশ্নপত্র লোকালাইজেশন প্রিভিউ</span>
+                      <span>{isBn ? "লাইভ প্রশ্নপত্র লোকালাইজেশন প্রিভিউ" : "Live Exam Paper Localization Preview"}</span>
                     </h2>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      নির্বাচিত মাধ্যম: <strong className="text-[#0A2540]">
-                        {activeMedium === 'BANGLA' && 'বাংলা মাধ্যম (Pure Bengali)'}
-                        {activeMedium === 'ENGLISH_VERSION' && 'English Version (Pure English)'}
-                        {activeMedium === 'BILINGUAL_DUAL' && 'দ্বিভাষিক সমান্তরাল কলাম (Side-by-Side Parallel)'}
-                        {activeMedium === 'INLINE_ANNOTATED' && 'ইনলাইন পারিভাষিক টীকাযুক্ত (Annotated Gloss)'}
+                      {isBn ? "নির্বাচিত মাধ্যম: " : "Selected Medium: "}<strong className="text-[#0A2540]">
+                        {activeMedium === 'BANGLA' && (isBn ? 'বাংলা মাধ্যম (Pure Bengali)' : 'Bangla Medium (Pure Bengali)')}
+                        {activeMedium === 'ENGLISH_VERSION' && (isBn ? 'English Version (Pure English)' : 'English Version (Pure English)')}
+                        {activeMedium === 'BILINGUAL_DUAL' && (isBn ? 'দ্বিভাষিক সমান্তরাল কলাম (Side-by-Side Parallel)' : 'Bilingual Parallel Columns (Side-by-Side)')}
+                        {activeMedium === 'INLINE_ANNOTATED' && (isBn ? 'ইনলাইন পারিভাষিক টীকাযুক্ত (Annotated Gloss)' : 'Inline Terminology Annotated (Gloss)')}
                       </strong>
                     </p>
                   </div>
 
                   <span className="text-[11px] bg-slate-100 border border-slate-200 text-slate-600 px-2 py-1 rounded font-mono">
-                    HSC/SSC বোর্ড ফরম্যাট
+                    {isBn ? "HSC/SSC বোর্ড ফরম্যাট" : "HSC/SSC Board Format"}
                   </span>
                 </div>
 
@@ -569,19 +587,19 @@ export default function CurriculumLexiconPage() {
                             className="text-xs font-semibold text-[#0A2540] hover:text-emerald-700 transition-colors flex items-center gap-1"
                           >
                             <HelpCircle className="w-3.5 h-3.5" />
-                            <span>{showExp ? 'ব্যাখ্যা লুকান' : 'সঠিক উত্তরের ব্যাখ্যা দেখুন'}</span>
+                            <span>{showExp ? (isBn ? 'ব্যাখ্যা লুকান' : 'Hide Explanation') : (isBn ? 'সঠিক উত্তরের ব্যাখ্যা দেখুন' : 'Show Answer Explanation')}</span>
                           </button>
 
                           {showExp && (
                             <span className="text-xs text-emerald-700 font-bold font-mono">
-                              সঠিক বিকল্প: {isEn ? ['A', 'B', 'C', 'D'][q.correctIndex] : ['ক', 'খ', 'গ', 'ঘ'][q.correctIndex]}
+                              {isBn ? 'সঠিক বিকল্প: ' : 'Correct Option: '}{isEn || !isBn ? ['A', 'B', 'C', 'D'][q.correctIndex] : ['ক', 'খ', 'গ', 'ঘ'][q.correctIndex]}
                             </span>
                           )}
                         </div>
 
                         {showExp && (
                           <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded text-xs text-emerald-900 space-y-1">
-                            <span className="font-bold block">কনসেপচুয়াল সমাধান:</span>
+                            <span className="font-bold block">{isBn ? "কনসেপচুয়াল সমাধান:" : "Conceptual Solution:"}</span>
                             <p>{isEn ? q.explanationEn : q.explanationBn}</p>
                           </div>
                         )}
@@ -599,11 +617,11 @@ export default function CurriculumLexiconPage() {
                   <div className="flex items-center gap-2">
                     <Bookmark className="w-4 h-4 text-[#B45309]" />
                     <h3 className="text-sm font-bold text-[#0A2540]">
-                      এনসিটিবি পারিভাষিক লেক্সিকন ভাণ্ডার
+                      {isBn ? "এনসিটিবি পারিভাষিক লেক্সিকন ভাণ্ডার" : "NCTB Academic Terminology Lexicon"}
                     </h3>
                   </div>
                   <span className="text-[11px] text-slate-500 font-mono">
-                    {toBengaliDigits(filteredLexicon.length)}টি ফলাফল
+                    {isBn ? `${toBengaliDigits(filteredLexicon.length)}টি ফলাফল` : `${filteredLexicon.length} Results`}
                   </span>
                 </div>
 
@@ -614,7 +632,7 @@ export default function CurriculumLexiconPage() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="শব্দ খুঁজুন (যেমন: গতিবিদ্যা, Kinematics, পর্যায় সারণি)..."
+                    placeholder={isBn ? "শব্দ খুঁজুন (যেমন: গতিবিদ্যা, Kinematics, পর্যায় সারণি)..." : "Search term (e.g., Kinematics, Periodic Table)..."}
                     className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-[#0A2540] text-slate-800"
                   />
                 </div>
@@ -623,11 +641,11 @@ export default function CurriculumLexiconPage() {
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {(
                     [
-                      { id: 'ALL', label: 'সকল বিষয়' },
-                      { id: 'PHYSICS', label: 'পদার্থবিজ্ঞান' },
-                      { id: 'CHEMISTRY', label: 'রসায়ন' },
-                      { id: 'HIGHER_MATH', label: 'উচ্চতর গণিত' },
-                      { id: 'BIOLOGY', label: 'জীববিজ্ঞান' }
+                      { id: 'ALL', label: isBn ? 'সকল বিষয়' : 'All Subjects' },
+                      { id: 'PHYSICS', label: isBn ? 'পদার্থবিজ্ঞান' : 'Physics' },
+                      { id: 'CHEMISTRY', label: isBn ? 'রসায়ন' : 'Chemistry' },
+                      { id: 'HIGHER_MATH', label: isBn ? 'উচ্চতর গণিত' : 'Higher Math' },
+                      { id: 'BIOLOGY', label: isBn ? 'জীববিজ্ঞান' : 'Biology' }
                     ] as { id: SubjectFilter; label: string }[]
                   ).map((s) => (
                     <button
@@ -649,7 +667,7 @@ export default function CurriculumLexiconPage() {
                 <div className="max-h-[560px] overflow-y-auto space-y-3 pr-1">
                   {filteredLexicon.length === 0 ? (
                     <div className="text-center py-8 text-xs text-slate-500">
-                      কোনো পরিভাষা খুঁজে পাওয়া যায়নি।
+                      {isBn ? "কোনো পরিভাষা খুঁজে পাওয়া যায়নি।" : "No terminology entries found."}
                     </div>
                   ) : (
                     filteredLexicon.map((term) => (
@@ -670,7 +688,7 @@ export default function CurriculumLexiconPage() {
                               </span>
                             </div>
                             <div className="text-[10px] text-slate-400 font-mono mt-0.5">
-                              উচ্চারণ: {term.phoneticEn}
+                              {isBn ? "উচ্চারণ: " : "Phonetic: "}{term.phoneticEn}
                             </div>
                           </div>
 
@@ -678,7 +696,7 @@ export default function CurriculumLexiconPage() {
                             type="button"
                             onClick={() => handleCopyTerm(`${term.termBn} (${term.termEn})`, term.id)}
                             className="text-slate-400 hover:text-slate-700 transition-colors p-1"
-                            title="কপি করুন"
+                            title={isBn ? "কপি করুন" : "Copy Term"}
                           >
                             {copiedId === term.id ? (
                               <Check className="w-3.5 h-3.5 text-emerald-600" />
@@ -691,7 +709,7 @@ export default function CurriculumLexiconPage() {
                         {/* Subject & NCTB Code Badges */}
                         <div className="flex items-center gap-2 flex-wrap text-[10px]">
                           <span className="bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-semibold">
-                            {term.subjectBn}
+                            {isBn ? term.subjectBn : term.subject}
                           </span>
                           <span className="bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded font-mono">
                             {term.gradeTier}
@@ -711,7 +729,7 @@ export default function CurriculumLexiconPage() {
                         {/* Definitions */}
                         <div className="space-y-1.5 pt-1 text-[11px] text-slate-600 border-t border-slate-200/60">
                           <div>
-                            <span className="font-bold text-slate-700 block">বাংলা সংজ্ঞা:</span>
+                            <span className="font-bold text-slate-700 block">{isBn ? "বাংলা সংজ্ঞা:" : "Bengali Definition:"}</span>
                             <p className="leading-relaxed font-['Hind_Siliguri',sans-serif]">{term.definitionBn}</p>
                           </div>
                           <div>

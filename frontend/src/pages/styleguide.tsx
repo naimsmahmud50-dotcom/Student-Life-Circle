@@ -49,6 +49,7 @@ import {
   Activity,
   Bookmark
 } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
 
 import {
   Button,
@@ -166,8 +167,9 @@ function Swatch({
 }
 
 export default function StyleGuidePage() {
+  const { t, locale, setLocale } = useTranslation();
   const [activeTab, setActiveTab] = useState<'all' | 'buttons' | 'backgrounds' | 'components' | 'colors' | 'typography' | 'quiz'>('all');
-  const [isBengali, setIsBengali] = useState(true);
+  const [isBengali, setIsBengali] = useState(locale === 'bn');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [showFormErrors, setShowFormErrors] = useState(false);
@@ -177,6 +179,28 @@ export default function StyleGuidePage() {
   const [checkboxChecked, setCheckboxChecked] = useState(true);
   const [currentPage, setCurrentPage] = useState(3);
   const [selectedOption, setSelectedOption] = useState<string | null>('B');
+
+  useEffect(() => {
+    setIsBengali(locale === 'bn');
+  }, [locale]);
+
+  const toggleLanguage = () => {
+    const next = !isBengali;
+    setIsBengali(next);
+    if (setLocale) {
+      setLocale(next ? 'bn' : 'en');
+    }
+  };
+
+  const pageTitle = isBengali
+    ? "অগ্রযাত্রা মাস্টার ডিজাইন সিস্টেম ও কম্পোনেন্ট গ্যালারি | Bengal Academic Editorial"
+    : "Ogrojatra Master Design System & Living Component Gallery | Academic Editorial";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = pageTitle;
+    }
+  }, [pageTitle]);
 
   // Sync theme with document class
   useEffect(() => {
@@ -270,7 +294,7 @@ export default function StyleGuidePage() {
             {/* Language Toggle */}
             <button
               type="button"
-              onClick={() => setIsBengali(!isBengali)}
+              onClick={toggleLanguage}
               className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#E5E2DA] dark:border-[#263147] bg-[#FAF8F3] dark:bg-[#1E2738] hover:bg-[#F5F2EB] text-[#0A2540] dark:text-[#F5F2EB] transition-colors cursor-pointer"
             >
               <span>{isBengali ? "English View" : "বাংলা ভিউ"}</span>

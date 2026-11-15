@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Zero-IDOR, Strict Supabase RLS, Pure Academic UI
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Scale,
@@ -33,7 +33,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { useTranslation, toBengaliDigits } from '../../lib/i18n';
 
 interface DisputeCaseItem {
   id: string;
@@ -118,10 +118,19 @@ const SAMPLE_DISPUTES: DisputeCaseItem[] = [
 ];
 
 export default function DisputeTribunalPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
   const [selectedCaseIndex, setSelectedCaseIndex] = useState<number>(0);
   const [rulingSelection, setRulingSelection] = useState<'SPLIT' | 'RELEASE' | 'REFUND'>('SPLIT');
   const [customTutorRatio, setCustomTutorRatio] = useState<number>(70);
   const [isRulingExecuted, setIsRulingExecuted] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'প্রাতিষ্ঠানিক এসক্রো বিরোধ নিষ্পত্তি ট্রাইব্যুনাল | অগ্রযাত্রা'
+      : 'Institutional Escrow Dispute Tribunal | Agragoti';
+  }, [isBn]);
 
   const currentCase = SAMPLE_DISPUTES[selectedCaseIndex];
   const escrowTotal = currentCase.escrowAmount;
@@ -152,10 +161,10 @@ export default function DisputeTribunalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] flex flex-col font-sans">
+    <div className={`min-h-screen bg-[#FAFAF8] text-[#0A2540] flex flex-col ${isBn ? 'font-bengali' : 'font-sans'}`}>
       <AppHead
-        title="প্রাতিষ্ঠানিক এসক্রো বিরোধ নিষ্পত্তি ট্রাইব্যুনাল | অগ্রযাত্রা"
-        description="শিক্ষক, অভিভাবক ও প্রাতিষ্ঠানিক অম্বুডসম্যান সমন্বিত ৩-পক্ষীয় এসক্রো আরবিট্রেশন ও সুরক্ষিত নিষ্পত্তি আদালত।"
+        title={isBn ? "প্রাতিষ্ঠানিক এসক্রো বিরোধ নিষ্পত্তি ট্রাইব্যুনাল | অগ্রযাত্রা" : "Institutional Escrow Dispute Tribunal | Agragoti"}
+        description={isBn ? "শিক্ষক, অভিভাবক ও প্রাতিষ্ঠানিক অম্বুডসম্যান সমন্বিত ৩-পক্ষীয় এসক্রো আরবিট্রেশন ও সুরক্ষিত নিষ্পত্তি আদালত।" : "Institutional 3-party escrow arbitration tribunal ensuring fair settlement between guardians and tutors."}
       />
 
       <Navbar />
@@ -164,25 +173,27 @@ export default function DisputeTribunalPage() {
       <section className="bg-[#0A2540] text-white py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-[#B45309]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-3">
-            <Link href="/" className="hover:text-white transition-colors">হোম</Link>
+            <Link href="/" className="hover:text-white transition-colors">{isBn ? "হোম" : "Home"}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link href="/tuition" className="hover:text-white transition-colors">টিউশন ভল্ট</Link>
+            <Link href="/tuition" className="hover:text-white transition-colors">{isBn ? "টিউশন ভল্ট" : "Tuition Vault"}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-amber-400">এসক্রো বিরোধ ট্রাইব্যুনাল</span>
+            <span className="text-amber-400">{isBn ? "এসক্রো বিরোধ ট্রাইব্যুনাল" : "Escrow Dispute Tribunal"}</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-amber-300 text-xs font-medium mb-3">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>ASVS L2 জিরো-IDOR নীতি • ৩-পক্ষীয় প্রাতিষ্ঠানিক আরবিট্রেশন বেঞ্চ</span>
+                <span>{isBn ? "ASVS L2 জিরো-IDOR নীতি • ৩-পক্ষীয় প্রাতিষ্ঠানিক আরবিট্রেশন বেঞ্চ" : "ASVS L2 Zero-IDOR Policy • 3-Party Institutional Arbitration Bench"}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
                 <Scale className="w-8 h-8 text-amber-400 shrink-0" />
-                <span>প্রাতিষ্ঠানিক এসক্রো বিরোধ নিষ্পত্তি ট্রাইব্যুনাল</span>
+                <span>{isBn ? "প্রাতিষ্ঠানিক এসক্রো বিরোধ নিষ্পত্তি ট্রাইব্যুনাল" : "Institutional Escrow Dispute Tribunal"}</span>
               </h1>
               <p className="mt-2 text-sm sm:text-base text-slate-200 max-w-3xl leading-relaxed">
-                অভিভাবক, গৃহশিক্ষক ও নিরপেক্ষ অ্যাকাডেমিক অম্বুডসম্যানের উপস্থিতিতে টিউটরিং ফি এসক্রো সংক্রান্ত বিরোধের চূড়ান্ত আইনি ও আর্থিক নিষ্পত্তি।
+                {isBn
+                  ? "অভিভাবক, গৃহশিক্ষক ও নিরপেক্ষ অ্যাকাডেমিক অম্বুডসম্যানের উপস্থিতিতে টিউটরিং ফি এসক্রো সংক্রান্ত বিরোধের চূড়ান্ত আইনি ও আর্থিক নিষ্পত্তি।"
+                  : "Final legal and financial arbitration of tutoring escrow disputes in presence of guardian, educator, and neutral institutional ombudsman."}
               </p>
             </div>
 
@@ -192,14 +203,14 @@ export default function DisputeTribunalPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg border border-white/30 bg-white/5 hover:bg-white/10 text-white transition-colors"
               >
                 <Users className="w-4 h-4 text-amber-300" />
-                <span>অভিভাবক-শিক্ষক কনফারেন্স (PTC)</span>
+                <span>{isBn ? "অভিভাবক-শিক্ষক কনফারেন্স (PTC)" : "Parent-Teacher Conference (PTC)"}</span>
               </Link>
               <button
                 onClick={handleReset}
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
               >
                 <RotateCcw className="w-4 h-4 text-slate-300" />
-                <span>কেস রিসেট</span>
+                <span>{isBn ? "কেস রিসেট" : "Reset Docket"}</span>
               </button>
             </div>
           </div>
@@ -216,7 +227,7 @@ export default function DisputeTribunalPage() {
               <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200">
                 <FileText className="w-5 h-5 text-[#0A2540]" />
                 <h2 className="text-sm font-bold uppercase tracking-wider text-[#0A2540]">
-                  সক্রিয় বিরোধ ডকেট তালিকা (Active Dockets)
+                  {isBn ? "সক্রিয় বিরোধ ডকেট তালিকা (Active Dockets)" : "Active Dispute Dockets"}
                 </h2>
               </div>
 
@@ -237,7 +248,7 @@ export default function DisputeTribunalPage() {
                     <div className="flex justify-between items-center mb-1.5">
                       <span className="font-mono text-xs font-bold text-[#0A2540]">{d.caseNumber}</span>
                       <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800">
-                        {d.status === 'IN_HEARING' ? 'শুনানী চলছে' : 'প্রমাণাধীন'}
+                        {d.status === 'IN_HEARING' ? (isBn ? 'শুনানী চলছে' : 'In Hearing') : (isBn ? 'প্রমাণাধীন' : 'Under Review')}
                       </span>
                     </div>
 
@@ -245,8 +256,10 @@ export default function DisputeTribunalPage() {
                     <p className="text-[11px] text-slate-500 mt-0.5">{d.tutorName}</p>
 
                     <div className="mt-3 pt-2 border-t border-slate-200 flex justify-between items-center text-xs">
-                      <span className="text-slate-500">বিরোধকৃত এসক্রো:</span>
-                      <span className="font-extrabold text-[#0A2540]">৳ {toBengaliDigits(d.escrowAmount.toLocaleString())}</span>
+                      <span className="text-slate-500">{isBn ? "বিরোধকৃত এসক্রো:" : "Disputed Escrow:"}</span>
+                      <span className="font-extrabold text-[#0A2540]">
+                        ৳ {isBn ? toBengaliDigits(d.escrowAmount.toLocaleString()) : d.escrowAmount.toLocaleString()}
+                      </span>
                     </div>
                   </button>
                 ))}
@@ -257,10 +270,12 @@ export default function DisputeTribunalPage() {
             <div className="bg-slate-100 rounded-xl p-5 border border-slate-300 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
                 <ShieldCheck className="w-4 h-4 text-emerald-700" />
-                <span>জিরো-IDOR ও আরএলএস নিরাপত্তা নীতি</span>
+                <span>{isBn ? "জিরো-IDOR ও আরএলএস নিরাপত্তা নীতি" : "Zero-IDOR & RLS Security Protocol"}</span>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
-                সুপাবেস RLS পলিসির মাধ্যমে নিশ্চিত করা হয়েছে যে, সংশ্লিষ্ট অভিভাবক এবং গৃহশিক্ষক ছাড়া কোনো তৃতীয় ব্যবহারকারী বা অননুমোদিত ব্যক্তি এই মামলার নথি বা প্রমাণ দেখতে পারবে না।
+                {isBn
+                  ? "সুপাবেস RLS পলিসির মাধ্যমে নিশ্চিত করা হয়েছে যে, সংশ্লিষ্ট অভিভাবক এবং গৃহশিক্ষক ছাড়া কোনো তৃতীয় ব্যবহারকারী বা অননুমোদিত ব্যক্তি এই মামলার নথি বা প্রমাণ দেখতে পারবে না।"
+                  : "Strict Zero-IDOR tenancy: Supabase RLS enforces that no third party can view docket briefs or evidence vaults outside the involved guardian and tutor."}
               </p>
             </div>
           </div>
@@ -272,13 +287,13 @@ export default function DisputeTribunalPage() {
             <div className="bg-white rounded-xl border border-slate-300 p-6 shadow-sm">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-200">
                 <div>
-                  <span className="font-mono text-xs font-bold text-slate-500 block">কেস রেফারেন্স</span>
+                  <span className="font-mono text-xs font-bold text-slate-500 block">{isBn ? "কেস রেফারেন্স" : "Case Reference"}</span>
                   <h3 className="text-lg sm:text-xl font-bold text-[#0A2540]">{currentCase.caseNumber}</h3>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-slate-500 block">লকড এসক্রো পরিমাণ</span>
+                  <span className="text-xs text-slate-500 block">{isBn ? "লকড এসক্রো পরিমাণ" : "Locked Escrow Amount"}</span>
                   <span className="text-xl sm:text-2xl font-black text-[#0A2540]">
-                    ৳ {toBengaliDigits(currentCase.escrowAmount.toLocaleString())}
+                    ৳ {isBn ? toBengaliDigits(currentCase.escrowAmount.toLocaleString()) : currentCase.escrowAmount.toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -287,7 +302,7 @@ export default function DisputeTribunalPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 rounded-lg bg-rose-50/60 border border-rose-200">
                   <span className="text-xs font-bold text-rose-900 block mb-1">
-                    অভিভাবকের আনুষ্ঠানিক অভিযোগ:
+                    {isBn ? "অভিভাবকের আনুষ্ঠানিক অভিযোগ:" : "Guardian Grievance Statement:"}
                   </span>
                   <span className="text-[11px] text-slate-500 block mb-2">{currentCase.guardianName}</span>
                   <p className="text-xs text-slate-800 leading-relaxed">
@@ -297,7 +312,7 @@ export default function DisputeTribunalPage() {
 
                 <div className="p-4 rounded-lg bg-blue-50/60 border border-blue-200">
                   <span className="text-xs font-bold text-blue-900 block mb-1">
-                    গৃহশিক্ষকের আত্মপক্ষ বক্তব্য:
+                    {isBn ? "গৃহশিক্ষকের আত্মপক্ষ বক্তব্য:" : "Tutor Defense Statement:"}
                   </span>
                   <span className="text-[11px] text-slate-500 block mb-2">{currentCase.tutorName}</span>
                   <p className="text-xs text-slate-800 leading-relaxed">
@@ -313,11 +328,13 @@ export default function DisputeTribunalPage() {
                 <div className="flex items-center gap-2">
                   <Lock className="w-5 h-5 text-[#0A2540]" />
                   <h3 className="text-base font-bold text-[#0A2540]">
-                    প্রমাণ সংরক্ষণাগার (SHA-256 Tamper-Proof Vault)
+                    {isBn ? "প্রমাণ সংরক্ষণাগার (SHA-256 Tamper-Proof Vault)" : "SHA-256 Tamper-Proof Evidence Vault"}
                   </h3>
                 </div>
                 <span className="text-xs text-slate-500 font-medium">
-                  {toBengaliDigits(currentCase.evidenceList.length)} টি অকাট্য প্রমাণপত্র দাখিলকৃত
+                  {isBn
+                    ? `${toBengaliDigits(currentCase.evidenceList.length)} টি অকাট্য প্রমাণপত্র দাখিলকৃত`
+                    : `${currentCase.evidenceList.length} Authenticated Exhibits Submitted`}
                 </span>
               </div>
 
@@ -332,7 +349,7 @@ export default function DisputeTribunalPage() {
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                         <span className="text-xs font-bold text-slate-900">{ev.title}</span>
                       </div>
-                      <span className="text-[11px] text-slate-500 block">দাখিলকারী: {ev.submitter}</span>
+                      <span className="text-[11px] text-slate-500 block">{isBn ? "দাখিলকারী: " : "Submitted by: "}{ev.submitter}</span>
                     </div>
 
                     <div className="text-left sm:text-right shrink-0">
@@ -340,7 +357,7 @@ export default function DisputeTribunalPage() {
                         SHA-256: {ev.hash}...
                       </span>
                       <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded inline-block mt-0.5">
-                        অডিট ভেরিফাইড
+                        {isBn ? "অডিট ভেরিফাইড" : "Audit Verified"}
                       </span>
                     </div>
                   </div>
@@ -353,7 +370,7 @@ export default function DisputeTribunalPage() {
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200">
                 <Gavel className="w-5 h-5 text-[#B45309]" />
                 <h3 className="text-base font-bold text-[#0A2540]">
-                  অম্বুডসম্যান আরবিট্রেশন ও মীমাংসা রায় (Arbitration Bench)
+                  {isBn ? "অম্বুডসম্যান আরবিট্রেশন ও মীমাংসা রায় (Arbitration Bench)" : "Ombudsman Arbitration Bench & Binding Ruling"}
                 </h3>
               </div>
 
@@ -369,10 +386,10 @@ export default function DisputeTribunalPage() {
                       }`}
                     >
                       <span className="text-xs font-bold text-[#0A2540] block mb-1">
-                        ১. আনুপাতিক ভাগ (Split)
+                        {isBn ? "১. আনুপাতিক ভাগ (Split)" : "1. Proportional Split"}
                       </span>
                       <p className="text-[11px] text-slate-600 leading-tight">
-                        সম্পাদিত ক্লাসের অনুপাতে অর্থ বণ্টন (শিক্ষক ও অভিভাবক)।
+                        {isBn ? "সম্পাদিত ক্লাসের অনুপাতে অর্থ বণ্টন (শিক্ষক ও অভিভাবক)।" : "Distribute funds based on verified delivered sessions."}
                       </p>
                     </button>
 
@@ -385,10 +402,10 @@ export default function DisputeTribunalPage() {
                       }`}
                     >
                       <span className="text-xs font-bold text-[#0A2540] block mb-1">
-                        ২. সম্পূর্ণ শিক্ষককে প্রদান
+                        {isBn ? "২. সম্পূর্ণ শিক্ষককে প্রদান" : "2. Full Release to Tutor"}
                       </span>
                       <p className="text-[11px] text-slate-600 leading-tight">
-                        ১০০% এসক্রো গৃহশিক্ষকের অ্যাকাউন্টে স্থানান্তর।
+                        {isBn ? "১০০% এসক্রো গৃহশিক্ষকের অ্যাকাউন্টে স্থানান্তর।" : "Transfer 100% of held escrow to the educator."}
                       </p>
                     </button>
 
@@ -401,10 +418,10 @@ export default function DisputeTribunalPage() {
                       }`}
                     >
                       <span className="text-xs font-bold text-[#0A2540] block mb-1">
-                        ৩. সম্পূর্ণ অভিভাবককে রিফান্ড
+                        {isBn ? "৩. সম্পূর্ণ অভিভাবককে রিফান্ড" : "3. Full Refund to Guardian"}
                       </span>
                       <p className="text-[11px] text-slate-600 leading-tight">
-                        ১০০% এসক্রো অভিভাবকের ওয়ালেটে ফেরত।
+                        {isBn ? "১০০% এসক্রো অভিভাবকের ওয়ালেটে ফেরত।" : "Refund 100% of held escrow to the guardian."}
                       </p>
                     </button>
                   </div>
@@ -413,8 +430,8 @@ export default function DisputeTribunalPage() {
                   {rulingSelection === 'SPLIT' && (
                     <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2">
                       <div className="flex justify-between items-center text-xs font-bold">
-                        <span className="text-slate-700">শিক্ষকের বরাদ্দ অনুপাত:</span>
-                        <span className="text-[#0A2540]">{toBengaliDigits(customTutorRatio)}%</span>
+                        <span className="text-slate-700">{isBn ? "শিক্ষকের বরাদ্দ অনুপাত:" : "Tutor Allocation Ratio:"}</span>
+                        <span className="text-[#0A2540]">{isBn ? toBengaliDigits(customTutorRatio) : customTutorRatio}%</span>
                       </div>
                       <input
                         type="range"
@@ -426,9 +443,9 @@ export default function DisputeTribunalPage() {
                         className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0A2540]"
                       />
                       <div className="flex justify-between text-[10px] text-slate-500 font-medium">
-                        <span>১০% শিক্ষক (৯০% অভিভাবক)</span>
-                        <span>৫০% সমবণ্টন</span>
-                        <span>৯০% শিক্ষক (১০% অভিভাবক)</span>
+                        <span>{isBn ? "১০% শিক্ষক (৯০% অভিভাবক)" : "10% Tutor (90% Guardian)"}</span>
+                        <span>{isBn ? "৫০% সমবণ্টন" : "50% Equal Split"}</span>
+                        <span>{isBn ? "৯০% শিক্ষক (১০% অভিভাবক)" : "90% Tutor (10% Guardian)"}</span>
                       </div>
                     </div>
                   )}
@@ -436,16 +453,16 @@ export default function DisputeTribunalPage() {
                   {/* Calculated Payout Summary Cards */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-300">
-                      <span className="text-xs text-emerald-800 font-medium block">শিক্ষককে প্রদেয়:</span>
+                      <span className="text-xs text-emerald-800 font-medium block">{isBn ? "শিক্ষককে প্রদেয়:" : "Payout to Tutor:"}</span>
                       <span className="text-lg font-bold text-emerald-950">
-                        ৳ {toBengaliDigits(tutorPayout.toLocaleString())}
+                        ৳ {isBn ? toBengaliDigits(tutorPayout.toLocaleString()) : tutorPayout.toLocaleString()}
                       </span>
                     </div>
 
                     <div className="p-3.5 rounded-lg bg-blue-50 border border-blue-300">
-                      <span className="text-xs text-blue-800 font-medium block">অভিভাবককে রিফান্ড:</span>
+                      <span className="text-xs text-blue-800 font-medium block">{isBn ? "অভিভাবককে রিফান্ড:" : "Refund to Guardian:"}</span>
                       <span className="text-lg font-bold text-blue-950">
-                        ৳ {toBengaliDigits(guardianPayout.toLocaleString())}
+                        ৳ {isBn ? toBengaliDigits(guardianPayout.toLocaleString()) : guardianPayout.toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -456,21 +473,29 @@ export default function DisputeTribunalPage() {
                     className="w-full py-3.5 px-4 bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold rounded-lg flex items-center justify-center gap-2 text-sm"
                   >
                     <Gavel className="w-4 h-4 text-amber-300" />
-                    <span>চূড়ান্ত আরবিট্রেশন রায় প্রদান ও এসক্রো রিলিজ করুন</span>
+                    <span>{isBn ? "চূড়ান্ত আরবিট্রেশন রায় প্রদান ও এসক্রো রিলিজ করুন" : "Execute Final Arbitration Ruling & Release Escrow"}</span>
                   </button>
                 </div>
               ) : (
                 <div className="p-5 bg-emerald-50 rounded-lg border-2 border-emerald-600 space-y-3">
                   <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm">
                     <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                    <span>আরবিট্রেশন রায় সফলভাবে কার্যকরের নির্দেশ জারি হয়েছে</span>
+                    <span>{isBn ? "আরবিট্রেশন রায় সফলভাবে কার্যকরের নির্দেশ জারি হয়েছে" : "Arbitration Ruling Successfully Executed"}</span>
                   </div>
                   <p className="text-xs text-emerald-900 leading-relaxed font-medium">
-                    অম্বুডসম্যানের বিচারিক রায়ানুযায়ী শিক্ষককে <strong>৳ {toBengaliDigits(tutorPayout.toLocaleString())}</strong> এবং অভিভাবককে <strong>৳ {toBengaliDigits(guardianPayout.toLocaleString())}</strong> স্বয়ংক্রিয়ভাবে ডিসবার্স করা হয়েছে। ডকেটটি সফলভাবে নিষ্পন্ন ও সিলগালা করা হয়েছে।
+                    {isBn ? (
+                      <>
+                        অম্বুডসম্যানের বিচারিক রায়ানুযায়ী শিক্ষককে <strong>৳ {toBengaliDigits(tutorPayout.toLocaleString())}</strong> এবং অভিভাবককে <strong>৳ {toBengaliDigits(guardianPayout.toLocaleString())}</strong> স্বয়ংক্রিয়ভাবে ডিসবার্স করা হয়েছে। ডকেটটি সফলভাবে নিষ্পন্ন ও সিলগালা করা হয়েছে।
+                      </>
+                    ) : (
+                      <>
+                        Pursuant to the Ombudsman arbitration order, <strong>৳ {tutorPayout.toLocaleString()}</strong> has been disbursed to the educator and <strong>৳ {guardianPayout.toLocaleString()}</strong> refunded to the guardian. Docket closed and sealed.
+                      </>
+                    )}
                   </p>
                   <div className="pt-2 border-t border-emerald-200 flex justify-between text-[11px] text-emerald-800 font-mono">
-                    <span>রুলিং হ্যাশ: e499ac0032a76f...</span>
-                    <span>স্ট্যাটাস: RESOLVED_SPLIT</span>
+                    <span>{isBn ? "রুলিং হ্যাশ: e499ac0032a76f..." : "Ruling Hash: e499ac0032a76f..."}</span>
+                    <span>{isBn ? "স্ট্যাটাস: RESOLVED_SPLIT" : "Status: RESOLVED_SPLIT"}</span>
                   </div>
                 </div>
               )}

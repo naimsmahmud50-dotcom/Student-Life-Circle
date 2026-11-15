@@ -52,6 +52,7 @@ function GlobalAppShell({ Component, pageProps }: AppProps) {
       if (process.env.NODE_ENV === 'production') {
         const handleLoad = () => {
           const swPath = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/sw.js`;
+          // Standard SW registration: navigator.serviceWorker.register('/sw.js')
           navigator.serviceWorker.register(swPath)
             .then((registration) => {
               setSwRegistration(registration);

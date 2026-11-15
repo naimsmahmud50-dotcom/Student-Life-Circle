@@ -12,7 +12,7 @@
  * STANDARDS: Pareto-Optimal Deferred Acceptance, Quota Spillover Balancing, Zero-Emoji, UI/UX Pro Max
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   GraduationCap,
   Award,
@@ -32,20 +32,34 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { AdmissionCounselingMatrix } from '@/components/admission/AdmissionCounselingMatrix';
 import { MigrationCascadeVisualizer } from '@/components/admission/MigrationCascadeVisualizer';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 export default function CounselingPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
   const [activeTab, setActiveTab] = useState<'both' | 'matrix' | 'migration'>('both');
   const [lastSavedMessage, setLastSavedMessage] = useState<string | null>(null);
 
+  useEffect(() => {
+    document.title = isBn
+      ? 'কেন্দ্রীয় ভর্তি কাউন্সেলিং ও গেলে-শ্যাপলি ম্যাচিং হাব | অগ্রযাত্রা'
+      : 'Centralized Admission Counseling & Gale-Shapley Matching Hub | Agragoti';
+  }, [isBn]);
+
   const handlePreferencesSaved = (preferences: string[], quota: string) => {
-    setLastSavedMessage(`পছন্দক্রম সংরক্ষিত হয়েছে (${preferences.length}টি বিভাগ, কোটা: ${quota})`);
+    setLastSavedMessage(
+      isBn
+        ? `পছন্দক্রম সংরক্ষিত হয়েছে (${toBengaliDigits(preferences.length)}টি বিভাগ, কোটা: ${quota})`
+        : `Preferences saved (${preferences.length} programs, quota: ${quota})`
+    );
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-bengali selection:bg-blue-500/30 selection:text-blue-200">
+    <div className={`min-h-screen bg-slate-950 text-slate-100 flex flex-col ${isBn ? 'font-bengali' : 'font-sans'} selection:bg-blue-500/30 selection:text-blue-200`}>
       <AppHead
-        title="কেন্দ্রীয় ভর্তি কাউন্সেলিং ও গেলে-শ্যাপলি ম্যাচিং হাব | অগ্রযাত্রা"
-        description="বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET), ঢাকা বিশ্ববিদ্যালয় (DU), মেডিকেল ও গুচ্ছ ভর্তির মেধাভিত্তিক ও ঈর্ষামুক্ত কেন্দ্রীয় কাউন্সেলিং স্টুডিও।"
+        title={isBn ? "কেন্দ্রীয় ভর্তি কাউন্সেলিং ও গেলে-শ্যাপলি ম্যাচিং হাব | অগ্রযাত্রা" : "Centralized Admission Counseling Hub | Agragoti"}
+        description={isBn ? "বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (BUET), ঢাকা বিশ্ববিদ্যালয় (DU), মেডিকেল ও গুচ্ছ ভর্তির মেধাভিত্তিক ও ঈর্ষামুক্ত কেন্দ্রীয় কাউন্সেলিং স্টুডিও।" : "Centralized counseling studio powered by Gale-Shapley Deferred Acceptance algorithm for BUET, DU, Medical, and GST admissions."}
       />
       <Navbar />
 
@@ -59,11 +73,12 @@ export default function CounselingPage() {
                 <span>CENTRALIZED MATCHING ENGINE: GALE-SHAPLEY DEFERRED ACCEPTANCE</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-sans">
-                কেন্দ্রীয় ভর্তি কাউন্সেলিং ও স্মার্ট মাইগ্রেশন হাব
+                {isBn ? "কেন্দ্রীয় ভর্তি কাউন্সেলিং ও স্মার্ট মাইগ্রেশন হাব" : "Centralized Admission Counseling & Smart Migration Hub"}
               </h1>
               <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-                নোবেলজয়ী অর্থনীতিবিদদের উদ্ভাবিত ডেফার্ড অ্যাকসেপ্টেন্স (Gale-Shapley) মডেলের মাধ্যমে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছ
-                ভর্তির আসন বণ্টন ব্যবস্থা। এটি শতভাগ স্থিতিশীল ও ঈর্ষামুক্ত (Envy-Free) মেধাভিত্তিক বরাদ্দ নিশ্চিত করে।
+                {isBn
+                  ? "নোবেলজয়ী অর্থনীতিবিদদের উদ্ভাবিত ডেফার্ড অ্যাকসেপ্টেন্স (Gale-Shapley) মডেলের মাধ্যমে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছ ভর্তির আসন বণ্টন ব্যবস্থা। এটি শতভাগ স্থিতিশীল ও ঈর্ষামুক্ত (Envy-Free) মেধাভিত্তিক বরাদ্দ নিশ্চিত করে।"
+                  : "National seat allocation powered by Nobel-prize winning Deferred Acceptance (Gale-Shapley) mechanism for BUET, DU, Medical, and GST admissions, ensuring 100% stable, envy-free merit placement."}
               </p>
             </div>
 
@@ -72,15 +87,23 @@ export default function CounselingPage() {
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">ম্যাচিং গ্যারান্টি</div>
-                  <div className="text-xs font-semibold text-emerald-300">১০০% স্থিতিশীল ও ঈর্ষামুক্ত</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "ম্যাচিং গ্যারান্টি" : "Matching Guarantee"}
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-300">
+                    {isBn ? "১০০% স্থিতিশীল ও ঈর্ষামুক্ত" : "100% Stable & Envy-Free"}
+                  </div>
                 </div>
               </div>
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <TrendingUp className="w-4 h-4 text-blue-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">কোটা নীতি</div>
-                  <div className="text-xs font-semibold text-blue-300">স্বয়ংক্রিয় সাধারণ স্পিল-ওভার</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "কোটা নীতি" : "Quota Protocol"}
+                  </div>
+                  <div className="text-xs font-semibold text-blue-300">
+                    {isBn ? "স্বয়ংক্রিয় সাধারণ স্পিল-ওভার" : "Automatic General Spillover"}
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,7 +121,7 @@ export default function CounselingPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                সম্মিলিত ভিউ (ম্যাট্রিক্স + মাইগ্রেশন)
+                {isBn ? "সম্মিলিত ভিউ (ম্যাট্রিক্স + মাইগ্রেশন)" : "Combined View (Matrix + Cascade)"}
               </button>
               <button
                 type="button"
@@ -109,7 +132,7 @@ export default function CounselingPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                পছন্দক্রম ম্যাট্রিক্স
+                {isBn ? "পছন্দক্রম ম্যাট্রিক্স" : "Preference Matrix"}
               </button>
               <button
                 type="button"
@@ -120,7 +143,7 @@ export default function CounselingPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                মাইগ্রেশন রিপল সিমুলেটর
+                {isBn ? "মাইগ্রেশন রিপল সিমুলেটর" : "Migration Ripple Simulator"}
               </button>
             </div>
 
@@ -140,7 +163,7 @@ export default function CounselingPage() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2 font-sans">
                   <GraduationCap className="w-5 h-5 text-blue-400" />
-                  <span>বিশ্ববিদ্যালয় পছন্দক্রম ও লাইভ সম্ভাবনা ম্যাট্রিক্স</span>
+                  <span>{isBn ? "বিশ্ববিদ্যালয় পছন্দক্রম ও লাইভ সম্ভাবনা ম্যাট্রিক্স" : "University Preference List & Live Probability Matrix"}</span>
                 </h2>
                 <span className="text-xs text-slate-400 font-mono">STRATEGY-PROOF REORDER</span>
               </div>
@@ -153,7 +176,7 @@ export default function CounselingPage() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2 font-sans">
                   <Layers className="w-5 h-5 text-blue-400" />
-                  <span>আসন মাইগ্রেশন ক্যাসকেড ও পরবর্তী রাউন্ড কাটঅফ</span>
+                  <span>{isBn ? "আসন মাইগ্রেশন ক্যাসকেড ও পরবর্তী রাউন্ড কাটঅফ" : "Seat Migration Cascade & Next Round Cutoff"}</span>
                 </h2>
                 <span className="text-xs text-slate-400 font-mono">3-STAGE VACANCY CASCADE</span>
               </div>
@@ -166,28 +189,37 @@ export default function CounselingPage() {
         <section className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 text-slate-300 space-y-4">
           <div className="flex items-center gap-2.5 text-blue-400 text-sm font-semibold">
             <Info className="w-4 h-4" />
-            <span>শিক্ষার্থী নির্দেশিকা: গেলে-শ্যাপলি ম্যাচিং ও মাইগ্রেশন নীতি</span>
+            <span>{isBn ? "শিক্ষার্থী নির্দেশিকা: গেলে-শ্যাপলি ম্যাচিং ও মাইগ্রেশন নীতি" : "Candidate Guidance: Gale-Shapley Matching & Migration Protocol"}</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-400 leading-relaxed font-sans">
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">১. সত্যবাদী পছন্দক্রম নিরাপদ (Strategy-Proof)</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "১. সত্যবাদী পছন্দক্রম নিরাপদ (Strategy-Proof)" : "1. Strategy-Proof Truthful Preferences"}
+              </div>
               <p>
-                আপনার সত্যিকারের পছন্দের ক্রমানুসারেই সাজান। পছন্দের ১ নম্বরে আপনার স্বপ্নের বিভাগ দিলে যদি আসন না পান,
-                তাতে ২ নম্বর বা ৩ নম্বর পছন্দের অগ্রাধিকার কখনোই ক্ষুণ্ন হবে না।
+                {isBn
+                  ? "আপনার সত্যিকারের পছন্দের ক্রমানুসারেই সাজান। পছন্দের ১ নম্বরে আপনার স্বপ্নের বিভাগ দিলে যদি আসন না পান, তাতে ২ নম্বর বা ৩ নম্বর পছন্দের অগ্রাধিকার কখনোই ক্ষুণ্ন হবে না।"
+                  : "Rank strictly by your authentic choices. Placing your dream program as #1 never penalizes your chances for #2 or #3 if you do not make the first cutoff."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">২. কোনো ব্লকিং পেয়ার নেই (Envy-Free)</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "২. কোনো ব্লকিং পেয়ার নেই (Envy-Free)" : "2. Envy-Free Guarantee (No Blocking Pairs)"}
+              </div>
               <p>
-                মেধা তালিকায় কোনো শিক্ষার্থী কম স্কোর নিয়ে আপনার পছন্দের বিভাগটিতে স্থান পাবে না। প্রতিটি বরাদ্দ
-                সম্পূর্ণ স্বচ্ছ এবং গাণিতিকভাবে ন্যায়সংগত।
+                {isBn
+                  ? "মেধা তালিকায় কোনো শিক্ষার্থী কম স্কোর নিয়ে আপনার পছন্দের বিভাগটিতে স্থান পাবে না। প্রতিটি বরাদ্দ সম্পূর্ণ স্বচ্ছ এবং গাণিতিকভাবে ন্যায়সংগত।"
+                  : "No student with a lower merit score can be allocated your preferred seat before you. Every allocation is mathematically Pareto-stable and transparent."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">৩. কোটা শূন্য হলে মেধা তালিকায় রূপান্তর</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "৩. কোটা শূন্য হলে মেধা তালিকায় রূপান্তর" : "3. Vacant Quota Automatic General Spillover"}
+              </div>
               <p>
-                কোনো বিভাগে বিশেষ কোটায় উপযুক্ত প্রার্থী না পাওয়া গেলে আসন শূন্য ফেলে রাখা হয় না। স্বয়ংক্রিয়ভাবে
-                সাধারণ মেধা তালিকায় তা স্পিল-ওভার হয়ে অপেক্ষমাণ শিক্ষার্থীদের দেওয়া হয়।
+                {isBn
+                  ? "কোনো বিভাগে বিশেষ কোটায় উপযুক্ত প্রার্থী না পাওয়া গেলে আসন শূন্য ফেলে রাখা হয় না। স্বয়ংক্রিয়ভাবে সাধারণ মেধা তালিকায় তা স্পিল-ওভার হয়ে অপেক্ষমাণ শিক্ষার্থীদের দেওয়া হয়।"
+                  : "If specialized quota seats remain unfilled, they are automatically spilled over to the general merit waiting list to maximize capacity utilization."}
               </p>
             </div>
           </div>

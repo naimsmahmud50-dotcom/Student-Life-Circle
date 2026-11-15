@@ -14,7 +14,7 @@
  * ========================================================================================
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Users,
   PenTool,
@@ -29,19 +29,36 @@ import { AppHead } from '@/components/layout/Head';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { StudyPodRoom } from '@/components/study-pods/StudyPodRoom';
+import { useTranslation } from '@/lib/i18n';
 
 export default function StudyPodPage() {
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
   const [activePodId, setActivePodId] = useState<string>('pod-hsc-higher-math-2026');
   const [isInRoom, setIsInRoom] = useState<boolean>(true);
+
+  const title = isBn
+    ? "লাইভ স্টাডি পড ও হোয়াইটবোর্ড | অগ্রযাত্রা"
+    : "Live Study Pod & Collaborative Whiteboard | Ogrojatra";
+  const description = isBn
+    ? "উচ্চ মাধ্যমিক ও বিশ্ববিদ্যালয় ভর্তি পরীক্ষার জন্য সহপাঠীদের সাথে রিয়েল-টাইম স্টাডি পড ও গাণিতিক হোয়াইটবোর্ড।"
+    : "Real-time peer study pods and mathematical collaborative whiteboards for HSC and university admission preparation.";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = title;
+    }
+  }, [title]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-bengali">
       <AppHead
-        title="লাইভ স্টাডি পড ও হোয়াইটবোর্ড | অগ্রযাত্রা"
-        description="উচ্চ মাধ্যমিক ও বিশ্ববিদ্যালয় ভর্তি পরীক্ষার জন্য সহপাঠীদের সাথে রিয়েল-টাইম স্টাডি পড ও গাণিতিক হোয়াইটবোর্ড।"
+        title={title}
+        description={description}
       />
 
-      <Navbar />
+      <Navbar currentStage={isBn ? "লাইভ স্টাডি পড (Study Pod)" : "Live Study Pod"} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col">
         {/* Breadcrumb & Intro */}
@@ -49,20 +66,22 @@ export default function StudyPodPage() {
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">
               <Users className="w-4 h-4" strokeWidth={1.75} />
-              <span>সহশিক্ষণ সার্কেল (Peer Study Pods)</span>
+              <span>{isBn ? "সহশিক্ষণ সার্কেল (Peer Study Pods)" : "Peer Study Pods"}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
-              রিয়েল-টাইম স্টাডি পড ও সহযোগী হোয়াইটবোর্ড
+              {isBn ? "রিয়েল-টাইম স্টাডি পড ও সহযোগী হোয়াইটবোর্ড" : "Real-Time Study Pods & Collaborative Whiteboard"}
             </h1>
             <p className="text-sm text-slate-400 mt-1 max-w-2xl">
-              সর্বোচ্চ ৮ জন শিক্ষার্থীর নিবিড় ভার্চুয়াল স্টাডি গ্রুপ। রিয়েল-টাইম অডিও মেশ, ফ্রিহ্যান্ড জ্যামিতি এবং KaTeX গাণিতিক সমীকরণ সমাধান করুন একসাথে।
+              {isBn
+                ? "সর্বোচ্চ ৮ জন শিক্ষার্থীর নিবিড় ভার্চুয়াল স্টাডি গ্রুপ। রিয়েল-টাইম অডিও মেশ, ফ্রিহ্যান্ড জ্যামিতি এবং KaTeX গাণিতিক সমীকরণ সমাধান করুন একসাথে।"
+                : "Intimate peer study groups capped at 8 students. Collaborate with real-time audio mesh, freehand vector geometry, and KaTeX math equation stamps."}
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold">
               <ShieldCheck className="w-4 h-4" strokeWidth={1.75} />
-              <span>P2P এনক্রিপ্টেড অডিও মেশ</span>
+              <span>{isBn ? "P2P এনক্রিপ্টেড অডিও মেশ" : "P2P Encrypted Audio Mesh"}</span>
             </div>
           </div>
         </div>
@@ -73,7 +92,7 @@ export default function StudyPodPage() {
             <StudyPodRoom
               podId={activePodId}
               currentUserId="usr-me-student-01"
-              currentUserName="তুমি (Student)"
+              currentUserName={isBn ? "তুমি (Student)" : "You (Student)"}
               podTitle="HSC Higher Math: Calculus & Conics Problem Solving"
               subject="Higher Mathematics"
               onLeave={() => setIsInRoom(false)}
@@ -85,17 +104,19 @@ export default function StudyPodPage() {
               <BookOpen className="w-8 h-8" strokeWidth={1.75} />
             </div>
             <h2 className="text-xl font-bold text-white">
-              তুমি স্টাডি পড থেকে প্রস্থান করেছ
+              {isBn ? "তুমি স্টাডি পড থেকে প্রস্থান করেছ" : "You have left the study pod"}
             </h2>
             <p className="text-sm text-slate-400 max-w-md">
-              তুমি যেকোনো সময় তোমার সহপাঠীদের সাথে পুনরায় এই স্টাডি পডে যোগ দিতে পারো।
+              {isBn
+                ? "তুমি যেকোনো সময় তোমার সহপাঠীদের সাথে পুনরায় এই স্টাডি পডে যোগ দিতে পারো।"
+                : "You can rejoin this collaborative study pod with your peers at any time."}
             </p>
             <button
               type="button"
               onClick={() => setIsInRoom(true)}
               className="btn-push-brand px-6 py-2.5 rounded-2xl bg-blue-600 text-white font-semibold text-sm shadow-lg active:scale-95 transition-all"
             >
-              পুনরায় প্রবেশ করুন
+              {isBn ? "পুনরায় প্রবেশ করুন" : "Rejoin Study Pod"}
             </button>
           </div>
         )}

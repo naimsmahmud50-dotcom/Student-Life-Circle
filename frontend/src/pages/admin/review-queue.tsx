@@ -48,7 +48,7 @@ import { ThemeToggle } from '../../components/ui/theme-toggle';
 import { useAuth } from '@/lib/auth-context';
 import { withAdminAuth } from '@/components/auth/AdminAuthGuard';
 import { apiClient } from '@/lib/api-client';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 interface OptionItem {
   id?: string;
@@ -106,28 +106,28 @@ const DEFAULT_COUNTS: StatusCounts = {
 };
 
 const SUBJECT_OPTIONS = [
-  { value: 'ALL', label: 'সকল বিষয়' },
-  { value: 'পদার্থবিজ্ঞান', label: 'পদার্থবিজ্ঞান' },
-  { value: 'রসায়ন', label: 'রসায়ন' },
-  { value: 'উচ্চতর গণিত', label: 'উচ্চতর গণিত' },
-  { value: 'জীববিজ্ঞান', label: 'জীববিজ্ঞান' },
-  { value: 'তথ্য ও যোগাযোগ প্রযুক্তি', label: 'তথ্য ও যোগাযোগ প্রযুক্তি' },
+  { value: 'ALL', labelBn: 'সকল বিষয়', labelEn: 'All Subjects' },
+  { value: 'পদার্থবিজ্ঞান', labelBn: 'পদার্থবিজ্ঞান', labelEn: 'Physics' },
+  { value: 'রসায়ন', labelBn: 'রসায়ন', labelEn: 'Chemistry' },
+  { value: 'উচ্চতর গণিত', labelBn: 'উচ্চতর গণিত', labelEn: 'Higher Math' },
+  { value: 'জীববিজ্ঞান', labelBn: 'জীববিজ্ঞান', labelEn: 'Biology' },
+  { value: 'তথ্য ও যোগাযোগ প্রযুক্তি', labelBn: 'তথ্য ও যোগাযোগ প্রযুক্তি', labelEn: 'ICT' },
 ];
 
 const DIFFICULTY_OPTIONS = [
-  { value: 'ALL', label: 'সকল স্তর' },
-  { value: 'EASY', label: 'সহজ (EASY)' },
-  { value: 'MEDIUM', label: 'মধ্যম (MEDIUM)' },
-  { value: 'HARD', label: 'কঠিন (HARD)' },
+  { value: 'ALL', labelBn: 'সকল স্তর', labelEn: 'All Difficulties' },
+  { value: 'EASY', labelBn: 'সহজ (EASY)', labelEn: 'Easy (EASY)' },
+  { value: 'MEDIUM', labelBn: 'মধ্যম (MEDIUM)', labelEn: 'Medium (MEDIUM)' },
+  { value: 'HARD', labelBn: 'কঠিন (HARD)', labelEn: 'Hard (HARD)' },
 ];
 
 const SOURCE_OPTIONS = [
-  { value: 'ALL', label: 'সকল উৎস' },
-  { value: 'AI_GENERATED', label: 'এআই জেনারেটেড' },
-  { value: 'TEACHER_SUBMISSION', label: 'শিক্ষক সাবমিশন' },
+  { value: 'ALL', labelBn: 'সকল উৎস', labelEn: 'All Sources' },
+  { value: 'AI_GENERATED', labelBn: 'এআই জেনারেটেড', labelEn: 'AI Generated' },
+  { value: 'TEACHER_SUBMISSION', labelBn: 'শিক্ষক সাবমিশন', labelEn: 'Teacher Submission' },
 ];
 
-const REJECTION_PRESETS = [
+const REJECTION_PRESETS_BN = [
   'এনসিটিবি কারিকুলাম মানদণ্ডের সাথে অমিল',
   'বিকল্প উত্তরে অস্পষ্টতা বা একাধিক সঠিক উত্তর দৃশ্যমান',
   'সঠিক উত্তরের স্বপক্ষে প্রদত্ত ব্যাখ্যা পর্যাপ্ত নয়',
@@ -135,11 +135,31 @@ const REJECTION_PRESETS = [
   'প্রশ্নপত্রে মুদ্রণ বা বৈজ্ঞানিক পরিভাষা সংক্রান্ত ত্রুটি রয়েছে',
 ];
 
+const REJECTION_PRESETS_EN = [
+  'Non-compliance with NCTB curriculum benchmark',
+  'Ambiguity in options or multiple correct answers detected',
+  'Pedagogical explanation lacks sufficient rationale',
+  'Bloom taxonomy cognitive level misalignment',
+  'Typographical error or scientific terminology inaccuracy',
+];
+
 const LOCAL_STORAGE_BACKUP_KEY = 'ogrojatra_draft_review_cache';
 
 function ReviewQueuePageComponent() {
   const router = useRouter();
   const { user } = useAuth();
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
+  const pageTitle = isBn
+    ? "এআই ড্রাফট রিভিউ কিউ | অগ্রযাত্রা অ্যাডমিন"
+    : "AI Draft Review Queue | Ogrojatra Admin";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = pageTitle;
+    }
+  }, [pageTitle]);
 
   // URL Query Initialization
   const queryStatus = (router.query.status as string) || 'NEEDS_REVIEW';
@@ -260,15 +280,15 @@ function ReviewQueuePageComponent() {
             setSelectedDraftId(parsed[0].id);
           }
         } else {
-          setErrorMsg('সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ পরীক্ষা করুন।');
+          setErrorMsg(isBn ? 'সার্ভারের সাথে সংযোগ স্থাপন করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ পরীক্ষা করুন।' : 'Failed to connect to backend server. Please verify your network.');
         }
       } catch {
-        setErrorMsg('ডেটা লোড করতে ব্যর্থ হয়েছে।');
+        setErrorMsg(isBn ? 'ডেটা লোড করতে ব্যর্থ হয়েছে।' : 'Failed to load question draft data.');
       }
     } finally {
       setIsLoading(false);
     }
-  }, [statusFilter, subjectFilter, difficultyFilter, sourceFilter, activeSearch, selectedDraftId]);
+  }, [statusFilter, subjectFilter, difficultyFilter, sourceFilter, activeSearch, selectedDraftId, isBn]);
 
   useEffect(() => {
     loadDrafts();
@@ -306,12 +326,12 @@ function ReviewQueuePageComponent() {
 
     try {
       await apiClient.approveDraftQuestion(questionId, 'বিষয় বিশেষজ্ঞ প্যানেল কর্তৃক পরীক্ষিত ও অনুমোদিত।');
-      showToast('প্রশ্নটি সফলভাবে অনুমোদিত হয়েছে এবং সক্রিয় পরীক্ষা পুলে যুক্ত হয়েছে।', 'success');
+      showToast(isBn ? 'প্রশ্নটি সফলভাবে অনুমোদিত হয়েছে এবং সক্রিয় পরীক্ষা পুলে যুক্ত হয়েছে।' : 'Question approved successfully and added to active exam pool.', 'success');
       loadDrafts();
     } catch (err: any) {
       // Rollback
       setDrafts(prevDrafts);
-      showToast('অনুমোদন ব্যর্থ হয়েছে: ' + (err.message || 'অপ্রত্যাশিত ত্রুটি'), 'error');
+      showToast((isBn ? 'অনুমোদন ব্যর্থ হয়েছে: ' : 'Approval failed: ') + (err.message || (isBn ? 'অপ্রত্যাশিত ত্রুটি' : 'Unexpected error')), 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -333,14 +353,14 @@ function ReviewQueuePageComponent() {
 
     try {
       await apiClient.rejectDraftQuestion(targetId, reason, 'REJECT');
-      showToast('প্রশ্নটি সংশোধন ফিডব্যাকসহ প্রত্যাখ্যাত হয়েছে।', 'success');
+      showToast(isBn ? 'প্রশ্নটি সংশোধন ফিডব্যাকসহ প্রত্যাখ্যাত হয়েছে।' : 'Question rejected with revision feedback.', 'success');
       setRejectModalOpen(false);
       setRejectionReason('');
       setRejectTargetId(null);
       loadDrafts();
     } catch (err: any) {
       setDrafts(prevDrafts);
-      showToast('প্রত্যাখ্যান ব্যর্থ হয়েছে: ' + (err.message || 'অপ্রত্যাশিত ত্রুটি'), 'error');
+      showToast((isBn ? 'প্রত্যাখ্যান ব্যর্থ হয়েছে: ' : 'Rejection failed: ') + (err.message || (isBn ? 'অপ্রত্যাশিত ত্রুটি' : 'Unexpected error')), 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -362,12 +382,12 @@ function ReviewQueuePageComponent() {
         cognitive_skill: editForm.cognitive_skill,
         comments: 'বিষয় বিশেষজ্ঞ কর্তৃক ইনলাইন পরিমার্জন ও অনুমোদন সম্পন্ন।',
       });
-      showToast('প্রশ্নটি সম্পাদিত ও অনুমোদিত হয়ে সক্রিয় পরীক্ষা পুলে যুক্ত হয়েছে।', 'success');
+      showToast(isBn ? 'প্রশ্নটি সম্পাদিত ও অনুমোদিত হয়ে সক্রিয় পরীক্ষা পুলে যুক্ত হয়েছে।' : 'Question edited and approved for examination pool.', 'success');
       setIsEditing(false);
       loadDrafts();
     } catch (err: any) {
       setDrafts(prevDrafts);
-      showToast('সম্পাদনা ও অনুমোদন ব্যর্থ হয়েছে: ' + (err.message || 'অপ্রত্যাশিত ত্রুটি'), 'error');
+      showToast((isBn ? 'সম্পাদনা ও অনুমোদন ব্যর্থ হয়েছে: ' : 'Edit and approval failed: ') + (err.message || (isBn ? 'অপ্রত্যাশিত ত্রুটি' : 'Unexpected error')), 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -465,8 +485,15 @@ function ReviewQueuePageComponent() {
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-main)] font-sans antialiased">
       <Head>
-        <title>এআই ড্রাফট রিভিউ কিউ | অগ্রযাত্রা অ্যাডমিন</title>
-        <meta name="description" content="এনসিটিবি কারিকুলাম সমন্বিত এআই প্রশ্ন ব্যাংক ও হিউম্যান-ইন-দ্য-লুপ রিভিউ কিউ" />
+        <title>{pageTitle}</title>
+        <meta
+          name="description"
+          content={
+            isBn
+              ? "এনসিটিবি কারিকুলাম সমন্বিত এআই প্রশ্ন ব্যাংক ও হিউম্যান-ইন-দ্য-লুপ রিভিউ কিউ"
+              : "NCTB curriculum-aligned AI question bank and human-in-the-loop review queue."
+          }
+        />
       </Head>
 
       {/* Global Toast Alert */}
@@ -496,14 +523,16 @@ function ReviewQueuePageComponent() {
               {/* Breadcrumb */}
               <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <Link href="/" className="hover:text-[var(--text-main)] transition-colors">
-                  হোম
+                  {isBn ? "হোম" : "Home"}
                 </Link>
                 <span>/</span>
                 <Link href="/admin" className="hover:text-[var(--text-main)] transition-colors">
-                  অ্যাডমিন
+                  {isBn ? "অ্যাডমিন" : "Admin"}
                 </Link>
                 <span>/</span>
-                <span className="text-[var(--text-main)] font-semibold">এআই ড্রাফট রিভিউ কিউ</span>
+                <span className="text-[var(--text-main)] font-semibold">
+                  {isBn ? "এআই ড্রাফট রিভিউ কিউ" : "AI Draft Review Queue"}
+                </span>
               </nav>
 
               <div className="flex items-center gap-3">
@@ -512,10 +541,12 @@ function ReviewQueuePageComponent() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-serif font-bold text-[var(--text-main)] tracking-tight">
-                    এআই প্রশ্ন ব্যাংক ও ড্রাফট পাইপলাইন
+                    {isBn ? "এআই প্রশ্ন ব্যাংক ও ড্রাফট পাইপলাইন" : "AI Question Bank & Draft Pipeline"}
                   </h1>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    এনসিটিবি কারিকুলাম মানদণ্ড অনুযায়ী এআই-ড্রাফট মূল্যায়ন, বিষয়বস্তু সংশোধন ও মানব পর্যালোচক অনুমোদন গেটওয়ে
+                    {isBn
+                      ? "এনসিটিবি কারিকুলাম মানদণ্ড অনুযায়ী এআই-ড্রাফট মূল্যায়ন, বিষয়বস্তু সংশোধন ও মানব পর্যালোচক অনুমোদন গেটওয়ে"
+                      : "NCTB curriculum-aligned AI draft evaluation, content remediation, and human-in-the-loop expert approval gateway."}
                   </p>
                 </div>
               </div>
@@ -528,7 +559,7 @@ function ReviewQueuePageComponent() {
                 className="inline-flex items-center gap-2 h-10 px-4 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-canvas)] hover:bg-[var(--bg-card)] text-[var(--text-main)] transition-all"
               >
                 <AlertTriangle className="w-4 h-4 text-rose-500" strokeWidth={1.75} />
-                <span>কোয়ারেন্টিন কনসোল</span>
+                <span>{isBn ? "কোয়ারেন্টিন কনসোল" : "Quarantine Console"}</span>
               </Link>
 
               <Link
@@ -536,7 +567,7 @@ function ReviewQueuePageComponent() {
                 className="inline-flex items-center gap-2 h-10 px-4 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-canvas)] hover:bg-[var(--bg-card)] text-[var(--text-main)] transition-all"
               >
                 <Layers className="w-4 h-4 text-cyan-500" strokeWidth={1.75} />
-                <span>অ্যাডমিন হাব</span>
+                <span>{isBn ? "অ্যাডমিন হাব" : "Admin Hub"}</span>
               </Link>
 
               <ThemeToggle />
@@ -546,12 +577,12 @@ function ReviewQueuePageComponent() {
           {/* Status Counter Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pt-6 border-t border-[var(--border-hairline)] mt-5 pb-1">
             {[
-              { key: 'NEEDS_REVIEW', label: 'রিভিউ আবশ্যক', count: counts.needs_review, color: 'text-amber-600 dark:text-amber-400' },
-              { key: 'ALL', label: 'সকল ড্রাফট', count: counts.all, color: 'text-slate-600 dark:text-slate-300' },
-              { key: 'DRAFT', label: 'ড্রাফট স্টোর', count: counts.draft, color: 'text-blue-600 dark:text-blue-400' },
-              { key: 'APPROVED', label: 'অনুমোদিত ও সক্রিয়', count: counts.approved, color: 'text-emerald-600 dark:text-emerald-400' },
-              { key: 'REJECTED', label: 'প্রত্যাখ্যাত', count: counts.rejected, color: 'text-rose-600 dark:text-rose-400' },
-              { key: 'NEEDS_CHANGES', label: 'সংশোধন আবশ্যক', count: counts.needs_changes, color: 'text-orange-600 dark:text-orange-400' },
+              { key: 'NEEDS_REVIEW', label: isBn ? 'রিভিউ আবশ্যক' : 'Needs Review', count: counts.needs_review, color: 'text-amber-600 dark:text-amber-400' },
+              { key: 'ALL', label: isBn ? 'সকল ড্রাফট' : 'All Drafts', count: counts.all, color: 'text-slate-600 dark:text-slate-300' },
+              { key: 'DRAFT', label: isBn ? 'ড্রাফট স্টোর' : 'Draft Store', count: counts.draft, color: 'text-blue-600 dark:text-blue-400' },
+              { key: 'APPROVED', label: isBn ? 'অনুমোদিত ও সক্রিয়' : 'Approved & Active', count: counts.approved, color: 'text-emerald-600 dark:text-emerald-400' },
+              { key: 'REJECTED', label: isBn ? 'প্রত্যাখ্যাত' : 'Rejected', count: counts.rejected, color: 'text-rose-600 dark:text-rose-400' },
+              { key: 'NEEDS_CHANGES', label: isBn ? 'সংশোধন আবশ্যক' : 'Needs Changes', count: counts.needs_changes, color: 'text-orange-600 dark:text-orange-400' },
             ].map((tab) => {
               const isActive = statusFilter.toUpperCase() === tab.key;
               return (
@@ -570,7 +601,7 @@ function ReviewQueuePageComponent() {
                 >
                   <span>{tab.label}</span>
                   <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-100 dark:bg-slate-800 ${tab.color}`}>
-                    {toBengaliDigits(tab.count)}
+                    {isBn ? toBengaliDigits(tab.count) : tab.count}
                   </span>
                 </button>
               );
@@ -597,7 +628,7 @@ function ReviewQueuePageComponent() {
                     syncUrlParams({ search: searchInput });
                   }
                 }}
-                placeholder="প্রশ্ন, টপিক বা আইডি খুঁজুন..."
+                placeholder={isBn ? 'প্রশ্ন, টপিক বা আইডি খুঁজুন...' : 'Search question, topic, or ID...'}
                 className="w-full h-10 pl-10 pr-16 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm text-[var(--text-main)] placeholder-[var(--text-muted)] focus:outline-hidden focus:border-[var(--color-primary)]"
               />
               {searchInput && (
@@ -610,7 +641,7 @@ function ReviewQueuePageComponent() {
                   }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] hover:text-[var(--text-main)] cursor-pointer"
                 >
-                  মুছুন
+                  {isBn ? 'মুছুন' : 'Clear'}
                 </button>
               )}
             </div>
@@ -627,7 +658,7 @@ function ReviewQueuePageComponent() {
               >
                 {SUBJECT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                    {isBn ? opt.labelBn : opt.labelEn}
                   </option>
                 ))}
               </select>
@@ -645,7 +676,7 @@ function ReviewQueuePageComponent() {
               >
                 {DIFFICULTY_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                    {isBn ? opt.labelBn : opt.labelEn}
                   </option>
                 ))}
               </select>
@@ -661,12 +692,12 @@ function ReviewQueuePageComponent() {
                 }}
                 className="h-10 px-4 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-xs transition-colors cursor-pointer"
               >
-                অনুসন্ধান
+                {isBn ? 'অনুসন্ধান' : 'Search'}
               </button>
               <button
                 type="button"
                 onClick={loadDrafts}
-                title="রিফ্রেশ করুন"
+                title={isBn ? 'রিফ্রেশ করুন' : 'Refresh'}
                 className="h-10 w-10 flex items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-colors cursor-pointer"
               >
                 <RotateCcw className={`w-4 h-4 ${isLoading ? 'animate-spin text-cyan-500' : ''}`} strokeWidth={1.75} />
@@ -677,11 +708,13 @@ function ReviewQueuePageComponent() {
           {/* Keyboard Shortcuts Hint Bar */}
           <div className="mt-3 pt-3 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between text-[11px] text-[var(--text-muted)]">
             <div className="flex items-center gap-4">
-              <span className="font-semibold text-[var(--text-main)]">দ্রুত কিবোর্ড শর্টকাট:</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">A</kbd> অনুমোদন</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">R</kbd> প্রত্যাখ্যান</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">E</kbd> সম্পাদনা</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">J</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">K</kbd> পরবর্তী/পূর্ববর্তী</span>
+              <span className="font-semibold text-[var(--text-main)]">
+                {isBn ? 'দ্রুত কিবোর্ড শর্টকাট:' : 'Keyboard Shortcuts:'}
+              </span>
+              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">A</kbd> {isBn ? 'অনুমোদন' : 'Approve'}</span>
+              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">R</kbd> {isBn ? 'প্রত্যাখ্যান' : 'Reject'}</span>
+              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">E</kbd> {isBn ? 'সম্পাদনা' : 'Edit'}</span>
+              <span><kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">J</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px]">K</kbd> {isBn ? 'পরবর্তী/পূর্ববর্তী' : 'Next/Prev'}</span>
             </div>
             <span className="text-[10px] uppercase font-mono tracking-wider">Zero-Unreviewed Policy Active</span>
           </div>
@@ -693,7 +726,7 @@ function ReviewQueuePageComponent() {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" strokeWidth={2} />
               <span className="text-xs font-bold text-cyan-900 dark:text-cyan-100">
-                {toBengaliDigits(selectedIds.size)}টি প্রশ্ন নির্বাচিত হয়েছে
+                {isBn ? `${toBengaliDigits(selectedIds.size)}টি প্রশ্ন নির্বাচিত হয়েছে` : `${selectedIds.size} Questions Selected`}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -703,7 +736,7 @@ function ReviewQueuePageComponent() {
                 disabled={isSubmitting}
                 className="h-8 px-3 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors cursor-pointer"
               >
-                নির্বাচিত অনুমোদন করুন
+                {isBn ? 'নির্বাচিত অনুমোদন করুন' : 'Approve Selected'}
               </button>
               <button
                 type="button"
@@ -711,14 +744,14 @@ function ReviewQueuePageComponent() {
                 disabled={isSubmitting}
                 className="h-8 px-3 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition-colors cursor-pointer"
               >
-                নির্বাচিত প্রত্যাখ্যান করুন
+                {isBn ? 'নির্বাচিত প্রত্যাখ্যান করুন' : 'Reject Selected'}
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedIds(new Set())}
                 className="h-8 px-2.5 rounded-lg text-xs text-[var(--text-muted)] hover:text-[var(--text-main)] cursor-pointer"
               >
-                বাতিল
+                {isBn ? 'বাতিল' : 'Cancel'}
               </button>
             </div>
           </div>
@@ -736,7 +769,7 @@ function ReviewQueuePageComponent() {
               onClick={loadDrafts}
               className="text-xs font-bold underline hover:no-underline cursor-pointer"
             >
-              পুনরায় চেষ্টা করুন
+              {isBn ? 'পুনরায় চেষ্টা করুন' : 'Retry'}
             </button>
           </div>
         )}
@@ -754,14 +787,14 @@ function ReviewQueuePageComponent() {
                   checked={drafts.length > 0 && selectedIds.size === drafts.length}
                   onChange={toggleSelectAll}
                   className="rounded border-[var(--border-subtle)] text-cyan-600 focus:ring-0 cursor-pointer"
-                  title="সব নির্বাচন করুন"
+                  title={isBn ? 'সব নির্বাচন করুন' : 'Select All'}
                 />
                 <span className="text-xs font-bold text-[var(--text-main)]">
-                  ড্রাফট তালিকা ({toBengaliDigits(drafts.length)}টি)
+                  {isBn ? `ড্রাফট তালিকা (${toBengaliDigits(drafts.length)}টি)` : `Draft List (${drafts.length})`}
                 </span>
               </div>
               <span className="text-[11px] text-[var(--text-muted)]">
-                ক্লিক করে বিস্তারিত দেখুন
+                {isBn ? 'ক্লিক করে বিস্তারিত দেখুন' : 'Click to inspect details'}
               </span>
             </div>
 
@@ -784,9 +817,13 @@ function ReviewQueuePageComponent() {
                   <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-[var(--text-muted)] flex items-center justify-center mx-auto mb-3">
                     <CheckCircle2 className="w-6 h-6" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-sm font-bold text-[var(--text-main)]">কোনো ড্রাফট প্রশ্ন মেলেনি</h3>
+                  <h3 className="text-sm font-bold text-[var(--text-main)]">
+                    {isBn ? 'কোনো ড্রাফট প্রশ্ন মেলেনি' : 'No draft questions found'}
+                  </h3>
                   <p className="text-xs text-[var(--text-muted)] mt-1 max-w-xs mx-auto">
-                    বর্তমান ফিল্টারে পর্যালোচনার জন্য কোনো প্রশ্ন অবশিষ্ট নেই। অন্য ফিল্টার বেছে নিন।
+                    {isBn
+                      ? 'বর্তমান ফিল্টারে পর্যালোচনার জন্য কোনো প্রশ্ন অবশিষ্ট নেই। অন্য ফিল্টার বেছে নিন।'
+                      : 'No questions match the current filters. Try selecting another filter.'}
                   </p>
                 </div>
               ) : (
@@ -834,20 +871,20 @@ function ReviewQueuePageComponent() {
                               }`}
                             >
                               {d.status === 'NEEDS_REVIEW'
-                                ? 'রিভিউ আবশ্যক'
+                                ? (isBn ? 'রিভিউ আবশ্যক' : 'Needs Review')
                                 : d.status === 'APPROVED'
-                                ? 'অনুমোদিত'
+                                ? (isBn ? 'অনুমোদিত' : 'Approved')
                                 : d.status === 'REJECTED'
-                                ? 'প্রত্যাখ্যাত'
+                                ? (isBn ? 'প্রত্যাখ্যাত' : 'Rejected')
                                 : d.status === 'NEEDS_CHANGES'
-                                ? 'সংশোধন আবশ্যক'
-                                : 'ড্রাফট'}
+                                ? (isBn ? 'সংশোধন আবশ্যক' : 'Needs Changes')
+                                : (isBn ? 'ড্রাফট' : 'Draft')}
                             </span>
                           </div>
 
                           {/* Stem Snippet */}
                           <h4 className="text-xs font-semibold text-[var(--text-main)] line-clamp-2 leading-relaxed">
-                            {d.stem_bn}
+                            {d.stem_en && !isBn ? d.stem_en : d.stem_bn}
                           </h4>
 
                           {/* Subject & Confidence Badges */}
@@ -860,7 +897,7 @@ function ReviewQueuePageComponent() {
                             </span>
                             {d.ai_confidence_score && (
                               <span className="text-[10px] font-mono text-purple-600 dark:text-purple-400">
-                                {Math.round(d.ai_confidence_score * 100)}% এআই স্কোর
+                                {Math.round(d.ai_confidence_score * 100)}% {isBn ? 'এআই স্কোর' : 'AI Score'}
                               </span>
                             )}
                           </div>
@@ -910,7 +947,7 @@ function ReviewQueuePageComponent() {
                       }`}
                     >
                       <Edit3 className="w-3.5 h-3.5" strokeWidth={1.75} />
-                      <span>{isEditing ? 'সম্পাদনা বাতিল' : 'ইনলাইন সম্পাদনা'}</span>
+                      <span>{isEditing ? (isBn ? 'সম্পাদনা বাতিল' : 'Cancel Edit') : (isBn ? 'ইনলাইন সম্পাদনা' : 'Inline Edit')}</span>
                     </button>
                   </div>
                 </div>
@@ -922,7 +959,7 @@ function ReviewQueuePageComponent() {
                     <div className="space-y-4">
                       <div>
                         <label className="block text-xs font-bold text-[var(--text-main)] mb-1">
-                          প্রশ্নের মূল বক্তব্য (Stem BN):
+                          {isBn ? 'প্রশ্নের মূল বক্তব্য (Stem):' : 'Question Stem:'}
                         </label>
                         <textarea
                           rows={3}
@@ -935,7 +972,7 @@ function ReviewQueuePageComponent() {
                       {/* Options Editing */}
                       <div>
                         <label className="block text-xs font-bold text-[var(--text-main)] mb-2">
-                          বিকল্প উত্তরসমূহ (সঠিক উত্তর চিহ্নিত করুন):
+                          {isBn ? 'বিকল্প উত্তরসমূহ (সঠিক উত্তর চিহ্নিত করুন):' : 'Answer Options (Select correct option):'}
                         </label>
                         <div className="space-y-2">
                           {editForm.options.map((opt, idx) => (
@@ -954,7 +991,7 @@ function ReviewQueuePageComponent() {
                                   });
                                 }}
                                 className="text-emerald-600 focus:ring-0 cursor-pointer"
-                                title="সঠিক উত্তর হিসেবে নির্বাচন করুন"
+                                title={isBn ? "সঠিক উত্তর হিসেবে নির্বাচন করুন" : "Select as correct answer"}
                               />
                               <span className="w-6 text-xs font-mono font-bold text-[var(--text-main)]">
                                 {opt.option_key}.
@@ -977,7 +1014,7 @@ function ReviewQueuePageComponent() {
                       {/* Explanation Editing */}
                       <div>
                         <label className="block text-xs font-bold text-[var(--text-main)] mb-1">
-                          বিশদ ব্যাখ্যা (Explanation BN):
+                          {isBn ? 'বিশদ ব্যাখ্যা (Explanation):' : 'Pedagogical Explanation:'}
                         </label>
                         <textarea
                           rows={3}
@@ -994,7 +1031,7 @@ function ReviewQueuePageComponent() {
                           onClick={() => setIsEditing(false)}
                           className="h-9 px-4 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] hover:bg-[var(--bg-canvas)] cursor-pointer"
                         >
-                          বাতিল
+                          {isBn ? 'বাতিল' : 'Cancel'}
                         </button>
                         <button
                           type="button"
@@ -1003,7 +1040,7 @@ function ReviewQueuePageComponent() {
                           className="inline-flex items-center gap-1.5 h-9 px-4 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors cursor-pointer"
                         >
                           <Save className="w-3.5 h-3.5" strokeWidth={2} />
-                          <span>সংরক্ষণ ও অনুমোদন করুন</span>
+                          <span>{isBn ? 'সংরক্ষণ ও অনুমোদন করুন' : 'Save & Approve'}</span>
                         </button>
                       </div>
                     </div>
@@ -1013,7 +1050,7 @@ function ReviewQueuePageComponent() {
                       {/* Question Stem */}
                       <div>
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] block mb-1">
-                          প্রশ্নের বিবরণ (Stem)
+                          {isBn ? 'প্রশ্নের বিবরণ (Stem)' : 'Question Stem'}
                         </span>
                         <div className="p-4 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-hairline)]">
                           <p className="text-base font-serif text-[var(--text-main)] leading-relaxed">
@@ -1030,7 +1067,7 @@ function ReviewQueuePageComponent() {
                       {/* Options Grid */}
                       <div>
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] block mb-2">
-                          বিকল্প উত্তর ও বিভ্রান্তিকারী যুক্তি (Distractor Rationale)
+                          {isBn ? 'বিকল্প উত্তর ও বিভ্রান্তিকারী যুক্তি (Distractor Rationale)' : 'Options & Distractor Rationale'}
                         </span>
                         <div className="space-y-2.5">
                           {selectedDraft.options?.map((opt) => (
@@ -1058,7 +1095,7 @@ function ReviewQueuePageComponent() {
                                 {opt.is_correct && (
                                   <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
                                     <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2} />
-                                    <span>সঠিক উত্তর</span>
+                                    <span>{isBn ? 'সঠিক উত্তর' : 'Correct Answer'}</span>
                                   </span>
                                 )}
                               </div>
@@ -1076,7 +1113,7 @@ function ReviewQueuePageComponent() {
                       {selectedDraft.explanation_bn && (
                         <div>
                           <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] block mb-1">
-                            শিক্ষামূলক সমাধান ও ব্যাখ্যা (Pedagogical Explanation)
+                            {isBn ? 'শিক্ষামূলক সমাধান ও ব্যাখ্যা (Pedagogical Explanation)' : 'Pedagogical Explanation & Solution'}
                           </span>
                           <div className="p-4 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-hairline)] text-xs text-[var(--text-main)] font-serif leading-relaxed">
                             {selectedDraft.explanation_bn}
@@ -1089,28 +1126,28 @@ function ReviewQueuePageComponent() {
                         <div className="flex items-center gap-2 mb-3">
                           <Sparkles className="w-4 h-4 text-purple-500" strokeWidth={1.75} />
                           <span className="text-xs font-bold text-[var(--text-main)]">
-                            এআই অডিট ও কোয়ালিটি স্কোরবোর্ড
+                            {isBn ? 'এআই অডিট ও কোয়ালিটি স্কোরবোর্ড' : 'AI Quality & Audit Scoreboard'}
                           </span>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                           <div>
-                            <span className="text-[10px] text-[var(--text-muted)] block">জেনারেটিভ মডেল</span>
+                            <span className="text-[10px] text-[var(--text-muted)] block">{isBn ? 'জেনারেটিভ মডেল' : 'Generative Model'}</span>
                             <span className="font-mono font-medium">{selectedDraft.ai_model || 'Claude-3.5-Sonnet'}</span>
                           </div>
                           <div>
-                            <span className="text-[10px] text-[var(--text-muted)] block">ব্লুমস ট্যাক্সোনমি স্তর</span>
+                            <span className="text-[10px] text-[var(--text-muted)] block">{isBn ? 'ব্লুমস ট্যাক্সোনমি স্তর' : 'Bloom Taxonomy Level'}</span>
                             <span className="font-medium text-indigo-600 dark:text-indigo-400">
                               {selectedDraft.cognitive_skill}
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] text-[var(--text-muted)] block">ডুপ্লিকেশন সাদৃশ্য</span>
+                            <span className="text-[10px] text-[var(--text-muted)] block">{isBn ? 'ডুপ্লিকেশন সাদৃশ্য' : 'Duplication Similarity'}</span>
                             <span className="font-mono text-emerald-600 dark:text-emerald-400">
-                              {selectedDraft.deduplication_similarity} (ইউনিক)
+                              {selectedDraft.deduplication_similarity} {isBn ? '(ইউনিক)' : '(Unique)'}
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] text-[var(--text-muted)] block">নির্ভুলতা স্কোর</span>
+                            <span className="text-[10px] text-[var(--text-muted)] block">{isBn ? 'নির্ভুলতা স্কোর' : 'Confidence Score'}</span>
                             <span className="font-mono font-bold text-purple-600 dark:text-purple-400">
                               {Math.round((selectedDraft.ai_confidence_score || 0.94) * 100)}%
                             </span>
@@ -1122,7 +1159,7 @@ function ReviewQueuePageComponent() {
                       {selectedDraft.rejection_feedback && (
                         <div className="p-4 rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50/60 dark:bg-rose-950/20 text-xs">
                           <span className="font-bold text-rose-700 dark:text-rose-400 block mb-1">
-                            প্রত্যাখ্যানের কারণ ও পর্যালোচক মন্তব্য:
+                            {isBn ? 'প্রত্যাখ্যানের কারণ ও পর্যালোচক মন্তব্য:' : 'Rejection Reason & Reviewer Feedback:'}
                           </span>
                           <p className="text-[var(--text-main)]">{selectedDraft.rejection_feedback}</p>
                         </div>
@@ -1144,7 +1181,7 @@ function ReviewQueuePageComponent() {
                       className="inline-flex items-center gap-1 h-9 px-3 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-card)] hover:bg-[var(--bg-canvas)] transition-colors cursor-pointer"
                     >
                       <ChevronLeft className="w-4 h-4" />
-                      <span>পূর্ববর্তী (K)</span>
+                      <span>{isBn ? 'পূর্ববর্তী (K)' : 'Previous (K)'}</span>
                     </button>
                     <button
                       type="button"
@@ -1154,7 +1191,7 @@ function ReviewQueuePageComponent() {
                       }}
                       className="inline-flex items-center gap-1 h-9 px-3 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-card)] hover:bg-[var(--bg-canvas)] transition-colors cursor-pointer"
                     >
-                      <span>পরবর্তী (J)</span>
+                      <span>{isBn ? 'পরবর্তী (J)' : 'Next (J)'}</span>
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -1170,7 +1207,7 @@ function ReviewQueuePageComponent() {
                       className="inline-flex items-center gap-1.5 h-9 px-4 rounded-xl text-xs font-bold border border-rose-300 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 hover:bg-rose-100 transition-colors cursor-pointer"
                     >
                       <XCircle className="w-4 h-4" strokeWidth={2} />
-                      <span>প্রত্যাখ্যান করুন (R)</span>
+                      <span>{isBn ? 'প্রত্যাখ্যান করুন (R)' : 'Reject (R)'}</span>
                     </button>
 
                     <button
@@ -1180,7 +1217,7 @@ function ReviewQueuePageComponent() {
                       className="inline-flex items-center gap-1.5 h-9 px-5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs transition-colors cursor-pointer"
                     >
                       <CheckCircle2 className="w-4 h-4" strokeWidth={2} />
-                      <span>অনুমোদন করুন (A)</span>
+                      <span>{isBn ? 'অনুমোদন করুন (A)' : 'Approve (A)'}</span>
                     </button>
                   </div>
                 </div>
@@ -1188,8 +1225,12 @@ function ReviewQueuePageComponent() {
             ) : (
               <div className="p-16 text-center text-[var(--text-muted)]">
                 <BookOpen className="w-10 h-10 mx-auto mb-3 opacity-40" strokeWidth={1.5} />
-                <h3 className="text-sm font-bold text-[var(--text-main)]">কোনো প্রশ্ন নির্বাচিত নেই</h3>
-                <p className="text-xs mt-1">বাম পাশের তালিকা থেকে একটি প্রশ্ন নির্বাচন করুন।</p>
+                <h3 className="text-sm font-bold text-[var(--text-main)]">
+                  {isBn ? 'কোনো প্রশ্ন নির্বাচিত নেই' : 'No Question Selected'}
+                </h3>
+                <p className="text-xs mt-1">
+                  {isBn ? 'বাম পাশের তালিকা থেকে একটি প্রশ্ন নির্বাচন করুন।' : 'Select a question from the queue list to inspect.'}
+                </p>
               </div>
             )}
           </div>
@@ -1207,10 +1248,10 @@ function ReviewQueuePageComponent() {
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-[var(--text-main)]">
-                    প্রশ্নটি প্রত্যাখ্যানের কারণ উল্লেখ করুন
+                    {isBn ? 'প্রশ্নটি প্রত্যাখ্যানের কারণ উল্লেখ করুন' : 'Specify Rejection Reason'}
                   </h3>
                   <p className="text-xs text-[var(--text-muted)]">
-                    অডিটে সংরক্ষণের জন্য সুনির্দিষ্ট কারণ আবশ্যক।
+                    {isBn ? 'অডিটে সংরক্ষণের জন্য সুনির্দিষ্ট কারণ আবশ্যক।' : 'Specific rationale is mandatory for the audit log.'}
                   </p>
                 </div>
               </div>
@@ -1218,7 +1259,7 @@ function ReviewQueuePageComponent() {
                 type="button"
                 onClick={() => setRejectModalOpen(false)}
                 className="text-[var(--text-muted)] hover:text-[var(--text-main)] cursor-pointer"
-                aria-label="বন্ধ করুন"
+                aria-label={isBn ? "বন্ধ করুন" : "Dismiss"}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1227,10 +1268,10 @@ function ReviewQueuePageComponent() {
             {/* Presets */}
             <div>
               <span className="text-[11px] font-bold text-[var(--text-muted)] block mb-1.5">
-                সচরাচর ব্যবহৃত কারণসমূহ:
+                {isBn ? 'সচরাচর ব্যবহৃত কারণসমূহ:' : 'Commonly Used Presets:'}
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {REJECTION_PRESETS.map((preset) => (
+                {(isBn ? REJECTION_PRESETS_BN : REJECTION_PRESETS_EN).map((preset) => (
                   <button
                     key={preset}
                     type="button"
@@ -1246,13 +1287,13 @@ function ReviewQueuePageComponent() {
             {/* Custom Reason Textarea */}
             <div>
               <label className="block text-xs font-semibold text-[var(--text-main)] mb-1">
-                বিস্তারিত ফিডব্যাক মন্তব্য:
+                {isBn ? 'বিস্তারিত ফিডব্যাক মন্তব্য:' : 'Detailed Feedback Comment:'}
               </label>
               <textarea
                 rows={4}
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
-                placeholder="কেন প্রশ্নটি বাতিল বা সংশোধন প্রয়োজন তা সংক্ষেপে লিখুন..."
+                placeholder={isBn ? 'কেন প্রশ্নটি বাতিল বা সংশোধন প্রয়োজন তা সংক্ষেপে লিখুন...' : 'Briefly explain why this question is being rejected or needs revision...'}
                 className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-xs text-[var(--text-main)] focus:outline-hidden focus:border-rose-500"
               />
             </div>
@@ -1264,7 +1305,7 @@ function ReviewQueuePageComponent() {
                 onClick={() => setRejectModalOpen(false)}
                 className="h-9 px-4 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] hover:bg-[var(--bg-canvas)] cursor-pointer"
               >
-                বাতিল
+                {isBn ? 'বাতিল' : 'Cancel'}
               </button>
               <button
                 type="button"
@@ -1272,7 +1313,7 @@ function ReviewQueuePageComponent() {
                 disabled={!rejectionReason.trim() || isSubmitting}
                 className="h-9 px-5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white disabled:opacity-50 transition-colors cursor-pointer"
               >
-                প্রত্যাখ্যান নিশ্চিত করুন
+                {isBn ? 'প্রত্যাখ্যান নিশ্চিত করুন' : 'Confirm Rejection'}
               </button>
             </div>
           </div>

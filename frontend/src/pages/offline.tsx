@@ -46,8 +46,10 @@ import {
 } from '@/lib/offline/offline-papers-store';
 import { BoardQuestionItem } from '@/components/curriculum/BoardQuestionArchiveViewer';
 import { KaTeXRenderer } from '@/components/quiz/katex-renderer';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 export default function OfflinePage() {
+  const { language } = useTranslation();
   const [isChecking, setIsChecking] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,6 +59,12 @@ export default function OfflinePage() {
   const [readQuestions, setReadQuestions] = useState<Set<string>>(new Set());
   const [vaultStats, setVaultStats] = useState<OfflineVaultStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = language === 'bn'
+      ? 'অফলাইন স্টাডি এরিনা ও সংরক্ষিত বোর্ড প্রশ্ন | অগ্রযাত্রা'
+      : 'Offline Study Arena & Saved Past Papers | Ogrojatra';
+  }, [language]);
 
   // Load questions from IndexedDB on mount
   useEffect(() => {
@@ -145,30 +153,51 @@ export default function OfflinePage() {
   return (
     <>
       <AppHead
-        title="অফলাইন স্টাডি এরিনা ও সংরক্ষিত বোর্ড প্রশ্ন | অগ্রযাত্রা"
-        description="ইন্টারনেট সংযোগ ছাড়াই ডিভাইসে সংরক্ষিত এনসিটিবি অনুমোদিত অফিসিয়াল বোর্ড প্রশ্ন ও KaTeX গাণিতিক সমাধান অনুশীলন করুন।"
+        title={
+          language === 'bn'
+            ? 'অফলাইন স্টাডি এরিনা ও সংরক্ষিত বোর্ড প্রশ্ন | অগ্রযাত্রা'
+            : 'Offline Study Arena & Saved Past Papers | Ogrojatra'
+        }
+        description={
+          language === 'bn'
+            ? 'ইন্টারনেট সংযোগ ছাড়াই ডিভাইসে সংরক্ষিত এনসিটিবি অনুমোদিত অফিসিয়াল বোর্ড প্রশ্ন ও KaTeX গাণিতিক সমাধান অনুশীলন করুন।'
+            : 'Practice official NCTB board questions and KaTeX mathematical solutions cached securely on your device without internet.'
+        }
         canonicalUrl="/offline"
         ogType="website"
       />
 
       <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#090D16] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
-        <Navbar currentStage="এইচএসসি ও এসএসসি প্রস্তুতি (HSC & SSC)" />
+        <Navbar currentStage={language === 'bn' ? 'এইচএসসি ও এসএসসি প্রস্তুতি (HSC & SSC)' : 'HSC & SSC Preparation'} />
 
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
           {/* Unified PageHeader */}
           <PageHeader
-            category="অফলাইন রেসিলিয়েন্স ও লোকাল ভল্ট"
-            title="অফলাইন স্টাডি এরিনা ও বোর্ড প্রশ্ন ব্যাংক"
-            subtitle="ইন্টারনেট সংযোগ নেই? প্রস্তুতি কিন্তু থেমে নেই! গ্রামীণ বা দূরপাল্লার যাত্রায় নেটওয়ার্ক হারিয়ে গেলেও তোমার ডিভাইসে সংরক্ষিত এনসিটিবি প্রশ্ন ও সমাধান সম্পূর্ণ প্রস্তুত।"
+            category={language === 'bn' ? 'অফলাইন রেসিলিয়েন্স ও লোকাল ভল্ট' : 'Offline Resilience & Local Vault'}
+            title={language === 'bn' ? 'অফলাইন স্টাডি এরিনা ও বোর্ড প্রশ্ন ব্যাংক' : 'Offline Study Arena & Question Bank'}
+            subtitle={
+              language === 'bn'
+                ? 'ইন্টারনেট সংযোগ নেই? প্রস্তুতি কিন্তু থেমে নেই! গ্রামীণ বা দূরপাল্লার যাত্রায় নেটওয়ার্ক হারিয়ে গেলেও তোমার ডিভাইসে সংরক্ষিত এনসিটিবি প্রশ্ন ও সমাধান সম্পূর্ণ প্রস্তুত।'
+                : 'No internet connection? Your preparation never stops! Even during rural travel with zero network, your cached NCTB questions and solutions are completely ready.'
+            }
             breadcrumbs={[
-              { label: 'নীড়পাতা', href: '/' },
-              { label: 'বোর্ড আর্কাইভ', href: '/board-archives' },
-              { label: 'অফলাইন এরিনা' }
+              { label: language === 'bn' ? 'নীড়পাতা' : 'Home', href: '/' },
+              { label: language === 'bn' ? 'বোর্ড আর্কাইভ' : 'Board Archives', href: '/board-archives' },
+              { label: language === 'bn' ? 'অফলাইন এরিনা' : 'Offline Arena' }
             ]}
             stats={[
-              { label: 'সংরক্ষিত প্রশ্নপত্র', value: `${savedQuestions.length}টি` },
-              { label: 'কভারেজ বোর্ড', value: `${vaultStats?.boards.length || 0}টি` },
-              { label: 'সংযোগ অবস্থা', value: isOnline ? 'অনলাইন' : 'অফলাইন' }
+              {
+                label: language === 'bn' ? 'সংরক্ষিত প্রশ্নপত্র' : 'Saved Questions',
+                value: language === 'bn' ? `${toBengaliDigits(savedQuestions.length)}টি` : `${savedQuestions.length} Items`
+              },
+              {
+                label: language === 'bn' ? 'কভারেজ বোর্ড' : 'Covered Boards',
+                value: language === 'bn' ? `${toBengaliDigits(vaultStats?.boards.length || 0)}টি` : `${vaultStats?.boards.length || 0} Boards`
+              },
+              {
+                label: language === 'bn' ? 'সংযোগ অবস্থা' : 'Connection Status',
+                value: isOnline ? (language === 'bn' ? 'অনলাইন' : 'Online') : (language === 'bn' ? 'অফলাইন' : 'Offline')
+              }
             ]}
           />
 
@@ -188,7 +217,9 @@ export default function OfflinePage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold font-bengali text-slate-900 dark:text-white text-base">
-                      {isOnline ? 'ইন্টারনেট সংযুক্ত রয়েছে' : 'বর্তমানে অফলাইন মোড সক্রিয়'}
+                      {isOnline
+                        ? (language === 'bn' ? 'ইন্টারনেট সংযুক্ত রয়েছে' : 'Internet Connected')
+                        : (language === 'bn' ? 'বর্তমানে অফলাইন মোড সক্রিয়' : 'Currently in Offline Mode')}
                     </span>
                     <span
                       className={`w-2 h-2 rounded-full ${
@@ -198,8 +229,12 @@ export default function OfflinePage() {
                   </div>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-bengali mt-0.5">
                     {isOnline
-                      ? 'সার্ভারের সাথে রিয়েল-টাইম সিঙ্ক সক্রিয়। সম্পূর্ণ পোর্টাল ব্রাউজ করতে পারেন।'
-                      : 'ডিভাইসে সংরক্ষিত প্রশ্নসমূহ ব্রাউজ করুন। নতুন উত্তর দিলে ব্যাকগ্রাউন্ডে জমা থাকবে।'}
+                      ? (language === 'bn'
+                          ? 'সার্ভারের সাথে রিয়েল-টাইম সিঙ্ক সক্রিয়। সম্পূর্ণ পোর্টাল ব্রাউজ করতে পারেন।'
+                          : 'Real-time server sync is active. You can browse the complete portal.')
+                      : (language === 'bn'
+                          ? 'ডিভাইসে সংরক্ষিত প্রশ্নসমূহ ব্রাউজ করুন। নতুন উত্তর দিলে ব্যাকগ্রাউন্ডে জমা থাকবে।'
+                          : 'Browse questions cached on this device. New responses will be queued in the background.')}
                   </p>
                 </div>
               </div>
@@ -212,12 +247,16 @@ export default function OfflinePage() {
                   className="w-full sm:w-auto"
                 >
                   <RefreshCw className={`w-4 h-4 text-blue-400 ${isChecking ? 'animate-spin' : ''}`} />
-                  <span>{isChecking ? 'পরীক্ষা করা হচ্ছে...' : 'সংযোগ পরীক্ষা করুন'}</span>
+                  <span>
+                    {isChecking
+                      ? (language === 'bn' ? 'পরীক্ষা করা হচ্ছে...' : 'Checking...')
+                      : (language === 'bn' ? 'সংযোগ পরীক্ষা করুন' : 'Check Connection')}
+                  </span>
                 </Button>
                 <Link href="/board-archives" className="w-full sm:w-auto">
                   <Button variant="oxford" className="w-full sm:w-auto shadow-[0_4px_0_0_#1D4ED8]">
                     <BookOpen className="w-4 h-4" />
-                    <span>অনলাইন আর্কাইভ</span>
+                    <span>{language === 'bn' ? 'অনলাইন আর্কাইভ' : 'Online Archives'}</span>
                   </Button>
                 </Link>
               </div>
@@ -231,7 +270,11 @@ export default function OfflinePage() {
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <Input
                   type="text"
-                  placeholder="সংরক্ষিত প্রশ্নের অধ্যায়, বোর্ড বা বিষয় খুঁজুন..."
+                  placeholder={
+                    language === 'bn'
+                      ? 'সংরক্ষিত প্রশ্নের অধ্যায়, বোর্ড বা বিষয় খুঁজুন...'
+                      : 'Search cached chapter, board, or subject...'
+                  }
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
@@ -249,7 +292,9 @@ export default function OfflinePage() {
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
-                    সকল বিষয় ({savedQuestions.length})
+                    {language === 'bn'
+                      ? `সকল বিষয় (${toBengaliDigits(savedQuestions.length)})`
+                      : `All Subjects (${savedQuestions.length})`}
                   </button>
                   {vaultStats.subjects.map((sub) => (
                     <button
@@ -273,13 +318,17 @@ export default function OfflinePage() {
             {filteredQuestions.length === 0 ? (
               <EmptyState
                 icon={<FileText className="w-8 h-8 text-slate-400" />}
-                title="কোনো সংরক্ষিত প্রশ্ন পাওয়া যায়নি"
+                title={language === 'bn' ? 'কোনো সংরক্ষিত প্রশ্ন পাওয়া যায়নি' : 'No Cached Questions Found'}
                 description={
                   searchQuery
-                    ? `"${searchQuery}" এর সাথে মিলে এমন কোনো অফলাইন প্রশ্ন নেই।`
-                    : 'ডিভাইসের ভল্টে কোনো প্রশ্ন সংরক্ষিত নেই। অনলাইন সংযোগ ফিরে এলে বোর্ড প্রশ্ন খুললে স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে।'
+                    ? (language === 'bn'
+                        ? `"${searchQuery}" এর সাথে মিলে এমন কোনো অফলাইন প্রশ্ন নেই।`
+                        : `No offline questions matching "${searchQuery}".`)
+                    : (language === 'bn'
+                        ? 'ডিভাইসের ভল্টে কোনো প্রশ্ন সংরক্ষিত নেই। অনলাইন সংযোগ ফিরে এলে বোর্ড প্রশ্ন খুললে স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে।'
+                        : 'No questions cached in the offline vault. Questions will cache automatically once opened with an active connection.')
                 }
-                actionLabel="অনুশীলন সেটে যান"
+                actionLabel={language === 'bn' ? 'অনুশীলন সেটে যান' : 'Go to Practice Sets'}
                 onAction={() => {
                   window.location.href = '/practice';
                 }}
@@ -302,7 +351,7 @@ export default function OfflinePage() {
                             {q.subject_bn} ({q.paper})
                           </span>
                           <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold font-bengali bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                            {q.board_bn} • {q.year}
+                            {q.board_bn} • {language === 'bn' ? toBengaliDigits(q.year) : q.year}
                           </span>
                           <span className="px-2 py-0.5 rounded-md text-[11px] font-mono text-slate-500 dark:text-slate-400">
                             {q.question_type}
@@ -313,11 +362,11 @@ export default function OfflinePage() {
                           {isRead && (
                             <span className="inline-flex items-center gap-1 text-[11px] text-emerald-500 dark:text-emerald-400 font-bengali">
                               <CheckCircle2 className="w-3.5 h-3.5" />
-                              <span>অনুশীলিত</span>
+                              <span>{language === 'bn' ? 'অনুশীলিত' : 'Completed'}</span>
                             </span>
                           )}
                           <span className="text-xs font-semibold font-bengali text-amber-600 dark:text-amber-400">
-                            পূর্ণমান: {q.marks_total}
+                            {language === 'bn' ? `পূর্ণমান: ${toBengaliDigits(q.marks_total)}` : `Marks: ${q.marks_total}`}
                           </span>
                         </div>
                       </div>
@@ -341,7 +390,11 @@ export default function OfflinePage() {
                           onClick={() => handleToggleExpand(q.id)}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold font-bengali text-blue-600 dark:text-blue-400 hover:text-blue-500 focus:outline-none"
                         >
-                          <span>{isExpanded ? 'প্রশ্ন ও সমাধান লুকান' : 'উপ-প্রশ্ন ও KaTeX সমাধান দেখুন'}</span>
+                          <span>
+                            {isExpanded
+                              ? (language === 'bn' ? 'প্রশ্ন ও সমাধান লুকান' : 'Hide Solution')
+                              : (language === 'bn' ? 'উপ-প্রশ্ন ও KaTeX সমাধান দেখুন' : 'View Sub-questions & KaTeX Solution')}
+                          </span>
                           {isExpanded ? (
                             <ChevronUp className="w-4 h-4" />
                           ) : (
@@ -369,7 +422,7 @@ export default function OfflinePage() {
                                   {subQ.label} {subQ.type}
                                 </span>
                                 <span className="font-mono text-slate-500 dark:text-slate-400">
-                                  নম্বর: {subQ.marks}
+                                  {language === 'bn' ? `নম্বর: ${toBengaliDigits(subQ.marks)}` : `Marks: ${subQ.marks}`}
                                 </span>
                               </div>
 
@@ -379,7 +432,7 @@ export default function OfflinePage() {
 
                               <div className="pt-2 border-t border-slate-200/50 dark:border-slate-800/50">
                                 <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-bengali">
-                                  মডেল সমাধান:
+                                  {language === 'bn' ? 'মডেল সমাধান:' : 'Model Solution:'}
                                 </span>
                                 <div className="text-xs sm:text-sm font-bengali text-slate-700 dark:text-slate-300 mt-1 whitespace-pre-line leading-relaxed">
                                   <KaTeXRenderer content={subQ.solution_bn} />
@@ -400,7 +453,12 @@ export default function OfflinePage() {
           <div className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/40 text-left flex items-start gap-3">
             <Zap className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" strokeWidth={1.75} />
             <p className="text-xs sm:text-sm font-bengali text-emerald-900 dark:text-emerald-200 leading-relaxed">
-              <span className="font-bold">স্বয়ংক্রিয় ব্যাকগ্রাউন্ড সিঙ্ক ও নিরাপত্তা:</span> অফলাইনে তোমার অনুশীলন করা যেকোনো প্রশ্নের অগ্রগতি ও নোট ব্রাউজারের এনক্রিপ্টেড IndexedDB ভল্টে সংরক্ষিত থাকবে। নেটওয়ার্ক পুনঃস্থাপিত হওয়ার সাথে সাথে ডেটা ক্লাউড সার্ভারে সিঙ্ক হয়ে যাবে।
+              <span className="font-bold">
+                {language === 'bn' ? 'স্বয়ংক্রিয় ব্যাকগ্রাউন্ড সিঙ্ক ও নিরাপত্তা:' : 'Automatic Background Sync & Security:'}
+              </span>{' '}
+              {language === 'bn'
+                ? 'অফলাইনে তোমার অনুশীলন করা যেকোনো প্রশ্নের অগ্রগতি ও নোট ব্রাউজারের এনক্রিপ্টেড IndexedDB ভল্টে সংরক্ষিত থাকবে। নেটওয়ার্ক পুনঃস্থাপিত হওয়ার সাথে সাথে ডেটা ক্লাউড সার্ভারে সিঙ্ক হয়ে যাবে।'
+                : 'Any progress, answers, or notes made offline remain securely encrypted within the browser IndexedDB vault and sync to cloud servers automatically upon network reconnection.'}
             </p>
           </div>
         </main>

@@ -35,6 +35,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { ProofOfSkillCard, CertificateData } from '@/components/certificate/ProofOfSkillCard';
 import { SocialShareButtons } from '@/components/certificate/SocialShareButtons';
 import { Academic3DToggle, ParallaxDepthContainer } from '@/components/3d';
+import { useTranslation } from '@/lib/i18n';
 
 // Sample fallback seed data for immediate offline/preview resilience
 const SEED_FALLBACK_CERTIFICATES: Record<string, CertificateData> = {
@@ -77,6 +78,8 @@ const SEED_FALLBACK_CERTIFICATES: Record<string, CertificateData> = {
 export default function CertificateVerificationPage() {
   const router = useRouter();
   const { certId } = router.query;
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
 
   const [loading, setLoading] = useState(true);
   const [certificate, setCertificate] = useState<CertificateData | null>(null);
@@ -139,11 +142,17 @@ export default function CertificateVerificationPage() {
   const verifyUrl = `https://ogrojatra.edu.bd/verify/${rawCertId}`;
   const ogImageUrl = `https://ogrojatra.edu.bd/api/v1/certificates/${rawCertId}/og-card.svg`;
   const pageTitle = certificate 
-    ? `Verified Certificate: ${certificate.student_name} | Ogrojatra`
-    : 'Certificate Verification | Ogrojatra';
+    ? (isBn ? `সনদপত্র যাচাইকরণ: ${certificate.student_name} | অগ্রযাত্রা` : `Verified Certificate: ${certificate.student_name} | Ogrojatra`)
+    : (isBn ? 'সনদপত্র যাচাইকরণ | অগ্রযাত্রা' : 'Certificate Verification | Ogrojatra');
   const pageDescription = certificate
-    ? `Authoritative Proof-of-Skill Certificate for ${certificate.student_name} (${certificate.course_title}). W3C Verifiable Credential cryptographically signed.`
-    : 'Official verification portal for Ogrojatra Student Life Circle Proof-of-Skill Credentials.';
+    ? (isBn ? `${certificate.student_name} (${certificate.course_title})-এর প্রামাণ্য দক্ষতা অর্জন সনদ। W3C ভেরিফায়েবল ক্রেডেনশিয়াল ডিজিটালভাবে স্বাক্ষরিত।` : `Authoritative Proof-of-Skill Certificate for ${certificate.student_name} (${certificate.course_title}). W3C Verifiable Credential cryptographically signed.`)
+    : (isBn ? 'অগ্রযাত্রা স্টুডেন্ট লাইফ সার্কেল প্রুফ-অব-স্কিল ক্রেডেনশিয়ালের অফিশিয়াল যাচাইকরণ পোর্টাল।' : 'Official verification portal for Ogrojatra Student Life Circle Proof-of-Skill Credentials.');
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = pageTitle;
+    }
+  }, [pageTitle]);
 
   // Build standard W3C JSON-LD envelope for inspector
   const w3cEnvelope = certificate ? {
@@ -201,7 +210,7 @@ export default function CertificateVerificationPage() {
       </Head>
 
       {/* Main Navigation Bar */}
-      <Navbar currentStage="প্রমাণপত্র যাচাইকরণ (Verification)" />
+      <Navbar currentStage={isBn ? "প্রমাণপত্র যাচাইকরণ (Verification)" : "Certificate Verification"} />
 
       {/* Page Content */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
@@ -213,13 +222,13 @@ export default function CertificateVerificationPage() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition min-h-touch"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>হোমে ফিরে যান (Back to Home)</span>
+            <span>{isBn ? "হোমে ফিরে যান (Back to Home)" : "Back to Home"}</span>
           </Link>
 
           <div className="flex items-center gap-3">
             <Academic3DToggle />
             <div className="text-xs font-semibold text-slate-500 hidden sm:block">
-              Ledger ID: <span className="text-blue-400 font-mono">{rawCertId}</span>
+              {isBn ? "লেজার আইডি" : "Ledger ID"}: <span className="text-blue-400 font-mono">{rawCertId}</span>
             </div>
           </div>
         </div>
@@ -232,18 +241,20 @@ export default function CertificateVerificationPage() {
             </div>
             <div>
               <div className="text-sm font-bold text-white flex items-center gap-2">
-                <span>সরকারি শিক্ষাক্রম ও অ্যাকাডেমিক ডাটাবেজে যাচাইকৃত</span>
+                <span>{isBn ? "সরকারি শিক্ষাক্রম ও অ্যাকাডেমিক ডাটাবেজে যাচাইকৃত" : "Verified against Government Curriculum & Academic Database"}</span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
               <div className="text-xs text-slate-400">
-                Official Authenticity Ledger: Cryptographic SHA-256 signature is intact and valid.
+                {isBn 
+                  ? "অফিশিয়াল নির্ভরযোগ্যতার খতিয়ান: ক্রিপ্টোগ্রাফিক SHA-256 ডিজিটাল স্বাক্ষর অবিকল ও বৈধ।" 
+                  : "Official Authenticity Ledger: Cryptographic SHA-256 signature is intact and valid."}
               </div>
             </div>
           </div>
 
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">
             <Lock className="w-3.5 h-3.5 text-blue-400" />
-            <span>Anti-Tamper Protected</span>
+            <span>{isBn ? "বিকৃতি-রোধী সুরক্ষিত (Anti-Tamper)" : "Anti-Tamper Protected"}</span>
           </div>
         </div>
 
@@ -252,7 +263,7 @@ export default function CertificateVerificationPage() {
           <div className="w-full h-96 rounded-3xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 font-medium">
             <div className="flex flex-col items-center gap-3">
               <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-              <span>সনদপত্র লোড হচ্ছে... (Loading Certificate Record)</span>
+              <span>{isBn ? "সনদপত্র লোড হচ্ছে... (Loading Certificate Record)" : "Loading Certificate Record..."}</span>
             </div>
           </div>
         ) : (
@@ -264,10 +275,12 @@ export default function CertificateVerificationPage() {
             {/* 1-Click Social Sharing Action Bar */}
             <div className="rounded-2xl p-6 bg-slate-900/80 border border-slate-800 text-center space-y-3">
               <h3 className="text-sm font-bold text-white tracking-wide uppercase">
-                সামাজিক যোগাযোগ মাধ্যমে শেয়ার করুন (Share Proof-of-Skill)
+                {isBn ? "সামাজিক যোগাযোগ মাধ্যমে শেয়ার করুন (Share Proof-of-Skill)" : "Share Proof-of-Skill"}
               </h3>
               <p className="text-xs text-slate-400 max-w-lg mx-auto">
-                LinkedIn বা Facebook-এ এক ক্লিকে আপনার অর্জিত দক্ষতার সনদপত্র শেয়ার করুন। ওপেনগ্রাফ মেটা ট্যাগের মাধ্যমে সরাসরি প্রিভিউ প্রদর্শিত হবে।
+                {isBn 
+                  ? "LinkedIn বা Facebook-এ এক ক্লিকে আপনার অর্জিত দক্ষতার সনদপত্র শেয়ার করুন। ওপেনগ্রাফ মেটা ট্যাগের মাধ্যমে সরাসরি প্রিভিউ প্রদর্শিত হবে।"
+                  : "Share your verified skill certificate to LinkedIn or Facebook in one click. Direct card previews render via OpenGraph meta tags."}
               </p>
               <SocialShareButtons
                 certId={certificate.cert_id}
@@ -287,7 +300,7 @@ export default function CertificateVerificationPage() {
               >
                 <div className="flex items-center gap-2.5 text-sm font-semibold text-slate-300">
                   <Code2 className="w-4 h-4 text-blue-400" />
-                  <span>W3C Verifiable Credential Raw Cryptographic JSON-LD</span>
+                  <span>{isBn ? "W3C Verifiable Credential Raw Cryptographic JSON-LD" : "W3C Verifiable Credential Raw Cryptographic JSON-LD"}</span>
                 </div>
                 {showJsonLd ? (
                   <ChevronUp className="w-4 h-4 text-slate-400" />
@@ -302,7 +315,9 @@ export default function CertificateVerificationPage() {
                     {JSON.stringify(w3cEnvelope, null, 2)}
                   </pre>
                   <div className="mt-3 text-[11px] text-slate-500">
-                    Complies with the W3C Verifiable Credentials Data Model 1.1 standard. Digitally signed with SHA-256 HMAC for anti-tamper authenticity.
+                    {isBn 
+                      ? "W3C Verifiable Credentials Data Model 1.1 মানসম্মত। বিকৃতি-রোধের জন্য SHA-256 HMAC দ্বারা ডিজিটালভাবে স্বাক্ষরিত।"
+                      : "Complies with the W3C Verifiable Credentials Data Model 1.1 standard. Digitally signed with SHA-256 HMAC for anti-tamper authenticity."}
                   </div>
                 </div>
               )}

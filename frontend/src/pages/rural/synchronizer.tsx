@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Disaster Resilient, Cryptographic Signatures, Low-Bandwidth
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Radio,
@@ -36,7 +36,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 interface GatewayNode {
   id: string;
@@ -105,6 +105,9 @@ interface ReconciliationRecord {
 }
 
 export default function RuralSynchronizerPage() {
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
   // 100 MCQ Options state (0: Unanswered, 1: A, 2: B, 3: C, 4: D)
   const [answers, setAnswers] = useState<number[]>(() => {
     // Initial deterministic sample answers for 100 questions
@@ -154,6 +157,19 @@ export default function RuralSynchronizerPage() {
     () => GATEWAY_NODES.find((n) => n.id === selectedNodeId) || GATEWAY_NODES[0],
     [selectedNodeId]
   );
+
+  const title = isBn
+    ? "অফলাইন লোরা ও এসএমএস এক্সাম সিঙ্ক্রোনাইজার | স্টুডেন্ট লাইফ সার্কেল"
+    : "Offline LoRa & SMS Exam Synchronizer | Student Life Circle";
+  const description = isBn
+    ? "দুর্যোগকালীন বিদ্যুৎ ও নেটওয়ার্ক বিপর্যয়ে লোরা মেশ ও আল্ট্রা-কম্প্রেসড এসএমএস পিডিইউ প্রযুক্তির মাধ্যমে অফলাইন পরীক্ষার ডেটাগ্রাম রিকনসিলিয়েশন।"
+    : "Disaster-resilient offline exam datagram reconciliation powered by LoRa mesh and ultra-compressed SMS PDU protocols.";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = title;
+    }
+  }, [title]);
 
   // Statistics
   const answeredCount = useMemo(() => answers.filter((a) => a > 0).length, [answers]);
@@ -256,7 +272,7 @@ export default function RuralSynchronizerPage() {
         crcHex: binaryPayload.crc16Hex,
         signatureVerified: true,
         isDuplicate: false,
-        syncedAt: 'এখনই মাত্র'
+        syncedAt: isBn ? 'এখনই মাত্র' : 'Just now'
       };
 
       setRecentRecords((prev) => [newRecord, ...prev.slice(0, 4)]);
@@ -266,22 +282,22 @@ export default function RuralSynchronizerPage() {
   return (
     <>
       <AppHead
-        title="অফলাইন লোরা ও এসএমএস এক্সাম সিঙ্ক্রোনাইজার | স্টুডেন্ট লাইফ সার্কেল"
-        description="দুর্যোগকালীন বিদ্যুৎ ও নেটওয়ার্ক বিপর্যয়ে লোরা মেশ ও আল্ট্রা-কম্প্রেসড এসএমএস পিডিইউ প্রযুক্তির মাধ্যমে অফলাইন পরীক্ষার ডেটাগ্রাম রিকনসিলিয়েশন।"
+        title={title}
+        description={description}
       />
 
       <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col font-sans">
-        <Navbar />
+        <Navbar currentStage={isBn ? "পল্লী সিঙ্ক্রোনাইজার (LoRa/SMS)" : "Rural Synchronizer (LoRa/SMS)"} />
 
         <main className="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
           {/* Breadcrumb & Disaster Resilience Header */}
           <div className="mb-6">
             <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-              <Link href="/" className="hover:text-[#0A2540] transition-colors">হোম</Link>
+              <Link href="/" className="hover:text-[#0A2540] transition-colors">{isBn ? "হোম" : "Home"}</Link>
               <span>/</span>
-              <span className="text-[#0A2540] font-semibold">দুর্যোগকালীন গ্রিড রেজিলিয়েন্স</span>
+              <span className="text-[#0A2540] font-semibold">{isBn ? "দুর্যোগকালীন গ্রিড রেজিলিয়েন্স" : "Disaster Grid Resilience"}</span>
               <span>/</span>
-              <span className="text-slate-400">লোরা ও এসএমএস সিঙ্ক্রোনাইজার (Phase 135)</span>
+              <span className="text-slate-400">{isBn ? "লোরা ও এসএমএস সিঙ্ক্রোনাইজার (Phase 135)" : "LoRa & SMS Synchronizer (Phase 135)"}</span>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#0A2540] text-white p-6 rounded-xl shadow-sm border border-slate-700">
@@ -291,11 +307,13 @@ export default function RuralSynchronizerPage() {
                     <Radio className="w-5 h-5 animate-pulse" />
                   </div>
                   <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
-                    অফলাইন লোরা ও এসএমএস এক্সাম সিঙ্ক্রোনাইজার
+                    {isBn ? "অফলাইন লোরা ও এসএমএস এক্সাম সিঙ্ক্রোনাইজার" : "Offline LoRa & SMS Exam Synchronizer"}
                   </h1>
                 </div>
                 <p className="text-xs text-slate-300 max-w-2xl">
-                  বিদ্যুৎ বিপর্যয় বা ইন্টারনেট বিচ্ছিন্ন উপকূলীয় ও হাওর অঞ্চলের পরীক্ষার উত্তরপত্র আল্ট্রা-কম্প্রেসড (৮৭ বাইট) বাইনারি প্যাকেটে রূপান্তর এবং অফলাইন সাইনড ডেটাগ্রাম ট্র্যাকিং।
+                  {isBn
+                    ? "বিদ্যুৎ বিপর্যয় বা ইন্টারনেট বিচ্ছিন্ন উপকূলীয় ও হাওর অঞ্চলের পরীক্ষার উত্তরপত্র আল্ট্রা-কম্প্রেসড (৮৭ বাইট) বাইনারি প্যাকেটে রূপান্তর এবং অফলাইন সাইনড ডেটাগ্রাম ট্র্যাকিং।"
+                    : "Ultra-compressed (87-byte) binary packetization and offline signed datagram reconciliation for storm-affected coastal and haor basin regions."}
                 </p>
               </div>
 
@@ -306,10 +324,10 @@ export default function RuralSynchronizerPage() {
                 </div>
                 <div>
                   <div className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">
-                    গ্রিড মোড: অফলাইন রেজিলিয়েন্স
+                    {isBn ? "গ্রিড মোড: অফলাইন রেজিলিয়েন্স" : "Grid Mode: Offline Resilience"}
                   </div>
                   <div className="text-xs font-mono text-slate-200">
-                    মেশ ফ্রিকোয়েন্সি: {toBengaliDigits(selectedNode.freqMhz)} MHz
+                    {isBn ? "মেশ ফ্রিকোয়েন্সি: " : "Mesh Frequency: "}{isBn ? toBengaliDigits(selectedNode.freqMhz) : selectedNode.freqMhz} MHz
                   </div>
                 </div>
               </div>
@@ -320,56 +338,66 @@ export default function RuralSynchronizerPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>সিগন্যাল স্প্রেডিং</span>
+                <span>{isBn ? "সিগন্যাল স্প্রেডিং" : "Signal Spreading"}</span>
                 <Signal className="w-3.5 h-3.5 text-[#B45309]" />
               </div>
               <div className="text-sm font-bold text-[#0A2540] font-mono">{selectedNode.sf}</div>
-              <div className="text-[10px] text-slate-400">ব্যান্ডউইথ: {toBengaliDigits(selectedNode.bandwidthKhz)} kHz</div>
+              <div className="text-[10px] text-slate-400">
+                {isBn ? `ব্যান্ডউইথ: ${toBengaliDigits(selectedNode.bandwidthKhz)} kHz` : `Bandwidth: ${selectedNode.bandwidthKhz} kHz`}
+              </div>
             </div>
 
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>সিগন্যাল নয়েজ (SNR)</span>
+                <span>{isBn ? "সিগন্যাল নয়েজ (SNR)" : "Signal Noise (SNR)"}</span>
                 <Activity className="w-3.5 h-3.5 text-emerald-600" />
               </div>
-              <div className="text-sm font-bold text-emerald-700 font-mono">+{toBengaliDigits(selectedNode.snrDb)} dB</div>
-              <div className="text-[10px] text-slate-400">নয়েজ মার্জিন নিখুঁত</div>
+              <div className="text-sm font-bold text-emerald-700 font-mono">
+                +{isBn ? toBengaliDigits(selectedNode.snrDb) : selectedNode.snrDb} dB
+              </div>
+              <div className="text-[10px] text-slate-400">{isBn ? "নয়েজ মার্জিন নিখুঁত" : "Optimal Noise Margin"}</div>
             </div>
 
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>সিগন্যাল শক্তি (RSSI)</span>
+                <span>{isBn ? "সিগন্যাল শক্তি (RSSI)" : "Signal Strength (RSSI)"}</span>
                 <Zap className="w-3.5 h-3.5 text-[#0A2540]" />
               </div>
-              <div className="text-sm font-bold text-[#0A2540] font-mono">{toBengaliDigits(selectedNode.rssiDbm)} dBm</div>
-              <div className="text-[10px] text-slate-400">লোরা লিংক স্ট্যাবল</div>
+              <div className="text-sm font-bold text-[#0A2540] font-mono">
+                {isBn ? toBengaliDigits(selectedNode.rssiDbm) : selectedNode.rssiDbm} dBm
+              </div>
+              <div className="text-[10px] text-slate-400">{isBn ? "লোরা লিংক স্ট্যাবল" : "LoRa Link Stable"}</div>
             </div>
 
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>প্যাকেট আকার</span>
+                <span>{isBn ? "প্যাকেট আকার" : "Packet Size"}</span>
                 <Binary className="w-3.5 h-3.5 text-indigo-600" />
               </div>
-              <div className="text-sm font-bold text-indigo-700 font-mono">{toBengaliDigits(binaryPayload.totalBytes)} Bytes</div>
-              <div className="text-[10px] text-emerald-600 font-semibold">বাজেট: ১৪০ B এর নিচে</div>
+              <div className="text-sm font-bold text-indigo-700 font-mono">
+                {isBn ? `${toBengaliDigits(binaryPayload.totalBytes)} Bytes` : `${binaryPayload.totalBytes} Bytes`}
+              </div>
+              <div className="text-[10px] text-emerald-600 font-semibold">{isBn ? "বাজেট: ১৪০ B এর নিচে" : "Budget: Under 140 B"}</div>
             </div>
 
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>চেকসাম এলগোরিদম</span>
+                <span>{isBn ? "চেকসাম এলগোরিদম" : "Checksum Algorithm"}</span>
                 <ShieldCheck className="w-3.5 h-3.5 text-cyan-600" />
               </div>
               <div className="text-sm font-bold text-cyan-800 font-mono">CRC-16-CCITT</div>
-              <div className="text-[10px] text-slate-400">পলিলুপ: 0x1021</div>
+              <div className="text-[10px] text-slate-400">{isBn ? "পলিলুপ: 0x1021" : "Poly: 0x1021"}</div>
             </div>
 
             <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-                <span>গেটওয়ে ব্যাটারি</span>
+                <span>{isBn ? "গেটওয়ে ব্যাটারি" : "Gateway Battery"}</span>
                 <Cpu className="w-3.5 h-3.5 text-amber-600" />
               </div>
-              <div className="text-sm font-bold text-amber-700 font-mono">{toBengaliDigits(selectedNode.batteryPct)}%</div>
-              <div className="text-[10px] text-slate-400">সোলার ব্যাকআপ সচল</div>
+              <div className="text-sm font-bold text-amber-700 font-mono">
+                {isBn ? `${toBengaliDigits(selectedNode.batteryPct)}%` : `${selectedNode.batteryPct}%`}
+              </div>
+              <div className="text-[10px] text-slate-400">{isBn ? "সোলার ব্যাকআপ সচল" : "Solar Backup Active"}</div>
             </div>
           </div>
 
@@ -381,10 +409,12 @@ export default function RuralSynchronizerPage() {
                   <div>
                     <h2 className="text-base font-bold text-[#0A2540] flex items-center gap-2">
                       <FileText className="w-4 h-4 text-[#B45309]" />
-                      <span>১০০-প্রশ্ন ওএমআর ও বিট-প্যাকার ভিউয়ার</span>
+                      <span>{isBn ? "১০০-প্রশ্ন ওএমআর ও বিট-প্যাকার ভিউয়ার" : "100-MCQ OMR & Bit-Packer Viewer"}</span>
                     </h2>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      প্রতিটি প্রশ্নের ৪টি বিকল্প ৩-বিট ফিল্ডে এনকোড করা হয় (মোট ৩৭.৫ বাইট → ৩৮ বাইট)।
+                      {isBn
+                        ? "প্রতিটি প্রশ্নের ৪টি বিকল্প ৩-বিট ফিল্ডে এনকোড করা হয় (মোট ৩৭.৫ বাইট → ৩৮ বাইট)।"
+                        : "Each 4-option question is packed into a 3-bit field (total 37.5 bytes → 38 bytes)."}
                     </p>
                   </div>
 
@@ -396,14 +426,14 @@ export default function RuralSynchronizerPage() {
                       className="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded transition-colors flex items-center gap-1"
                     >
                       <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
-                      <span>র‍্যান্ডম ওএমআর</span>
+                      <span>{isBn ? "র‍্যান্ডম ওএমআর" : "Random OMR"}</span>
                     </button>
                     <button
                       type="button"
                       onClick={handleClearAll}
                       className="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded transition-colors"
                     >
-                      ক্লিয়ার
+                      {isBn ? "ক্লিয়ার" : "Clear"}
                     </button>
                   </div>
                 </div>
@@ -411,15 +441,18 @@ export default function RuralSynchronizerPage() {
                 {/* Question Status Counter */}
                 <div className="flex items-center gap-4 text-xs mb-4 p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
                   <span className="font-semibold text-slate-700">
-                    উত্তর দেওয়া হয়েছে: <strong className="text-emerald-700 font-mono">{toBengaliDigits(answeredCount)}</strong>/১০০
+                    {isBn ? "উত্তর দেওয়া হয়েছে: " : "Answered: "}
+                    <strong className="text-emerald-700 font-mono">{isBn ? toBengaliDigits(answeredCount) : answeredCount}</strong>/{isBn ? "১০০" : "100"}
                   </span>
                   <span className="text-slate-300">|</span>
                   <span className="text-slate-600">
-                    উত্তরহীন: <span className="text-amber-700 font-mono">{toBengaliDigits(unansweredCount)}</span>
+                    {isBn ? "উত্তরহীন: " : "Unanswered: "}
+                    <span className="text-amber-700 font-mono">{isBn ? toBengaliDigits(unansweredCount) : unansweredCount}</span>
                   </span>
                   <span className="text-slate-300">|</span>
                   <span className="text-slate-600">
-                    কম্প্রেশন অনুপাত: <span className="font-bold text-[#0A2540]">৯২.৪% সংকোচন</span>
+                    {isBn ? "কম্প্রেশন অনুপাত: " : "Compression: "}
+                    <span className="font-bold text-[#0A2540]">{isBn ? "৯২.৪% সংকোচন" : "92.4% Reduction"}</span>
                   </span>
                 </div>
 
@@ -469,42 +502,68 @@ export default function RuralSynchronizerPage() {
               <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
                 <h3 className="text-sm font-bold text-[#0A2540] flex items-center gap-2 mb-3">
                   <Layers className="w-4 h-4 text-[#B45309]" />
-                  <span>বাইনারি ডেটাগ্রাম আর্কিটেকচার (BAP-140 ফ্রেম স্পেসিফিকেশন)</span>
+                  <span>
+                    {isBn
+                      ? 'বাইনারি ডেটাগ্রাম আর্কিটেকচার (BAP-140 ফ্রেম স্পেসিফিকেশন)'
+                      : 'Binary Datagram Architecture (BAP-140 Frame Specification)'}
+                  </span>
                 </h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs mb-4">
                   <div className="bg-slate-50 p-2.5 rounded border border-slate-200">
-                    <span className="text-slate-400 block text-[10px]">১. হেডার মেটাডাটা</span>
-                    <span className="font-bold text-[#0A2540] font-mono">১৫ বাইট</span>
-                    <span className="text-[10px] text-slate-500 block">ম্যাজিক + আইডি হ্যাশ</span>
+                    <span className="text-slate-400 block text-[10px]">
+                      {isBn ? '১. হেডার মেটাডাটা' : '1. Header Metadata'}
+                    </span>
+                    <span className="font-bold text-[#0A2540] font-mono">
+                      {isBn ? '১৫ বাইট' : '15 Bytes'}
+                    </span>
+                    <span className="text-[10px] text-slate-500 block">
+                      {isBn ? 'ম্যাজিক + আইডি হ্যাশ' : 'Magic + ID Hash'}
+                    </span>
                   </div>
                   <div className="bg-blue-50/60 p-2.5 rounded border border-blue-200">
-                    <span className="text-blue-500 block text-[10px]">২. উত্তরপত্র বিটপ্যাক</span>
-                    <span className="font-bold text-blue-900 font-mono">৩৮ বাইট</span>
-                    <span className="text-[10px] text-blue-600 block">১০০টি ৩-বিট এমসিকিউ</span>
+                    <span className="text-blue-500 block text-[10px]">
+                      {isBn ? '২. উত্তরপত্র বিটপ্যাক' : '2. Answer Bitpack'}
+                    </span>
+                    <span className="font-bold text-blue-900 font-mono">
+                      {isBn ? '৩৮ বাইট' : '38 Bytes'}
+                    </span>
+                    <span className="text-[10px] text-blue-600 block">
+                      {isBn ? '১০০টি ৩-বিট এমসিকিউ' : '100 3-bit MCQs'}
+                    </span>
                   </div>
                   <div className="bg-amber-50/60 p-2.5 rounded border border-amber-200">
-                    <span className="text-amber-600 block text-[10px]">৩. ক্রিপ্টো স্বাক্ষর</span>
-                    <span className="font-bold text-amber-900 font-mono">৩২ বাইট</span>
-                    <span className="text-[10px] text-amber-700 block">HMAC-SHA256 সিল</span>
+                    <span className="text-amber-600 block text-[10px]">
+                      {isBn ? '৩. ক্রিপ্টো স্বাক্ষর' : '3. Crypto Seal'}
+                    </span>
+                    <span className="font-bold text-amber-900 font-mono">
+                      {isBn ? '৩২ বাইট' : '32 Bytes'}
+                    </span>
+                    <span className="text-[10px] text-amber-700 block">
+                      {isBn ? 'HMAC-SHA256 সিল' : 'HMAC-SHA256 Seal'}
+                    </span>
                   </div>
                   <div className="bg-emerald-50/60 p-2.5 rounded border border-emerald-200">
-                    <span className="text-emerald-600 block text-[10px]">৪. ইন্টিগ্রিটি চেকসাম</span>
-                    <span className="font-bold text-emerald-900 font-mono">২ বাইট</span>
+                    <span className="text-emerald-600 block text-[10px]">
+                      {isBn ? '৪. ইন্টিগ্রিটি চেকসাম' : '4. Integrity Checksum'}
+                    </span>
+                    <span className="font-bold text-emerald-900 font-mono">
+                      {isBn ? '২ বাইট' : '2 Bytes'}
+                    </span>
                     <span className="text-[10px] text-emerald-700 block">CRC-16-CCITT</span>
                   </div>
                 </div>
 
                 <div className="bg-slate-900 text-slate-100 p-3.5 rounded-lg font-mono text-xs overflow-x-auto space-y-2">
                   <div className="flex items-center justify-between text-slate-400 text-[11px] pb-1 border-b border-slate-800">
-                    <span>এনকোডেড হেক্স পিডিইউ (HEX PDU)</span>
+                    <span>{isBn ? 'এনকোডেড হেক্স পিডিইউ (HEX PDU)' : 'Encoded HEX PDU'}</span>
                     <button
                       type="button"
                       onClick={handleCopyHex}
                       className="hover:text-white transition-colors flex items-center gap-1"
                     >
                       {copiedHex ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>{copiedHex ? 'কপি হয়েছে' : 'কপি হেক্স'}</span>
+                      <span>{copiedHex ? (isBn ? 'কপি হয়েছে' : 'Copied') : (isBn ? 'কপি হেক্স' : 'Copy Hex')}</span>
                     </button>
                   </div>
                   <div className="break-all tracking-wider text-slate-300 text-[11px] leading-relaxed">
@@ -523,13 +582,13 @@ export default function RuralSynchronizerPage() {
               <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
                 <h3 className="text-sm font-bold text-[#0A2540] flex items-center gap-2 pb-2 border-b border-slate-100">
                   <Server className="w-4 h-4 text-[#B45309]" />
-                  <span>লোরা গেটওয়ে নোড কনফিগারেশন</span>
+                  <span>{isBn ? 'লোরা গেটওয়ে নোড কনফিগারেশন' : 'LoRa Gateway Node Configuration'}</span>
                 </h3>
 
                 <div className="space-y-3">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      টার্গেট লোরা রিলে নোড নির্বাচন
+                      {isBn ? 'টার্গেট লোরা রিলে নোড নির্বাচন' : 'Target LoRa Relay Node Selection'}
                     </label>
                     <select
                       value={selectedNodeId}
@@ -538,7 +597,7 @@ export default function RuralSynchronizerPage() {
                     >
                       {GATEWAY_NODES.map((node) => (
                         <option key={node.id} value={node.id}>
-                          {node.nameBn} - {node.region} ({node.freqMhz} MHz)
+                          {isBn ? node.nameBn : node.nameEn} - {node.region} ({node.freqMhz} MHz)
                         </option>
                       ))}
                     </select>
@@ -546,7 +605,9 @@ export default function RuralSynchronizerPage() {
 
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-500 mb-1">শিক্ষার্থী আইডি</label>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                        {isBn ? 'শিক্ষার্থী আইডি' : 'Student ID'}
+                      </label>
                       <input
                         type="text"
                         value={studentId}
@@ -555,7 +616,9 @@ export default function RuralSynchronizerPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-500 mb-1">পরীক্ষা ট্র্যাকার</label>
+                      <label className="block text-[11px] font-semibold text-slate-500 mb-1">
+                        {isBn ? 'পরীক্ষা ট্র্যাকার' : 'Exam Tracker'}
+                      </label>
                       <input
                         type="text"
                         value={examId}
@@ -576,7 +639,9 @@ export default function RuralSynchronizerPage() {
                   >
                     <Send className="w-4 h-4 text-amber-400" />
                     <span>
-                      {isTransmitting ? 'প্যাকেট ব্রডকাস্ট হচ্ছে...' : 'লোরা মেশ ৪৩৩ মেগাহার্টজে প্রেরণ করুন'}
+                      {isTransmitting
+                        ? (isBn ? 'প্যাকেট ব্রডকাস্ট হচ্ছে...' : 'Broadcasting Packet...')
+                        : (isBn ? 'লোরা মেশ ৪৩৩ মেগাহার্টজে প্রেরণ করুন' : 'Transmit via LoRa Mesh 433 MHz')}
                     </span>
                   </button>
 
@@ -587,7 +652,9 @@ export default function RuralSynchronizerPage() {
                     className="w-full py-2.5 px-4 bg-slate-800 text-white text-xs font-bold rounded shadow-[0_4px_0_0_#0f172a] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     <Terminal className="w-4 h-4 text-emerald-400" />
-                    <span>এসএমএস পিডিইউ গেটওয়ে ব্রিজ তৈরি করুন</span>
+                    <span>
+                      {isBn ? 'এসএমএস পিডিইউ গেটওয়ে ব্রিজ তৈরি করুন' : 'Bridge via GSM SMS PDU Gateway'}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -597,7 +664,9 @@ export default function RuralSynchronizerPage() {
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <div className="flex items-center gap-2">
                     <Radio className="w-4 h-4 text-[#B45309]" />
-                    <span className="text-xs font-bold text-[#0A2540]">বেস৮৫ এসএমএস পে-লোড (Base85 GSM-7)</span>
+                    <span className="text-xs font-bold text-[#0A2540]">
+                      {isBn ? 'বেস৮৫ এসএমএস পে-লোড (Base85 GSM-7)' : 'Base85 SMS Payload (Base85 GSM-7)'}
+                    </span>
                   </div>
                   <button
                     type="button"
@@ -605,7 +674,7 @@ export default function RuralSynchronizerPage() {
                     className="text-[11px] text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1"
                   >
                     {copiedSms ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedSms ? 'কপি হয়েছে' : 'কপি টেক্সট'}</span>
+                    <span>{copiedSms ? (isBn ? 'কপি হয়েছে' : 'Copied') : (isBn ? 'কপি টেক্সট' : 'Copy Text')}</span>
                   </button>
                 </div>
 
@@ -614,8 +683,14 @@ export default function RuralSynchronizerPage() {
                 </div>
 
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
-                  <span>দৈর্ঘ্য: {toBengaliDigits(binaryPayload.simulatedBase85.length)} ক্যারেক্টার</span>
-                  <span className="text-emerald-700 font-semibold">১টি একক এসএমএস (১৬০ ক্যারেক্টার লিমিট)</span>
+                  <span>
+                    {isBn ? 'দৈর্ঘ্য: ' : 'Length: '}
+                    {isBn ? toBengaliDigits(binaryPayload.simulatedBase85.length) : binaryPayload.simulatedBase85.length}{' '}
+                    {isBn ? 'ক্যারেক্টার' : 'Characters'}
+                  </span>
+                  <span className="text-emerald-700 font-semibold">
+                    {isBn ? '১টি একক এসএমএস (১৬০ ক্যারেক্টার লিমিট)' : '1 Single SMS (160 Character Limit)'}
+                  </span>
                 </div>
               </div>
 
@@ -624,9 +699,13 @@ export default function RuralSynchronizerPage() {
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xs font-bold text-[#0A2540]">সর্বশেষ গেটওয়ে রিকনসিলিয়েশন হিস্ট্রি</span>
+                    <span className="text-xs font-bold text-[#0A2540]">
+                      {isBn ? 'সর্বশেষ গেটওয়ে রিকনসিলিয়েশন হিস্ট্রি' : 'Recent Gateway Reconciliation Log'}
+                    </span>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono">লাইভ অডিট</span>
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    {isBn ? 'লাইভ অডিট' : 'Live Audit'}
+                  </span>
                 </div>
 
                 <div className="space-y-2">
@@ -642,13 +721,24 @@ export default function RuralSynchronizerPage() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between text-slate-600 text-[11px]">
-                        <span>স্কোর: <strong className="text-emerald-700 font-mono">{toBengaliDigits(rec.score)}</strong> (গ্রেড: {rec.grade})</span>
+                        <span>
+                          {isBn ? 'স্কোর: ' : 'Score: '}
+                          <strong className="text-emerald-700 font-mono">
+                            {isBn ? toBengaliDigits(rec.score) : rec.score}
+                          </strong>{' '}
+                          ({isBn ? 'গ্রেড: ' : 'Grade: '}{rec.grade})
+                        </span>
                         <span className="text-slate-400">{rec.syncedAt}</span>
                       </div>
                       <div className="flex items-center gap-3 text-[10px] text-slate-500 font-mono">
-                        <span className="text-emerald-700 font-semibold">স্বাক্ষর ভেরিফায়েড</span>
+                        <span className="text-emerald-700 font-semibold">
+                          {isBn ? 'স্বাক্ষর ভেরিফায়েড' : 'Signature Verified'}
+                        </span>
                         <span>CRC16: {rec.crcHex}</span>
-                        <span className="text-slate-400">ডুপ্লিকেট: {rec.isDuplicate ? 'হ্যাঁ' : 'না'}</span>
+                        <span className="text-slate-400">
+                          {isBn ? 'ডুপ্লিকেট: ' : 'Duplicate: '}
+                          {rec.isDuplicate ? (isBn ? 'হ্যাঁ' : 'Yes') : (isBn ? 'না' : 'No')}
+                        </span>
                       </div>
                     </div>
                   ))}

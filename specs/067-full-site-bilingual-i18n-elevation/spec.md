@@ -44,39 +44,32 @@ When the user selects **EN**, the entire site displays in authoritative, natural
 
 ## 3. Scope & Coverage
 
-### Phase 1: Flagship Homepage (`frontend/src/pages/index.tsx`)
-1. **Section 1: Editorial Hero**
-   - NCTB Accreditation Chip & 3D Toggle label
-   - Welcome subtitle & 4-in-1 application alternative badge
-   - Main headline and secondary mission statement
-   - Stage selector chips (SSC, HSC, Admission, Career)
-   - Primary and outline Call-to-Action buttons
-   - 4-item Trust Strip (NCTB syllabus, 10-year board questions, offline mesh sync, no hidden fees)
-2. **Section 1.5: 4-in-1 Platform Disruption Grid**
-   - 10 Minute School alternative (3D virtual labs vs passive video)
-   - Live MCQ alternative (Cheating-proof Olympiad vs static tests)
-   - Careertutors alternative (Zero commission tuition vs 50% cuts)
-   - Bdjobs alternative (W3C verifiable cryptographic credentials vs paper CVs)
-3. **Section 2: Academic Progress & Pedagogical Pillars**
-   - Daily study goals, continuous learning streak, board syllabus completion tracker
-   - 3 Pedagogical Pillars (Spaced repetition, concept mastery, doubt resolution)
-4. **Section 3: Curated Journey Pathways**
-   - 4 stage pathways (Secondary SSC, Higher Secondary HSC, University Admission, Professional Career)
-5. **Section 4: 3D STEM Virtual Labs**
-   - Physics Lab (Screw Gauge, Vernier Caliper, Pendulum)
-   - Chemistry Lab (Titration, Acid-Base balance, Reaction kinetics)
-6. **Section 5: Live Challenge & Socratic AI Instant Solver**
-   - Live MCQ countdown timer, active participants, instant solver drawer trigger
-7. **Section 6: W3C Proof-of-Skill Certificate Showcase**
-   - Verifiable credential preview, cryptographic hash, QR verification
-8. **Section 6.5 & 7: Testimonials, Trust Badges, & 69 Modules Directory**
-   - Student success stories, ISO/OWASP compliance seals, national education directory
-9. **Section 8: Closing Academic Call to Action**
-   - Final join banner, registration CTA, community statistics
+### Phase 1: Flagship Core Routes
+1. `index.tsx`: Editorial Hero, 4-in-1 Platform Comparison, 3D STEM Virtual Labs, National Live Challenge, W3C Cryptographic Certificates, Testimonials, National Directory.
+2. `live-challenge.tsx`: Live MCQ Arena, Category Track Selector, OMR Simulator, Leaderboard, Routine Matrix.
+3. `learn.tsx`: NCTB Curriculum Hub, Spaced Repetition Queue, Video Drawer, Subject Matrix.
+4. `admission.tsx`: Battleground Hub, Target Blueprints (DU, BUET, Medical), Counseling Cascade.
+5. `tuition.tsx`: Match & Escrow Milestone Hub, Verified Teacher Cards, Consent Modal.
+6. `career.tsx`: Career Radar, Sealed Cryptographic CV Snapshot, ATS Application Pipeline.
+7. `auth.tsx`: Minor-Safe Onboarding, SMS OTP Verification, Identifier & Password.
+8. `dashboard.tsx`: Personalized Bento Grid, 3D Lab Launchers, Live Challenge Radar.
+9. `practice.tsx`: Practice Exam Arena, Adaptive Quiz, Socratic AI Solver Drawer.
+
+### Phase 2: Full-Site Comprehensive Elevation (100% of 43 Routes)
+1. **Error & System Resilience**: `404.tsx` (Not Found), `500.tsx` (Server Error), `offline.tsx` (IndexedDB PWA fallback).
+2. **Public & Trust**: `about.tsx` (Pedagogical Mission & Editorial Board), `terms.tsx` (Legal & Compliance Framework).
+3. **Academic Simulators & Archives**: `board-archives.tsx`, `admission/predictor.tsx`, `olympiad/arena.tsx`, `socratic/solver.tsx`, `viva/evaluator.tsx`.
+4. **Governance, Dispute & Financial**: `achievements.tsx`, `guardian.tsx`, `guardian/ptc.tsx`, `tribunal/disputes.tsx`, `governance/board-gateway.tsx`, `scholarship/disbursement.tsx`.
+5. **Career & Corporate Infrastructure**: `career/radar.tsx`, `counseling.tsx`, `recruiter.tsx`.
+6. **Decentralized & Resilient Infrastructure**: `verify/[certId].tsx` (W3C Ed25519 Certs), `adaptive-exam.tsx` (CAT Engine), `emergency-mesh.tsx` (LoRa P2P Bridge), `rural/synchronizer.tsx` (SMS Sync), `study-pod.tsx` (Collaborative Canvas).
+7. **Curriculum, Courses & Schedules**: `curriculum/lexicon.tsx`, `routines/index.tsx`, `modules.tsx` (69 Modular Packages), `courses.tsx`, `academic-hub.tsx`, `grading-demo.tsx`, `styleguide.tsx`.
+8. **Security & Content Administration**: `admin/index.tsx`, `admin/quarantine.tsx`, `admin/review-queue.tsx`.
 
 ---
 
 ## 4. Architectural & Governance Invariants
-1. **Strict Zero-Emoji Policy**: Zero emojis in all code, text dictionaries, comments, and commits.
-2. **Backward Compatibility**: All Bengali string literals tested by backend suites (e.g. `backend/tests/test_phase98_2_flagship_home_dashboard.py`) must be retained directly in the code to ensure 100% test passing.
-3. **Sub-Pixel Legibility**: Bengali font rules apply when `isBengali` is true; English typography defaults to `Inter` / `sans` when false.
+1. **Strict Zero-Emoji Policy**: Zero emojis in all code, text dictionaries, comments, and commits. All iconography strictly Lucide-React SVG with `strokeWidth={1.75}`.
+2. **Backward Compatibility**: All Bengali string literals tested by backend suites (e.g. `BAP-140`, `CRC-16-CCITT`, `shadow-[0_4px_0_0_#051329] active:translate-y-1`, `Hind_Siliguri`, `Inter`, `toBengaliDigits`, `৬৯টি এন্টারপ্রাইজ মডিউল ডিরেক্টরি`) must be retained verbatim in the code to ensure 100% test passing.
+3. **Sub-Pixel Legibility**: Bengali typography utilizes `Hind Siliguri` font; English typography defaults to `Inter` / `sans`.
+4. **Zero Layout Shift (CLS < 0.05)**: Switching language does not alter grid structures, component boundaries, card dimensions, or CSS flex arrangements.
+

@@ -1,6 +1,7 @@
 /**
  * DEVELOPER ARCHITECTURE NOTE:
- * MODULE:    Socratic AI Math & Science Whiteboard Solver & Multimodal Tutor
+ * MODULE:    Socratic Math & Science Whiteboard Solver & Multimodal Tutor
+ * PHASE:     Phase 132 - Multimodal Socratic AI Tutor & Interactive Whiteboard Canvas
  * TOPIC:     Interactive Canvas, Khata Notebook OCR, Voice Input & 4-Tier Socratic Guidance
  * FILE:      frontend/src/pages/socratic/solver.tsx
  * PURPOSE:   Advanced Socratic learning environment:
@@ -53,7 +54,7 @@ import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { KaTeXRenderer } from '../../components/quiz/katex-renderer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 import {
   isDirectAnswerDemanded,
   ZERO_ANSWER_LEAKING_REFUSAL_BN,
@@ -234,6 +235,15 @@ const BENCHMARK_PROBLEMS: ProblemScenario[] = [
 ];
 
 export default function SocraticWhiteboardSolverPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'সক্রেটিক এআই টিউটর ও হোয়াইটবোর্ড সলভার | অগ্রযাত্রা'
+      : 'Socratic AI STEM Tutor & Whiteboard Solver | Ogrojatra';
+  }, [isBn]);
+
   // Mode selection: Tutor vs Canvas Whiteboard
   const [activeMode, setActiveMode] = useState<ActiveMode>('tutor');
 
@@ -711,10 +721,10 @@ export default function SocraticWhiteboardSolverPage() {
   return (
     <div className="min-h-screen bg-[#FFFCF6] dark:bg-[#0B0F19] text-[#213130] dark:text-[#F5F2EB] flex flex-col font-sans selection:bg-[#ED8E22] selection:text-white transition-colors duration-200">
       <AppHead
-        title="সক্রেটিক এআই টিউটর ও হোয়াইটবোর্ড সলভার | Socratic AI STEM Tutor"
-        description="হাতে লেখা খাতার ওটিআর স্ক্যানিং, বাংলা ভয়েস ইনপুট ও ৪-টিয়ার সক্রেটিক শিক্ষাদানের মাধ্যমে ধাপে ধাপে বিজ্ঞান ও গণিত সমস্যা সমাধান।"
+        title={isBn ? "সক্রেটিক এআই টিউটর ও হোয়াইটবোর্ড সলভার | অগ্রযাত্রা" : "Socratic AI STEM Tutor & Whiteboard Solver | Ogrojatra"}
+        description={isBn ? "হাতে লেখা খাতার ওটিআর স্ক্যানিং, বাংলা ভয়েস ইনপুট ও ৪-টিয়ার সক্রেটিক শিক্ষাদানের মাধ্যমে ধাপে ধাপে বিজ্ঞান ও গণিত সমস্যা সমাধান।" : "Handwritten khata notebook OCR scanning, Bengali voice input, and 4-tier Socratic scaffolding for STEM problem-solving."}
       />
-      <Navbar currentStage="সক্রেটিক এআই ল্যাব" />
+      <Navbar currentStage={isBn ? "সক্রেটিক এআই ল্যাব" : "Socratic AI Lab"} />
 
       {/* Socratic Bespoke Atmospheric Hero with SOCRATIC Watermark */}
       <section className="relative overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-14 border-b border-amber-200/60 dark:border-[#262D3D] bg-[#FFF6DD]/80 dark:bg-[#0B0F19] transition-colors">
@@ -751,16 +761,18 @@ export default function SocraticWhiteboardSolverPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#ED8E22] dark:text-amber-400 mb-1">
-                <span>একাডেমিক ল্যাবরেটরি</span>
+                <span>{isBn ? 'একাডেমিক ল্যাবরেটরি' : 'Academic Laboratory'}</span>
                 <ChevronRight className="w-3.5 h-3.5 text-amber-400/80" />
-                <span>সক্রেটিক পেডাগজি ইঞ্জিন</span>
+                <span>{isBn ? 'সক্রেটিক পেডাগজি ইঞ্জিন' : 'Socratic Pedagogy Engine'}</span>
               </div>
               <h1 className="text-2xl md:text-4xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] flex items-center gap-3">
                 <Sparkles className="w-7 h-7 text-[#ED8E22]" />
-                <span>সক্রেটিক এআই টিউটর ও সলভার</span>
+                <span>{isBn ? 'সক্রেটিক এআই টিউটর ও সলভার' : 'Socratic AI Tutor & Solver'}</span>
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed">
-                সরাসরি সমাধান না দিয়ে শিক্ষার্থীকে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করা হয়।
+                {isBn
+                  ? 'সরাসরি সমাধান না দিয়ে শিক্ষার্থীকে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করা হয়।'
+                  : 'Empowers students through guided questioning and step-by-step reasoning rather than spoiling direct answers.'}
               </p>
             </div>
 
@@ -776,7 +788,7 @@ export default function SocraticWhiteboardSolverPage() {
                 }`}
               >
                 <Cpu className="w-4 h-4" />
-                <span>সক্রেটিক এআই টিউটর ও খাতা ওটিআর</span>
+                <span>{isBn ? 'সক্রেটিক এআই টিউটর ও খাতা ওটিআর' : 'Socratic AI Tutor & Khata OCR'}</span>
               </button>
               <button
                 type="button"
@@ -788,7 +800,7 @@ export default function SocraticWhiteboardSolverPage() {
                 }`}
               >
                 <Pencil className="w-4 h-4" />
-                <span>ইন্টারেক্টিভ ড্রয়িং হোয়াইটবোর্ড</span>
+                <span>{isBn ? 'ইন্টারেক্টিভ ড্রয়িং হোয়াইটবোর্ড' : 'Interactive Whiteboard Canvas'}</span>
               </button>
             </div>
           </div>
@@ -806,10 +818,10 @@ export default function SocraticWhiteboardSolverPage() {
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 uppercase tracking-wider">
                   <FileText className="w-3.5 h-3.5 text-[#ED8E22]" />
-                  বিগত বোর্ড ও ভর্তি পরীক্ষার নমুনা খাতা প্রশ্ন:
+                  {isBn ? "বিগত বোর্ড ও ভর্তি পরীক্ষার নমুনা খাতা প্রশ্ন:" : "Past Board & Admission Sample Khata Questions:"}
                 </span>
                 <span className="text-[11px] text-slate-500 font-medium">
-                  এনসিটিবি কারিকুলাম মানদণ্ড
+                  {isBn ? "এনসিটিবি কারিকুলাম মানদণ্ড" : "NCTB Curriculum Standards"}
                 </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -848,10 +860,10 @@ export default function SocraticWhiteboardSolverPage() {
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-bold text-slate-800 flex items-center gap-2">
                       <Camera className="w-4 h-4 text-[#0A2540]" />
-                      খাতার হস্তলিপি স্ক্যানার (Multimodal Math OCR)
+                      {isBn ? "খাতার হস্তলিপি স্ক্যানার (Multimodal Math OCR)" : "Handwritten Math OCR Scanner"}
                     </span>
                     <span className="text-[11px] text-[#065F46] font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                      ASVS L2 এনক্রিপ্টেড
+                      {isBn ? "ASVS L2 এনক্রিপ্টেড" : "ASVS L2 Encrypted"}
                     </span>
                   </div>
 
@@ -872,12 +884,12 @@ export default function SocraticWhiteboardSolverPage() {
                       <div className="flex flex-col items-center">
                         <img
                           src={uploadedImagePreview}
-                          alt="হাতে লেখা খাতার পৃষ্ঠা"
+                          alt={isBn ? "হাতে লেখা খাতার পৃষ্ঠা" : "Handwritten script page"}
                           className="max-h-48 object-contain rounded border border-slate-300 mb-3 shadow-xs"
                         />
                         <div className="text-xs font-bold text-[#0A2540] flex items-center gap-1.5">
                           <CheckCircle2 className="w-4 h-4 text-[#065F46]" />
-                          খাতার ছবি সফলভাবে আপলোড হয়েছে
+                          {isBn ? "খাতার ছবি সফলভাবে আপলোড হয়েছে" : "Answer script image uploaded successfully"}
                         </div>
                         <button
                           type="button"
@@ -888,7 +900,7 @@ export default function SocraticWhiteboardSolverPage() {
                           }}
                           className="text-[11px] text-red-600 hover:underline mt-1"
                         >
-                          ছবি পরিবর্তন করুন
+                          {isBn ? "ছবি পরিবর্তন করুন" : "Change Image"}
                         </button>
                       </div>
                     ) : (
@@ -897,10 +909,12 @@ export default function SocraticWhiteboardSolverPage() {
                           <UploadCloud className="w-6 h-6 text-[#0A2540]" />
                         </div>
                         <div className="text-xs font-bold text-slate-800 mb-1">
-                          হাতে লেখা অংকের পৃষ্ঠা ড্র্যাগ করুন অথবা ক্লিক করে নির্বাচন করুন
+                          {isBn ? "হাতে লেখা অংকের পৃষ্ঠা ড্র্যাগ করুন অথবা ক্লিক করে নির্বাচন করুন" : "Drag and drop handwritten math page or click to browse"}
                         </div>
                         <p className="text-[11px] text-slate-500 max-w-sm">
-                          খাতার পাতায় লেখা সমীকরণ, জ্যামিতিক চিত্র বা রাসায়নিক সমীকরণ ওটিআর প্রযুক্তিতে স্বয়ংক্রিয়ভাবে সনাক্ত হবে।
+                          {isBn
+                            ? "খাতার পাতায় লেখা সমীকরণ, জ্যামিতিক চিত্র বা রাসায়নিক সমীকরণ ওটিআর প্রযুক্তিতে স্বয়ংক্রিয়ভাবে সনাক্ত হবে।"
+                            : "Equations, geometric diagrams, or chemical reactions on your notebook page are automatically identified via OCR."}
                         </p>
                       </div>
                     )}
@@ -912,11 +926,11 @@ export default function SocraticWhiteboardSolverPage() {
                       <div className="flex items-center justify-between text-xs font-bold text-amber-900 mb-1.5">
                         <span className="flex items-center gap-1.5">
                           <Eye className="w-3.5 h-3.5 text-[#B45309]" />
-                          সনাক্তকৃত সমীকরণ (LaTeX OCR):
+                          {isBn ? "সনাক্তকৃত সমীকরণ (LaTeX OCR):" : "Detected Equation (LaTeX OCR):"}
                         </span>
                         {ocrConfidence && (
                           <span className="text-[10px] font-mono font-normal text-slate-600">
-                            নির্ভুলতা: {ocrConfidence}%
+                            {isBn ? `নির্ভুলতা: ${toBengaliDigits(ocrConfidence)}%` : `Confidence: ${ocrConfidence}%`}
                           </span>
                         )}
                       </div>
@@ -932,7 +946,7 @@ export default function SocraticWhiteboardSolverPage() {
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                       <Calculator className="w-4 h-4 text-[#0A2540]" />
-                      আপনার প্রশ্ন বা গাণিতিক ধারণা লিখুন:
+                      {isBn ? "আপনার প্রশ্ন বা গাণিতিক ধারণা লিখুন:" : "Enter your STEM query or concept:"}
                     </label>
 
                     {/* Bengali Voice Recognition Button */}
@@ -945,17 +959,17 @@ export default function SocraticWhiteboardSolverPage() {
                             ? 'bg-red-50 text-red-700 border-red-300 animate-pulse'
                             : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                         }`}
-                        title="বাংলা ভয়েসে প্রশ্ন বলুন"
+                        title={isBn ? "বাংলা ভয়েসে প্রশ্ন বলুন" : "Voice input query"}
                       >
                         {isVoiceListening ? (
                           <>
                             <Mic className="w-3.5 h-3.5 text-red-600" />
-                            <span>শুনছি...</span>
+                            <span>{isBn ? "শুনছি..." : "Listening..."}</span>
                           </>
                         ) : (
                           <>
                             <Mic className="w-3.5 h-3.5 text-slate-600" />
-                            <span>ভয়েস ইনপুট</span>
+                            <span>{isBn ? "ভয়েস ইনপুট" : "Voice Input"}</span>
                           </>
                         )}
                       </button>
@@ -965,7 +979,7 @@ export default function SocraticWhiteboardSolverPage() {
                   {/* Math Symbols Toolbar */}
                   <div className="flex flex-wrap gap-1 mb-2 bg-slate-50 p-2 rounded border border-slate-200">
                     <span className="text-[10px] text-slate-500 font-bold self-center mr-1">
-                      সংকেত:
+                      {isBn ? "সংকেত:" : "Symbols:"}
                     </span>
                     {[
                       'x^2',
@@ -993,7 +1007,11 @@ export default function SocraticWhiteboardSolverPage() {
                   <textarea
                     value={studentInput}
                     onChange={e => setStudentInput(e.target.value)}
-                    placeholder="উদাহরণ: আদিবেগ v_0 এবং অনুভূমিকের সাথে θ কোণে নিক্ষিপ্ত প্রাসের সর্বোচ্চ উচ্চতার সূত্র কীভাবে প্রতিপাদন করব?"
+                    placeholder={
+                      isBn
+                        ? "উদাহরণ: আদিবেগ v_0 এবং অনুভূমিকের সাথে θ কোণে নিক্ষিপ্ত প্রাসের সর্বোচ্চ উচ্চতার সূত্র কীভাবে প্রতিপাদন করব?"
+                        : "Example: How do I derive the maximum height formula for a projectile launched at angle θ with initial velocity v_0?"
+                    }
                     rows={3}
                     className="w-full text-xs border border-slate-300 rounded p-2.5 bg-[#FAFAF8] focus:outline-none focus:ring-1 focus:ring-[#0A2540] text-slate-800"
                   />
@@ -1002,7 +1020,7 @@ export default function SocraticWhiteboardSolverPage() {
                   {studentInput && (studentInput.includes('^') || studentInput.includes('\\') || studentInput.includes('=')) && (
                     <div className="mt-2 p-2.5 bg-slate-50 border border-slate-200 rounded text-xs">
                       <span className="text-[10px] uppercase font-bold text-slate-500 block mb-1">
-                        লাইভ সূত্র প্রিভিউ:
+                        {isBn ? "লাইভ সূত্র প্রিভিউ:" : "Live Formula Preview:"}
                       </span>
                       <div className="text-center font-medium">
                         <KaTeXRenderer content={studentInput} />
@@ -1013,7 +1031,7 @@ export default function SocraticWhiteboardSolverPage() {
                   {/* Submit Button */}
                   <div className="mt-3 flex items-center justify-between gap-3">
                     <span className="text-[11px] text-slate-500">
-                      সরাসরি উত্তর নিষিদ্ধ নীতি কার্যকর
+                      {isBn ? "সরাসরি উত্তর নিষিদ্ধ নীতি কার্যকর" : "Zero-Direct Answer Policy Active"}
                     </span>
                     <button
                       type="button"
@@ -1024,11 +1042,11 @@ export default function SocraticWhiteboardSolverPage() {
                       {isAiLoading ? (
                         <>
                           <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                          <span>বিশ্লেষণ চলছে...</span>
+                          <span>{isBn ? "বিশ্লেষণ চলছে..." : "Reasoning..."}</span>
                         </>
                       ) : (
                         <>
-                          <span>জিজ্ঞাসা করুন</span>
+                          <span>{isBn ? "জিজ্ঞাসা করুন" : "Ask Socratic Tutor"}</span>
                           <Send className="w-3.5 h-3.5" />
                         </>
                       )}
@@ -1041,10 +1059,10 @@ export default function SocraticWhiteboardSolverPage() {
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-bold text-slate-800 flex items-center gap-2">
                       <Layers className="w-4 h-4 text-[#065F46]" />
-                      ইন্টারেক্টিভ ৩ডি সিমুলেশন ল্যাবসমূহ
+                      {isBn ? "ইন্টারেক্টিভ ৩ডি সিমুলেশন ল্যাবসমূহ" : "Interactive 3D STEM Simulation Labs"}
                     </span>
                     <span className="text-[11px] text-slate-500">
-                      বাস্তব পরীক্ষার অভিজ্ঞতা
+                      {isBn ? "বাস্তব পরীক্ষার অভিজ্ঞতা" : "Hands-on Lab Experience"}
                     </span>
                   </div>
 
@@ -1055,17 +1073,19 @@ export default function SocraticWhiteboardSolverPage() {
                     >
                       <div>
                         <div className="text-[10px] font-bold text-[#065F46] uppercase tracking-wider mb-1">
-                          পদার্থবিজ্ঞান
+                          {isBn ? "পদার্থবিজ্ঞান" : "Physics"}
                         </div>
                         <h4 className="text-xs font-bold text-slate-800 group-hover:text-[#B45309] transition-colors mb-1">
-                          প্রাসের গতির ৩ডি ল্যাব
+                          {isBn ? "প্রাসের গতির ৩ডি ল্যাব" : "3D Projectile Motion Lab"}
                         </h4>
                         <p className="text-[11px] text-slate-600">
-                          কোণ ও বেগ পরিবর্তন করে পরাবৃত্তাকার ট্র্যাজেক্টরি দেখুন।
+                          {isBn
+                            ? "কোণ ও বেগ পরিবর্তন করে পরাবৃত্তাকার ট্র্যাজেক্টরি দেখুন।"
+                            : "Explore parabolic trajectories by varying launch angle and velocity."}
                         </p>
                       </div>
                       <div className="mt-2 text-[10px] font-semibold text-[#0A2540] flex items-center gap-1">
-                        <span>সিমুলেশন খুলুন</span>
+                        <span>{isBn ? "সিমুলেশন খুলুন" : "Open Simulation"}</span>
                         <ExternalLink className="w-3 h-3" />
                       </div>
                     </Link>
@@ -1076,17 +1096,19 @@ export default function SocraticWhiteboardSolverPage() {
                     >
                       <div>
                         <div className="text-[10px] font-bold text-[#B45309] uppercase tracking-wider mb-1">
-                          রসায়ন
+                          {isBn ? "রসায়ন" : "Chemistry"}
                         </div>
                         <h4 className="text-xs font-bold text-slate-800 group-hover:text-[#B45309] transition-colors mb-1">
-                          আণবিক জ্যামিতি ৩ডি ভিউয়ার
+                          {isBn ? "আণবিক জ্যামিতি ৩ডি ভিউয়ার" : "3D Molecular Geometry Viewer"}
                         </h4>
                         <p className="text-[11px] text-slate-600">
-                          সংকরণ ও বন্ধন কোণ ত্রিমাত্রিকভাবে পরীক্ষা করুন।
+                          {isBn
+                            ? "সংকরণ ও বন্ধন কোণ ত্রিমাত্রিকভাবে পরীক্ষা করুন।"
+                            : "Inspect hybridization and bond angles in interactive 3D."}
                         </p>
                       </div>
                       <div className="mt-2 text-[10px] font-semibold text-[#0A2540] flex items-center gap-1">
-                        <span>সিমুলেশন খুলুন</span>
+                        <span>{isBn ? "সিমুলেশন খুলুন" : "Open Simulation"}</span>
                         <ExternalLink className="w-3 h-3" />
                       </div>
                     </Link>
@@ -1097,17 +1119,19 @@ export default function SocraticWhiteboardSolverPage() {
                     >
                       <div>
                         <div className="text-[10px] font-bold text-[#1B2A4A] uppercase tracking-wider mb-1">
-                          মহাকাশ বিজ্ঞান
+                          {isBn ? "মহাকাশ বিজ্ঞান" : "Astrophysics"}
                         </div>
                         <h4 className="text-xs font-bold text-slate-800 group-hover:text-[#B45309] transition-colors mb-1">
-                          ৩ডি স্কলার মহাজাগতিক গ্লোব
+                          {isBn ? "৩ডি স্কলার মহাজাগতিক গ্লোব" : "3D Celestial Mechanics Globe"}
                         </h4>
                         <p className="text-[11px] text-slate-600">
-                          কেপলারের সূত্র ও গ্রহের কক্ষপথের ঘূর্ণন পরিমাপ।
+                          {isBn
+                            ? "কেপলারের সূত্র ও গ্রহের কক্ষপথের ঘূর্ণন পরিমাপ।"
+                            : "Observe Kepler's laws and planetary orbital dynamics."}
                         </p>
                       </div>
                       <div className="mt-2 text-[10px] font-semibold text-[#0A2540] flex items-center gap-1">
-                        <span>সিমুলেশন খুলুন</span>
+                        <span>{isBn ? "সিমুলেশন খুলুন" : "Open Simulation"}</span>
                         <ExternalLink className="w-3 h-3" />
                       </div>
                     </Link>
@@ -1121,10 +1145,10 @@ export default function SocraticWhiteboardSolverPage() {
                 <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                      সক্রেটিক পেডাগজি অগ্রগতি (Bloom&apos;s Taxonomy)
+                      {isBn ? "সক্রেটিক পেডাগজি অগ্রগতি (Bloom's Taxonomy)" : "Socratic Scaffolding Progress (Bloom's Taxonomy)"}
                     </span>
                     <span className="text-xs font-bold text-[#0A2540]">
-                      টিয়ার {toBengaliDigits(activeTier)} / {toBengaliDigits(4)}
+                      {isBn ? `টিয়ার ${toBengaliDigits(activeTier)} / ৪` : `Tier ${activeTier} / 4`}
                     </span>
                   </div>
 
@@ -1136,7 +1160,7 @@ export default function SocraticWhiteboardSolverPage() {
                           : 'bg-slate-50 text-slate-500 border-slate-200'
                       }`}
                     >
-                      ১. ধারণা নোঙর
+                      {isBn ? "১. ধারণা নোঙর" : "1. Concept Anchor"}
                     </div>
                     <div
                       className={`p-1.5 rounded border transition-colors ${
@@ -1145,7 +1169,7 @@ export default function SocraticWhiteboardSolverPage() {
                           : 'bg-slate-50 text-slate-500 border-slate-200'
                       }`}
                     >
-                      ২. সূত্র গঠন
+                      {isBn ? "২. সূত্র গঠন" : "2. Formula Setup"}
                     </div>
                     <div
                       className={`p-1.5 rounded border transition-colors ${
@@ -1154,7 +1178,7 @@ export default function SocraticWhiteboardSolverPage() {
                           : 'bg-slate-50 text-slate-500 border-slate-200'
                       }`}
                     >
-                      ৩. ধাপ বিশ্লেষণ
+                      {isBn ? "৩. ধাপ বিশ্লেষণ" : "3. Step Breakdown"}
                     </div>
                     <div
                       className={`p-1.5 rounded border transition-colors ${
@@ -1163,7 +1187,7 @@ export default function SocraticWhiteboardSolverPage() {
                           : 'bg-slate-50 text-slate-500 border-slate-200'
                       }`}
                     >
-                      ৪. স্ব-মূল্যায়ন
+                      {isBn ? "৪. স্ব-মূল্যায়ন" : "4. Self-Evaluation"}
                     </div>
                   </div>
                 </div>
@@ -1174,7 +1198,7 @@ export default function SocraticWhiteboardSolverPage() {
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-[#065F46]" />
                       <span className="text-xs font-bold text-[#0A2540]">
-                        সক্রেটিক অনুসন্ধান সংলাপ
+                        {isBn ? "সক্রেটিক অনুসন্ধান সংলাপ" : "Socratic Inquiry Dialogue"}
                       </span>
                     </div>
                     {activeAnalysis?.relevantBoardExamBn && (
@@ -1208,13 +1232,13 @@ export default function SocraticWhiteboardSolverPage() {
                           {msg.isRefusal && (
                             <div className="flex items-center gap-1 text-[11px] font-bold text-amber-800 mb-1">
                               <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
-                              জিরো-অ্যানসার নির্দেশিকা
+                              {isBn ? "জিরো-অ্যানসার নির্দেশিকা" : "Zero-Direct Answer Policy"}
                             </div>
                           )}
                           {msg.isMisconceptionAlert && (
                             <div className="flex items-center gap-1 text-[11px] font-bold text-rose-800 mb-1">
                               <AlertTriangle className="w-3.5 h-3.5 text-rose-700" />
-                              ক্লাসিক্যাল ভুল ধারণা সনাক্ত
+                              {isBn ? "ক্লাসিক্যাল ভুল ধারণা সনাক্ত" : "Classical Misconception Detected"}
                             </div>
                           )}
 
@@ -1239,7 +1263,7 @@ export default function SocraticWhiteboardSolverPage() {
                     {isAiLoading && (
                       <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200 w-fit">
                         <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#0A2540]" />
-                        <span>সক্রেটিক টিউটর যুক্তি গঠন করছে...</span>
+                        <span>{isBn ? "সক্রেটিক টিউটর যুক্তি গঠন করছে..." : "Socratic tutor formulating inquiry..."}</span>
                       </div>
                     )}
                     <div ref={chatScrollEndRef} />
@@ -1249,14 +1273,14 @@ export default function SocraticWhiteboardSolverPage() {
                   {activeTier < 4 && (
                     <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
                       <span className="text-[11px] text-slate-600">
-                        বর্তমান প্রশ্নের উত্তর দিয়ে পরবর্তী টিয়ারে পৌঁছান
+                        {isBn ? "বর্তমান প্রশ্নের উত্তর দিয়ে পরবর্তী টিয়ারে পৌঁছান" : "Answer current inquiry to advance to the next tier"}
                       </span>
                       <button
                         type="button"
                         onClick={advanceScaffoldingTier}
                         className="px-3 py-1.5 text-xs font-bold text-[#B45309] bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded flex items-center gap-1 transition-colors"
                       >
-                        <span>পরবর্তী টিয়ার সংকেত</span>
+                        <span>{isBn ? "পরবর্তী টিয়ার সংকেত" : "Next Tier Hint"}</span>
                         <ChevronRight className="w-3.5 h-3.5" />
                       </button>
                     </div>
@@ -1267,10 +1291,12 @@ export default function SocraticWhiteboardSolverPage() {
                 <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs text-xs text-slate-600">
                   <div className="flex items-center gap-2 font-bold text-[#0A2540] mb-1">
                     <ShieldCheck className="w-4 h-4 text-[#065F46]" />
-                    আন্তর্জাতিক সক্রেটিক মানদণ্ড (ASVS L2)
+                    {isBn ? "আন্তর্জাতিক সক্রেটিক মানদণ্ড (ASVS L2)" : "Socratic Pedagogy Standards (ASVS L2)"}
                   </div>
                   <p className="text-[11px] leading-relaxed">
-                    এই সিস্টেম সরাসরি উত্তর প্রদানের পরিবর্তে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করে। জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (এনসিটিবি) কারিকুলাম ও ব্লুমস ট্যাক্সোনমি অনুযায়ী পরিচালিত।
+                    {isBn
+                      ? "এই সিস্টেম সরাসরি উত্তর প্রদানের পরিবর্তে প্রশ্নবাণের মাধ্যমে নিজস্ব বিশ্লেষণ ও অনুমানের ভুল সংশোধনে সহায়তা করে। জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড (এনসিটিবি) কারিকুলাম ও ব্লুমস ট্যাক্সোনমি অনুযায়ী পরিচালিত।"
+                      : "Rather than spoiling direct solutions, this engine guides students through scaffolded questioning to cultivate independent problem-solving skills under NCTB and Bloom's Taxonomy standards."}
                   </p>
                 </div>
               </div>
@@ -1333,7 +1359,7 @@ export default function SocraticWhiteboardSolverPage() {
                           ? 'bg-[#0A2540] text-white border-[#0A2540]'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                       }`}
-                      title="ফ্রিহ্যান্ড পেন্সিল"
+                      title={isBn ? "ফ্রিহ্যান্ড পেন্সিল" : "Freehand Pencil"}
                     >
                       <Pencil className="w-4 h-4" />
                     </button>
@@ -1345,7 +1371,7 @@ export default function SocraticWhiteboardSolverPage() {
                           ? 'bg-[#0A2540] text-white border-[#0A2540]'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                       }`}
-                      title="সোজা রেখা ও রুলার"
+                      title={isBn ? "সোজা রেখা ও রুলার" : "Straight Line & Ruler"}
                     >
                       <Ruler className="w-4 h-4" />
                     </button>
@@ -1357,7 +1383,7 @@ export default function SocraticWhiteboardSolverPage() {
                           ? 'bg-[#0A2540] text-white border-[#0A2540]'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                       }`}
-                      title="কম্পাস ও বৃত্ত"
+                      title={isBn ? "কম্পাস ও বৃত্ত" : "Compass & Circle"}
                     >
                       <Compass className="w-4 h-4" />
                     </button>
@@ -1369,7 +1395,7 @@ export default function SocraticWhiteboardSolverPage() {
                           ? 'bg-[#0A2540] text-white border-[#0A2540]'
                           : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                       }`}
-                      title="ইরেজার"
+                      title={isBn ? "ইরেজার" : "Eraser"}
                     >
                       <Eraser className="w-4 h-4" />
                     </button>
@@ -1377,7 +1403,7 @@ export default function SocraticWhiteboardSolverPage() {
 
                   {/* Stroke Width and Color Palette */}
                   <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
-                    <span className="text-xs text-slate-500 font-medium">রং:</span>
+                    <span className="text-xs text-slate-500 font-medium">{isBn ? "রং:" : "Color:"}</span>
                     <div className="flex items-center gap-1.5">
                       {['#0A2540', '#B45309', '#065F46', '#991B1B'].map(c => (
                         <button
@@ -1392,15 +1418,15 @@ export default function SocraticWhiteboardSolverPage() {
                       ))}
                     </div>
 
-                    <span className="text-xs text-slate-500 font-medium ml-2">বেধ:</span>
+                    <span className="text-xs text-slate-500 font-medium ml-2">{isBn ? "বেধ:" : "Width:"}</span>
                     <select
                       value={strokeWidth}
                       onChange={e => setStrokeWidth(Number(e.target.value))}
                       className="text-xs border border-slate-200 rounded px-1.5 py-1 bg-slate-50 text-slate-800"
                     >
-                      <option value={2}>পাতলা (২px)</option>
-                      <option value={4}>মাঝারি (৪px)</option>
-                      <option value={8}>পুরু (৮px)</option>
+                      <option value={2}>{isBn ? "পাতলা (২px)" : "Thin (2px)"}</option>
+                      <option value={4}>{isBn ? "মাঝারি (৪px)" : "Medium (4px)"}</option>
+                      <option value={8}>{isBn ? "পুরু (৮px)" : "Thick (8px)"}</option>
                     </select>
                   </div>
 
@@ -1410,7 +1436,7 @@ export default function SocraticWhiteboardSolverPage() {
                       type="button"
                       onClick={clearCanvas}
                       className="p-2 text-slate-600 hover:text-red-700 hover:bg-red-50 rounded border border-slate-200 transition-colors"
-                      title="ক্যানভাস পরিষ্কার করুন"
+                      title={isBn ? "ক্যানভাস পরিষ্কার করুন" : "Clear Canvas"}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -1433,7 +1459,7 @@ export default function SocraticWhiteboardSolverPage() {
                     className="w-full h-[520px] cursor-crosshair touch-none"
                   />
                   <div className="absolute bottom-2 right-3 pointer-events-none text-[10px] text-slate-400 font-mono tracking-tight">
-                    অক্সফোর্ড পেপার ক্যানভাস | Virtual DPI 2.0 | ASVS L2 Buffer
+                    {isBn ? "অক্সফোর্ড পেপার ক্যানভাস | Virtual DPI 2.0 | ASVS L2 Buffer" : "Oxford Paper Canvas | Virtual DPI 2.0 | ASVS L2 Buffer"}
                   </div>
                 </div>
               </div>
@@ -1443,12 +1469,14 @@ export default function SocraticWhiteboardSolverPage() {
                 <div className="bg-white rounded-lg border border-slate-200 p-5 shadow-xs">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#B45309] bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded">
-                      সক্রেটিক অনুসন্ধান {toBengaliDigits(currentStepIndex + 1)} / {toBengaliDigits(activeProblem.steps.length)}
+                      {isBn
+                        ? `সক্রেটিক অনুসন্ধান ${toBengaliDigits(currentStepIndex + 1)} / ${toBengaliDigits(activeProblem.steps.length)}`
+                        : `Socratic Step ${currentStepIndex + 1} / ${activeProblem.steps.length}`}
                     </span>
                     {completedSteps.includes(currentStepIndex) && (
                       <span className="flex items-center gap-1 text-xs font-semibold text-[#065F46] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        সম্পন্ন
+                        {isBn ? "সম্পন্ন" : "Completed"}
                       </span>
                     )}
                   </div>
@@ -1465,7 +1493,7 @@ export default function SocraticWhiteboardSolverPage() {
                       <HelpCircle className="w-4 h-4 text-[#B45309] shrink-0 mt-0.5" />
                       <div>
                         <h4 className="text-xs font-bold text-slate-800 mb-1">
-                          মূল প্রশ্ন:
+                          {isBn ? "মূল প্রশ্ন:" : "Guiding Inquiry:"}
                         </h4>
                         <p className="text-sm text-slate-800 font-medium">
                           {currentStep.inquiryBn}
@@ -1479,7 +1507,7 @@ export default function SocraticWhiteboardSolverPage() {
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
                         <BookOpen className="w-3.5 h-3.5 text-[#0A2540]" />
-                        শিক্ষণ সংকেত (Hints):
+                        {isBn ? "শিক্ষণ সংকেত (Hints):" : "Pedagogical Hints:"}
                       </span>
                       {unlockedHintLevel < currentStep.hints.length && (
                         <button
@@ -1487,7 +1515,7 @@ export default function SocraticWhiteboardSolverPage() {
                           onClick={handleUnlockHint}
                           className="text-xs font-semibold text-[#B45309] hover:underline flex items-center gap-1"
                         >
-                          পরবর্তী সংকেত খুলুন (+১)
+                          {isBn ? "পরবর্তী সংকেত খুলুন (+১)" : "Reveal Next Hint (+1)"}
                         </button>
                       )}
                     </div>
@@ -1499,7 +1527,7 @@ export default function SocraticWhiteboardSolverPage() {
                           className="bg-slate-50 border border-slate-200 rounded p-2.5 text-xs text-slate-700"
                         >
                           <span className="font-bold text-[#0A2540] mr-1">
-                            সংকেত {toBengaliDigits(hIdx + 1)}:
+                            {isBn ? `সংকেত ${toBengaliDigits(hIdx + 1)}:` : `Hint ${hIdx + 1}:`}
                           </span>
                           {hint}
                         </div>
@@ -1511,7 +1539,7 @@ export default function SocraticWhiteboardSolverPage() {
                   {currentStep.formulaLatex && (
                     <div className="bg-slate-50 border border-slate-200 rounded p-3 mb-4 text-center">
                       <span className="text-[10px] text-slate-500 uppercase tracking-wider block mb-1">
-                        লক্ষ্য সমীকরণ রূপ
+                        {isBn ? "লক্ষ্য সমীকরণ রূপ" : "Target Formula Form"}
                       </span>
                       <KaTeXRenderer mathContent={currentStep.formulaLatex} block />
                     </div>
@@ -1520,7 +1548,7 @@ export default function SocraticWhiteboardSolverPage() {
                   {/* Student deduction input */}
                   <div className="mb-4">
                     <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      আপনার গাণিতিক যুক্তি / উত্তর প্রতিপাদন করুন:
+                      {isBn ? "আপনার গাণিতিক যুক্তি / উত্তর প্রতিপাদন করুন:" : "Enter your mathematical deduction / reasoning:"}
                     </label>
 
                     <div className="flex flex-wrap gap-1 mb-2 bg-slate-50 p-1.5 rounded border border-slate-200">
@@ -1539,7 +1567,11 @@ export default function SocraticWhiteboardSolverPage() {
                     <textarea
                       value={studentDeduction}
                       onChange={e => setStudentDeduction(e.target.value)}
-                      placeholder="উভয়পক্ষকে ২ দিয়ে ভাগ করে x^2 এর সহগ ১ এ রূপান্তর করতে হবে..."
+                      placeholder={
+                        isBn
+                          ? "উভয়পক্ষকে ২ দিয়ে ভাগ করে x^2 এর সহগ ১ এ রূপান্তর করতে হবে..."
+                          : "Divide both sides by 2 to convert the coefficient of x^2 to 1..."
+                      }
                       rows={3}
                       className="w-full text-xs border border-slate-300 rounded p-2.5 bg-[#FAFAF8] focus:outline-none focus:ring-1 focus:ring-[#0A2540] text-slate-800"
                     />
@@ -1567,7 +1599,7 @@ export default function SocraticWhiteboardSolverPage() {
                     onClick={evaluateStudentDeduction}
                     className="w-full py-2.5 px-4 bg-[#0A2540] text-white text-xs font-bold rounded uppercase tracking-wider shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
                   >
-                    <span>ধাপের যুক্তি যাচাই করুন</span>
+                    <span>{isBn ? "ধাপের যুক্তি যাচাই করুন" : "Verify Step Reasoning"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>

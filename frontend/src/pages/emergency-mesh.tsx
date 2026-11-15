@@ -9,7 +9,7 @@
  * STANDARDS: Delay-Tolerant Networking (DTN), CRC16 Frame Validation, Zero-Emoji, Field-Grade
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Radio,
   Sun,
@@ -28,22 +28,39 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { LoRaRadioStudio } from '@/components/emergency-mesh/LoRaRadioStudio';
 import { SolarStationTelemetry } from '@/components/emergency-mesh/SolarStationTelemetry';
+import { useTranslation } from '@/lib/i18n';
 
 export default function EmergencyMeshPage() {
+  const { t, locale } = useTranslation();
+  const isBn = locale === 'bn';
+
   const [activeTab, setActiveTab] = useState<'studio' | 'telemetry' | 'both'>('both');
   const [lastPacketTime, setLastPacketTime] = useState<string | null>(null);
 
+  const title = isBn 
+    ? "পল্লী LoRaWAN জরুরি রেডিও ও সোলার মাইক্রো-হাব | অগ্রযাত্রা" 
+    : "Rural LoRaWAN Emergency Radio & Solar Micro-Hub | Ogrojatra";
+  const description = isBn
+    ? "চরম বন্যা ও প্রাকৃতিক দুর্যোগে ইন্টারনেট বিচ্ছিন্ন চর ও হাওর অঞ্চলের শিক্ষার্থীদের পরীক্ষা ও একাডেমিক সংযোগের জন্য সাব-গিগা হার্জ জরুরি রেডিও মেশ ও সোলার হাব।"
+    : "Sub-GHz emergency radio mesh and solar micro-hub enabling exam and academic continuity for students in flood-hit and remote char/haor areas.";
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = title;
+    }
+  }, [title]);
+
   const handlePacketTransmitted = (packet: any) => {
-    setLastPacketTime(new Date().toLocaleTimeString('bn-BD'));
+    setLastPacketTime(new Date().toLocaleTimeString(isBn ? 'bn-BD' : 'en-US'));
   };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-bengali selection:bg-teal-500/30 selection:text-teal-200">
       <AppHead
-        title="পল্লী LoRaWAN জরুরি রেডিও ও সোলার মাইক্রো-হাব | অগ্রযাত্রা"
-        description="চরম বন্যা ও প্রাকৃতিক দুর্যোগে ইন্টারনেট বিচ্ছিন্ন চর ও হাওর অঞ্চলের শিক্ষার্থীদের পরীক্ষা ও একাডেমিক সংযোগের জন্য সাব-গিগা হার্জ জরুরি রেডিও মেশ ও সোলার হাব।"
+        title={title}
+        description={description}
       />
-      <Navbar />
+      <Navbar currentStage={isBn ? "জরুরি রেডিও মেশ (LoRaWAN)" : "Emergency Radio Mesh (LoRaWAN)"} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
         {/* Field Instrument Top Hero Banner */}
@@ -55,11 +72,12 @@ export default function EmergencyMeshPage() {
                 <span>OFF-GRID MESH PROTOCOL: LORAWAN + DTN (868/433 MHZ)</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-sans">
-                পল্লী LoRaWAN জরুরি রেডিও ও সোলার মাইক্রো-হাব
+                {isBn ? "পল্লী LoRaWAN জরুরি রেডিও ও সোলার মাইক্রো-হাব" : "Rural LoRaWAN Emergency Radio & Solar Micro-Hub"}
               </h1>
               <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-                ব্রহ্মপুত্র চর ও হাওর অঞ্চলের ইন্টারনেট-বিচ্ছিন্ন শিক্ষার্থীদের জন্য সাব-গিগা হার্জ রেডিও নেটওয়ার্ক।
-                সোলার ব্যাটারি চালিত মাইক্রো-হাবের মাধ্যমে বিদ্যুৎ ও ফাইবার সংযোগ ছাড়াই উত্তরপত্র ও জরুরি নির্দেশনা পৌঁছাবে কেন্দ্রে।
+                {isBn
+                  ? "ব্রহ্মপুত্র চর ও হাওর অঞ্চলের ইন্টারনেট-বিচ্ছিন্ন শিক্ষার্থীদের জন্য সাব-গিগা হার্জ রেডিও নেটওয়ার্ক। সোলার ব্যাটারি চালিত মাইক্রো-হাবের মাধ্যমে বিদ্যুৎ ও ফাইবার সংযোগ ছাড়াই উত্তরপত্র ও জরুরি নির্দেশনা পৌঁছাবে কেন্দ্রে।"
+                  : "Sub-GHz radio mesh network designed for internet-isolated students across char and haor river basin regions. Solar-powered micro-hubs relay answer sheets and critical academic directives to central gateways without grid power or fiber connectivity."}
               </p>
             </div>
 
@@ -68,15 +86,23 @@ export default function EmergencyMeshPage() {
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <WifiOff className="w-4 h-4 text-amber-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">ইন্টারনেট অবস্থা</div>
-                  <div className="text-xs font-semibold text-amber-300">অফ-গ্রিড (DTN বাফার সক্রিয়)</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "ইন্টারনেট অবস্থা" : "Internet Status"}
+                  </div>
+                  <div className="text-xs font-semibold text-amber-300">
+                    {isBn ? "অফ-গ্রিড (DTN বাফার সক্রিয়)" : "Off-Grid (DTN Buffer Active)"}
+                  </div>
                 </div>
               </div>
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <BatteryCharging className="w-4 h-4 text-emerald-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">পাওয়ার ব্যাকআপ</div>
-                  <div className="text-xs font-semibold text-emerald-300">১২.৮V LiFePO4 সোলার গ্রিড</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "পাওয়ার ব্যাকআপ" : "Power Backup"}
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-300">
+                    {isBn ? "১২.৮V LiFePO4 সোলার গ্রিড" : "12.8V LiFePO4 Solar Grid"}
+                  </div>
                 </div>
               </div>
             </div>
@@ -94,7 +120,7 @@ export default function EmergencyMeshPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                সম্মিলিত দৃশ্য (রেডিও + সোলার)
+                {isBn ? "সম্মিলিত দৃশ্য (রেডিও + সোলার)" : "Combined View (Radio + Solar)"}
               </button>
               <button
                 type="button"
@@ -105,7 +131,7 @@ export default function EmergencyMeshPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                রেডিও কন্ট্রোল স্টুডিও
+                {isBn ? "রেডিও কন্ট্রোল স্টুডিও" : "Radio Control Studio"}
               </button>
               <button
                 type="button"
@@ -116,14 +142,14 @@ export default function EmergencyMeshPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                সোলার হাব টেলিমেট্রি
+                {isBn ? "সোলার হাব টেলিমেট্রি" : "Solar Hub Telemetry"}
               </button>
             </div>
 
             {lastPacketTime && (
               <div className="text-xs text-teal-400 font-mono flex items-center gap-2">
                 <Activity className="w-3.5 h-3.5" />
-                <span>সর্বশেষ প্রেরিত প্যাকেট: {lastPacketTime}</span>
+                <span>{isBn ? `সর্বশেষ প্রেরিত প্যাকেট: ${lastPacketTime}` : `Last Dispatched Packet: ${lastPacketTime}`}</span>
               </div>
             )}
           </div>
@@ -136,7 +162,7 @@ export default function EmergencyMeshPage() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2 font-sans">
                   <Radio className="w-4 h-4 text-teal-400" />
-                  <span>সাব-গিগা হার্জ LoRa ট্রান্সসিভার কন্ট্রোল</span>
+                  <span>{isBn ? "সাব-গিগা হার্জ LoRa ট্রান্সসিভার কন্ট্রোল" : "Sub-GHz LoRa Transceiver Control"}</span>
                 </h2>
                 <span className="text-xs text-slate-400 font-mono">CCITT CRC-16 PROTECTED</span>
               </div>
@@ -149,7 +175,7 @@ export default function EmergencyMeshPage() {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2 font-sans">
                   <Sun className="w-4 h-4 text-amber-400" />
-                  <span>সোলার মাইক্রো-হাব পাওয়ার ও মেশ নোড টেলিমেট্রি</span>
+                  <span>{isBn ? "সোলার মাইক্রো-হাব পাওয়ার ও মেশ নোড টেলিমেট্রি" : "Solar Micro-Hub Power & Mesh Node Telemetry"}</span>
                 </h2>
                 <span className="text-xs text-slate-400 font-mono">12.8V LiFePO4 TELEMETRY</span>
               </div>
@@ -162,25 +188,37 @@ export default function EmergencyMeshPage() {
         <section className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 text-slate-300 space-y-4">
           <div className="flex items-center gap-2.5 text-teal-400 text-sm font-semibold">
             <Info className="w-4 h-4" />
-            <span>ফিল্ড গাইড ও ডিলে-টলারেন্ট নেটওয়ার্কিং (DTN) নির্দেশিকা</span>
+            <span>{isBn ? "ফিল্ড গাইড ও ডিলে-টলারেন্ট নেটওয়ার্কিং (DTN) নির্দেশিকা" : "Field Guide & Delay-Tolerant Networking (DTN) Manual"}</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-400 leading-relaxed font-sans">
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">১. সর্বোচ্চ ২৫৬ বাইট বাইনারি ফ্রেম</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "১. সর্বোচ্চ ২৫৬ বাইট বাইনারি ফ্রেম" : "1. Max 256-Byte Binary Frame"}
+              </div>
               <p>
-                প্রতিটি উত্তরপত্র ও জরুরি অ্যালার্ট সংকুচিত বাইনারি ফ্রেমে এনকোড করা হয় যাতে LoRaWAN ফিজিক্যাল ফ্রেম সীমা ২৫৬ বাইট অতিক্রম না করে।
+                {isBn
+                  ? "প্রতিটি উত্তরপত্র ও জরুরি অ্যালার্ট সংকুচিত বাইনারি ফ্রেমে এনকোড করা হয় যাতে LoRaWAN ফিজিক্যাল ফ্রেম সীমা ২৫৬ বাইট অতিক্রম না করে।"
+                  : "Every submission and emergency alert is packed into a compressed binary frame to strictly respect LoRaWAN's 256-byte physical payload boundary."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">২. CRC16-CCITT ত্রুটি পরীক্ষণ</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "২. CRC16-CCITT ত্রুটি পরীক্ষণ" : "2. CRC16-CCITT Frame Validation"}
+              </div>
               <p>
-                বন্যা ও ঝড়ো বাতাসে নয়েজযুক্ত রেডিও চ্যানেলে কোনো বিট পরিবর্তন হলে ১৬-বিট চেকসামের মাধ্যমে অবৈধ প্যাকেট তাৎক্ষণিক বাতিল করা হয়।
+                {isBn
+                  ? "বন্যা ও ঝড়ো বাতাসে নয়েজযুক্ত রেডিও চ্যানেলে কোনো বিট পরিবর্তন হলে ১৬-বিট চেকসামের মাধ্যমে অবৈধ প্যাকেট তাৎক্ষণিক বাতিল করা হয়।"
+                  : "In noisy sub-tropical storm environments, any bit corrupted during radio propagation is instantly detected and discarded by the 16-bit polynomial checksum."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">৩. স্টোর-অ্যান্ড-ফরোয়ার্ড বাফারিং</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "৩. স্টোর-অ্যান্ড-ফরোয়ার্ড বাফারিং" : "3. Store-and-Forward Buffering"}
+              </div>
               <p>
-                মূল সার্ভারের সাথে সংযোগ না থাকলেও শিক্ষার্থী ডিভাইস বা হাবের ফ্ল্যাশ মেমোরিতে উত্তরপত্র সংরক্ষিত থাকে এবং গেটওয়ে সচল হলে স্বয়ংক্রিয়ভাবে সিঙ্ক হয়।
+                {isBn
+                  ? "মূল সার্ভারের সাথে সংযোগ না থাকলেও শিক্ষার্থী ডিভাইস বা হাবের ফ্ল্যাশ মেমোরিতে উত্তরপত্র সংরক্ষিত থাকে এবং গেটওয়ে সচল হলে স্বয়ংক্রিয়ভাবে সিঙ্ক হয়।"
+                  : "Even with disconnected backhaul, submissions are persisted locally in non-volatile flash and automatically relayed once an active gateway comes within range."}
               </p>
             </div>
           </div>

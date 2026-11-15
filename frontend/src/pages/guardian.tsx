@@ -12,7 +12,7 @@
  * STANDARDS: ASVS L2 Minor Privacy Boundary, Zero-Intrusion Safeguards, Zero-Emoji, UI/UX Pro Max
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldCheck,
   Heart,
@@ -32,15 +32,24 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { GuardianDashboard } from '@/components/guardian/GuardianDashboard';
 import { TuitionEscrowApprovalCard } from '@/components/guardian/TuitionEscrowApprovalCard';
+import { useTranslation } from '@/lib/i18n';
 
 export default function GuardianPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
   const [activeTab, setActiveTab] = useState<'both' | 'progress' | 'escrow'>('both');
 
+  useEffect(() => {
+    document.title = isBn
+      ? 'অভিভাবক ট্রাস্ট কনসোল ও শিশু ডিজিটাল নিরাপত্তা | অগ্রযাত্রা'
+      : 'Guardian Trust Console & Child Digital Safety | Agragoti';
+  }, [isBn]);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-bengali selection:bg-teal-500/30 selection:text-teal-200">
+    <div className={`min-h-screen bg-slate-950 text-slate-100 flex flex-col ${isBn ? 'font-bengali' : 'font-sans'} selection:bg-teal-500/30 selection:text-teal-200`}>
       <AppHead
-        title="অভিভাবক ট্রাস্ট কনসোল ও শিশু ডিজিটাল নিরাপত্তা | অগ্রযাত্রা"
-        description="সন্তানের পড়াশোনার সার্বিক অগ্রগতি ও মানসিক শান্তির সমন্বয়। গোপনীয়তা প্রাচীর (ASVS L2) ও নিরাপদ টিউশন ফি এসক্রো ব্যবস্থাপনা।"
+        title={isBn ? "অভিভাবক ট্রাস্ট কনসোল ও শিশু ডিজিটাল নিরাপত্তা | অগ্রযাত্রা" : "Guardian Trust Console & Child Safety | Agragoti"}
+        description={isBn ? "সন্তানের পড়াশোনার সার্বিক অগ্রগতি ও মানসিক শান্তির সমন্বয়। গোপনীয়তা প্রাচীর (ASVS L2) ও নিরাপদ টিউশন ফি এসক্রো ব্যবস্থাপনা।" : "Harmonizing student academic progress with parental peace of mind. ASVS L2 privacy boundary and secure tuition escrow."}
       />
       <Navbar />
 
@@ -54,11 +63,12 @@ export default function GuardianPage() {
                 <span>FAMILY TRUST & CHILD DIGITAL SAFETY CONSOLE</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-sans">
-                অভিভাবক ট্রাস্ট কনসোল ও শিশু ডিজিটাল নিরাপত্তা
+                {isBn ? "অভিভাবক ট্রাস্ট কনসোল ও শিশু ডিজিটাল নিরাপত্তা" : "Guardian Trust Console & Child Digital Safety"}
               </h1>
               <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-                সন্তানের পড়াশোনায় পাশে থাকুন স্নেহে, উদ্বেগে নয়। এই কনসোলটি কোনো নজরদারি বা প্যানিক সৃষ্টি করে না;
-                বরং সন্তানের সুস্থ মানসিক বিকাশ ও স্বচ্ছ টিউশন সম্মানী পরিশোধের একটি বিশ্বস্ত পারিবারিক মাধ্যম।
+                {isBn
+                  ? "সন্তানের পড়াশোনায় পাশে থাকুন স্নেহে, উদ্বেগে নয়। এই কনসোলটি কোনো নজরদারি বা প্যানিক সৃষ্টি করে না; বরং সন্তানের সুস্থ মানসিক বিকাশ ও স্বচ্ছ টিউশন সম্মানী পরিশোধের একটি বিশ্বস্ত পারিবারিক মাধ্যম।"
+                  : "Stand beside your child with encouragement, not surveillance. This console provides non-intrusive academic telemetry and verifiable tuition escrow release without panic."}
               </p>
             </div>
 
@@ -67,15 +77,23 @@ export default function GuardianPage() {
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <Lock className="w-4 h-4 text-emerald-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">শিশু গোপনীয়তা মান</div>
-                  <div className="text-xs font-semibold text-emerald-300">ASVS L2 / COPPA সুরক্ষিত</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "শিশু গোপনীয়তা মান" : "Child Privacy Standard"}
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-300">
+                    {isBn ? "ASVS L2 / COPPA সুরক্ষিত" : "ASVS L2 / COPPA Compliant"}
+                  </div>
                 </div>
               </div>
               <div className="px-4 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex items-center gap-3">
                 <Wallet className="w-4 h-4 text-teal-400" />
                 <div>
-                  <div className="text-[11px] text-slate-400 font-sans uppercase">টিউশন ফি নিরাপত্তা</div>
-                  <div className="text-xs font-semibold text-teal-300">১-ক্লিক ওটিপি এসক্রো রিলিজ</div>
+                  <div className="text-[11px] text-slate-400 font-sans uppercase">
+                    {isBn ? "টিউশন ফি নিরাপত্তা" : "Tuition Fee Security"}
+                  </div>
+                  <div className="text-xs font-semibold text-teal-300">
+                    {isBn ? "১-ক্লিক ওটিপি এসক্রো রিলিজ" : "1-Click OTP Escrow Release"}
+                  </div>
                 </div>
               </div>
             </div>
@@ -93,7 +111,7 @@ export default function GuardianPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                সম্মিলিত ভিউ (অগ্রগতি + ফি রিলিজ)
+                {isBn ? "সম্মিলিত ভিউ (অগ্রগতি + ফি রিলিজ)" : "Combined View (Progress + Escrow)"}
               </button>
               <button
                 type="button"
@@ -104,7 +122,7 @@ export default function GuardianPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                পড়াশোনার অগ্রগতি ও শিখন
+                {isBn ? "পড়াশোনার অগ্রগতি ও শিখন" : "Academic Progress & Learning"}
               </button>
               <button
                 type="button"
@@ -115,7 +133,7 @@ export default function GuardianPage() {
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                টিউশন এসক্রো অনুমোদন
+                {isBn ? "টিউশন এসক্রো অনুমোদন" : "Tuition Escrow Approval"}
               </button>
             </div>
           </div>
@@ -140,26 +158,37 @@ export default function GuardianPage() {
         <section className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 text-slate-300 space-y-4">
           <div className="flex items-center gap-2.5 text-teal-400 text-sm font-semibold">
             <Info className="w-4 h-4" />
-            <span>অভিভাবক সচেতনতা ও শিশু নিরাপত্তা নীতিমালা (ASVS L2 / COPPA)</span>
+            <span>{isBn ? "অভিভাবক সচেতনতা ও শিশু নিরাপত্তা নীতিমালা (ASVS L2 / COPPA)" : "Guardian Awareness & Child Privacy Protocol (ASVS L2 / COPPA)"}</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-400 leading-relaxed font-sans">
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">১. নজরদারি নয়, উৎসাহ দিন</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "১. নজরদারি নয়, উৎসাহ দিন" : "1. Encourage, Don't Surveil"}
+              </div>
               <p>
-                শিক্ষার্থীর ব্যক্তিগত চিন্তা, সহপাঠী গ্রুপ চ্যাট বা খসড়া নোট অভিভাবকের কাছে গোপন রাখা হয়। এটি শিশুর আত্মবিশ্বাস ও
-                স্বাধীন মেধা বিকাশে অত্যন্ত জরুরি।
+                {isBn
+                  ? "শিক্ষার্থীর ব্যক্তিগত চিন্তা, সহপাঠী গ্রুপ চ্যাট বা খসড়া নোট অভিভাবকের কাছে গোপন রাখা হয়। এটি শিশুর আত্মবিশ্বাস ও স্বাধীন মেধা বিকাশে অত্যন্ত জরুরি।"
+                  : "Private student reflections, peer pod discussions, and rough notes remain confidential to nurture autonomy and emotional well-being."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">২. সামগ্রিক অগ্রগতিতে আলোকপাত</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "২. সামগ্রিক অগ্রগতিতে আলোকপাত" : "2. Focus on Macro Trajectory"}
+              </div>
               <p>
-                প্রতিটি ভুলের হিসাব না করে দেখুন সন্তান প্রতিদিনের রুটিন বজায় রাখছে কিনা এবং সাপ্তাহিক সময়ের সঠিক ব্যবহার করছে কিনা।
+                {isBn
+                  ? "প্রতিটি ভুলের হিসাব না করে দেখুন সন্তান প্রতিদিনের রুটিন বজায় রাখছে কিনা এবং সাপ্তাহিক সময়ের সঠিক ব্যবহার করছে কিনা।"
+                  : "Rather than micro-analyzing each question mistake, observe whether regular routines and balanced study habits are sustained."}
               </p>
             </div>
             <div className="space-y-1.5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-              <div className="font-semibold text-slate-200">৩. নিরাপদ ও স্বচ্ছ এসক্রো সম্মানী</div>
+              <div className="font-semibold text-slate-200">
+                {isBn ? "৩. নিরাপদ ও স্বচ্ছ এসক্রো সম্মানী" : "3. Safe & Verifiable Escrow"}
+              </div>
               <p>
-                গৃহশিক্ষকের ১২টি ক্লাস সম্পন্ন হওয়া এবং শিক্ষার্থীর সন্তুষ্টি নিশ্চিত করার পরেই কেবল ওটিপি দিয়ে ফি রিলিজ করবেন।
+                {isBn
+                  ? "গৃহশিক্ষকের ১২টি ক্লাস সম্পন্ন হওয়া এবং শিক্ষার্থীর সন্তুষ্টি নিশ্চিত করার পরেই কেবল ওটিপি দিয়ে ফি রিলিজ করবেন।"
+                  : "Release tuition milestones only after completion of the 12 delivered classes and mutual student satisfaction via SMS OTP."}
               </p>
             </div>
           </div>

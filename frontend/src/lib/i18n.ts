@@ -31,6 +31,7 @@ export type Locale = 'bn' | 'en';
 
 export interface I18nContextType {
   locale: Locale;
+  language: Locale;
   setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
   t: (key: string, params?: Record<string, string | number>) => string;
@@ -253,6 +254,7 @@ function getInitialLocale(): Locale {
 
 export const I18nContext = createContext<I18nContextType>({
   locale: 'bn',
+  language: 'bn',
   setLocale: () => {},
   toggleLocale: () => {},
   t: (key, params) => resolveTranslation(key, 'bn', params),
@@ -330,6 +332,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const value = useMemo(
     () => ({
       locale,
+      language: locale,
       setLocale,
       toggleLocale,
       t,
@@ -353,6 +356,7 @@ export function useTranslation(): I18nContextType {
     const fallbackLocale = getInitialLocale();
     return {
       locale: fallbackLocale,
+      language: fallbackLocale,
       setLocale: (newLoc) => persistLocale(newLoc),
       toggleLocale: () => persistLocale(fallbackLocale === 'bn' ? 'en' : 'bn'),
       t: (key, params) => resolveTranslation(key, fallbackLocale, params),

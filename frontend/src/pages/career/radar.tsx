@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Pure Academic Design, ASVS L2, Immutable CV Snapshots
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Briefcase,
@@ -33,7 +33,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 interface JobRequisition {
   id: string;
@@ -102,7 +102,24 @@ const RADAR_AXIS_LABELS = [
   'সিস্টেম আর্কিটেকচার'
 ];
 
+const RADAR_AXIS_LABELS_EN = [
+  'Math & Analysis',
+  'Algorithms & Coding',
+  'Olympiad Problem Solving',
+  'Communication & Language',
+  'Systems Architecture'
+];
+
 export default function CareerSkillRadarPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'অ্যালগরিদমিক স্কিল-টু-জব রাডার | অগ্রযাত্রা'
+      : 'Algorithmic Skill-to-Job Matching Radar | Ogrojatra';
+  }, [isBn]);
+
   // Student Competency Radar States (0 to 100)
   const [studentRadar, setStudentRadar] = useState<[number, number, number, number, number]>([
     95, 90, 92, 82, 85
@@ -175,10 +192,13 @@ export default function CareerSkillRadarPage() {
       const gaps: string[] = [];
 
       u.forEach((val, idx) => {
+        const axisName = isBn ? RADAR_AXIS_LABELS[idx] : RADAR_AXIS_LABELS_EN[idx];
         if (val >= v[idx]) {
-          strengths.push(RADAR_AXIS_LABELS[idx]);
+          strengths.push(axisName);
         } else if (v[idx] - val >= 10) {
-          gaps.push(`${RADAR_AXIS_LABELS[idx]} (-${toBengaliDigits(v[idx] - val)})`);
+          const diff = v[idx] - val;
+          const diffStr = isBn ? toBengaliDigits(diff) : String(diff);
+          gaps.push(`${axisName} (-${diffStr})`);
         }
       });
 
@@ -190,7 +210,7 @@ export default function CareerSkillRadarPage() {
         gaps
       };
     }).sort((a, b) => b.matchPct - a.matchPct);
-  }, [studentRadar]);
+  }, [studentRadar, isBn]);
 
   // Handle Sealed CV Application
   const handleApplySealedCv = (job: JobRequisition) => {
@@ -199,42 +219,44 @@ export default function CareerSkillRadarPage() {
     ).join('');
 
     setSealedCvReceipt({
-      jobTitle: job.titleBn,
+      jobTitle: isBn ? job.titleBn : job.titleEn,
       company: job.companyName,
       sha256Hash: fakeHash,
-      timestampStr: '২১ অক্টোবর ২০২৬, ১০:২৫ পূর্বাহ্ন'
+      timestampStr: isBn ? '২১ অক্টোবর ২০২৬, ১০:২৫ পূর্বাহ্ন' : 'October 21, 2026, 10:25 AM'
     });
   };
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-slate-800 flex flex-col font-sans">
       <AppHead
-        title="অ্যালগরিদমিক স্কিল-টু-জব রাডার | Career Skill-to-Job Matching Radar"
-        description="মাল্টি-ডাইমেনশনাল স্কিল রাডার ও ক্রিপ্টোগ্রাফিক সিলড সিভি আবেদনের মাধ্যমে শীর্ষ কর্পোরেট ও স্টার্টআপ রিক্রুটিং।"
+        title={isBn ? "অ্যালগরিদমিক স্কিল-টু-জব রাডার | অগ্রযাত্রা" : "Algorithmic Skill-to-Job Matching Radar | Ogrojatra"}
+        description={isBn ? "মাল্টি-ডাইমেনশনাল স্কিল রাডার ও ক্রিপ্টোগ্রাফিক সিলড সিভি আবেদনের মাধ্যমে শীর্ষ কর্পোরেট ও স্টার্টআপ রিক্রুটিং।" : "Multi-dimensional competency radar and cryptographically sealed CV applications for corporate recruitment."}
       />
-      <Navbar />
+      <Navbar currentStage={isBn ? "ক্যারিয়ার স্কিল রাডার" : "Career Skill Radar"} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-8">
         {/* Header Breadcrumb & Title */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
-              <span>ক্যারিয়ার হেডহান্টিং পাইপলাইন</span>
+              <span>{isBn ? 'ক্যারিয়ার হেডহান্টিং পাইপলাইন' : 'Career Headhunting Pipeline'}</span>
               <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <span>দক্ষতা মূল্যায়ন রাডার</span>
+              <span>{isBn ? 'দক্ষতা মূল্যায়ন রাডার' : 'Competency Evaluation Radar'}</span>
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-[#0A2540] flex items-center gap-3">
               <Target className="w-7 h-7 text-[#0A2540]" />
-              অ্যালগরিদমিক স্কিল-টু-জব রাডার
+              {isBn ? 'অ্যালগরিদমিক স্কিল-টু-জব রাডার' : 'Algorithmic Skill-to-Job Radar'}
             </h1>
             <p className="text-sm text-slate-600 mt-1">
-              ভেরিফায়েড অলিম্পিয়াড ও পরীক্ষা স্কোরের ৫-অক্ষীয় সক্ষমতা বিশ্লেষণ এবং অপরিবর্তনীয় সিলড সিভিতে সরাসরি হেডহান্টিং।
+              {isBn
+                ? 'ভেরিফায়েড অলিম্পিয়াড ও পরীক্ষা স্কোরের ৫-অক্ষীয় সক্ষমতা বিশ্লেষণ এবং অপরিবর্তনীয় সিলড সিভিতে সরাসরি হেডহান্টিং।'
+                : '5-axis competency vector analysis of verified academic scores with immutable sealed CV headhunting.'}
             </p>
           </div>
 
           <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#065F46]">
             <ShieldCheck className="w-4 h-4" />
-            <span>ইমিউটেবল সিলড সিভি স্ন্যাপশট (ASVS L2)</span>
+            <span>{isBn ? 'ইমিউটেবল সিলড সিভি স্ন্যাপশট (ASVS L2)' : 'Immutable Sealed CV Snapshot (ASVS L2)'}</span>
           </div>
         </div>
 
@@ -246,10 +268,12 @@ export default function CareerSkillRadarPage() {
             <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm flex flex-col items-center">
               <div className="w-full flex items-center justify-between mb-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#065F46] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
-                  ৫-অক্ষীয় কম্পিটেন্সি রাডার
+                  {isBn ? '৫-অক্ষীয় কম্পিটেন্সি রাডার' : '5-Axis Competency Radar'}
                 </span>
                 <span className="text-[11px] text-slate-500 font-mono">
-                  গড় স্কোর: {toBengaliDigits(Math.round(studentRadar.reduce((a, b) => a + b, 0) / 5))}/১০০
+                  {isBn ? 'গড় স্কোর: ' : 'Average Score: '}
+                  {isBn ? toBengaliDigits(Math.round(studentRadar.reduce((a, b) => a + b, 0) / 5)) : Math.round(studentRadar.reduce((a, b) => a + b, 0) / 5)}
+                  /{isBn ? '১০০' : '100'}
                 </span>
               </div>
 
@@ -328,6 +352,7 @@ export default function CareerSkillRadarPage() {
                   {/* Axis Vertex Text Labels */}
                   {RADAR_AXIS_LABELS.map((lbl, idx) => {
                     const { x, y } = getCoordinates(idx, 120);
+                    const labelText = isBn ? lbl : RADAR_AXIS_LABELS_EN[idx];
                     return (
                       <text
                         key={idx}
@@ -337,7 +362,7 @@ export default function CareerSkillRadarPage() {
                         dominantBaseline="central"
                         className="text-[10px] font-bold fill-slate-700"
                       >
-                        {lbl}
+                        {labelText}
                       </text>
                     );
                   })}
@@ -348,11 +373,11 @@ export default function CareerSkillRadarPage() {
               <div className="flex items-center gap-4 mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600">
                 <div className="flex items-center gap-1.5">
                   <span className="w-3 h-3 bg-[#065F46]/30 border border-[#065F46] rounded-sm" />
-                  <span>শিক্ষার্থীর ভেরিফাইড দক্ষতা</span>
+                  <span>{isBn ? 'শিক্ষার্থীর ভেরিফাইড দক্ষতা' : 'Student Verified Competency'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-3 h-0.5 border-t-2 border-dashed border-[#B45309]" />
-                  <span>চাকরির আবশ্যকীয় লক্ষ্যমাত্রা</span>
+                  <span>{isBn ? 'চাকরির আবশ্যকীয় লক্ষ্যমাত্রা' : 'Job Required Target'}</span>
                 </div>
               </div>
             </div>
@@ -361,16 +386,16 @@ export default function CareerSkillRadarPage() {
             <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
               <div className="flex items-center gap-2 text-xs font-bold text-[#0A2540] mb-4">
                 <Sliders className="w-4 h-4 text-[#B45309]" />
-                <span>দক্ষতা মাত্রা কাস্টমাইজেশন (সিমুলেশন):</span>
+                <span>{isBn ? 'দক্ষতা মাত্রা কাস্টমাইজেশন (সিমুলেশন):' : 'Competency Simulation Controls:'}</span>
               </div>
 
               <div className="space-y-3.5">
                 {RADAR_AXIS_LABELS.map((label, idx) => (
                   <div key={idx}>
                     <div className="flex justify-between text-xs font-medium mb-1">
-                      <span className="text-slate-700">{label}</span>
+                      <span className="text-slate-700">{isBn ? label : RADAR_AXIS_LABELS_EN[idx]}</span>
                       <span className="font-mono font-bold text-[#0A2540]">
-                        {toBengaliDigits(studentRadar[idx])} / ১০০
+                        {isBn ? `${toBengaliDigits(studentRadar[idx])} / ১০০` : `${studentRadar[idx]} / 100`}
                       </span>
                     </div>
                     <input
@@ -401,10 +426,12 @@ export default function CareerSkillRadarPage() {
                 <div>
                   <h2 className="text-lg font-bold text-[#0A2540] flex items-center gap-2">
                     <Briefcase className="w-5 h-5 text-[#B45309]" />
-                    <span>ম্যাচিং কর্পোরেট ও স্টার্টআপ ভ্যাকেন্সি ({toBengaliDigits(BENCHMARK_JOBS.length)})</span>
+                    <span>{isBn ? `ম্যাচিং কর্পোরেট ও স্টার্টআপ ভ্যাকেন্সি (${toBengaliDigits(BENCHMARK_JOBS.length)})` : `Matching Corporate & Startup Vacancies (${BENCHMARK_JOBS.length})`}</span>
                   </h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    ভেক্টরের কোসাইন সামঞ্জস্যের ভিত্তিতে ক্রমানুসারে সাজানো শীর্ষ নিয়োগ বিজ্ঞপ্তি।
+                    {isBn
+                      ? 'ভেক্টরের কোসাইন সামঞ্জস্যের ভিত্তিতে ক্রমানুসারে সাজানো শীর্ষ নিয়োগ বিজ্ঞপ্তি।'
+                      : 'Top corporate and startup positions ranked by vector cosine similarity.'}
                   </p>
                 </div>
               </div>
@@ -433,7 +460,7 @@ export default function CareerSkillRadarPage() {
                             </span>
                           </div>
                           <h3 className="text-base font-bold text-[#0A2540] mt-0.5">
-                            {job.titleBn}
+                            {isBn ? job.titleBn : job.titleEn}
                           </h3>
                         </div>
 
@@ -441,7 +468,7 @@ export default function CareerSkillRadarPage() {
                         <div className="flex items-center gap-1.5 self-start sm:self-auto bg-emerald-50 border border-emerald-300 px-3 py-1 rounded-full">
                           <CheckCircle2 className="w-4 h-4 text-[#065F46]" />
                           <span className="text-sm font-bold text-[#065F46]">
-                            {toBengaliDigits(matchPct)}% ম্যাচ
+                            {isBn ? `${toBengaliDigits(matchPct)}% ম্যাচ` : `${matchPct}% Match`}
                           </span>
                         </div>
                       </div>
@@ -454,7 +481,7 @@ export default function CareerSkillRadarPage() {
                         </div>
                         <div className="flex items-center gap-1 font-semibold text-[#065F46]">
                           <DollarSign className="w-3.5 h-3.5" />
-                          <span>বেতন: {job.salaryRangeBdt}</span>
+                          <span>{isBn ? `বেতন: ${job.salaryRangeBdt}` : `Salary: ${job.salaryRangeBdt}`}</span>
                         </div>
                       </div>
 
@@ -474,13 +501,13 @@ export default function CareerSkillRadarPage() {
                       <div className="bg-white border border-slate-200 rounded p-3 mb-4 text-xs space-y-1">
                         {strengths.length > 0 && (
                           <div className="text-[#065F46] flex items-center gap-1.5">
-                            <span className="font-bold">দক্ষতা প্রাচুর্য:</span>
+                            <span className="font-bold">{isBn ? 'দক্ষতা প্রাচুর্য:' : 'Surplus Strengths:'}</span>
                             <span>{strengths.join(', ')}</span>
                           </div>
                         )}
                         {gaps.length > 0 && (
                           <div className="text-[#B45309] flex items-center gap-1.5">
-                            <span className="font-bold">উন্নয়ন ক্ষেত্র:</span>
+                            <span className="font-bold">{isBn ? 'উন্নয়ন ক্ষেত্র:' : 'Growth Areas:'}</span>
                             <span>{gaps.join(', ')}</span>
                           </div>
                         )}
@@ -489,7 +516,7 @@ export default function CareerSkillRadarPage() {
                       {/* 3D Tactile Apply Button */}
                       <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                         <span className="text-[11px] text-slate-500 font-mono">
-                          কোসাইন মানদণ্ড: {toBengaliDigits(cosine)}
+                          {isBn ? 'কোসাইন মানদণ্ড: ' : 'Cosine Metric: '}{isBn ? toBengaliDigits(cosine) : cosine}
                         </span>
 
                         <button
@@ -501,7 +528,7 @@ export default function CareerSkillRadarPage() {
                           className="py-2 px-4 bg-[#0A2540] text-white text-xs font-bold rounded shadow-[0_4px_0_0_#051329] active:translate-y-1 active:shadow-none transition-all flex items-center gap-1.5"
                         >
                           <Lock className="w-3.5 h-3.5 text-amber-400" />
-                          <span>সিলড সিভি জমা দিন</span>
+                          <span>{isBn ? 'সিলড সিভি জমা দিন' : 'Submit Sealed CV'}</span>
                           <ArrowRight className="w-3.5 h-3.5 ml-1" />
                         </button>
                       </div>
@@ -516,20 +543,22 @@ export default function CareerSkillRadarPage() {
               <div className="bg-emerald-50 border-2 border-emerald-400 rounded-lg p-5 shadow-sm">
                 <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm mb-3">
                   <Check className="w-5 h-5 text-emerald-700 bg-white rounded-full p-0.5 border border-emerald-300" />
-                  <span>সিলড সিভি আবেদন সফলভাবে সম্পন্ন হয়েছে!</span>
+                  <span>{isBn ? 'সিলড সিভি আবেদন সফলভাবে সম্পন্ন হয়েছে!' : 'Sealed CV Application Successfully Submitted!'}</span>
                 </div>
 
                 <div className="space-y-1.5 text-xs text-emerald-950 font-mono bg-white p-3.5 rounded border border-emerald-200 mb-3">
-                  <div><span className="text-slate-500">পদবী:</span> {sealedCvReceipt.jobTitle}</div>
-                  <div><span className="text-slate-500">প্রতিষ্ঠান:</span> {sealedCvReceipt.company}</div>
-                  <div><span className="text-slate-500">আবেদনের সময়:</span> {sealedCvReceipt.timestampStr}</div>
+                  <div><span className="text-slate-500">{isBn ? 'পদবী:' : 'Position:'}</span> {sealedCvReceipt.jobTitle}</div>
+                  <div><span className="text-slate-500">{isBn ? 'প্রতিষ্ঠান:' : 'Company:'}</span> {sealedCvReceipt.company}</div>
+                  <div><span className="text-slate-500">{isBn ? 'আবেদনের সময়:' : 'Applied At:'}</span> {sealedCvReceipt.timestampStr}</div>
                   <div className="break-all text-[10px] text-slate-600 pt-1.5 border-t border-slate-100">
-                    <span className="text-slate-500">SHA-256 ক্রিপ্টোগ্রাফিক সিল:</span> {sealedCvReceipt.sha256Hash}
+                    <span className="text-slate-500">{isBn ? 'SHA-256 ক্রিপ্টোগ্রাফিক সিল:' : 'SHA-256 Cryptographic Seal:'}</span> {sealedCvReceipt.sha256Hash}
                   </div>
                 </div>
 
                 <p className="text-[11px] text-emerald-800 leading-relaxed">
-                  আবেদনটি সম্পূর্ণ অপরিবর্তনীয় (Immutable) এবং রিক্রুটার আপনার তৎকালীন ভেরিফাইড মেধা স্কোর দেখতে পারবেন। কোনো জালিয়াতি বা তথ্য পরিবর্তনের সুযোগ নেই।
+                  {isBn
+                    ? 'আবেদনটি সম্পূর্ণ অপরিবর্তনীয় (Immutable) এবং রিক্রুটার আপনার তৎকালীন ভেরিফাইড মেধা স্কোর দেখতে পারবেন। কোনো জালিয়াতি বা তথ্য পরিবর্তনের সুযোগ নেই।'
+                    : 'The application snapshot is fully immutable; recruiters inspect your authentic verified scores without risk of tampering or alteration.'}
                 </p>
               </div>
             )}

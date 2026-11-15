@@ -12,7 +12,7 @@
  * STANDARDS: UI/UX Pro Max, WCAG 2.2 AAA Contrast, Zero Layout Shift, Strict Zero-Emoji.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Award,
@@ -36,13 +36,22 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { StreakShieldModal } from '@/components/gamification/StreakShieldModal';
 import { MasteryBadgeCard } from '@/components/gamification/MasteryBadgeCard';
+import { useTranslation, toBengaliDigits } from '@/lib/i18n';
 
 export default function AchievementsPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
   const [isShieldModalOpen, setIsShieldModalOpen] = useState<boolean>(false);
   const [currentStreak, setCurrentStreak] = useState<number>(24);
   const [availableShields, setAvailableShields] = useState<number>(2);
   const [todayXp, setTodayXp] = useState<number>(280);
   const dailyCap = 500;
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'অর্জন ও ডিজিটাল সনদ | অগ্রযাত্রা'
+      : 'Achievements & Digital Credentials | Agragoti';
+  }, [isBn]);
 
   const handleRecoverStreak = () => {
     setCurrentStreak((prev) => prev + 1);
@@ -55,10 +64,10 @@ export default function AchievementsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-bengali">
+    <div className={`min-h-screen bg-slate-950 text-slate-100 flex flex-col ${isBn ? 'font-bengali' : 'font-sans'}`}>
       <AppHead
-        title="অর্জন ও ডিজিটাল সনদ | অগ্রযাত্রা"
-        description="তোমার ধারাবাহিক অধ্যবসায়, বিষয়ভিত্তিক দক্ষতা এবং যাচাইকৃত অ্যাকাডেমিক সনদ পোর্টফোলিও।"
+        title={isBn ? "অর্জন ও ডিজিটাল সনদ | অগ্রযাত্রা" : "Achievements & Digital Credentials | Agragoti"}
+        description={isBn ? "তোমার ধারাবাহিক অধ্যবসায়, বিষয়ভিত্তিক দক্ষতা এবং যাচাইকৃত অ্যাকাডেমিক সনদ পোর্টফোলিও।" : "Your continuous perseverance, subject mastery, and verified academic credentials portfolio."}
       />
 
       <Navbar />
@@ -69,13 +78,15 @@ export default function AchievementsPage() {
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">
               <Award className="w-4 h-4" strokeWidth={1.75} />
-              <span>মর্যাদাপূর্ণ অর্জন ও সামাজিক প্রমাণ</span>
+              <span>{isBn ? "মর্যাদাপূর্ণ অর্জন ও সামাজিক প্রমাণ" : "Dignified Achievements & Social Proof"}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
-              অ্যাকাডেমিক দক্ষতা ও ধারাবাহিকতা পোর্টফোলিও
+              {isBn ? "অ্যাকাডেমিক দক্ষতা ও ধারাবাহিকতা পোর্টফোলিও" : "Academic Mastery & Consistency Portfolio"}
             </h1>
             <p className="text-sm text-slate-400 mt-1 max-w-2xl">
-              সস্তা গ্যামিফিকেশন নয়, এখানে মূল্যায়িত হয় গভীর অধ্যবসায় ও যাচাইযোগ্য জাতীয় মেধা মানদণ্ড।
+              {isBn
+                ? "সস্তা গ্যামিফিকেশন নয়, এখানে মূল্যায়িত হয় গভীর অধ্যবসায় ও যাচাইযোগ্য জাতীয় মেধা মানদণ্ড।"
+                : "Not cheap gamification, but rigorous dedication and verifiable national merit benchmarks."}
             </p>
           </div>
 
@@ -87,7 +98,7 @@ export default function AchievementsPage() {
               className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold transition-all active:scale-95 shadow-sm"
             >
               <Flame className="w-4 h-4 text-amber-500 fill-amber-500/20" strokeWidth={1.75} />
-              <span>স্ট্রিক শিল্ড পরিচালনা</span>
+              <span>{isBn ? "স্ট্রিক শিল্ড পরিচালনা" : "Manage Streak Shield"}</span>
             </button>
 
             <Link
@@ -95,7 +106,7 @@ export default function AchievementsPage() {
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all active:scale-95 shadow-md"
             >
               <ExternalLink className="w-4 h-4" strokeWidth={1.75} />
-              <span>সনদ যাচাই লেজার</span>
+              <span>{isBn ? "সনদ যাচাই লেজার" : "Credential Ledger"}</span>
             </Link>
           </div>
         </div>
@@ -107,34 +118,35 @@ export default function AchievementsPage() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  ধারাবাহিক অধ্যবসায় (Streak)
+                  {isBn ? "ধারাবাহিক অধ্যবসায় (Streak)" : "Continuous Streak"}
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-400 border border-amber-800/60 text-[11px] font-semibold">
-                  সক্রিয়
+                  {isBn ? "সক্রিয়" : "Active"}
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl sm:text-5xl font-extrabold text-amber-400 font-numeric tracking-tight">
-                  {currentStreak}
+                  {isBn ? toBengaliDigits(currentStreak) : currentStreak}
                 </span>
-                <span className="text-base text-slate-300 font-bold">দিন</span>
+                <span className="text-base text-slate-300 font-bold">{isBn ? "দিন" : "Days"}</span>
               </div>
               <p className="text-xs text-slate-400 mt-2">
-                সর্বোচ্চ রেকর্ড: <strong className="text-white font-numeric">৪২ দিন</strong> (টানা ৩ সপ্তাহ নিয়মিত প্রস্তুতি)
+                {isBn ? "সর্বোচ্চ রেকর্ড: " : "Peak Record: "}
+                <strong className="text-white font-numeric">{isBn ? "৪২ দিন" : "42 Days"}</strong> {isBn ? "(টানা ৩ সপ্তাহ নিয়মিত প্রস্তুতি)" : "(3 consecutive weeks of regular study)"}
               </p>
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" strokeWidth={1.75} />
-                <span>{availableShields} টি ফ্রিজ শিল্ড অবশিষ্ট</span>
+                <span>{isBn ? `${toBengaliDigits(availableShields)} টি ফ্রিজ শিল্ড অবশিষ্ট` : `${availableShields} Freeze Shields left`}</span>
               </span>
               <button
                 type="button"
                 onClick={() => setIsShieldModalOpen(true)}
                 className="text-amber-400 font-semibold hover:underline"
               >
-                শিল্ড যোগ করুন
+                {isBn ? "শিল্ড যোগ করুন" : "Add Shield"}
               </button>
             </div>
           </div>
@@ -144,17 +156,17 @@ export default function AchievementsPage() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  দৈনিক সীমা (Anti-Burnout Cap)
+                  {isBn ? "দৈনিক সীমা (Anti-Burnout Cap)" : "Daily Cap (Anti-Burnout)"}
                 </span>
                 <span className="px-2.5 py-0.5 rounded-full bg-blue-950 text-blue-400 border border-blue-800/60 text-[11px] font-semibold">
-                  মানসিক স্বাস্থ্য সুরক্ষা
+                  {isBn ? "মানসিক স্বাস্থ্য সুরক্ষা" : "Mental Well-being"}
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl sm:text-5xl font-extrabold text-white font-numeric tracking-tight">
-                  {todayXp}
+                  {isBn ? toBengaliDigits(todayXp) : todayXp}
                 </span>
-                <span className="text-sm text-slate-400 font-numeric">/ {dailyCap} XP</span>
+                <span className="text-sm text-slate-400 font-numeric">/ {isBn ? toBengaliDigits(dailyCap) : dailyCap} XP</span>
               </div>
 
               {/* Progress bar */}
@@ -165,13 +177,15 @@ export default function AchievementsPage() {
                 />
               </div>
               <p className="text-xs text-slate-400 mt-2">
-                দৈনিক লক্ষ্য অর্জিত হলে অতিরিক্ত চাপ না নিয়ে গভীর ঘুমের বিশ্রাম নেওয়া বাঞ্ছনীয়।
+                {isBn
+                  ? "দৈনিক লক্ষ্য অর্জিত হলে অতিরিক্ত চাপ না নিয়ে গভীর ঘুমের বিশ্রাম নেওয়া বাঞ্ছনীয়।"
+                  : "Once the daily target is reached, rest and recharge without extra pressure."}
               </p>
             </div>
 
             <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-              <span>মোট অর্জিত পয়েন্ট:</span>
-              <strong className="text-white font-numeric">৮,৪৫০ XP</strong>
+              <span>{isBn ? "মোট অর্জিত পয়েন্ট:" : "Total XP Earned:"}</span>
+              <strong className="text-white font-numeric">{isBn ? "৮,৪৫০ XP" : "8,450 XP"}</strong>
             </div>
           </div>
 
@@ -180,24 +194,26 @@ export default function AchievementsPage() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  জাতীয় মেধা অবস্থান
+                  {isBn ? "জাতীয় মেধা অবস্থান" : "National Percentile"}
                 </span>
                 <TrendingUp className="w-4 h-4 text-emerald-400" strokeWidth={1.75} />
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400 font-numeric tracking-tight">
-                  ৯৭.৪%
+                  {isBn ? "৯৭.৪%" : "97.4%"}
                 </span>
-                <span className="text-xs text-slate-400">পার্সেন্টাইল</span>
+                <span className="text-xs text-slate-400">{isBn ? "পার্সেন্টাইল" : "Percentile"}</span>
               </div>
               <p className="text-xs text-slate-400 mt-2">
-                বিজ্ঞান ও উচ্চতর গণিত বিভাগে সারাদেশের শীর্ষ ৩% শিক্ষার্থীদের অগ্রভাগে তোমার অবস্থান।
+                {isBn
+                  ? "বিজ্ঞান ও উচ্চতর গণিত বিভাগে সারাদেশের শীর্ষ ৩% শিক্ষার্থীদের অগ্রভাগে তোমার অবস্থান।"
+                  : "You are ranked in the top 3% nationwide across Science and Higher Math disciplines."}
               </p>
             </div>
 
             <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-              <span>যাচাইকৃত ব্যাজ:</span>
-              <strong className="text-white font-numeric">৩টি অর্জিত</strong>
+              <span>{isBn ? "যাচাইকৃত ব্যাজ:" : "Verified Badges:"}</span>
+              <strong className="text-white font-numeric">{isBn ? "৩টি অর্জিত" : "3 Earned"}</strong>
             </div>
           </div>
         </div>
@@ -207,10 +223,12 @@ export default function AchievementsPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-bold text-white font-display">
-                যাচাইযোগ্য দক্ষতা সনদ ব্যাজ (Cryptographic Badges)
+                {isBn ? "যাচাইযোগ্য দক্ষতা সনদ ব্যাজ (Cryptographic Badges)" : "Verifiable Skill Badges (Cryptographic Proof)"}
               </h2>
               <p className="text-xs text-slate-400 mt-0.5">
-                প্রতিটি ব্যাজ HMAC-SHA256 অ্যালগরিদমে ডিজিটাল সাক্ষরিত এবং পাবলিক লেজারে যাচাইযোগ্য।
+                {isBn
+                  ? "প্রতিটি ব্যাজ HMAC-SHA256 অ্যালগরিদমে ডিজিটাল সাক্ষরিত এবং পাবলিক লেজারে যাচাইযোগ্য।"
+                  : "Each badge is HMAC-SHA256 cryptographically sealed and verifiable on public ledger."}
               </p>
             </div>
           </div>
@@ -218,32 +236,32 @@ export default function AchievementsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <MasteryBadgeCard
               badgeId="badge-hsc-physics-mechanics-top3"
-              title="এইচএসসি পদার্থবিজ্ঞান: বলবিদ্যা দক্ষতা"
+              title={isBn ? "এইচএসসি পদার্থবিজ্ঞান: বলবিদ্যা দক্ষতা" : "HSC Physics: Mechanics Mastery"}
               skillName="Classical Mechanics & Rotational Dynamics"
               percentileRank={97.4}
-              issuingAuthority="জাতীয় অলিম্পিয়াড ফ্যাকাল্টি"
+              issuingAuthority={isBn ? "জাতীয় অলিম্পিয়াড ফ্যাকাল্টি" : "National Olympiad Faculty"}
               verificationHash="a7e8b910c2d3e4f5a6b7c8d9e0f1a2b3"
-              issuedDate="১৮ অক্টোবর ২০২৬"
+              issuedDate={isBn ? "১৮ অক্টোবর ২০২৬" : "18 October 2026"}
             />
 
             <MasteryBadgeCard
               badgeId="badge-higher-math-calculus-top5"
-              title="উচ্চতর গণিত: ক্যালকুলাস ও কণিক্স"
+              title={isBn ? "উচ্চতর গণিত: ক্যালকুলাস ও কণিক্স" : "Higher Math: Calculus & Conics"}
               skillName="Differential & Integral Calculus"
               percentileRank={95.8}
-              issuingAuthority="বুয়েট মেন্টরশিপ কাউন্সিল"
+              issuingAuthority={isBn ? "বুয়েট মেন্টরশিপ কাউন্সিল" : "BUET Mentorship Council"}
               verificationHash="c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
-              issuedDate="১০ অক্টোবর ২০২৬"
+              issuedDate={isBn ? "১০ অক্টোবর ২০২৬" : "10 October 2026"}
             />
 
             <MasteryBadgeCard
               badgeId="badge-chemistry-organic-synthesis"
-              title="রসায়ন: জৈব রসায়ন সংশ্লেষণ"
+              title={isBn ? "রসায়ন: জৈব রসায়ন সংশ্লেষণ" : "Chemistry: Organic Synthesis"}
               skillName="Reaction Mechanisms & Isomerism"
               percentileRank={94.2}
-              issuingAuthority="জাতীয় পাঠ্যপুস্তক বোর্ড মানদণ্ড"
+              issuingAuthority={isBn ? "জাতীয় পাঠ্যপুস্তক বোর্ড মানদণ্ড" : "NCTB Curriculum Standard"}
               verificationHash="f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6"
-              issuedDate="০২ অক্টোবর ২০২৬"
+              issuedDate={isBn ? "০২ অক্টোবর ২০২৬" : "02 October 2026"}
             />
           </div>
         </section>
@@ -253,10 +271,10 @@ export default function AchievementsPage() {
           <div className="flex items-center justify-between pb-3 border-b border-slate-800">
             <div>
               <h3 className="text-lg font-bold text-white font-display">
-                শিক্ষণ মাইলস্টোন টাইমলাইন
+                {isBn ? "শিক্ষণ মাইলস্টোন টাইমলাইন" : "Learning Milestone Timeline"}
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                অর্জিত লক্ষ্যের স্বচ্ছ ইতিহাস যা তোমার অধ্যবসায়ের প্রমাণ বহন করে।
+                {isBn ? "অর্জিত লক্ষ্যের স্বচ্ছ ইতিহাস যা তোমার অধ্যবসায়ের প্রমাণ বহন করে।" : "Transparent ledger of accomplished goals reflecting your disciplined journey."}
               </p>
             </div>
             <Calendar className="w-5 h-5 text-slate-400" strokeWidth={1.75} />
@@ -270,12 +288,12 @@ export default function AchievementsPage() {
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-white">
-                    ক্যালকুলাস ও কণিক্স দক্ষতা সনদ অর্জিত (Top 5%)
+                    {isBn ? "ক্যালকুলাস ও কণিক্স দক্ষতা সনদ অর্জিত (Top 5%)" : "Calculus & Conics Certificate Earned (Top 5%)"}
                   </h4>
-                  <span className="text-xs text-slate-500 font-numeric">১৮ অক্টোবর ২০২৬</span>
+                  <span className="text-xs text-slate-500 font-numeric">{isBn ? "১৮ অক্টোবর ২০২৬" : "18 Oct 2026"}</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  টানা ২৫টি বুয়েট স্ট্যান্ডার্ড জটিল গাণিতিক সমস্যার সঠিক সমাধান সম্পন্ন।
+                  {isBn ? "টানা ২৫টি বুয়েট স্ট্যান্ডার্ড জটিল গাণিতিক সমস্যার সঠিক সমাধান সম্পন্ন।" : "Solved 25 consecutive BUET-standard advanced mathematical problems correctly."}
                 </p>
               </div>
             </div>
@@ -287,12 +305,12 @@ export default function AchievementsPage() {
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-white">
-                    ২১ দিনের অবিচল অধ্যবসায় মাইলফলক
+                    {isBn ? "২১ দিনের অবিচল অধ্যবসায় মাইলফলক" : "21-Day Unbroken Habit Milestone"}
                   </h4>
-                  <span className="text-xs text-slate-500 font-numeric">১০ অক্টোবর ২০২৬</span>
+                  <span className="text-xs text-slate-500 font-numeric">{isBn ? "১০ অক্টোবর ২০২৬" : "10 Oct 2026"}</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  একটি দিনও অপচয় না করে দৈনিক প্রস্তুতি বজায় রাখার অনন্য রেকর্ড।
+                  {isBn ? "একটি দিনও অপচয় না করে দৈনিক প্রস্তুতি বজায় রাখার অনন্য রেকর্ড।" : "Maintained daily active study discipline without missing a single day."}
                 </p>
               </div>
             </div>
@@ -304,12 +322,12 @@ export default function AchievementsPage() {
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold text-white">
-                    আসন্ন লক্ষ্য: জাতীয় লাইভ অলিম্পিয়াড সেমিফাইনাল
+                    {isBn ? "আসন্ন লক্ষ্য: জাতীয় লাইভ অলিম্পিয়াড সেমিফাইনাল" : "Upcoming Goal: National Live Olympiad Semifinal"}
                   </h4>
-                  <span className="text-xs text-blue-400 font-semibold">চলমান</span>
+                  <span className="text-xs text-blue-400 font-semibold">{isBn ? "চলমান" : "In Progress"}</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  পরবর্তী পর্ব আগামী শুক্রবার রাত ৮:০০ টায় অনুষ্ঠিত হবে।
+                  {isBn ? "পরবর্তী পর্ব আগামী শুক্রবার রাত ৮:০০ টায় অনুষ্ঠিত হবে।" : "Next session will be broadcast this Friday at 8:00 PM."}
                 </p>
               </div>
             </div>

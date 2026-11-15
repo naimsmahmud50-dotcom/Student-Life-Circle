@@ -39,7 +39,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 type DialectKey = 'STANDARD_BANGLA' | 'CHITTAGONG' | 'SYLHET' | 'BARISAL';
 
@@ -150,6 +150,15 @@ const SAMPLE_QUESTIONS: VivaQuestionItem[] = [
 ];
 
 export default function VoiceVivaEvaluatorPage() {
+  const { language } = useTranslation();
+  const isBn = language === 'bn';
+
+  useEffect(() => {
+    document.title = isBn
+      ? 'বহু-আঞ্চলিক অডিও টিউটরিং ও মৌখিক ভাইভা মূল্যায়ক | অগ্রযাত্রা'
+      : 'Multi-Dialect Audio Tutoring & Voice Viva Evaluator | Ogrojatra';
+  }, [isBn]);
+
   const [selectedDialect, setSelectedDialect] = useState<DialectKey>('CHITTAGONG');
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0);
   const [recordingState, setRecordingState] = useState<'IDLE' | 'RECORDING' | 'SUBMITTED'>('IDLE');
@@ -222,34 +231,36 @@ export default function VoiceVivaEvaluatorPage() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] flex flex-col font-sans">
       <AppHead
-        title="বহু-আঞ্চলিক অডিও টিউটরিং ও মৌখিক ভাইভা মূল্যায়ক | অগ্রযাত্রা"
-        description="চাটগাঁইয়া, সিলেটি ও বরিশালের আঞ্চলিক কথ্যরীতি সহনশীল এনসিটিবি প্রমিত ভাইভা-ভয়েস মূল্যায়ন পরীক্ষাগার।"
+        title={isBn ? "বহু-আঞ্চলিক অডিও টিউটরিং ও মৌখিক ভাইভা মূল্যায়ক | অগ্রযাত্রা" : "Multi-Dialect Audio Tutoring & Voice Viva Evaluator | Ogrojatra"}
+        description={isBn ? "চাটগাঁইয়া, সিলেটি ও বরিশালের আঞ্চলিক কথ্যরীতি সহনশীল এনসিটিবি প্রমিত ভাইভা-ভয়েস মূল্যায়ন পরীক্ষাগার।" : "Regional dialect-tolerant NCTB viva-voce examination and voice tutoring laboratory."}
       />
 
-      <Navbar />
+      <Navbar currentStage={isBn ? "মৌখিক ভাইভা পরীক্ষাগার" : "Voice Viva Laboratory"} />
 
       {/* Laboratory Banner & Navigation Header */}
       <section className="bg-[#0A2540] text-white py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-[#B45309]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-3">
-            <Link href="/" className="hover:text-white transition-colors">হোম</Link>
+            <Link href="/" className="hover:text-white transition-colors">{isBn ? 'হোম' : 'Home'}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link href="/practice" className="hover:text-white transition-colors">অনুশীলন</Link>
+            <Link href="/practice" className="hover:text-white transition-colors">{isBn ? 'অনুশীলন' : 'Practice'}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-amber-400">মৌখিক ভাইভা পরীক্ষাগার</span>
+            <span className="text-amber-400">{isBn ? 'মৌখিক ভাইভা পরীক্ষাগার' : 'Voice Viva Laboratory'}</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-amber-300 text-xs font-medium mb-3">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>ASVS L2 ইন-মেমোরি প্রসেসিং • ১৫-মিনিট ক্ষণস্থায়ী অডিও বাফার নীতি</span>
+                <span>{isBn ? 'ASVS L2 ইন-মেমোরি প্রসেসিং • ১৫-মিনিট ক্ষণস্থায়ী অডিও বাফার নীতি' : 'ASVS L2 In-Memory Processing • 15-Minute Ephemeral Audio Buffer Policy'}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
-                বহু-আঞ্চলিক অডিও টিউটরিং ও মৌখিক ভাইভা মূল্যায়ক
+                {isBn ? 'বহু-আঞ্চলিক অডিও টিউটরিং ও মৌখিক ভাইভা মূল্যায়ক' : 'Multi-Dialect Audio Tutoring & Voice Viva Evaluator'}
               </h1>
               <p className="mt-2 text-sm sm:text-base text-slate-200 max-w-3xl leading-relaxed">
-                প্রমিত বাংলাসহ চট্টগ্রাম, সিলেট ও বরিশালের আঞ্চলিক কথ্যরীতি সমন্বিত এনসিটিবি প্র্যাকটিক্যাল মৌখিক পরীক্ষা (Viva-Voce) রুব্রিক অ্যানালাইসিস।
+                {isBn
+                  ? 'প্রমিত বাংলাসহ চট্টগ্রাম, সিলেট ও বরিশালের আঞ্চলিক কথ্যরীতি সমন্বিত এনসিটিবি প্র্যাকটিক্যাল মৌখিক পরীক্ষা (Viva-Voce) রুব্রিক অ্যানালাইসিস।'
+                  : 'NCTB practical viva-voce rubric analysis with dialect accommodation for Chittagong, Sylhet, and Barisal regions.'}
               </p>
             </div>
 
@@ -257,10 +268,10 @@ export default function VoiceVivaEvaluatorPage() {
               <button
                 onClick={handleReset}
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
-                title="পরীক্ষাগার সেশন রিসেট করুন"
+                title={isBn ? "পরীক্ষাগার সেশন রিসেট করুন" : "Reset Laboratory Session"}
               >
                 <RotateCcw className="w-4 h-4 text-slate-300" />
-                <span>সেশন রিসেট</span>
+                <span>{isBn ? 'সেশন রিসেট' : 'Reset Session'}</span>
               </button>
             </div>
           </div>
@@ -278,7 +289,9 @@ export default function VoiceVivaEvaluatorPage() {
             <div className="bg-white rounded-xl border border-slate-300 p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-200">
                 <Radio className="w-5 h-5 text-[#0A2540]" />
-                <h2 className="text-base font-bold text-[#0A2540]">আঞ্চলিক কথ্যরীতি নির্বাচন (Dialect Mode)</h2>
+                <h2 className="text-base font-bold text-[#0A2540]">
+                  {isBn ? 'আঞ্চলিক কথ্যরীতি নির্বাচন (Dialect Mode)' : 'Regional Dialect Selection (Dialect Mode)'}
+                </h2>
               </div>
 
               <div className="space-y-3">
@@ -296,7 +309,7 @@ export default function VoiceVivaEvaluatorPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-bold text-[#0A2540]">{d.nameBn}</span>
+                      <span className="text-sm font-bold text-[#0A2540]">{isBn ? d.nameBn : d.nameEn}</span>
                       <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-200 text-slate-700">
                         {d.regionBn}
                       </span>
@@ -314,19 +327,21 @@ export default function VoiceVivaEvaluatorPage() {
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
                 <div className="flex items-center gap-2.5">
                   <Headphones className="w-5 h-5 text-[#0A2540]" />
-                  <h2 className="text-base font-bold text-[#0A2540]">মৌখিক অডিও ল্যাবরেটরি বুথ</h2>
+                  <h2 className="text-base font-bold text-[#0A2540]">
+                    {isBn ? 'মৌখিক অডিও ল্যাবরেটরি বুথ' : 'Voice Audio Laboratory Booth'}
+                  </h2>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-300">
                   <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                  <span>মাইক্রোফোন সক্রিয়</span>
+                  <span>{isBn ? 'মাইক্রোফোন সক্রিয়' : 'Microphone Active'}</span>
                 </div>
               </div>
 
               {/* Segmented Sound Level Meter (Formal British Council Style) */}
               <div className="bg-[#0A2540] rounded-lg p-4 text-white mb-5">
                 <div className="flex justify-between items-center text-xs font-mono text-slate-300 mb-2">
-                  <span>ইনপুট লেভেল মিটার</span>
-                  <span>{recordingState === 'RECORDING' ? '-18.5 dB (স্বাভাবিক)' : 'প্রস্তুত'}</span>
+                  <span>{isBn ? 'ইনপুট লেভেল মিটার' : 'Input Level Meter'}</span>
+                  <span>{recordingState === 'RECORDING' ? (isBn ? '-18.5 dB (স্বাভাবিক)' : '-18.5 dB (Nominal)') : (isBn ? 'প্রস্তুত' : 'Ready')}</span>
                 </div>
 
                 {/* 12-segment discrete level bar */}
@@ -360,10 +375,10 @@ export default function VoiceVivaEvaluatorPage() {
                 <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
                   <span className="text-slate-400 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-amber-400" />
-                    সময়সীমা: {toBengaliDigits(activeQuestion.timeLimitSec)} সেকেন্ড
+                    {isBn ? `সময়সীমা: ${toBengaliDigits(activeQuestion.timeLimitSec)} সেকেন্ড` : `Time Limit: ${activeQuestion.timeLimitSec} seconds`}
                   </span>
                   <span className="font-mono font-bold text-amber-300 text-sm">
-                    {toBengaliDigits(recordedSeconds)}s / {toBengaliDigits(activeQuestion.timeLimitSec)}s
+                    {isBn ? toBengaliDigits(recordedSeconds) : recordedSeconds}s / {isBn ? toBengaliDigits(activeQuestion.timeLimitSec) : activeQuestion.timeLimitSec}s
                   </span>
                 </div>
               </div>
@@ -376,7 +391,7 @@ export default function VoiceVivaEvaluatorPage() {
                     className="w-full py-3.5 px-4 bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold rounded-lg flex items-center justify-center gap-2 text-sm"
                   >
                     <Mic className="w-4 h-4 text-emerald-400" />
-                    <span>মৌখিক উত্তর শুরু করুন (Start Viva)</span>
+                    <span>{isBn ? 'মৌখিক উত্তর শুরু করুন (Start Viva)' : 'Start Viva Response (মৌখিক উত্তর শুরু)'}</span>
                   </button>
                 )}
 
@@ -386,7 +401,7 @@ export default function VoiceVivaEvaluatorPage() {
                     className="w-full py-3.5 px-4 bg-[#991B1B] text-white shadow-[0_4px_0_0_#5F1010] hover:bg-[#7F1D1D] active:translate-y-1 active:shadow-none transition-all font-semibold rounded-lg flex items-center justify-center gap-2 text-sm animate-pulse"
                   >
                     <Square className="w-4 h-4 fill-white text-white" />
-                    <span>রেকর্ডিং সমাপ্ত ও খাতা জমা দিন (Finish & Submit)</span>
+                    <span>{isBn ? 'রেকর্ডিং সমাপ্ত ও খাতা জমা দিন (Finish & Submit)' : 'Finish & Submit (রেকর্ডিং সমাপ্ত)'}</span>
                   </button>
                 )}
 
@@ -397,14 +412,14 @@ export default function VoiceVivaEvaluatorPage() {
                       className="flex-1 py-3 px-3 bg-white text-[#0A2540] border border-slate-300 hover:bg-slate-50 font-semibold rounded-lg shadow-sm flex items-center justify-center gap-1.5 text-xs transition-colors"
                     >
                       <Volume2 className="w-4 h-4 text-[#0A2540]" />
-                      <span>{isDemoAudioPlaying ? 'অডিও থামান' : 'উত্তর শুনুন'}</span>
+                      <span>{isDemoAudioPlaying ? (isBn ? 'অডিও থামান' : 'Stop Audio') : (isBn ? 'উত্তর শুনুন' : 'Listen Response')}</span>
                     </button>
                     <button
                       onClick={handleStartRecording}
                       className="flex-1 py-3 px-3 bg-[#0A2540] text-white shadow-[0_3px_0_0_#051329] hover:bg-[#081C30] active:translate-y-0.5 active:shadow-none font-semibold rounded-lg flex items-center justify-center gap-1.5 text-xs transition-all"
                     >
                       <RotateCcw className="w-4 h-4 text-slate-300" />
-                      <span>পুনরায় রেকর্ড</span>
+                      <span>{isBn ? 'পুনরায় রেকর্ড' : 'Re-Record'}</span>
                     </button>
                   </div>
                 )}
@@ -414,7 +429,7 @@ export default function VoiceVivaEvaluatorPage() {
               <div className="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-200 flex items-start gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                 <p className="text-[11px] text-slate-600 leading-relaxed">
-                  <strong>ইন-মেমোরি ক্ষণস্থায়ী নীতি:</strong> অডিও স্ট্রিম সর্বোচ্চ ১৫ মিনিট মেমোরিতে সংরক্ষিত থাকে। মূল্যায়নের পর কোনো স্থায়ী ভয়েস প্রিন্ট বা বায়োমেট্রিক ডেটা ডিস্কে জমা রাখা হয় না।
+                  <strong>{isBn ? 'ইন-মেমোরি ক্ষণস্থায়ী নীতি:' : 'In-Memory Ephemeral Policy:'}</strong> {isBn ? 'অডিও স্ট্রিম সর্বোচ্চ ১৫ মিনিট মেমোরিতে সংরক্ষিত থাকে। মূল্যায়নের পর কোনো স্থায়ী ভয়েস প্রিন্ট বা বায়োমেট্রিক ডেটা ডিস্কে জমা রাখা হয় না।' : 'Audio streams are retained strictly in-memory for a 15-minute TTL. No permanent voice prints or biometric audio is written to disk.'}
                 </p>
               </div>
             </div>
@@ -430,7 +445,7 @@ export default function VoiceVivaEvaluatorPage() {
                 <div className="flex items-center gap-2">
                   <FileText className="w-5 h-5 text-[#0A2540]" />
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                    {activeQuestion.subjectBn}
+                    {isBn ? activeQuestion.subjectBn : (activeQuestion.discipline + ' Paper 1')}
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-xs">
@@ -447,7 +462,7 @@ export default function VoiceVivaEvaluatorPage() {
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                       }`}
                     >
-                      {toBengaliDigits(idx + 1)}
+                      {isBn ? toBengaliDigits(idx + 1) : idx + 1}
                     </button>
                   ))}
                 </div>
@@ -455,14 +470,16 @@ export default function VoiceVivaEvaluatorPage() {
 
               <div className="space-y-3">
                 <h3 className="text-lg sm:text-xl font-bold text-[#0A2540] leading-snug">
-                  {activeQuestion.questionBn}
+                  {isBn ? activeQuestion.questionBn : activeQuestion.questionEn}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-500 italic">
-                  {activeQuestion.questionEn}
+                  {isBn ? activeQuestion.questionEn : activeQuestion.questionBn}
                 </p>
 
                 <div className="flex flex-wrap gap-2 pt-2">
-                  <span className="text-xs font-semibold text-slate-700 self-center">প্রত্যাশিত মূল ধারণা:</span>
+                  <span className="text-xs font-semibold text-slate-700 self-center">
+                    {isBn ? 'প্রত্যাশিত মূল ধারণা:' : 'Expected Key Concepts:'}
+                  </span>
                   {activeQuestion.keyConcepts.slice(0, 4).map((c, i) => (
                     <span
                       key={i}
@@ -480,7 +497,7 @@ export default function VoiceVivaEvaluatorPage() {
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200">
                 <Layers className="w-5 h-5 text-[#0A2540]" />
                 <h3 className="text-base font-bold text-[#0A2540]">
-                  সমান্তরাল বাচনিক রূপান্তর (Parallel Dialect Normalization)
+                  {isBn ? 'সমান্তরাল বাচনিক রূপান্তর (Parallel Dialect Normalization)' : 'Parallel Dialect Normalization (সমান্তরাল রূপান্তর)'}
                 </h3>
               </div>
 
@@ -489,7 +506,7 @@ export default function VoiceVivaEvaluatorPage() {
                 <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-xs font-bold text-slate-700">
-                      শিক্ষার্থীর উচ্চারিত কথ্যরূপ ({DIALECT_OPTIONS.find(d => d.id === selectedDialect)?.nameBn.split('(')[0]})
+                      {isBn ? 'শিক্ষার্থীর উচ্চারিত কথ্যরূপ' : 'Candidate Spoken Dialect'} ({DIALECT_OPTIONS.find(d => d.id === selectedDialect)?.nameBn.split('(')[0]})
                     </span>
                     <span className="text-[10px] uppercase font-bold text-slate-500">Raw Input</span>
                   </div>
@@ -502,7 +519,7 @@ export default function VoiceVivaEvaluatorPage() {
                 <div className="p-4 rounded-lg bg-emerald-50/60 border border-emerald-300">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-xs font-bold text-emerald-900">
-                      প্রমিত অ্যাকাডেমিক রূপান্তর
+                      {isBn ? 'প্রমিত অ্যাকাডেমিক রূপান্তর' : 'Normalized Academic Bengali'}
                     </span>
                     <span className="text-[10px] uppercase font-bold text-emerald-700">Normalized Benchmark</span>
                   </div>
@@ -518,24 +535,24 @@ export default function VoiceVivaEvaluatorPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
                 <div>
                   <span className="inline-block px-3 py-1 rounded text-xs font-bold bg-[#0A2540] text-white uppercase tracking-wider mb-1.5">
-                    এনসিটিবি মূল্যায়ন রুব্রিক ফলাফল
+                    {isBn ? 'এনসিটিবি মূল্যায়ন রুব্রিক ফলাফল' : 'NCTB Evaluation Rubric Results'}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-[#0A2540]">
-                    মৌখিক পরীক্ষা মূল্যায়ন বিবরণী
+                    {isBn ? 'মৌখিক পরীক্ষা মূল্যায়ন বিবরণী' : 'Viva-Voce Evaluation Scorecard'}
                   </h3>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="text-right">
                     <div className="text-3xl sm:text-4xl font-black text-[#0A2540]">
-                      {toBengaliDigits(totalScore.toFixed(1))}
-                      <span className="text-sm font-bold text-slate-400">/১০০</span>
+                      {isBn ? toBengaliDigits(totalScore.toFixed(1)) : totalScore.toFixed(1)}
+                      <span className="text-sm font-bold text-slate-400">/{isBn ? '১০০' : '100'}</span>
                     </div>
-                    <span className="text-xs text-slate-500 font-semibold">সর্বমোট অর্জিত নম্বর</span>
+                    <span className="text-xs text-slate-500 font-semibold">{isBn ? 'সর্বমোট অর্জিত নম্বর' : 'Total Score Awarded'}</span>
                   </div>
                   <div className="w-14 h-14 rounded-xl bg-emerald-700 text-white flex flex-col items-center justify-center font-bold shadow">
                     <span className="text-xl leading-none">A+</span>
-                    <span className="text-[9px] uppercase tracking-wider mt-0.5">অনার্স গ্রেড</span>
+                    <span className="text-[9px] uppercase tracking-wider mt-0.5">{isBn ? 'অনার্স গ্রেড' : 'Honors Grade'}</span>
                   </div>
                 </div>
               </div>
@@ -546,64 +563,72 @@ export default function VoiceVivaEvaluatorPage() {
                 {/* 1. Conceptual Accuracy (40%) */}
                 <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-xs font-bold text-[#0A2540]">১. ধারণাগত নির্ভুলতা (Conceptual)</span>
+                    <span className="text-xs font-bold text-[#0A2540]">{isBn ? '১. ধারণাগত নির্ভুলতা (Conceptual)' : '1. Conceptual Accuracy (ধারণাগত নির্ভুলতা)'}</span>
                     <span className="text-xs font-extrabold text-[#0A2540]">
-                      {toBengaliDigits(conceptualScore)} / ৪০
+                      {isBn ? toBengaliDigits(conceptualScore) : conceptualScore} / {isBn ? '৪০' : '40'}
                     </span>
                   </div>
                   <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden mb-2">
                     <div className="h-full bg-emerald-600 rounded-full" style={{ width: '90%' }} />
                   </div>
                   <p className="text-[11px] text-slate-600 leading-tight">
-                    মূল বৈজ্ঞানিক সূত্র, ভৌত রাশি ও কার্যকারণ সম্পর্কের পরিপূর্ণ ব্যাখ্যা উপস্থাপিত হয়েছে।
+                    {isBn
+                      ? 'মূল বৈজ্ঞানিক সূত্র, ভৌত রাশি ও কার্যকারণ সম্পর্কের পরিপূর্ণ ব্যাখ্যা উপস্থাপিত হয়েছে।'
+                      : 'Comprehensive articulation of core scientific principles, physical quantities, and causal mechanisms.'}
                   </p>
                 </div>
 
                 {/* 2. Scientific Terminology (30%) */}
                 <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-xs font-bold text-[#0A2540]">২. পারিভাষিক স্পষ্টতা (Terminology)</span>
+                    <span className="text-xs font-bold text-[#0A2540]">{isBn ? '২. পারিভাষিক স্পষ্টতা (Terminology)' : '2. Scientific Terminology (পারিভাষিক স্পষ্টতা)'}</span>
                     <span className="text-xs font-extrabold text-[#0A2540]">
-                      {toBengaliDigits(terminologyScore)} / ৩০
+                      {isBn ? toBengaliDigits(terminologyScore) : terminologyScore} / {isBn ? '৩০' : '30'}
                     </span>
                   </div>
                   <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden mb-2">
                     <div className="h-full bg-emerald-600 rounded-full" style={{ width: '90%' }} />
                   </div>
                   <p className="text-[11px] text-slate-600 leading-tight">
-                    পাঠ্যপুস্তকীয় পরিভাষা (ভরবেগ, ত্বরণ, বলের দিক) নির্ভুলভাবে উচ্চারিত হয়েছে।
+                    {isBn
+                      ? 'পাঠ্যপুস্তকীয় পরিভাষা (ভরবেগ, ত্বরণ, বলের দিক) নির্ভুলভাবে উচ্চারিত হয়েছে।'
+                      : 'Curricular terminology (momentum, acceleration, vector direction) stated with precision.'}
                   </p>
                 </div>
 
                 {/* 3. Articulation & Fluency (20%) */}
                 <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-xs font-bold text-[#0A2540]">৩. উপস্থাপন ও সাবলীলতা (Fluency)</span>
+                    <span className="text-xs font-bold text-[#0A2540]">{isBn ? '৩. উপস্থাপন ও সাবলীলতা (Fluency)' : '3. Articulation & Fluency (উপস্থাপন ও সাবলীলতা)'}</span>
                     <span className="text-xs font-extrabold text-[#0A2540]">
-                      {toBengaliDigits(articulationScore)} / ২০
+                      {isBn ? toBengaliDigits(articulationScore) : articulationScore} / {isBn ? '২০' : '20'}
                     </span>
                   </div>
                   <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden mb-2">
                     <div className="h-full bg-amber-600 rounded-full" style={{ width: '90%' }} />
                   </div>
                   <p className="text-[11px] text-slate-600 leading-tight">
-                    স্বাভাবিক বাকগতি (১২৫ WPM) ও পরিচ্ছন্ন স্পষ্টতা বজায় ছিল; দীর্ঘ বিরতি পরিহারকৃত।
+                    {isBn
+                      ? 'স্বাভাবিক বাকগতি (১২৫ WPM) ও পরিচ্ছন্ন স্পষ্টতা বজায় ছিল; দীর্ঘ বিরতি পরিহারকৃত।'
+                      : 'Natural speech pacing (125 WPM) and clear cadence maintained with minimal hesitation.'}
                   </p>
                 </div>
 
                 {/* 4. Regional Dialect Accommodation (10%) */}
                 <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
                   <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-xs font-bold text-[#0A2540]">৪. আঞ্চলিক বাচনিক অভিযোজন (Dialect)</span>
+                    <span className="text-xs font-bold text-[#0A2540]">{isBn ? '৪. আঞ্চলিক বাচনিক অভিযোজন (Dialect)' : '4. Regional Dialect Accommodation (আঞ্চলিক অভিযোজন)'}</span>
                     <span className="text-xs font-extrabold text-emerald-700">
-                      {toBengaliDigits(dialectAccommodationScore)} / ১০
+                      {isBn ? toBengaliDigits(dialectAccommodationScore) : dialectAccommodationScore} / {isBn ? '১০' : '10'}
                     </span>
                   </div>
                   <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden mb-2">
                     <div className="h-full bg-emerald-600 rounded-full" style={{ width: '100%' }} />
                   </div>
                   <p className="text-[11px] text-slate-600 leading-tight">
-                    আঞ্চলিক কথ্যরীতির অভিব্যক্তির কারণে কোনো নম্বর কাটা হয়নি; পূর্ণ সমমর্যাদা প্রদানকৃত।
+                    {isBn
+                      ? 'আঞ্চলিক কথ্যরীতির অভিব্যক্তির কারণে কোনো নম্বর কাটা হয়নি; পূর্ণ সমমর্যাদা প্রদানকৃত।'
+                      : 'Full dialect neutrality applied; zero marks deducted for regional phonetic variations.'}
                   </p>
                 </div>
 
@@ -613,10 +638,12 @@ export default function VoiceVivaEvaluatorPage() {
               <div className="bg-[#FAFAF8] rounded-lg p-4 border border-slate-300">
                 <div className="flex items-center gap-2 mb-2 text-xs font-bold text-[#0A2540]">
                   <Award className="w-4 h-4 text-[#B45309]" />
-                  <span>পরীক্ষক প্যানেলের গঠনমূলক পরামর্শ (Evaluator Feedback)</span>
+                  <span>{isBn ? 'পরীক্ষক প্যানেলের গঠনমূলক পরামর্শ (Evaluator Feedback)' : 'Evaluator Panel Constructive Feedback (পরীক্ষক পরামর্শ)'}</span>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-700 font-medium">
-                  চমৎকার মৌখিক উপস্থাপন। আপনি বিষয়টির মূল ধারণা (ভরবেগ, প্রযুক্ত বল, ত্বরণ) অত্যন্ত পরিচ্ছন্নভাবে তুলে ধরেছেন। চূড়ান্ত বোর্ডে F = ma প্রতিপাদন সম্পর্কিত সংক্ষিপ্ত গাণিতিক রূপরেখা মৌখিকভাবে জুড়ে দিলে উত্তরটি আরও প্রাতিষ্ঠানিক মর্যাদা পাবে।
+                  {isBn
+                    ? 'চমৎকার মৌখিক উপস্থাপন। আপনি বিষয়টির মূল ধারণা (ভরবেগ, প্রযুক্ত বল, ত্বরণ) অত্যন্ত পরিচ্ছন্নভাবে তুলে ধরেছেন। চূড়ান্ত বোর্ডে F = ma প্রতিপাদন সম্পর্কিত সংক্ষিপ্ত গাণিতিক রূপরেখা মৌখিকভাবে জুড়ে দিলে উত্তরটি আরও প্রাতিষ্ঠানিক মর্যাদা পাবে।'
+                    : 'Excellent oral exposition. Core scientific principles were articulated clearly. Mentioning the step-by-step mathematical derivation of F = ma verbally will enhance institutional presentation in formal board exams.'}
                 </p>
               </div>
             </div>

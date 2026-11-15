@@ -10,7 +10,7 @@
  * STANDARDS: Zero-Emoji, Pure Academic Design, ASVS L2, Calibrated Probability
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   GraduationCap,
@@ -38,7 +38,7 @@ import {
 import { AppHead } from '../../components/layout/Head';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
-import { toBengaliDigits } from '../../lib/i18n';
+import { toBengaliDigits, useTranslation } from '../../lib/i18n';
 
 type UnitKey = 'BUET' | 'DU_KA' | 'DU_KHA' | 'DU_GA' | 'MEDICAL' | 'GST';
 type QuotaKey = 'GENERAL' | 'FREEDOM_FIGHTER' | 'TRIBAL' | 'ENGLISH_MEDIUM' | 'SPECIAL_NEEDS';
@@ -269,8 +269,15 @@ const HISTORICAL_TRENDS: Record<UnitKey, { year: number; cutoff: number }[]> = {
 };
 
 export default function AdmissionCutoffPredictor() {
+  const { language } = useTranslation();
   const [selectedUnit, setSelectedUnit] = useState<UnitKey>('BUET');
   const [selectedQuota, setSelectedQuota] = useState<QuotaKey>('GENERAL');
+
+  useEffect(() => {
+    document.title = language === 'bn'
+      ? 'ভর্তি কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর | অগ্রযাত্রা'
+      : 'Admission Cut-Off Forecaster & Sigmoid Rank Predictor | Ogrojatra';
+  }, [language]);
 
   // Academic inputs
   const [sscGpa, setSscGpa] = useState<string>('5.00');
@@ -484,34 +491,47 @@ export default function AdmissionCutoffPredictor() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#0A2540] flex flex-col font-sans">
       <AppHead
-        title="ভর্তি কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর | অগ্রযাত্রা"
-        description="বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট), ঢাবি, মেডিকেল ও গুচ্ছের ১০ বছরের ঐতিহাসিক কাট-অফ ও সিগময়েড সম্ভাব্যতা অ্যালগরিদম।"
+        title={
+          language === 'bn'
+            ? 'ভর্তি কাট-অফ ফোরকাস্টার ও সিগময়েড র‍্যাংক প্রেডিক্টর | অগ্রযাত্রা'
+            : 'Admission Cut-Off Forecaster & Sigmoid Rank Predictor | Ogrojatra'
+        }
+        description={
+          language === 'bn'
+            ? 'বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট), ঢাবি, মেডিকেল ও গুচ্ছের ১০ বছরের ঐতিহাসিক কাট-অফ ও সিগময়েড সম্ভাব্যতা অ্যালগরিদম।'
+            : '10-year historical cutoff and calibrated sigmoid admission probability algorithm for BUET, DU, Medical, and GST.'
+        }
       />
 
-      <Navbar />
+      <Navbar currentStage={language === 'bn' ? 'বিশ্ববিদ্যালয় ভর্তি (University Admission)' : 'University Admission'} />
 
       {/* Institutional Breadcrumb & Header */}
       <section className="bg-[#0A2540] text-white py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-[#B45309]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-3">
-            <Link href="/" className="hover:text-white transition-colors">হোম</Link>
+            <Link href="/" className="hover:text-white transition-colors">{language === 'bn' ? 'হোম' : 'Home'}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link href="/admission" className="hover:text-white transition-colors">ভর্তি হাব</Link>
+            <Link href="/admission" className="hover:text-white transition-colors">{language === 'bn' ? 'ভর্তি হাব' : 'Admission Hub'}</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-amber-400">কাট-অফ ফোরকাস্টার</span>
+            <span className="text-amber-400">{language === 'bn' ? 'কাট-অফ ফোরকাস্টার' : 'Cut-Off Forecaster'}</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-amber-300 text-xs font-medium mb-3">
+                <GraduationCap className="w-4 h-4" />
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>ASVS L2 জিরো-PII নীতি • ১০ বছরের অ্যাকাডেমিক কাট-অফ মডেল (২০১৫-২০২৫)</span>
+                <span>
+                  ASVS L2 {language === 'bn' ? 'জিরো-PII নীতি • ১০ বছরের অ্যাকাডেমিক কাট-অফ মডেল (২০১৫-২০২৫)' : 'Zero-PII Policy • 10-Year Historical Cut-off Model (2015-2025)'}
+                </span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
-                স্বায়ত্তশাসিত বিশ্ববিদ্যালয় ভর্তি কাট-অফ ফোরকাস্টার
+                {language === 'bn' ? 'স্বায়ত্তশাসিত বিশ্ববিদ্যালয় ভর্তি কাট-অফ ফোরকাস্টার' : 'Autonomous University Admission Cut-Off Forecaster'}
               </h1>
               <p className="mt-2 text-sm sm:text-base text-slate-200 max-w-3xl leading-relaxed">
-                সিগময়েড প্রোবাবিলিটি মডেলিং ও কোটা সমীকরণের ভিত্তিতে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছের রিয়েল-টাইম আসন প্রাপ্তির সম্ভাবনা এবং র‍্যাংক ইন্টারভাল পূর্বাভাস।
+                {language === 'bn'
+                  ? 'সিগময়েড প্রোবাবিলিটি মডেলিং ও কোটা সমীকরণের ভিত্তিতে বুয়েট, ঢাবি, মেডিকেল ও গুচ্ছের রিয়েল-টাইম আসন প্রাপ্তির সম্ভাবনা এবং র‍্যাংক ইন্টারভাল পূর্বাভাস।'
+                  : 'Real-time seat projection and merit rank interval forecast for BUET, DU, Medical, and GST based on sigmoid probability modeling and quota offsets.'}
               </p>
             </div>
 
@@ -521,15 +541,15 @@ export default function AdmissionCutoffPredictor() {
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg border border-white/30 bg-white/5 hover:bg-white/10 text-white transition-colors"
               >
                 <Compass className="w-4 h-4 text-amber-300" />
-                <span>ভর্তি ম্যাট্রিক্স হাব</span>
+                <span>{language === 'bn' ? 'ভর্তি ম্যাট্রিক্স হাব' : 'Admission Matrix Hub'}</span>
               </Link>
               <button
                 onClick={handleReset}
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
-                title="ডিফল্ট ইনপুটে রিসেট করুন"
+                title={language === 'bn' ? 'ডিফল্ট ইনপুটে রিসেট করুন' : 'Reset to default inputs'}
               >
                 <RotateCcw className="w-4 h-4 text-slate-300" />
-                <span>পুনরায় সেট করুন</span>
+                <span>{language === 'bn' ? 'পুনরায় সেট করুন' : 'Reset Inputs'}</span>
               </button>
             </div>
           </div>
@@ -547,13 +567,15 @@ export default function AdmissionCutoffPredictor() {
             <div className="bg-white rounded-xl border border-slate-300 p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-200">
                 <Building2 className="w-5 h-5 text-[#0A2540]" />
-                <h2 className="text-base font-bold text-[#0A2540]">লক্ষ্যভুক্ত বিশ্ববিদ্যালয় ও অনুষদ ইউনিট</h2>
+                <h2 className="text-base font-bold text-[#0A2540]">
+                  {language === 'bn' ? 'লক্ষ্যভুক্ত বিশ্ববিদ্যালয় ও অনুষদ ইউনিট' : 'Target University & Faculty Unit'}
+                </h2>
               </div>
 
               <div className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1.5">
-                    প্রতিষ্ঠান ও ইউনিট নির্বাচন করুন
+                    {language === 'bn' ? 'প্রতিষ্ঠান ও ইউনিট নির্বাচন করুন' : 'Select Institution & Unit'}
                   </label>
                   <select
                     value={selectedUnit}
@@ -562,7 +584,7 @@ export default function AdmissionCutoffPredictor() {
                   >
                     {Object.values(UNIT_REGISTRY).map((u) => (
                       <option key={u.id} value={u.id}>
-                        {u.shortCode} — {u.nameBn}
+                        {u.shortCode} — {language === 'bn' ? u.nameBn : u.nameEn}
                       </option>
                     ))}
                   </select>
@@ -570,27 +592,35 @@ export default function AdmissionCutoffPredictor() {
 
                 <div className="bg-slate-50 rounded-lg p-3.5 border border-slate-200 text-xs space-y-1.5">
                   <div className="flex justify-between text-slate-600">
-                    <span>পরীক্ষা পদ্ধতি:</span>
-                    <span className="font-semibold text-slate-900">{unitDef.examTypeBn}</span>
+                    <span>{language === 'bn' ? 'পরীক্ষা পদ্ধতি:' : 'Exam Mode:'}</span>
+                    <span className="font-semibold text-slate-900">
+                      {language === 'bn' ? unitDef.examTypeBn : (selectedUnit === 'BUET' ? 'Written Exam (Pre-selection & Final)' : 'MCQ & Written Exam')}
+                    </span>
                   </div>
                   <div className="flex justify-between text-slate-600">
-                    <span>পূর্ণমান:</span>
-                    <span className="font-semibold text-slate-900">{toBengaliDigits(unitDef.fullMarks)} নম্বর</span>
+                    <span>{language === 'bn' ? 'পূর্ণমান:' : 'Full Marks:'}</span>
+                    <span className="font-semibold text-slate-900">
+                      {language === 'bn' ? `${toBengaliDigits(unitDef.fullMarks)} নম্বর` : `${unitDef.fullMarks} Marks`}
+                    </span>
                   </div>
                   <div className="flex justify-between text-slate-600">
-                    <span>মোট আসন সংখ্যা:</span>
-                    <span className="font-semibold text-slate-900">{toBengaliDigits(unitDef.totalSeats)} টি</span>
+                    <span>{language === 'bn' ? 'মোট আসন সংখ্যা:' : 'Total Seats:'}</span>
+                    <span className="font-semibold text-slate-900">
+                      {language === 'bn' ? `${toBengaliDigits(unitDef.totalSeats)} টি` : `${unitDef.totalSeats} Seats`}
+                    </span>
                   </div>
                   <div className="flex justify-between text-slate-600">
-                    <span>ঐতিহাসিক মিডিয়ান কাট-অফ (x₀):</span>
-                    <span className="font-bold text-[#0A2540]">{toBengaliDigits(unitDef.medianCutoffX0)} নম্বর</span>
+                    <span>{language === 'bn' ? 'ঐতিহাসিক মিডিয়ান কাট-অফ (x₀):' : 'Historical Median Cut-off (x₀):'}</span>
+                    <span className="font-bold text-[#0A2540]">
+                      {language === 'bn' ? `${toBengaliDigits(unitDef.medianCutoffX0)} নম্বর` : `${unitDef.medianCutoffX0} Marks`}
+                    </span>
                   </div>
                 </div>
 
                 {/* Quota Selection */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1.5">
-                    সংরক্ষিত কোটা বিধান
+                    {language === 'bn' ? 'সংরক্ষিত কোটা বিধান' : 'Reserved Quota Category'}
                   </label>
                   <select
                     value={selectedQuota}
@@ -599,12 +629,12 @@ export default function AdmissionCutoffPredictor() {
                   >
                     {Object.entries(QUOTA_REGISTRY).map(([k, q]) => (
                       <option key={k} value={k}>
-                        {q.nameBn}
+                        {language === 'bn' ? q.nameBn : q.nameEn}
                       </option>
                     ))}
                   </select>
                   <p className="mt-1 text-[11px] text-slate-500 font-medium">
-                    {quotaDef.descBn}
+                    {language === 'bn' ? quotaDef.descBn : (selectedQuota === 'GENERAL' ? 'All general merit candidates with zero quota offset' : 'Eligible quota category with calibrated cut-off adjustment')}
                   </p>
                 </div>
               </div>
@@ -614,14 +644,16 @@ export default function AdmissionCutoffPredictor() {
             <div className="bg-white rounded-xl border border-slate-300 p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-200">
                 <Calculator className="w-5 h-5 text-[#0A2540]" />
-                <h2 className="text-base font-bold text-[#0A2540]">অ্যাকাডেমিক ফলাফল ও টেস্ট স্কোর</h2>
+                <h2 className="text-base font-bold text-[#0A2540]">
+                  {language === 'bn' ? 'অ্যাকাডেমিক ফলাফল ও টেস্ট স্কোর' : 'Academic Credentials & Test Score'}
+                </h2>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      এসএসসি জিপিএ (SSC)
+                      {language === 'bn' ? 'এসএসসি জিপিএ (SSC)' : 'SSC GPA'}
                     </label>
                     <input
                       type="number"
@@ -632,12 +664,14 @@ export default function AdmissionCutoffPredictor() {
                       onChange={(e) => setSscGpa(e.target.value)}
                       className="w-full text-sm rounded-lg border border-slate-300 px-3 py-2 bg-white text-[#0A2540] focus:ring-2 focus:ring-[#0A2540] font-semibold"
                     />
-                    <span className="text-[10px] text-slate-500">ন্যূনতম: {toBengaliDigits(unitDef.minSscGpa)}</span>
+                    <span className="text-[10px] text-slate-500">
+                      {language === 'bn' ? `ন্যূনতম: ${toBengaliDigits(unitDef.minSscGpa)}` : `Min: ${unitDef.minSscGpa}`}
+                    </span>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      এইচএসসি জিপিএ (HSC)
+                      {language === 'bn' ? 'এইচএসসি জিপিএ (HSC)' : 'HSC GPA'}
                     </label>
                     <input
                       type="number"
@@ -648,7 +682,9 @@ export default function AdmissionCutoffPredictor() {
                       onChange={(e) => setHscGpa(e.target.value)}
                       className="w-full text-sm rounded-lg border border-slate-300 px-3 py-2 bg-white text-[#0A2540] focus:ring-2 focus:ring-[#0A2540] font-semibold"
                     />
-                    <span className="text-[10px] text-slate-500">ন্যূনতম: {toBengaliDigits(unitDef.minHscGpa)}</span>
+                    <span className="text-[10px] text-slate-500">
+                      {language === 'bn' ? `ন্যূনতম: ${toBengaliDigits(unitDef.minHscGpa)}` : `Min: ${unitDef.minHscGpa}`}
+                    </span>
                   </div>
                 </div>
 
@@ -656,10 +692,10 @@ export default function AdmissionCutoffPredictor() {
                 <div>
                   <div className="flex justify-between items-center mb-1">
                     <label className="text-xs font-semibold text-slate-700 uppercase">
-                      মডেল টেস্ট / সিমুলেশন পরীক্ষার নম্বর
+                      {language === 'bn' ? 'মডেল টেস্ট / সিমুলেশন পরীক্ষার নম্বর' : 'Mock Test / Simulation Exam Score'}
                     </label>
                     <span className="text-xs font-bold text-[#0A2540]">
-                      {toBengaliDigits(simScore)} / {toBengaliDigits(unitDef.fullMarks)}
+                      {language === 'bn' ? `${toBengaliDigits(simScore)} / ${toBengaliDigits(unitDef.fullMarks)}` : `${simScore} / ${unitDef.fullMarks}`}
                     </span>
                   </div>
                   <input
@@ -672,21 +708,23 @@ export default function AdmissionCutoffPredictor() {
                     className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#0A2540]"
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 mt-1">
-                    <span>০</span>
-                    <span>কাট-অফ: {toBengaliDigits(unitDef.medianCutoffX0)}</span>
-                    <span>{toBengaliDigits(unitDef.fullMarks)}</span>
+                    <span>{language === 'bn' ? '০' : '0'}</span>
+                    <span>{language === 'bn' ? `কাট-অফ: ${toBengaliDigits(unitDef.medianCutoffX0)}` : `Cut-off: ${unitDef.medianCutoffX0}`}</span>
+                    <span>{language === 'bn' ? toBengaliDigits(unitDef.fullMarks) : unitDef.fullMarks}</span>
                   </div>
                 </div>
 
                 {/* Subject-specific grade points */}
                 <div className="pt-2 border-t border-slate-200">
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-2">
-                    বিষয়ভিত্তিক গ্রেড পয়েন্ট (গ্রেড ৫.০০ স্কেল)
+                    {language === 'bn' ? 'বিষয়ভিত্তিক গ্রেড পয়েন্ট (গ্রেড ৫.০০ স্কেল)' : 'Subject Grade Points (5.00 Scale)'}
                   </label>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     <div>
-                      <span className="text-[11px] text-slate-600 block mb-1">পদার্থবিজ্ঞান</span>
+                      <span className="text-[11px] text-slate-600 block mb-1">
+                        {language === 'bn' ? 'পদার্থবিজ্ঞান' : 'Physics'}
+                      </span>
                       <input
                         type="number"
                         step="0.01"
@@ -698,7 +736,9 @@ export default function AdmissionCutoffPredictor() {
                       />
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 block mb-1">রসায়ন</span>
+                      <span className="text-[11px] text-slate-600 block mb-1">
+                        {language === 'bn' ? 'রসায়ন' : 'Chemistry'}
+                      </span>
                       <input
                         type="number"
                         step="0.01"
@@ -710,7 +750,9 @@ export default function AdmissionCutoffPredictor() {
                       />
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 block mb-1">উচ্চতর গণিত</span>
+                      <span className="text-[11px] text-slate-600 block mb-1">
+                        {language === 'bn' ? 'উচ্চতর গণিত' : 'Higher Math'}
+                      </span>
                       <input
                         type="number"
                         step="0.01"
@@ -722,7 +764,9 @@ export default function AdmissionCutoffPredictor() {
                       />
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 block mb-1">জীববিজ্ঞান</span>
+                      <span className="text-[11px] text-slate-600 block mb-1">
+                        {language === 'bn' ? 'জীববিজ্ঞান' : 'Biology'}
+                      </span>
                       <input
                         type="number"
                         step="0.01"
@@ -734,7 +778,9 @@ export default function AdmissionCutoffPredictor() {
                       />
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 block mb-1">ইংরেজি</span>
+                      <span className="text-[11px] text-slate-600 block mb-1">
+                        {language === 'bn' ? 'ইংরেজি' : 'English'}
+                      </span>
                       <input
                         type="number"
                         step="0.01"
@@ -755,7 +801,7 @@ export default function AdmissionCutoffPredictor() {
                     className="w-full py-3 px-4 bg-[#0A2540] text-white shadow-[0_4px_0_0_#051329] hover:bg-[#081C30] active:translate-y-1 active:shadow-none transition-all font-semibold rounded-lg flex items-center justify-center gap-2 text-sm"
                   >
                     <Sparkles className="w-4 h-4 text-amber-300" />
-                    <span>সিগময়েড ক্যালিব্রেশন গণনা সম্পন্ন</span>
+                    <span>{language === 'bn' ? 'সিগময়েড ক্যালিব্রেশন গণনা সম্পন্ন' : 'Sigmoid Calibration Computed'}</span>
                   </button>
                 </div>
               </div>
@@ -765,8 +811,12 @@ export default function AdmissionCutoffPredictor() {
             <div className="bg-slate-100 rounded-lg p-4 border border-slate-200 flex items-start gap-3">
               <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
               <div className="text-xs text-slate-600 leading-relaxed">
-                <span className="font-semibold text-slate-800">ASVS L2 Zero-PII নিশ্চয়তা:</span>{' '}
-                এই ফোরকাস্টার কোনো ব্যক্তিগত তথ্য (নাম, ফোন, রোল, রেজিস্ট্রেশন নম্বর) সংগ্রহ করে না। সম্পূর্ণ গণনা ক্লায়েন্ট ব্রাউজারে বিশুদ্ধ গাণিতিক মডেলে নির্বাহ হয়।
+                <span className="font-semibold text-slate-800">
+                  ASVS L2 Zero-PII {language === 'bn' ? 'নিশ্চয়তা:' : 'Guarantee:'}
+                </span>{' '}
+                {language === 'bn'
+                  ? 'এই ফোরকাস্টার কোনো ব্যক্তিগত তথ্য (নাম, ফোন, রোল, রেজিস্ট্রেশন নম্বর) সংগ্রহ করে না। সম্পূর্ণ গণনা ক্লায়েন্ট ব্রাউজারে বিশুদ্ধ গাণিতিক মডেলে নির্বাহ হয়।'
+                  : 'This forecaster collects zero PII (name, phone, roll, registration). All calculations execute purely client-side within the browser mathematical model.'}
               </div>
             </div>
 
@@ -781,14 +831,16 @@ export default function AdmissionCutoffPredictor() {
                 <div className="flex items-center gap-3 mb-2">
                   <XCircle className="w-6 h-6 text-rose-700" />
                   <h3 className="text-base font-bold text-rose-900">
-                    আবেদনের প্রাথমিক শর্ত অপূর্ণ রয়েছে
+                    {language === 'bn' ? 'আবেদনের প্রাথমিক শর্ত অপূর্ণ রয়েছে' : 'Preliminary Application Criteria Unmet'}
                   </h3>
                 </div>
                 <p className="text-xs text-rose-800 mb-3 font-medium">
-                  নির্বাচিত ইউনিটের পূর্বশর্ত পূরণ না হওয়ায় সিগময়েড সম্ভাব্যতা সক্রিয় করা যায়নি:
+                  {language === 'bn'
+                    ? 'নির্বাচিত ইউনিটের পূর্বশর্ত পূরণ না হওয়ায় সিগময়েড সম্ভাব্যতা সক্রিয় করা যায়নি:'
+                    : 'Sigmoid probability disabled due to unmet criteria for this unit:'}
                 </p>
                 <ul className="space-y-1.5 text-xs text-rose-900 list-disc list-inside">
-                  {forecast.violationsBn.map((v, i) => (
+                  {(language === 'bn' ? forecast.violationsBn : forecast.violationsEn).map((v, i) => (
                     <li key={i} className="font-semibold">{v}</li>
                   ))}
                 </ul>
@@ -797,8 +849,12 @@ export default function AdmissionCutoffPredictor() {
               <div className="bg-emerald-50 border border-emerald-600 rounded-xl p-4 flex items-center gap-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
                 <div className="text-xs text-emerald-900">
-                  <span className="font-bold">প্রাথমিক অ্যাকাডেমিক শর্ত শতভাগ সম্পন্ন:</span>{' '}
-                  সকল ন্যূনতম জিপিএ ও আবশ্যিক বিষয়ভিত্তিক গ্রেড পয়েন্টের মানদণ্ড সফলভাবে পূরণ হয়েছে।
+                  <span className="font-bold">
+                    {language === 'bn' ? 'প্রাথমিক অ্যাকাডেমিক শর্ত শতভাগ সম্পন্ন:' : 'Academic Eligibility Fully Satisfied:'}
+                  </span>{' '}
+                  {language === 'bn'
+                    ? 'সকল ন্যূনতম জিপিএ ও আবশ্যিক বিষয়ভিত্তিক গ্রেড পয়েন্টের মানদণ্ড সফলভাবে পূরণ হয়েছে।'
+                    : 'All minimum GPA and mandatory subject grade requirements have been verified successfully.'}
                 </div>
               </div>
             )}
@@ -808,18 +864,20 @@ export default function AdmissionCutoffPredictor() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
                   <span className={`inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-wider ${tierInfo.badge} mb-1.5`}>
-                    {tierInfo.labelBn}
+                    {language === 'bn' ? tierInfo.labelBn : tierInfo.labelEn}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-black text-[#0A2540]">
-                    ভর্তি সম্ভাব্যতা মানদণ্ড
+                    {language === 'bn' ? 'ভর্তি সম্ভাব্যতা মানদণ্ড' : 'Admission Probability Benchmark'}
                   </h3>
                 </div>
 
                 <div className="text-right">
                   <div className="text-3xl sm:text-4xl font-extrabold text-[#0A2540]">
-                    {toBengaliDigits(probPercent)}%
+                    {language === 'bn' ? `${toBengaliDigits(probPercent)}%` : `${probPercent}%`}
                   </div>
-                  <span className="text-xs text-slate-500 font-medium">ক্যালিব্রেটেড সম্ভাব্যতা সূচক</span>
+                  <span className="text-xs text-slate-500 font-medium">
+                    {language === 'bn' ? 'ক্যালিব্রেটেড সম্ভাব্যতা সূচক' : 'Calibrated Probability Index'}
+                  </span>
                 </div>
               </div>
 
@@ -840,46 +898,68 @@ export default function AdmissionCutoffPredictor() {
 
                 {/* Benchmark Indicator Markers */}
                 <div className="flex justify-between text-[11px] font-semibold text-slate-500 mt-2">
-                  <span>০% (চ্যালেঞ্জিং)</span>
-                  <span className="text-amber-700">৪০% (প্রতিযোগিতাপূর্ণ)</span>
-                  <span className="text-emerald-700">৭৫% (নিরাপদ জোন)</span>
-                  <span>১০০%</span>
+                  <span>0% ({language === 'bn' ? 'চ্যালেঞ্জিং' : 'Reach'})</span>
+                  <span className="text-amber-700">40% ({language === 'bn' ? 'প্রতিযোগিতাপূর্ণ' : 'Competitive'})</span>
+                  <span className="text-emerald-700">75% ({language === 'bn' ? 'নিরাপদ জোন' : 'Safe Zone'})</span>
+                  <span>100%</span>
                 </div>
               </div>
 
               <p className={`text-sm leading-relaxed font-medium ${tierInfo.text}`}>
-                {tierInfo.descBn}
+                {language === 'bn'
+                  ? tierInfo.descBn
+                  : (forecast.tier === 'SAFE'
+                      ? 'Positioned well above historical cut-off thresholds. Highest likelihood of securing merit seats.'
+                      : forecast.tier === 'COMPETITIVE'
+                      ? 'Within competitive cut-off range. Sound preparation and high exam performance are crucial.'
+                      : forecast.tier === 'REACH'
+                      ? 'Below typical cutoff thresholds. Significant score improvements needed in mock exams.'
+                      : 'Subject-wise GPA or minimum requirements not met for this unit.')}
               </p>
 
               {/* Merit Rank Interval Estimation Box */}
               <div className="mt-6 pt-5 border-t border-slate-300 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-white rounded-lg p-3.5 border border-slate-200">
-                  <span className="text-xs text-slate-500 block">কম্পোজিট সমন্বিত স্কোর</span>
+                  <span className="text-xs text-slate-500 block">
+                    {language === 'bn' ? 'কম্পোজিট সমন্বিত স্কোর' : 'Composite Score'}
+                  </span>
                   <span className="text-lg font-bold text-[#0A2540]">
-                    {toBengaliDigits(forecast.compositeScore.toFixed(2))}
+                    {language === 'bn' ? toBengaliDigits(forecast.compositeScore.toFixed(2)) : forecast.compositeScore.toFixed(2)}
                   </span>
                   <span className="text-[10px] text-slate-400 block mt-0.5">
-                    কাট-অফ লক্ষ্য: {toBengaliDigits(forecast.effectiveCutoff.toFixed(1))}
+                    {language === 'bn'
+                      ? `কাট-অফ লক্ষ্য: ${toBengaliDigits(forecast.effectiveCutoff.toFixed(1))}`
+                      : `Cut-off Target: ${forecast.effectiveCutoff.toFixed(1)}`}
                   </span>
                 </div>
 
                 <div className="bg-white rounded-lg p-3.5 border border-slate-200">
-                  <span className="text-xs text-slate-500 block">প্রাক্কলিত মেধা ক্রম (Rank Range)</span>
+                  <span className="text-xs text-slate-500 block">
+                    {language === 'bn' ? 'প্রাক্কলিত মেধা ক্রম (Rank Range)' : 'Projected Rank Range'}
+                  </span>
                   <span className="text-lg font-bold text-[#0A2540]">
-                    {toBengaliDigits(forecast.rankMin)} - {toBengaliDigits(forecast.rankMax)}
+                    {language === 'bn'
+                      ? `${toBengaliDigits(forecast.rankMin)} - ${toBengaliDigits(forecast.rankMax)}`
+                      : `${forecast.rankMin} - ${forecast.rankMax}`}
                   </span>
                   <span className="text-[10px] text-slate-400 block mt-0.5">
-                    মোট আসন: {toBengaliDigits(unitDef.totalSeats)}
+                    {language === 'bn'
+                      ? `মোট আসন: ${toBengaliDigits(unitDef.totalSeats)}`
+                      : `Total Seats: ${unitDef.totalSeats}`}
                   </span>
                 </div>
 
                 <div className="bg-white rounded-lg p-3.5 border border-slate-200">
-                  <span className="text-xs text-slate-500 block">কোটা সুবিধা সমন্বয়</span>
+                  <span className="text-xs text-slate-500 block">
+                    {language === 'bn' ? 'কোটা সুবিধা সমন্বয়' : 'Quota Benefit Offset'}
+                  </span>
                   <span className="text-lg font-bold text-amber-700">
-                    {quotaDef.offset > 0 ? `-${toBengaliDigits(quotaDef.offset)} নম্বর` : 'প্রযোজ্য নয়'}
+                    {quotaDef.offset > 0
+                      ? (language === 'bn' ? `-${toBengaliDigits(quotaDef.offset)} নম্বর` : `-${quotaDef.offset} Marks`)
+                      : (language === 'bn' ? 'প্রযোজ্য নয়' : 'None')}
                   </span>
                   <span className="text-[10px] text-slate-400 block mt-0.5">
-                    {quotaDef.nameBn.split('(')[0]}
+                    {language === 'bn' ? quotaDef.nameBn.split('(')[0] : quotaDef.nameEn.split('(')[0]}
                   </span>
                 </div>
               </div>
@@ -891,7 +971,9 @@ export default function AdmissionCutoffPredictor() {
                 <div className="flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-[#0A2540]" />
                   <h3 className="text-base font-bold text-[#0A2540]">
-                    ১০ বছরের ঐতিহাসিক কাট-অফ উপাত্ত (২০১৫ - ২০২৫)
+                    {language === 'bn'
+                      ? '১০ বছরের ঐতিহাসিক কাট-অফ উপাত্ত (২০১৫ - ২০২৫)'
+                      : '10-Year Historical Cut-off Data (2015 - 2025)'}
                   </h3>
                 </div>
                 <span className="text-xs text-slate-500 font-medium">{unitDef.shortCode}</span>
@@ -901,10 +983,10 @@ export default function AdmissionCutoffPredictor() {
                 <table className="w-full text-left text-xs">
                   <thead>
                     <tr className="border-b border-slate-200 text-slate-500 font-semibold uppercase">
-                      <th className="py-2.5 px-3">শিক্ষাবর্ষ</th>
-                      <th className="py-2.5 px-3">কাট-অফ মার্কস</th>
-                      <th className="py-2.5 px-3">আপনার স্কোরের মার্জিন</th>
-                      <th className="py-2.5 px-3 text-right">স্ট্যাটাস</th>
+                      <th className="py-2.5 px-3">{language === 'bn' ? 'শিক্ষাবর্ষ' : 'Year'}</th>
+                      <th className="py-2.5 px-3">{language === 'bn' ? 'কাট-অফ মার্কস' : 'Cut-off Marks'}</th>
+                      <th className="py-2.5 px-3">{language === 'bn' ? 'আপনার স্কোরের মার্জিন' : 'Score Margin'}</th>
+                      <th className="py-2.5 px-3 text-right">{language === 'bn' ? 'স্ট্যাটাস' : 'Status'}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -914,24 +996,25 @@ export default function AdmissionCutoffPredictor() {
                       return (
                         <tr key={t.year} className="hover:bg-slate-50 transition-colors">
                           <td className="py-2.5 px-3 font-semibold text-slate-800">
-                            {toBengaliDigits(t.year)}
+                            {language === 'bn' ? toBengaliDigits(t.year) : t.year}
                           </td>
                           <td className="py-2.5 px-3 font-bold text-[#0A2540]">
-                            {toBengaliDigits(t.cutoff.toFixed(1))}
+                            {language === 'bn' ? toBengaliDigits(t.cutoff.toFixed(1)) : t.cutoff.toFixed(1)}
                           </td>
                           <td className="py-2.5 px-3 font-medium">
                             <span className={isAbove ? 'text-emerald-700' : 'text-rose-700'}>
-                              {isAbove ? '+' : ''}{toBengaliDigits(diff.toFixed(1))} নম্বর
+                              {isAbove ? '+' : ''}
+                              {language === 'bn' ? `${toBengaliDigits(diff.toFixed(1))} নম্বর` : `${diff.toFixed(1)} Marks`}
                             </span>
                           </td>
                           <td className="py-2.5 px-3 text-right">
                             {isAbove ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                                নিরাপদ
+                                {language === 'bn' ? 'নিরাপদ' : 'Safe'}
                               </span>
                             ) : (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-rose-100 text-rose-800 text-[10px] font-bold">
-                                ঘাটতি
+                                {language === 'bn' ? 'ঘাটতি' : 'Deficit'}
                               </span>
                             )}
                           </td>
@@ -943,8 +1026,16 @@ export default function AdmissionCutoffPredictor() {
               </div>
 
               <div className="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600 flex items-center justify-between">
-                <span className="font-medium">গড় মধ্যক কাট-অফ (Median): {toBengaliDigits(unitDef.medianCutoffX0)} নম্বর</span>
-                <span className="text-slate-500">সিগময়েড স্লোপ প্যারামিটার (k): {unitDef.slopeK}</span>
+                <span className="font-medium">
+                  {language === 'bn'
+                    ? `গড় মধ্যক কাট-অফ (Median): ${toBengaliDigits(unitDef.medianCutoffX0)} নম্বর`
+                    : `Median Cut-off: ${unitDef.medianCutoffX0} Marks`}
+                </span>
+                <span className="text-slate-500">
+                  {language === 'bn'
+                    ? `সিগময়েড স্লোপ প্যারামিটার (k): ${unitDef.slopeK}`
+                    : `Sigmoid Slope (k): ${unitDef.slopeK}`}
+                </span>
               </div>
             </div>
 
@@ -953,27 +1044,36 @@ export default function AdmissionCutoffPredictor() {
               <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200">
                 <BookOpen className="w-5 h-5 text-[#0A2540]" />
                 <h3 className="text-base font-bold text-[#0A2540]">
-                  অ্যাকাডেমিক প্রস্তুতি সুপারিশ
+                  {language === 'bn' ? 'অ্যাকাডেমিক প্রস্তুতি সুপারিশ' : 'Academic Preparation Recommendations'}
                 </h3>
               </div>
 
               <div className="space-y-3 text-xs leading-relaxed text-slate-700">
                 <p>
-                  <strong>১. সিগময়েড মডেলের ভিত্তি:</strong> এই ফোরকাস্টার গত ১০ বছরের ভর্তি পরীক্ষার শিক্ষার্থী সংখ্যা, প্রশ্নপত্রের কাঠিন্য ও আসন বিন্যাস বিবেচনা করে ক্যালিব্রেট করা হয়েছে।
+                  <strong>{language === 'bn' ? '১. সিগময়েড মডেলের ভিত্তি:' : '1. Foundation of Sigmoid Modeling:'}</strong>{' '}
+                  {language === 'bn'
+                    ? 'এই ফোরকাস্টার গত ১০ বছরের ভর্তি পরীক্ষার শিক্ষার্থী সংখ্যা, প্রশ্নপত্রের কাঠিন্য ও আসন বিন্যাস বিবেচনা করে ক্যালিব্রেট করা হয়েছে।'
+                    : 'This forecaster is calibrated using historical applicant volume, question difficulty, and seat allotments over the past 10 years.'}
                 </p>
                 <p>
-                  <strong>২. নেগেটিভ মার্কিং নিয়ন্ত্রণ:</strong> প্রকৃত ভর্তি পরীক্ষায় ভুল উত্তরের নেগেটিভ মার্কিং (০.২৫) মেধা ক্রমকে দ্রুত নিম্নগামী করে। সিমুলেশন অনুশীলনে নির্ভুলতার হার ৯০%+ বজায় রাখুন।
+                  <strong>{language === 'bn' ? '২. নেগেটিভ মার্কিং নিয়ন্ত্রণ:' : '2. Negative Marking Control:'}</strong>{' '}
+                  {language === 'bn'
+                    ? 'প্রকৃত ভর্তি পরীক্ষায় ভুল উত্তরের নেগেটিভ মার্কিং (০.২৫) মেধা ক্রমকে দ্রুত নিম্নগামী করে। সিমুলেশন অনুশীলনে নির্ভুলতার হার ৯০%+ বজায় রাখুন।'
+                    : 'In admission exams, negative marking (-0.25) significantly impacts rank. Aim for 90%+ accuracy in mock simulations.'}
                 </p>
                 <p>
-                  <strong>৩. চূড়ান্ত প্রস্তুতি:</strong> প্ল্যাটফর্মের{' '}
+                  <strong>{language === 'bn' ? '৩. চূড়ান্ত প্রস্তুতি:' : '3. Final Preparation:'}</strong>{' '}
+                  {language === 'bn' ? 'প্ল্যাটফর্মের' : 'Explore the platform\'s'}{' '}
                   <Link href="/practice" className="text-[#0A2540] font-bold underline hover:text-amber-700">
-                    দৈনিক প্র্যাকটিস সেশন
+                    {language === 'bn' ? 'দৈনিক প্র্যাকটিস সেশন' : 'Daily Practice Sessions'}
                   </Link>{' '}
-                  ও{' '}
+                  {language === 'bn' ? 'ও' : 'and'}{' '}
                   <Link href="/olympiad/arena" className="text-[#0A2540] font-bold underline hover:text-amber-700">
-                    জাতীয় স্টেম অলিম্পিয়াড
+                    {language === 'bn' ? 'জাতীয় স্টেম অলিম্পিয়াড' : 'National STEM Olympiad'}
                   </Link>{' '}
-                  -এ অংশগ্রহণ করে আপনার একুরেসি ও স্পিড বৃদ্ধি করুন।
+                  {language === 'bn'
+                    ? '-এ অংশগ্রহণ করে আপনার একুরেসি ও স্পিড বৃদ্ধি করুন।'
+                    : 'to sharpen speed and competitive accuracy.'}
                 </p>
               </div>
             </div>

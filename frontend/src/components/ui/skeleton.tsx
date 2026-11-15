@@ -3,6 +3,7 @@
  * MODULE:    Unified Design System & Accessible Loading Skeleton
  * TOPIC:     Bengal Academic Editorial & Warm Paper Shimmer
  * FILE:      frontend/src/components/ui/skeleton.tsx
+ * PHASE:     Phase 138 - Unified Premium Design for Sub-pages
  * PURPOSE:   Provides subtle, warm paper loading skeleton shimmer components that respect
  *            prefers-reduced-motion, avoid harsh neon white/slate flashes, and harmonize across both Light and Dark themes.
  * STANDARDS: Zero-Emoji, WCAG 2.2 AAA, Academic Editorial, Warm Paper Shimmer

@@ -79,10 +79,11 @@
 
 ## 4. Verification & Testing Protocol
 1. **Static Analysis & Typecheck**:
-   - `cd frontend && npx tsc --noEmit` must return 0 errors.
+   - `cd frontend && npx tsc --noEmit` must return 0 errors across all 43 pages and all shared libraries.
 2. **Backend Regression Testing**:
-   - Run `python3 -m unittest backend/tests/test_phase98_2_flagship_home_dashboard.py` and `backend/tests/test_phase98_flagship_ui_elevation.py` to confirm zero test breakages.
+   - Run complete 28+ test suites (`test_phase98_2_flagship_home_dashboard.py`, `test_phase100_grand_launch_signoff.py`, `test_phase120_grand_nationwide_rollout.py`, `test_phase111_supabase_security_hardening.py`, etc.) confirming zero test breakages.
 3. **Strict Zero-Emoji Audit**:
-   - Run python zero-emoji regex scanner across `frontend/src/pages/index.tsx`.
+   - Run python zero-emoji regex scanner across all 43 modified frontend pages and components.
 4. **Build & Live Verification**:
    - Run `bash scripts/deploy-gh-pages.sh --rebuild` and verify `HTTP 200` on GitHub Pages.
+

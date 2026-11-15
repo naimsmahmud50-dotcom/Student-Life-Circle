@@ -3,6 +3,7 @@
  * MODULE:    Unified Design System & Accessible Form Input
  * TOPIC:     Bengal Academic Editorial & Tactile Form Controls
  * FILE:      frontend/src/components/ui/input.tsx
+ * PHASE:     Phase 138 - Unified Premium Design for Sub-pages
  * PURPOSE:   Provides production-grade, accessible form input field with subtle inner bevel,
  *            hairline borders (#E5E2DA), Oxford Navy tactile focus ring, prefix/suffix icon slots,
  *            dark/light theme support, and WCAG 2.2 AAA contrast.
