@@ -100,7 +100,7 @@ export const LazyAcademic3DScene: React.FC<LazyAcademic3DSceneProps> = ({
       {showToggle && (
         <div className="flex items-center justify-between w-full max-w-[280px] px-1">
           <Academic3DToggle compact />
-          <span className="text-[10px] font-mono text-[#5A687D] dark:text-[#94A3B8]">
+          <span className="text-xs font-semibold font-bengali tracking-normal text-[#5A687D] dark:text-[#94A3B8]">
             এনসিটিবি ২০২৬
           </span>
         </div>

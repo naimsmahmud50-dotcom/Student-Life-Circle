@@ -291,7 +291,7 @@ export const CompetitorComparisonPillars: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] text-xs font-bold text-[#ED8E22] shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-[#121B2D] border border-amber-200/80 dark:border-[#262D3D] text-xs sm:text-[13px] font-bold font-bengali tracking-normal text-[#ED8E22] shadow-xs">
             <span className="h-2 w-2 rounded-full bg-[#ED8E22] shrink-0 animate-pulse" aria-hidden="true" />
             <Zap className="w-3.5 h-3.5 text-[#ED8E22]" />
             <span>

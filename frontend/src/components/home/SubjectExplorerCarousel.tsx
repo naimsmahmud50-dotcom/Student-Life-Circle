@@ -152,7 +152,7 @@ export const SubjectExplorerCarousel: React.FC = () => {
       {/* Top Header & Navigation Controls */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+          <div className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 font-bengali tracking-normal">
             {isBengali ? 'জাতীয় পাঠ্যক্রম বিষয়সমূহ' : 'National Curriculum Subjects'}
           </div>
           <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-tight">

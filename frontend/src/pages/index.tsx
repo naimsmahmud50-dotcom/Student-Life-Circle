@@ -175,7 +175,7 @@ export default function FlagshipLandingPage() {
                   
                   {/* National Accreditation Chip & 3D Depth Controller */}
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 border border-amber-200/80 dark:border-gray-700 text-xs font-semibold font-bengali text-gray-700 dark:text-gray-200 shadow-xs">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 border border-amber-200/80 dark:border-gray-700 text-xs sm:text-[13px] font-semibold font-bengali tracking-normal text-gray-700 dark:text-gray-200 shadow-xs">
                       <ShieldCheck className="w-4 h-4 text-[#ED8E22] shrink-0" />
                       <span>
                         {isBengali
@@ -189,7 +189,7 @@ export default function FlagshipLandingPage() {
                   {/* Headline & Welcoming Tone */}
                   <div className="space-y-3.5">
                     <div className="flex flex-wrap items-center gap-2.5">
-                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 text-gray-800 dark:text-gray-200 text-xs font-bold font-bengali border border-amber-200/80 dark:border-gray-700 shadow-sm">
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-gray-800/95 text-gray-800 dark:text-gray-200 text-xs sm:text-[13px] font-bold font-bengali tracking-normal border border-amber-200/80 dark:border-gray-700 shadow-sm">
                         <span className="h-2 w-2 rounded-full bg-[#ED8E22] shrink-0 animate-pulse" aria-hidden="true" />
                         <span>
                           {isBengali
@@ -197,7 +197,7 @@ export default function FlagshipLandingPage() {
                             : 'Single Alternative to 4 Legacy Apps • National Digital Campus'}
                         </span>
                       </div>
-                      <span className="text-xs font-semibold text-[#213130] dark:text-[#F5F2EB] font-bengali">
+                      <span className="text-xs sm:text-[13px] font-semibold text-[#213130] dark:text-[#F5F2EB] font-bengali tracking-normal">
                         {isBengali ? 'স্বাগতম, ভবিষ্যৎ গড়ার অগ্রযাত্রায়' : 'Welcome to the Journey of Shaping the Future'}
                       </span>
                     </div>
@@ -268,7 +268,7 @@ export default function FlagshipLandingPage() {
                   </div>
 
                   {/* Trust Strip */}
-                  <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-6 text-xs text-[#5B5B5B] dark:text-slate-400 font-medium">
+                  <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-6 text-xs sm:text-[13px] text-[#5B5B5B] dark:text-slate-400 font-medium font-bengali tracking-normal">
                     <div className="flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4 text-[#0B5D3B] dark:text-emerald-400 shrink-0" />
                       <span>{isBengali ? 'এনসিটিবি অনুমোদিত পাঠ্যক্রম' : 'NCTB Approved Curriculum'}</span>
@@ -350,7 +350,7 @@ export default function FlagshipLandingPage() {
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-amber-200/70 dark:border-[#262D3D]">
                   <div className="space-y-1">
-                    <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 tracking-wider uppercase font-sans">
+                    <div className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 tracking-normal font-bengali">
                       {isBengali ? 'আপনার শেখার অগ্রগতি (লাইভ লার্নিং টেলিমেট্রি)' : 'Your Academic Progress (Live Learning Telemetry)'}
                     </div>
                     <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight font-bengali">
@@ -592,7 +592,7 @@ export default function FlagshipLandingPage() {
               <div className="space-y-6 pt-4">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-amber-200/70 dark:border-[#262D3D]">
                   <div className="space-y-1">
-                    <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 tracking-wider uppercase font-sans">
+                    <div className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 tracking-normal font-bengali">
                       {isBengali ? 'প্রাতিষ্ঠানিক ভিত্তি' : 'Institutional Foundation'}
                     </div>
                     <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] tracking-tight font-bengali">
@@ -831,7 +831,7 @@ export default function FlagshipLandingPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+                <span className="text-xs font-bold tracking-normal text-[#0B5D3B] dark:text-emerald-400 font-bengali">
                   {isBengali ? 'পাঠ্যক্রম ও প্রস্তুতি' : 'Curriculum & Pathways'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
@@ -1068,7 +1068,7 @@ export default function FlagshipLandingPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+                <span className="text-xs font-bold tracking-normal text-[#0B5D3B] dark:text-emerald-400 font-bengali">
                   {isBengali ? 'গবেষণা ও চিন্তন দক্ষতা (3D STEM)' : 'Research & Critical Thinking (3D STEM)'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
@@ -1340,7 +1340,7 @@ export default function FlagshipLandingPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12 relative z-10">
               
               <div className="text-center max-w-2xl mx-auto space-y-2.5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+                <span className="text-xs font-bold tracking-normal text-[#0B5D3B] dark:text-emerald-400 font-bengali">
                   {isBengali ? 'যাচাইযোগ্য মেধা সনদ (W3C)' : 'Verifiable Credentials (W3C)'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#213130] dark:text-[#F5F2EB] tracking-tight font-bengali">
@@ -1470,7 +1470,7 @@ export default function FlagshipLandingPage() {
               <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
                 
                 <div className="space-y-1 text-center md:text-left max-w-xl">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+                  <span className="text-xs font-bold tracking-normal text-[#0B5D3B] dark:text-emerald-400 font-bengali">
                     {isBengali ? 'জাতীয় নিরাপত্তা ও স্বীকৃতি' : 'National Security & Compliance'}
                   </span>
                   <h3 className="text-base sm:text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">

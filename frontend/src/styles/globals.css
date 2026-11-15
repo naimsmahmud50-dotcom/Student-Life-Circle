@@ -83,11 +83,12 @@ body {
   font-family: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
 }
 
-/* Primary Body Typography (Scholarly Academic Serif) */
+/* Primary Body Typography & Modern Sans Bengali (Clean, High-Legibility UI) */
 .font-sans-bn,
 .font-sans-bengali,
 .font-bengali {
-  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Noto Sans Bengali', Georgia, serif;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: normal;
 }
 
 .font-sans-en,
@@ -108,13 +109,12 @@ body {
   color: var(--color-ink-primary, #F5F2EB);
 }
 
-/* Eyebrow Label (Small Letter-Spaced Sans, Scholarly Subdued) */
+/* Eyebrow Label (Small Modern Sans, Scholarly Subdued) */
 .eyebrow-label {
-  font-family: 'Inter', 'Noto Serif Bengali', 'Tiro Bangla', serif;
+  font-family: 'Hind Siliguri', 'Inter', 'Noto Sans Bengali', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   color: var(--color-ink-muted, #525252);
 }
 

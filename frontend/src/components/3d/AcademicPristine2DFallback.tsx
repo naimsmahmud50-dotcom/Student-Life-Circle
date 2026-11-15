@@ -140,7 +140,7 @@ export const AcademicPristine2DFallback: React.FC<AcademicPristine2DFallbackProp
       </svg>
 
       {/* Institutional Metadata Pill */}
-      <div className="absolute bottom-2.5 inset-x-3 flex items-center justify-between text-[10px] font-mono font-bold text-[#0A2540] dark:text-[#E8EFF8] bg-[#FAF8F5]/90 dark:bg-[#0C1422]/90 backdrop-blur-xs px-2.5 py-1 rounded-md border border-[#E2DDD3] dark:border-[#263147] z-20">
+      <div className="absolute bottom-2.5 inset-x-3 flex items-center justify-between text-xs font-bengali font-bold tracking-normal text-[#0A2540] dark:text-[#E8EFF8] bg-[#FAF8F5]/90 dark:bg-[#0C1422]/90 backdrop-blur-xs px-2.5 py-1 rounded-md border border-[#E2DDD3] dark:border-[#263147] z-20">
         <span>২৩°৪১′ উত্তর</span>
         <span className="text-emerald-700 dark:text-emerald-400">৯০°২১′ পূর্ব</span>
       </div>

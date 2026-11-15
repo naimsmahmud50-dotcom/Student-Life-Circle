@@ -139,7 +139,7 @@ export const StudentStoriesCarousel: React.FC = () => {
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#0B5D3B] dark:text-emerald-400 font-sans">
+          <div className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 font-bengali tracking-normal">
             {isBengali ? 'শিক্ষার্থী অভিজ্ঞতা ও মেধা অর্জন' : 'Student Experiences & Achievements'}
           </div>
           <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-tight">

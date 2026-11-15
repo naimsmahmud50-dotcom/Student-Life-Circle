@@ -142,13 +142,14 @@ module.exports = {
         '2xl': '16px',
       },
       fontFamily: {
-        sans: ['"Noto Serif Bengali"', '"Tiro Bangla"', '"Noto Sans Bengali"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'serif'],
+        sans: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         'serif-bengali': ['"Noto Serif Bengali"', '"Tiro Bangla"', '"Source Serif 4"', 'Georgia', 'serif'],
+        'serif-bn': ['"Noto Serif Bengali"', '"Tiro Bangla"', '"Source Serif 4"', 'Georgia', 'serif'],
         'serif-english': ['"Source Serif 4"', 'Lora', 'Georgia', '"Times New Roman"', 'serif'],
-        'sans-bengali': ['"Noto Serif Bengali"', '"Tiro Bangla"', 'system-ui', 'serif'],
+        'sans-bengali': ['"Hind Siliguri"', '"Noto Sans Bengali"', 'system-ui', 'sans-serif'],
         'sans-english': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['"Noto Serif Bengali"', '"Tiro Bangla"', '"Source Serif 4"', 'Plus Jakarta Sans', 'serif'],
-        bengali: ['"Noto Serif Bengali"', '"Tiro Bangla"', 'serif'],
+        bengali: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
         tabular: ['Inter', 'monospace'],
       },
       minHeight: {

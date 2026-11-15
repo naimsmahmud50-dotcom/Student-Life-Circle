@@ -370,7 +370,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Subtle Stage Badge: Only displayed on 2xl+ extra wide displays */}
             <div 
-              className="hidden 2xl:inline-flex items-center gap-1.5 px-3 h-7 rounded-full text-xs font-semibold whitespace-nowrap border shrink-0 transition-colors border-[#E5E2DA] dark:border-[#273145] bg-[#FAF8F3] dark:bg-[#181E2B] text-[#5B5B5B] dark:text-slate-300"
+              className="hidden 2xl:inline-flex items-center gap-1.5 px-3 h-7 rounded-full text-xs font-semibold font-bengali tracking-normal whitespace-nowrap border shrink-0 transition-colors border-[#E5E2DA] dark:border-[#273145] bg-[#FAF8F3] dark:bg-[#181E2B] text-[#5B5B5B] dark:text-slate-300"
               style={{
                 backgroundColor: 'var(--navbar-surface)',
                 borderColor: 'var(--navbar-surface-border)',
