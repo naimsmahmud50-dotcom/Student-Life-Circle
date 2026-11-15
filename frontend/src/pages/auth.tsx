@@ -178,7 +178,12 @@ export default function AuthPage() {
             <div className="grid grid-cols-2 p-1 rounded-xl bg-[#F0EDE6] dark:bg-[#172030] border border-[#E2DDD3] dark:border-[#263147]">
               <button
                 type="button"
-                onClick={() => setAuthMode('REGISTER')}
+                onClick={() => {
+                  setAuthMode('REGISTER');
+                  setFullName('');
+                  setIdentifier('');
+                  setPassword('');
+                }}
                 className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none font-bengali cursor-pointer ${
                   authMode === 'REGISTER'
                     ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
@@ -189,7 +194,12 @@ export default function AuthPage() {
               </button>
               <button
                 type="button"
-                onClick={() => setAuthMode('LOGIN')}
+                onClick={() => {
+                  setAuthMode('LOGIN');
+                  setFullName('');
+                  setIdentifier('');
+                  setPassword('');
+                }}
                 className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none font-bengali cursor-pointer ${
                   authMode === 'LOGIN'
                     ? "bg-[#FDFCF9] dark:bg-[#1E293B] text-[#0A2540] dark:text-[#E8EFF8] shadow-paper-xs"
@@ -201,7 +211,7 @@ export default function AuthPage() {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
               
               {authMode === 'REGISTER' && (
                 <>
@@ -214,8 +224,9 @@ export default function AuthPage() {
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder={isBengali ? "যেমন: তানভীর আহমেদ" : "e.g. Tanvir Ahmed"}
-                      className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali"
+                      placeholder={isBengali ? "নাম দিন (যেমন: তানভীর আহমেদ)" : "Enter name (e.g. Tanvir Ahmed)"}
+                      autoComplete="name"
+                      className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                     />
                   </div>
 
@@ -231,7 +242,7 @@ export default function AuthPage() {
                         value={age}
                         onChange={(e) => setAge(e.target.value ? parseInt(e.target.value) : '')}
                         placeholder={isBengali ? "যেমন: ১৬" : "e.g. 16"}
-                        className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali"
+                        className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                       />
                     </div>
 
@@ -288,7 +299,7 @@ export default function AuthPage() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
-                    {isBengali ? "ইমেইল অথবা ফোন নম্বর:" : "Email or Phone Number:"}
+                    {isBengali ? "জিমেইল / ইমেইল অথবা ফোন নম্বর:" : "Gmail / Email or Phone Number:"}
                   </label>
                   <button
                     type="button"
@@ -303,8 +314,13 @@ export default function AuthPage() {
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder={isBengali ? "student@example.com অথবা 017XXXXXXXX" : "student@example.com or 017XXXXXXXX"}
-                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali"
+                  placeholder={
+                    isBengali
+                      ? "জিমেইল বা ফোন নম্বর দিন (student@example.com অথবা 017XXXXXXXX)"
+                      : "Enter Gmail or phone (student@example.com or 017XXXXXXXX)"
+                  }
+                  autoComplete="username"
+                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                 />
               </div>
 
@@ -326,7 +342,7 @@ export default function AuthPage() {
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
                       placeholder={isBengali ? "৬ ডিজিট ওটিপি" : "6-digit OTP"}
-                      className="flex-1 text-sm font-mono tracking-widest p-2.5 rounded-lg border border-[#D5DEE8] dark:border-[#263554] bg-[#FDFCF9] dark:bg-[#0C1422] text-[#0A2540] dark:text-white shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540]"
+                      className="flex-1 text-sm font-mono tracking-widest p-2.5 rounded-lg border border-[#D5DEE8] dark:border-[#263554] bg-[#FDFCF9] dark:bg-[#0C1422] text-[#0A2540] dark:text-white shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                     />
                     <button
                       type="button"
@@ -355,8 +371,13 @@ export default function AuthPage() {
                   minLength={8}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder={isBengali ? "কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড" : "Strong password (at least 8 characters)"}
-                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali"
+                  placeholder={
+                    isBengali
+                      ? "পাসওয়ার্ড দিন (কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড)"
+                      : "Enter password (at least 8 characters)"
+                  }
+                  autoComplete={authMode === 'REGISTER' ? 'new-password' : 'current-password'}
+                  className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                 />
               </div>
 
@@ -372,26 +393,6 @@ export default function AuthPage() {
               </div>
 
             </form>
-
-            {/* Quick Student Demo Credential */}
-            <div className="pt-3 border-t border-[#E5E2DA] dark:border-[#263147] space-y-2">
-              <span className="text-[11px] text-[#5A687D] dark:text-[#94A3B8] font-sans block font-medium font-bengali">
-                {isBengali ? "দ্রুত টেস্ট অ্যাকাউন্ট (শিক্ষার্থী):" : "Quick Demo Account (Student):"}
-              </span>
-              <div className="flex flex-wrap gap-2 text-xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode('LOGIN');
-                    setIdentifier('student@ogrojatra.edu.bd');
-                    setPassword('StudentPass1234');
-                  }}
-                  className="btn-tactile-outline px-2.5 py-1 rounded-lg text-[#5A687D] dark:text-slate-300 font-sans text-[11px] font-semibold cursor-pointer"
-                >
-                  {isBengali ? "শিক্ষার্থী (Student Demo)" : "Student Demo"}
-                </button>
-              </div>
-            </div>
 
             <div className="text-center pt-2 border-t border-[#E5E2DA] dark:border-[#263147]">
               <p className="text-xs text-[#5A687D] dark:text-[#94A3B8] font-bengali">
