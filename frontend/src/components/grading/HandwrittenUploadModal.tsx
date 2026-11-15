@@ -120,7 +120,7 @@ export const HandwrittenUploadModal: React.FC<HandwrittenUploadModalProps> = ({
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-2 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 font-bengali tracking-normal mb-1">
               <Camera className="w-4 h-4" strokeWidth={1.75} />
               <span>হাতে লেখা খাতা স্ক্যানার (Handwritten OCR)</span>
             </div>

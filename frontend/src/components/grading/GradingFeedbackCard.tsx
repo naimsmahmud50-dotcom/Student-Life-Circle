@@ -121,7 +121,7 @@ export const GradingFeedbackCard: React.FC<GradingFeedbackCardProps> = ({
         {/* Tactile Score Badge with Teacher Pen Aesthetic */}
         <div className="flex items-center gap-3 self-start sm:self-auto">
           <div className="p-3 rounded-2xl bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/30 text-right">
-            <span className="text-[11px] font-semibold text-amber-700 dark:text-amber-300 block uppercase tracking-wider">
+            <span className="text-xs font-semibold text-amber-700 dark:text-amber-300 block font-bengali tracking-normal">
               অর্জিত নম্বর
             </span>
             <div className="flex items-baseline justify-end gap-1 font-numeric">
@@ -136,18 +136,18 @@ export const GradingFeedbackCard: React.FC<GradingFeedbackCardProps> = ({
 
       {/* Affectionate Teacher Handwritten Summary Note (Ruled Notepad Margin Aesthetic) */}
       <div className="relative p-5 rounded-2xl bg-[#FAF8F3] dark:bg-[#121B2D] border border-[#E5E2DA] dark:border-[#24314A] space-y-2">
-        <div className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-300">
+        <div className="flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-300 font-bengali tracking-normal">
           <Heart className="w-4 h-4 text-rose-500 fill-rose-500/20" strokeWidth={1.75} />
           <span>শিক্ষকের স্নেহাশিস ও মূল মন্তব্য:</span>
         </div>
-        <p className="text-sm text-slate-800 dark:text-slate-200 leading-relaxed italic pl-6">
+        <p className="text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-bengali tracking-normal pl-6">
           "{teacherSummary || 'বেশ ভালো চেষ্টা করেছ! সূত্র ও মান বসানো চমৎকার হয়েছে, তবে শেষের দিকে গণনায় সামান্য মনোযোগ দিলেই পূর্ণ ৪/৪ নম্বর অর্জন সম্ভব।'}"
         </p>
       </div>
 
       {/* Step-by-Step Point Rubric Breakdown */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-1">
+        <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 font-bengali tracking-normal px-1">
           <span>ধাপভিত্তিক মার্কিং বিভাজন (Step Rubric)</span>
           <span>নম্বর</span>
         </div>
@@ -210,13 +210,13 @@ export const GradingFeedbackCard: React.FC<GradingFeedbackCardProps> = ({
               {step.expected_latex && (
                 <div className="mt-3 ml-8 p-3 rounded-xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 text-xs text-slate-900 dark:text-white shadow-sm flex items-center justify-between overflow-x-auto">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider shrink-0">
+                    <span className="text-xs font-semibold text-slate-400 font-bengali tracking-normal shrink-0">
                       সঠিক সমীকরণ:
                     </span>
                     <KaTeXRenderer content={`$${step.expected_latex}$`} />
                   </div>
                   {isFullCredit && (
-                    <div className="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
+                    <div className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-semibold font-bengali tracking-normal shrink-0">
                       <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2} />
                       <span>নির্ভুল</span>
                     </div>

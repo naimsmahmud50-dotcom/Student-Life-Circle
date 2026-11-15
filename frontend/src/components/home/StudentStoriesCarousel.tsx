@@ -215,13 +215,13 @@ export const StudentStoriesCarousel: React.FC = () => {
                     <div className="w-9 h-9 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#ED8E22] flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                       <Quote className="w-4 h-4 text-[#ED8E22]" />
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                       {isBengali ? item.highlightedMetric : (item.highlightedMetric_en || item.highlightedMetric)}
                     </span>
                   </div>
 
                   {/* Bengali/English Quote Body */}
-                  <p className="text-xs sm:text-sm text-[#213130] dark:text-[#F5F2EB] font-serif italic leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#213130] dark:text-[#F5F2EB] font-bengali tracking-normal leading-relaxed">
                     “{isBengali ? item.quote_bn : (item.quote_en || item.quote_bn)}”
                   </p>
                 </div>
@@ -229,22 +229,22 @@ export const StudentStoriesCarousel: React.FC = () => {
                 {/* Student Info Footer */}
                 <div className="pt-5 mt-5 border-t border-amber-200/60 dark:border-[#262D3D] space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
+                    <h3 className="text-sm font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-normal">
                       {isBengali ? item.studentName : (item.studentName_en || item.studentName)}
                     </h3>
                     {item.verified && (
-                      <span className="inline-flex items-center gap-1 text-[11px] text-[#0B5D3B] dark:text-emerald-400 font-semibold font-bengali">
+                      <span className="inline-flex items-center gap-1 text-xs text-[#0B5D3B] dark:text-emerald-400 font-semibold font-bengali tracking-normal">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>{isBengali ? 'যাচাইকৃত' : 'Verified'}</span>
                       </span>
                     )}
                   </div>
 
-                  <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 font-bengali">
+                  <div className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 font-bengali tracking-normal">
                     {isBengali ? item.achievement : (item.achievement_en || item.achievement)}
                   </div>
 
-                  <div className="flex items-center gap-2 text-[11px] text-[#525252] dark:text-slate-400 font-bengali">
+                  <div className="flex items-center gap-2 text-xs font-medium text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                     <span>{isBengali ? item.institution : (item.institution_en || item.institution)}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">

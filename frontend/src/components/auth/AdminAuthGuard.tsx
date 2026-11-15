@@ -55,13 +55,13 @@ export const AdminAuthLoadingState: React.FC = () => {
           <Lock className="w-5 h-5 text-[#1B2A4A] dark:text-[#5A7EBA] animate-pulse" strokeWidth={1.75} />
         </div>
         <div className="space-y-1.5">
-          <p className="text-xs uppercase tracking-wider text-[#B8862B] dark:text-[#D4A34B] font-semibold font-sans">
+          <p className="text-xs text-[#B8862B] dark:text-[#D4A34B] font-semibold font-bengali tracking-normal">
             নিরাপত্তা যাচাইকরণ
           </p>
           <h2 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
             প্রশাসনিক অনুমোদন অনুসন্ধান করা হচ্ছে...
           </h2>
-          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-sans leading-relaxed">
+          <p className="text-xs text-[#5B5B5B] dark:text-slate-400 font-bengali tracking-normal leading-relaxed">
             আপনার অ্যাকাউন্টের নিরাপত্তা স্তর ও রোল পারমিশন যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।
           </p>
         </div>

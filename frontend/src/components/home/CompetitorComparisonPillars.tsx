@@ -341,7 +341,7 @@ export const CompetitorComparisonPillars: React.FC = () => {
           {/* Header Summary */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-amber-200/70 dark:border-[#262D3D]">
             <div className="space-y-1.5 max-w-2xl">
-              <span className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 uppercase tracking-wider font-sans">
+              <span className="text-xs font-bold text-[#0B5D3B] dark:text-emerald-400 font-bengali tracking-normal">
                 {isBengali ? current.categoryTitle.bn : current.categoryTitle.en}
               </span>
               <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
@@ -368,11 +368,11 @@ export const CompetitorComparisonPillars: React.FC = () => {
                 key={idx}
                 className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 transition-all space-y-3"
               >
-                <div className="text-xs font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
+                <div className="text-xs font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-normal">
                   {isBengali ? pt.feature.bn : pt.feature.en}
                 </div>
 
-                <div className="space-y-2 text-xs font-bengali">
+                <div className="space-y-2 text-xs font-bengali tracking-normal">
                   {/* Competitor's Limitation */}
                   <div className="flex items-start gap-2 text-[#991B1B] dark:text-rose-400 opacity-90">
                     <XCircle className="w-4 h-4 shrink-0 mt-0.5" />

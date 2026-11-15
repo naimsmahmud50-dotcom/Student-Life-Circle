@@ -229,7 +229,7 @@ export const SubjectExplorerCarousel: React.FC = () => {
                     >
                       {subject.icon}
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                       {isBengali ? subject.level : (subject.level_en || subject.level)}
                     </span>
                   </div>
@@ -239,7 +239,7 @@ export const SubjectExplorerCarousel: React.FC = () => {
                     <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali leading-snug">
                       {isBengali ? subject.name_bn : subject.name_en}
                     </h3>
-                    <div className="text-[11px] font-medium text-[#525252] dark:text-slate-400 font-sans">
+                    <div className="text-xs font-medium text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                       {isBengali ? subject.name_en : subject.name_bn}
                     </div>
                   </div>
@@ -250,8 +250,8 @@ export const SubjectExplorerCarousel: React.FC = () => {
                   </p>
 
                   {/* KaTeX Math Formula Preview Box */}
-                  <div className="p-3 rounded-xl bg-[#FFFDF9] dark:bg-[#0E1526] border border-amber-200/60 dark:border-[#262D3D] text-[11px] overflow-x-auto">
-                    <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali pb-1 flex items-center justify-between">
+                  <div className="p-3 rounded-xl bg-[#FFFDF9] dark:bg-[#0E1526] border border-amber-200/60 dark:border-[#262D3D] text-xs overflow-x-auto">
+                    <div className="text-xs font-semibold text-[#525252] dark:text-slate-400 font-bengali pb-1 flex items-center justify-between tracking-normal">
                       <span>{isBengali ? 'নমুনা সমীকরণ ও সূত্র' : 'Sample Equation & Formula'}</span>
                       <span className="font-semibold text-[#0B5D3B] dark:text-emerald-400">KaTeX</span>
                     </div>

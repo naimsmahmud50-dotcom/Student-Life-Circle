@@ -377,7 +377,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'Study Streak (অধ্যয়ন স্ট্রিক)' : 'Study Streak (Consistency)'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#B8862B] border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#B8862B] border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'ধারাবাহিক' : 'Consistent'}
                         </span>
                       </div>
@@ -413,7 +413,7 @@ export default function FlagshipLandingPage() {
                               }`}
                               title={`${item.day}: ${isBengali ? 'অর্জিত' : 'Earned'}`}
                             />
-                            <span className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali">
+                            <span className="text-xs font-medium text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                               {item.day}
                             </span>
                           </div>
@@ -432,7 +432,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'প্রশ্ন সমাধান' : 'Solved Questions'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'বোর্ড ব্যাংক' : 'Board Bank'}
                         </span>
                       </div>
@@ -471,7 +471,7 @@ export default function FlagshipLandingPage() {
                           );
                         })}
                       </div>
-                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal mt-1.5">
                         <span>{isBengali ? '৭ দিন পূর্বে' : '7 Days Ago'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">
                           {isBengali ? 'আজকের পিক (২২টি)' : "Today's Peak (22)"}
@@ -490,7 +490,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'নির্ভুলতা' : 'Accuracy'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'ঋণাত্মক সতর্ক' : 'Negative Alert'}
                         </span>
                       </div>
@@ -536,7 +536,7 @@ export default function FlagshipLandingPage() {
                           {isBengali ? 'উচ্চ নির্ভুলতা ব্যান্ড' : 'High Accuracy Band'}
                         </div>
                       </div>
-                      <span className="text-[11px] text-[#0B5D3B] dark:text-emerald-400 bg-[#FFF9EB] dark:bg-[#0E1526] px-2 py-0.5 rounded border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                      <span className="text-xs font-semibold text-[#0B5D3B] dark:text-emerald-400 bg-[#FFF9EB] dark:bg-[#0E1526] px-2.5 py-0.5 rounded border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                         {isBengali ? '+৪.২% প্রবৃদ্ধি' : '+4.2% Growth'}
                       </span>
                     </div>
@@ -552,7 +552,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'National Percentile (জাতীয় পার্সেন্টাইল)' : 'National Percentile Rank'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'শীর্ষ মেধা' : 'Top Merit'}
                         </span>
                       </div>
@@ -575,7 +575,7 @@ export default function FlagshipLandingPage() {
                           className="h-full bg-[#0B5D3B] dark:bg-emerald-400 rounded-full"
                         />
                       </div>
-                      <div className="flex items-center justify-between text-[10px] text-[#525252] dark:text-slate-400 font-bengali">
+                      <div className="flex items-center justify-between text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         <span>{isBengali ? '০%' : '0%'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">
                           {isBengali ? '৯৫.২তম পার্সেন্টাইল' : '95.2th Percentile'}
@@ -619,7 +619,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'বোর্ড প্রশ্ন আর্কাইভ' : 'Board Question Archive'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? '২০১৫ — ২০২৫' : '2015 — 2025'}
                         </span>
                       </div>
@@ -648,7 +648,7 @@ export default function FlagshipLandingPage() {
                           />
                         ))}
                       </div>
-                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal mt-1.5">
                         <span>{isBengali ? '২০১৫' : '2015'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">
                           {isBengali ? '১০/১০ বছর সম্পূর্ণ' : '10/10 Years Complete'}
@@ -668,7 +668,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'জাতীয় মানদণ্ড' : 'National Standard'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'ভেরিফায়েড' : 'Verified'}
                         </span>
                       </div>
@@ -690,7 +690,7 @@ export default function FlagshipLandingPage() {
 
                     <div className="pt-3 border-t border-amber-200/60 dark:border-[#262D3D]">
                       <div className="w-full h-1.5 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
-                      <div className="flex justify-between items-center text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="flex justify-between items-center text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal mt-1.5">
                         <span>{isBengali ? 'এনসিটিবি অনুমোদিত' : 'NCTB Approved'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-medium">
                           {isBengali ? '৬৯ / ৬৯ অধ্যায়' : '69 / 69 Chapters'}
@@ -709,7 +709,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'দেশব্যাপী রেজিলিয়েন্স' : 'Nationwide Resilience'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#525252] dark:text-slate-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'P2P মেশ' : 'P2P Mesh'}
                         </span>
                       </div>
@@ -738,11 +738,11 @@ export default function FlagshipLandingPage() {
                           <span className="w-6 h-[1.5px] bg-amber-200 dark:bg-slate-700" />
                           <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
                         </div>
-                        <span className="text-[11px] text-[#525252] dark:text-slate-400 font-bengali">
+                        <span className="text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                           {isBengali ? '৪৯৫ উপজেলা' : '495 Upazilas'}
                         </span>
                       </div>
-                      <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal mt-1.5">
                         {isBengali ? 'জিরো-প্যাকেট লস আর্কিটেকচার' : 'Zero-Packet Loss Architecture'}
                       </div>
                     </div>
@@ -758,7 +758,7 @@ export default function FlagshipLandingPage() {
                             {isBengali ? 'মর্যাদা ও অধিকার' : 'Dignity & Privacy'}
                           </span>
                         </div>
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0B5D3B] dark:text-emerald-400 border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                           {isBengali ? 'নিরাপদ' : 'Secure'}
                         </span>
                       </div>
@@ -783,7 +783,7 @@ export default function FlagshipLandingPage() {
                         <span className="w-2 h-2 rounded-full bg-[#0B5D3B] dark:bg-emerald-400" />
                         <span>{isBengali ? 'এন্ড-টু-এন্ড এনক্রিপ্টেড ও সুরক্ষিত' : 'End-to-End Encrypted & Secure'}</span>
                       </div>
-                      <div className="text-[10px] text-[#525252] dark:text-slate-400 font-bengali mt-1.5">
+                      <div className="text-xs text-[#525252] dark:text-slate-400 font-bengali tracking-normal mt-1.5">
                         {isBengali ? 'সার্বভৌম শিক্ষার্থী ডেটা নিরাপত্তা' : 'Sovereign Student Data Security'}
                       </div>
                     </div>
@@ -853,12 +853,12 @@ export default function FlagshipLandingPage() {
                       <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#1B2A4A] dark:text-sky-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <BookOpen className="w-5 h-5 text-[#ED8E22]" />
                       </div>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bengali">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-bengali tracking-normal">
                         {isBengali ? '১০MS অল্টারনেটিভ • ৩ডি ল্যাব' : '10MS Alternative • 3D Lab'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">
+                      <span className="text-xs font-bold text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         {isBengali ? 'Class 9–10 • মাধ্যমিক (SSC ৯-১০)' : 'Class 9–10 • Secondary (SSC 9-10)'}
                       </span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
@@ -897,12 +897,12 @@ export default function FlagshipLandingPage() {
                       <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <Layers className="w-5 h-5 text-[#0B5D3B] dark:text-emerald-400" />
                       </div>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bengali">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bengali tracking-normal">
                         {isBengali ? 'এনসিটিবি ১০ বছর আর্কাইভ' : 'NCTB 10-Year Archive'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">
+                      <span className="text-xs font-bold text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         {isBengali ? 'Class 11–12 • উচ্চ মাধ্যমিক (HSC ১১-১২)' : 'Class 11–12 • Higher Secondary (HSC 11-12)'}
                       </span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
@@ -941,12 +941,12 @@ export default function FlagshipLandingPage() {
                       <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-[#B8862B] dark:text-amber-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <Target className="w-5 h-5 text-[#ED8E22]" />
                       </div>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bengali">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-bengali tracking-normal">
                         {isBengali ? 'Live MCQ বিকল্প • জিরো ল্যাগ' : 'Live MCQ Alternative • Zero Lag'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">
+                      <span className="text-xs font-bold text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         {isBengali ? 'University Entrance • বিশ্ববিদ্যালয় ভর্তি' : 'University Entrance • Admission Exam'}
                       </span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
@@ -985,12 +985,12 @@ export default function FlagshipLandingPage() {
                       <div className="w-10 h-10 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] text-slate-700 dark:text-slate-300 flex items-center justify-center border border-amber-200/80 dark:border-[#262D3D]">
                         <Users className="w-5 h-5 text-[#1B2A4A] dark:text-slate-300" />
                       </div>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-50 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bengali">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bengali tracking-normal">
                         {isBengali ? 'CareTutors মুক্ত • ০% ফি' : 'CareTutors Free • 0% Commission'}
                       </span>
                     </div>
                     <div>
-                      <span className="text-[11px] font-semibold text-[#525252] dark:text-slate-400 uppercase font-sans">
+                      <span className="text-xs font-bold text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         {isBengali ? 'Marketplace & Career • টিউশন ও ক্যারিয়ার' : 'Marketplace & Career • Tuition & CV'}
                       </span>
                       <h3 className="text-lg font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali mt-0.5">
@@ -1087,7 +1087,7 @@ export default function FlagshipLandingPage() {
                 {/* Lab 1: Physics Projectile Motion */}
                 <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all flex flex-col justify-between space-y-5">
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-400 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D]">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#065F46] dark:text-emerald-400 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                       <Atom className="w-4 h-4 text-[#ED8E22]" />
                       <span>{isBengali ? '৩ডি ইন্টারেক্টিভ সিমুলেটর • Physics' : '3D Interactive Simulator • Physics'}</span>
                     </div>
@@ -1103,7 +1103,7 @@ export default function FlagshipLandingPage() {
 
                     {/* Crisp KaTeX Preview Box */}
                     <div className="p-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] space-y-2 text-xs">
-                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400">
+                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         <span>{isBengali ? 'পদার্থবিজ্ঞান ১ম পত্র • গতিবিদ্যা' : 'Physics 1st Paper • Dynamics'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">{isBengali ? '৬০ FPS ক্যানভাস' : '60 FPS Canvas'}</span>
                       </div>
@@ -1129,7 +1129,7 @@ export default function FlagshipLandingPage() {
                 {/* Lab 2: Chemistry Molecular Geometry */}
                 <div className="lg:col-span-6 p-7 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] shadow-xs hover:border-[#ED8E22]/50 hover:shadow-md transition-all flex flex-col justify-between space-y-5">
                   <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0A2540] dark:text-sky-300 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D]">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF9EB] dark:bg-[#0E1526] text-[#0A2540] dark:text-sky-300 text-xs font-semibold border border-amber-200/80 dark:border-[#262D3D] font-bengali tracking-normal">
                       <Atom className="w-4 h-4 text-[#ED8E22]" />
                       <span>{isBengali ? '৩ডি ইন্টারেক্টিভ সিমুলেটর • Chemistry' : '3D Interactive Simulator • Chemistry'}</span>
                     </div>
@@ -1145,7 +1145,7 @@ export default function FlagshipLandingPage() {
 
                     {/* Crisp KaTeX Preview Box */}
                     <div className="p-3.5 rounded-xl bg-[#FFF9EB] dark:bg-[#0E1526] border border-amber-200/70 dark:border-[#262D3D] space-y-2 text-xs">
-                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400">
+                      <div className="flex items-center justify-between text-[#525252] dark:text-slate-400 font-bengali tracking-normal">
                         <span>{isBengali ? 'রসায়ন ১ম পত্র • রাসায়নিক বন্ধন' : 'Chemistry 1st Paper • Chemical Bonding'}</span>
                         <span className="text-[#0B5D3B] dark:text-emerald-400 font-semibold">VSEPR 3D Engine</span>
                       </div>
@@ -1234,18 +1234,18 @@ export default function FlagshipLandingPage() {
                     {/* Countdown Timer Display */}
                     <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <span className="text-[11px] uppercase tracking-wider text-amber-200/80 font-sans">
-                          {isBengali ? 'লাইভ কাউন্টডাউন (countdown)' : 'Live Countdown'}
+                        <span className="text-xs font-semibold text-amber-200/90 font-bengali tracking-normal">
+                          {isBengali ? 'লাইভ কাউন্টডাউন' : 'Live Countdown'}
                         </span>
                         <div className="text-2xl sm:text-3xl font-serif font-bold text-amber-300 tabular-nums">
                           {String(countdown.hours).padStart(2, '0')}:{String(countdown.minutes).padStart(2, '0')}:{String(countdown.seconds).padStart(2, '0')}
                         </div>
                       </div>
                       <div className="text-right space-y-0.5">
-                        <span className="text-[11px] uppercase tracking-wider text-slate-300 font-sans">
+                        <span className="text-xs font-semibold text-slate-300 font-bengali tracking-normal">
                           {isBengali ? 'অংশগ্রহণকারী' : 'Participants'}
                         </span>
-                        <div className="text-sm sm:text-base font-semibold text-emerald-300 font-bengali">
+                        <div className="text-sm sm:text-base font-semibold text-emerald-300 font-bengali tracking-normal">
                           {isBengali ? '৪,৮৫০+ প্রতিযোগী শিক্ষার্থী' : '4,850+ Live Competitors'}
                         </div>
                       </div>
@@ -1514,7 +1514,7 @@ export default function FlagshipLandingPage() {
               {/* Direct Modules Directory Link Card */}
               <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#121B2D] border border-amber-200/70 dark:border-[#262D3D] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
                 <div className="space-y-0.5 text-center sm:text-left">
-                  <div className="text-sm font-serif font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali">
+                  <div className="text-sm font-bold text-[#1B2A4A] dark:text-[#F5F2EB] font-bengali tracking-normal">
                     {isBengali ? '৬৯টি এন্টারপ্রাইজ মডিউল ডিরেক্টরি' : '69 Enterprise Modules Directory'}
                   </div>
                   <p className="text-xs text-[#525252] dark:text-slate-400">

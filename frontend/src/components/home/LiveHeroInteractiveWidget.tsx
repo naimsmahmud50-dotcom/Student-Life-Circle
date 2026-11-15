@@ -204,7 +204,7 @@ export const LiveHeroInteractiveWidget: React.FC = () => {
         <div className="relative w-full h-28 bg-[#FAF8F3] dark:bg-[#090D16] rounded-xl border border-[#E5E2DA] dark:border-[#262D3D] p-2 flex flex-col justify-between overflow-hidden">
           {/* Target Zone Marker */}
           <div
-            className="absolute bottom-2 right-12 w-16 h-6 border-b-2 border-dashed border-[#B8862B] bg-[#B8862B]/10 rounded flex items-center justify-center text-[11px] font-bold text-[#B8862B] font-bengali tracking-normal z-0"
+            className="absolute bottom-2 right-12 px-2.5 py-0.5 border-b-2 border-dashed border-[#B8862B] bg-[#B8862B]/10 rounded flex items-center justify-center text-xs font-bold text-[#B8862B] font-bengali tracking-normal z-0"
             title={isBengali ? 'টার্গেট অঞ্চল: ৮৫মি - ১১০মি' : 'Target Zone: 85m - 110m'}
           >
             {isBengali ? 'টার্গেট জোন' : 'Target Zone'}

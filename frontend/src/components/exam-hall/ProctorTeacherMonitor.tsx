@@ -236,7 +236,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">মোট পরীক্ষার্থী</span>
+              <span className="text-xs font-semibold text-slate-500 font-bengali tracking-normal">মোট পরীক্ষার্থী</span>
               <Users className="w-4 h-4 text-slate-400" />
             </div>
             <div className="text-2xl font-bold text-[#0A2540]">{totalCount} জন</div>
@@ -245,7 +245,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
 
           <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">পরীক্ষা প্রদানরত</span>
+              <span className="text-xs font-semibold text-slate-500 font-bengali tracking-normal">পরীক্ষা প্রদানরত</span>
               <Clock className="w-4 h-4 text-emerald-600" />
             </div>
             <div className="text-2xl font-bold text-emerald-700">{activeCount} জন</div>
@@ -254,7 +254,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
 
           <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">সমাপ্তকৃত পরীক্ষা</span>
+              <span className="text-xs font-semibold text-slate-500 font-bengali tracking-normal">সমাপ্তকৃত পরীক্ষা</span>
               <CheckCircle2 className="w-4 h-4 text-slate-600" />
             </div>
             <div className="text-2xl font-bold text-[#0A2540]">{finalizedCount} জন</div>
@@ -263,7 +263,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
 
           <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">গড় অখণ্ডতা সূচক</span>
+              <span className="text-xs font-semibold text-slate-500 font-bengali tracking-normal">গড় অখণ্ডতা সূচক</span>
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
             </div>
             <div className="text-2xl font-bold text-[#0A2540]">{avgIntegrity}%</div>
@@ -438,7 +438,7 @@ export const ProctorTeacherMonitor: React.FC<ProctorTeacherMonitorProps> = ({
 
               {/* Heuristic Audit Summary */}
               <div className="border border-slate-200 rounded-2xl p-4">
-                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-semibold text-slate-500 font-bengali tracking-normal mb-2">
                   ক্লায়েন্ট হিউরিস্টিক অডিট পর্যবেক্ষণ (শূন্য বায়োমেট্রিক রেকর্ড)
                 </h4>
                 <ul className="text-xs text-slate-600 space-y-2">
