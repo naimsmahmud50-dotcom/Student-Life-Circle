@@ -793,7 +793,7 @@ export default function StyleGuidePage() {
               <CardHeader>
                 <CardTitle>বাংলা ও ইংরেজি টাইপ স্কেল (~১.২৫০ মেজর থার্ড)</CardTitle>
                 <CardDescription>
-                  মাত্রা সুরক্ষা সহ ১.৭৮ লাইন-হাইট এবং Noto Serif Bengali + Hind Siliguri ফন্ট সমন্বয়। যুক্তাক্ষরে কোনো কাটাকুটি বা ক্লিপিং নেই।
+                  মাত্রা সুরক্ষা সহ ১.৭৮ লাইন-হাইট এবং সার্বিক Noto Serif Bengali ফন্ট সমন্বয়। যুক্তাক্ষরে কোনো কাটাকুটি বা ক্লিপিং নেই।
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">

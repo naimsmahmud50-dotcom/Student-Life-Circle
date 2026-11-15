@@ -10,7 +10,7 @@
  */
 
 @import './tokens.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -48,6 +48,10 @@
   padding: 0;
 }
 
+input, button, select, textarea {
+  font-family: inherit;
+}
+
 html {
   font-size: 16px;
   background-color: var(--color-paper-ground, #FAF8F3);
@@ -55,10 +59,11 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
 }
 
 body {
-  font-family: var(--font-sans-bengali);
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', var(--font-serif-bengali), var(--font-sans-bengali), Georgia, serif;
   font-size: 1rem;
   line-height: var(--line-height-relaxed, 1.78); /* High baseline to protect Bengali matra and conjunct clearance */
   background-color: var(--bg-app);
@@ -72,7 +77,8 @@ body {
 
 /* Bengali Serif Headings (Authentic Classical Editorial Book-Print) */
 .font-serif-bn,
-.font-serif-bengali {
+.font-serif-bengali,
+.font-serif {
   font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Source Serif 4', Georgia, serif;
   font-feature-settings: "kern" 1, "liga" 1;
 }
@@ -83,17 +89,17 @@ body {
   font-family: 'Source Serif 4', 'Lora', Georgia, 'Times New Roman', serif;
 }
 
-/* Primary Body Typography & Modern Sans Bengali (Clean, High-Legibility UI) */
+/* Primary Body Typography & Modern Bengali UI (Noto Serif Bengali Universal) */
 .font-sans-bn,
 .font-sans-bengali,
 .font-bengali {
-  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Noto Sans Bengali', Georgia, serif;
   letter-spacing: normal;
 }
 
 .font-sans-en,
 .font-sans-english {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Noto Serif Bengali', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Landmark Editorial Heading (Solid Scholarly Ink, Zero-Gradient) */
@@ -109,9 +115,9 @@ body {
   color: var(--color-ink-primary, #F5F2EB);
 }
 
-/* Eyebrow Label (Small Modern Sans, Scholarly Subdued) */
+/* Eyebrow Label (Small Modern Editorial, Scholarly Subdued) */
 .eyebrow-label {
-  font-family: 'Hind Siliguri', 'Inter', 'Noto Sans Bengali', sans-serif;
+  font-family: 'Noto Serif Bengali', 'Tiro Bangla', 'Inter', serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;

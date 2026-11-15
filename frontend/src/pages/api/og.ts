@@ -61,7 +61,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     <text x="74" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" fill="#F8FAFC" letter-spacing="1">
       STUDENT LIFE CIRCLE
     </text>
-    <text x="74" y="48" font-family="'Hind Siliguri', sans-serif" font-weight="600" font-size="16" fill="#38BDF8">
+    <text x="74" y="48" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="600" font-size="16" fill="#38BDF8">
       অগ্রযাত্রা • বাংলাদেশের জাতীয় পরীক্ষা প্রস্তুতি ও লার্নিং প্ল্যাটফর্ম
     </text>
   </g>
@@ -71,12 +71,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     <!-- Regional Pill Badge -->
     <rect width="220" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
     <circle cx="18" cy="18" r="5" fill="#10B981" />
-    <text x="32" y="23" font-family="'Hind Siliguri', sans-serif" font-weight="600" font-size="14" fill="#94A3B8">
+    <text x="32" y="23" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="600" font-size="14" fill="#94A3B8">
       বিভাগ: ${districtInfo.division}
     </text>
 
     <!-- District Name Headline in Authentic Bengali & English -->
-    <text x="0" y="105" font-family="'Hind Siliguri', sans-serif" font-weight="700" font-size="64" fill="#FFFFFF">
+    <text x="0" y="105" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="700" font-size="64" fill="#FFFFFF">
       ${districtInfo.nameBn} জেলা
     </text>
     <text x="0" y="150" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="26" fill="#64748B" letter-spacing="0.5">
@@ -86,7 +86,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     <!-- Focus Exam Stream -->
     <g transform="translate(0, 195)">
       <rect width="700" height="48" rx="12" fill="#0F172A" stroke="#1E293B" stroke-width="1.5" />
-      <text x="24" y="30" font-family="'Hind Siliguri', sans-serif" font-weight="500" font-size="18" fill="#E2E8F0">
+      <text x="24" y="30" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="500" font-size="18" fill="#E2E8F0">
         শীর্ষ প্রস্তুতি: ${districtInfo.topExamStream}
       </text>
     </g>
@@ -95,14 +95,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   <!-- Statistics Panel (Right Side) -->
   <g transform="translate(820, 240)">
     <rect width="300" height="190" rx="20" fill="#0F172A" stroke="#1E293B" stroke-width="2" />
-    <text x="30" y="50" font-family="'Hind Siliguri', sans-serif" font-weight="600" font-size="16" fill="#94A3B8">
+    <text x="30" y="50" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="600" font-size="16" fill="#94A3B8">
       নিবন্ধিত শিক্ষার্থী
     </text>
     <text x="30" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="44" fill="#38BDF8">
       ${districtInfo.activeLearners.toLocaleString()}+
     </text>
     <line x1="30" y1="125" x2="270" y2="125" stroke="#1E293B" stroke-width="1.5" />
-    <text x="30" y="158" font-family="'Hind Siliguri', sans-serif" font-weight="500" font-size="14" fill="#10B981">
+    <text x="30" y="158" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="500" font-size="14" fill="#10B981">
       সক্রিয় স্টাডি পড ও টিউটর নেটওয়ার্ক
     </text>
   </g>
@@ -110,7 +110,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   <!-- Footer Verification & Trust Bar -->
   <g transform="translate(80, 560)">
     <line x1="0" y1="0" x2="1040" y2="0" stroke="#1E293B" stroke-width="1.5" />
-    <text x="0" y="30" font-family="'Hind Siliguri', sans-serif" font-weight="500" font-size="14" fill="#64748B">
+    <text x="0" y="30" font-family="'Noto Serif Bengali', 'Tiro Bangla', serif" font-weight="500" font-size="14" fill="#64748B">
       NCTB অনুমোদিত কারিকুলাম • বাংলা মিডিয়াম ও ইংলিশ ভার্সন • ২৪ ঘণ্টার ডিজিটাল এসক্রো
     </text>
     <text x="1040" y="30" text-anchor="end" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="14" fill="#38BDF8">

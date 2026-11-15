@@ -88,7 +88,7 @@ export const HandwrittenUploadModal: React.FC<HandwrittenUploadModalProps> = ({
 
       // Simulated handwriting
       ctx.fillStyle = '#1E3A8A';
-      ctx.font = 'bold 16px "Hind Siliguri", sans-serif';
+      ctx.font = 'bold 16px "Noto Serif Bengali", "Tiro Bangla", serif';
       ctx.fillText('ধাপ ১: সূত্রানুযায়ী, H = (u² sin²θ) / (2g)', 95, 65);
       ctx.fillText('ধাপ ২: দেওয়া আছে, u = 40 m/s, θ = 30°, g = 9.8 m/s²', 95, 125);
       ctx.fillText('ধাপ ৩: H = (40² × sin²30°) / (2 × 9.8)', 95, 185);
