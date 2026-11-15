@@ -183,6 +183,9 @@ export default function AuthPage() {
                   setFullName('');
                   setIdentifier('');
                   setPassword('');
+                  setAge('');
+                  setOtpCode('');
+                  setShowOtpSection(false);
                 }}
                 className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none font-bengali cursor-pointer ${
                   authMode === 'REGISTER'
@@ -199,6 +202,9 @@ export default function AuthPage() {
                   setFullName('');
                   setIdentifier('');
                   setPassword('');
+                  setAge('');
+                  setOtpCode('');
+                  setShowOtpSection(false);
                 }}
                 className={`py-2 text-xs sm:text-sm font-bold rounded-lg transition-all select-none font-bengali cursor-pointer ${
                   authMode === 'LOGIN'
@@ -216,15 +222,17 @@ export default function AuthPage() {
               {authMode === 'REGISTER' && (
                 <>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
+                    <label htmlFor="fullName" className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
                       {isBengali ? "পূর্ণ নাম (Full Name):" : "Full Name:"}
                     </label>
                     <input
+                      id="fullName"
+                      name="fullName"
                       type="text"
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder={isBengali ? "নাম দিন (যেমন: তানভীর আহমেদ)" : "Enter name (e.g. Tanvir Ahmed)"}
+                      placeholder={isBengali ? "নাম দিতে হবে" : "Enter Name"}
                       autoComplete="name"
                       className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
                     />
@@ -232,10 +240,12 @@ export default function AuthPage() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
+                      <label htmlFor="age" className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
                         {isBengali ? "বয়স (Age):" : "Age:"}
                       </label>
                       <input
+                        id="age"
+                        name="age"
                         type="number"
                         min={5}
                         max={100}
@@ -298,7 +308,7 @@ export default function AuthPage() {
 
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
+                  <label htmlFor="identifier" className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
                     {isBengali ? "জিমেইল / ইমেইল অথবা ফোন নম্বর:" : "Gmail / Email or Phone Number:"}
                   </label>
                   <button
@@ -310,14 +320,16 @@ export default function AuthPage() {
                   </button>
                 </div>
                 <input
+                  id="identifier"
+                  name="identifier"
                   type="text"
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder={
                     isBengali
-                      ? "জিমেইল বা ফোন নম্বর দিন (student@example.com অথবা 017XXXXXXXX)"
-                      : "Enter Gmail or phone (student@example.com or 017XXXXXXXX)"
+                      ? "জিমেইল দিতে হবে"
+                      : "Enter Gmail"
                   }
                   autoComplete="username"
                   className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"
@@ -362,10 +374,12 @@ export default function AuthPage() {
               )}
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
+                <label htmlFor="password" className="text-xs font-semibold text-[#0A2540] dark:text-[#E2E8F0] font-bengali">
                   {isBengali ? "পাসওয়ার্ড (Password):" : "Password:"}
                 </label>
                 <input
+                  id="password"
+                  name="password"
                   type="password"
                   required
                   minLength={8}
@@ -373,8 +387,8 @@ export default function AuthPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={
                     isBengali
-                      ? "পাসওয়ার্ড দিন (কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড)"
-                      : "Enter password (at least 8 characters)"
+                      ? "পাসওয়ার্ড দিতে হবে"
+                      : "Enter Password"
                   }
                   autoComplete={authMode === 'REGISTER' ? 'new-password' : 'current-password'}
                   className="w-full text-sm p-3 rounded-lg border border-[#E2DDD3] dark:border-[#2D3A52] bg-[#FAF8F5] dark:bg-[#0C1422] text-[#1B2A4A] dark:text-[#E2E8F0] shadow-inner-bevel focus:outline-none focus:ring-2 focus:ring-[#0A2540] dark:focus:ring-[#3B82F6] transition-all font-bengali placeholder:select-none placeholder:text-[#8C9BAE] dark:placeholder:text-[#64748B]"

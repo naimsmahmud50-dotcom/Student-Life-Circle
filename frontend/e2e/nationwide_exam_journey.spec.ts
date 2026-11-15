@@ -37,10 +37,10 @@ test.describe('Phase 125: Nationwide Live Exam & Playwright E2E Journey', () => 
     assertZeroEmojis(pageContent, 'Auth Page Initial Render');
 
     // Fill in student registration credentials
-    const nameInput = page.locator('input[placeholder*="তানভীর আহমেদ"]');
+    const nameInput = page.locator('input[name="fullName"], input[placeholder*="নাম"]');
     await nameInput.fill('রাকিবুল হাসান');
 
-    const phoneInput = page.locator('input[placeholder*="017XXXXXXXX"]');
+    const phoneInput = page.locator('input[name="identifier"], input[placeholder*="জিমেইল"]');
     await phoneInput.fill('01712345678');
 
     // Trigger SMS OTP Dispatch

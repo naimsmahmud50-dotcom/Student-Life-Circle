@@ -41,7 +41,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
     await registerTab.click();
 
     // 3. Fill in Adult Student Details (Age: 18)
-    const nameInput = page.locator('input[placeholder*="তানভীর আহমেদ"]');
+    const nameInput = page.locator('input[name="fullName"], input[placeholder*="নাম"]');
     await nameInput.fill('নুসরাত জাহান');
 
     const ageInput = page.locator('input[type="number"]');
@@ -59,7 +59,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
     await stageSelect.selectOption('HSC');
 
     // Fill Phone / Email
-    const identifierInput = page.locator('input[placeholder*="student@example.com"]');
+    const identifierInput = page.locator('input[name="identifier"], input[placeholder*="জিমেইল"]');
     await identifierInput.fill('01811000002');
 
     // Fill Password
@@ -84,7 +84,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
     await page.locator('button', { hasText: 'নতুন অ্যাকাউন্ট' }).click();
 
     // Fill Minor Student Details (Age: 15)
-    await page.locator('input[placeholder*="তানভীর আহমেদ"]').fill('তানভীর আহমেদ');
+    await page.locator('input[name="fullName"], input[placeholder*="নাম"]').fill('তানভীর আহমেদ');
     await page.locator('input[type="number"]').fill('15');
 
     // Verify Child Protection Banner immediately appears
@@ -99,7 +99,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
     assertZeroEmojis(noticeText, 'Minor Student Protection Notice');
 
     // Fill credentials
-    await page.locator('input[placeholder*="student@example.com"]').fill('01711000001');
+    await page.locator('input[name="identifier"], input[placeholder*="জিমেইল"]').fill('01711000001');
     await page.locator('input[type="password"]').fill('MinorSafetyKey2026!');
 
     // Submit Registration
@@ -118,7 +118,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
     await loginTab.click();
 
     // In Login mode, name and age inputs must not be present
-    await expect(page.locator('input[placeholder*="তানভীর আহমেদ"]')).not.toBeVisible();
+    await expect(page.locator('input[name="fullName"], input[placeholder*="নাম"]')).not.toBeVisible();
     await expect(page.locator('input[type="number"]')).not.toBeVisible();
 
     // Submit button text should update to "লগইন করুন"
@@ -126,7 +126,7 @@ test.describe('End-to-End Authentication & Minor-Safe Onboarding Journey', () =>
 
     // Switch back to Register Tab
     await page.locator('button', { hasText: 'নতুন অ্যাকাউন্ট' }).click();
-    await expect(page.locator('input[placeholder*="তানভীর আহমেদ"]')).toBeVisible();
+    await expect(page.locator('input[name="fullName"], input[placeholder*="নাম"]')).toBeVisible();
     await expect(page.locator('button[type="submit"]')).toHaveText('নিরাপদ প্রোফাইল তৈরি করুন');
 
     consoleTrap.assertZeroErrors();
